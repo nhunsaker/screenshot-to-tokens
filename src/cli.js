@@ -12,22 +12,11 @@ import { execSync } from 'child_process'
 import { loadDotEnv, settings, LLM_PRESETS } from './config.js'
 import { runPipeline, STAGES } from './pipeline.js'
 import { serveDir } from './lib/serve.js'
+import { parseArgs } from './lib/args.js'
+export { parseArgs }
 
 loadDotEnv()
 
-export function parseArgs(argv) {
-  const args = { _: [] }
-  for (let i = 0; i < argv.length; i++) {
-    const a = argv[i]
-    if (a.startsWith('--')) {
-      const [k, v] = a.slice(2).split('=')
-      if (v !== undefined) args[k] = v
-      else if (argv[i + 1] && !argv[i + 1].startsWith('--')) args[k] = argv[++i]
-      else args[k] = true
-    } else args._.push(a)
-  }
-  return args
-}
 
 async function doctor() {
   const cfg = settings()
