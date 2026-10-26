@@ -37,7 +37,9 @@ export function buildArgs(o) {
 /** Spawn python3 with argv, resolving when it exits 0, rejecting with stderr otherwise. */
 function runPython(args) {
   return new Promise((resolvePromise, reject) => {
-    const proc = spawn('python3', args, { stdio: ['ignore', 'pipe', 'pipe'] })
+    // Weights download to the external drive by default (HF_HOME), never the nearly-full internal disk.
+    const env = { ...process.env, HF_HOME: process.env.HF_HOME || join(process.env.S2T_MODELS_DIR || '/Volumes/SanDisk/models', 'huggingface') }
+    const proc = spawn('python3', args, { stdio: ['ignore', 'pipe', 'pipe'], env })
     let stderr = ''
     proc.stderr.on('data', (d) => { stderr += d })
     proc.on('error', (e) => reject(new Error(`sam-local: failed to spawn python3: ${e.message}`)))

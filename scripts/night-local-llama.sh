@@ -9,13 +9,18 @@ if [[ "${1:-}" != "--granted" && "$hour" -ge 6 ]]; then
   echo "Outside the 00:00-06:00 heavy window (now $(date +%H:%M)). Re-run with --granted if you have a window." >&2
   exit 2
 fi
+# Large model files live on the SanDisk, never the internal disk (18 GB free). Refuse if it isn't mounted.
+models_dir=${S2T_MODELS_DIR:-/Volumes/SanDisk/models}
+if [[ ! -d "$models_dir" ]]; then echo "Model storage $models_dir not mounted; not downloading to the internal disk." >&2; exit 3; fi
+export OLLAMA_MODELS="$models_dir/ollama"
 model=${OLLAMA_MODEL:-llama3.2:3b}
 started=0
-if ! curl -s -m 2 localhost:11434/api/tags >/dev/null; then
-  ollama serve >"${TMPDIR:-/tmp}/s2t-ollama.log" 2>&1 &
-  started=1
-  for i in {1..30}; do curl -s -m 1 localhost:11434/api/tags >/dev/null && break; sleep 1; done
+if curl -s -m 2 localhost:11434/api/tags >/dev/null; then
+  echo "An Ollama server is already running and may store models on the internal disk. Stop it first so this run uses $OLLAMA_MODELS." >&2; exit 4
 fi
+ollama serve >"${TMPDIR:-/tmp}/s2t-ollama.log" 2>&1 &
+started=1
+for i in {1..30}; do curl -s -m 1 localhost:11434/api/tags >/dev/null && break; sleep 1; done
 ollama pull "$model"
 run=out/acme-shop-ollama
 S2T_NAMER=ollama OLLAMA_MODEL="$model" node src/cli.js run --fixture acme-shop --run "$run"
