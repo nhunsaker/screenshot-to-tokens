@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync, statSync, existsSync } from 'fs'
 import { join } from 'path'
 import { cssVarOf } from '../lib/props.js'
+import { evaluateReason } from './reasons.js'
 
 // ---------------------------------------------------------------------------
 // small, dependency-free helpers
@@ -120,14 +121,20 @@ function headerSection(data) {
   </header>`
 }
 
+/** Full page pixel size: viewport, extended to cover anything (region or element) below the fold. */
+function pageDims(capture, regions) {
+  const W = (capture && capture.viewport && capture.viewport.width) || 1440
+  let H = (capture && capture.viewport && capture.viewport.height) || 900
+  for (const r of regions || []) { const bottom = r.bbox[1] + r.bbox[3]; if (bottom > H) H = bottom }
+  for (const e of (capture && capture.elements) || []) { const bottom = e.bbox[1] + e.bbox[3]; if (bottom > H) H = bottom }
+  return { W, H }
+}
+
 function heroSection(data) {
   const { capture, regions, screenshot } = data
   if (!screenshot) return sectionWrap('Screenshot', empty('No screenshot yet — run the capture stage.'))
   const regs = regions || []
-  const W = (capture && capture.viewport && capture.viewport.width) || 1440
-  let H = (capture && capture.viewport && capture.viewport.height) || 900
-  for (const r of regs) { const bottom = r.bbox[1] + r.bbox[3]; if (bottom > H) H = bottom }
-  for (const e of (capture && capture.elements) || []) { const bottom = e.bbox[1] + e.bbox[3]; if (bottom > H) H = bottom }
+  const { W, H } = pageDims(capture, regs)
 
   const boxes = regs.map((r) => {
     const [x, y, w, h] = r.bbox
@@ -155,31 +162,131 @@ function heroSection(data) {
   `)
 }
 
+/** Chain of token names from `t` down to its primitive, e.g. [button.radius, radius.md]. */
+function aliasChainNames(t, byName) {
+  const chain = [t.name]
+  const seen = new Set([t.name])
+  let cur = t
+  while (cur && cur.alias && !seen.has(cur.alias)) { chain.push(cur.alias); seen.add(cur.alias); cur = byName.get(cur.alias) }
+  return chain
+}
+
+/** "button.radius &rarr; radius.md &rarr; 6px" — the value/alias chain, ending at the resolved literal. */
+function chainHtml(t, byName, resolved) {
+  const chain = aliasChainNames(t, byName).map((n) => `<code>${escapeHtml(n)}</code>`)
+  if (resolved != null) chain.push(`<code>${escapeHtml(resolved)}</code>`)
+  return `<div class="chip-chain">${chain.join(' &rarr; ')}</div>`
+}
+
+/** The cluster's merged members, with counts — "which near-duplicate values this token absorbed". */
+function membersHtml(covered) {
+  const pills = covered.flatMap((c) => (c.members || []).map((m) => `<span class="pill">${escapeHtml(m.value)} &times;${escapeHtml(m.count)}</span>`))
+  if (!pills.length) return ''
+  return `<div class="chip-members"><span class="muted">members:</span> ${pills.join('')}</div>`
+}
+
+/** Top props and region labels across every cluster the token covers — "where it's used". */
+function whereHtml(covered) {
+  const props = {}, regionLabels = {}
+  for (const c of covered) {
+    for (const [p, n] of Object.entries(c.props || {})) props[p] = (props[p] || 0) + n
+    for (const [l, n] of Object.entries(c.regionLabels || {})) regionLabels[l] = (regionLabels[l] || 0) + n
+  }
+  const topProps = topEntries(props, 3).map(([k, v]) => `${escapeHtml(k)} (${v})`).join(', ')
+  const topRegions = topEntries(regionLabels, 3).map(([k, v]) => `${escapeHtml(k)} (${v})`).join(', ')
+  if (!topProps && !topRegions) return ''
+  return `<div class="chip-where"><span class="muted">props:</span> ${topProps || '—'} &nbsp; <span class="muted">regions:</span> ${topRegions || '—'}</div>`
+}
+
+/** Up to 3 regions (by bbox) whose label matches where this token's clusters are used, largest-first
+ * per label so the crop is legible. Best-effort: clusters only record region *labels*, not ids. */
+function regionsForToken(covered, regions) {
+  if (!covered.length || !(regions || []).length) return []
+  const labelScore = {}
+  for (const c of covered) for (const [label, n] of Object.entries(c.regionLabels || {})) labelScore[label] = (labelScore[label] || 0) + n
+  const rankedLabels = Object.entries(labelScore).sort((a, b) => b[1] - a[1]).map(([l]) => l)
+  if (!rankedLabels.length) return []
+  const byLabel = new Map(rankedLabels.map((l) => [l, regions.filter((r) => r.label === l).sort((a, b) => (b.bbox[2] * b.bbox[3]) - (a.bbox[2] * a.bbox[3]))]))
+  const picked = [], seen = new Set()
+  // round-robin across labels first (variety), then fill from whatever's left.
+  let more = true
+  while (picked.length < 3 && more) {
+    more = false
+    for (const label of rankedLabels) {
+      if (picked.length >= 3) break
+      const next = (byLabel.get(label) || []).find((r) => !seen.has(r.id))
+      if (next) { picked.push(next); seen.add(next.id); more = true }
+    }
+  }
+  return picked
+}
+
+/** Crop thumbnails: a CSS background-position/-size trick on the existing screenshot, no new images. */
+function thumbsHtml(picked, screenshot, W, H) {
+  if (!screenshot || !picked.length) return ''
+  const DISP_W = 108, DISP_H = 72
+  const figs = picked.map((r) => {
+    const [x, y, w, h] = r.bbox
+    const scale = Math.min(DISP_W / Math.max(w, 1), DISP_H / Math.max(h, 1))
+    const style = `width:${DISP_W}px;height:${DISP_H}px;background-image:url(${screenshot});`
+      + `background-repeat:no-repeat;background-position:${(-x * scale).toFixed(1)}px ${(-y * scale).toFixed(1)}px;`
+      + `background-size:${(W * scale).toFixed(1)}px ${(H * scale).toFixed(1)}px;`
+    const tip = `${r.label} via ${r.source || 'unknown'}`
+    return `<div class="thumb" style="${style}" title="${escapeHtml(tip)}"></div>`
+  }).join('')
+  return `<div class="chip-thumbs">${figs}</div>`
+}
+
+/** Namer id + which segmenter(s) found the regions shown — "provenance" the council asked for. */
+function provenanceHtml(namerId, picked) {
+  const sources = [...new Set(picked.map((r) => r.source).filter(Boolean))]
+  const bits = []
+  if (namerId) bits.push(`namer <code>${escapeHtml(namerId)}</code>`)
+  if (sources.length) bits.push(`regions via <code>${escapeHtml(sources.join(', '))}</code>`)
+  return bits.length ? `<div class="chip-provenance muted">${bits.join(' &middot; ')}</div>` : ''
+}
+
 function tokensSection(data) {
-  const { tokens, clusters } = data
+  const { tokens, clusters, regions, capture, screenshot } = data
   if (!tokens) return sectionWrap('Tokens', empty('No token set yet — run the name stage.'))
   const list = tokens.tokens || []
   if (!list.length) return sectionWrap('Tokens', empty('No tokens proposed.'))
-  const clustersById = new Map((clusters || []).map((c) => [c.id, c]))
+  const allClusters = clusters || []
+  const clustersById = new Map(allClusters.map((c) => [c.id, c]))
   const byName = new Map(list.map((t) => [t.name, t]))
+  const { W, H } = pageDims(capture, regions)
 
   const tiers = ['primitive', 'semantic', 'component']
   const groups = tiers.map((tier) => {
     const inTier = list.filter((t) => t.tier === tier)
     if (!inTier.length) return ''
     const chips = inTier.map((t) => {
-      const cluster = (t.clusters || []).map((id) => clustersById.get(id)).find(Boolean)
+      const covered = (t.clusters || []).map((id) => clustersById.get(id)).filter(Boolean)
+      const cluster = covered[0] || null
       const kind = cluster ? cluster.kind : null
       const resolved = resolveTokenValue(t, byName)
       const preview = kindPreview(kind, resolved)
-      const alias = t.alias ? `<div class="alias">&rarr; <code>${escapeHtml(t.alias)}</code></div>` : ''
-      const clusterPills = (t.clusters || []).map((id) => `<span class="pill">${escapeHtml(id)}</span>`).join('')
+      const reason = evaluateReason(t, allClusters)
+      const picked = regionsForToken(covered, regions || [])
+
       const reviewBadge = t.review ? `<span class="badge ${REVIEW_BADGE_CLASS[t.review] || 'badge-info'}">${escapeHtml(t.review)}</span>` : ''
+      const rolesBadge = reason.rolesDiffer ? '<span class="badge badge-caution">Roles differ: review</span>' : ''
+      const unverifiedBadge = reason.unverified ? '<span class="badge badge-caution">unverified</span>' : ''
+      const clusterPills = (t.clusters || []).map((id) => `<span class="pill">${escapeHtml(id)}</span>`).join('')
+      const unsupported = reason.unverified && reason.unsupported.length
+        ? `<div class="chip-unsupported muted">model said, unverified: ${reason.unsupported.map(escapeHtml).join('; ')}</div>`
+        : ''
+
       return `<div class="chip" data-token-name="${escapeHtml(t.name)}">
-        <div class="chip-head">${preview}<code class="chip-name">${escapeHtml(t.name)}</code>${reviewBadge}</div>
+        <div class="chip-head">${preview}<code class="chip-name">${escapeHtml(t.name)}</code>${reviewBadge}${rolesBadge}${unverifiedBadge}</div>
         <div class="chip-var"><code>${escapeHtml(cssVarOf(t.name))}</code></div>
-        ${alias}
-        ${t.why ? `<div class="chip-why">${escapeHtml(t.why)}</div>` : ''}
+        ${chainHtml(t, byName, resolved)}
+        <div class="chip-why">${escapeHtml(reason.text)}</div>
+        ${unsupported}
+        ${membersHtml(covered)}
+        ${whereHtml(covered)}
+        ${thumbsHtml(picked, screenshot, W, H)}
+        ${provenanceHtml(tokens.namer, picked)}
         <div class="chip-meta">${clusterPills}</div>
         <div class="review-controls">
           <button type="button" class="review-btn" data-action="accept">Accept</button>
@@ -493,6 +600,12 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 .chip-why { margin-top: 6px; font-size: 0.9em; }
 .chip-meta { margin-top: 6px; }
 .alias { margin-top: 4px; }
+.chip-chain { margin-top: 4px; color: var(--secondary); font-size: 0.85em; word-break: break-word; }
+.chip-members, .chip-where { margin-top: 6px; font-size: 0.85em; }
+.chip-unsupported { margin-top: 4px; font-size: 0.8em; }
+.chip-thumbs { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+.thumb { border: 1px solid var(--border); border-radius: 4px; background-color: var(--surface); }
+.chip-provenance { margin-top: 4px; font-size: 0.78em; }
 .pill { display: inline-block; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; font-size: 0.8em; margin: 2px 2px 0 0; }
 .swatch { display: inline-block; width: 22px; height: 22px; border: 1px solid var(--border); flex-shrink: 0; }
 .swatch-neutral { background: var(--surface); }

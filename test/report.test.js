@@ -242,6 +242,115 @@ test('report shows merge suggestions with an accept toggle', async () => {
   assert.ok(!html.includes('close <b>'))
 })
 
+// ---------------------------------------------------------------------------
+// F5 "Named & why spec cards" — grounding + roles-differ surfaced on the token chip
+// ---------------------------------------------------------------------------
+
+const f5Regions = [
+  { id: 'r0', bbox: [10, 10, 100, 40], label: 'button', score: 0.9, source: 'sam3.1' },
+  { id: 'r1', bbox: [10, 60, 300, 20], label: 'card', score: 0.6, source: 'sam3.1' },
+]
+
+const f5Capture = {
+  url: 'http://localhost:4321/', viewport: { width: 400, height: 300 },
+  screenshot: 'screenshot.png', capturedAt: '2026-10-25T00:00:00.000Z', elements: [],
+}
+
+const groundedCluster = {
+  id: 'color-03', kind: 'color', value: '#333333ff',
+  members: [{ value: '#333333ff', count: 22 }, { value: '#343434ff', count: 10 }],
+  count: 32, props: { color: 32 }, regionLabels: { button: 6, card: 26 },
+}
+
+// Used both as background (button) and as text (card) in significant proportion each way —
+// the merge is not settled, and the card must say so rather than presenting it as clean.
+const conflictedCluster = {
+  id: 'color-09', kind: 'color', value: '#1a73e8ff',
+  members: [{ value: '#1a73e8ff', count: 10 }],
+  count: 10, props: { 'background-color': 6, color: 4 }, regionLabels: { button: 6, card: 4 },
+}
+
+test('a grounded why is shown verbatim, with no unverified/roles-differ badge', () => {
+  const html = buildReportHtml({
+    capture: f5Capture, regions: f5Regions, clusters: [groundedCluster],
+    tokens: { namer: 'meta:muse-spark-1.3', tokens: [
+      { name: 'color.gray.800', tier: 'primitive', value: '#333333ff', clusters: ['color-03'], why: 'Dominant text color with 32 uses across card and button.' },
+    ] },
+    screenshot: 'data:image/png;base64,' + TINY_PNG_B64,
+  })
+  assert.match(html, /Dominant text color with 32 uses across card and button\./)
+  assert.ok(!html.includes('unverified'))
+  assert.ok(!html.includes('Roles differ'))
+  // provenance: namer id + the segmenter source of the regions shown
+  assert.match(html, /namer <code>meta:muse-spark-1\.3<\/code>/)
+  assert.match(html, /regions via <code>sam3\.1<\/code>/)
+})
+
+test('an ungrounded why is replaced by the plain templated reason and marked unverified, visibly', () => {
+  const html = buildReportHtml({
+    clusters: [groundedCluster],
+    tokens: { namer: 'meta:muse-spark-1.3', tokens: [
+      { name: 'color.gray.800', tier: 'primitive', value: '#333333ff', clusters: ['color-03'], why: 'Used 999 times in the sidebar nav.' },
+    ] },
+  })
+  assert.ok(!html.includes('Used 999 times in the sidebar nav.'))
+  assert.match(html, /Used 32 times as text color/) // the templated fallback took over
+  assert.match(html, /badge badge-caution">unverified/) // visible, not hidden
+  assert.match(html, /model said, unverified:/)
+  assert.match(html, /count 999/)
+})
+
+test('a token whose clusters disagree on role gets a visible "Roles differ" badge and is never presented as settled', () => {
+  const html = buildReportHtml({
+    clusters: [conflictedCluster],
+    tokens: { namer: 'mock', tokens: [
+      { name: 'color.brand', tier: 'primitive', value: '#1a73e8ff', clusters: ['color-09'], why: 'Primary brand color.' },
+    ] },
+  })
+  assert.match(html, /badge badge-caution">Roles differ: review/)
+})
+
+test('a clean single-role token never gets the roles-differ badge', () => {
+  const html = buildReportHtml({
+    clusters: [groundedCluster],
+    tokens: { namer: 'mock', tokens: [
+      { name: 'color.gray.800', tier: 'primitive', value: '#333333ff', clusters: ['color-03'], why: 'Dominant text color.' },
+    ] },
+  })
+  assert.ok(!html.includes('Roles differ'))
+})
+
+test('a token chip shows the merged cluster members, where it is used, and the value/alias chain', () => {
+  const html = buildReportHtml({
+    clusters: [groundedCluster],
+    tokens: { namer: 'mock', tokens: [
+      { name: 'color.gray.800', tier: 'primitive', value: '#333333ff', clusters: ['color-03'], why: '' },
+      { name: 'color.text.muted', tier: 'semantic', alias: 'color.gray.800', clusters: ['color-03'], why: '' },
+    ] },
+  })
+  assert.match(html, /#343434ff &times;10/) // drifted member + count
+  assert.match(html, /props:.*color \(32\)/s)
+  assert.match(html, /regions:.*card \(26\)/s)
+  assert.match(html, /color\.text\.muted.*&rarr;.*color\.gray\.800.*&rarr;.*#333333ff/s) // chain ends at the literal
+})
+
+test('a token chip crops up to 3 screenshot regions matching its clusters, with no new image files', () => {
+  const html = buildReportHtml({
+    capture: f5Capture, regions: f5Regions, clusters: [groundedCluster],
+    tokens: { namer: 'mock', tokens: [
+      { name: 'color.gray.800', tier: 'primitive', value: '#333333ff', clusters: ['color-03'], why: '' },
+    ] },
+    screenshot: 'data:image/png;base64,' + TINY_PNG_B64,
+  })
+  assert.match(html, /class="thumb"/)
+  assert.match(html, /background-image:url\(data:image\/png;base64,/)
+  // no thumbs at all when there is no screenshot to crop from
+  const noScreenshot = buildReportHtml({ regions: f5Regions, clusters: [groundedCluster], tokens: { namer: 'mock', tokens: [
+    { name: 'color.gray.800', tier: 'primitive', value: '#333333ff', clusters: ['color-03'], why: '' },
+  ] } })
+  assert.ok(!noScreenshot.includes('class="thumb"'))
+})
+
 test('writeReport links images instead of embedding when asked (big runs)', async () => {
   const { writeReport } = await import('../src/stages/report.js')
   const { mkdtempSync, writeFileSync, readFileSync } = await import('fs')
