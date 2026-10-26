@@ -1,7 +1,7 @@
 // Orchestrates the stages. Each stage writes <runDir>/<stage>.json so runs are inspectable
 // and a single stage can be re-run (e.g. swap the namer without re-capturing).
-import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync, cpSync } from 'fs'
-import { join, resolve, relative } from 'path'
+import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync, cpSync, statSync } from 'fs'
+import { join, resolve, relative, basename } from 'path'
 import { settings } from './config.js'
 import { runCapture, screenshotUrl } from './stages/capture.js'
 import { collectUses } from './stages/join.js'
@@ -147,7 +147,10 @@ export async function runPipeline(o) {
           siteDir = join(runDir, 'site')
           rmSync(siteDir, { recursive: true, force: true })
           cpSync(runMeta.serve, siteDir, { recursive: true, filter: (src) => !/[\/](node_modules|\.git)$/.test(src) })
-          cpSync(rw.outDir, join(siteDir, relative(runMeta.serve, runMeta.target)), { recursive: true })
+          const rel = relative(runMeta.serve, runMeta.target)
+          // A file target overlays one rewritten file; a folder target overlays the whole rewritten folder.
+          if (statSync(runMeta.target).isFile()) cpSync(join(rw.outDir, basename(runMeta.target)), join(siteDir, rel))
+          else cpSync(rw.outDir, join(siteDir, rel), { recursive: true })
         }
         const s = await serveDir(siteDir)
         servers.push(s)

@@ -39,3 +39,14 @@ test('deterministic coder rewrites jsx and skips node_modules', async () => {
   assert.ok(!existsSync(join(runDir, 'rewritten', 'node_modules')))
   assert.match(readFileSync(join(runDir, 'rewritten', 'src', 'B.jsx'), 'utf-8'), /var\(--color-/)
 })
+
+test('deterministic coder: a single-file target rewrites only that file', async () => {
+  const { mkdtempSync, mkdirSync, writeFileSync, readdirSync } = await import('fs')
+  const dir = mkdtempSync(join(tmpdir(), 's2t-file-'))
+  mkdirSync(join(dir, 'css'))
+  writeFileSync(join(dir, 'css', 'app.css'), 'a { color: #1a73e8; }\n')
+  writeFileSync(join(dir, 'css', 'app.min.css'), 'a{color:#1a73e8}')
+  const r = await deterministicCoder().rewrite({ targetDir: join(dir, 'css', 'app.css'), tokens, clusters, write: true, runDir: join(dir, 'run') })
+  assert.deepEqual(r.files, ['app.css'])
+  assert.deepEqual(readdirSync(join(dir, 'run', 'rewritten')), ['app.css'])
+})

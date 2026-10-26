@@ -3,7 +3,7 @@
 // the mechanical apply stays here either way.
 //
 // Safety: refuses a dirty working tree, always works on a NEW branch, never pushes unless open:true.
-import { readFileSync, writeFileSync, copyFileSync, mkdirSync, existsSync } from 'fs'
+import { readFileSync, writeFileSync, copyFileSync, mkdirSync, existsSync, statSync } from 'fs'
 import { join, dirname, relative } from 'path'
 import { execFileSync } from 'child_process'
 import { cssVarOf } from '../lib/props.js'
@@ -47,6 +47,8 @@ export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel }) {
  *   tokensCssPath: where tokens.css goes (default <targetDir>/tokens.css).
  */
 export function runPr(o) {
+  // A single-file target means "rewrite this file": its folder is where the rewritten file and tokens.css go.
+  if (statSync(o.targetDir).isFile()) o = { ...o, targetDir: dirname(o.targetDir) }
   const rd = (n) => JSON.parse(readFileSync(join(o.runDir, `${n}.json`), 'utf-8'))
   const rewrite = rd('rewrite')
   const tokens = rd('tokens')

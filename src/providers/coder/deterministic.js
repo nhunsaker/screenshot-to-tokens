@@ -191,7 +191,14 @@ export default function deterministicCoder() {
       const outDir = join(runDir, 'rewritten')
       rmSync(outDir, { recursive: true, force: true })
       mkdirSync(runDir, { recursive: true })
-      cpSync(targetDir, outDir, { recursive: true, filter: (src) => !SKIP_DIRS.has(basename(src)) })
+      // A single file target (e.g. src/assets/css/argon-dashboard-react.css) rewrites just that file, so a PR
+      // doesn't also touch minified copies or unrelated stylesheets sitting next to it.
+      if (statSync(targetDir).isFile()) {
+        mkdirSync(outDir, { recursive: true })
+        cpSync(targetDir, join(outDir, basename(targetDir)))
+      } else {
+        cpSync(targetDir, outDir, { recursive: true, filter: (src) => !SKIP_DIRS.has(basename(src)) })
+      }
 
       const files = walk(outDir).filter((f) => extname(f) === '.css' || extname(f) === '.vue' || JSX_EXT.test(f) || SVG_HTML_EXT.test(f))
       // JSX/JS files go through @sorb/seed's detector + codemod with the same token choice as CSS.
