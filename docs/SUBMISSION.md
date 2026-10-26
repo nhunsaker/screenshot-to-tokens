@@ -9,6 +9,19 @@ spacing that drifted apart by accident, proposes a reasoned token set, rewrites 
 files to use it, proves with a pixel diff that the rewrite itself changes nothing, and shows exactly
 what the cleanup changes, before a human merges anything.
 
+## What existed before the hackathon, and what is new
+
+The rules ask every entrant to separate pre-existing work from hackathon work. Here is the line, and the git history
+shows it exactly.
+
+**Before the building period (tag `pre-event-baseline`, built Oct 25, 2026):** the pipeline scaffold with an offline
+stand-in for every Meta model. That covers capture, a DOM-based mock segmenter, clustering, a heuristic namer and validator,
+the rewrite, the three-check verify, the HTML report with review, the CLI, two test fixtures and the test suite. It depends
+only on the published `@sorb/seed` package; Sorb itself is Metatoy's existing product and is not part of this repo.
+
+**Built during the hackathon (Oct 26 to Nov 4, every commit after `pre-event-baseline`):** everything that uses Meta's
+models, and every feature shown in the demo video. _(Filled in as work lands; see `git log pre-event-baseline..HEAD`.)_
+
 ## The problem
 
 One person, one moment: a design engineer inherits a React app with zero design tokens. Every
