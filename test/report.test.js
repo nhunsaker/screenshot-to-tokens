@@ -367,3 +367,19 @@ test('writeReport links images instead of embedding when asked (big runs)', asyn
   const embedded = readFileSync(writeReport(dir, { images: 'auto' }), 'utf-8')
   assert.match(embedded, /data:image\/png;base64/)
 })
+
+test('timingSection renders a waterfall with per-stage model calls and cost', async () => {
+  const { timingSection } = await import('../src/stages/report.js')
+  const assert = (await import('node:assert/strict')).default
+  const html = timingSection({ timing: { totalMs: 37900, stages: [
+    { stage: 'capture', ms: 900, calls: 0, cached: 0, usd: 0 },
+    { stage: 'segment', ms: 1000, calls: 3, cached: 1, usd: 0.005 },
+    { stage: 'name', ms: 33100, calls: 1, cached: 0, usd: 0.0495 },
+  ] } })
+  assert.match(html, /Run timing/)
+  assert.match(html, /33\.1 s/)
+  assert.match(html, /3 calls \(1 cached\)/)
+  assert.match(html, /wf-bar wf-model/)
+  assert.match(html, /about \$0\.05[45]/)
+  assert.equal(timingSection({}), '')
+})

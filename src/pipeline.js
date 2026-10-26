@@ -10,6 +10,7 @@ import { runName } from './stages/name.js'
 import { toCss, toDtcg } from './stages/emit.js'
 import { serveDir } from './lib/serve.js'
 import { usableTokens } from './stages/review.js'
+import { mark, since } from './lib/metrics.js'
 
 export const STAGES = ['capture', 'segment', 'cluster', 'name', 'emit', 'rewrite', 'verify', 'report']
 
@@ -29,7 +30,7 @@ export async function segmenterFor(id) {
   throw new Error(`unknown segmenter: ${id}`)
 }
 
-const log = (stage, msg) => console.log(`  ${stage.padEnd(8)} ${msg}`)
+const logLine = (stage, msg) => console.log(`  ${stage.padEnd(8)} ${msg}`)
 
 /**
  * @param {{url?:string, fixture?:string, serve?:string, target?:string, runDir:string, from?:string, to?:string, write?:boolean}} o
@@ -47,6 +48,16 @@ export async function runPipeline(o) {
   const readIf = (stage, name) => (after(stage) ? readJson(runDir, name) : null)
   const servers = []
   const t0 = Date.now()
+  // F19 latency waterfall: each stage logs once when it finishes, so the time since the previous log is that
+  // stage's wall time; model calls (count, cache hits, cost) come from the metrics ledger over the same span.
+  const timings = []
+  let tStage = Date.now(), mStage = mark()
+  const log = (stage, msg) => {
+    timings.push({ stage, ms: Date.now() - tStage, ...since(mStage) })
+    writeJson(runDir, 'timing', { totalMs: Date.now() - t0, stages: timings })
+    tStage = Date.now(); mStage = mark()
+    logLine(stage, msg)
+  }
   try {
     let url = o.url
     let target = o.target ? resolve(o.target) : null
@@ -177,7 +188,9 @@ export async function runPipeline(o) {
       const p = writeReport(runDir)
       log('report', p)
     }
-    console.log(`done in ${((Date.now() - t0) / 1000).toFixed(1)} s`)
+    const usd = timings.reduce((n, t) => n + t.usd, 0)
+    const calls = timings.reduce((n, t) => n + t.calls, 0), hits = timings.reduce((n, t) => n + t.cached, 0)
+    console.log(`done in ${((Date.now() - t0) / 1000).toFixed(1)} s · ${calls} model calls (${hits} cached) · about $${usd.toFixed(3)}`)
   } finally {
     for (const s of servers) await s.close()
   }

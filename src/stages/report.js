@@ -649,6 +649,14 @@ tr.drift { background: var(--info-bg); }
   .chip-grid { grid-template-columns: 1fr 1fr; }
   .review-toolbar { flex-direction: column; align-items: stretch; text-align: center; }
 }
+
+.wf { width: 100%; border-collapse: collapse; }
+.wf td { padding: 4px 8px; vertical-align: middle; }
+.wf .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.wf-cell { width: 55%; }
+.wf-track { position: relative; height: 14px; background: color-mix(in srgb, currentColor 8%, transparent); border-radius: 4px; }
+.wf-bar { position: absolute; top: 0; bottom: 0; border-radius: 4px; background: color-mix(in srgb, currentColor 35%, transparent); }
+.wf-bar.wf-model { background: #e8711a; }
 `
 
 // ---------------------------------------------------------------------------
@@ -672,6 +680,26 @@ tr.drift { background: var(--info-bg); }
  * }} data
  * @returns {string}
  */
+/** F19: per-stage wall time as a waterfall, with model calls, cache hits and estimated cost per stage. */
+export function timingSection(data) {
+  const t = data.timing
+  if (!t || !Array.isArray(t.stages) || !t.stages.length) return ''
+  const total = Math.max(1, t.stages.reduce((n, s) => n + s.ms, 0))
+  let offset = 0
+  const rows = t.stages.map((s) => {
+    const left = (100 * offset) / total, width = Math.max(0.4, (100 * s.ms) / total)
+    offset += s.ms
+    const model = s.calls ? `${s.calls} call${s.calls === 1 ? '' : 's'}${s.cached ? ` (${s.cached} cached)` : ''} · $${s.usd.toFixed(3)}` : ''
+    return `<tr><td><code>${escapeHtml(s.stage)}</code></td>
+      <td class="wf-cell"><div class="wf-track"><div class="wf-bar${s.calls ? ' wf-model' : ''}" style="left:${left.toFixed(2)}%;width:${width.toFixed(2)}%"></div></div></td>
+      <td class="num">${(s.ms / 1000).toFixed(1)} s</td><td class="muted">${escapeHtml(model)}</td></tr>`
+  }).join('')
+  const usd = t.stages.reduce((n, s) => n + s.usd, 0)
+  const calls = t.stages.reduce((n, s) => n + s.calls, 0), hits = t.stages.reduce((n, s) => n + s.cached, 0)
+  const note = `Total ${(t.totalMs / 1000).toFixed(1)} s · ${calls} model calls${hits ? ` (${hits} from cache, free)` : ''} · about $${usd.toFixed(3)} at Meta Model API list prices. Wall time on this machine for this page, recorded during the run; not a throughput benchmark.`
+  return sectionWrap('Run timing', `<table class="wf"><tbody>${rows}</tbody></table><p class="muted">${escapeHtml(note)}</p>`)
+}
+
 export function buildReportHtml(data = {}) {
   const body = [
     headerSection(data),
@@ -680,6 +708,7 @@ export function buildReportHtml(data = {}) {
     clustersSection(data),
     rewriteSection(data),
     verifySection(data),
+    timingSection(data),
   ].join('\n')
   return `<!doctype html>
 <html lang="en">
@@ -716,6 +745,7 @@ export function writeReport(runDir, o = {}) {
   const tokens = readJsonSafe(join(runDir, 'tokens.json'))
   const rewrite = readJsonSafe(join(runDir, 'rewrite.json'))
   const verify = readJsonSafe(join(runDir, 'verify.json'))
+  const timing = readJsonSafe(join(runDir, 'timing.json'))
 
   const rels = [capture && capture.screenshot]
   for (const v of [verify, verify && verify.fallback, verify && verify.colors]) if (v) rels.push(v.before, v.after, v.diff)
@@ -731,7 +761,7 @@ export function writeReport(runDir, o = {}) {
     ? { ...imagesFor(verify), fallback: imagesFor(verify.fallback), colors: imagesFor(verify.colors) }
     : null
 
-  const html = buildReportHtml({ capture, regions, clusters, tokens, rewrite, verify, screenshot, verifyImages })
+  const html = buildReportHtml({ capture, regions, clusters, tokens, rewrite, verify, timing, screenshot, verifyImages })
   const outPath = join(runDir, 'report.html')
   writeFileSync(outPath, html)
   return outPath

@@ -7,6 +7,7 @@ import { join } from 'path'
 import { PNG } from 'pngjs'
 import { createHash } from 'crypto'
 import { cached } from '../../lib/cache.js'
+import { recordCall } from '../../lib/metrics.js'
 import { postprocessRegions } from '../../stages/segeval.js'
 
 /** Concept prompts sent one per call; each maps to a Region.label. */
@@ -118,7 +119,9 @@ export const responsesUrl = (baseURL) => {
 async function callSam(o) {
   // Cached by model + prompt + image hash (the key never includes the API key or the full image).
   const req = { baseURL: o.baseURL, model: o.model, prompt: o.prompt, image: createHash('sha256').update(o.imageDataUrl).digest('hex') }
-  const { cached: _hit, ...json } = await cached('sam', req, () => callSamUncached(o))
+  const t0 = Date.now()
+  const { cached: hit, ...json } = await cached('sam', req, () => callSamUncached(o))
+  recordCall({ kind: 'sam', model: o.model, ms: Date.now() - t0, cached: !!hit })
   return json
 }
 

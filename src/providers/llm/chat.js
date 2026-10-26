@@ -2,6 +2,7 @@
 // assuming Meta's API keeps an OpenAI-compatible endpoint, Meta Model API (verify Oct 26).
 // Data policy: only public, non-sensitive (class C) content goes to hosted APIs.
 import { cached } from '../../lib/cache.js'
+import { recordCall } from '../../lib/metrics.js'
 
 /** Pull the first JSON object out of a model reply (handles ```json fences and chatter). */
 export function extractJson(text) {
@@ -23,7 +24,10 @@ export async function chat(o) {
   if (!o.baseURL || !o.model) throw new Error('chat: baseURL and model are required')
   // Same request → cached reply (no cost, no wait). The key never includes the API key.
   const req = { baseURL: o.baseURL, model: o.model, messages: o.messages, json: !!o.json, temperature: o.temperature ?? 0.2 }
-  return cached('chat', req, () => chatUncached(o))
+  const t0 = Date.now()
+  const r = await cached('chat', req, () => chatUncached(o))
+  recordCall({ kind: 'chat', model: o.model, ms: Date.now() - t0, cached: !!r.cached, usage: r.usage })
+  return r
 }
 
 async function chatUncached(o) {

@@ -9,7 +9,7 @@ const pct = (v, d = 0) => (v == null ? '-' : `${(v * 100).toFixed(d)}%`)
 /** Summarize one run folder into flat rows. Pure apart from reads; exported for tests. */
 export function summarizeRun(dir) {
   const run = rd(dir, 'run'), tokens = rd(dir, 'tokens'), regions = rd(dir, 'regions')
-  const ev = rd(dir, 'eval'), seg = rd(dir, 'segeval'), ver = rd(dir, 'verify'), usage = rd(dir, 'usage')
+  const ev = rd(dir, 'eval'), seg = rd(dir, 'segeval'), ver = rd(dir, 'verify'), usage = rd(dir, 'usage'), timing = rd(dir, 'timing')
   const tiers = {}
   for (const t of tokens?.tokens || []) tiers[t.tier] = (tiers[t.tier] || 0) + 1
   const tok = (usage || []).reduce((a, u) => ({ in: a.in + (u.usage?.prompt_tokens || 0), out: a.out + (u.usage?.completion_tokens || 0) }), { in: 0, out: 0 })
@@ -33,6 +33,8 @@ export function summarizeRun(dir) {
     'verify colors': ver?.colors ? pct(ver.colors.ratio, 3) : '-',
     'verify all': ver ? pct(ver.ratio, 3) : '-',
     'model tokens in/out': usage ? `${tok.in}/${tok.out}` : '-',
+    'run time': timing ? `${(timing.totalMs / 1000).toFixed(1)} s (name ${((timing.stages.find((x) => x.stage === 'name') || { ms: 0 }).ms / 1000).toFixed(1)} s)` : '-',
+    'est. cost': timing ? `$${timing.stages.reduce((n, x) => n + (x.usd || 0), 0).toFixed(3)}` : '-',
   }
 }
 
