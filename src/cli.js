@@ -55,6 +55,7 @@ async function doctor() {
   } catch (e) {
     console.log('  ollama      not running (start with `ollama serve`; pull a model in a granted heavy window)')
   }
+  console.log(`  baseten     ${LLM_PRESETS.baseten().apiKey ? 'key set' : 'no key'}; model=${LLM_PRESETS.baseten().model}`)
   console.log(`  fireworks   ${LLM_PRESETS.fireworks().apiKey ? 'key set' : 'no key'}`)
 }
 

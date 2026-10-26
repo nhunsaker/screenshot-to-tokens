@@ -21,6 +21,10 @@ export function loadDotEnv(cwd = process.cwd()) {
       const k = keychainMetaKey()
       if (k) process.env.META_API_KEY = k
     }
+    if (!process.env.BASETEN_API_KEY) {
+      const k = keychain('baseten-api')
+      if (k) process.env.BASETEN_API_KEY = k
+    }
     if (!process.env.FIREWORKS_API_KEY) {
       const k = keychain('fireworks-api')
       if (k) process.env.FIREWORKS_API_KEY = k
@@ -52,6 +56,13 @@ export const LLM_PRESETS = {
     baseURL: process.env.META_API_BASE_URL || 'https://api.meta.ai/v1',
     apiKey: process.env.META_API_KEY || '',
     model: process.env.META_NAMER_MODEL || 'muse-spark-1.3',
+  }),
+  // Muse Spark Open (open weights) on Baseten; the hackathon id is enabled with the hackathon credit (2026-10-26).
+  baseten: () => ({
+    id: 'baseten',
+    baseURL: 'https://inference.baseten.co/v1',
+    apiKey: process.env.BASETEN_API_KEY || '',
+    model: process.env.BASETEN_MODEL || 'meta-models/muse-spark-open-1026',
   }),
   fireworks: () => ({
     id: 'fireworks',
