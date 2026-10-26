@@ -4,7 +4,7 @@
 //
 // Safety: refuses a dirty working tree, always works on a NEW branch, never pushes unless open:true.
 import { readFileSync, writeFileSync, copyFileSync, mkdirSync, existsSync, statSync } from 'fs'
-import { join, dirname, relative } from 'path'
+import { join, dirname, relative, resolve } from 'path'
 import { execFileSync } from 'child_process'
 import { cssVarOf } from '../lib/props.js'
 
@@ -74,7 +74,8 @@ export function runPr(o) {
   copyFileSync(join(o.runDir, 'tokens.css'), tokensCss)
   const tokensCssRel = relative(o.repoDir, tokensCss)
   const body = prBody({ tokens, rewrite, verify, eval: score, tokensCssRel })
-  const bodyPath = join(o.runDir, 'pr-body.md')
+  // Absolute: gh runs with cwd = the app repo, not this project.
+  const bodyPath = resolve(o.runDir, 'pr-body.md')
   writeFileSync(bodyPath, body)
   const title = o.title || `Design tokens: replace ${rewrite.edits.length} hardcoded values`
   git(o.repoDir, 'add', '-A')
