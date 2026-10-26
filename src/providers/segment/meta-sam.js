@@ -5,6 +5,8 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { PNG } from 'pngjs'
+import { createHash } from 'crypto'
+import { cached } from '../../lib/cache.js'
 import { postprocessRegions } from '../../stages/segeval.js'
 
 /** Concept prompts sent one per call; each maps to a Region.label. */
@@ -113,7 +115,14 @@ export const responsesUrl = (baseURL) => {
   return /\/v1$/.test(b) ? `${b}/responses` : `${b}/v1/responses`
 }
 
-async function callSam({ baseURL, apiKey, model, imageDataUrl, prompt }) {
+async function callSam(o) {
+  // Cached by model + prompt + image hash (the key never includes the API key or the full image).
+  const req = { baseURL: o.baseURL, model: o.model, prompt: o.prompt, image: createHash('sha256').update(o.imageDataUrl).digest('hex') }
+  const { cached: _hit, ...json } = await cached('sam', req, () => callSamUncached(o))
+  return json
+}
+
+async function callSamUncached({ baseURL, apiKey, model, imageDataUrl, prompt }) {
   const res = await fetch(responsesUrl(baseURL), {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
@@ -135,6 +144,15 @@ async function callSam({ baseURL, apiKey, model, imageDataUrl, prompt }) {
   return res.json()
 }
 // ─────────────────────────────────────────────────────────────────────────────────────────────
+
+/** Run fn over items with at most `limit` in flight; results keep input order. */
+export async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length)
+  let next = 0
+  const worker = async () => { while (next < items.length) { const i = next++; out[i] = await fn(items[i], i) } }
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(limit, items.length)) }, worker))
+  return out
+}
 
 /** Max tile height. Full-page captures can be 6000+ px tall; segmentation works better per screenful. */
 export const TILE_H = 1600
@@ -169,42 +187,45 @@ export default function metaSam() {
       const screenshotPath = join(runDir, capture.screenshot)
       const full = PNG.sync.read(readFileSync(screenshotPath))
 
+      // Every (tile, prompt) pair is an independent call: run them concurrently (default 4 at a time),
+      // then assemble results in a fixed order so region ids and masks stay deterministic.
+      const jobs = []
+      for (const tile of tilePng(full, Number(process.env.S2T_SAM_TILE_H || TILE_H))) {
+        const imageDataUrl = `data:image/png;base64,${PNG.sync.write(tile.png).toString('base64')}`
+        for (const prompt of promptsFromEnv()) jobs.push({ tile, imageDataUrl, prompt })
+      }
+      const calls = jobs.length
+      const results = await mapLimit(jobs, Number(process.env.S2T_SAM_CONCURRENCY || 4), async (j) => {
+        try {
+          return { json: await callSam({ baseURL, apiKey, model, imageDataUrl: j.imageDataUrl, prompt: j.prompt }) }
+        } catch (e) {
+          return { error: `${j.prompt}@y${j.tile.y}: ${e.message}` }
+        }
+      })
+
       /** @type {import('../../types.js').Region[]} */
       const regions = []
       const errors = []
-      let calls = 0
-      for (const tile of tilePng(full, Number(process.env.S2T_SAM_TILE_H || TILE_H))) {
-        const png = tile.png
-        const imageDataUrl = `data:image/png;base64,${PNG.sync.write(png).toString('base64')}`
-      for (const prompt of promptsFromEnv()) {
-        const label = LABEL_BY_PROMPT[prompt] || 'other'
-        let json
-        calls++
-        try {
-          json = await callSam({ baseURL, apiKey, model, imageDataUrl, prompt })
-        } catch (e) {
-          // One concept failing shouldn't sink the whole segment step; the next concept still runs.
-          // But record it: if every call fails we throw below instead of returning nothing.
-          errors.push(`${prompt}@y${tile.y}: ${e.message}`)
-          continue
-        }
-        const text = extractOutputText(json)
+      results.forEach((res, k) => {
+        const { tile, prompt } = jobs[k]
+        // One concept failing shouldn't sink the whole step, but record it: all failing throws below.
+        if (res.error) { errors.push(res.error); return }
+        const text = extractOutputText(res.json)
         const dets = parseSamOutput(text)
-        if (!dets.length) continue
+        if (!dets.length) return
         // If the API resized the image before detecting, dets[0].box.w/h is its reference frame;
         // scale back to the page-px tile we sent, then shift by the tile's page offset.
         const { w: refW, h: refH } = dets[0].box
-        const scale = { x: refW ? png.width / refW : 1, y: refH ? png.height / refH : 1 }
+        const scale = { x: refW ? tile.png.width / refW : 1, y: refH ? tile.png.height / refH : 1 }
         const mapped = toRegions(text, scale, {
-          label,
+          label: LABEL_BY_PROMPT[prompt] || 'other',
           source: 'sam3.1',
           idPrefix: 'r',
           startIndex: regions.length,
           onMask: (maskData, region) => {
             try {
               const maskPath = `mask-${region.id}.raw`
-              // Encoding is unknown pre-access (docs/providers-research.md §1b) — write the raw
-              // token payload so nothing is lost; decode once the real mask format is confirmed.
+              // Mask encoding not decoded yet: keep the raw token payload so nothing is lost.
               writeFileSync(join(runDir, maskPath), String(maskData))
               return maskPath
             } catch (e) {
@@ -214,8 +235,7 @@ export default function metaSam() {
         })
         for (const r of mapped) r.bbox[1] += tile.y
         regions.push(...mapped)
-      }
-      }
+      })
       if (errors.length === calls) throw new Error(`SAM 3.1: all ${calls} calls failed; first: ${errors[0]}`)
       if (errors.length) console.warn(`  segment  ${errors.length}/${calls} SAM calls failed (first: ${errors[0]})`)
       return postprocessRegions(regions)

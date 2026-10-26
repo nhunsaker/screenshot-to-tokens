@@ -1,6 +1,7 @@
 // Minimal OpenAI-compatible chat client (global fetch). Works for Ollama, Fireworks and,
 // assuming Meta's API keeps an OpenAI-compatible endpoint, Meta Model API (verify Oct 26).
 // Data policy: only public, non-sensitive (class C) content goes to hosted APIs.
+import { cached } from '../../lib/cache.js'
 
 /** Pull the first JSON object out of a model reply (handles ```json fences and chatter). */
 export function extractJson(text) {
@@ -20,6 +21,12 @@ export function extractJson(text) {
  */
 export async function chat(o) {
   if (!o.baseURL || !o.model) throw new Error('chat: baseURL and model are required')
+  // Same request → cached reply (no cost, no wait). The key never includes the API key.
+  const req = { baseURL: o.baseURL, model: o.model, messages: o.messages, json: !!o.json, temperature: o.temperature ?? 0.2 }
+  return cached('chat', req, () => chatUncached(o))
+}
+
+async function chatUncached(o) {
   const ctrl = new AbortController()
   const timer = setTimeout(() => ctrl.abort(), o.timeoutMs || 120000)
   try {

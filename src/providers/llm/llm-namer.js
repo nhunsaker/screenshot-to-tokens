@@ -63,7 +63,7 @@ export default function llmNamer(presetId) {
         user.push({ type: 'image_url', image_url: { url: `data:image/png;base64,${b64}` } })
       }
       const t0 = Date.now()
-      const { text, usage } = await chat({
+      const { text, usage, cached } = await chat({
         ...cfg,
         json: true,
         messages: [{ role: 'system', content: SYSTEM_PROMPT }, { role: 'user', content: user.length === 1 ? user[0].text : user }],
@@ -71,7 +71,7 @@ export default function llmNamer(presetId) {
       const parsed = extractJson(text)
       // If the model says nothing about merges, keep the deterministic suggestions rather than losing them.
       const merges = Array.isArray(parsed.merges) ? parsed.merges : draft.merges || []
-      return { tokens: parsed.tokens || [], merges, namer: `${presetId}:${cfg.model}`, meta: { ms: Date.now() - t0, usage } }
+      return { tokens: parsed.tokens || [], merges, namer: `${presetId}:${cfg.model}`, meta: { ms: Date.now() - t0, usage: cached ? { prompt_tokens: 0, completion_tokens: 0, cached_from: usage } : usage, cached: !!cached } }
     },
   }
 }
