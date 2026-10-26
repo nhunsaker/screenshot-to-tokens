@@ -106,7 +106,7 @@ export function heuristicTokens({ clusters }) {
   sem('color.text.default', text, 'Most used text color.')
   const muted = top(clusters, 'color', (c) => (c !== text && c !== action ? fg(c) : 0))
   sem('color.text.muted', muted, 'Second most used text color.')
-  const border = top(clusters, 'color', (c) => c.props['border-top-color'] || 0)
+  const border = top(clusters, 'color', (c) => ['top', 'right', 'bottom', 'left'].reduce((n, side) => n + (c.props[`border-${side}-color`] || 0), 0))
   sem('color.border.default', border, 'Most used border color.')
   const body = top(clusters, 'font-size', (c) => c.count)
   sem('font.size.body', body, 'Most used font size.')

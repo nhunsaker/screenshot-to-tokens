@@ -14,7 +14,7 @@ export function labelFor(e) {
   // A link drawn as a button (fill or border, plus padding) is a button to a person, and to SAM.
   if (e.role === 'link') {
     const padded = parseFloat(s['padding-left'] || '0') >= 8 && parseFloat(s['padding-top'] || '0') >= 4
-    if (padded && (hasBg || s['border-top-color'])) return 'button'
+    if (padded && (hasBg || s['border-top-color'] || s['border-left-color'])) return 'button'
   }
   if (e.role && LABEL_BY_ROLE[e.role]) return LABEL_BY_ROLE[e.role]
   const hasShadow = s['box-shadow'] && s['box-shadow'] !== 'none'

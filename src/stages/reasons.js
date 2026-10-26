@@ -62,8 +62,8 @@ const PROP_PHRASES = [
   ['font color', ['color']],
   ['background color', ['background-color']],
   ['background', ['background-color']],
-  ['border color', ['border-top-color', 'border-color']],
-  ['border', ['border-top-color', 'border-color']],
+  ['border color', ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color', 'border-color']],
+  ['border', ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color', 'border-color']],
   ['outline', ['outline-color']],
   ['fill', ['fill']],
   ['stroke', ['stroke']],
@@ -93,7 +93,7 @@ export const REGION_WORDS = ['button', 'link', 'input', 'card', 'nav', 'header',
 // left to the PROP_PHRASES pass below, so a multi-word phrase like "border color" still gets a
 // chance to match before a bare "color" inside it is claimed first.
 const LITERAL_PROPS = [
-  'border-top-left-radius', 'border-top-color', 'background-color', 'outline-color',
+  'border-top-left-radius', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color', 'background-color', 'outline-color',
   'padding-right', 'padding-bottom', 'padding-left', 'padding-top',
   'margin-bottom', 'margin-top', 'row-gap', 'column-gap',
   'font-weight', 'font-family', 'font-size', 'line-height', 'box-shadow',
@@ -193,7 +193,7 @@ export function checkGrounding(token, clusters) {
 
 const PROP_LABEL = {
   color: 'text color', 'background-color': 'background color', background: 'background color',
-  'border-top-color': 'border color', 'border-color': 'border color', border: 'border color',
+  'border-top-color': 'border color', 'border-right-color': 'border color', 'border-bottom-color': 'border color', 'border-left-color': 'border color', 'border-color': 'border color', border: 'border color',
   'outline-color': 'outline color', outline: 'outline color', fill: 'fill color', stroke: 'stroke color',
   'box-shadow': 'shadow', 'border-top-left-radius': 'corner radius', 'border-radius': 'corner radius',
   'padding-top': 'padding', 'padding-right': 'padding', 'padding-bottom': 'padding', 'padding-left': 'padding',

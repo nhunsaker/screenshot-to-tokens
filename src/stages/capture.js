@@ -56,7 +56,10 @@ function walkPage(props, maxElements) {
     const styles = {}
     for (const p of props) styles[p] = cs.getPropertyValue(p)
     // Border color only matters when there is a border.
-    if (parseFloat(cs.borderTopWidth) === 0) delete styles['border-top-color']
+    // Each side's border color only counts when that side actually has a border.
+    for (const side of ['top', 'right', 'bottom', 'left']) {
+      if (parseFloat(cs.getPropertyValue('border-' + side + '-width')) === 0 || cs.getPropertyValue('border-' + side + '-style') === 'none') delete styles['border-' + side + '-color']
+    }
     if (cs.outlineStyle === 'none') delete styles['outline-color']
     // fill/stroke only mean something on SVG shapes; HTML elements report a default black fill.
     const isShape = el instanceof SVGElement && !(el instanceof SVGSVGElement)
