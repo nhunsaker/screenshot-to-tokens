@@ -70,9 +70,9 @@ test('tilePng splits tall screenshots with page offsets', () => {
 test('meta namer: request shape, JSON extraction, validator repair', async () => {
   const { server, seen, base } = await fakeMeta()
   try {
-    const set = await withEnv({ META_API_KEY: 'test-key', META_API_BASE_URL: base, META_NAMER_MODEL: 'muse-spark-1.3' }, () =>
+    const set = await withEnv({ META_API_KEY: 'test-key', META_API_BASE_URL: base, META_NAMER_MODEL: 'muse-spark-1.3', S2T_NAMER_MODE: 'full', S2T_CACHE: '0' }, () =>
       runName({ clusters, regions: [], namer: 'meta', strict: true }))
-    assert.equal(set.namer, 'meta:muse-spark-1.3')
+    assert.equal(set.namer, 'meta:muse-spark-1.3:full')
     assert.equal(seen.chat[0].auth, 'Bearer test-key')
     assert.equal(seen.chat[0].json.model, 'muse-spark-1.3')
     assert.deepEqual(seen.chat[0].json.response_format, { type: 'json_object' })

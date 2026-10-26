@@ -23,7 +23,10 @@ export function extractJson(text) {
 export async function chat(o) {
   if (!o.baseURL || !o.model) throw new Error('chat: baseURL and model are required')
   // Same request → cached reply (no cost, no wait). The key never includes the API key.
-  const req = { baseURL: o.baseURL, model: o.model, messages: o.messages, json: !!o.json, temperature: o.temperature ?? 0.2 }
+  // Reasoning models (Muse Spark 1.3) spend most output tokens thinking; S2T_REASONING_EFFORT=low|medium|high caps it.
+  const effort = o.reasoningEffort || process.env.S2T_REASONING_EFFORT || ''
+  o = { ...o, reasoningEffort: effort }
+  const req = { baseURL: o.baseURL, model: o.model, messages: o.messages, json: !!o.json, temperature: o.temperature ?? 0.2, effort }
   const t0 = Date.now()
   const r = await cached('chat', req, () => chatUncached(o))
   recordCall({ kind: 'chat', model: o.model, ms: Date.now() - t0, cached: !!r.cached, usage: r.usage })
@@ -43,6 +46,7 @@ async function chatUncached(o) {
         messages: o.messages,
         temperature: o.temperature ?? 0.2,
         ...(o.json ? { response_format: { type: 'json_object' } } : {}),
+        ...(o.reasoningEffort ? { reasoning_effort: o.reasoningEffort } : {}),
       }),
     })
     if (!res.ok) throw new Error(`chat ${res.status}: ${(await res.text()).slice(0, 300)}`)

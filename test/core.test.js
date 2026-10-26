@@ -154,3 +154,20 @@ test('mock oracle: a padded, filled link is a button', async () => {
   assert.equal(labelFor({ ...base, styles: { 'background-color': 'rgb(26, 115, 232)', 'padding-left': '16px', 'padding-top': '10px' } }), 'button')
   assert.equal(labelFor({ ...base, styles: { 'background-color': 'rgba(0, 0, 0, 0)', 'padding-left': '0px', 'padding-top': '0px' } }), 'link')
 })
+
+test('expandCompact: draft primitives + renames + model tokens, aliases follow renames', async () => {
+  const { expandCompact } = await import('../src/providers/llm/llm-namer.js')
+  const draft = { tokens: [
+    { name: 'color.blue.500', tier: 'primitive', value: '#1a73e8ff', clusters: ['color-01'], why: 'Used 9 times.' },
+    { name: 'color.gray.800', tier: 'primitive', value: '#333333ff', clusters: ['color-02'], why: 'Used 16 times.' },
+    { name: 'color.action.primary', tier: 'semantic', alias: 'color.blue.500', clusters: ['color-01'], why: 'draft' },
+  ] }
+  const out = expandCompact({ rename: { 'color-01': 'color.brand.500' }, tokens: [
+    { name: 'color.action.primary', tier: 'semantic', alias: 'color.blue.500', clusters: ['color-01'], why: 'Button fills.' },
+    { name: 'oops', tier: 'primitive', value: '#000', clusters: ['color-02'] },
+  ] }, draft)
+  assert.equal(out.renamed, 1)
+  assert.deepEqual(out.tokens.filter((t) => t.tier === 'primitive').map((t) => t.name), ['color.brand.500', 'color.gray.800'])
+  assert.equal(out.tokens.find((t) => t.name === 'color.action.primary').alias, 'color.brand.500')
+  assert.ok(!out.tokens.some((t) => t.name === 'oops'))
+})
