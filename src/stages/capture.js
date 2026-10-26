@@ -10,6 +10,16 @@ import { STYLE_PROPS } from '../lib/props.js'
 const LAUNCH = { args: ['--disable-accelerated-2d-canvas', '--disable-gpu'] }
 async function settle(page) {
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
+  // JS-driven animations (e.g. Chart.js draw-in on the Argon dashboard) ignore the CSS animation kill switch and
+  // made verify flaky (34 px "changed" in a chart line). Wait until two consecutive frames are identical, up to
+  // about 3 s; if the page never settles, carry on and let verify report what it sees.
+  let prev = await page.screenshot({ fullPage: true })
+  for (let i = 0; i < 12; i++) {
+    await page.waitForTimeout(250)
+    const next = await page.screenshot({ fullPage: true })
+    if (next.equals(prev)) return
+    prev = next
+  }
 }
 
 /** In-page walker. Self-contained: no closures over module scope. */
