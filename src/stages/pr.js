@@ -10,6 +10,12 @@ import { cssVarOf } from '../lib/props.js'
 
 const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
 
+/** "https://github.com/owner/repo(.git)" or "git@github.com:owner/repo(.git)" → "owner/repo". Pure; exported for tests. */
+export function repoFromRemote(url) {
+  const m = String(url).trim().match(/github\.com[/:]([^/]+)\/([^/]+?)(?:\.git)?\/?$/)
+  return m ? `${m[1]}/${m[2]}` : null
+}
+
 /** PR body from the run artifacts. Pure; exported for tests. */
 export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel }) {
   const usedBy = {}
@@ -76,7 +82,13 @@ export function runPr(o) {
   const result = { branch, files: rewrite.files.length + 1, bodyPath, opened: false, url: null }
   if (o.open) {
     git(o.repoDir, 'push', '-u', 'origin', branch)
-    result.url = execFileSync('gh', ['pr', 'create', '--draft', '--title', title, '--body-file', bodyPath], { cwd: o.repoDir, encoding: 'utf-8' }).trim()
+    // Open the PR on the clone's OWN origin repo. In a clone of a fork, `gh pr create` can otherwise default to the
+    // upstream parent, which would send an unsolicited PR to the original authors.
+    const originRepo = repoFromRemote(git(o.repoDir, 'remote', 'get-url', 'origin'))
+    if (!originRepo) throw new Error('could not read owner/repo from the origin remote; not opening a PR')
+    const base = o.base || git(o.repoDir, 'rev-parse', '--abbrev-ref', `origin/HEAD`).replace(/^origin\//, '') || 'main'
+    result.url = execFileSync('gh', ['pr', 'create', '--draft', '--repo', originRepo, '--base', base, '--head', branch, '--title', title, '--body-file', bodyPath], { cwd: o.repoDir, encoding: 'utf-8' }).trim()
+    result.repo = originRepo
     result.opened = true
   }
   return result

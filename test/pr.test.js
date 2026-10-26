@@ -52,3 +52,10 @@ test('runPr refuses a dirty tree and a failed fallback verify', () => {
   writeFileSync(join(runDir, 'verify.json'), JSON.stringify({ fallback: { pass: false } }))
   assert.throws(() => runPr({ runDir, repoDir: repo, targetDir: repo }), /fallback-only render changed/)
 })
+
+test('repoFromRemote reads owner/repo from https and ssh remotes', async () => {
+  const { repoFromRemote } = await import('../src/stages/pr.js')
+  assert.equal(repoFromRemote('https://github.com/nhunsaker/argon-dashboard-react.git'), 'nhunsaker/argon-dashboard-react')
+  assert.equal(repoFromRemote('git@github.com:nhunsaker/argon-dashboard-react.git'), 'nhunsaker/argon-dashboard-react')
+  assert.equal(repoFromRemote('https://gitlab.com/x/y'), null)
+})
