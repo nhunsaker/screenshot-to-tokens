@@ -50,7 +50,9 @@ export function primitiveNames(clusters) {
   const uniq = (n) => { let x = n, i = 2; while (used.has(x)) x = `${n}-${i++}`; used.add(x); return x }
   const byKind = (k) => clusters.filter((c) => c.kind === k)
   for (const c of byKind('color')) names.set(c.id, uniq(colorPrimitiveName(c.value)))
-  byKind('space').forEach((c) => names.set(c.id, uniq(`space.${parseFloat(c.value)}`)))
+  // Negative spacing (e.g. margin: -96px) needs a valid name segment: space.neg-96, not space.-96.
+  const spaceName = (v) => { const n = parseFloat(v); return `space.${n < 0 ? 'neg-' : ''}${String(Math.abs(n)).replace('.', '-')}` }
+  byKind('space').forEach((c) => names.set(c.id, uniq(spaceName(c.value))))
   const radii = byKind('radius')
   radii.forEach((c, i) => names.set(c.id, uniq(parseFloat(c.value) >= 999 ? 'radius.full' : `radius.${SIZES[Math.min(i + 1, SIZES.length - 1)]}`)))
   byKind('font-size').forEach((c, i) => names.set(c.id, uniq(`font.size.${SIZES[Math.min(i, SIZES.length - 1)]}`)))

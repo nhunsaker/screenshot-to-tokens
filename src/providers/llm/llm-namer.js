@@ -112,7 +112,7 @@ export default function llmNamer(presetId) {
       const { text, usage, cached } = await chat({
         ...cfg,
         json: true,
-        reasoningEffort: process.env.S2T_REASONING_EFFORT || (presetId === 'meta' ? 'low' : ''),
+        reasoningEffort: process.env.S2T_REASONING_EFFORT || (presetId === 'meta' || presetId === 'baseten' ? 'low' : ''),
         messages: [{ role: 'system', content: compact ? COMPACT_PROMPT : SYSTEM_PROMPT }, { role: 'user', content: user.length === 1 ? user[0].text : user }],
       })
       const parsed = extractJson(text)

@@ -171,3 +171,13 @@ test('expandCompact: draft primitives + renames + model tokens, aliases follow r
   assert.equal(out.tokens.find((t) => t.name === 'color.action.primary').alias, 'color.brand.500')
   assert.ok(!out.tokens.some((t) => t.name === 'oops'))
 })
+
+test('negative and fractional spacing get valid primitive names', async () => {
+  const { primitiveNames } = await import('../src/providers/llm/heuristic.js')
+  const names = primitiveNames([
+    { id: 'space-01', kind: 'space', value: '-96px', members: [], count: 1, props: {}, regionLabels: {} },
+    { id: 'space-02', kind: 'space', value: '7.5px', members: [], count: 1, props: {}, regionLabels: {} },
+  ])
+  assert.equal(names.get('space-01'), 'space.neg-96')
+  assert.equal(names.get('space-02'), 'space.7-5')
+})
