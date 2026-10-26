@@ -4,14 +4,15 @@ import { resolve } from 'path'
 import { execFileSync } from 'child_process'
 
 /** Meta API key from the macOS login Keychain (service "meta-hackathon-api"), so it never sits in a file. */
-function keychainMetaKey() {
+function keychain(service) {
   if (process.platform !== 'darwin') return ''
   try {
-    return execFileSync('security', ['find-generic-password', '-s', process.env.META_KEYCHAIN_SERVICE || 'meta-hackathon-api', '-w'], { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }).trim()
+    return execFileSync('security', ['find-generic-password', '-s', service, '-w'], { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }).trim()
   } catch (e) {
     return ''
   }
 }
+const keychainMetaKey = () => keychain(process.env.META_KEYCHAIN_SERVICE || 'meta-hackathon-api')
 
 /** Load KEY=VALUE lines from .env into process.env without overriding real env vars; then fill META_API_KEY from the Keychain. */
 export function loadDotEnv(cwd = process.cwd()) {
@@ -19,6 +20,10 @@ export function loadDotEnv(cwd = process.cwd()) {
     if (!process.env.META_API_KEY) {
       const k = keychainMetaKey()
       if (k) process.env.META_API_KEY = k
+    }
+    if (!process.env.FIREWORKS_API_KEY) {
+      const k = keychain('fireworks-api')
+      if (k) process.env.FIREWORKS_API_KEY = k
     }
   }
 }
@@ -52,7 +57,7 @@ export const LLM_PRESETS = {
     id: 'fireworks',
     baseURL: 'https://api.fireworks.ai/inference/v1',
     apiKey: process.env.FIREWORKS_API_KEY || '',
-    model: process.env.FIREWORKS_MODEL || 'accounts/fireworks/models/llama-v3p1-8b-instruct',
+    model: process.env.FIREWORKS_MODEL || 'accounts/fireworks/models/muse-spark-open',
   }),
 }
 
