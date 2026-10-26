@@ -1,0 +1,29 @@
+[
+  { "id": "h0", "bbox": [0, 0, 220, 900], "label": "nav", "score": 1, "source": "human" },
+  { "id": "h1", "bbox": [248, 24, 1164, 35], "label": "header", "score": 1, "source": "human" },
+  { "id": "h2", "bbox": [248, 24, 953, 35], "label": "input", "score": 1, "source": "human" },
+
+  { "id": "h3", "bbox": [1217, 24, 69, 35], "label": "button", "score": 1, "source": "human" },
+  { "id": "h4", "bbox": [1302, 25, 110, 33], "label": "button", "score": 1, "source": "human" },
+  { "id": "h5", "bbox": [1338, 667, 58, 27], "label": "button", "score": 1, "source": "human" },
+  { "id": "h6", "bbox": [1338, 713, 58, 27], "label": "button", "score": 1, "source": "human" },
+  { "id": "h7", "bbox": [1338, 759, 58, 27], "label": "button", "score": 1, "source": "human" },
+  { "id": "h8", "bbox": [1338, 805, 58, 27], "label": "button", "score": 1, "source": "human" },
+  { "id": "h9", "bbox": [1338, 851, 58, 27], "label": "button", "score": 1, "source": "human" },
+  { "id": "h10", "bbox": [1211, 271, 119, 36], "label": "button", "score": 1, "source": "human" },
+
+  { "id": "h11", "bbox": [248, 83, 279, 108], "label": "card", "score": 1, "source": "human" },
+  { "id": "h12", "bbox": [543, 83, 279, 108], "label": "card", "score": 1, "source": "human" },
+  { "id": "h13", "bbox": [838, 83, 279, 108], "label": "card", "score": 1, "source": "human" },
+  { "id": "h14", "bbox": [1133, 83, 279, 108], "label": "card", "score": 1, "source": "human" },
+
+  { "id": "h15", "bbox": [264, 156, 53, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h16", "bbox": [559, 156, 47, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h17", "bbox": [854, 156, 51, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h18", "bbox": [1149, 156, 49, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h19", "bbox": [629, 671, 41, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h20", "bbox": [629, 717, 74, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h21", "bbox": [629, 763, 41, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h22", "bbox": [629, 809, 50, 19], "label": "badge", "score": 1, "source": "human" },
+  { "id": "h23", "bbox": [629, 855, 41, 19], "label": "badge", "score": 1, "source": "human" }
+]

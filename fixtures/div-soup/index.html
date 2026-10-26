@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>div-soup</title>
+  <meta name="viewport" content="width=1440" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="x1">
+    <div class="z2"><span class="z3">Nimbus</span></div>
+    <div class="n4">
+      <div class="n5 n5-on" onclick="">Overview</div>
+      <div class="n5" onclick="">Projects</div>
+      <div class="n5" onclick="">Deploys</div>
+      <div class="n5" onclick="">Billing</div>
+      <div class="n5" onclick="">Team</div>
+      <div class="n5" onclick="">Settings</div>
+    </div>
+  </div>
+
+  <div class="x2">
+    <div class="q7">
+      <div class="q8">
+        <span class="q9">Search projects, logs, people</span>
+      </div>
+      <div class="q10" onclick="">Invite</div>
+      <div class="q11" onclick="">New project</div>
+    </div>
+
+    <div class="q12">
+      <div class="c-9f">
+        <span class="c-lbl">Active users</span>
+        <span class="c-num">8,412</span>
+        <span class="c-trend c-up">+4.2%</span>
+      </div>
+      <div class="c-a2">
+        <span class="c-lbl">Deploys today</span>
+        <span class="c-num">37</span>
+        <span class="c-trend c-up">+12%</span>
+      </div>
+      <div class="c-b5">
+        <span class="c-lbl">Error rate</span>
+        <span class="c-num">0.08%</span>
+        <span class="c-trend c-down">-0.3%</span>
+      </div>
+      <div class="c-c1">
+        <span class="c-lbl">MRR</span>
+        <span class="c-num">$19,220</span>
+        <span class="c-trend c-up">+1.1%</span>
+      </div>
+    </div>
+
+    <div class="k3">
+      <div class="k4">
+        <span class="k5">Traffic, last 7 days</span>
+        <div class="k6">
+          <span class="k7"><span class="dot dot-a"></span>Requests</span>
+          <span class="k7"><span class="dot dot-b"></span>Errors</span>
+        </div>
+      </div>
+      <canvas id="chart" class="k8" width="760" height="220"></canvas>
+    </div>
+
+    <div class="t1">
+      <div class="t2">
+        <span class="t3 t3-w1">Project</span>
+        <span class="t3 t3-w2">Status</span>
+        <span class="t3 t3-w3">Owner</span>
+        <span class="t3 t3-w4">Updated</span>
+        <span class="t3 t3-w5"></span>
+      </div>
+      <div class="t4">
+        <span class="t5 t5-w1">marketing-site</span>
+        <span class="t6 t6-ok">Live</span>
+        <span class="t5 t5-w3">R. Alvarez</span>
+        <span class="t5 t5-w4">2h ago</span>
+        <div class="t7" onclick="">View</div>
+      </div>
+      <div class="t4">
+        <span class="t5 t5-w1">billing-service</span>
+        <span class="t6 t6-warn">Degraded</span>
+        <span class="t5 t5-w3">J. Okafor</span>
+        <span class="t5 t5-w4">6h ago</span>
+        <div class="t7" onclick="">View</div>
+      </div>
+      <div class="t4">
+        <span class="t5 t5-w1">mobile-api</span>
+        <span class="t6 t6-ok">Live</span>
+        <span class="t5 t5-w3">R. Alvarez</span>
+        <span class="t5 t5-w4">1d ago</span>
+        <div class="t7" onclick="">View</div>
+      </div>
+      <div class="t4">
+        <span class="t5 t5-w1">internal-tools</span>
+        <span class="t6 t6-err">Down</span>
+        <span class="t5 t5-w3">S. Park</span>
+        <span class="t5 t5-w4">3d ago</span>
+        <div class="t7" onclick="">View</div>
+      </div>
+      <div class="t4">
+        <span class="t5 t5-w1">docs-site</span>
+        <span class="t6 t6-ok">Live</span>
+        <span class="t5 t5-w3">J. Okafor</span>
+        <span class="t5 t5-w4">5d ago</span>
+        <div class="t7" onclick="">View</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const c = document.getElementById('chart')
+    const ctx = c.getContext('2d')
+    ctx.fillStyle = '#ffffff'
+    ctx.fillRect(0, 0, c.width, c.height)
+    const req = [40, 55, 48, 70, 62, 80, 90]
+    const err = [4, 6, 3, 8, 5, 2, 4]
+    const bw = 80, gap = 24, base = 190, scale = 1.7
+    req.forEach((v, i) => {
+      const x = 20 + i * (bw + gap)
+      ctx.fillStyle = '#1a73e8'
+      ctx.fillRect(x, base - v * scale, bw * 0.55, v * scale)
+      ctx.fillStyle = '#e0453f'
+      ctx.fillRect(x + bw * 0.55 + 4, base - err[i] * scale * 3, bw * 0.4, err[i] * scale * 3)
+    })
+    // Canvas-drawn "Export" button: pixels only, no DOM node describes this control.
+    ctx.fillStyle = '#1b74e9'
+    ctx.beginPath()
+    ctx.moveTo(636, 10)
+    ctx.arcTo(716, 10, 716, 34, 6)
+    ctx.arcTo(716, 34, 636, 34, 6)
+    ctx.arcTo(636, 34, 636, 10, 6)
+    ctx.closePath()
+    ctx.fill()
+    ctx.fillStyle = '#ffffff'
+    ctx.font = '13px -apple-system, Helvetica, Arial, sans-serif'
+    ctx.fillText('Export', 654, 23)
+  </script>
+</body>
+</html>

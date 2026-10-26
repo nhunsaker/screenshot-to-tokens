@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Acme Shop</title>
+  <meta name="viewport" content="width=1440" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="logo" href="#">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#1a73e8" />
+          <path d="M8 12.5l2.5 2.5L16 9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>Acme Shop</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link active">New arrivals</a></li>
+        <li><a href="#" class="nav-link">Best sellers</a></li>
+        <li><a href="#" class="nav-link">Sale</a></li>
+        <li><a href="#" class="nav-link">About</a></li>
+      </ul>
+      <div class="search">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="#343434" stroke-width="2" />
+          <path d="M21 21l-4.3-4.3" stroke="#343434" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <input class="search-input" type="search" placeholder="Search products" />
+      </div>
+      <a class="btn btn-secondary nav-cta" href="#">Sign in</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="badge badge-new">New season</span>
+        <h1 class="hero-title">Everyday gear, made to last</h1>
+        <p class="hero-sub">Simple, durable goods for the studio and the street. Free shipping over $50.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#">Shop the collection</a>
+          <a class="btn btn-secondary" href="#">Learn more</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg width="320" height="220" viewBox="0 0 320 220">
+          <rect x="0" y="0" width="320" height="220" rx="16" fill="#eef3fc" />
+          <rect x="40" y="40" width="140" height="140" rx="12" fill="#1b74e9" />
+          <circle cx="240" cy="120" r="56" fill="#fff" stroke="#1a73e8" stroke-width="3" />
+        </svg>
+      </div>
+    </section>
+
+    <section class="products">
+      <div class="section-head">
+        <h2 class="section-title">Best sellers</h2>
+        <a class="see-all" href="#">See all</a>
+      </div>
+
+      <div class="product-grid">
+        <article class="card">
+          <div class="card-media">
+            <span class="badge badge-sale">Sale</span>
+            <svg width="100%" height="160" viewBox="0 0 240 160" preserveAspectRatio="none">
+              <rect width="240" height="160" fill="#f3f4f6" />
+              <circle cx="120" cy="80" r="46" fill="#dbe6fb" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Canvas tote</h3>
+            <p class="card-desc">Heavyweight cotton canvas, reinforced straps.</p>
+            <div class="card-row">
+              <span class="price">$38.00</span>
+              <span class="price-old">$48.00</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary btn-sm">Add to cart</button>
+              <button class="btn btn-secondary btn-sm">Wishlist</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media">
+            <svg width="100%" height="160" viewBox="0 0 240 160" preserveAspectRatio="none">
+              <rect width="240" height="160" fill="#f3f4f6" />
+              <rect x="60" y="40" width="120" height="80" rx="8" fill="#dbe6fb" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Ceramic mug</h3>
+            <p class="card-desc">Matte glaze, holds 12oz, dishwasher safe.</p>
+            <div class="card-row">
+              <span class="price">$18.00</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary btn-sm">Add to cart</button>
+              <button class="btn btn-secondary btn-sm">Wishlist</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media">
+            <span class="badge badge-new">New</span>
+            <svg width="100%" height="160" viewBox="0 0 240 160" preserveAspectRatio="none">
+              <rect width="240" height="160" fill="#f3f4f6" />
+              <polygon points="120,30 180,130 60,130" fill="#dbe6fb" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Wool throw</h3>
+            <p class="card-desc">Lambswool blend, woven in small batches.</p>
+            <div class="card-row">
+              <span class="price">$64.00</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary btn-sm">Add to cart</button>
+              <button class="btn btn-secondary btn-sm">Wishlist</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-media">
+            <svg width="100%" height="160" viewBox="0 0 240 160" preserveAspectRatio="none">
+              <rect width="240" height="160" fill="#f3f4f6" />
+              <rect x="70" y="30" width="100" height="100" rx="50" fill="#dbe6fb" />
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Desk lamp</h3>
+            <p class="card-desc">Warm dimmable LED, weighted base.</p>
+            <div class="card-row">
+              <span class="price">$72.00</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary btn-sm">Add to cart</button>
+              <button class="btn btn-secondary btn-sm">Wishlist</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4 class="footer-heading">Acme Shop</h4>
+        <p class="footer-text">Everyday goods, made to last. Based in Minneapolis.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Shop</h4>
+        <ul class="footer-links">
+          <li><a href="#">New arrivals</a></li>
+          <li><a href="#">Best sellers</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Support</h4>
+        <ul class="footer-links">
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Acme Shop</span>
+      <a href="#" class="footer-link-accent">Back to top</a>
+    </div>
+  </footer>
+</body>
+</html>

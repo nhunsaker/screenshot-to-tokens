@@ -1,0 +1,28 @@
+{
+  "name": "screenshot-to-tokens",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Point it at a running app: capture, segment (SAM 3.1), propose a tiered token set (Muse Spark), rewrite literals to var(--token, fallback), verify nothing moved.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "s2t": "src/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "doctor": "node src/cli.js doctor",
+    "demo": "node src/cli.js run --fixture acme-shop",
+    "serve:fixture": "node src/cli.js serve --fixture acme-shop"
+  },
+  "dependencies": {
+    "@sorb/seed": "^0.5.1",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "playwright": "1.61.1"
+  }
+}

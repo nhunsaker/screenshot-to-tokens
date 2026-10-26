@@ -1,0 +1,29 @@
+{
+  "_about": "div-soup: counter-case fixture. The page is built entirely from <div>/<span> with meaningless classes, no ARIA, no button/a/input/nav tags, plus one <canvas>-drawn control the DOM cannot describe at all. 'regions' below is what a PERSON sees looking at the screenshot — the DOM-based mock segmenter is expected to badly undershoot it (see regions.truth.json + README.md).",
+  "same": [
+    ["#1a73e8", "#1b74e9", "#1A73E8"],
+    ["#333", "#343434", "rgb(52, 52, 52)"],
+    ["#fff", "#ffffff"],
+    { "kind": "radius", "values": ["5px", "6px"] },
+    { "kind": "space", "values": ["7px", "8px", "9px"] },
+    { "kind": "font-size", "values": ["12px", "12.5px"] }
+  ],
+  "different": [
+    ["#222", "#333"],
+    { "kind": "radius", "values": ["4px", "8px"] },
+    { "kind": "space", "values": ["16px", "24px"] },
+    { "kind": "font-size", "values": ["14px", "24px"] }
+  ],
+  "semantic": [
+    { "value": "#1a73e8", "kind": "color", "name": "color.action.primary", "accept": ["color.action", "color.brand", "color.primary"] },
+    { "value": "#ffffff", "kind": "color", "name": "color.surface.default", "accept": ["color.surface", "color.bg", "color.background"] },
+    { "value": "#333", "kind": "color", "name": "color.text.default", "accept": ["color.text", "color.fg"] },
+    { "value": "#ddd", "kind": "color", "name": "color.border.default", "accept": ["color.border"] }
+  ],
+  "regions": [
+    { "label": "button", "min": 7 },
+    { "label": "card", "min": 4 },
+    { "label": "input", "min": 1 },
+    { "label": "nav", "min": 1 }
+  ]
+}

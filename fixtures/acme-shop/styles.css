@@ -1,0 +1,175 @@
+/* Base / reset / layout / typography. Plain CSS, hardcoded literals on purpose (demo fixture
+   for screenshot-to-tokens: the drift below is intentional, not a mistake). */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+.container,
+.nav,
+.hero,
+.products,
+.footer-cols {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+main {
+  display: block;
+}
+
+/* Hero */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.hero-copy {
+  max-width: 520px;
+}
+
+.hero-title {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 15px 0 16px;
+  color: #222;
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: #343434;
+  margin: 0 0 24px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.hero-art {
+  flex-shrink: 0;
+}
+
+/* Products section */
+
+.products {
+  padding-top: 24px;
+  padding-bottom: 64px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 24px;
+  color: #222;
+  margin: 0;
+}
+
+.see-all {
+  font-size: 14px;
+  color: #1a73e8;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Footer */
+
+.site-footer {
+  border-top: 1px solid #ddd;
+  margin-top: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.footer-cols {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+
+.footer-col {
+  flex: 1;
+}
+
+.footer-heading {
+  font-size: 15px;
+  color: #222;
+  margin: 0 0 9px;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #343434;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 7px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: #333;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: rgb(52, 52, 52);
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+}
+
+.footer-link-accent {
+  color: rgb(26, 115, 232);
+}
