@@ -80,6 +80,8 @@ function walkPage(props, maxElements) {
       tag,
       path: pathOf(el),
       role: el.getAttribute('role') || implicitRole(el),
+      // Full class list (capped) so component profiles can map CSS selectors back to detected components.
+      classes: Array.prototype.slice.call(el.classList || [], 0, 8),
       text: ownText(el),
       bbox: [Math.round(r.left + scrollX), Math.round(r.top + scrollY), Math.round(r.width), Math.round(r.height)],
       styles,

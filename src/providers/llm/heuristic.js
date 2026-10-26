@@ -79,7 +79,39 @@ const L = (c) => rgbToLab(hexToRgba(c.value)).L
  * @param {{clusters: import('../../types.js').Cluster[]}} input
  * @returns {import('../../types.js').TokenSet}
  */
-export function heuristicTokens({ clusters }) {
+/** Property → short role used in component token names (button.bg, card.shadow). Spacing is left to primitives. */
+export const COMPONENT_PROP = {
+  'background-color': 'bg', 'color': 'text', 'fill': 'icon',
+  'border-top-color': 'border', 'border-right-color': 'border', 'border-bottom-color': 'border', 'border-left-color': 'border',
+  'border-top-left-radius': 'radius', 'box-shadow': 'shadow',
+}
+
+/**
+ * Third tier from component profiles: <component>.<role> aliasing the semantic token for that cluster when one exists,
+ * else its primitive. Only the dominant cluster per role. Pure; exported for tests.
+ */
+export function componentTokens(profiles, tokens) {
+  const out = []
+  const byCluster = (id) => tokens.find((t) => t.tier === 'semantic' && t.clusters.includes(id)) || tokens.find((t) => t.tier === 'primitive' && t.clusters.includes(id))
+  for (const p of profiles || []) {
+    const roles = {}
+    for (const [prop, list] of Object.entries(p.props)) {
+      const role = COMPONENT_PROP[prop]
+      if (!role || !list.length) continue
+      const top = list[0]
+      if (!roles[role] || top.n > roles[role].n) roles[role] = top
+    }
+    for (const [role, top] of Object.entries(roles)) {
+      const target = byCluster(top.cluster)
+      const name = `${p.component}.${role}`
+      if (!target || tokens.some((t) => t.name === name) || out.some((t) => t.name === name)) continue
+      out.push({ name, tier: 'component', alias: target.name, clusters: [top.cluster], why: `Most used ${role} value inside ${p.component} regions (${top.n} uses).` })
+    }
+  }
+  return out
+}
+
+export function heuristicTokens({ clusters, components }) {
   const prim = primitiveNames(clusters)
   /** @type {import('../../types.js').TokenProposal[]} */
   const tokens = clusters.map((c) => ({
@@ -118,6 +150,7 @@ export function heuristicTokens({ clusters }) {
   sem('card.radius', cardRadius, 'Corner radius used on cards.', 'component')
   const cardShadow = top(clusters, 'shadow', (c) => c.regionLabels.card || 0)
   sem('card.shadow', cardShadow, 'Shadow used on cards.', 'component')
+  for (const t of componentTokens(components, tokens)) tokens.push(t)
   return { tokens, merges: suggestMerges(clusters), namer: 'mock-heuristic' }
 }
 

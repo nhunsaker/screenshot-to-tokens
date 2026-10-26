@@ -11,6 +11,7 @@
  * @property {string} tag               Lower-case tag name.
  * @property {string} path              Short CSS-ish path (e.g. "main>section.card>button.btn").
  * @property {string|null} role         ARIA role or implicit role guess.
+ * @property {string[]} [classes]        The element's CSS classes (first 8).
  * @property {string} text              First 40 chars of own text.
  * @property {[number,number,number,number]} bbox  [x, y, w, h] in page px.
  * @property {Record<string,string>} styles  Raw computed values for STYLE_PROPS.

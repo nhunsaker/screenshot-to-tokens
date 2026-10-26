@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, readdirSync, st
 import { join, relative, extname, basename } from 'path'
 import { propKind, propRole, normalizeFor, cssVarOf } from '../../lib/props.js'
 import { rewriteJsx, JSX_EXT } from './jsx.js'
+import { classIndex, componentsForSelector } from '../../stages/components.js'
 import { rewriteSvgAttrs, SVG_HTML_EXT } from './svg-attrs.js'
 
 /** Split a CSS declaration value into whitespace-separated parts, but never inside parens
@@ -55,11 +56,27 @@ const ROLE_RE = {
  * @param {import('../../types.js').TokenProposal[]} tokens
  * @returns {import('../../types.js').TokenProposal|null}
  */
-export function pickToken(prop, cluster, tokens) {
+/** Which component-token role an authored property maps to (bg, text, border, radius, shadow, icon). */
+export function componentRole(prop) {
+  const p = String(prop).toLowerCase()
+  if (p === 'fill' || p === 'stroke') return 'icon'
+  const kind = propKind(p)
+  if (kind === 'radius') return 'radius'
+  if (kind === 'shadow') return 'shadow'
+  return propRole(p) // bg | text | border | null
+}
+
+export function pickToken(prop, cluster, tokens, components = []) {
   const candidates = tokens.filter((t) => Array.isArray(t.clusters) && t.clusters.includes(cluster.id))
   if (!candidates.length) return null
-  const role = propRole(prop)
-  const roleRe = role && ROLE_RE[role]
+  // Inside a rule for a detected component (e.g. `.btn { … }`), prefer that component's token for this role.
+  const role = componentRole(prop)
+  if (role && components.length) {
+    const hit = candidates.find((t) => t.tier === 'component' && components.some((c) => t.name === `${c}.${role}` || t.name.startsWith(`${c}.`) && t.name.endsWith(`.${role}`)))
+    if (hit) return hit
+  }
+  const semRole = propRole(prop)
+  const roleRe = semRole && ROLE_RE[semRole]
   if (roleRe) {
     const hit = candidates.find((t) => t.tier !== 'primitive' && roleRe.test(t.name))
     if (hit) return hit
@@ -85,7 +102,42 @@ const DECL_RE = /([a-zA-Z-]+)(\s*:\s*)([^;{}]+)(;)/g
  * @param {import('../../types.js').TokenProposal[]} tokens
  * @returns {{code:string, edits:import('../../types.js').RewriteEdit[], changed:boolean}}
  */
-export function rewriteCss(source, relFile, clusters, tokens) {
+/**
+ * Selector-aware context: which detected components the rule around each declaration styles. Walks braces so nested
+ * blocks (@media) work; returns a function (lineIdx, col) → component labels. Pure; exported for tests.
+ */
+export function selectorContext(source, classIdx) {
+  const lines = source.split('\n')
+  const startStack = []
+  const stack = []
+  let pending = ''
+  for (const line of lines) {
+    startStack.push({ stack: [...stack], pending })
+    for (const ch of line) {
+      if (ch === '{') { stack.push(pending.trim()); pending = '' }
+      else if (ch === '}') { stack.pop(); pending = '' }
+      else if (ch === ';') pending = ''
+      else pending += ch
+    }
+    pending += ' '
+  }
+  return (lineIdx, col) => {
+    if (!classIdx || !classIdx.size) return []
+    const st = startStack[lineIdx]
+    const s2 = [...st.stack]
+    let pend = st.pending
+    for (const ch of lines[lineIdx].slice(0, col)) {
+      if (ch === '{') { s2.push(pend.trim()); pend = '' }
+      else if (ch === '}') { s2.pop(); pend = '' }
+      else if (ch === ';') pend = ''
+      else pend += ch
+    }
+    return componentsForSelector(s2.join(' '), classIdx)
+  }
+}
+
+export function rewriteCss(source, relFile, clusters, tokens, classIdx = null) {
+  const ctxAt = selectorContext(source, classIdx)
   const lines = source.split('\n')
   const edits = []
   let changedAny = false
@@ -115,7 +167,7 @@ export function rewriteCss(source, relFile, clusters, tokens) {
         if (!normalized) continue
         const cluster = clusterFor(kind, normalized, clusters)
         if (!cluster) continue
-        const token = pickToken(prop, cluster, tokens)
+        const token = pickToken(prop, cluster, tokens, ctxAt(idx, m.index))
         if (!token) continue
         const cssVar = cssVarOf(token.name)
         const after = `var(${cssVar}, ${part.text})`
@@ -140,13 +192,13 @@ export const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'build', '.nex
  * Vue single-file components: run each <style> block through rewriteCss, keeping line numbers.
  * Blocks with lang="scss|sass|less|stylus" are skipped (not plain CSS).
  */
-export function rewriteVue(source, relFile, clusters, tokens) {
+export function rewriteVue(source, relFile, clusters, tokens, classIdx = null) {
   const edits = []
   let changed = false
   const code = source.replace(/(<style\b[^>]*>)([\s\S]*?)(<\/style>)/gi, (m, open, body, close, offset) => {
     if (/\blang\s*=\s*["'](scss|sass|less|stylus)["']/i.test(open)) return m
     const lineOffset = source.slice(0, offset + open.length).split('\n').length - 1
-    const r = rewriteCss(body, relFile, clusters, tokens)
+    const r = rewriteCss(body, relFile, clusters, tokens, classIdx)
     if (!r.changed) return m
     changed = true
     for (const e of r.edits) edits.push({ ...e, line: e.line + lineOffset })
@@ -187,7 +239,8 @@ export default function deterministicCoder() {
   return {
     id: 'deterministic',
     /** @param {{targetDir:string, tokens:import('../../types.js').TokenSet, clusters:import('../../types.js').Cluster[], write:boolean, runDir:string}} input */
-    async rewrite({ targetDir, tokens, clusters, write, runDir }) {
+    async rewrite({ targetDir, tokens, clusters, components = [], write, runDir }) {
+      const classIdx = classIndex(components)
       const outDir = join(runDir, 'rewritten')
       rmSync(outDir, { recursive: true, force: true })
       mkdirSync(runDir, { recursive: true })
@@ -216,14 +269,14 @@ export default function deterministicCoder() {
         const original = readFileSync(abs, 'utf-8')
         let code, edits, changed
         if (extname(relFile) === '.vue') {
-          ;({ code, edits, changed } = rewriteVue(original, relFile, clusters, tokens.tokens || []))
+          ;({ code, edits, changed } = rewriteVue(original, relFile, clusters, tokens.tokens || [], classIdx))
         } else if (JSX_EXT.test(relFile) || SVG_HTML_EXT.test(relFile)) {
           const r = JSX_EXT.test(relFile) ? rewriteJsx(original, relFile, pickFor) : rewriteSvgAttrs(original, relFile, pickFor)
           code = r.code
           edits = r.edits.map((e) => ({ file: relFile, ...e }))
           changed = edits.length > 0
         } else {
-          ;({ code, edits, changed } = rewriteCss(original, relFile, clusters, tokens.tokens || []))
+          ;({ code, edits, changed } = rewriteCss(original, relFile, clusters, tokens.tokens || [], classIdx))
         }
         if (!changed) continue
         changedFiles.push(relFile)

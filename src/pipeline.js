@@ -11,6 +11,7 @@ import { toCss, toDtcg } from './stages/emit.js'
 import { serveDir } from './lib/serve.js'
 import { usableTokens } from './stages/review.js'
 import { mark, since } from './lib/metrics.js'
+import { profileComponents } from './stages/components.js'
 
 export const STAGES = ['capture', 'segment', 'cluster', 'name', 'emit', 'rewrite', 'verify', 'report']
 
@@ -105,7 +106,10 @@ export async function runPipeline(o) {
 
     if (on('name')) {
       const t = Date.now()
-      const set = await runName({ clusters, regions, screenshotPath: join(runDir, capture.screenshot), namer: cfg.namer })
+      // Third tier: profile the detected components (classes + the clusters each uses) and hand them to the namer.
+      const components = profileComponents(capture, regions, clusters)
+      writeJson(runDir, 'components', components)
+      const set = await runName({ clusters, regions, components, screenshotPath: join(runDir, capture.screenshot), namer: cfg.namer })
       writeJson(runDir, 'tokens', set)
       // Credit metering: one line per model call, so we can see what a full app run costs.
       if (set.meta) {
@@ -130,7 +134,8 @@ export async function runPipeline(o) {
         log('rewrite', 'skipped (no --target source folder)')
       } else {
         const { runRewrite } = await import('./stages/rewrite.js')
-        const rw = await runRewrite({ targetDir: target, tokens: usableTokens(tokens), clusters, write: o.write !== false, runDir })
+        const components = existsSync(join(runDir, 'components.json')) ? readJson(runDir, 'components') : []
+        const rw = await runRewrite({ targetDir: target, tokens: usableTokens(tokens), clusters, components, write: o.write !== false, runDir })
         log('rewrite', `${rw.edits.length} edits in ${rw.files.length} files via ${rw.coder} → ${rw.outDir}`)
       }
     }

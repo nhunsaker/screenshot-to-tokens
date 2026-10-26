@@ -38,8 +38,11 @@ Rules:
 - "rename": only clusters whose draft primitive name is clearly wrong or unclear; omit the rest. Primitive names say
   what the value is (color.blue.600, space.16, radius.md).
 - "tokens": semantic (purpose: color.text.muted, color.surface.raised, color.border.default, color.action.primary)
-  and component (one component's use: button.radius, card.shadow) tokens only. Each aliases an existing primitive
-  name (after your renames) or another of your tokens. Cover the roles the usage data supports; skip the rest.
+  and component tokens only. Each aliases an existing primitive name (after your renames) or another of your tokens.
+  Cover the roles the usage data supports; skip the rest.
+- Component tokens: for each entry in COMPONENTS, name <component>.<role> (roles: bg, text, border, radius, shadow,
+  icon), e.g. button.bg, input.border, card.shadow, nav.bg. Alias the semantic token for that value when one exists
+  (button.bg -> color.action.primary), else the primitive. Only use clusters listed in that component's "uses".
 - "why": one short sentence grounded only in the usage counts, properties and regions given. Do not quote numbers
   from token names.
 - Names: lower case, dot separated, no spaces. Do not invent clusters, values or regions.
@@ -66,7 +69,7 @@ export function expandCompact(parsed, draft) {
 }
 
 /** Compact cluster view for the prompt (keeps tokens small for local models). */
-export function promptPayload(clusters, regions, draft) {
+export function promptPayload(clusters, regions, draft, components = []) {
   const regionCounts = {}
   for (const r of regions) regionCounts[r.label] = (regionCounts[r.label] || 0) + 1
   return {
@@ -79,6 +82,9 @@ export function promptPayload(clusters, regions, draft) {
     draft: draft.tokens.map(({ name, tier, value, alias, clusters }) => ({ name, tier, value, alias, clusters })),
     draftPrimitives: Object.fromEntries(draft.tokens.filter((t) => t.tier === 'primitive').map((t) => [t.clusters[0], t.name])),
     draftMerges: draft.merges || [],
+    // Detected components and the clusters each one uses, per property (the basis for the third tier).
+    components: (components || []).map((p) => ({ component: p.component, regions: p.regions,
+      uses: Object.fromEntries(Object.entries(p.props).map(([prop, list]) => [prop, list.map((x) => x.cluster)])) })),
   }
 }
 
@@ -91,14 +97,14 @@ export default function llmNamer(presetId) {
   if (!preset) throw new Error(`unknown namer preset: ${presetId}`)
   return {
     id: presetId,
-    async name({ clusters, regions, screenshotPath }) {
+    async name({ clusters, regions, screenshotPath, components }) {
       const cfg = preset()
       if (presetId !== 'ollama' && !cfg.apiKey) {
         throw new Error(`${presetId} namer not configured: set its API key (Meta: META_API_KEY, META_API_BASE_URL, META_NAMER_MODEL after approval)`)
       }
       if (!cfg.baseURL || !cfg.model) throw new Error(`${presetId} namer not configured: base URL / model missing`)
-      const draft = heuristicTokens({ clusters })
-      const user = [{ type: 'text', text: JSON.stringify(promptPayload(clusters, regions, draft)) }]
+      const draft = heuristicTokens({ clusters, components })
+      const user = [{ type: 'text', text: JSON.stringify(promptPayload(clusters, regions, draft, components)) }]
       // Vision models (Muse Spark, llama3.2-vision) can look at the page too. Off by default.
       if (process.env.S2T_NAMER_VISION === '1' && screenshotPath && existsSync(screenshotPath)) {
         const b64 = readFileSync(screenshotPath).toString('base64')

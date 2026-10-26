@@ -12,7 +12,7 @@ const TIERS = new Set(['primitive', 'semantic', 'component'])
  * @param {import('../types.js').Cluster[]} clusters
  * @returns {import('../types.js').TokenSet}
  */
-export function validateTokenSet(set, clusters) {
+export function validateTokenSet(set, clusters, components = null) {
   const warnings = [...(set.warnings || [])]
   const byId = new Map(clusters.map((c) => [c.id, c]))
   const seen = new Set()
@@ -40,7 +40,7 @@ export function validateTokenSet(set, clusters) {
   const covered = new Set(kept.filter((t) => t.tier === 'primitive').flatMap((t) => t.clusters))
   const missing = clusters.filter((c) => !covered.has(c.id))
   if (missing.length) {
-    const draft = heuristicTokens({ clusters })
+    const draft = heuristicTokens({ clusters, components })
     for (const c of missing) {
       const d = draft.tokens.find((t) => t.tier === 'primitive' && t.clusters[0] === c.id)
       let name = d.name, i = 2
@@ -70,6 +70,18 @@ export function validateTokenSet(set, clusters) {
       if (path.has(cur.name)) { warnings.push(`${t.name}: alias cycle, pointed at primitive`); t.alias = primOf.get(t.clusters[0]); break }
       path.add(cur.name)
       cur = byName.get(cur.alias)
+    }
+  }
+  // Component tokens (third tier) may only cover values their component actually uses. A component token whose
+  // name starts with a profiled component (e.g. button.*) but cites a cluster that component never uses is dropped.
+  if (components && components.length) {
+    const used = new Map(components.map((p) => [p.component, new Set(Object.values(p.props).flat().map((x) => x.cluster))]))
+    for (let i = kept.length - 1; i >= 0; i--) {
+      const t = kept[i]
+      if (t.tier !== 'component') continue
+      const comp = t.name.split('.')[0]
+      const set = used.get(comp)
+      if (set && !t.clusters.every((id) => set.has(id))) { warnings.push(`dropped ${t.name}: ${comp} never uses ${t.clusters.filter((id) => !set.has(id)).join(', ')}`); kept.splice(i, 1) }
     }
   }
   // Merge suggestions are proposals only (a person accepts them in review). Keep the well-formed ones.
@@ -112,5 +124,5 @@ export async function runName(o) {
     if (o.strict) throw e
     set = { ...heuristicTokens(o), warnings: [`namer "${provider.id}" failed, used heuristic: ${e.message}`] }
   }
-  return validateTokenSet(set, o.clusters)
+  return validateTokenSet(set, o.clusters, o.components)
 }
