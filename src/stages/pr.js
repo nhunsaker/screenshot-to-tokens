@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, copyFileSync, mkdirSync, existsSync, statS
 import { join, dirname, relative, resolve } from 'path'
 import { execFileSync } from 'child_process'
 import { cssVarOf } from '../lib/props.js'
+import { evaluateReason } from './reasons.js'
 
 const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
 
@@ -17,12 +18,21 @@ export function repoFromRemote(url) {
 }
 
 /** PR body from the run artifacts. Pure; exported for tests. */
-export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel }) {
+export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clusters = [], verifiedOn = '' }) {
+  // Same grounding check as the report's spec cards: a reason that cites anything the cluster data doesn't support
+  // is replaced by a plain reason built from the data and marked, and role conflicts are flagged for review.
+  const byId = new Map(clusters.map((c) => [c.id, c]))
+  const reason = (t) => {
+    const cl = (t.clusters || []).map((id) => byId.get(id)).filter(Boolean)
+    if (!cl.length) return t.why || ''
+    const r = evaluateReason(t, cl)
+    return `${r.text}${r.unverified ? ' _(model reason replaced: unverified)_' : ''}${r.rolesDiffer ? ' **Roles differ: review.**' : ''}`
+  }
   const usedBy = {}
   for (const e of rewrite.edits) usedBy[e.token] = (usedBy[e.token] || 0) + 1
   const byTier = { primitive: [], semantic: [], component: [] }
   for (const t of tokens.tokens) if (t.review !== 'rejected') (byTier[t.tier] || (byTier[t.tier] = [])).push(t)
-  const row = (t) => `| \`${t.name}\` | \`${cssVarOf(t.name)}\` | ${t.value || `→ \`${t.alias}\``} | ${usedBy[t.name] || 0} | ${(t.why || '').replace(/\|/g, '/')} |`
+  const row = (t) => `| \`${t.name}\` | \`${cssVarOf(t.name)}\` | ${t.value || `→ \`${t.alias}\``} | ${usedBy[t.name] || 0} | ${reason(t).replace(/\|/g, '/')} |`
   const pct = (v) => (v ? `${(v.ratio * 100).toFixed(3)}%` : 'not run')
   const lines = [
     `Replaces ${rewrite.edits.length} hardcoded values in ${rewrite.files.length} files with design tokens.`,
@@ -30,6 +40,7 @@ export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel }) {
     `Every replacement keeps the original value as the fallback, \`var(--token, original)\`, so nothing changes until \`${tokensCssRel}\` is loaded.`,
     '',
     '## Verify',
+    ...(verifiedOn ? [`Measured by rendering ${verifiedOn} before and after with the same stylesheet rules.`, ''] : []),
     '| Check | Result |',
     '|---|---|',
     `| Fallbacks only (must be identical) | ${verify?.fallback ? `${verify.fallback.diffPixels} px changed, ${verify.fallback.pass ? 'pass' : 'FAIL'}` : 'not run'} |`,
@@ -73,7 +84,10 @@ export function runPr(o) {
   const tokensCss = o.tokensCssPath || join(o.targetDir, 'tokens.css')
   copyFileSync(join(o.runDir, 'tokens.css'), tokensCss)
   const tokensCssRel = relative(o.repoDir, tokensCss)
-  const body = prBody({ tokens, rewrite, verify, eval: score, tokensCssRel })
+  const clusters = existsSync(join(o.runDir, 'clusters.json')) ? rd('clusters') : []
+  const runMeta = existsSync(join(o.runDir, 'run.json')) ? rd('run') : {}
+  const verifiedOn = runMeta.serve ? `the app's production build (\`${runMeta.serve.split('/').slice(-2).join('/')}\`)` : ''
+  const body = prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clusters, verifiedOn })
   // Absolute: gh runs with cwd = the app repo, not this project.
   const bodyPath = resolve(o.runDir, 'pr-body.md')
   writeFileSync(bodyPath, body)
