@@ -135,6 +135,23 @@ async function main() {
     const r = await proposePreview({ bridgeUrl, tokenName: cssVarOf(a.token).slice(2), value: a.value, key: process.env.SORB_BRIDGE_KEY })
     const app = a['app-url'] ? `${a['app-url'].replace(/\/$/, '')}/?preview=${r.id}` : r.url
     console.log(`preview ${r.id}: open ${app}`)
+  } else if (cmd === 'scoreboard') {
+    // F7: SAM vs DOM split-screen scoreboard (div-soup DOM/SAM/hybrid vs the hand-labeled truth,
+    // plus two real apps scored honestly against the DOM oracle). s2t scoreboard --out out/scoreboard.html
+    const { writeScoreboard } = await import('./stages/scoreboard.js')
+    const truth = join('fixtures', 'div-soup', 'regions.truth.json')
+    const outPath = a.out || join('out', 'scoreboard.html')
+    const p = writeScoreboard({
+      runs: [
+        { role: 'dom', label: 'DOM (page structure)', runDir: join('out', 'div-soup'), truth },
+        { role: 'sam', label: 'SAM 3.1', runDir: join('out', 'div-soup-sam'), truth },
+        { role: 'hybrid', label: 'Hybrid (SAM + layout + DOM)', runDir: join('out', 'div-soup-hybrid'), truth },
+        { role: 'real', label: 'agency (hybrid)', runDir: join('out', 'agency-hybrid') },
+        { role: 'real', label: 'acme-shop (hybrid)', runDir: join('out', 'acme-shop-hybrid') },
+      ],
+      out: outPath,
+    })
+    console.log(`scoreboard: wrote ${p}`)
   } else if (cmd === 'doctor') {
     await doctor()
   } else if (cmd === 'serve') {
@@ -148,6 +165,7 @@ async function main() {
        s2t review --run <dir> [--decisions review.json]
        s2t pr --run <dir> --repo <app git root> [--target <dir>] [--branch <name>] [--open]
        s2t preview --token <name> --value <css> [--bridge http://localhost:7777] [--app-url <url>]
+       s2t scoreboard [--out out/scoreboard.html]      (SAM vs DOM split-screen scoreboard: div-soup + 2 real apps)
        s2t doctor
        s2t serve --fixture <name> [--port 4321]
 stages: ${STAGES.join(' → ')}`)
