@@ -4,6 +4,14 @@ import { mkdirSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { STYLE_PROPS } from '../lib/props.js'
 
+// Canvas content sometimes went missing from full-page screenshots (headless GPU canvas race; seen on the
+// div-soup chart, 2026-10-26), which made verify flaky. Draw 2D canvases on the CPU and let two frames paint
+// before every screenshot.
+const LAUNCH = { args: ['--disable-accelerated-2d-canvas', '--disable-gpu'] }
+async function settle(page) {
+  await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
+}
+
 /** In-page walker. Self-contained: no closures over module scope. */
 function walkPage(props, maxElements) {
   const out = []
@@ -74,12 +82,13 @@ function walkPage(props, maxElements) {
 export async function runCapture(o) {
   const { chromium } = await import('playwright')
   mkdirSync(o.runDir, { recursive: true })
-  const browser = await chromium.launch()
+  const browser = await chromium.launch(LAUNCH)
   try {
     const page = await browser.newPage({ viewport: o.viewport, deviceScaleFactor: 1 })
     await page.goto(o.url, { waitUntil: 'networkidle' })
     await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
     const screenshot = 'screenshot.png'
+    await settle(page)
     await page.screenshot({ path: join(o.runDir, screenshot), fullPage: true })
     const elements = await page.evaluate(([props, max]) => {
       // eslint-disable-next-line no-new-func
@@ -97,12 +106,13 @@ export async function runCapture(o) {
 /** Screenshot only (verify stage uses this for the "after" image). */
 export async function screenshotUrl(url, path, viewport, extraCss = '') {
   const { chromium } = await import('playwright')
-  const browser = await chromium.launch()
+  const browser = await chromium.launch(LAUNCH)
   try {
     const page = await browser.newPage({ viewport, deviceScaleFactor: 1 })
     await page.goto(url, { waitUntil: 'networkidle' })
     await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
     if (extraCss) await page.addStyleTag({ content: extraCss })
+    await settle(page)
     await page.screenshot({ path, fullPage: true })
   } finally {
     await browser.close()

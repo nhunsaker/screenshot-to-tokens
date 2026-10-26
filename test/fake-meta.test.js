@@ -90,7 +90,7 @@ test('meta SAM: tiles, one call per concept per tile, scaled + offset boxes', as
   try {
     const regions = await withEnv({ META_API_KEY: 'k', META_API_BASE_URL: base, META_SAM_MODEL: 'sam-3.1', S2T_SAM_TILE_H: "1000" }, () =>
       metaSam().segment({ screenshot: 'shot.png', elements: [] }, runDir))
-    assert.equal(seen.responses.length, 2 * 9, '2 tiles x 9 concept prompts')
+    assert.equal(seen.responses.length, 2 * 3, '2 tiles x 3 concept prompts')
     assert.ok(seen.responses.every((r) => r.model === 'sam-3.1'))
     const buttons = regions.filter((r) => r.label === 'button')
     assert.equal(buttons.length, 2)
@@ -109,7 +109,7 @@ test('meta SAM: all calls failing is an error, not an empty success', async () =
   writeFileSync(join(runDir, 'shot.png'), PNG.sync.write(new PNG({ width: 100, height: 100 })))
   try {
     await withEnv({ META_API_KEY: 'k', META_API_BASE_URL: `http://127.0.0.1:${dead.address().port}`, META_SAM_MODEL: 'sam-3.1' }, () =>
-      assert.rejects(metaSam().segment({ screenshot: 'shot.png', elements: [] }, runDir), /all 9 calls failed/))
+      assert.rejects(metaSam().segment({ screenshot: 'shot.png', elements: [] }, runDir), /all 3 calls failed/))
   } finally { dead.close() }
 })
 

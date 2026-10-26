@@ -20,6 +20,8 @@ const readJson = (runDir, name) => JSON.parse(readFileSync(join(runDir, `${name}
 export async function segmenterFor(id) {
   if (id === 'mock') return (await import('./providers/segment/mock.js')).default()
   if (id === 'meta') return (await import('./providers/segment/meta-sam.js')).default()
+  // SAM 3.1 for buttons / inputs / icons + layout rules anchored on them + DOM style rules (the recommended mode).
+  if (id === 'hybrid') return (await import('./providers/segment/hybrid.js')).default()
   if (id === 'local') return (await import('./providers/segment/local-sam.js')).default()
   // Fallback if SAM scores NO-GO on UI: a vision LLM returns boxes as JSON (meta = Muse Spark).
   if (id === 'vision') return (await import('./providers/segment/meta-vision.js')).default('meta')

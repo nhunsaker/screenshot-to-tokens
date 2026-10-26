@@ -12,9 +12,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 export const DEFAULT_SCRIPT_PATH = resolve(__dirname, '../../../scripts/sam_local.py')
 
 /** Same concept vocabulary as meta-sam.js, kept local so this provider has no import-time dependency on it. */
-export const CONCEPT_PROMPTS = [
-  'button', 'text input', 'card', 'navigation bar', 'header', 'link', 'icon', 'image', 'badge',
-]
+// Same tuned vocabulary as the hosted provider (one source of truth).
+export { CONCEPT_PROMPTS } from './meta-sam.js'
+import { CONCEPT_PROMPTS } from './meta-sam.js'
 
 /**
  * Build the argv for `python3 scripts/sam_local.py ...`. Pure + exported so tests can check the

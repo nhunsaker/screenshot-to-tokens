@@ -8,12 +8,19 @@ import { PNG } from 'pngjs'
 import { postprocessRegions } from '../../stages/segeval.js'
 
 /** Concept prompts sent one per call; each maps to a Region.label. */
-export const CONCEPT_PROMPTS = [
-  'button', 'text input', 'card', 'navigation bar', 'header', 'link', 'icon', 'image', 'badge',
-]
+// Tuned 2026-10-26 against the live API on acme-shop + div-soup. SAM 3.1 answers for named objects only:
+// "button", "search bar", "input field", "icon", "price" return boxes; card, text input, navigation bar, header, link,
+// badge, image, panel, tag, label, menu, logo, tab, checkbox, dropdown, avatar, heading all returned zero. Layout
+// containers come from the hybrid segmenter's layout + DOM rules instead. Override: S2T_SAM_PROMPTS="a,b,c".
+export const CONCEPT_PROMPTS = ['button', 'search bar', 'icon']
+export const promptsFromEnv = () =>
+  process.env.S2T_SAM_PROMPTS ? process.env.S2T_SAM_PROMPTS.split(',').map((p) => p.trim()).filter(Boolean) : CONCEPT_PROMPTS
 
 export const LABEL_BY_PROMPT = {
   button: 'button',
+  'search bar': 'input',
+  'input field': 'input',
+  price: 'text',
   'text input': 'input',
   card: 'card',
   'navigation bar': 'nav',
@@ -169,7 +176,7 @@ export default function metaSam() {
       for (const tile of tilePng(full, Number(process.env.S2T_SAM_TILE_H || TILE_H))) {
         const png = tile.png
         const imageDataUrl = `data:image/png;base64,${PNG.sync.write(png).toString('base64')}`
-      for (const prompt of CONCEPT_PROMPTS) {
+      for (const prompt of promptsFromEnv()) {
         const label = LABEL_BY_PROMPT[prompt] || 'other'
         let json
         calls++

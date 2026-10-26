@@ -103,7 +103,7 @@ test('toRegions accepts a full JSON envelope too, not just a raw string', () => 
 
 test('meta-sam and local-sam agree on the concept prompt vocabulary', () => {
   assert.deepEqual(META_PROMPTS, LOCAL_PROMPTS)
-  assert.ok(META_PROMPTS.includes('button') && META_PROMPTS.includes('navigation bar'))
+  assert.ok(META_PROMPTS.includes('button') && META_PROMPTS.includes('search bar'))
 })
 
 // ── local-sam: argv construction (no spawn) ─────────────────────────────────────────────────────

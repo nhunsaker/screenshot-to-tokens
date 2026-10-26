@@ -15,7 +15,10 @@ export function summarizeRun(dir) {
   const tok = (usage || []).reduce((a, u) => ({ in: a.in + (u.usage?.prompt_tokens || 0), out: a.out + (u.usage?.completion_tokens || 0) }), { in: 0, out: 0 })
   return {
     run: basename(dir),
-    segmenter: regions?.[0]?.source || run?.providers?.segmenter || '-',
+    // Hybrid runs mix sources, so show the share per source (e.g. "sam3.1 14 · layout 2 · mock-dom 96").
+    segmenter: regions && regions.length
+      ? Object.entries(regions.reduce((m, r) => ((m[r.source] = (m[r.source] || 0) + 1), m), {})).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(' · ')
+      : run?.providers?.segmenter || '-',
     namer: tokens?.namer || '-',
     regions: regions ? String(regions.length) : '-',
     tokens: tokens ? `${tokens.tokens.length} (${tiers.primitive || 0}/${tiers.semantic || 0}/${tiers.component || 0})` : '-',
