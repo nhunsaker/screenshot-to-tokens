@@ -27,8 +27,17 @@ rewrite, three-check verify. Runner: `node scripts/breadth-run.mjs <pool.md> --c
 4. Every screenshot gets the same seeded `Math.random`, and a second shot of the unchanged page marks pixels that move
    between loads; they are excluded from the counts, painted blue in the diff, and reported.
 
-Known jitter to fix after L6: devbattery showed 78 px of glyph anti-aliasing difference in one earlier run (web font
-timing); this run was 0 px. Waiting for `document.fonts.ready` before each shot is the planned fix.
+## Repeat check (L6, 2026-10-26 23:30)
+
+The verify stage was re-run on all 27 finished sites (same rewrite, fresh screenshots), two at a time.
+- **The rewrite gate repeated on every site:** all 25 that passed (fallbacks 0 px, colors invisible) passed again; the
+  two self-animating sites failed again, with the remaining pixels again only inside their moving regions.
+- **23 of 27 produced byte-identical verify results.** The other two stable sites moved only in numbers that don't
+  gate: devbattery's "all tokens" view 78 px → 0 px (web-font timing), burning-cost's colors view 0 → 5 px (still
+  0.000%, pass).
+- Fix applied after L6: every screenshot now waits for `document.fonts.ready` (devbattery re-checked: gates 0 px).
+  Side effect: with fonts loaded, the review-only "all tokens" view now shows font-size token changes it used to miss
+  (devbattery 0.31%).
 
 ## Per site
 

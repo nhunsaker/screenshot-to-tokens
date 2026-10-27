@@ -34,6 +34,8 @@ async function loadImages(page) {
       await new Promise((r) => setTimeout(r, 50))
     }
     window.scrollTo(0, 0)
+    // Web fonts swapping in mid-shot moved a few glyph pixels (L2/L6: devbattery 78 px in one run, 0 in the next).
+    if (document.fonts && document.fonts.ready) await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 3000))])
     const pending = Array.from(document.images).filter((img) => !img.complete).map((img) => new Promise((r) => { img.onload = img.onerror = r }))
     await Promise.race([Promise.all(pending), new Promise((r) => setTimeout(r, 3000))])
   })
