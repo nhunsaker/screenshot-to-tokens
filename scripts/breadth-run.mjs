@@ -6,7 +6,7 @@
 // L6 (--reverify): re-run only the verify stage on every finished site and record whether the result repeats.
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
 import { join, resolve } from 'path'
-import { spawnSync } from 'child_process'
+import { spawn } from 'child_process'
 import { parseArgs } from '../src/lib/args.js'
 
 const a = parseArgs(process.argv.slice(2))
@@ -27,7 +27,15 @@ export function poolSites(md) {
 }
 
 const env = { ...process.env, S2T_SEGMENTER: process.env.S2T_SEGMENTER || 'hybrid', S2T_NAMER: process.env.S2T_NAMER || 'baseten' }
-const run = (args, timeout) => spawnSync(process.execPath, args, { env, encoding: 'utf-8', timeout })
+// Async so --concurrency N sites can run side by side (each site is its own child process).
+const run = (args, timeout) => new Promise((done) => {
+  const p = spawn(process.execPath, args, { env })
+  let stdout = '', stderr = ''
+  p.stdout.on('data', (d) => { stdout += d })
+  p.stderr.on('data', (d) => { stderr += d })
+  const t = setTimeout(() => p.kill('SIGTERM'), timeout)
+  p.on('close', (status) => { clearTimeout(t); done({ status, stdout, stderr }) })
+})
 const readJson = (p) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf-8')) : null)
 const summaryPath = join(outRoot, 'summary.json')
 const summary = readJson(summaryPath) || {}
@@ -41,23 +49,23 @@ function verifyOf(runDir) {
   return v
 }
 
-for (const [i, s] of sites.entries()) {
+async function doSite(i, s) {
   const runDir = join(outRoot, s.owner)
   const t0 = Date.now()
   const row = summary[s.owner] || { ...s }
   if (a.reverify) {
-    if (!existsSync(join(runDir, 'rewrite.json'))) continue
+    if (!existsSync(join(runDir, 'rewrite.json'))) return
     const before = JSON.stringify(verifyOf(runDir))
-    const r = run(['src/cli.js', 'run', '--serve', join(mirrors, s.owner), '--run', runDir, '--from', 'verify', '--to', 'verify'], 180000)
+    const r = await run(['src/cli.js', 'run', '--serve', join(mirrors, s.owner), '--run', runDir, '--from', 'verify', '--to', 'verify'], 180000)
     const after = verifyOf(runDir)
     row.reverify = { ok: r.status === 0, same: JSON.stringify(after) === before, verify: after, ms: Date.now() - t0 }
   } else {
-    const m = run(['scripts/mirror-site.mjs', s.url, join(mirrors, s.owner)], 120000)
+    const m = await run(['scripts/mirror-site.mjs', s.url, join(mirrors, s.owner)], 120000)
     const files = Number((m.stdout || '').match(/mirror: (\d+) files/)?.[1] || 0)
     if (m.status !== 0 || !files) {
       Object.assign(row, { status: 'mirror-failed', error: (m.stderr || m.stdout || '').trim().slice(-200), ms: Date.now() - t0 })
     } else {
-      const r = run(['src/cli.js', 'run', '--serve', join(mirrors, s.owner), '--run', runDir], 420000)
+      const r = await run(['src/cli.js', 'run', '--serve', join(mirrors, s.owner), '--run', runDir], 420000)
       const log = (r.stdout || '') + (r.stderr || '')
       const tokens = readJson(join(runDir, 'tokens.json'))
       const rw = readJson(join(runDir, 'rewrite.json'))
@@ -73,6 +81,13 @@ for (const [i, s] of sites.entries()) {
   writeFileSync(summaryPath, JSON.stringify(summary, null, 1))
   console.log(`[${i + 1}/${sites.length}] ${s.owner}: ${a.reverify ? (row.reverify ? (row.reverify.same ? 'same' : 'DIFFERENT') : 'skipped') : row.status} ${row.verifyLine || row.error || ''}`.slice(0, 220))
 }
+
+// Worker pool: --concurrency 2 runs two sites at once (founder-approved 2026-10-26; default 1).
+const concurrency = Math.max(1, Number(a.concurrency || 1))
+let next = 0
+await Promise.all(Array.from({ length: concurrency }, async () => {
+  while (next < sites.length) { const i = next++; await doSite(i, sites[i]) }
+}))
 
 // Table for docs/breadth.md.
 const rows = Object.values(summary)
