@@ -250,7 +250,9 @@ export default function deterministicCoder() {
         mkdirSync(outDir, { recursive: true })
         cpSync(targetDir, join(outDir, basename(targetDir)))
       } else {
-        cpSync(targetDir, outDir, { recursive: true, filter: (src) => !SKIP_DIRS.has(basename(src)) })
+        // Copy the whole site (built folders like assets/js/dist included) so verify serves a complete page; only the
+        // walk below skips SKIP_DIRS. Skipping dist here hid Chirpy's scripts and failed verify (L2: 44,885 px).
+        cpSync(targetDir, outDir, { recursive: true, filter: (src) => !/^(node_modules|\.git)$/.test(basename(src)) })
       }
 
       const files = walk(outDir).filter((f) => extname(f) === '.css' || extname(f) === '.vue' || JSX_EXT.test(f) || SVG_HTML_EXT.test(f))

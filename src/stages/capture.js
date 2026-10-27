@@ -22,6 +22,27 @@ async function settle(page) {
   }
 }
 
+// Lazy-loaded images (Jekyll Chirpy and friends) load only when scrolled into view and fade in, so two screenshots
+// of the same page could differ (L2 breadth run: Andra-sun's post images were half-faded in one shot, 44,885 px).
+// Load every image eagerly, scroll the page once to wake scroll-driven loaders, and wait for the images to decode.
+async function loadImages(page) {
+  await page.evaluate(async () => {
+    for (const img of Array.from(document.images)) img.loading = 'eager'
+    const step = Math.max(200, window.innerHeight)
+    for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+      window.scrollTo(0, y)
+      await new Promise((r) => setTimeout(r, 50))
+    }
+    window.scrollTo(0, 0)
+    const pending = Array.from(document.images).filter((img) => !img.complete).map((img) => new Promise((r) => { img.onload = img.onerror = r }))
+    await Promise.race([Promise.all(pending), new Promise((r) => setTimeout(r, 3000))])
+  })
+}
+
+// Some pages set a Content-Security-Policy that blocks injected <style> tags (L2: DiogoRibeiro7); we inject the
+// animation kill switch and, in verify, tokens.css, so bypass CSP in our own browser.
+const PAGE = { deviceScaleFactor: 1, bypassCSP: true }
+
 /** In-page walker. Self-contained: no closures over module scope. */
 function walkPage(props, maxElements) {
   const out = []
@@ -102,10 +123,11 @@ export async function runCapture(o) {
   mkdirSync(o.runDir, { recursive: true })
   const browser = await chromium.launch(LAUNCH)
   try {
-    const page = await browser.newPage({ viewport: o.viewport, deviceScaleFactor: 1 })
+    const page = await browser.newPage({ ...PAGE, viewport: o.viewport })
     await page.goto(o.url, { waitUntil: 'networkidle' })
     await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
     const screenshot = 'screenshot.png'
+    await loadImages(page)
     await settle(page)
     await page.screenshot({ path: join(o.runDir, screenshot), fullPage: true })
     const elements = await page.evaluate(([props, max]) => {
@@ -126,10 +148,11 @@ export async function screenshotUrl(url, path, viewport, extraCss = '') {
   const { chromium } = await import('playwright')
   const browser = await chromium.launch(LAUNCH)
   try {
-    const page = await browser.newPage({ viewport, deviceScaleFactor: 1 })
+    const page = await browser.newPage({ ...PAGE, viewport })
     await page.goto(url, { waitUntil: 'networkidle' })
     await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
     if (extraCss) await page.addStyleTag({ content: extraCss })
+    await loadImages(page)
     await settle(page)
     await page.screenshot({ path, fullPage: true })
   } finally {
