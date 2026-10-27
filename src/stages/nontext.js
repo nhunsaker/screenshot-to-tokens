@@ -102,6 +102,7 @@ async function callSamPoint({ baseURL, apiKey, model, imageDataUrl, prompt }, st
         model,
         input: [{ type: 'message', role: 'user', content: [{ type: 'input_text', text: prompt }, { type: 'input_image', image_url: imageDataUrl }] }],
         metadata: { mask_encoding: 'one_bit' },
+        store: false,
       }),
     })
     if (!res.ok) throw new Error(`SAM 3.1 ${res.status}: ${(await res.text()).slice(0, 200)}`)

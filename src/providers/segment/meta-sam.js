@@ -141,6 +141,7 @@ async function callSamUncached({ baseURL, apiKey, model, imageDataUrl, prompt })
         },
       ],
       metadata: { mask_encoding: 'one_bit' },
+      store: false, // Responses API keeps requests by default ("store": true); we never want our screenshots kept
     }),
   })
   if (!res.ok) throw new Error(`SAM 3.1 ${res.status}: ${(await res.text()).slice(0, 300)}`)
