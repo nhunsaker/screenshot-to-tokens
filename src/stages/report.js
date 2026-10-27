@@ -818,3 +818,42 @@ export function writeReport(runDir, o = {}) {
   writeFileSync(outPath, html)
   return outPath
 }
+
+/**
+ * L16: the non-text section (icon/control contrast, WCAG 1.4.11; target size, WCAG 2.5.8) from <runDir>/nontext.json,
+ * inserted into an existing report.html (replacing an earlier copy). Self-contained so it merges with other report work.
+ * Crops are embedded as data URIs. Returns the report path, or null when there is no report or no nontext.json.
+ */
+export function appendNontextSection(runDir) {
+  const nt = readJsonSafe(join(runDir, 'nontext.json'))
+  const reportPath = join(runDir, 'report.html')
+  if (!nt || !existsSync(reportPath)) return null
+  const badge = (ok, yes, no) => (ok == null ? '<span class="muted">n/a</span>' : ok ? `<span class="badge badge-pass">${yes}</span>` : `<span class="badge badge-fail">${no}</span>`)
+  const swatch = (hex) => (safeCss(hex) ? `<span style="display:inline-block;width:12px;height:12px;border:1px solid var(--border);vertical-align:middle;background:${safeCss(hex)}"></span> <code>${escapeHtml(hex)}</code>` : '')
+  const rows = (nt.items || []).map((x) => {
+    const img = readPngDataUri(join(runDir, x.crop))
+    const c = x.contrast
+    const size = x.size
+      ? `${x.size.w}&times;${x.size.h} ${x.size.pass ? badge(true, 'ok') : x.size.spacingException ? '<span class="badge badge-caution">small, spaced</span>' : badge(false, '', 'under 24')}`
+      : '<span class="muted">not a target</span>'
+    const token = x.token ? [x.token.fg, x.token.bg].map((t) => (t ? `<code>${escapeHtml(t)}</code>` : '<span class="muted">no token</span>')).join(' on ') : ''
+    return `<tr><td>${img ? `<img src="${img}" alt="${escapeHtml(x.label)} ${escapeHtml(x.id)}" style="max-height:72px;max-width:220px">` : ''}</td>
+<td><strong>${escapeHtml(x.label)}</strong> <span class="muted">${escapeHtml(x.id)}</span><br><span class="muted">${escapeHtml(x.outlineSource)}</span></td>
+<td>${c ? `${Number(c.ratio).toFixed(2)}:1 ${!c.pass && c.textLabel ? `<span class="badge badge-caution">review</span> <span class="muted">labelled &ldquo;${escapeHtml(c.textLabel)}&rdquo;</span>` : badge(c.pass, 'ok', 'below 3:1')}<br>${swatch(c.fg)} on ${swatch(c.bg)}<br><span class="muted">${escapeHtml(c.basis)}</span>` : '<span class="muted">not measured</span>'}</td>
+<td>${size}</td><td>${token}</td></tr>`
+  }).join('\n')
+  const s = nt.sam || {}
+  const summary = `${nt.controls} controls found by SAM (${Object.entries(nt.byLabel || {}).map(([k, v]) => `${v} ${escapeHtml(k)}`).join(', ')}). ` +
+    `Non-text contrast below 3:1: ${nt.contrastFailing} of ${nt.contrastMeasured} (${nt.contrastFailingNeedsBoundary ?? nt.contrastFailing} with no text label to identify them). Targets under 24&times;24 px: ${nt.undersized} of ${nt.targets} (${nt.undersizedNoSpacing} without the spacing exception).`
+  const note = `Outlines from SAM 3.1 point prompts (${s.calls || 0} calls, ${s.cached || 0} cached${s.uncachedMedianMs ? `, median ${s.uncachedMedianMs} ms uncached` : ''}). ` +
+    'Contrast compares the control (fill, border, or glyph) with a 3 px ring just outside its mask, on the captured route only; hover and focus states are not measured. ' +
+    'WCAG does not require a visible boundary on a button whose text label identifies it, so a low button ratio is a finding to review, not a failure by itself. ' +
+    'The spacing check considers only the targets found here.'
+  const section = `<!-- nontext:start -->${sectionWrap('Icon and control contrast, target size (SAM)', `<p>${summary}</p><table class="wf"><thead><tr><th>Crop</th><th>Control</th><th>Contrast (WCAG 1.4.11)</th><th>Size (WCAG 2.5.8)</th><th>Token</th></tr></thead><tbody>${rows}</tbody></table><p class="muted">${escapeHtml(note)}</p>`)}<!-- nontext:end -->`
+  let html = readFileSync(reportPath, 'utf-8').replace(/<!-- nontext:start -->[\s\S]*?<!-- nontext:end -->\n?/, '')
+  // After the last section inside .wrap (the review toolbar and script that follow have no <section>).
+  const at = html.lastIndexOf('</section>')
+  html = at >= 0 ? `${html.slice(0, at + 10)}\n${section}${html.slice(at + 10)}` : html.replace('</body>', `${section}\n</body>`)
+  writeFileSync(reportPath, html)
+  return reportPath
+}
