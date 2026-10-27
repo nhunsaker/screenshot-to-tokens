@@ -6,6 +6,7 @@
 //   s2t doctor                              what's configured, what's reachable, Mac headroom
 //   s2t serve --fixture acme-shop           serve a fixture to look at it
 //   s2t eval | review | pr | preview         score, apply review decisions, branch + PR, live Sorb preview
+//   s2t playground --run out/app-argon --app <build>   local token playground + Muse audit fixes / dark theme
 import { join } from 'path'
 import { totalmem, freemem, cpus } from 'os'
 import { execSync } from 'child_process'
@@ -147,6 +148,12 @@ async function main() {
       out: outPath,
     })
     console.log(`scoreboard: wrote ${p}`)
+  } else if (cmd === 'playground') {
+    // Local only (127.0.0.1): playground + tokenized app + /api/muse (audit fixes, dark theme). Never deploy this.
+    const { startPlayground } = await import('./stages/playground.js')
+    if (!a.run || !a.app) throw new Error('playground needs --run <run dir> --app <dir of the tokenized app build>')
+    const s = await startPlayground({ runDir: a.run, appDir: a.app, port: Number(a.port || 4400), provider: a.provider === 'meta' ? 'meta' : 'baseten', title: a.title, log: (m) => console.log(`  ${m}`) })
+    console.log(`playground: ${s.tokens} tokens, ${s.pairs} text pairs at ${s.url} (local only; Ctrl+C to stop)`)
   } else if (cmd === 'doctor') {
     await doctor()
   } else if (cmd === 'serve') {
@@ -161,6 +168,7 @@ async function main() {
        s2t pr --run <dir> --repo <app git root> [--target <dir>] [--branch <name>] [--open]
        s2t preview --token <name> --value <css> [--bridge http://localhost:7777] [--app-url <url>]
        s2t scoreboard [--out out/scoreboard.html]      (SAM vs DOM split-screen scoreboard: div-soup + 2 real apps)
+       s2t playground --run <run dir> --app <tokenized app build> [--port 4400] [--provider baseten|meta] [--title <name>]
        s2t doctor
        s2t serve --fixture <name> [--port 4321]
 stages: ${STAGES.join(' → ')}`)
