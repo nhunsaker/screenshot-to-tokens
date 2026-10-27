@@ -74,12 +74,30 @@ export function validateTokenSet(set, clusters, components = null) {
   }
   // Component tokens (third tier) may only cover values their component actually uses. A component token whose
   // name starts with a profiled component (e.g. button.*) but cites a cluster that component never uses is dropped.
+  // A fourth-tier state token (<component>.<state>.<role>, e.g. nav.active.bg) is checked even more strictly:
+  // against only the clusters that *state's own* roots use (profile.states[state]), never the component's
+  // overall usage — an inactive nav-link's blue never backs an active-pill token into existence, and vice versa.
   if (components && components.length) {
     const used = new Map(components.map((p) => [p.component, new Set(Object.values(p.props).flat().map((x) => x.cluster))]))
+    const stateUsed = new Map()
+    for (const p of components) {
+      for (const [state, info] of Object.entries(p.states || {})) {
+        stateUsed.set(`${p.component}.${state}`, new Set(Object.values(info.props).flat().map((x) => x.cluster)))
+      }
+    }
     for (let i = kept.length - 1; i >= 0; i--) {
       const t = kept[i]
       if (t.tier !== 'component') continue
-      const comp = t.name.split('.')[0]
+      const parts = t.name.split('.')
+      const comp = parts[0]
+      if (parts.length >= 3 && stateUsed.has(`${comp}.${parts[1]}`)) {
+        const set = stateUsed.get(`${comp}.${parts[1]}`)
+        if (!t.clusters.every((id) => set.has(id))) { warnings.push(`dropped ${t.name}: ${comp}.${parts[1]} never uses ${t.clusters.filter((id) => !set.has(id)).join(', ')}`); kept.splice(i, 1) }
+        continue
+      }
+      // A 3+-segment name that doesn't match any profiled state (typo, or model invented one) has no usage
+      // data to check against at all — never trust it.
+      if (parts.length >= 3) { warnings.push(`dropped ${t.name}: no profiled state ${comp}.${parts[1]}`); kept.splice(i, 1); continue }
       const set = used.get(comp)
       if (set && !t.clusters.every((id) => set.has(id))) { warnings.push(`dropped ${t.name}: ${comp} never uses ${t.clusters.filter((id) => !set.has(id)).join(', ')}`); kept.splice(i, 1) }
     }

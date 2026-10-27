@@ -15,6 +15,9 @@ Rules:
 - Three tiers. primitive = raw value, named by what it is (color.blue.600, space.16, radius.md).
   semantic = purpose, aliases a primitive (color.text.muted, color.surface.raised, color.border.default).
   component = one component's use, aliases a primitive or semantic (button.radius, card.shadow).
+  A component token may also be scoped to a state the capture observed on it (active/disabled/selected/current),
+  named <component>.<state>.<role> (e.g. nav.active.bg) — only when the CLUSTERS/COMPONENTS data shows that
+  exact state actually uses that value.
 - Every cluster id must be covered by exactly one primitive. Copy primitive values from the cluster "value" exactly.
 - Semantic and component tokens use "alias" (an existing token name), never "value".
 - Names: lower case, dot separated, no spaces. Keep draft names unless a better one is clearly justified.
@@ -43,6 +46,11 @@ Rules:
 - Component tokens: for each entry in COMPONENTS, name <component>.<role> (roles: bg, text, border, radius, shadow,
   icon), e.g. button.bg, input.border, card.shadow, nav.bg. Alias the semantic token for that value when one exists
   (button.bg -> color.action.primary), else the primitive. Only use clusters listed in that component's "uses".
+- State tokens: when a COMPONENTS entry has a "states" map (active/disabled/selected/current — the states
+  a static capture can actually see, e.g. the one nav-link carrying Bootstrap's "active" class), name
+  <component>.<state>.<role> (e.g. nav.active.bg, link.active.text) from that state's own "uses", the same way
+  as a plain component token. Only use clusters listed under that state; never reuse a different state's or the
+  component's overall clusters for it.
 - "why": one short sentence grounded only in the usage counts, properties and regions given. Do not quote numbers
   from token names.
 - Names: lower case, dot separated, no spaces. Do not invent clusters, values or regions.
@@ -84,7 +92,11 @@ export function promptPayload(clusters, regions, draft, components = []) {
     draftMerges: draft.merges || [],
     // Detected components and the clusters each one uses, per property (the basis for the third tier).
     components: (components || []).map((p) => ({ component: p.component, regions: p.regions,
-      uses: Object.fromEntries(Object.entries(p.props).map(([prop, list]) => [prop, list.map((x) => x.cluster)])) })),
+      uses: Object.fromEntries(Object.entries(p.props).map(([prop, list]) => [prop, list.map((x) => x.cluster)])),
+      // Which observable states (active/disabled/selected/current) this component's own roots carry, and the
+      // clusters each state's roots use per property — the basis for the fourth-tier state tokens.
+      states: Object.fromEntries(Object.entries(p.states || {}).map(([state, info]) => [state,
+        Object.fromEntries(Object.entries(info.props).map(([prop, list]) => [prop, list.map((x) => x.cluster)]))])) })),
   }
 }
 
