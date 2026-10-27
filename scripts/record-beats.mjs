@@ -132,7 +132,7 @@ function endCard() {
 <script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},100)</script>`
 }
 // Beat 9 (played before the closer): accessibility. Contrast row on the Argon report, the axe-core comparison card,
-// SAM's controls on div-soup, then a dark mode switched on as a token file (proinsias.github.io, MIT).
+// SAM's controls on div-soup, then a dark mode switched on as a token file (Light Bootstrap Dashboard React, MIT).
 function axeCard() {
   return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#fff;color:#1d1d1b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:56px 72px}h1{font-size:30px;margin:0 0 6px}p{color:#6b6a66;font-size:17px;margin:0 0 26px}table{border-collapse:collapse;font-size:21px;width:100%}td,th{padding:12px 14px;border-bottom:1px solid #eee;text-align:left}th{font-size:15px;color:#6b6a66;font-weight:600}.n{font-weight:700;color:#137a3a}</style>
 <h1>Our text-contrast check vs axe-core, 28 sites</h1><p>Text colour from the DOM, background measured on the rendered pixels, so gradients and images count.</p>
@@ -147,9 +147,9 @@ await beat(9, async (p) => {
   await p.goto(page('axe.html', axeCard())); await wait(p, 9000)
   await p.goto(`${srv.url}out/video/assets/divsoup-nontext/report.html`, { waitUntil: 'networkidle' })
   await p.evaluate(() => [...document.querySelectorAll('h2')].find((h) => /Icon and control/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 6500)
-  const dark = await serveDir(resolve('out/video/assets/proinsias-dark'))
+  const dark = await serveDir(resolve('out/video/assets/lightbootstrap-dark'))
   try {
-    await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 2500)
+    await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 3000)
     await p.click('#sorb-theme-toggle'); await wait(p, 5500)
   } finally { await dark.close() }
 })

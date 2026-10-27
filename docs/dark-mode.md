@@ -111,3 +111,19 @@ Screenshots: `out/l14-argon/dark.png`, `out/l14-proinsias-l13/dark.png`; the tog
 Wording for the video and README follows the spec: say "text contrast" and name the numbers ("41 text pairs fell below
 WCAG AA; in the dark theme every pair whose text color is a token passes"); never "accessible" as a verdict or
 "compliant".
+
+## On-camera pick (2026-10-27): Light Bootstrap Dashboard React
+
+Tried on 5 breadth sites (all personal blogs; 3 of 5 returned a theme that stayed mostly light and were rejected by the
+dark check) and on the product-style UIs. The demo uses **Light Bootstrap Dashboard React** (Creative Tim, MIT): a real
+third-party product dashboard whose background, cards, sidebar and text are all reachable through tokens.
+
+| UI | Text pairs passing, light | Dark (`--provider both`) | Winner | Notes |
+|---|---|---|---|---|
+| Light Bootstrap Dashboard | 14 of 84 | **83 of 84** | Muse Spark 1.3 (Meta), retry, 28 s | top navbar stays light; 87% of text on dark |
+| acme-shop (our fixture) | 48 of 48 | 48 of 48 (Baseten) | — | top nav stays white |
+| div-soup (our fixture) | 44 of 54 | 54 of 54 (Baseten) | — | the canvas chart can't follow (not CSS) |
+| Agency landing page | — | rejected: 27% of text on dark | — | hero image and sections are literal colors |
+
+Run: `out/darkpick/lightbootstrap-both` (`node src/cli.js dark --run <run> --provider both`); toggle page built with
+`node scripts/preview-site.mjs <run>`.
