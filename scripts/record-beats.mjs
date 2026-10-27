@@ -115,14 +115,14 @@ await beat(7, async (p) => {
 function endCard() {
   const items = [
     [0.3, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
-    [12.7, 'Muse Spark Open · on Baseten', 'names the token set', '3 to 5 s · 3 to 9× faster than hosted · same answer-key scores'],
-    [23.2, 'Muse Spark', 'audits contrast on the live app', '41 failing text pairs → 2'],
-    [30.2, 'No GPU. One laptop.', '191 runs to build this', 'under $2 of Meta credit · 28 real sites · 2,313 values · 0 px'],
-    [40.4, 'Propose the change. See it live. Verify before you merge.', '', 'Screenshot to Tokens · a Sorb add-on by Metatoy'],
+    [12.1, 'Muse Spark Open · on Baseten', 'names the token set', '3 to 5 s · 3 to 9× faster than hosted · same answer-key scores'],
+    [22.4, 'Muse Spark', 'audits contrast on the live app', '41 failing text pairs → 2'],
+    [28.9, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 2,313 values · 0 px'],
+    [36.9, 'Propose the change. See it live. Verify before you merge.', '', 'Screenshot to Tokens · a Sorb add-on by Metatoy'],
   ]
   const rows = items.map(([at, h, sub, big]) => `<div class="it" data-at="${at}"><div class="h">${esc(h)}</div>${sub ? `<div class="s">${esc(sub)}</div>` : ''}<div class="b">${esc(big)}</div></div>`).join('')
-  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:48px 72px}.it{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;margin:0 0 26px}.it.on{opacity:1;transform:none}.h{font-size:30px;font-weight:700;letter-spacing:-.3px}.s{font-size:17px;color:#9a9a94;margin-top:2px}.b{font-size:21px;color:#8a9af0;margin-top:4px}.it:last-child .h{font-size:34px;margin-top:10px}.cr{position:fixed;left:72px;right:72px;bottom:28px;font-size:13px;color:#6b6a66;opacity:0;transition:opacity .6s}.cr.on{opacity:1}</style>${rows}<div class="cr" data-at="42">SAM 3.1 and Muse Spark by Meta · Muse Spark Open served on Baseten · Argon Dashboard React by Creative Tim (MIT; our fork, not affiliated) · breadth-run sites are MIT/Apache/BSD/ISC licensed, used with credit</div>
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:48px 72px}.it{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;margin:0 0 26px}.it.on{opacity:1;transform:none}.h{font-size:30px;font-weight:700;letter-spacing:-.3px}.s{font-size:17px;color:#9a9a94;margin-top:2px}.b{font-size:21px;color:#8a9af0;margin-top:4px}.it:last-child .h{font-size:34px;margin-top:10px}.cr{position:fixed;left:72px;right:72px;bottom:28px;font-size:13px;color:#6b6a66;opacity:0;transition:opacity .6s}.cr.on{opacity:1}</style>${rows}<div class="cr" data-at="38.5">SAM 3.1 and Muse Spark by Meta · Muse Spark Open served on Baseten · Argon Dashboard React by Creative Tim (MIT; our fork, not affiliated) · breadth-run sites are MIT/Apache/BSD/ISC licensed, used with credit</div>
 <script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},100)</script>`
 }
-await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 46500) })
+await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 42500) })
 await browser.close(); await srv.close()
