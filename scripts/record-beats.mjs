@@ -42,7 +42,7 @@ function runTerminal() {
   const at = {}
   for (const s of timing.stages) { t += s.ms / 1000; at[s.stage] = t }
   const lines = text.map((l) => { const m = l.match(/^\s+(\w+)\s/); return { text: l.length > 112 ? l.slice(0, 111) + '…' : l, at: m && at[m[1]] != null ? at[m[1]] : (/^done/.test(l) ? t : 0) } })
-  return terminalPage(`node src/cli.js run --serve argon/build --run ${RUN}`, lines, /verify|done in/, 2)
+  return terminalPage(`node src/cli.js run --serve argon/build --run ${RUN}`, lines, /verify|done in/, 3)
 }
 function diffPage() {
   const r = JSON.parse(readFileSync(join(RUN, 'rewrite.json'), 'utf-8'))
@@ -110,7 +110,7 @@ await beat(4, async (p) => {
   await chip('color.surface.muted').locator('.rename-input').pressSequentially('color.surface.input', { delay: 70 }); await chip('color.surface.muted').locator('.rename-input').press('Enter'); await wait(p, 2200)
   await p.locator('.merge-item').first().scrollIntoViewIfNeeded(); await wait(p, 2200)
   await p.locator('.merge-item .merge-btn').first().click(); await wait(p, 3000)
-  await p.goto(`${srv.url}out/video/pages/review-terminal.html`); await p.waitForFunction(() => window.done, null, { timeout: 60000 }); await wait(p, 2500)
+  await p.goto(`${srv.url}out/video/pages/review-terminal.html`); await p.waitForFunction(() => window.done, null, { timeout: 60000 }); await wait(p, 1200)
 })
 await beat(5, async (p) => {
   await p.goto(page('diff.html', diffPage())); await wait(p, 6500)
@@ -118,23 +118,40 @@ await beat(5, async (p) => {
   await p.evaluate(() => [...document.querySelectorAll('h2')].find((h) => h.textContent.trim() === 'Verify')?.scrollIntoView({ block: 'start' })); await wait(p, 4000)
   await p.mouse.wheel(0, 450); await wait(p, 3500)
 })
-await beat(7, async (p) => {
-  await p.goto(page('breadth.html', breadthPage())); await wait(p, 9000)
-  await p.goto(`${srv.url}out/scoreboard.html`, { waitUntil: 'networkidle' })
-  await p.evaluate(() => [...document.querySelectorAll('h2')].find((h) => /Real sites/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 4000)
-  await p.goto('https://github.com/nhunsaker/argon-dashboard-react/pull/1', { waitUntil: 'domcontentloaded' }); await wait(p, 4000)
-})
+await beat(7, async (p) => { await p.goto(page('breadth.html', breadthPage())); await wait(p, 11500) })
 function endCard() {
   const items = [
-    [0.3, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
-    [12.4, 'Muse Spark Open · on Baseten', 'names the token set', '3 to 5 s · 3 to 9× faster than hosted · same answer-key scores'],
-    [20.5, 'Muse Spark', 'audits contrast on the live app', '41 failing text pairs → 2'],
-    [23.5, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 2,313 values · 0 px'],
-    [30.0, 'Propose the change. See it live. Verify before you merge.', '', 'Code: github.com/nhunsaker/screenshot-to-tokens · Live demo: nhunsaker.github.io/argon-dashboard-react'],
+    [3.0, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
+    [7.2, 'Muse Spark Open · on Baseten', 'names the token set', '3 to 5 s · 3 to 9× faster than hosted · same answer-key scores'],
+    [11.5, 'Checked before it merges', 'text contrast on every PR · SAM-measured controls · dark mode as a token file', '28 sites vs axe-core: 1 opposite verdict in 2,483 · 243 of 251 "needs review" items decided'],
+    [14.2, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 2,313 values · 0 px'],
+    [19.0, 'Propose the change. See it live. Verify before you merge.', '', 'Code: github.com/nhunsaker/screenshot-to-tokens · Live demo: nhunsaker.github.io/argon-dashboard-react'],
   ]
   const rows = items.map(([at, h, sub, big]) => `<div class="it" data-at="${at}"><div class="h">${esc(h)}</div>${sub ? `<div class="s">${esc(sub)}</div>` : ''}<div class="b">${esc(big)}</div></div>`).join('')
-  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:48px 72px}.it{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;margin:0 0 26px}.it.on{opacity:1;transform:none}.h{font-size:30px;font-weight:700;letter-spacing:-.3px}.s{font-size:17px;color:#9a9a94;margin-top:2px}.b{font-size:21px;color:#8a9af0;margin-top:4px}.it:last-child .h{font-size:34px;margin-top:10px}.it:last-child .b{font-size:24px;color:#e8e8e4;font-weight:600}.cr{position:fixed;left:72px;right:72px;bottom:28px;font-size:13px;color:#6b6a66;opacity:0;transition:opacity .6s}.cr.on{opacity:1}</style>${rows}<div class="cr" data-at="32">SAM 3.1 and Muse Spark by Meta · Muse Spark Open served on Baseten · Argon Dashboard React by Creative Tim (MIT; our fork, not affiliated) · breadth-run sites are MIT/Apache/BSD/ISC licensed, used with credit</div>
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:48px 72px}.it{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;margin:0 0 26px}.it.on{opacity:1;transform:none}.h{font-size:30px;font-weight:700;letter-spacing:-.3px}.s{font-size:17px;color:#9a9a94;margin-top:2px}.b{font-size:21px;color:#8a9af0;margin-top:4px}.it:last-child .h{font-size:34px;margin-top:10px}.it:last-child .b{font-size:24px;color:#e8e8e4;font-weight:600}.cr{position:fixed;left:72px;right:72px;bottom:28px;font-size:13px;color:#6b6a66;opacity:0;transition:opacity .6s}.cr.on{opacity:1}</style>${rows}<div class="cr" data-at="20.5">SAM 3.1 and Muse Spark by Meta · Muse Spark Open served on Baseten · Argon Dashboard React by Creative Tim (MIT; our fork, not affiliated) · breadth-run sites are MIT/Apache/BSD/ISC licensed, used with credit</div>
 <script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},100)</script>`
 }
-await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 36000) })
+// Beat 9 (played before the closer): accessibility. Contrast row on the Argon report, the axe-core comparison card,
+// SAM's controls on div-soup, then a dark mode switched on as a token file (proinsias.github.io, MIT).
+function axeCard() {
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#fff;color:#1d1d1b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:56px 72px}h1{font-size:30px;margin:0 0 6px}p{color:#6b6a66;font-size:17px;margin:0 0 26px}table{border-collapse:collapse;font-size:21px;width:100%}td,th{padding:12px 14px;border-bottom:1px solid #eee;text-align:left}th{font-size:15px;color:#6b6a66;font-weight:600}.n{font-weight:700;color:#137a3a}</style>
+<h1>Our text-contrast check vs axe-core, 28 sites</h1><p>Text colour from the DOM, background measured on the rendered pixels, so gradients and images count.</p>
+<table><tr><th>axe-core says</th><th>items</th><th>we agree</th><th>opposite verdict</th></tr>
+<tr><td>violation</td><td>309</td><td class="n">308</td><td>0</td></tr>
+<tr><td>pass</td><td>2,174</td><td class="n">2,165</td><td>1</td></tr>
+<tr><td>can't decide (needs a person)</td><td>251</td><td class="n">we decide 243</td><td>—</td></tr></table>`
+}
+await beat(9, async (p) => {
+  await p.goto(`${srv.url}out/m12-argon/report.html`, { waitUntil: 'networkidle' })
+  await p.evaluate(() => [...document.querySelectorAll('strong')].find((h) => /Text contrast/.test(h.textContent))?.scrollIntoView({ block: 'center' })); await wait(p, 6500)
+  await p.goto(page('axe.html', axeCard())); await wait(p, 9000)
+  await p.goto(`${srv.url}out/video/assets/divsoup-nontext/report.html`, { waitUntil: 'networkidle' })
+  await p.evaluate(() => [...document.querySelectorAll('h2')].find((h) => /Icon and control/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 6500)
+  const dark = await serveDir(resolve('out/video/assets/proinsias-dark'))
+  try {
+    await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 2500)
+    await p.click('#sorb-theme-toggle'); await wait(p, 5500)
+  } finally { await dark.close() }
+})
+await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 24000) })
 await browser.close(); await srv.close()

@@ -7,8 +7,8 @@ import subprocess, os
 os.chdir('out/video')
 def dur(f): return float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',f]).strip())
 lst=[]; t=0
-for n in range(0,9):
-    V=dur(f'n{n}.mp4'); main='vo0/vo-1.mp3' if n==0 else f'vo/vo-{n}.mp3'; A=dur(main); ex=f'vo2/b{n}/vo-1.mp3'
+for n in [0,1,2,3,4,5,6,7,9,8]:
+    V=dur(f'n{n}.mp4'); main='vo0/vo-1.mp3' if n==0 else ('vo9/vo-1.mp3' if n==9 else f'vo/vo-{n}.mp3'); A=dur(main); ex=f'vo2/b{n}/vo-1.mp3'
     inputs=['-i',f'n{n}.mp4','-i',main]; end=0.3+A
     if os.path.exists(ex):
         start2=end+0.6; E=dur(ex); end=start2+E; inputs+=['-i',ex]; d2=int(start2*1000)
