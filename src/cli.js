@@ -154,6 +154,15 @@ async function main() {
     if (!a.run || !a.app) throw new Error('playground needs --run <run dir> --app <dir of the tokenized app build>')
     const s = await startPlayground({ runDir: a.run, appDir: a.app, port: Number(a.port || 4400), provider: a.provider === 'meta' ? 'meta' : 'baseten', title: a.title, log: (m) => console.log(`  ${m}`) })
     console.log(`playground: ${s.tokens} tokens, ${s.pairs} text pairs at ${s.url} (local only; Ctrl+C to stop)`)
+  } else if (cmd === 'nontext') {
+    // L16: icon/control contrast (WCAG 1.4.11) and target size (WCAG 2.5.8) on the controls SAM found; SAM point prompts.
+    const { runNontext, formatNontext } = await import('./stages/nontext.js')
+    const { appendNontextSection } = await import('./stages/report.js')
+    if (!a.run) throw new Error('nontext needs --run <run dir> (a hybrid run with regions.json)')
+    const out = await runNontext(a.run, { log: (m) => console.log(`  ${m}`), max: a.max ? Number(a.max) : undefined })
+    console.log(formatNontext(out))
+    const p = appendNontextSection(a.run)
+    if (p) console.log(`nontext: section added to ${p}`)
   } else if (cmd === 'doctor') {
     await doctor()
   } else if (cmd === 'serve') {
@@ -169,6 +178,7 @@ async function main() {
        s2t preview --token <name> --value <css> [--bridge http://localhost:7777] [--app-url <url>]
        s2t scoreboard [--out out/scoreboard.html]      (SAM vs DOM split-screen scoreboard: div-soup + 2 real apps)
        s2t playground --run <run dir> --app <tokenized app build> [--port 4400] [--provider baseten|meta] [--title <name>]
+       s2t nontext --run <hybrid run dir> [--max 150]   (icon/control contrast 3:1 + target size 24x24 via SAM point prompts)
        s2t doctor
        s2t serve --fixture <name> [--port 4321]
 stages: ${STAGES.join(' → ')}`)
