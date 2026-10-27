@@ -11,9 +11,9 @@ import { parseArgs } from '../src/lib/args.js'
 
 const a = parseArgs(process.argv.slice(2))
 const pool = a._[0]
-if (!pool) { console.error('usage: node scripts/breadth-run.mjs <demo-site-pool.md> [--mirrors dir] [--only a,b] [--reverify]'); process.exit(2) }
+if (!pool) { console.error('usage: node scripts/breadth-run.mjs <demo-site-pool.md> [--mirrors dir] [--only a,b] [--reverify] [--out out/breadth]'); process.exit(2) }
 const mirrors = resolve(a.mirrors || '/Volumes/SanDisk/s2t-breadth')
-const outRoot = resolve('out/breadth')
+const outRoot = resolve(a.out || 'out/breadth')
 mkdirSync(outRoot, { recursive: true })
 
 /** Pool table rows: | Licence | Framework | owner/owner.github.io | — exported shape for the summary. */
