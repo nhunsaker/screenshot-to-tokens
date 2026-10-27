@@ -159,22 +159,30 @@ export async function runPipeline(o) {
         }
         const s = await serveDir(siteDir)
         servers.push(s)
+        // Noise baseline: the ORIGINAL page shot a second time. Whatever moves between two loads of the unchanged page
+        // (a randomized tag pile, a running waveform; L2 breadth run) is excluded from all three checks and reported.
+        let noise = null
+        const origUrl = runMeta.serve ? (await serveDir(runMeta.serve).then((srv) => { servers.push(srv); return srv.url })) : (o.url || null)
+        if (origUrl) {
+          noise = join(runDir, 'noise.png')
+          await screenshotUrl(origUrl, noise, cfg.viewport)
+        }
         // Check 1: fallbacks only (no tokens loaded) must be pixel-identical to the original.
         const fb = join(runDir, 'after-fallback.png')
         await screenshotUrl(s.url, fb, cfg.viewport)
-        const v1 = compareScreenshots(join(runDir, capture.screenshot), fb, join(runDir, 'diff-fallback.png'), 0)
+        const v1 = compareScreenshots(join(runDir, capture.screenshot), fb, join(runDir, 'diff-fallback.png'), 0, noise)
         // Check 2: color tokens only. Merged colors are within ΔE 3, so this should look identical.
         const kindOf = new Map(clusters.map((c) => [c.id, c.kind]))
         const usable = usableTokens(tokens)
         const colorSet = { ...usable, tokens: usable.tokens.filter((t) => kindOf.get(t.clusters[0]) === 'color') }
         const afterColors = join(runDir, 'after-colors.png')
         await screenshotUrl(s.url, afterColors, cfg.viewport, toCss(colorSet))
-        const v2 = compareScreenshots(join(runDir, capture.screenshot), afterColors, join(runDir, 'diff-colors.png'), cfg.verifyThreshold)
+        const v2 = compareScreenshots(join(runDir, capture.screenshot), afterColors, join(runDir, 'diff-colors.png'), cfg.verifyThreshold, noise)
         // Check 3: every token. Merging 7/8/9px spacing into one value moves things on purpose;
         // this diff is shown to the reviewer as "what the cleanup changes", not failed.
         const after = join(runDir, 'after.png')
         await screenshotUrl(s.url, after, cfg.viewport, readFileSync(join(runDir, 'tokens.css'), 'utf-8'))
-        const v3 = compareScreenshots(join(runDir, capture.screenshot), after, join(runDir, 'diff.png'), cfg.verifyThreshold)
+        const v3 = compareScreenshots(join(runDir, capture.screenshot), after, join(runDir, 'diff.png'), cfg.verifyThreshold, noise)
         const rel = (v) => ({ ...v, before: v.before.replace(runDir + '/', ''), after: v.after.replace(runDir + '/', ''), diff: v.diff.replace(runDir + '/', '') })
         const out = {
           ...rel(v3),
@@ -187,7 +195,7 @@ export async function runPipeline(o) {
         }
         writeJson(runDir, 'verify', out)
         const pct = (v) => `${(v.ratio * 100).toFixed(3)}%`
-        log('verify', `fallback-only ${v1.diffPixels} px (${v1.pass ? 'pass' : 'FAIL'}); colors ${pct(v2)} (${v2.pass ? 'pass' : 'FAIL'}); all tokens ${pct(v3)} (${v3.pass ? 'within threshold' : 'layout changes for review'})`)
+        log('verify', `fallback-only ${v1.diffPixels} px (${v1.pass ? 'pass' : 'FAIL'}); colors ${pct(v2)} (${v2.pass ? 'pass' : 'FAIL'}); all tokens ${pct(v3)} (${v3.pass ? 'within threshold' : 'layout changes for review'})${v1.noisePixels ? `; ${v1.noisePixels} px excluded (the unchanged page itself differs between loads)` : ''}`)
       }
     }
 

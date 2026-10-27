@@ -43,6 +43,15 @@ async function loadImages(page) {
 // animation kill switch and, in verify, tokens.css, so bypass CSP in our own browser.
 const PAGE = { deviceScaleFactor: 1, bypassCSP: true }
 
+// Randomized layouts (zeikar.github.io throws its tag pile down differently on every load) made two shots of the
+// same page differ. Every page we screenshot gets the same seeded Math.random, so "random" comes out identical.
+const SEEDED_RANDOM = `(() => { let s = 0x2f6b9a1d; Math.random = () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s >>> 0) / 4294967296 } })()`
+async function newPage(browser, viewport) {
+  const page = await browser.newPage({ ...PAGE, viewport })
+  await page.addInitScript(SEEDED_RANDOM)
+  return page
+}
+
 /** In-page walker. Self-contained: no closures over module scope. */
 function walkPage(props, maxElements) {
   const out = []
@@ -123,7 +132,7 @@ export async function runCapture(o) {
   mkdirSync(o.runDir, { recursive: true })
   const browser = await chromium.launch(LAUNCH)
   try {
-    const page = await browser.newPage({ ...PAGE, viewport: o.viewport })
+    const page = await newPage(browser, o.viewport)
     await page.goto(o.url, { waitUntil: 'networkidle' })
     await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
     const screenshot = 'screenshot.png'
@@ -148,7 +157,7 @@ export async function screenshotUrl(url, path, viewport, extraCss = '') {
   const { chromium } = await import('playwright')
   const browser = await chromium.launch(LAUNCH)
   try {
-    const page = await browser.newPage({ ...PAGE, viewport })
+    const page = await newPage(browser, viewport)
     await page.goto(url, { waitUntil: 'networkidle' })
     await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
     if (extraCss) await page.addStyleTag({ content: extraCss })
