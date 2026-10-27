@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Playground</title>
+<style>
+  :root {
+    --bg: #f6f6f4; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a66; --line: #e3e2de; --soft: #efefec;
+    --accent: #5e72e4; --warn-bg: #fff5e6; --warn-ink: #8a5300; --chip: #f2f2ef;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a09f9a; --line: #34332f; --soft: #2a2a27;
+      --accent: #8a9af0; --warn-bg: #3a2a12; --warn-ink: #f0c27a; --chip: #2a2a27; }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .app { display: grid; grid-template-columns: 380px 1fr; height: 100vh; }
+  aside { background: var(--panel); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; }
+  header { padding: 16px 16px 12px; border-bottom: 1px solid var(--line); }
+  h1 { margin: 0; font-size: 17px; letter-spacing: -0.2px; }
+  .sub { color: var(--muted); font-size: 13px; margin: 2px 0 10px; }
+  .notice { background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; font-weight: 600; }
+  .actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  button { font: 600 12.5px system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:disabled { opacity: .45; cursor: default; }
+  .search { margin-top: 10px; width: 100%; font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+  .list { overflow: auto; flex: 1; padding: 4px 8px 24px; }
+  h2 { font-size: 11.5px; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); margin: 16px 8px 6px; }
+  .tok { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 8px; border-radius: 10px; }
+  .tok:hover { background: var(--soft); }
+  .tok.changed { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .sw { position: relative; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); overflow: hidden; }
+  .sw input[type=color] { position: absolute; inset: -6px; width: 46px; height: 46px; border: 0; padding: 0; cursor: pointer; background: none; }
+  .name { font: 600 12.5px ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+  .meta { color: var(--muted); font-size: 12px; }
+  .meta code { font: 11.5px ui-monospace, Menlo, monospace; }
+  .uses { font-size: 11.5px; color: var(--muted); background: var(--chip); border-radius: 99px; padding: 2px 8px; white-space: nowrap; }
+  .radius { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .radius input { width: 140px; }
+  .rprev { width: 34px; height: 34px; border: 2px solid var(--accent); background: var(--soft); }
+  .stage { position: relative; min-width: 0; }
+  iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+  .toast { position: fixed; right: 16px; bottom: 16px; background: #111; color: #fff; padding: 8px 12px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; grid-template-rows: 55vh auto; height: auto; }
+    .stage { order: -1; height: 55vh; }
+    aside { border-right: 0; border-top: 1px solid var(--line); }
+    .list { overflow: visible; }
+  }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <header>
+      <h1 id="title">Token playground</h1>
+      <div class="sub" id="sub">Loading tokens…</div>
+      <div class="notice">Preview only: changes apply in this page. Nothing is merged.</div>
+      <div class="actions">
+        <button id="reset" disabled>Reset all</button>
+        <button id="copy" class="primary" disabled>Copy proposal link</button>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Filter tokens (e.g. action, blue, radius)" aria-label="Filter tokens">
+    </header>
+    <div class="list" id="list" aria-live="polite"></div>
+  </aside>
+  <main class="stage">
+    <iframe id="app" title="Tokenized app"></iframe>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  var frame = document.getElementById('app')
+  var list = document.getElementById('list')
+  var changes = {} // cssVar -> value
+  var data = null
+
+  function toast(msg) {
+    var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show')
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show') }, 1600)
+  }
+  function root() { try { return frame.contentDocument && frame.contentDocument.documentElement } catch (e) { return null } }
+  function current(cssVar) {
+    var r = root(); if (!r) return ''
+    return getComputedStyle(r).getPropertyValue('--' + cssVar).trim()
+  }
+  // <input type=color> needs #rrggbb.
+  function toHex(v) {
+    v = String(v || '').trim()
+    var m = v.match(/^#([0-9a-f]{3})$/i); if (m) return '#' + m[1].split('').map(function (c) { return c + c }).join('')
+    m = v.match(/^#([0-9a-f]{6})([0-9a-f]{2})?$/i); if (m) return '#' + m[1]
+    m = v.match(/^rgba?\(\s*(\d+)[ ,]+(\d+)[ ,]+(\d+)/i)
+    if (m) return '#' + [m[1], m[2], m[3]].map(function (n) { return (+n).toString(16).padStart(2, '0') }).join('')
+    return '#000000'
+  }
+  function apply() {
+    var r = root(); if (!r) return
+    Object.keys(changes).forEach(function (k) { r.style.setProperty('--' + k, changes[k]) })
+  }
+  function set(cssVar, value, row) {
+    changes[cssVar] = value
+    var r = root(); if (r) r.style.setProperty('--' + cssVar, value)
+    if (row) row.classList.add('changed')
+    sync()
+  }
+  function sync() {
+    var n = Object.keys(changes).length
+    document.getElementById('reset').disabled = !n
+    document.getElementById('copy').disabled = !n
+    // Refresh swatches for tokens whose value cascades from an alias.
+    Array.prototype.forEach.call(list.querySelectorAll('[data-var]'), function (row) {
+      var k = row.getAttribute('data-var')
+      var input = row.querySelector('input[type=color]')
+      if (input && !changes[k]) input.value = toHex(current(k))
+    })
+  }
+  function chain(t) {
+    var out = [t.alias], seen = {}
+    var byName = {}; data.tokens.forEach(function (x) { byName[x.name] = x })
+    var cur = byName[t.alias]
+    while (cur && cur.alias && !seen[cur.name]) { seen[cur.name] = 1; out.push(cur.alias); cur = byName[cur.alias] }
+    return out
+  }
+  function row(t) {
+    var el = document.createElement('div')
+    el.className = 'tok'
+    el.setAttribute('data-var', t.cssVar)
+    el.setAttribute('data-search', (t.name + ' ' + (t.alias || '') + ' ' + t.tier + ' ' + t.kind).toLowerCase())
+    var meta = t.alias ? '→ <code>' + chain(t).join(' → ') + '</code>' : '<code>' + (t.value || '') + '</code>'
+    var uses = '<span class="uses" title="Places in the stylesheet that use this token">' + t.uses + ' use' + (t.uses === 1 ? '' : 's') + '</span>'
+    if (t.kind === 'color') {
+      el.innerHTML = '<label class="sw"><input type="color" aria-label="' + t.name + '"></label>' +
+        '<div><div class="name">' + t.name + '</div><div class="meta">' + meta + '</div></div>' + uses
+      var input = el.querySelector('input')
+      input.value = toHex(current(t.cssVar) || t.value)
+      input.addEventListener('input', function () { set(t.cssVar, input.value, el) })
+    } else {
+      var px = parseFloat(current(t.cssVar) || t.value) || 0
+      el.innerHTML = '<div class="rprev" style="border-radius:' + px + 'px"></div>' +
+        '<div><div class="name">' + t.name + '</div><div class="meta">' + meta + '</div>' +
+        '<div class="radius"><input type="range" min="0" max="32" step="1" value="' + px + '" aria-label="' + t.name + '"><span class="meta">' + px + 'px</span></div></div>' + uses
+      var range = el.querySelector('input'), label = el.querySelector('.radius .meta'), prev = el.querySelector('.rprev')
+      range.addEventListener('input', function () { var v = range.value + 'px'; label.textContent = v; prev.style.borderRadius = v; set(t.cssVar, v, el) })
+    }
+    el.title = t.why || ''
+    return el
+  }
+  function render() {
+    list.innerHTML = ''
+    var groups = [
+      ['Semantic (what it is for)', function (t) { return t.tier === 'semantic' }],
+      ['Component (where it is used)', function (t) { return t.tier === 'component' }],
+      ['Primitive colors (what it is)', function (t) { return t.tier === 'primitive' && t.kind === 'color' }],
+      ['Corner radius', function (t) { return t.tier === 'primitive' && t.kind === 'radius' }],
+    ]
+    groups.forEach(function (g) {
+      var items = data.tokens.filter(g[1]); if (!items.length) return
+      var h = document.createElement('h2'); h.textContent = g[0] + ' · ' + items.length; list.appendChild(h)
+      items.forEach(function (t) { list.appendChild(row(t)) })
+    })
+  }
+
+  document.getElementById('reset').addEventListener('click', function () {
+    var r = root(); Object.keys(changes).forEach(function (k) { if (r) r.style.removeProperty('--' + k) })
+    changes = {}
+    render(); sync(); toast('Back to the merged values')
+  })
+  document.getElementById('copy').addEventListener('click', function () {
+    var q = Object.keys(changes).map(function (k) { return k + ':' + String(changes[k]).replace(/^#/, '') }).join(',')
+    var url = new URL(data.app, location.href).href.replace(/#.*$/, '') + '?tokens=' + encodeURIComponent(q)
+    var done = function () { toast('Proposal link copied') }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { prompt('Copy this link', url) })
+    else prompt('Copy this link', url)
+  })
+  document.getElementById('search').addEventListener('input', function (e) {
+    var q = e.target.value.trim().toLowerCase()
+    Array.prototype.forEach.call(list.querySelectorAll('.tok'), function (el) {
+      el.style.display = !q || el.getAttribute('data-search').indexOf(q) >= 0 ? '' : 'none'
+    })
+  })
+
+  fetch('tokens.json').then(function (r) { return r.json() }).then(function (d) {
+    data = d
+    document.getElementById('title').textContent = d.title
+    document.title = d.title + ' · Token playground'
+    document.getElementById('sub').textContent = d.tokens.length + ' tokens you can change · ' + d.edits + ' hardcoded values replaced · named by ' + d.namer
+    frame.addEventListener('load', function () {
+      // The app is a single-page app: wait for its styles, then render the panel from live values.
+      setTimeout(function () { apply(); render(); sync() }, 400)
+    })
+    frame.src = d.app
+  }).catch(function (e) {
+    document.getElementById('sub').textContent = 'Could not load tokens.json (' + e.message + ')'
+  })
+})()
+</script>
+</body>
+</html>
