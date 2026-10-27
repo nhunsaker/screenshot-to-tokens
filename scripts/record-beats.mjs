@@ -2,7 +2,7 @@
 // Draft video beats for the demo (docs/demo-script.md), recorded headless with Playwright at 1280x720. Every number on
 // screen comes from a real run folder; terminal beats replay the real output of that run at its real stage timings.
 // Writes out/video/beat-<n>.webm. A person adds the voiceover and cuts the final video.
-//   node scripts/record-beats.mjs [--run out/rec-argon] [--only 1,3]
+//   node scripts/record-beats.mjs [--run out/rec-argon] [--only 1,3] [--apps /path/to/demo-apps]
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, renameSync } from 'fs'
 import { join, resolve } from 'path'
 import { chromium } from 'playwright'
@@ -11,6 +11,7 @@ import { serveDir } from '../src/lib/serve.js'
 
 const a = parseArgs(process.argv.slice(2))
 const RUN = a.run || 'out/rec-argon'
+const APPS = a.apps || process.env.S2T_APPS || '/Volumes/SanDisk/s2t-demo-apps' // demo app builds (docs/demo-apps.md)
 const OUT = resolve('out/video'), PAGES = join(OUT, 'pages')
 mkdirSync(PAGES, { recursive: true })
 const only = a.only ? new Set(String(a.only).split(',').map(Number)) : null
@@ -19,7 +20,7 @@ const BASE_CSS = 'body{margin:0;background:#1e1e1e;color:#d4d4d4;font:17px/1.6 u
 
 // Beat 1: the stylesheet, one declaration per line, hex codes and px values highlighted.
 function editorPage() {
-  const dir = '/Volumes/SanDisk/s2t-demo-apps/argon/build/static/css'
+  const dir = `${APPS}/argon/build/static/css`
   const css = readFileSync(join(dir, readdirSync(dir).find((f) => f.endsWith('.css'))), 'utf-8')
   const lines = css.slice(css.indexOf('.btn'), css.indexOf('.btn') + 60000).replace(/\{/g, ' {\n  ').replace(/;/g, ';\n  ').replace(/\}/g, '\n}\n').split('\n').filter((l) => l.trim()).slice(0, 420)
   const body = lines.map((l, i) => `<div><span class="n">${i + 1}</span>${esc(l).replace(/(#[0-9a-fA-F]{3,8}\b)/g, '<span class="hex">$1</span>').replace(/(\b\d+(?:\.\d+)?(?:px|rem)\b)/g, '<span class="px">$1</span>')}</div>`).join('')

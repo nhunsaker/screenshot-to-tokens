@@ -165,7 +165,7 @@ No dev server or background process left running at end of session (checked `ps`
 ## Agency (startbootstrap-agency, static dist — full built-in verify)
 
 Target already cloned at
-`/private/tmp/claude-501/-Users-nobrien-workspace-metatoy/7386bdd0-2487-404d-8ea4-7d2c4f786eae/scratchpad/targets/startbootstrap-agency`
+`<startbootstrap-agency>`
 (dist/ prebuilt, zero install needed).
 
 Command (ran once, as instructed):
