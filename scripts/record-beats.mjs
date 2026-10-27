@@ -79,7 +79,7 @@ async function beat(n, fn) {
 const page = (name, html) => { writeFileSync(join(PAGES, name), html); return `${srv.url}out/video/pages/${name}` }
 const wait = (p, ms) => p.waitForTimeout(ms)
 
-// Beat 0: what Sorb is (the live try page, labeled as pre-existing), then the hackathon title card.
+// Beat 0: the hackathon title card (no footage of the pre-existing Sorb product; the voice explains it).
 function titleCard() {
   return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh}.c{max-width:900px;padding:0 48px}.k{font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:#8a9af0;opacity:0;transition:opacity .5s}.t{font-size:60px;font-weight:700;letter-spacing:-1px;margin:10px 0 14px;opacity:0;transition:opacity .5s}.s{font-size:22px;color:#b9b8b2;line-height:1.45;opacity:0;transition:opacity .5s}.n{font-size:15px;color:#6b6a66;margin-top:22px;opacity:0;transition:opacity .5s}.on{opacity:1!important}</style>
 <div class="c"><div class="k" data-at="0.2">Meta Global AI Developer Hackathon · Startup track</div><div class="t" data-at="0.6">Screenshot to Tokens</div><div class="s" data-at="1.4">An add-on to Sorb for apps that have no design tokens yet: SAM 3.1 reads the interface from pixels, Muse Spark names the tokens, Sorb previews and verifies before anything merges.</div><div class="n" data-at="3.0">Sorb is Metatoy's existing product and is not shown here. Everything in this video was built Oct 25 to 27, 2026 (git tag pre-event-baseline marks the line).</div></div>

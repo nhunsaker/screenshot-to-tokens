@@ -4,7 +4,7 @@ Point it at a running web app that has no design tokens. It captures the page, *
 pixels (so it works where the markup says nothing), near-duplicate values are clustered, **Muse Spark** names a
 three-tier token set (primitive → semantic → component, with a reason per token), a person accepts, renames or merges,
 the hardcoded literals are rewritten to `var(--token, original)`, and a three-check pixel diff proves the rewrite itself
-changes nothing before a pull request opens. **Sorb** then previews any token change live in the running app.
+changes nothing before a pull request opens. **Sorb** then previews any token change live in your web app.
 
 **One minute, no sound:** the page with no markup, one real run, the diff and the three checks, the live preview, the breadth table.
 

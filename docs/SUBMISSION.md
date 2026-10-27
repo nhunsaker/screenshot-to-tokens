@@ -4,7 +4,7 @@ Meta Global AI Developer Hackathon, Oct 26 – Nov 4, 2026.
 
 ## One-line pitch
 
-Point it at a running app with no design tokens. It captures the page, finds the colors and
+Point it at a live web app with no design tokens. It captures the page, finds the colors and
 spacing that drifted apart by accident, proposes a reasoned token set, rewrites the real source
 files to use it, proves with a pixel diff that the rewrite itself changes nothing, and shows exactly
 what the cleanup changes, before a human merges anything.
@@ -34,7 +34,7 @@ she cannot verify. That is the moment this tool is built for.
 
 See `docs/architecture.svg` for the full diagram. In short:
 
-A running app gets **captured** (Playwright: full-page screenshot plus computed styles per
+A live web app gets **captured** (Playwright: full-page screenshot plus computed styles per
 element). The screenshot is **segmented** into UI regions, button, card, input, nav, using SAM
 3.1, with a vision-model fallback and a DOM-derived mock for offline runs. Each style value is
 **joined** to the smallest region that contains it, then **clustered**: near-duplicate colors
@@ -47,7 +47,7 @@ proposal and can accept, rename, reject, or merge any token. Approved tokens are
 plain CSS, Vue `<style>` blocks, JSX/styled-components, and inline SVG `fill`/`stroke`, to
 `var(--token, fallback)`, keeping the original value as the fallback. The rewrite is **verified**
 with a three-way pixel diff before it ever reaches a **pull request**. A side branch lets the same
-tokens drive a live preview in a running app through Sorb, with no rebuild.
+tokens drive a live preview in the web app itself through Sorb, with no rebuild.
 
 The model proposes; deterministic code guarantees the shape. If a model call fails, the pipeline
 falls back to a heuristic and records a warning rather than failing silently.
@@ -119,7 +119,7 @@ tokens from a live URL and can detect drift against a saved baseline, but it nev
 target app's source and its drift check is for watching a site over time, not for proving one
 specific rewrite is safe to merge. Screenshot to Tokens rewrites the real `.css`/`.jsx`/`.vue`/SVG
 files in place and runs a three-check pixel-diff verification before a human approves the pull
-request, closing the loop from a live running app to a reviewed, mergeable change.
+request, closing the loop from a live web app to a reviewed, mergeable change.
 
 ## Track fit
 
@@ -128,7 +128,7 @@ Figma and React with a published npm scope, `@sorb/*`). This hackathon project i
 standalone repo by design, so it depends only on the already-published `@sorb/seed` package and
 never touches Sorb's private code, but it is built to feed directly into Sorb: the tokens this
 pipeline proposes are the same tokens Sorb's live-preview bridge already knows how to serve to a
-running app.
+live web app.
 
 ## How to run (5 commands)
 
