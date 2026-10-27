@@ -4,7 +4,7 @@
 import { readFileSync, existsSync } from 'fs'
 import { LLM_PRESETS } from '../../config.js'
 import { chat, extractJson } from './chat.js'
-import { heuristicTokens } from './heuristic.js'
+import { heuristicTokens, fillSemanticGaps } from './heuristic.js'
 
 export const SYSTEM_PROMPT = `You are a design-systems engineer naming design tokens for an app that has none.
 You get CLUSTERS of near-duplicate style values found on the page (with how often and where each is used)
@@ -37,9 +37,14 @@ DRAFT primitive names (one per cluster). Return JSON only, no prose, in exactly 
 Rules:
 - "rename": only clusters whose draft primitive name is clearly wrong or unclear; omit the rest. Primitive names say
   what the value is (color.blue.600, space.16, radius.md).
-- "tokens": semantic (purpose: color.text.muted, color.surface.raised, color.border.default, color.action.primary)
-  and component tokens only. Each aliases an existing primitive name (after your renames) or another of your tokens.
-  Cover the roles the usage data supports; skip the rest.
+- "tokens": semantic (purpose) and component tokens only. Each aliases an existing primitive name (after your
+  renames) or another of your tokens. Check EACH of these roles against the usage data and include it if the
+  evidence supports it (do not force a role with no support, but low effort is not a reason to skip one that has
+  it): color.action.primary (button background); color.text.default, color.text.muted, color.text.inverse (text
+  on a colored/dark background, e.g. inside buttons); color.surface.default, color.surface.card (page vs. card
+  background); color.border.default; color.status.success/warning/danger/info (only when badge/alert backgrounds
+  show 2+ distinct hue families - one color alone is not a status palette); color.focus.ring (only if a focus
+  outline/ring color is actually present in the data).
 - Component tokens: for each entry in COMPONENTS, name <component>.<role> (roles: bg, text, border, radius, shadow,
   icon), e.g. button.bg, input.border, card.shadow, nav.bg. Alias the semantic token for that value when one exists
   (button.bg -> color.action.primary), else the primitive. Only use clusters listed in that component's "uses".
@@ -126,7 +131,11 @@ export default function llmNamer(presetId) {
       // return "merges": [], which used to drop acme-shop's 6px-into-4px suggestion from the review page.
       const modelMerges = Array.isArray(parsed.merges) ? parsed.merges : []
       const merges = [...modelMerges, ...(draft.merges || []).filter((d) => !modelMerges.some((m) => m && m.from === d.from))]
-      const tokens = compact ? expandCompact(parsed, draft).tokens : parsed.tokens || []
+      const rawTokens = compact ? expandCompact(parsed, draft).tokens : parsed.tokens || []
+      // Low reasoning effort proposes fewer semantic/component tokens, leaning on primitives more. This
+      // deterministic pass fills a short list of roles the model skipped but the component evidence clearly
+      // supports (text.inverse, status colors) - see fillSemanticGaps in heuristic.js.
+      const tokens = fillSemanticGaps(rawTokens, clusters, components)
       return { tokens, merges, namer: `${presetId}:${cfg.model}${compact ? '' : ':full'}`, meta: { mode: compact ? 'compact' : 'full', ms: Date.now() - t0, usage: cached ? { prompt_tokens: 0, completion_tokens: 0, cached_from: usage } : usage, cached: !!cached } }
     },
   }

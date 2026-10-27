@@ -154,6 +154,73 @@ export function heuristicTokens({ clusters, components }) {
   return { tokens, merges: suggestMerges(clusters), namer: 'mock-heuristic' }
 }
 
+const STATUS_FAMILY = { green: 'success', red: 'danger', orange: 'warning', yellow: 'warning', blue: 'info', teal: 'info' }
+
+/** Most-used text color inside button regions, from component profiles. */
+function buttonTextUse(components) {
+  const btn = (components || []).find((p) => p.component === 'button')
+  const list = btn && btn.props && btn.props.color
+  return list && list.length ? list[0] : null
+}
+
+/**
+ * Deterministic gap-fill for semantic roles the model (any effort) skipped despite clear evidence in
+ * the component profiles: a text color reserved for buttons/inverse surfaces, and status colors from
+ * badge/alert backgrounds. Each addition is marked "Heuristic:" in its "why" so it reads as ours, not a
+ * model's read of the page. Conservative on purpose: one badge color alone is not enough to tell a status
+ * color from a brand accent, so status tokens only land when 2+ distinct hue families show up. Pure;
+ * exported for tests.
+ * @param {import('../../types.js').TokenProposal[]} tokens
+ * @param {import('../../types.js').Cluster[]} clusters
+ * @param {any[]} components
+ */
+export function fillSemanticGaps(tokens, clusters, components) {
+  const out = [...tokens]
+  const clusterById = (id) => clusters.find((c) => c.id === id)
+  const primFor = (id) => out.find((t) => t.tier === 'primitive' && t.clusters?.includes(id))
+  const has = (name) => out.some((t) => t.name === name)
+
+  const btnText = buttonTextUse(components)
+  if (btnText && !has('color.text.inverse')) {
+    const c = clusterById(btnText.cluster)
+    const p = c && primFor(c.id)
+    const sameRoleAlready = p && out.some((t) => t.tier === 'semantic' && /^color\.text\./.test(t.name) && t.alias === p.name)
+    if (p && !sameRoleAlready) {
+      out.push({
+        name: 'color.text.inverse', tier: 'semantic', alias: p.name, clusters: [c.id],
+        why: `Heuristic: most used text color inside buttons (${btnText.n} uses), distinct from the default/muted text roles.`,
+      })
+    }
+  }
+
+  const byFamily = new Map()
+  for (const p of components || []) {
+    if (p.component !== 'badge' && p.component !== 'alert') continue
+    for (const u of p.props?.['background-color'] || []) {
+      const c = clusterById(u.cluster)
+      if (!c || c.kind !== 'color') continue
+      const m = /^color\.([a-z]+)\./.exec(colorPrimitiveName(c.value))
+      const role = m && STATUS_FAMILY[m[1]]
+      if (!role) continue
+      const prev = byFamily.get(role)
+      if (!prev || u.n > prev.n) byFamily.set(role, { cluster: c.id, n: u.n })
+    }
+  }
+  if (byFamily.size >= 2) {
+    for (const [role, u] of byFamily) {
+      const name = `color.status.${role}`
+      const p = primFor(u.cluster)
+      if (p && !has(name)) {
+        out.push({
+          name, tier: 'semantic', alias: p.name, clusters: [u.cluster],
+          why: `Heuristic: badge/alert background color (${u.n} uses) reads as ${role} by hue.`,
+        })
+      }
+    }
+  }
+  return out
+}
+
 /** @returns {import('../../types.js').NamerProvider} */
 export default function heuristicNamer() {
   return { id: 'mock-heuristic', name: async (input) => heuristicTokens(input) }
