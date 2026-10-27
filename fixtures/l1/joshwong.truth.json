@@ -1,0 +1,23 @@
+[
+  {"id":"h0","bbox":[0,0,1440,60],"label":"header","score":1,"source":"human"},
+  {"id":"h1","bbox":[1269,12,155,36],"label":"input","score":1,"source":"human"},
+  {"id":"h2","bbox":[581,260,107,47],"label":"button","score":1,"source":"human"},
+  {"id":"h3","bbox":[718,260,141,47],"label":"button","score":1,"source":"human"},
+  {"id":"h4","bbox":[1297,811,108,28],"label":"button","score":1,"source":"human"},
+  {"id":"h5","bbox":[1225,14,32,32],"label":"button","score":1,"source":"human"},
+  {"id":"h6","bbox":[1063,12,20,20],"label":"badge","score":1,"source":"human"},
+  {"id":"h7","bbox":[1046,18,20,22],"label":"icon","score":1,"source":"human"},
+  {"id":"h8","bbox":[1093,18,24,24],"label":"icon","score":1,"source":"human"},
+  {"id":"h9","bbox":[1141,18,24,24],"label":"icon","score":1,"source":"human"},
+  {"id":"h10","bbox":[1189,18,24,24],"label":"icon","score":1,"source":"human"},
+  {"id":"h11","bbox":[1229,18,24,24],"label":"icon","score":1,"source":"human"},
+  {"id":"h12","bbox":[72,13,57,34],"label":"link","score":1,"source":"human"},
+  {"id":"h13","bbox":[141,21,78,18],"label":"link","score":1,"source":"human"},
+  {"id":"h14","bbox":[231,13,69,34],"label":"link","score":1,"source":"human"},
+  {"id":"h15","bbox":[1081,14,48,32],"label":"link","score":1,"source":"human"},
+  {"id":"h16","bbox":[1129,14,48,32],"label":"link","score":1,"source":"human"},
+  {"id":"h17","bbox":[1177,14,48,32],"label":"link","score":1,"source":"human"},
+  {"id":"h18","bbox":[76,737,33,18],"label":"link","score":1,"source":"human"},
+  {"id":"h19","bbox":[632,737,69,18],"label":"link","score":1,"source":"human"},
+  {"id":"h20","bbox":[1137,816,95,18],"label":"link","score":1,"source":"human"}
+]

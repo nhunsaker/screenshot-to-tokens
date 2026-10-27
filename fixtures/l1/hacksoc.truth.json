@@ -1,0 +1,9 @@
+[
+  {"id":"h0","bbox":[823,109,183,45],"label":"button","score":1,"source":"human"},
+  {"id":"h1","bbox":[823,109,183,162],"label":"nav","score":1,"source":"human"},
+  {"id":"h2","bbox":[823,156,96,25],"label":"link","score":1,"source":"human"},
+  {"id":"h3","bbox":[823,186,108,25],"label":"link","score":1,"source":"human"},
+  {"id":"h4","bbox":[823,216,108,25],"label":"link","score":1,"source":"human"},
+  {"id":"h5","bbox":[823,246,120,25],"label":"link","score":1,"source":"human"},
+  {"id":"h6","bbox":[374,751,112,30],"label":"link","score":1,"source":"human"}
+]

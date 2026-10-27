@@ -90,16 +90,18 @@ async function main() {
     // --truth <file> scores against a hand-labeled Region[] instead (for fixtures where the DOM oracle
     // is itself useless, e.g. div-soup — see fixtures/div-soup/regions.truth.json).
     const { readFileSync, writeFileSync, existsSync } = await import('fs')
-    const { scoreSegmentation, goNoGo, resolveOracle, formatSegScore } = await import('./stages/segeval.js')
+    const { scoreSegmentation, goNoGo, resolveOracle, formatSegScore, clipToScreen } = await import('./stages/segeval.js')
     const runDir = a.run || join('out', a.fixture || 'acme-shop')
     const rd = (n) => JSON.parse(readFileSync(join(runDir, `${n}.json`), 'utf-8'))
-    const regions = a.regions ? JSON.parse(readFileSync(a.regions, 'utf-8')) : rd('regions')
+    let regions = a.regions ? JSON.parse(readFileSync(a.regions, 'utf-8')) : rd('regions')
+    // --max-y 900 scores only the first screen (real-site truth is labeled on the first screen only).
+    if (a['max-y']) regions = clipToScreen(regions, Number(a['max-y']))
     if (a.truth && !existsSync(a.truth)) throw new Error(`no truth file at ${a.truth}`)
     const truth = a.truth ? JSON.parse(readFileSync(a.truth, 'utf-8')) : null
     const oracle = resolveOracle(rd('capture'), truth)
     const score = scoreSegmentation(regions, oracle, { iou: a.iou ? Number(a.iou) : 0.5 })
     const verdict = goNoGo(score)
-    writeFileSync(join(runDir, 'segeval.json'), JSON.stringify({ ...score, verdict, oracleSource: truth ? a.truth : 'dom-oracle' }, null, 2))
+    writeFileSync(join(runDir, 'segeval.json'), JSON.stringify({ ...score, verdict, oracleSource: truth ? a.truth : 'dom-oracle', maxY: a['max-y'] ? Number(a['max-y']) : null }, null, 2))
     console.log(formatSegScore(score, verdict))
   } else if (cmd === 'compare') {
     // s2t compare out/acme-shop out/acme-shop-meta  (or --runs a,b)
@@ -138,6 +140,9 @@ async function main() {
         { role: 'hybrid', label: 'Hybrid (SAM + layout + DOM)', runDir: join('out', 'div-soup-hybrid'), truth },
         { role: 'real', label: 'agency (hybrid)', runDir: join('out', 'agency-hybrid') },
         { role: 'real', label: 'acme-shop (hybrid)', runDir: join('out', 'acme-shop-hybrid') },
+        // L1: real sites vs hand-labeled first-screen truth (capture once, segment three ways; see docs/real-site-segeval.md).
+        ...[['argon', 'Argon Dashboard'], ['hacksoc', 'HackSoc Notts'], ['joshwong', 'josh-wong.github.io']].flatMap(([id, site]) =>
+          ['dom', 'sam', 'hybrid'].map((segmenter) => ({ role: 'site', site, segmenter, label: `${site} (${segmenter})`, runDir: join('out', 'l1', `${id}-${segmenter}`), truth: join('fixtures', 'l1', `${id}.truth.json`), maxY: 900 }))),
       ],
       out: outPath,
     })
@@ -150,7 +155,7 @@ async function main() {
   } else {
     console.log(`usage: s2t run --fixture <name> | --serve <static dir> | --url <url> [--target <dir>] [--run <dir>] [--from <stage>] [--to <stage>]
        s2t eval --fixture <name> [--run <dir>] [--golden <file>]
-       s2t segeval --run <dir> [--iou 0.5] [--truth <file>]  (vs DOM oracle, or a hand-labeled Region[] file; GO / NO-GO)
+       s2t segeval --run <dir> [--iou 0.5] [--truth <file>] [--max-y 900]  (vs DOM oracle, or a hand-labeled Region[] file; GO / NO-GO)
        s2t compare <run dir> <run dir> ...       (providers, eval, segeval, verify, model usage side by side)
        s2t review --run <dir> [--decisions review.json]
        s2t pr --run <dir> --repo <app git root> [--target <dir>] [--branch <name>] [--open]

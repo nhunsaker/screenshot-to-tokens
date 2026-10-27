@@ -10,7 +10,7 @@
 // it's the floor any pixel-based segmenter has to clear on markup-free pages.
 import { readFileSync, writeFileSync, statSync, existsSync } from 'fs'
 import { join } from 'path'
-import { iou, scoreSegmentation, resolveOracle } from './segeval.js'
+import { iou, scoreSegmentation, resolveOracle, clipToScreen, goNoGo } from './segeval.js'
 
 const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
 const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ESCAPES[c])
@@ -99,6 +99,29 @@ function realAppRows(real) {
       <thead><tr><th>app</th><th>recall</th><th>precision</th><th>oracle</th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>
+  </section>`
+}
+
+// L1: real sites scored against first-screen truth labeled from the screenshot (fixtures/l1/*.truth.json), so unlike the
+// DOM-oracle rows above this doesn't flatter the DOM segmenter. One row per site, one column group per segmenter.
+const SEGMENTERS = [['dom', 'DOM'], ['sam', 'SAM 3.1'], ['hybrid', 'Hybrid']]
+
+function realSiteTable(sites) {
+  if (!sites.length) return ''
+  const names = [...new Set(sites.map((r) => r.site))]
+  const cell = (r) => {
+    if (!r) return '<td class="muted">-</td><td class="muted">-</td><td class="muted">-</td>'
+    const a = r.score.anyLabel, b = r.score.perLabel.button
+    const go = r.verdict.go ? '<b>GO</b>' : `<span class="muted" title="${escapeHtml(r.verdict.reasons.join('; '))}">no-go</span>`
+    return `<td>${pct(a.recall)} <span class="muted">/ ${pct(a.precision)}</span></td><td>${b && b.oracle ? `${b.matched}/${b.oracle}` : '-'}</td><td>${go}</td>`
+  }
+  const rows = names.map((n) => `<tr><td>${escapeHtml(n)}</td>${SEGMENTERS.map(([k]) => cell(sites.find((r) => r.site === n && r.segmenter === k))).join('')}</tr>`).join('')
+  const head1 = `<tr><th rowspan="2">site</th>${SEGMENTERS.map(([, l]) => `<th colspan="3">${l}</th>`).join('')}</tr>`
+  const head2 = `<tr>${SEGMENTERS.map(() => '<th>recall / precision</th><th>buttons</th><th>gate</th>').join('')}</tr>`
+  return `<section class="card">
+    <h2>Real sites, labeled from the screenshot</h2>
+    <p class="muted">First screen (1440&times;900) of three public sites, labeled box by box from the screenshot (not from any segmenter output; truth files in fixtures/l1, open to review). Same capture for all three segmenters; any-label recall / precision at IoU 0.5. Hover a no-go for the reason.</p>
+    <div class="table-wrap"><table><thead>${head1}${head2}</thead><tbody>${rows}</tbody></table></div>
   </section>`
 }
 
@@ -222,6 +245,7 @@ th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--bor
  *   samMatchedIdx?: Set<number>,
  *   compare?: Array<{label:string, score: ReturnType<typeof scoreSegmentation>}>,
  *   real?: Array<{label:string, score: ReturnType<typeof scoreSegmentation>}>,
+ *   sites?: Array<{site:string, segmenter:'dom'|'sam'|'hybrid', score: ReturnType<typeof scoreSegmentation>, verdict: {go:boolean, reasons:string[]}}>,
  *   method?: {fixture?:string, prompts?:string[], model?:string, iou?:number, date?:string},
  * }} data
  * @returns {string}
@@ -230,7 +254,7 @@ export function buildScoreboardHtml(data = {}) {
   const {
     screenshot = null, viewport = {}, goldButtons = [],
     domMatchedIdx = new Set(), samMatchedIdx = new Set(),
-    compare = [], real = [], method = {},
+    compare = [], real = [], sites = [], method = {},
   } = data
   const W = viewport.width || 1440
   const H = viewport.height || 900
@@ -253,6 +277,7 @@ export function buildScoreboardHtml(data = {}) {
       <p class="muted">Recall/precision at IoU 0.5 against the hand-labeled truth (fixtures/div-soup/regions.truth.json).</p>
       ${compareTable(compare)}
     </section>
+    ${realSiteTable(sites)}
     ${realAppRows(real)}
     ${methodNote(method)}
   `
@@ -279,9 +304,10 @@ ${SCRIPT}
  * Read the given runs, score each (pure, via scoreSegmentation/resolveOracle), and write the
  * scoreboard page. The hero split-screen needs one `role: 'dom'` and one `role: 'sam'` run scored
  * against the same truth file; `role: 'hybrid'` runs join the per-label table; `role: 'real'` runs
- * (no `truth`) are always scored against the DOM oracle and shown separately, honestly labeled.
+ * (no `truth`) are always scored against the DOM oracle and shown separately, honestly labeled; `role: 'site'`
+ * runs are real sites scored against hand-labeled first-screen truth (`maxY` clips predictions to that screen).
  * @param {{
- *   runs: Array<{role: 'dom'|'sam'|'hybrid'|'real', label: string, runDir: string, truth?: string}>,
+ *   runs: Array<{role: 'dom'|'sam'|'hybrid'|'real'|'site', label: string, runDir: string, truth?: string, site?: string, segmenter?: string, maxY?: number}>,
  *   out: string,
  *   images?: 'embed'|'link'|'auto',
  * }} o
@@ -293,7 +319,8 @@ export function writeScoreboard({ runs, out, images } = {}) {
 
   const scoreRun = (r) => {
     const capture = readJson(r.runDir, 'capture')
-    const regions = readJson(r.runDir, 'regions')
+    const all = readJson(r.runDir, 'regions')
+    const regions = r.maxY ? clipToScreen(all, r.maxY) : all
     const truth = r.truth ? JSON.parse(readFileSync(r.truth, 'utf-8')) : null
     const oracle = resolveOracle(capture, truth)
     const score = scoreSegmentation(regions, oracle, { iou: 0.5 })
@@ -302,6 +329,7 @@ export function writeScoreboard({ runs, out, images } = {}) {
 
   const compareRuns = runs.filter((r) => r.role === 'dom' || r.role === 'sam' || r.role === 'hybrid').map(scoreRun)
   const realRuns = runs.filter((r) => r.role === 'real').map(scoreRun)
+  const siteRuns = runs.filter((r) => r.role === 'site').map(scoreRun).map((r) => ({ ...r, verdict: goNoGo(r.score) }))
 
   const domScored = compareRuns.find((r) => r.role === 'dom')
   const samScored = compareRuns.find((r) => r.role === 'sam')
@@ -332,6 +360,7 @@ export function writeScoreboard({ runs, out, images } = {}) {
     samMatchedIdx,
     compare: compareRuns,
     real: realRuns,
+    sites: siteRuns,
     method: {
       fixture: 'div-soup',
       prompts: ['button', 'search bar', 'icon'],

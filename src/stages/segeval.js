@@ -74,6 +74,24 @@ export function goNoGo(score, rule = GO_RULE) {
 export const oracleFor = (capture) => regionsFromCapture(capture)
 
 /**
+ * Clip regions to the first screen (y < maxY) and drop the ones left outside it. Hand-labeled truth for real
+ * sites covers only the first screen, while captures are full-page, so predictions below the fold must not
+ * count as false positives (and a full-height sidebar is scored by its visible part).
+ * @param {import('../types.js').Region[]} regions
+ * @param {number} maxY
+ */
+export function clipToScreen(regions, maxY) {
+  const out = []
+  for (const r of regions) {
+    const [x, y, w, h] = r.bbox
+    const bottom = Math.min(y + h, maxY)
+    if (y >= maxY || bottom - y < 4) continue
+    out.push({ ...r, bbox: [x, y, w, bottom - y] })
+  }
+  return out
+}
+
+/**
  * Pick the gold regions to score against: a hand-labeled truth file when given (e.g. for a
  * fixture like div-soup where the DOM can't describe the UI, so the DOM oracle is useless),
  * else fall back to the DOM-derived oracle (the default, existing behaviour).

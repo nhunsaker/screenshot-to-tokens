@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { iou, scoreSegmentation, goNoGo, formatSegScore, resolveOracle, oracleFor } from '../src/stages/segeval.js'
+import { iou, scoreSegmentation, goNoGo, formatSegScore, resolveOracle, oracleFor, clipToScreen } from '../src/stages/segeval.js'
 
 const R = (id, label, bbox) => ({ id, label, bbox, score: 1, source: 't' })
 
@@ -53,4 +53,14 @@ test('postprocessRegions: min size, per-label NMS, nested pairs kept', async () 
   ])
   assert.deepEqual(out.map((r) => r.label), ['card', 'button'])
   assert.deepEqual(out.map((r) => r.id), ['r0', 'r1'])
+})
+
+test('clipToScreen keeps first-screen regions and trims ones that cross the fold', () => {
+  const out = clipToScreen([
+    R('a', 'nav', [0, 0, 250, 2400]),     // full-height sidebar → trimmed to the screen
+    R('b', 'button', [10, 880, 50, 40]),  // crosses the fold → trimmed
+    R('c', 'card', [0, 1200, 300, 200]),  // below the fold → dropped
+    R('d', 'link', [0, 898, 40, 20]),     // 2px sliver on screen → dropped
+  ], 900)
+  assert.deepEqual(out.map((r) => [r.id, r.bbox]), [['a', [0, 0, 250, 900]], ['b', [10, 880, 50, 20]]])
 })
