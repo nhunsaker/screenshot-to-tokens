@@ -4,7 +4,7 @@
 import { readFileSync, existsSync } from 'fs'
 import { LLM_PRESETS } from '../../config.js'
 import { chat, extractJson } from './chat.js'
-import { heuristicTokens, fillSemanticGaps } from './heuristic.js'
+import { heuristicTokens, fillSemanticGaps, fillOnSurfaceTextTokens } from './heuristic.js'
 
 export const SYSTEM_PROMPT = `You are a design-systems engineer naming design tokens for an app that has none.
 You get CLUSTERS of near-duplicate style values found on the page (with how often and where each is used)
@@ -44,7 +44,10 @@ Rules:
   renames) or another of your tokens. Check EACH of these roles against the usage data and include it if the
   evidence supports it (do not force a role with no support, but low effort is not a reason to skip one that has
   it): color.action.primary (button background); color.text.default, color.text.muted, color.text.inverse (text
-  on a colored/dark background, e.g. inside buttons); color.surface.default, color.surface.card (page vs. card
+  on a colored/dark background, e.g. inside buttons); color.text.on-primary / color.text.on-dark (a text color
+  whose usage sits mostly on the action color or on a dark/colored card other than the page background - give
+  it its own token, never reuse color.surface.* or a surface's primitive for a "color:" role just because the
+  raw value matches); color.surface.default, color.surface.card (page vs. card
   background); color.border.default; color.status.success/warning/danger/info (only when badge/alert backgrounds
   show 2+ distinct hue families - one color alone is not a status palette); color.focus.ring (only if a focus
   outline/ring color is actually present in the data).
@@ -114,7 +117,7 @@ export default function llmNamer(presetId) {
   if (!preset) throw new Error(`unknown namer preset: ${presetId}`)
   return {
     id: presetId,
-    async name({ clusters, regions, screenshotPath, components }) {
+    async name({ clusters, regions, screenshotPath, components, capture }) {
       const cfg = preset()
       if (presetId !== 'ollama' && !cfg.apiKey) {
         throw new Error(`${presetId} namer not configured: set its API key (Meta: META_API_KEY, META_API_BASE_URL, META_NAMER_MODEL after approval)`)
@@ -147,7 +150,9 @@ export default function llmNamer(presetId) {
       // Low reasoning effort proposes fewer semantic/component tokens, leaning on primitives more. This
       // deterministic pass fills a short list of roles the model skipped but the component evidence clearly
       // supports (text.inverse, status colors) - see fillSemanticGaps in heuristic.js.
-      const tokens = fillSemanticGaps(rawTokens, clusters, components)
+      // Same role: a text color whose own evidence (button text, or any component sitting on a
+      // non-page-surface background) the model didn't name gets filled in regardless of its effort.
+      const tokens = fillOnSurfaceTextTokens(fillSemanticGaps(rawTokens, clusters, components), clusters, capture)
       return { tokens, merges, namer: `${presetId}:${cfg.model}${compact ? '' : ':full'}`, meta: { mode: compact ? 'compact' : 'full', ms: Date.now() - t0, usage: cached ? { prompt_tokens: 0, completion_tokens: 0, cached_from: usage } : usage, cached: !!cached } }
     },
   }

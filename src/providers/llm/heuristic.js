@@ -1,7 +1,9 @@
 // Offline namer: deterministic primitive / semantic / component names from cluster usage.
 // Two jobs: (1) the mock provider until Muse Spark access lands, (2) the draft we hand the
 // model, so even a small local Llama only has to refine names and reasons, not invent structure.
+import { normalizeColor } from '@sorb/seed'
 import { hexToRgba, rgbToLab, suggestMerges } from '../../stages/cluster.js'
+import { pairsFromCapture } from '../../preview-client/contrast.js'
 
 const FAMILIES = [
   [15, 'red'], [45, 'orange'], [70, 'yellow'], [160, 'green'], [200, 'teal'], [255, 'blue'], [290, 'purple'], [345, 'pink'], [361, 'red'],
@@ -140,7 +142,7 @@ export function componentStateTokens(profiles, tokens) {
   return out
 }
 
-export function heuristicTokens({ clusters, components }) {
+export function heuristicTokens({ clusters, components, capture }) {
   const prim = primitiveNames(clusters)
   /** @type {import('../../types.js').TokenProposal[]} */
   const tokens = clusters.map((c) => ({
@@ -181,7 +183,10 @@ export function heuristicTokens({ clusters, components }) {
   sem('card.shadow', cardShadow, 'Shadow used on cards.', 'component')
   for (const t of componentTokens(components, tokens)) tokens.push(t)
   for (const t of componentStateTokens(components, tokens)) tokens.push(t)
-  return { tokens, merges: suggestMerges(clusters), namer: 'mock-heuristic' }
+  // Text sitting on a non-page-surface background (a dark card, the action color) needs its own
+  // semantic token even when it is not inside a profiled "button" component; see fillOnSurfaceTextTokens.
+  const withOnSurface = capture ? fillOnSurfaceTextTokens(tokens, clusters, capture) : tokens
+  return { tokens: withOnSurface, merges: suggestMerges(clusters), namer: 'mock-heuristic' }
 }
 
 const STATUS_FAMILY = { green: 'success', red: 'danger', orange: 'warning', yellow: 'warning', blue: 'info', teal: 'info' }
@@ -247,6 +252,95 @@ export function fillSemanticGaps(tokens, clusters, components) {
         })
       }
     }
+  }
+  return out
+}
+
+/**
+ * For each text color cluster, the background color cluster it most often sits on, from the captured
+ * text/background pairs (contrast.js `pairsFromCapture` — the same evidence the verify-stage contrast
+ * check uses, re-derived from the raw capture rather than a region-level aggregate). Pure; exported for
+ * tests.
+ * @param {import('../../types.js').Capture} capture
+ * @param {import('../../types.js').Cluster[]} clusters
+ * @returns {Map<string, {bgCluster: string|null, n: number, total: number}>} fg cluster id -> dominant bg
+ */
+export function onSurfaceEvidence(capture, clusters) {
+  const byFg = new Map()
+  if (!capture || !Array.isArray(capture.elements)) return byFg
+  const colorClusters = clusters.filter((c) => c.kind === 'color')
+  const clusterOf = (raw) => {
+    const hex = normalizeColor(String(raw || ''))
+    if (!hex) return null
+    const c = colorClusters.find((c) => c.members.some((m) => m.value === hex))
+    return c ? c.id : null
+  }
+  for (const p of pairsFromCapture(capture)) {
+    const fg = clusterOf(p.captured.fg)
+    const bg = clusterOf(p.captured.bg)
+    if (!fg || !bg) continue
+    const counts = byFg.get(fg) || new Map()
+    counts.set(bg, (counts.get(bg) || 0) + 1)
+    byFg.set(fg, counts)
+  }
+  const out = new Map()
+  for (const [fg, counts] of byFg) {
+    let bestBg = null, bestN = 0, total = 0
+    for (const [bg, n] of counts) { total += n; if (n > bestN) { bestN = n; bestBg = bg } }
+    out.set(fg, { bgCluster: bestBg, n: bestN, total })
+  }
+  return out
+}
+
+/**
+ * Deterministic gap-fill for text colors that sit on a surface other than the page's own
+ * (`color.surface.default`): Argon's white text and white surfaces share one primitive, so a theme that
+ * darkens surfaces also darkens that text unless it gets its own semantic token. Convention (reconciling
+ * with L4's `color.text.inverse`, kept as-is for button text): `color.text.on-primary` when the dominant
+ * background is the action/primary color, else `color.text.on-dark`. Only fires when the evidence clears
+ * a small usage floor (n >= 2) and the text cluster has no text-role semantic/component token yet (button
+ * text already covered by `fillSemanticGaps`'s `color.text.inverse`, or a model-proposed role). Pure;
+ * exported for tests.
+ * @param {import('../../types.js').TokenProposal[]} tokens
+ * @param {import('../../types.js').Cluster[]} clusters
+ * @param {import('../../types.js').Capture} [capture]
+ */
+export function fillOnSurfaceTextTokens(tokens, clusters, capture) {
+  const out = [...tokens]
+  if (!capture) return out
+  const primFor = (id) => out.find((t) => t.tier === 'primitive' && t.clusters?.includes(id))
+  const has = (name) => out.some((t) => t.name === name)
+  const byName = (name) => out.find((t) => t.name === name)
+
+  const surface = byName('color.surface.default')
+  const surfacePrim = surface && byName(surface.alias)
+  const surfaceCluster = surfacePrim && surfacePrim.clusters[0]
+  const action = byName('color.action.primary')
+  const actionPrim = action && byName(action.alias)
+  const actionCluster = actionPrim && actionPrim.clusters[0]
+
+  const textRoleRe = /text|inverse/i
+  const textCovered = new Set(
+    out.filter((t) => t.tier !== 'primitive' && textRoleRe.test(t.name))
+      .flatMap((t) => t.clusters || [])
+  )
+
+  const evidence = onSurfaceEvidence(capture, clusters)
+  // Deterministic order so repeated runs over the same capture add tokens in the same sequence.
+  const entries = [...evidence.entries()].sort((a, b) => a[0].localeCompare(b[0]))
+  for (const [fgCluster, info] of entries) {
+    if (info.n < 2) continue
+    if (!info.bgCluster || info.bgCluster === surfaceCluster) continue
+    if (textCovered.has(fgCluster)) continue
+    const p = primFor(fgCluster)
+    if (!p) continue
+    const name = info.bgCluster === actionCluster ? 'color.text.on-primary' : 'color.text.on-dark'
+    if (has(name)) continue
+    const reason = info.bgCluster === actionCluster
+      ? `Heuristic: most common background under this text (${info.n}/${info.total} checked pairs) is the action/primary color.`
+      : `Heuristic: most common background under this text (${info.n}/${info.total} checked pairs) is not the page surface.`
+    out.push({ name, tier: 'semantic', alias: p.name, clusters: [fgCluster], why: reason })
+    textCovered.add(fgCluster)
   }
   return out
 }

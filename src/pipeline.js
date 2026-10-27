@@ -109,7 +109,7 @@ export async function runPipeline(o) {
       // Third tier: profile the detected components (classes + the clusters each uses) and hand them to the namer.
       const components = profileComponents(capture, regions, clusters)
       writeJson(runDir, 'components', components)
-      const set = await runName({ clusters, regions, components, screenshotPath: join(runDir, capture.screenshot), namer: cfg.namer })
+      const set = await runName({ clusters, regions, components, capture, screenshotPath: join(runDir, capture.screenshot), namer: cfg.namer })
       writeJson(runDir, 'tokens', set)
       // Credit metering: one line per model call, so we can see what a full app run costs.
       if (set.meta) {

@@ -87,9 +87,16 @@ export function pickToken(prop, cluster, tokens, components = [], states = []) {
     const hit = candidates.find((t) => t.tier !== 'primitive' && roleRe.test(t.name))
     if (hit) return hit
   }
-  const semantic = candidates.find((t) => t.tier === 'semantic')
+  // A `color:` (text) declaration never prefers a token explicitly named for the surface role, even as the
+  // generic "any semantic" fallback below: Argon's white text and white surfaces are the same primitive
+  // value, so without this a text declaration with no text-role token yet (the on-surface gap this loop
+  // fills in heuristic.js) could land on color.surface.default and mislabel the design decision. Any other
+  // cross-role fallback (e.g. a text prop landing on color.action.primary) is left as-is - a named semantic
+  // guess beats a bare primitive there.
+  const blockSurfaceForText = semRole === 'text' ? /surface/i : null
+  const semantic = candidates.find((t) => t.tier === 'semantic' && !(blockSurfaceForText && blockSurfaceForText.test(t.name)))
   if (semantic) return semantic
-  const component = candidates.find((t) => t.tier === 'component')
+  const component = candidates.find((t) => t.tier === 'component' && !(blockSurfaceForText && blockSurfaceForText.test(t.name)))
   if (component) return component
   return candidates.find((t) => t.tier === 'primitive') || candidates[0]
 }

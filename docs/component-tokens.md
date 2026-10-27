@@ -51,3 +51,50 @@ hybrid segmenter), re-run from the name stage on the existing F20 captures:
 `button.active.bg` is exactly the Argon toggle's blue, aliased to `color.action.primary` — the active pill's
 background now reads as "this component, in this state" instead of just another button background. Zero
 validator warnings on either page (no state token was proposed for a value its state didn't use).
+
+## L13: on-surface text tokens
+
+Argon's button/card text and its page/card surfaces are the same raw color (white), so they land in one
+cluster with one primitive. Without a text-role semantic token of its own, a `color:` declaration on that
+cluster had nowhere correct to land: `pickToken`'s generic "any semantic token for this cluster" fallback
+could pick `color.surface.default` — a theme that darkens surfaces would darken that text too (found while
+building L11's dark-theme playground: Argon's "Sales value" card label went dark-on-dark).
+
+**Evidence.** `onSurfaceEvidence` (`src/providers/llm/heuristic.js`) re-derives each text/background pairing
+from the raw capture with `contrast.js`'s own `pairsFromCapture` (the same function the verify-stage contrast
+check uses) and maps both colors to cluster ids. For every text cluster, it reports the background cluster it
+sits on most often. `fillOnSurfaceTextTokens` then adds a semantic token for any text cluster whose dominant
+background is *not* the page's `color.surface.default` cluster and has no text-role token yet (at least two
+observed pairs, so a one-off doesn't fire): `color.text.on-primary` when that background is the
+`color.action.primary` cluster, else `color.text.on-dark`.
+
+**Convention.** Three text-role semantic names now exist and all alias a primitive, never invent one:
+`color.text.inverse` (kept as-is — the L4 heuristic's button-text evidence), `color.text.on-primary`, and
+`color.text.on-dark` (the two L13 additions, for text on a colored/dark surface that evidence didn't already
+cover as "inside a button"). A model is free to propose `color.text.inverse` itself for the same case — the
+compact prompt's checklist (`COMPACT_PROMPT` in `llm-namer.js`) now names all three and tells the model never
+to reuse `color.surface.*` or a surface's primitive for a `color:` role just because the raw value matches;
+`fillOnSurfaceTextTokens` runs after the model either way, so a skipped role still gets filled deterministically.
+
+**Rewrite.** `pickToken` (`src/providers/coder/deterministic.js`) already prefers a token whose name matches
+the declaration's role (`text` for `color:`) before falling back to "any semantic" — enough by itself once an
+on-surface token exists, since its name contains "text". The one remaining gap was the fallback itself: a
+`color:` declaration with no text-role token yet could still land on a surface-named one sharing the same
+primitive. `pickToken` now excludes any semantic/component token matching `/surface/i` from that generic
+fallback for a text-role declaration (primitive wins instead) — one targeted rule, not a blanket "never
+cross roles" (an existing, intentional case keeps a text color that happens to equal the brand action color
+landing on `color.action.primary` rather than the bare primitive).
+
+Measured 2026-10-27 (hosted Muse Spark 1.3 and Baseten Muse Spark Open, low reasoning effort, re-run from the
+name stage on the existing captures):
+
+| Page | Namer | On-surface text tokens added | `color:` edits using one | Button/card text aliases a surface token? | Safety |
+|---|---|---|---|---|---|
+| Argon Dashboard React | baseten | `color.text.on-primary` | 28 | No | fallback 0 px, colors 0.000% |
+| Argon Dashboard React | meta | `color.text.on-primary` | 28 | No | fallback 0 px, colors 0.000% |
+| Light Bootstrap Dashboard | baseten | `color.text.inverse` (model-named; same role) | 31 (+9 via `button.text`) | No | fallback 0 px, colors 0.000% |
+| StartBootstrap Agency | baseten | `color.text.on-primary` | 25 | No | fallback 0 px, colors 0.000% |
+
+No run put a `color:` declaration on `color.surface.default`/`.card` or a surface's bare primitive. Fixture
+evals unchanged: acme-shop 20/21 and div-soup 18/20 (3 uncached `S2T_NAMER=baseten` runs each, `S2T_CACHE=0`
+on div-soup with `S2T_SEGMENTER=hybrid` so SAM-only regions resolve — same as L9/F20's measurement setup).

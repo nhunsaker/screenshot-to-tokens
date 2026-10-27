@@ -3,12 +3,13 @@ import assert from 'node:assert/strict'
 import { normalizeFor, cssVarOf, propKind } from '../src/lib/props.js'
 import { containment, regionFor, collectUses } from '../src/stages/join.js'
 import { clusterUses, deltaE, near, driftSummary } from '../src/stages/cluster.js'
-import { colorPrimitiveName, heuristicTokens } from '../src/providers/llm/heuristic.js'
+import { colorPrimitiveName, heuristicTokens, onSurfaceEvidence, fillOnSurfaceTextTokens } from '../src/providers/llm/heuristic.js'
 import { validateTokenSet, resolveValue, runName } from '../src/stages/name.js'
 import { extractJson } from '../src/providers/llm/chat.js'
 import { promptPayload } from '../src/providers/llm/llm-namer.js'
 import { toCss, toDtcg } from '../src/stages/emit.js'
 import { regionsFromCapture } from '../src/providers/segment/mock.js'
+import { pickToken } from '../src/providers/coder/deterministic.js'
 
 const el = (i, bbox, styles, extra = {}) => ({ i, tag: 'div', path: 'div', role: null, text: 'x', bbox, styles, ...extra })
 
@@ -206,6 +207,101 @@ test('fillSemanticGaps: status colors need 2+ hue families from badge background
   const out = fillSemanticGaps(base, clusters, twoColors)
   assert.ok(out.find((t) => t.name === 'color.status.success' && t.alias === 'color.green.500'))
   assert.ok(out.find((t) => t.name === 'color.status.danger' && t.alias === 'color.red.500'))
+})
+
+// L13: Argon's bug - white text and white surfaces share one primitive, so a `color:` declaration with no
+// text-role token of its own used to fall back to color.surface.default (same cluster, wrong role).
+test('onSurfaceEvidence: a text color sitting on a dark card (not the page surface) pairs with that card background', () => {
+  const cap = {
+    url: 'test', viewport: { width: 400, height: 300 }, screenshot: 's.png', capturedAt: '',
+    elements: [
+      el(0, [0, 0, 400, 300], { 'background-color': 'rgb(255, 255, 255)' }, { text: '' }),
+      el(1, [10, 10, 200, 100], { 'background-color': 'rgb(34, 34, 34)' }, { text: '' }),
+      el(2, [20, 20, 80, 20], { color: 'rgb(255, 255, 255)', 'font-size': '14px', 'font-weight': '400' }, { text: 'Sales value' }),
+      el(3, [20, 50, 80, 20], { color: 'rgb(255, 255, 255)', 'font-size': '14px', 'font-weight': '400' }, { text: 'Sales value 2' }),
+    ],
+  }
+  const clusters = [
+    { id: 'color-white', kind: 'color', value: '#ffffffff', members: [{ value: '#ffffffff', count: 3 }], count: 3, props: {}, regionLabels: {} },
+    { id: 'color-dark', kind: 'color', value: '#222222ff', members: [{ value: '#222222ff', count: 1 }], count: 1, props: {}, regionLabels: {} },
+  ]
+  const evidence = onSurfaceEvidence(cap, clusters)
+  const info = evidence.get('color-white')
+  assert.ok(info, 'white text has pairing evidence')
+  assert.equal(info.bgCluster, 'color-dark', 'the dark card it sits on, not the page surface behind it')
+  assert.ok(info.n >= 2)
+})
+
+test('fillOnSurfaceTextTokens: adds color.text.on-dark, never reusing color.surface.default for the same primitive', () => {
+  const cap = {
+    url: 'test', viewport: { width: 400, height: 300 }, screenshot: 's.png', capturedAt: '',
+    elements: [
+      el(0, [0, 0, 400, 300], { 'background-color': 'rgb(255, 255, 255)' }, { text: '' }),
+      el(1, [10, 10, 200, 100], { 'background-color': 'rgb(34, 34, 34)' }, { text: '' }),
+      el(2, [20, 20, 80, 20], { color: 'rgb(255, 255, 255)', 'font-size': '14px', 'font-weight': '400' }, { text: 'Sales value' }),
+      el(3, [20, 50, 80, 20], { color: 'rgb(255, 255, 255)', 'font-size': '14px', 'font-weight': '400' }, { text: 'Sales value 2' }),
+    ],
+  }
+  const clusters = [
+    { id: 'color-white', kind: 'color', value: '#ffffffff', members: [{ value: '#ffffffff', count: 3 }], count: 3, props: {}, regionLabels: {} },
+    { id: 'color-dark', kind: 'color', value: '#222222ff', members: [{ value: '#222222ff', count: 1 }], count: 1, props: {}, regionLabels: {} },
+  ]
+  const tokens = [
+    { name: 'color.white', tier: 'primitive', value: '#ffffffff', clusters: ['color-white'], why: '' },
+    { name: 'color.gray.900', tier: 'primitive', value: '#222222ff', clusters: ['color-dark'], why: '' },
+    { name: 'color.surface.default', tier: 'semantic', alias: 'color.white', clusters: ['color-white'], why: '' },
+  ]
+  const out = fillOnSurfaceTextTokens(tokens, clusters, cap)
+  const onDark = out.find((t) => t.name === 'color.text.on-dark')
+  assert.ok(onDark, 'adds color.text.on-dark for text mostly over a non-surface background')
+  assert.equal(onDark.alias, 'color.white')
+  assert.match(onDark.why, /^Heuristic:/)
+
+  // Already covered by a text-role token aliasing the same primitive (e.g. color.text.inverse from button
+  // evidence): don't add a second, redundant on-surface token for the same cluster.
+  const covered = [...tokens, { name: 'color.text.inverse', tier: 'semantic', alias: 'color.white', clusters: ['color-white'], why: 'x' }]
+  const out2 = fillOnSurfaceTextTokens(covered, clusters, cap)
+  assert.ok(!out2.some((t) => t.name === 'color.text.on-dark'))
+
+  // No capture (e.g. a unit-test caller that never passes one): a no-op, not a throw.
+  assert.deepEqual(fillOnSurfaceTextTokens(tokens, clusters, undefined), tokens)
+})
+
+test('fillOnSurfaceTextTokens: a text color dominant over the action/primary color gets on-primary, not on-dark', () => {
+  const cap = {
+    url: 'test', viewport: { width: 400, height: 300 }, screenshot: 's.png', capturedAt: '',
+    elements: [
+      el(0, [0, 0, 400, 300], { 'background-color': 'rgb(255, 255, 255)' }, { text: '' }),
+      el(1, [10, 10, 200, 60], { 'background-color': 'rgb(94, 114, 228)' }, { text: '' }),
+      el(2, [20, 20, 80, 20], { color: 'rgb(255, 255, 255)', 'font-size': '14px', 'font-weight': '400' }, { text: 'Save' }),
+      el(3, [20, 40, 80, 20], { color: 'rgb(255, 255, 255)', 'font-size': '14px', 'font-weight': '400' }, { text: 'Save 2' }),
+    ],
+  }
+  const clusters = [
+    { id: 'color-white', kind: 'color', value: '#ffffffff', members: [{ value: '#ffffffff', count: 3 }], count: 3, props: {}, regionLabels: {} },
+    { id: 'color-action', kind: 'color', value: '#5e72e4ff', members: [{ value: '#5e72e4ff', count: 1 }], count: 1, props: {}, regionLabels: {} },
+  ]
+  const tokens = [
+    { name: 'color.white', tier: 'primitive', value: '#ffffffff', clusters: ['color-white'], why: '' },
+    { name: 'color.blue.500', tier: 'primitive', value: '#5e72e4ff', clusters: ['color-action'], why: '' },
+    { name: 'color.surface.default', tier: 'semantic', alias: 'color.white', clusters: ['color-white'], why: '' },
+    { name: 'color.action.primary', tier: 'semantic', alias: 'color.blue.500', clusters: ['color-action'], why: '' },
+  ]
+  const out = fillOnSurfaceTextTokens(tokens, clusters, cap)
+  const onPrimary = out.find((t) => t.name === 'color.text.on-primary')
+  assert.ok(onPrimary, 'text mostly over the action color gets on-primary')
+  assert.equal(onPrimary.alias, 'color.white')
+})
+
+test('pickToken: a `color:` declaration never falls back to a surface-named semantic token for the same cluster', () => {
+  const clusters2 = [{ id: 'color-white', kind: 'color', value: '#ffffffff', members: [{ value: '#ffffffff', count: 2 }], count: 2, props: {}, regionLabels: {} }]
+  const tokens2 = [
+    { name: 'color.white', tier: 'primitive', value: '#ffffffff', clusters: ['color-white'], why: '' },
+    { name: 'color.surface.default', tier: 'semantic', alias: 'color.white', clusters: ['color-white'], why: '' },
+  ]
+  assert.equal(pickToken('color', clusters2[0], tokens2).name, 'color.white', 'no text-role token exists yet: primitive beats mislabeling this text as a surface')
+  const withOnDark = [...tokens2, { name: 'color.text.on-dark', tier: 'semantic', alias: 'color.white', clusters: ['color-white'], why: '' }]
+  assert.equal(pickToken('color', clusters2[0], withOnDark).name, 'color.text.on-dark', 'once the on-surface token exists, it wins')
 })
 
 test('negative and fractional spacing get valid primitive names', async () => {
