@@ -1,156 +1,129 @@
 # Submission: Screenshot to Tokens
 
-Meta Global AI Developer Hackathon, Oct 26 – Nov 4, 2026.
+Meta Global AI Developer Hackathon, Oct 26 – Nov 4, 2026 · **Startup track** · Theme: **Build for Your World**
 
 ## One-line pitch
 
-Point it at a live web app with no design tokens. It captures the page, finds the colors and
-spacing that drifted apart by accident, proposes a reasoned token set, rewrites the real source
-files to use it, proves with a pixel diff that the rewrite itself changes nothing, and shows exactly
-what the cleanup changes, before a human merges anything.
-
-## What existed before the hackathon, and what is new
-
-The rules ask every entrant to separate pre-existing work from hackathon work. Here is the line, and the git history
-shows it exactly.
-
-**Before the building period (tag `pre-event-baseline`, built Oct 25, 2026):** the pipeline scaffold with an offline
-stand-in for every Meta model. That covers capture, a DOM-based mock segmenter, clustering, a heuristic namer and validator,
-the rewrite, the three-check verify, the HTML report with review, the CLI, two test fixtures and the test suite. It depends
-only on the published `@sorb/seed` package; Sorb itself is Metatoy's existing product and is not part of this repo.
-
-**Built during the hackathon (Oct 26 to Nov 4, every commit after `pre-event-baseline`):** everything that uses Meta's
-models, and every feature shown in the demo video. _(Filled in as work lands; see `git log pre-event-baseline..HEAD`.)_
-
-## The problem
-
-One person, one moment: a design engineer inherits a React app with zero design tokens. Every
-color and radius is typed by hand. Five buttons use five almost-identical blues because three
-different people copy-pasted one over two years, and nobody can tell you which ones are supposed
-to match. She does not have time to grep every CSS file by hand, and she will not trust a rewrite
-she cannot verify. That is the moment this tool is built for.
-
-## How it works
-
-See `docs/architecture.svg` for the full diagram. In short:
-
-A live web app gets **captured** (Playwright: full-page screenshot plus computed styles per
-element). The screenshot is **segmented** into UI regions, button, card, input, nav, using SAM
-3.1, with a vision-model fallback and a DOM-derived mock for offline runs. Each style value is
-**joined** to the smallest region that contains it, then **clustered**: near-duplicate colors
-merge by ΔE in Lab space, near-duplicate sizes merge by a pixel/percent tolerance. The clusters go
-to **naming**: Muse Spark proposes a tiered token set (primitive, semantic, component) with a
-one-line reason per token, and deterministic code validates the result, one primitive per cluster,
-aliases that resolve, no cycles, before anything downstream sees it. A person **reviews** the
-proposal and can accept, rename, reject, or merge any token. Approved tokens are **emitted** as
-`tokens.css` and a DTCG JSON file, then used to **rewrite** the literals in the real source,
-plain CSS, Vue `<style>` blocks, JSX/styled-components, and inline SVG `fill`/`stroke`, to
-`var(--token, fallback)`, keeping the original value as the fallback. The rewrite is **verified**
-with a three-way pixel diff before it ever reaches a **pull request**. A side branch lets the same
-tokens drive a live preview in the web app itself through Sorb, with no rebuild.
-
-The model proposes; deterministic code guarantees the shape. If a model call fails, the pipeline
-falls back to a heuristic and records a warning rather than failing silently.
-
-## Built with Meta models
-
-- **SAM 3.1** (segmentation). The screenshot is sent with short, open-vocabulary noun-phrase
-  prompts, "button," "card," "nav bar," "input," one call per concept, to get back boxes/masks
-  for each UI region. This is the `S2T_SEGMENTER=meta` provider in `src/providers/segment/meta-sam.js`.
-  A DOM-derived mock and a vision-model fallback stand in for it offline.
-- **Muse Spark** (naming, validated). Given the clusters and a heuristic first draft, Muse Spark
-  proposes the final token names, tiers, and a one-line reason per token. Deterministic code
-  (`validateTokenSet`) checks every proposal before it is used: one primitive per cluster, aliases
-  resolve without cycles, and primitive values match what was actually captured. The model never
-  gets the final say on shape, only on naming.
-- **Muse Code** (PR, if real). The plan was for Muse Code to open the pull request from the
-  rewrite's edit plan. We found no documented headless API or scriptable CLI for it before access
-  day, so the PR step is deterministic (`git` + `gh`) unless that changes. *[placeholder: update
-  this section after Oct 26 if Muse Code turns out to have a real scriptable surface we used.]*
-
-## What was proven (2026-10-25, offline, before API access)
-
-Everything below ran against this repo's offline stand-in providers (a DOM-derived mock segmenter,
-a usage-driven heuristic namer), not the real SAM 3.1 or Muse Spark. Numbers are copied as-measured,
-not rounded up.
-
-| Check | Result |
-|---|---|
-| Fixture (`acme-shop`, planted drift) full pipeline | 3 s; 43 distinct values → 33 clusters; 127 edits in CSS + inline SVG |
-| Verify on fixture | fallbacks only **0 px**; colors merged **0.000%**; all tokens **1.7%** (spacing merges, flagged for review) |
-| Eval vs hand-written golden set | **20/21** as proposed; **21/21** after one human-accepted merge suggestion (6 px radius into 4 px) in review |
-| Real site (StartBootstrap Agency, MIT license, `--serve dist --target dist/css`) | 6 s; 123 edits; fallbacks **0 px**; colors **0.000%**; all tokens **3.7%** |
-| Live Sorb preview (published `@sorb/juice` 0.3.0 + `src/preview-client/sorb-preview.js`) | one `s2t preview` call turned every button, badge, link, logo, and SVG illustration orange, no rebuild |
-| Fake Meta API contract test | Muse Spark chat shape and the SAM 3.1 token-stream shape drive the real providers (tiling, scaling, repair) |
-| Review loop (`review.json` → `s2t review`) | rename follows aliases, reject drops the token, rewrite and verify rerun correctly |
-
-*[placeholder: real SAM 3.1 and Muse Spark numbers from Oct 26+ go here once access-day testing
-runs, segmentation recall vs the DOM oracle (`s2t segeval`), and a namer score vs the golden set,
-replacing or sitting alongside the offline numbers above.]*
-
-## What's honest about the limits
-
-- **SAM on UI screenshots is unproven.** We found no published use of SAM, any version, on app UI
-  screenshots. Buttons, cards, and photo-like images are the regions most likely to work; icons,
-  badges, and links are the regions most likely to come back weak or missing, because they are
-  small, flat, and low on the texture SAM relies on. The go/no-go gate (`s2t segeval`) checks
-  button/input/card/nav recall at 60% and treats icon/badge/link as known-weak, non-blocking
-  categories rather than pretending they will work.
-- **Icons and badges are the weak spot industry-wide, not just for us.** Published GUI-grounding
-  benchmarks put icon-target accuracy far below text-target accuracy for vision models in general.
-  We expect the same pattern here.
-- **Fallbacks exist because we expect to need them.** If SAM's day-1 recall is too low to demo
-  live, the pipeline falls back to the DOM-derived mock segmenter and the SAM numbers are shown as
-  evidence of what is needed next, not hidden. If Muse Spark naming is unavailable or fails, a
-  local heuristic draft covers it, with a warning, not a silent substitution.
-- **Everything marked MOCK stays marked MOCK.** The report page carries a visible badge whenever a
-  stand-in provider ran instead of a real model, on purpose, so nobody mistakes an offline demo
-  for a live one.
-- **Known gaps:** SCSS/Less sources are not rewritten, only compiled CSS; `lang="scss"` Vue blocks
-  are skipped; authored unitless line-heights are left alone; verifying a remote `--url` app with
-  hashed CSS bundles isn't possible yet, it needs the local source build.
-
-## Positioning vs the closest tools
-
-Every comparable tool we found does one of two things: it reports on a website's existing styles,
-or it helps build new UI from a design file. Nothing we found goes back into an app's own source
-files and swaps a hardcoded literal for a token. The closest is **Dembrandt**, which extracts
-tokens from a live URL and can detect drift against a saved baseline, but it never touches the
-target app's source and its drift check is for watching a site over time, not for proving one
-specific rewrite is safe to merge. Screenshot to Tokens rewrites the real `.css`/`.jsx`/`.vue`/SVG
-files in place and runs a three-check pixel-diff verification before a human approves the pull
-request, closing the loop from a live web app to a reviewed, mergeable change.
-
-## Track fit
-
-**Startup track.** Sorb is a real product already in production (a design-token bridge between
-Figma and React with a published npm scope, `@sorb/*`). This hackathon project is a separate,
-standalone repo by design, so it depends only on the already-published `@sorb/seed` package and
-never touches Sorb's private code, but it is built to feed directly into Sorb: the tokens this
-pipeline proposes are the same tokens Sorb's live-preview bridge already knows how to serve to a
-live web app.
-
-## How to run (5 commands)
-
-```sh
-pnpm install --ignore-workspace          # standalone repo inside a pnpm workspace folder
-pnpm test                                # 68 unit tests
-pnpm demo                                # fixture app, offline stand-in providers → out/acme-shop/report.html
-node src/cli.js eval --fixture acme-shop # score the run against fixtures/acme-shop/golden.json
-pnpm doctor                              # checks providers, keys, Ollama, Mac headroom
-```
-
-Open `out/acme-shop/report.html` after `pnpm demo` to see the region overlay, token chips with
-reasons, the review step, and the verify diff.
-
-## Data policy
-
-Only public, non-sensitive pages go to a hosted model. The "Contributor" tier that Meta's API
-offers at a steep discount in exchange for training on your prompts and completions is never
-enabled, not for this project, not anywhere in this repo; `.env.example` and the provider code
-flag this at every point a model id is read. Keys live in `.env`, git-ignored, never in code.
+Point it at a live web app with no design tokens. SAM 3.1 reads the interface from pixels, Muse Spark names a tiered
+token set with a reason for each token, a person reviews it, the hardcoded values in the real source are rewritten to
+`var(--token, original)`, and four checks prove the rewrite changes nothing and makes no text harder to read, before a
+pull request opens. From then on, making the app more accessible, or giving it a dark mode, is one token change.
 
 ## Links
 
-*[placeholder: repo URL, not yet public as of this writing]*
-*[placeholder: demo video link, recording is planned for Nov 3, see `docs/demo-script.md`]*
+- **Demo video (2:57):** _[link to the unlisted YouTube upload]_
+- **Code:** https://github.com/nhunsaker/screenshot-to-tokens
+- **Live demo:** https://nhunsaker.github.io/argon-dashboard-react/ (original, tokenized, a previewed change, token playground)
+- **A real pull request on our fork of Argon Dashboard React:** https://github.com/nhunsaker/argon-dashboard-react/pull/2
+
+## The problem (Build for Your World)
+
+I've spent my career as a design engineer cleaning up the same mess by hand: an app with no design tokens, where every
+color and size was typed in place and copied across screens until nobody can say which ones are meant to match. Fixing
+it means grepping hundreds of literals and hoping the rewrite doesn't change anything, so most teams never do. And until
+an app has tokens, everything that depends on them, a brand refresh, a dark mode, a contrast fix, has to be done by hand
+in every file.
+
+It matters beyond tidiness. Low-contrast text is the most common accessibility failure on the web: WebAIM's 2026 survey
+of one million home pages found it on 83.9% of them. In the EU, the European Accessibility Act has applied to new
+digital products and services since 28 June 2025, and in the US, state and local government sites must meet WCAG 2.1 AA
+from April 2027.
+
+## What it does
+
+1. **Capture** a live web app (Playwright: full-page screenshot plus computed styles per element).
+2. **Segment** the screenshot with **SAM 3.1** (buttons, inputs, icons from pixels), combined with layout rules anchored
+   on SAM's regions and DOM style rules for cards, badges and links. Works where the markup describes nothing.
+3. **Cluster** near-duplicate values (ΔE for colors, a tolerance for sizes).
+4. **Name** a three-tier token set (primitive → semantic → component, plus state tokens like `button.active.bg` and
+   on-surface text tokens like `color.text.on-primary`) with **Muse Spark**, one reason per token. Deterministic code
+   validates every proposal: one primitive per cluster, aliases resolve, values match what was captured.
+5. **Review:** a person accepts, renames, rejects or merges tokens in the HTML report.
+6. **Rewrite** the literals in the real source (CSS, Vue `<style>`, JSX/styled-components, inline SVG) to
+   `var(--token, original)`, keeping the original as the fallback.
+7. **Verify** with four checks: fallbacks only must be pixel-identical; merged colors must be invisible; the full
+   cleanup is measured and shown for review; and **text contrast** (WCAG 2.x AA, SC 1.4.3) is measured on the rendered
+   pixels, so a proposal that makes any text harder to read is blocked.
+8. **Pull request** with the verify table and the text pairs below AA, each with the token that controls it.
+9. **Preview** any token change live in the web app itself through Sorb, before anyone merges.
+
+Also built on the same tokens: `s2t dark` proposes a dark theme as a token file (every text pair contrast-checked, one
+automatic retry), and `s2t nontext` uses SAM 3.1 click prompts to outline each icon and control and measure its contrast
+(WCAG 1.4.11) and target size (WCAG 2.5.8).
+
+## Built with Meta's models
+
+| Model | What it does here | Measured |
+|---|---|---|
+| **SAM 3.1** (Meta Model API) | Segments buttons, inputs and icons from pixels; click (point) prompts outline single controls for measurement | On a page built of divs and a canvas, page structure finds **0 of 8** buttons and SAM finds **8 of 8** (IoU 0.95), including one painted inside a canvas. Click-to-outline in about 1.6 s |
+| **Muse Spark Open** on Baseten (open weights) | The default namer, and dark-theme proposals | Names a page's tokens in **3 to 5 s**, 3 to 9× faster than hosted Muse Spark 1.3, with identical fixture scores |
+| **Muse Spark 1.3** (hosted) | Alternative namer; dark-theme proposals in `--provider both` (the better result is kept) | 13.7 to 26.2 s per naming call; won the dark-theme comparison on Light Bootstrap Dashboard |
+
+No GPU on the laptop; one full run on Argon Dashboard costs under a cent.
+
+## Evidence (all numbers from real runs; reproducible from the repo)
+
+| Claim | Result | Where |
+|---|---|---|
+| Rewrite is safe on real sites | 28 public, permissively licensed sites we didn't build: **2,313 values rewritten, 0 px changed on 23 of 23** stable sites with edits; a second run gave the same verdict on all 27 reachable | `docs/breadth.md` |
+| Segmentation on real sites | Hand-labeled first screens of 3 sites: the combined segmenter passes all three | `docs/real-site-segeval.md` |
+| End to end, Argon Dashboard | 16 to 23 s, naming 3.6 to 4.9 s; checks 0 px · 0.000% · 0.919% | `docs/latency.md` |
+| Human review | Accept, rename and merge take the fixture's answer-key score from 20/21 to 21/21, still 0 px | `demo/L5-review-take.md` |
+| Text contrast vs the W3C rule | ACT rule afw4f7 (text has minimum contrast): **32 of 32** approved test cases consistent, 31 exact | `docs/a11y.md` |
+| Text contrast vs axe-core 4.14 | 28 sites: agrees on 308 of 309 violations and 2,165 of 2,174 passes, **1 opposite verdict in 2,483**; decides **243 of the 251** items axe leaves for manual review (text on gradients and images) | `docs/a11y.md` |
+| Icons and controls (SAM) | On the div page, SAM found 9 controls the code doesn't describe; each measured for contrast and size | `docs/a11y-nontext.md` |
+| Dark mode as a token file | Light Bootstrap Dashboard: 83 of 84 text pairs pass in dark (14 of 84 in its original light theme) | `docs/dark-mode.md` |
+| Tests | 205 passing | `pnpm test` |
+
+## How it scores against the rubric
+
+| Rubric | Where to look |
+|---|---|
+| **Impact (30%)** | The problem above; contrast fixes and dark mode become token changes; 28-site breadth run |
+| **Use of Meta AI tooling (25%)** | SAM 3.1 on UI screenshots, where the DOM has nothing (0/8 vs 8/8); SAM click prompts to measure single controls; open-weights Muse Spark on Baseten as the fast namer; hosted Muse Spark compared on every dark theme |
+| **Technical depth & execution (20%)** | The model proposes, deterministic code guarantees the shape; four-check verify; benchmarks against the W3C ACT test cases and axe-core; 205 tests |
+| **Demo (25%)** | The video; the live demo site and playground; PR #2 on the fork |
+
+## What existed before the hackathon, and what is new
+
+**Before the building period (git tag `pre-event-baseline`, built Oct 25, 2026):** the pipeline scaffold with an
+offline stand-in for every Meta model: capture, a DOM-based mock segmenter, clustering, a heuristic namer and validator,
+the rewrite, a three-check verify, the HTML report with review, the CLI, two test fixtures and the test suite. It
+depends only on the published `@sorb/seed` package. **Sorb** is Metatoy's existing product (a design-token bridge
+between design and a live web app, published under `@sorb/*`); it is not part of this repo and not shown in the video.
+
+**Built during the hackathon (66 commits after `pre-event-baseline`, `git log pre-event-baseline..main`):** everything
+that uses Meta's models (SAM 3.1 segmentation and click prompts, Muse Spark naming hosted and open-weights, the hybrid
+segmenter), component and state tokens, on-surface text tokens, the text-contrast check and its benchmarks, SAM-measured
+controls, dark mode, the 28-site breadth run, the live demo site, the playground, and the demo video.
+
+## Limits
+
+- Text contrast is checked on the captured page in its default state: not hover or focus states, placeholders, or
+  non-text contrast beyond the SAM-measured controls. This is a contrast check, not a full accessibility audit (no
+  keyboard or screen-reader checks).
+- Two of the 28 sites animate on their own (a randomly thrown tag pile, a live waveform); pixel checks can't be exact
+  there, so they're reported separately, not counted as passes.
+- SCSS/Less sources aren't rewritten (the compiled CSS is); hashed CSS bundles behind a remote URL need the local build.
+- Dark mode only reaches colors that are tokens: on Argon the sidebar, page background and header gradient stay light.
+
+## How to run
+
+```sh
+pnpm install --ignore-workspace
+pnpm test                                   # 205 tests
+pnpm demo                                   # fixture app, offline stand-ins → out/acme-shop/report.html
+S2T_SEGMENTER=hybrid S2T_NAMER=baseten node src/cli.js run --serve <app build> --target <css dir> --run out/my-app
+node src/cli.js dark --run out/my-app --provider both
+```
+
+## Data policy
+
+Only public pages go to hosted models. Meta's "Contributor" tier (cheaper because it trains on your data) is never
+used; the code refuses `-contributor` model ids. SAM requests send `store: false`. Keys are read from the macOS Keychain
+or a git-ignored `.env`, never from code.
+
+## Team
+
+Nathan O'Brien, Metatoy (https://github.com/nhunsaker): solo founder; design, engineering and the demo. Built with AI
+coding agents (Claude Code) under his direction.

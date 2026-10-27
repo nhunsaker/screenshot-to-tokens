@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Demo voiceover with the same ElevenLabs voice and settings as the flsx.io walkthrough
-// (fls-harness/deploy/walkthrough/walkthrough.json). Key from the macOS Keychain item `elevenlabs-api`; never printed.
+// (Metatoy's flsx.io walkthrough). Key from the macOS Keychain item `elevenlabs-api`; never printed.
 //   node scripts/gen-vo.mjs out/video/vo-lines.json out/video/vo
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
 import { execFileSync } from 'child_process'
