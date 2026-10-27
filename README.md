@@ -89,6 +89,8 @@ If a provider fails, the run falls back to the heuristic and records a warning i
 Verify runs three checks: with only the `var()` fallbacks the page must be pixel-identical (0 px); with the merged
 color tokens loaded nothing may visibly change; with every token loaded the spacing cleanup is measured and shown
 for review. A second shot of the unchanged page marks pixels that move between loads so animations don't count.
+A fourth check measures text contrast (WCAG 2.x AA, SC 1.4.3) with the background read from the rendered pixels, and
+fails a proposal that adds a failing pair (`docs/a11y.md`).
 
 ## Data policy
 

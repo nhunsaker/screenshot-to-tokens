@@ -390,6 +390,55 @@ function verifyRow(label, v, imgs, status) {
   </div>`
 }
 
+/** One swatch for a measured color (hex only; anything else renders as text). */
+const colorChip = (hex) => {
+  const v = /^#[0-9a-f]{6}$/i.test(String(hex || '')) ? hex : null
+  return v ? `<span class="swatch swatch-sm" style="background:${v}"></span> <code>${v}</code>` : `<code>${escapeHtml(hex || '')}</code>`
+}
+
+/** Failing text pairs as a table: text, measured ratio vs the AA minimum, both colors, the token(s) behind the text color. */
+function contrastTable(list, max = 60) {
+  if (!list || !list.length) return ''
+  const rows = list.slice(0, max).map((p) => `<tr>
+    <td>${escapeHtml(p.text)}</td>
+    <td class="num">${escapeHtml(p.ratio)} : 1${p.before !== undefined ? ` <span class="muted">(was ${escapeHtml(p.before)})</span>` : ''}</td>
+    <td class="num">${escapeHtml(p.required)}${p.large ? ' <span class="muted">large</span>' : ''}</td>
+    <td>${colorChip(p.fg)}</td>
+    <td>${colorChip(p.bg)}</td>
+    <td>${(p.tokens || []).map((t) => `<code>${escapeHtml(cssVarOf(t))}</code>`).join(' ') || '<span class="muted">no token</span>'}</td>
+  </tr>`).join('')
+  const more = list.length > max ? `<p class="muted">and ${list.length - max} more in verify.json</p>` : ''
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>text</th><th>ratio</th><th>AA min</th><th>text color</th><th>background (measured)</th><th>text color token</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>${more}`
+}
+
+/** Check 4: text contrast. Not a pixel diff, so it gets its own row: counts, regressions (blocking), then existing failures. */
+function contrastRow(c) {
+  if (!c) return ''
+  const label = 'Text contrast (WCAG 2.x AA, SC 1.4.3)'
+  if (c.error) return `<div class="verify-row"><div class="verify-row-head"><span class="badge badge-info">not run</span> <strong>${label}</strong> <span class="muted">${escapeHtml(c.error)}</span></div></div>`
+  const status = c.pass ? 'pass' : 'FAIL'
+  const fa = c.failingAfter || {}
+  const counts = `${c.pairs} text pairs measured; ${c.failingBefore} below the AA minimum on the original page, ${fa.colors ?? '?'} with color tokens, ${fa.all ?? '?'} with all tokens; ${c.regressions.length} regression${c.regressions.length === 1 ? '' : 's'}`
+  const regress = c.regressions.length
+    ? `<p><strong>Newly below AA after the proposal (blocks the gate):</strong></p>${contrastTable(c.regressions)}`
+    : ''
+  const improved = c.improved && c.improved.length ? `<p class="muted">${c.improved.length} pair${c.improved.length === 1 ? '' : 's'} moved above the minimum.</p>` : ''
+  const existing = c.failing && c.failing.length
+    ? `<details${c.failing.length <= 12 ? ' open' : ''}><summary>${c.failing.length} pair${c.failing.length === 1 ? '' : 's'} below AA on the original page (reported, not blocking)</summary>${contrastTable(c.failing)}</details>`
+    : ''
+  return `<div class="verify-row">
+    <div class="verify-row-head">
+      <span class="badge ${STATUS_BADGE_CLASS[status]}">${status}</span> <strong>${label}</strong>
+      <span class="muted">${escapeHtml(counts)}</span>
+    </div>
+    <p class="muted">Text color from the computed style; background measured on the rendered pixels around the letters, so gradients and images count. Checked on this captured route only (no hover or focus states, no non-text contrast). The gate blocks a proposal that adds a failing pair.</p>
+    ${regress}${improved}${existing}
+  </div>`
+}
+
 function verifySection(data) {
   const { verify, verifyImages } = data
   if (!verify) return sectionWrap('Verify', empty('No verify yet — run the verify stage.'))
@@ -417,10 +466,11 @@ function verifySection(data) {
     verifyRow('Fallbacks only (safety)', verify.fallback, imgs.fallback, verify.fallback && verify.fallback.pass ? 'pass' : 'FAIL'),
     verifyRow('Colors merged', verify.colors, imgs.colors, verify.colors && verify.colors.pass ? 'pass' : 'FAIL'),
     verifyRow('All tokens (layout cleanup to review)', verify, imgs, verify.reviewNeeded ? 'review' : 'pass'),
+    contrastRow(verify.contrast),
   ].join('')
 
   return sectionWrap('Verify', `
-    <p>${gateBadge} rewrite gate: fallbacks must be pixel-identical and color merges must be invisible</p>
+    <p>${gateBadge} rewrite gate: fallbacks must be pixel-identical, color merges must be invisible${verify.contrast && !verify.contrast.error ? ', and no text pair may newly fall below the AA contrast minimum' : ''}</p>
     ${rows}
   `)
 }
@@ -609,6 +659,8 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 .pill { display: inline-block; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; font-size: 0.8em; margin: 2px 2px 0 0; }
 .swatch { display: inline-block; width: 22px; height: 22px; border: 1px solid var(--border); flex-shrink: 0; }
 .swatch-neutral { background: var(--surface); }
+.swatch-sm { width: 14px; height: 14px; vertical-align: middle; border-radius: 3px; }
+td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .swatch-bar { height: 10px; border-radius: 3px; background: var(--secondary); }
 .sample { font-size: 14px; border: 1px solid var(--border); border-radius: 4px; padding: 0 6px; background: var(--surface); }
 .table-wrap { overflow-x: auto; }
