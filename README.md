@@ -80,7 +80,7 @@ Playwright  SAM 3.1   bbox    ΔE / px   Muse Spark  repairs   tokens.css  var()
 
 | Stage | Provider env | Stand-in (offline) | Real |
 |---|---|---|---|
-| segment | `S2T_SEGMENTER` | `mock`: regions from DOM boxes (an oracle; overstates quality) | `meta` SAM 3.1, `local` SAM on this machine |
+| segment | `S2T_SEGMENTER` | `mock`: regions from DOM boxes (an oracle; overstates quality) | `meta` SAM 3.1 (hosted), `hybrid` SAM 3.1 + layout + DOM rules, `modal` SAM 3.1 open weights on a Modal GPU, `hybrid+modal` (or `hybrid` with `S2T_SAM=modal`) the hybrid on open weights, `local` SAM on this machine |
 | name | `S2T_NAMER` | `mock`: usage-driven heuristic names | `meta` Muse Spark 1.3, `baseten` Muse Spark Open (open weights), `ollama` local Llama, `fireworks` |
 | review | `s2t review` | decisions exported from report.html (accept / rename / reject) | same |
 | rewrite | `S2T_CODER` | `deterministic`: literal → `var(--token, original)` into `out/<run>/rewritten/` | same; `s2t pr` branches, commits and opens the draft PR |
@@ -105,7 +105,8 @@ tier. Keys are read from the macOS Keychain or `.env` (git-ignored), never from 
 ```
 src/cli.js, src/pipeline.js     entry + orchestration (each stage writes out/<run>/<stage>.json)
 src/stages/                     capture, join, cluster, name (validate), emit, rewrite, verify, report, eval, review, pr, preview
-src/providers/segment/          mock, meta-sam (SAM 3.1), local-sam (+ scripts/sam_local.py)
+src/providers/segment/          mock, meta-sam (SAM 3.1), hybrid, modal-sam (open weights), local-sam (+ scripts/sam_local.py)
+modal/                          SAM 3.1 open-weights app for Modal + its client (docs/open-weights-pipeline.md)
 src/providers/llm/              chat (OpenAI-compatible), heuristic, llm-namer
 src/providers/coder/            deterministic (CSS + Vue), jsx, svg-attrs, meta-code
 src/preview-client/             sorb-preview.js (no-build live preview for plain HTML)

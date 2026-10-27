@@ -77,11 +77,15 @@ export function mergeRegions(sam, layout, dom) {
   return postprocessRegions(kept)
 }
 
-/** @returns {import('../../types.js').SegmentProvider} */
-export default function hybridSegmenter() {
-  const sam = metaSam()
+/**
+ * @param {{sam?: import('../../types.js').SegmentProvider}} [o]  the SAM provider (default: hosted SAM 3.1 on the
+ *   Meta Model API; `S2T_SEGMENTER=hybrid+modal` passes the open-weights SAM 3.1 on Modal instead)
+ * @returns {import('../../types.js').SegmentProvider}
+ */
+export default function hybridSegmenter(o = {}) {
+  const sam = o.sam || metaSam()
   return {
-    id: 'hybrid:sam3.1+layout+dom',
+    id: `hybrid:${sam.id}+layout+dom`,
     async segment(capture, runDir) {
       const samRegions = relabelInertButtons(await sam.segment(capture, runDir), capture)
       const layout = layoutRegions(capture, samRegions)

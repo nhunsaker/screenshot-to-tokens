@@ -23,7 +23,14 @@ export async function segmenterFor(id) {
   if (id === 'mock') return (await import('./providers/segment/mock.js')).default()
   if (id === 'meta') return (await import('./providers/segment/meta-sam.js')).default()
   // SAM 3.1 for buttons / inputs / icons + layout rules anchored on them + DOM style rules (the recommended mode).
-  if (id === 'hybrid') return (await import('./providers/segment/hybrid.js')).default()
+  // S2T_SAM=modal (or the id hybrid+modal) swaps the hosted SAM for the open-weights SAM 3.1 on Modal.
+  if (id === 'hybrid' && process.env.S2T_SAM !== 'modal') return (await import('./providers/segment/hybrid.js')).default()
+  if (id === 'hybrid+modal' || id === 'hybrid') {
+    const sam = (await import('./providers/segment/modal-sam.js')).default()
+    return (await import('./providers/segment/hybrid.js')).default({ sam })
+  }
+  // SAM 3.1 from Meta's open weights, self-hosted on a Modal GPU (modal/sam31_app.py).
+  if (id === 'modal') return (await import('./providers/segment/modal-sam.js')).default()
   if (id === 'local') return (await import('./providers/segment/local-sam.js')).default()
   // Fallback if SAM scores NO-GO on UI: a vision LLM returns boxes as JSON (meta = Muse Spark).
   if (id === 'vision') return (await import('./providers/segment/meta-vision.js')).default('meta')
