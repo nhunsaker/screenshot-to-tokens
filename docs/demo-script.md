@@ -69,3 +69,16 @@ Silent rough cut: `out/video/demo-v1-draft.mp4` (2:18). Needs: voiceover, trims 
 Open issue for the cut: the PR on screen (fork #1) says "replace 919 hardcoded values"; it was opened from the
 10-26 run, while the diff beat shows the recording run's 412 edits on the compiled stylesheet. Either re-open the PR
 from `out/rec-argon` or don't show the count on the PR page.
+
+## Voiceover (generated 2026-10-27)
+
+`node scripts/gen-vo.mjs` with the flsx.io ElevenLabs voice (`nyfVCF0XNA1BwwJ7FiP2`, `eleven_multilingual_v2`).
+Main lines are the Voiceover column above. Second lines fill the long pauses (numbers from `out/rec-argon` and the
+review run), spoken 0.6 s after each beat's first line (`docs/demo-vo-extra.json`):
+- Beat 1: "On this one page: sixty-seven distinct values, and thirteen of them are near-duplicates of others."
+- Beat 3: "It captured 277 elements with their real styles. The hybrid segmenter returned 66 regions. 995 style values
+  collapsed into 54 clusters. Muse Spark Open, on Baseten, named 86 tokens in under five seconds: primitives, semantic
+  tokens, and component tokens like button.active.bg. Then 412 values were rewritten, and checked."
+- Beat 4: "Applying her decisions re-runs the rewrite and the checks: 127 edits, and still zero pixels changed."
+- Beat 6: "Nothing here is merged. A link carries the proposal to the rest of the team."
+Voiced cut: `out/video/demo-v1-vo.mp4` (2:39, −16 LUFS); the only silences are about 1.5 s at beat cuts.
