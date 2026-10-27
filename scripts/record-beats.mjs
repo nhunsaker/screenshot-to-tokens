@@ -27,11 +27,12 @@ function editorPage() {
 }
 
 // A terminal that types a command and reveals the real output lines at the real stage times (seconds since start).
-function terminalPage(cmd, lines, highlight) {
+function terminalPage(cmd, lines, highlight, speed = 1) {
+  const label = speed > 1 ? `<div style="position:fixed;right:18px;top:14px;font:600 13px system-ui;color:#999;border:1px solid #444;border-radius:6px;padding:3px 8px">${speed}× replay · real times shown</div>` : ''
   const rows = lines.map((l) => `<div class="o ${highlight.test(l.text) ? 'ok' : ''}" data-at="${l.at}">${esc(l.text)}</div>`).join('')
-  return `<!doctype html><meta charset="utf-8"><style>${BASE_CSS}</style><div><span class="p">screenshot-to-tokens <b>%</b></span> <span id="t"></span></div><div id="o">${rows}</div>
-<script>const cmd=${JSON.stringify(cmd)};const s=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await s(500);for(const ch of cmd){t.textContent+=ch;await s(22)}await s(250);const t0=Date.now();
-for(const o of document.querySelectorAll('.o')){const at=+o.dataset.at*1000;while(Date.now()-t0<at)await s(30);o.classList.add('show')}document.querySelectorAll('.o.ok').forEach(e=>e.classList.add('hl'));window.done=1})()</script>`
+  return `<!doctype html><meta charset="utf-8"><style>${BASE_CSS}</style><div><span class="p">screenshot-to-tokens <b>%</b></span> <span id="t"></span></div>${label}<div id="o">${rows}</div>
+<script>const cmd=${JSON.stringify(cmd)};const speed=${JSON.stringify(speed)};const s=ms=>new Promise(r=>setTimeout(r,ms));(async()=>{await s(500);for(const ch of cmd){t.textContent+=ch;await s(22)}await s(250);const t0=Date.now();
+for(const o of document.querySelectorAll('.o')){const at=+o.dataset.at*1000/speed;while(Date.now()-t0<at)await s(30);o.classList.add('show')}document.querySelectorAll('.o.ok').forEach(e=>e.classList.add('hl'));window.done=1})()</script>`
 }
 function runTerminal() {
   const text = readFileSync(`${RUN}-terminal.txt`, 'utf-8').trim().split('\n')
@@ -40,7 +41,7 @@ function runTerminal() {
   const at = {}
   for (const s of timing.stages) { t += s.ms / 1000; at[s.stage] = t }
   const lines = text.map((l) => { const m = l.match(/^\s+(\w+)\s/); return { text: l.length > 112 ? l.slice(0, 111) + '…' : l, at: m && at[m[1]] != null ? at[m[1]] : (/^done/.test(l) ? t : 0) } })
-  return terminalPage(`node src/cli.js run --serve argon/build --run ${RUN}`, lines, /verify|done in/)
+  return terminalPage(`node src/cli.js run --serve argon/build --run ${RUN}`, lines, /verify|done in/, 2)
 }
 function diffPage() {
   const r = JSON.parse(readFileSync(join(RUN, 'rewrite.json'), 'utf-8'))
@@ -77,13 +78,13 @@ async function beat(n, fn) {
 const page = (name, html) => { writeFileSync(join(PAGES, name), html); return `${srv.url}out/video/pages/${name}` }
 const wait = (p, ms) => p.waitForTimeout(ms)
 
-await beat(1, async (p) => { await p.goto(page('editor.html', editorPage())); await wait(p, 13000) })
+await beat(1, async (p) => { await p.goto(page('editor.html', editorPage())); await wait(p, 10000) })
 await beat(2, async (p) => { await p.goto(`${srv.url}out/scoreboard.html`, { waitUntil: 'networkidle' }); await wait(p, 600); await p.click('#replay'); await wait(p, 6500); await p.evaluate(() => document.querySelector('.headline')?.scrollIntoView({ block: 'start' })); await wait(p, 3500) })
 await beat(3, async (p) => {
   await p.goto(page('run.html', runTerminal())); await p.waitForFunction(() => window.done, null, { timeout: 60000 }); await wait(p, 1800)
   await p.goto(`${srv.url}${RUN}/report.html`, { waitUntil: 'networkidle' })
-  await p.evaluate(() => [...document.querySelectorAll('h3.tier-head')].find((h) => /semantic/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 3000)
-  await p.mouse.wheel(0, 500); await wait(p, 2500); await p.mouse.wheel(0, 500); await wait(p, 2000)
+  await p.evaluate(() => [...document.querySelectorAll('h3.tier-head')].find((h) => /semantic/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 2600)
+  await p.mouse.wheel(0, 500); await wait(p, 2400)
 })
 await beat(4, async (p) => {
   // Paced to the voiceover: accept (about 2 s in), rename (about 7 s), merge (about 14 s), then the terminal.
@@ -111,5 +112,17 @@ await beat(7, async (p) => {
   await p.evaluate(() => [...document.querySelectorAll('h2')].find((h) => /Real sites/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 4000)
   await p.goto('https://github.com/nhunsaker/argon-dashboard-react/pull/1', { waitUntil: 'domcontentloaded' }); await wait(p, 4000)
 })
-await beat(8, async (p) => { await p.goto(`${srv.url}${RUN}/report.html`, { waitUntil: 'networkidle' }); await wait(p, 4000) })
+function endCard() {
+  const items = [
+    [0.3, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
+    [12.7, 'Muse Spark Open · on Baseten', 'names the token set', '3 to 5 s · 3 to 9× faster than hosted · same answer-key scores'],
+    [23.2, 'Muse Spark', 'audits contrast on the live app', '41 failing text pairs → 2'],
+    [30.2, 'No GPU. One laptop.', '191 runs to build this', 'under $2 of Meta credit · 28 real sites · 2,313 values · 0 px'],
+    [40.4, 'Propose the change. See it live. Verify before you merge.', '', 'Screenshot to Tokens · a Sorb add-on by Metatoy'],
+  ]
+  const rows = items.map(([at, h, sub, big]) => `<div class="it" data-at="${at}"><div class="h">${esc(h)}</div>${sub ? `<div class="s">${esc(sub)}</div>` : ''}<div class="b">${esc(big)}</div></div>`).join('')
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:48px 72px}.it{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;margin:0 0 26px}.it.on{opacity:1;transform:none}.h{font-size:30px;font-weight:700;letter-spacing:-.3px}.s{font-size:17px;color:#9a9a94;margin-top:2px}.b{font-size:21px;color:#8a9af0;margin-top:4px}.it:last-child .h{font-size:34px;margin-top:10px}.cr{position:fixed;left:72px;right:72px;bottom:28px;font-size:13px;color:#6b6a66;opacity:0;transition:opacity .6s}.cr.on{opacity:1}</style>${rows}<div class="cr" data-at="42">SAM 3.1 and Muse Spark by Meta · Muse Spark Open served on Baseten · Argon Dashboard React by Creative Tim (MIT; our fork, not affiliated) · breadth-run sites are MIT/Apache/BSD/ISC licensed, used with credit</div>
+<script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},100)</script>`
+}
+await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 46500) })
 await browser.close(); await srv.close()
