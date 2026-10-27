@@ -16,3 +16,17 @@ p50 = median, p90 = 90th percentile. Cost at Meta Model API list prices. Reprodu
 - **Agency is a 6,000 px tall page**, so SAM runs on 4 tiles (12 calls in parallel): 7 s and $0.05 instead of 2 s and $0.035.
 - The F20 component-token change landed between rounds 3 and 4; naming time in rounds 4 and 5 is in the same range.
 - This is wall time on one machine for these pages, not a throughput benchmark.
+
+## L3: the demo namer is Muse Spark Open on Baseten (2026-10-26)
+
+`zsh scripts/demo-runs.sh` warms the Baseten endpoint (`scripts/warm-namer.mjs`, 1.2 s), then runs the three demo apps
+end to end, uncached, with `S2T_NAMER=baseten`. Hosted Muse Spark stays one switch away (`S2T_NAMER=meta`).
+
+| App | Hosted total p50 (5 runs, above) | Open weights total (1 run) | Naming | Safety checks |
+|---|---|---|---|---|
+| Argon Dashboard | 26.8 s | 17.1 s | 4.2 s | 0 px, colors 0.000% |
+| Light Bootstrap Dashboard | 24.2 s | 12.4 s | 3.6 s | 0 px, colors 0.000% |
+| StartBootstrap Agency | 34.9 s | 26.4 s | 5.1 s | 0 px, colors 0.000% |
+
+Naming is no longer the longest stage; verify (three screenshot passes) and, on the long Agency page, SAM tiles are.
+Cost: $0.007 to $0.03 per run. One run per app, so these are single measurements, not percentiles.

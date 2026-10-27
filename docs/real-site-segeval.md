@@ -45,8 +45,8 @@ node src/cli.js run --serve <argon build> --run out/l1/argon-dom --to segment
 node src/cli.js run --url https://hacksocnotts.github.io/ --run out/l1/hacksoc-dom --to segment
 node src/cli.js run --url https://josh-wong.github.io/ --run out/l1/joshwong-dom --to segment
 # copy capture.json + run.json + screenshot.png to <id>-sam and <id>-hybrid, then:
-S2T_SEGMENTER=meta   node src/cli.js run --url x --run out/l1/<id>-sam    --from segment --to segment
-S2T_SEGMENTER=hybrid node src/cli.js run --url x --run out/l1/<id>-hybrid --from segment --to segment
+S2T_SEGMENTER=meta   node src/cli.js run --url https://example.invalid --run out/l1/<id>-sam    --from segment --to segment
+S2T_SEGMENTER=hybrid node src/cli.js run --url https://example.invalid --run out/l1/<id>-hybrid --from segment --to segment
 node src/cli.js segeval --run out/l1/<id>-hybrid --truth fixtures/l1/<id>.truth.json --max-y 900
 node src/cli.js scoreboard   # adds the "Real sites" table
 ```
