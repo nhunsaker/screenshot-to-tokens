@@ -13,6 +13,7 @@
  * @property {string|null} role         ARIA role or implicit role guess.
  * @property {string[]} [classes]        The element's CSS classes (first 8).
  * @property {string} text              First 40 chars of own text.
+ * @property {boolean} [clickable]      Behaves clickable (itself or via an ancestor, or pointer cursor). Older captures lack it.
  * @property {[number,number,number,number]} bbox  [x, y, w, h] in page px.
  * @property {Record<string,string>} styles  Raw computed values for STYLE_PROPS.
  */

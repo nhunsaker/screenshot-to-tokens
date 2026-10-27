@@ -83,6 +83,9 @@ function walkPage(props, maxElements) {
       // Full class list (capped) so component profiles can map CSS selectors back to detected components.
       classes: Array.prototype.slice.call(el.classList || [], 0, 8),
       text: ownText(el),
+      // Does it behave clickable (itself or through a clickable ancestor; cursor is inherited)? Lets the hybrid
+      // tell a status pill (looks like a button, does nothing) from a real button.
+      clickable: cs.cursor === 'pointer' || !!el.closest('a[href],button,input,select,textarea,label,summary,[onclick],[role=button],[role=link],[role=tab],[tabindex]:not([tabindex="-1"])'),
       bbox: [Math.round(r.left + scrollX), Math.round(r.top + scrollY), Math.round(r.width), Math.round(r.height)],
       styles,
     })

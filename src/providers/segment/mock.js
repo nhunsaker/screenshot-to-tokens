@@ -15,6 +15,10 @@ export function labelFor(e) {
   if (e.role === 'link') {
     const padded = parseFloat(s['padding-left'] || '0') >= 8 && parseFloat(s['padding-top'] || '0') >= 4
     if (padded && (hasBg || s['border-top-color'] || s['border-left-color'])) return 'button'
+    // A filled block of link text big enough to tap (HackSoc Notts' green "JOIN US!") is a button too, even
+    // with no padding; inline text links are shorter than this.
+    const [, , lw, lh] = e.bbox
+    if (hasBg && lh >= 28 && lw >= 48) return 'button'
   }
   if (e.role && LABEL_BY_ROLE[e.role]) return LABEL_BY_ROLE[e.role]
   const hasShadow = s['box-shadow'] && s['box-shadow'] !== 'none'
@@ -29,7 +33,10 @@ export function labelFor(e) {
 export function regionsFromCapture(capture) {
   /** @type {import('../../types.js').Region[]} */
   const regions = []
+  const vw = capture.viewport?.width || Infinity
   for (const e of capture.elements) {
+    // Parked off-screen (skip links at left: -9999px or past the right edge) means invisible to a person.
+    if (e.bbox[0] >= vw || e.bbox[0] + e.bbox[2] <= 0) continue
     const label = labelFor(e)
     if (!label) continue
     regions.push({ id: `r${regions.length}`, bbox: e.bbox, label, score: 1, source: 'mock-dom' })

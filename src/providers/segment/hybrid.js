@@ -47,6 +47,24 @@ export function layoutRegions(capture, anchors) {
 }
 
 /**
+ * SAM calls anything pill-shaped a "button", including status pills that do nothing (div-soup: every "Healthy"
+ * and "Failed" in the deploys table). When the capture shows the element under a small SAM button is not
+ * clickable (no link, button, onclick, tabindex or pointer cursor, itself or via an ancestor), call it a badge.
+ * Boxes with no matching element (a button painted inside a canvas) and older captures without the
+ * `clickable` field are left alone. Pure; exported for tests.
+ * @param {import('../../types.js').Region[]} sam
+ * @param {import('../../types.js').Capture} capture
+ */
+export function relabelInertButtons(sam, capture) {
+  return sam.map((r) => {
+    if (r.label !== 'button' || r.bbox[3] > 32 || r.bbox[2] > 160) return r
+    const under = capture.elements.filter((e) => e.clickable !== undefined && iou(e.bbox, r.bbox) > 0.6)
+    if (!under.length || under.some((e) => e.clickable)) return r
+    return { ...r, label: 'badge', source: `${r.source || 'sam3.1'}+inert` }
+  })
+}
+
+/**
  * Merge SAM, layout and DOM regions. Pure; exported for tests.
  * - Layout regions are containers (a header holds the search bar), so they only clash with the same label.
  * - DOM regions clash with anything already kept at IoU > 0.5, so SAM's label wins when both saw the same box
@@ -65,7 +83,7 @@ export default function hybridSegmenter() {
   return {
     id: 'hybrid:sam3.1+layout+dom',
     async segment(capture, runDir) {
-      const samRegions = await sam.segment(capture, runDir)
+      const samRegions = relabelInertButtons(await sam.segment(capture, runDir), capture)
       const layout = layoutRegions(capture, samRegions)
       const dom = regionsFromCapture(capture)
       return mergeRegions(samRegions, layout, dom)
