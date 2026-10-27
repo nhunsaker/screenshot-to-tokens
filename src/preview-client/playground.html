@@ -7,11 +7,11 @@
 <style>
   :root {
     --bg: #f6f6f4; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a66; --line: #e3e2de; --soft: #efefec;
-    --accent: #5e72e4; --warn-bg: #fff5e6; --warn-ink: #8a5300; --chip: #f2f2ef;
+    --accent: #5e72e4; --warn-bg: #fff5e6; --warn-ink: #8a5300; --chip: #f2f2ef; --good: #1f6e3f;
   }
   @media (prefers-color-scheme: dark) {
     :root { --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a09f9a; --line: #34332f; --soft: #2a2a27;
-      --accent: #8a9af0; --warn-bg: #3a2a12; --warn-ink: #f0c27a; --chip: #2a2a27; }
+      --accent: #8a9af0; --warn-bg: #3a2a12; --warn-ink: #f0c27a; --chip: #2a2a27; --good: #8fdcaa; }
   }
   * { box-sizing: border-box; }
   html, body { height: 100%; }
@@ -41,6 +41,33 @@
   .radius { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
   .radius input { width: 140px; }
   .rprev { width: 34px; height: 34px; border: 2px solid var(--accent); background: var(--soft); }
+  .tools { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .tools.on { display: block; }
+  .tools .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .tools select { font: 12.5px system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 5px 6px; max-width: 100%; }
+  .tools .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  .results { display: none; border-bottom: 1px solid var(--line); padding: 10px 16px 12px; max-height: 46vh; overflow: auto; }
+  .results.on { display: block; }
+  .results h3 { font-size: 13px; margin: 8px 0 4px; }
+  .results p { margin: 4px 0; font-size: 12.5px; }
+  .score { display: inline-block; font: 700 12px system-ui, sans-serif; border-radius: 99px; padding: 2px 8px; background: var(--chip); }
+  .score.bad { background: var(--warn-bg); color: var(--warn-ink); }
+  .score.good { background: color-mix(in srgb, #2f9e5b 18%, transparent); color: var(--good); }
+  .pair { display: grid; grid-template-columns: 40px 1fr auto; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--soft); font-size: 12.5px; }
+  .pair:first-of-type { border-top: 0; }
+  .aa { width: 40px; height: 28px; border-radius: 6px; border: 1px solid var(--line); display: grid; place-items: center; font: 700 13px system-ui, sans-serif; }
+  .ratio { font: 600 12px ui-monospace, Menlo, monospace; white-space: nowrap; text-align: right; }
+  .ratio .need { display: block; font-weight: 400; color: var(--muted); }
+  .fix { padding: 6px 0; border-top: 1px solid var(--soft); font-size: 12.5px; }
+  .fix .name { display: inline; }
+  .fix .why { color: var(--muted); }
+  .fix.dropped { opacity: .6; }
+  .tag { font: 600 11px system-ui, sans-serif; border-radius: 99px; padding: 1px 7px; margin-left: 4px; background: var(--chip); color: var(--muted); }
+  .tag.ok { background: color-mix(in srgb, #2f9e5b 18%, transparent); color: var(--good); }
+  .tag.no { background: var(--warn-bg); color: var(--warn-ink); }
+  .busy { color: var(--muted); font-size: 12.5px; }
+  .busy::after { content: ''; display: inline-block; width: 10px; height: 10px; margin-left: 6px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -1px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .stage { position: relative; min-width: 0; }
   iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
   .toast { position: fixed; right: 16px; bottom: 16px; background: #111; color: #fff; padding: 8px 12px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
@@ -50,8 +77,9 @@
     .stage { order: -1; height: 55vh; }
     aside { border-right: 0; border-top: 1px solid var(--line); }
     .list { overflow: visible; }
+    .results { max-height: none; overflow: visible; }
   }
-  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } .busy::after { animation: none; } }
 </style>
 </head>
 <body>
@@ -65,8 +93,20 @@
         <button id="reset" disabled>Reset all</button>
         <button id="copy" class="primary" disabled>Copy proposal link</button>
       </div>
+      <div class="tools" id="tools">
+        <div class="row">
+          <button id="audit">Check contrast</button>
+          <button id="dark" hidden>Build a dark theme</button>
+          <select id="provider" hidden aria-label="Model">
+            <option value="baseten">Muse Spark Open (Baseten, fast)</option>
+            <option value="meta">Muse Spark (Meta hosted)</option>
+          </select>
+        </div>
+        <div class="hint" id="toolsHint">WCAG AA text contrast, checked on the live app with the current token values.</div>
+      </div>
       <input class="search" id="search" type="search" placeholder="Filter tokens (e.g. action, blue, radius)" aria-label="Filter tokens">
     </header>
+    <section class="results" id="results" aria-live="polite"></section>
     <div class="list" id="list" aria-live="polite"></div>
   </aside>
   <main class="stage">
@@ -130,7 +170,7 @@
   }
   function row(t) {
     var el = document.createElement('div')
-    el.className = 'tok'
+    el.className = 'tok' + (changes[t.cssVar] ? ' changed' : '')
     el.setAttribute('data-var', t.cssVar)
     el.setAttribute('data-search', (t.name + ' ' + (t.alias || '') + ' ' + t.tier + ' ' + t.kind).toLowerCase())
     var meta = t.alias ? '→ <code>' + chain(t).join(' → ') + '</code>' : '<code>' + (t.value || '') + '</code>'
@@ -186,6 +226,199 @@
     })
   })
 
+  // ---- Accessibility audit + Muse (audit fixes, dark theme) ------------------------------------------------------
+  // The contrast check is deterministic and runs here on the live iframe (contrast.js). Muse is only reachable when
+  // the page is served by `s2t playground` (local, key stays on the server); the static build hides those buttons.
+  var C = null // contrast.js module
+  var museOk = false
+  var results = document.getElementById('results')
+  var busy = false
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  function colorTokens() {
+    return data.tokens.filter(function (t) { return t.kind === 'color' }).map(function (t) {
+      return { name: t.name, cssVar: t.cssVar, tier: t.tier, alias: t.alias, value: current(t.cssVar) }
+    })
+  }
+  function audit() {
+    var d = frame.contentDocument
+    var res = C.auditLive(d, data.pairs || [])
+    var checked = res.filter(function (r) { return r.status === 'pass' || r.status === 'fail' })
+    return { all: res, checked: checked, fails: res.filter(function (r) { return r.status === 'fail' }), groups: C.groupFailures(res) }
+  }
+  function withTokens(groups) {
+    var tv = colorTokens()
+    return groups.map(function (g) {
+      return { examples: g.examples, count: g.count, fg: g.fg, bg: g.bg, ratio: g.ratio, required: g.required, fgTokens: C.tokensForColor(g.fg, tv).slice(0, 4), bgTokens: g.gradient ? [] : C.tokensForColor(g.bg, tv).slice(0, 4), gradient: !!g.gradient }
+    })
+  }
+  // Temporarily set some custom properties, run fn, put everything back exactly as it was.
+  function trying(cs, fn) {
+    var r = root(), prev = {}
+    var thaw = C.freezeTransitions(frame.contentDocument) // no fade in or out: read end values, show no flicker
+    cs.forEach(function (c) { prev[c.cssVar] = r.style.getPropertyValue('--' + c.cssVar); r.style.setProperty('--' + c.cssVar, c.css) })
+    try { return fn() } finally {
+      Object.keys(prev).forEach(function (k) { if (prev[k]) r.style.setProperty('--' + k, prev[k]); else r.style.removeProperty('--' + k) })
+      getComputedStyle(r).color // settle the reverted values before transitions come back
+      thaw()
+    }
+  }
+  function pairRow(g, tokens) {
+    var bigFont = g.large ? '17px' : '13px'
+    return '<div class="pair"><div class="aa" style="color:' + esc(g.fg) + ';background:' + esc(g.bg) + ';font-size:' + bigFont + '" aria-hidden="true">Aa</div>' +
+      '<div><div>' + esc(g.examples.map(function (x) { return '“' + x + '”' }).join(', ')) + (g.count > g.examples.length ? ' <span class="meta">+' + (g.count - g.examples.length) + ' more</span>' : '') + '</div>' +
+      '<div class="meta"><code>' + esc(g.fg) + '</code> on <code>' + esc(g.bg) + '</code>' + (tokens ? ' · ' + esc(tokens) : '') + '</div></div>' +
+      '<div class="ratio">' + g.ratio.toFixed(2) + ':1<span class="need">needs ' + g.required.toFixed(1) + (g.large ? ' (large)' : '') + '</span></div></div>'
+  }
+  function tokenHint(g) {
+    var f = g.fgTokens.slice(0, 2).join(' / ') || 'text: no token', b = g.bgTokens.slice(0, 2).join(' / ') || (g.gradient ? 'a gradient (no token)' : 'bg: no token')
+    return f + ' on ' + b
+  }
+  function scoreHtml(a) {
+    var n = a.checked.length, f = a.fails.length
+    var skipped = a.all.length - n
+    return '<span class="score ' + (f ? 'bad' : 'good') + '">' + (n - f) + ' of ' + n + ' text pairs pass</span>' +
+      (skipped ? ' <span class="meta">' + skipped + ' not checked (not visible in this view or over an image)</span>' : '')
+  }
+  function setBusy(on, msg) {
+    busy = on
+    ;['audit', 'dark', 'provider'].forEach(function (id) { document.getElementById(id).disabled = on })
+    if (on) { results.classList.add('on'); results.insertAdjacentHTML('beforeend', '<p class="busy" id="busy">' + esc(msg) + '</p>'); results.scrollTop = results.scrollHeight }
+    else { var b = document.getElementById('busy'); if (b) b.remove() }
+  }
+  function muse(body) {
+    body.provider = document.getElementById('provider').value
+    return fetch('api/muse', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status)); return j }) })
+  }
+  function via(r) { return esc(r.provider === 'baseten' ? 'Muse Spark Open on Baseten' : 'Muse Spark (Meta)') + ' · ' + (r.cached ? 'cached' : (r.ms / 1000).toFixed(1) + ' s') }
+  function applyChanges(cs) {
+    cs.forEach(function (c) { changes[c.cssVar] = c.css })
+    apply(); render(); sync()
+  }
+
+  function runAudit() {
+    var a = audit()
+    var groups = withTokens(a.groups)
+    var html = '<h3>Contrast audit (WCAG 2.x AA)</h3><p>' + scoreHtml(a) + '</p>'
+    if (!a.fails.length) html += '<p>Every checked text pair meets AA with the current token values.</p>'
+    else html += '<p class="meta">' + a.fails.length + ' failing text elements in ' + groups.length + ' color pairings, worst first:</p>' +
+      a.groups.map(function (g, i) { return pairRow(g, tokenHint(groups[i])) }).join('')
+    if (a.fails.length && museOk) html += '<div class="actions"><button id="askFix" class="primary">Ask Muse to fix these</button></div>'
+    results.innerHTML = html
+    results.classList.add('on')
+    var ask = document.getElementById('askFix')
+    if (ask) ask.addEventListener('click', function () { askFix(a, groups) })
+    return a
+  }
+
+  function askFix(a, groups) {
+    if (busy) return
+    setBusy(true, 'Muse is proposing token changes…')
+    muse({ task: 'fix', tokens: colorTokens(), failures: groups }).then(function (r) {
+      setBusy(false)
+      var before = {}; a.fails.forEach(function (f) { before[f.id] = 1 })
+      // Re-check each proposed change on its own, then the passing ones together. Only verified fixes are offered.
+      var checkedChanges = r.changes.map(function (c) {
+        var after = trying([c], audit)
+        var fixed = after.checked.filter(function (x) { return before[x.id] && x.status === 'pass' }).length
+        var broke = after.fails.filter(function (x) { return !before[x.id] }).length
+        return { c: c, fixed: fixed, broke: broke, ok: fixed > 0 && broke === 0 }
+      })
+      var good = checkedChanges.filter(function (x) { return x.ok }).map(function (x) { return x.c })
+      var combined = good.length ? trying(good, audit) : a
+      var html = '<h3>Muse proposal</h3><p class="meta">' + via(r) + '</p>' + (r.summary ? '<p>' + esc(r.summary) + '</p>' : '')
+      html += '<p>Re-checked here: <span class="score ' + (combined.fails.length ? 'bad' : 'good') + '">' + a.fails.length + ' failing → ' + combined.fails.length + ' failing</span> with the ' + good.length + ' verified change' + (good.length === 1 ? '' : 's') + '</p>'
+      html += checkedChanges.map(function (x) {
+        var tag = x.ok ? '<span class="tag ok">fixes ' + x.fixed + '</span>' : '<span class="tag no">' + (x.broke ? 'breaks ' + x.broke : 'fixes nothing') + ', not offered</span>'
+        return '<div class="fix' + (x.ok ? '' : ' dropped') + '"><span class="name">' + esc(x.c.token) + '</span> → <code>' + esc(x.c.css) + '</code>' + tag + '<div class="why">' + esc(x.c.reason) + '</div></div>'
+      }).join('')
+      if (r.rejected.length) html += '<p class="meta">Rejected as invalid: ' + r.rejected.map(function (x) { return esc(x.token + ' (' + x.why + ')') }).join(', ') + '</p>'
+      if (combined.fails.length) html += '<p class="meta">Still failing after the verified changes:</p>' + combined.groups.map(function (g) { return pairRow(g) }).join('')
+      html += '<div class="actions">' + (good.length ? '<button id="applyFix" class="primary">Apply ' + good.length + ' fix' + (good.length === 1 ? '' : 'es') + ' (preview)</button>' : '') + '<button id="reaudit">Check again</button></div>'
+      results.insertAdjacentHTML('beforeend', html)
+      var ap = document.getElementById('applyFix')
+      if (ap) ap.addEventListener('click', function () { applyChanges(good); ap.disabled = true; toast('Applied as a preview. Copy the proposal link to share it.') })
+      document.getElementById('reaudit').addEventListener('click', runAudit)
+      window.__s2t = { lastFix: { before: a.fails.length, after: combined.fails.length, checked: a.checked.length, offered: good.length, proposed: r.changes.length, ms: r.ms, provider: r.provider, cached: r.cached } }
+    }).catch(function (e) { setBusy(false); results.insertAdjacentHTML('beforeend', '<p class="notice">Muse call failed: ' + esc(e.message) + '</p>') })
+  }
+
+  function darkRound(prev, failures, notDarkBg) {
+    var light = audit()
+    // Context: every checked pairing (light theme), with the tokens behind each color.
+    var all = {}
+    light.checked.forEach(function (r) { var k = r.fg + '|' + r.bg + '|' + r.required; var g = all[k] || (all[k] = { fg: r.fg, bg: r.bg, gradient: r.gradient, ratio: r.ratio, required: r.required, large: r.large, count: 0, examples: [] }); g.count++; if (g.examples.length < 2) g.examples.push(r.text) })
+    var pairs = withTokens(Object.keys(all).map(function (k) { return all[k] }).sort(function (a, b) { return b.count - a.count }).slice(0, 40))
+    return muse({ task: 'dark', tokens: colorTokens(), pairs: pairs, previous: prev || [], failures: failures || [], notDarkBg: notDarkBg || null })
+  }
+  // One round's verdict, read with its changes applied: is the main text background dark, what still fails.
+  function judgeDark(r) {
+    return trying(r.changes, function () {
+      var a = audit(), split = C.splitFailures(a.all), dom = C.dominantBackground(a.all)
+      return { a: a, fixable: split.fixable.length, onGradient: split.gradient.length, dom: dom, dark: !!(dom && dom.dark),
+        feedback: withTokens(C.groupFailures(split.fixable)) }
+    })
+  }
+  function buildDark() {
+    if (busy) return
+    // Start from the merged light theme so the model sees the real values.
+    var r0 = root(); Object.keys(changes).forEach(function (k) { r0.style.removeProperty('--' + k) }); changes = {}; render(); sync()
+    results.innerHTML = '<h3>Dark theme</h3>'
+    setBusy(true, 'Muse is building a dark theme…')
+    var t0 = Date.now()
+    darkRound().then(function (r1) {
+      var j1 = judgeDark(r1)
+      var rounds = [{ r: r1, j: j1 }]
+      if ((j1.dark && !j1.fixable) || !r1.changes.length) return rounds
+      var why = (j1.dark ? '' : 'the main background stayed light; ') + (j1.fixable ? j1.fixable + ' pairs fail; ' : '')
+      setBusy(false); setBusy(true, why + 'one automatic retry with that fed back…')
+      return darkRound(r1.changes.map(function (c) { return { token: c.token, value: c.css } }), j1.feedback, j1.dark ? null : j1.dom && j1.dom.bg).then(function (r2) {
+        rounds.push({ r: r2, j: judgeDark(r2) }); return rounds
+      })
+    }).then(function (rounds) {
+      setBusy(false)
+      // Keep the better round: actually dark first, then fewer fixable failures. The retry is not assumed better.
+      var rank = function (x) { return (x.j.dark ? 0 : 1000) + x.j.fixable }
+      var best = rounds.slice().sort(function (x, y) { return rank(x) - rank(y) })[0]
+      applyChanges(best.r.changes)
+      var a = audit(), split = C.splitFailures(a.all), dom = C.dominantBackground(a.all)
+      var line = function (x) { return x.j.fixable + ' failing' + (x.j.onGradient ? ' (+' + x.j.onGradient + ' on a gradient)' : '') + (x.j.dark ? '' : ', not dark') + ' · ' + via(x.r) }
+      var html = '<p class="meta">' + rounds.map(function (x, i) { return (i ? 'retry: ' : 'first try: ') + line(x) }).join('<br>') + '</p>'
+      html += (best.r.summary ? '<p>' + esc(best.r.summary) + '</p>' : '') + '<p>Applied as a preview (' + best.r.changes.length + ' token changes' + (rounds.length > 1 ? ', ' + (best === rounds[0] ? 'first try kept' : 'retry kept') : '') + '): ' + scoreHtml(a) + '</p>'
+      if (dom && !dom.dark) html += '<p class="notice">Not a dark theme: most text still sits on ' + esc(dom.bg) + '.</p>'
+      if (best.r.rejected.length) html += '<p class="meta">Rejected as invalid: ' + best.r.rejected.map(function (x) { return esc(x.token + ' (' + x.why + ')') }).join(', ') + '</p>'
+      if (a.fails.length) html += '<p class="meta">Still failing (shown honestly; ' + split.gradient.length + ' sit on a gradient no token controls):</p>' + withTokens(a.groups).map(function (g, i) { return pairRow(a.groups[i], tokenHint(g)) }).join('')
+      html += '<details><summary class="meta">The ' + best.r.changes.length + ' token changes</summary>' + best.r.changes.map(function (c) { return '<div class="fix"><span class="name">' + esc(c.token) + '</span> → <code>' + esc(c.css) + '</code>' + (c.isNew ? '<span class="tag">new</span>' : '') + '<div class="why">' + esc(c.reason) + '</div></div>' }).join('') + '</details>'
+      html += '<div class="actions"><button id="reaudit2">Check again</button></div>'
+      results.insertAdjacentHTML('beforeend', html)
+      document.getElementById('reaudit2').addEventListener('click', runAudit)
+      window.__s2t = { lastDark: { rounds: rounds.map(function (x) { return { fixable: x.j.fixable, onGradient: x.j.onGradient, dark: x.j.dark, dominantBg: x.j.dom, checked: x.j.a.checked.length, changes: x.r.changes.length, ms: x.r.ms, provider: x.r.provider, cached: x.r.cached } }), kept: rounds.indexOf(best), pass: a.checked.length - a.fails.length, checked: a.checked.length, dominantBg: dom, totalMs: Date.now() - t0 } }
+    }).catch(function (e) { setBusy(false); results.insertAdjacentHTML('beforeend', '<p class="notice">Muse call failed: ' + esc(e.message) + '</p>') })
+  }
+
+  var toolsStarted = false
+  function initTools() {
+    if (toolsStarted || !data.pairs || !data.pairs.length) return
+    toolsStarted = true
+    import('./contrast.js').then(function (m) {
+      C = m
+      document.getElementById('tools').classList.add('on')
+      document.getElementById('audit').addEventListener('click', runAudit)
+      return fetch('api/muse').then(function (r) { return r.ok ? r.json() : null }).catch(function (e) { void e; return null })
+    }).then(function (j) {
+      if (!C || !j || !j.ok) return
+      museOk = true
+      var ids = j.providers.map(function (p) { return p.id })
+      var sel = document.getElementById('provider')
+      Array.prototype.slice.call(sel.options).forEach(function (o) { if (ids.indexOf(o.value) < 0) o.remove() })
+      sel.hidden = false
+      document.getElementById('dark').hidden = false
+      document.getElementById('dark').addEventListener('click', buildDark)
+      document.getElementById('toolsHint').textContent = 'Contrast is checked here on the live app. Muse proposes; every proposal is re-checked before it is offered. Sends token names, values and contrast numbers only.'
+    }).catch(function (e) { void e }) // no contrast.js (older static build): the audit stays hidden
+  }
+
   fetch('tokens.json').then(function (r) { return r.json() }).then(function (d) {
     data = d
     document.getElementById('title').textContent = d.title
@@ -193,7 +426,7 @@
     document.getElementById('sub').textContent = d.tokens.length + ' tokens you can change · ' + d.edits + ' hardcoded values replaced · named by ' + d.namer
     frame.addEventListener('load', function () {
       // The app is a single-page app: wait for its styles, then render the panel from live values.
-      setTimeout(function () { apply(); render(); sync() }, 400)
+      setTimeout(function () { apply(); render(); sync(); initTools() }, 400)
     })
     frame.src = d.app
   }).catch(function (e) {
