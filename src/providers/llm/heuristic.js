@@ -111,6 +111,35 @@ export function componentTokens(profiles, tokens) {
   return out
 }
 
+/**
+ * Fourth layer on the third tier: `<component>.<state>.<role>` tokens, aliasing the semantic/primitive token
+ * for the cluster that state's own roots use — e.g. `nav.active.bg` for the blue Bootstrap's `.active` class
+ * puts on the current pill in a Month/Week toggle. Same dominant-cluster-per-role rule as componentTokens,
+ * scoped to profile.states (already restricted to roots carrying that state's class). Pure; exported for tests.
+ */
+export function componentStateTokens(profiles, tokens) {
+  const out = []
+  const byCluster = (id) => tokens.find((t) => t.tier === 'semantic' && t.clusters.includes(id)) || tokens.find((t) => t.tier === 'primitive' && t.clusters.includes(id))
+  for (const p of profiles || []) {
+    for (const [state, info] of Object.entries(p.states || {})) {
+      const roles = {}
+      for (const [prop, list] of Object.entries(info.props)) {
+        const role = COMPONENT_PROP[prop]
+        if (!role || !list.length) continue
+        const top = list[0]
+        if (!roles[role] || top.n > roles[role].n) roles[role] = top
+      }
+      for (const [role, top] of Object.entries(roles)) {
+        const target = byCluster(top.cluster)
+        const name = `${p.component}.${state}.${role}`
+        if (!target || tokens.some((t) => t.name === name) || out.some((t) => t.name === name)) continue
+        out.push({ name, tier: 'component', alias: target.name, clusters: [top.cluster], why: `Most used ${role} value inside ${p.component} ${state} roots (${top.n} uses).` })
+      }
+    }
+  }
+  return out
+}
+
 export function heuristicTokens({ clusters, components }) {
   const prim = primitiveNames(clusters)
   /** @type {import('../../types.js').TokenProposal[]} */
@@ -151,6 +180,7 @@ export function heuristicTokens({ clusters, components }) {
   const cardShadow = top(clusters, 'shadow', (c) => c.regionLabels.card || 0)
   sem('card.shadow', cardShadow, 'Shadow used on cards.', 'component')
   for (const t of componentTokens(components, tokens)) tokens.push(t)
+  for (const t of componentStateTokens(components, tokens)) tokens.push(t)
   return { tokens, merges: suggestMerges(clusters), namer: 'mock-heuristic' }
 }
 

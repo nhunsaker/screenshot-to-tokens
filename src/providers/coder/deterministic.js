@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, readdirSync, st
 import { join, relative, extname, basename } from 'path'
 import { propKind, propRole, normalizeFor, cssVarOf } from '../../lib/props.js'
 import { rewriteJsx, JSX_EXT } from './jsx.js'
-import { classIndex, componentsForSelector } from '../../stages/components.js'
+import { classIndex, componentsForSelector, statesForSelector } from '../../stages/components.js'
 import { rewriteSvgAttrs, SVG_HTML_EXT } from './svg-attrs.js'
 
 /** Split a CSS declaration value into whitespace-separated parts, but never inside parens
@@ -66,13 +66,19 @@ export function componentRole(prop) {
   return propRole(p) // bg | text | border | null
 }
 
-export function pickToken(prop, cluster, tokens, components = []) {
+export function pickToken(prop, cluster, tokens, components = [], states = []) {
   const candidates = tokens.filter((t) => Array.isArray(t.clusters) && t.clusters.includes(cluster.id))
   if (!candidates.length) return null
   // Inside a rule for a detected component (e.g. `.btn { … }`), prefer that component's token for this role.
   const role = componentRole(prop)
   if (role && components.length) {
-    const hit = candidates.find((t) => t.tier === 'component' && components.some((c) => t.name === `${c}.${role}` || t.name.startsWith(`${c}.`) && t.name.endsWith(`.${role}`)))
+    // A state selector (.active, :hover, .disabled, …) prefers that state's own component token first — the
+    // active nav-pill's background is `nav.active.bg`, not the component's general `nav.bg`.
+    if (states.length) {
+      const stateHit = candidates.find((t) => t.tier === 'component' && components.some((c) => states.some((s) => t.name === `${c}.${s}.${role}`)))
+      if (stateHit) return stateHit
+    }
+    const hit = candidates.find((t) => t.tier === 'component' && components.some((c) => t.name === `${c}.${role}`))
     if (hit) return hit
   }
   const semRole = propRole(prop)
@@ -103,10 +109,10 @@ const DECL_RE = /([a-zA-Z-]+)(\s*:\s*)([^;{}]+)(;)/g
  * @returns {{code:string, edits:import('../../types.js').RewriteEdit[], changed:boolean}}
  */
 /**
- * Selector-aware context: which detected components the rule around each declaration styles. Walks braces so nested
- * blocks (@media) work; returns a function (lineIdx, col) → component labels. Pure; exported for tests.
+ * Walks the CSS source's braces to build a (lineIdx, col) → selector-text-so-far lookup, shared by
+ * selectorContext and selectorComponentsAndStates below. Pure.
  */
-export function selectorContext(source, classIdx) {
+function selectorTextAt(source) {
   const lines = source.split('\n')
   const startStack = []
   const stack = []
@@ -122,7 +128,6 @@ export function selectorContext(source, classIdx) {
     pending += ' '
   }
   return (lineIdx, col) => {
-    if (!classIdx || !classIdx.size) return []
     const st = startStack[lineIdx]
     const s2 = [...st.stack]
     let pend = st.pending
@@ -132,12 +137,35 @@ export function selectorContext(source, classIdx) {
       else if (ch === ';') pend = ''
       else pend += ch
     }
-    return componentsForSelector(s2.join(' '), classIdx)
+    return s2.join(' ')
+  }
+}
+
+/**
+ * Selector-aware context: which detected components the rule around each declaration styles. Walks braces so nested
+ * blocks (@media) work; returns a function (lineIdx, col) → component labels. Pure; exported for tests.
+ */
+export function selectorContext(source, classIdx) {
+  const textAt = selectorTextAt(source)
+  return (lineIdx, col) => (!classIdx || !classIdx.size ? [] : componentsForSelector(textAt(lineIdx, col), classIdx))
+}
+
+/**
+ * Like selectorContext, but returns {components, states}: the components found via classIdx (may be empty
+ * without one) plus the states (active, hover, disabled, …) named right in the selector text, which needs no
+ * classIdx at all — `:hover` and `[aria-current]` are never authored classes. Pure; exported for tests.
+ */
+export function selectorComponentsAndStates(source, classIdx) {
+  const textAt = selectorTextAt(source)
+  return (lineIdx, col) => {
+    const text = textAt(lineIdx, col)
+    const components = classIdx && classIdx.size ? componentsForSelector(text, classIdx) : []
+    return { components, states: statesForSelector(text) }
   }
 }
 
 export function rewriteCss(source, relFile, clusters, tokens, classIdx = null) {
-  const ctxAt = selectorContext(source, classIdx)
+  const ctxAt = selectorComponentsAndStates(source, classIdx)
   const lines = source.split('\n')
   const edits = []
   let changedAny = false
@@ -167,7 +195,8 @@ export function rewriteCss(source, relFile, clusters, tokens, classIdx = null) {
         if (!normalized) continue
         const cluster = clusterFor(kind, normalized, clusters)
         if (!cluster) continue
-        const token = pickToken(prop, cluster, tokens, ctxAt(idx, m.index))
+        const ctx = ctxAt(idx, m.index)
+        const token = pickToken(prop, cluster, tokens, ctx.components, ctx.states)
         if (!token) continue
         const cssVar = cssVarOf(token.name)
         const after = `var(${cssVar}, ${part.text})`
