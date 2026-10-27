@@ -17,6 +17,43 @@ export function repoFromRemote(url) {
   return m ? `${m[1]}/${m[2]}` : null
 }
 
+/** Group contrast pairs by (text color, background, minimum, tokens) so one bad pairing is one row. */
+function groupPairs(list) {
+  const groups = new Map()
+  for (const p of list) {
+    const k = [p.fg, p.bg, p.required, (p.tokens || []).join(',')].join('|')
+    const g = groups.get(k) || { ...p, count: 0, examples: [] }
+    g.count++
+    if (g.examples.length < 3 && !g.examples.includes(p.text)) g.examples.push(p.text)
+    g.ratio = Math.min(g.ratio, p.ratio)
+    groups.set(k, g)
+  }
+  return Array.from(groups.values()).sort((a, b) => a.ratio - b.ratio)
+}
+
+/** The "Text contrast (WCAG 2.x AA)" section: method, regressions (blocking), then existing failures with their tokens. */
+export function contrastSection(c) {
+  if (!c || c.error) return []
+  const cell = (s) => String(s).replace(/\|/g, '/').replace(/\n/g, ' ')
+  const table = (list) => [
+    '| Text color | Background (measured) | Ratio | AA min | Pairs | Examples | Token for the text color |',
+    '|---|---|---|---|---|---|---|',
+    ...groupPairs(list).map((g) => `| \`${g.fg}\` | \`${g.bg}\` | ${g.ratio}:1 | ${g.required}:1${g.large ? ' (large)' : ''} | ${g.count} | ${cell(g.examples.map((e) => `"${e}"`).join(', '))} | ${(g.tokens || []).map((t) => `\`${cssVarOf(t)}\``).join(', ') || 'none'} |`),
+  ]
+  const fa = c.failingAfter || {}
+  const lines = [
+    '## Text contrast (WCAG 2.x AA)',
+    `${c.pairs} text pairs on the captured page were measured against the SC 1.4.3 minimum (4.5:1, or 3:1 for large text). Text color comes from the computed style; the background is measured on the rendered pixels around the letters, so text on gradients and images is included.`,
+    '',
+    `Below the minimum: ${c.failingBefore} before this change, ${fa.colors ?? fa.all ?? c.failingBefore} after it. ${c.regressions.length ? `**${c.regressions.length} pair${c.regressions.length === 1 ? '' : 's'} newly below the minimum: verify fails.**` : 'No pair newly falls below the minimum.'}`,
+    '',
+  ]
+  if (c.regressions.length) lines.push('### Newly below the minimum', ...table(c.regressions), '')
+  if (c.failing && c.failing.length) lines.push('### Already below the minimum (not changed by this PR)', 'Fixing one of these is a token change: adjust the token in the last column and re-run verify.', '', ...table(c.failing), '')
+  lines.push('This checks text contrast on the captured route only. It does not cover hover or focus states, placeholders, non-text contrast, keyboard use or screen readers.', '')
+  return lines
+}
+
 /** PR body from the run artifacts. Pure; exported for tests. */
 export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clusters = [], verifiedOn = '' }) {
   // Same grounding check as the report's spec cards: a reason that cites anything the cluster data doesn't support
@@ -46,7 +83,9 @@ export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clu
     `| Fallbacks only (must be identical) | ${verify?.fallback ? `${verify.fallback.diffPixels} px changed, ${verify.fallback.pass ? 'pass' : 'FAIL'}` : 'not run'} |`,
     `| Colors merged | ${verify?.colors ? `${pct(verify.colors)}, ${verify.colors.pass ? 'pass' : 'FAIL'}` : 'not run'} |`,
     `| All tokens (layout cleanup, review) | ${pct(verify)} |`,
+    ...(verify?.contrast && !verify.contrast.error ? [`| Text contrast, WCAG 2.x AA (no new failing pairs) | ${verify.contrast.failingBefore} of ${verify.contrast.pairs} pairs below AA before, ${verify.contrast.regressions.length} regressions, ${verify.contrast.pass ? 'pass' : 'FAIL'} |`] : []),
     '',
+    ...contrastSection(verify?.contrast),
   ]
   if (score) lines.push(`Eval against the golden set: ${score.passed}/${score.total}.`, '')
   if (tokens.reviewed) lines.push(`Reviewed by a person: ${tokens.reviewed.decisions} decisions applied.`, '')

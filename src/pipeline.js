@@ -161,11 +161,12 @@ export async function runPipeline(o) {
         servers.push(s)
         // Noise baseline: the ORIGINAL page shot a second time. Whatever moves between two loads of the unchanged page
         // (a randomized tag pile, a running waveform; L2 breadth run) is excluded from all three checks and reported.
-        let noise = null
+        let noise = null, beforeTexts = null
         const origUrl = runMeta.serve ? (await serveDir(runMeta.serve).then((srv) => { servers.push(srv); return srv.url })) : (o.url || null)
         if (origUrl) {
           noise = join(runDir, 'noise.png')
-          await screenshotUrl(origUrl, noise, cfg.viewport)
+          // The same load also gives the original page's text runs for the contrast check.
+          beforeTexts = await screenshotUrl(origUrl, noise, cfg.viewport, '', { texts: true })
         }
         // Check 1: fallbacks only (no tokens loaded) must be pixel-identical to the original.
         const fb = join(runDir, 'after-fallback.png')
@@ -176,26 +177,42 @@ export async function runPipeline(o) {
         const usable = usableTokens(tokens)
         const colorSet = { ...usable, tokens: usable.tokens.filter((t) => kindOf.get(t.clusters[0]) === 'color') }
         const afterColors = join(runDir, 'after-colors.png')
-        await screenshotUrl(s.url, afterColors, cfg.viewport, toCss(colorSet))
+        const colorsTexts = await screenshotUrl(s.url, afterColors, cfg.viewport, toCss(colorSet), { texts: true })
         const v2 = compareScreenshots(join(runDir, capture.screenshot), afterColors, join(runDir, 'diff-colors.png'), cfg.verifyThreshold, noise)
         // Check 3: every token. Merging 7/8/9px spacing into one value moves things on purpose;
         // this diff is shown to the reviewer as "what the cleanup changes", not failed.
         const after = join(runDir, 'after.png')
-        await screenshotUrl(s.url, after, cfg.viewport, readFileSync(join(runDir, 'tokens.css'), 'utf-8'))
+        const afterTexts = await screenshotUrl(s.url, after, cfg.viewport, readFileSync(join(runDir, 'tokens.css'), 'utf-8'), { texts: true })
         const v3 = compareScreenshots(join(runDir, capture.screenshot), after, join(runDir, 'diff.png'), cfg.verifyThreshold, noise)
+        // Check 4: text contrast (WCAG 2.x AA), background measured on the pixels of each render. The proposal must
+        // not add a failing pair; failures the page already had are reported, not blocking.
+        let contrast
+        try {
+          const { runContrastCheck, textsFromCapture } = await import('./stages/text-contrast.js')
+          const { PNG } = await import('pngjs')
+          const png = (p) => PNG.sync.read(readFileSync(p))
+          contrast = runContrastCheck({
+            before: { img: png(join(runDir, capture.screenshot)), texts: beforeTexts || textsFromCapture(capture) },
+            afters: { colors: { img: png(afterColors), texts: colorsTexts }, all: { img: png(after), texts: afterTexts } },
+            tokens: usable, clusters,
+          })
+        } catch (e) {
+          contrast = { check: 'text contrast (WCAG 2.x AA, SC 1.4.3)', error: String((e && e.message) || e), pass: true }
+        }
         const rel = (v) => ({ ...v, before: v.before.replace(runDir + '/', ''), after: v.after.replace(runDir + '/', ''), diff: v.diff.replace(runDir + '/', '') })
         const out = {
           ...rel(v3),
-          // Gate: rewrite is safe (fallbacks identical) and color merges are invisible.
-          pass: v1.pass && v2.pass,
+          // Gate: rewrite is safe (fallbacks identical), color merges are invisible, and no text pair newly fails AA.
+          pass: v1.pass && v2.pass && contrast.pass,
           allTokensWithinThreshold: v3.pass,
           reviewNeeded: !v3.pass,
           fallback: rel(v1),
           colors: rel(v2),
+          contrast,
         }
         writeJson(runDir, 'verify', out)
         const pct = (v) => `${(v.ratio * 100).toFixed(3)}%`
-        log('verify', `fallback-only ${v1.diffPixels} px (${v1.pass ? 'pass' : 'FAIL'}); colors ${pct(v2)} (${v2.pass ? 'pass' : 'FAIL'}); all tokens ${pct(v3)} (${v3.pass ? 'within threshold' : 'layout changes for review'})${v1.noisePixels ? `; ${v1.noisePixels} px excluded (the unchanged page itself differs between loads)` : ''}`)
+        log('verify', `fallback-only ${v1.diffPixels} px (${v1.pass ? 'pass' : 'FAIL'}); colors ${pct(v2)} (${v2.pass ? 'pass' : 'FAIL'}); all tokens ${pct(v3)} (${v3.pass ? 'within threshold' : 'layout changes for review'}); ${contrast.error ? `text contrast not measured (${contrast.error})` : `text contrast ${contrast.failingBefore} of ${contrast.pairs} pairs below AA before, ${contrast.regressions.length} regressions (${contrast.pass ? 'pass' : 'FAIL'})`}${v1.noisePixels ? `; ${v1.noisePixels} px excluded (the unchanged page itself differs between loads)` : ''}`)
       }
     }
 

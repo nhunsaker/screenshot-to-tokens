@@ -118,6 +118,51 @@
  */
 
 /**
+ * One element's own text as rendered (capture.walkTexts), for the contrast check.
+ * @typedef {Object} TextSample
+ * @property {string} path              Same short path as ElementSample.path.
+ * @property {string} tag
+ * @property {string} text              First 40 chars of own text.
+ * @property {[number,number,number,number]} bbox  Element box, page px.
+ * @property {number[][]} rects         Boxes of its own text runs [x, y, w, h], page px (one per line fragment).
+ * @property {string} color             Painted text color (-webkit-text-fill-color when it differs from color).
+ * @property {number} opacity           Product of the element's and its ancestors' opacity.
+ * @property {string} fontSize
+ * @property {string} fontWeight
+ * @property {boolean} disabled         Inside a disabled control/group, or the label of one (exempt from SC 1.4.3).
+ */
+
+/**
+ * One text pair measured on one render (text-contrast.evaluateTexts).
+ * @typedef {Object} ContrastPair
+ * @property {string} key               path|text|occurrence; matches the same text across renders.
+ * @property {string} text
+ * @property {string} path
+ * @property {'pass'|'fail'|'disabled'|'decorative'|'offscreen'|'invisible'|'no-glyphs'} status
+ * @property {number} [ratio]           Measured ratio against the chosen background cluster.
+ * @property {number} required          4.5, or 3 for large text.
+ * @property {boolean} large
+ * @property {string} [fg]              Text color as painted (composited when translucent).
+ * @property {string} [bg]              Background cluster color measured on the pixels.
+ * @property {[number,number,number,number]} [bbox]
+ * @property {string[]} [tokens]        Tokens whose value is the text color (text-color tokens first).
+ */
+
+/**
+ * Check 4 of verify (verify.json.contrast).
+ * @typedef {Object} ContrastResult
+ * @property {number} pairs             Text pairs measured on the original page.
+ * @property {number} failingBefore     Of those, below the AA minimum.
+ * @property {Record<string,number>} failingAfter  Per after-render: colors (color tokens), all (every token).
+ * @property {ContrastPair[]} regressions  Passed before, fail after: blocks the gate.
+ * @property {ContrastPair[]} improved     Failed before, pass after.
+ * @property {ContrastPair[]} failing      The original page's failing pairs, worst first.
+ * @property {Record<string,number>} skipped  Counts of pairs not measured, by status.
+ * @property {boolean} pass             No regressions.
+ * @property {string} [error]           Set when the check could not run (the other three checks still stand).
+ */
+
+/**
  * @typedef {Object} VerifyResult
  * @property {number} diffPixels
  * @property {number} totalPixels
@@ -127,6 +172,7 @@
  * @property {string} before
  * @property {string} after
  * @property {string} diff
+ * @property {ContrastResult} [contrast]  Text contrast check (pipeline verify only).
  */
 
 export {}
