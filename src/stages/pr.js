@@ -8,6 +8,7 @@ import { join, dirname, relative, resolve } from 'path'
 import { execFileSync } from 'child_process'
 import { cssVarOf } from '../lib/props.js'
 import { evaluateReason } from './reasons.js'
+import { includeDarkInPr } from './dark.js'
 
 const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
 
@@ -91,6 +92,7 @@ export function runPr(o) {
   // Absolute: gh runs with cwd = the app repo, not this project.
   const bodyPath = resolve(o.runDir, 'pr-body.md')
   writeFileSync(bodyPath, body)
+  includeDarkInPr(o.runDir, tokensCss, o.repoDir, bodyPath) // L14: optional tokens.dark.css + its own PR section
   const title = o.title || `Design tokens: replace ${rewrite.edits.length} hardcoded values`
   git(o.repoDir, 'add', '-A')
   git(o.repoDir, 'commit', '-m', title, '-m', `Adds ${tokensCssRel} and rewrites literals to var(--token, fallback). Fallback-only render verified identical.`)

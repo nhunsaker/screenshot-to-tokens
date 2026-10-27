@@ -23,6 +23,9 @@ rmSync(out, { recursive: true, force: true })
 cpSync(src, out, { recursive: true })
 cpSync(join(runDir, 'tokens.css'), join(out, 'tokens.css'))
 cpSync(resolve('src/preview-client/sorb-preview.js'), join(out, 'sorb-preview.js'))
+// A dark theme from `s2t dark` rides along: the preview client loads it and shows a theme button (?theme=dark too).
+const dark = existsSync(join(runDir, 'tokens.dark.css'))
+if (dark) cpSync(join(runDir, 'tokens.dark.css'), join(out, 'tokens.dark.css'))
 const indexPath = join(out, 'index.html')
 if (!existsSync(indexPath)) {
   console.error(`no index.html in ${src}; preview-site needs a servable site`)
@@ -30,7 +33,7 @@ if (!existsSync(indexPath)) {
 }
 let html = readFileSync(indexPath, 'utf-8')
 html = html.replace('</head>', '<link rel="stylesheet" href="/tokens.css"></head>')
-html = html.replace('</body>', `<script src="/sorb-preview.js" data-bridge="${bridge}"></script></body>`)
+html = html.replace('</body>', `<script src="/sorb-preview.js" data-bridge="${bridge}"${dark ? ' data-dark-css="/tokens.dark.css"' : ''}></script></body>`)
 writeFileSync(indexPath, html)
 const s = await serveDir(out, Number(a.port || 4600))
 console.log(`preview site: ${s.url}  (add ?preview=<id> from \`s2t preview\`; bridge ${bridge}; Ctrl+C to stop)`)

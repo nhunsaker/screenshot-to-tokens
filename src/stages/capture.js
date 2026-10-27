@@ -7,8 +7,8 @@ import { STYLE_PROPS } from '../lib/props.js'
 // Canvas content sometimes went missing from full-page screenshots (headless GPU canvas race; seen on the
 // div-soup chart, 2026-10-26), which made verify flaky. Draw 2D canvases on the CPU and let two frames paint
 // before every screenshot.
-const LAUNCH = { args: ['--disable-accelerated-2d-canvas', '--disable-gpu'] }
-async function settle(page) {
+export const LAUNCH = { args: ['--disable-accelerated-2d-canvas', '--disable-gpu'] }
+export async function settle(page) {
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))))
   // JS-driven animations (e.g. Chart.js draw-in on the Argon dashboard) ignore the CSS animation kill switch and
   // made verify flaky (34 px "changed" in a chart line). Wait until two consecutive frames are identical, up to
@@ -25,7 +25,7 @@ async function settle(page) {
 // Lazy-loaded images (Jekyll Chirpy and friends) load only when scrolled into view and fade in, so two screenshots
 // of the same page could differ (L2 breadth run: Andra-sun's post images were half-faded in one shot, 44,885 px).
 // Load every image eagerly, scroll the page once to wake scroll-driven loaders, and wait for the images to decode.
-async function loadImages(page) {
+export async function loadImages(page) {
   await page.evaluate(async () => {
     for (const img of Array.from(document.images)) img.loading = 'eager'
     const step = Math.max(200, window.innerHeight)
@@ -48,7 +48,7 @@ const PAGE = { deviceScaleFactor: 1, bypassCSP: true }
 // Randomized layouts (zeikar.github.io throws its tag pile down differently on every load) made two shots of the
 // same page differ. Every page we screenshot gets the same seeded Math.random, so "random" comes out identical.
 const SEEDED_RANDOM = `(() => { let s = 0x2f6b9a1d; Math.random = () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s >>> 0) / 4294967296 } })()`
-async function newPage(browser, viewport) {
+export async function newPage(browser, viewport) {
   const page = await browser.newPage({ ...PAGE, viewport })
   await page.addInitScript(SEEDED_RANDOM)
   return page

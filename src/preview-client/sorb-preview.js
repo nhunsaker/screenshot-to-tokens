@@ -6,13 +6,59 @@
 //   ?tokens=color-action-primary:e8711a   static proposal in the URL (hosted demos, no bridge needed)
 // A banner always says what is proposed (old -> new) and offers "Show original", so a preview is never mistaken
 // for the merged result. Keys are CSS custom property names without "--".
+// Optional dark theme (s2t dark writes tokens.dark.css):
+//   <script src="sorb-preview.js" data-dark-css="tokens.dark.css"></script>   loads it and shows a theme button
+//   ?theme=dark | ?theme=light                                                  sets data-theme on <html> (shareable)
+// tokens.dark.css follows the system setting; data-theme="light"/"dark" on <html> overrides it either way.
 ;(function () {
+  // Theme button: shown when tokens.dark.css is on the page (data-dark-css, or a <link> to it) or ?theme= is set.
+  function darkThemeToggle(script, theme) {
+    var root = document.documentElement
+    var href = script && script.getAttribute('data-dark-css')
+    // Only a plain relative or same-site path to a .css file (not //host/...); anything else is ignored.
+    if (href && (!/^[\w./-]+\.css$/.test(href) || /^\/\//.test(href))) href = null
+    var links = document.querySelectorAll('link[rel~="stylesheet"]')
+    var present = false
+    for (var i = 0; i < links.length; i++) if (/tokens\.dark\.css(\?|$)/.test(links[i].getAttribute('href') || '')) present = true
+    if (href && !present) {
+      var link = document.createElement('link')
+      link.setAttribute('rel', 'stylesheet')
+      link.setAttribute('href', href)
+      document.head.appendChild(link)
+      present = true
+    }
+    if (theme === 'dark' || theme === 'light') root.setAttribute('data-theme', theme)
+    if (!present && theme !== 'dark' && theme !== 'light') return
+    var isDark = function () {
+      var t = root.getAttribute('data-theme')
+      if (t === 'dark' || t === 'light') return t === 'dark'
+      return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    }
+    var show = function () {
+      var b = document.getElementById('sorb-theme-toggle')
+      if (!b) {
+        b = document.createElement('button')
+        b.id = 'sorb-theme-toggle'
+        b.type = 'button'
+        b.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:2147483647;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.35);cursor:pointer;background:#111;color:#fff;font:600 12px/1.3 system-ui,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.25)'
+        b.onclick = function () { root.setAttribute('data-theme', isDark() ? 'light' : 'dark'); show() }
+        document.body.appendChild(b)
+      }
+      var dark = isDark()
+      b.setAttribute('aria-pressed', dark ? 'true' : 'false')
+      b.textContent = dark ? 'Dark theme (proposal): on' : 'Dark theme (proposal): off'
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show)
+    else show()
+  }
+
   var script = document.currentScript
   var bridge = ((script && script.getAttribute('data-bridge')) || 'http://localhost:7777').replace(/\/$/, '')
   // Hash routers (#/admin) keep the query before or after the hash; read both.
   var params = new URLSearchParams(location.search || (location.hash.split('?')[1] || ''))
   var id = params.get('preview')
   var inline = params.get('tokens')
+  darkThemeToggle(script, params.get('theme'))
   if (!id && !inline) return
 
   // Same fail-safe idea as @sorb/leaf sanitize: skip anything that could break out of a declaration.

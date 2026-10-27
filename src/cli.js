@@ -7,6 +7,7 @@
 //   s2t serve --fixture acme-shop           serve a fixture to look at it
 //   s2t eval | review | pr | preview         score, apply review decisions, branch + PR, live Sorb preview
 //   s2t playground --run out/app-argon --app <build>   local token playground + Muse audit fixes / dark theme
+//   s2t dark --run out/app-argon [--provider baseten|meta|both]   dark theme as tokens.dark.css, contrast-checked
 import { join } from 'path'
 import { totalmem, freemem, cpus } from 'os'
 import { execSync } from 'child_process'
@@ -154,6 +155,14 @@ async function main() {
     if (!a.run || !a.app) throw new Error('playground needs --run <run dir> --app <dir of the tokenized app build>')
     const s = await startPlayground({ runDir: a.run, appDir: a.app, port: Number(a.port || 4400), provider: a.provider === 'meta' ? 'meta' : 'baseten', title: a.title, log: (m) => console.log(`  ${m}`) })
     console.log(`playground: ${s.tokens} tokens, ${s.pairs} text pairs at ${s.url} (local only; Ctrl+C to stop)`)
+  } else if (cmd === 'dark') {
+    // L14: Muse Spark proposes dark token values; every text pair is checked in the browser; writes tokens.dark.css,
+    // dark.json and dark.png into the run folder. Local only (the key stays in this process).
+    const { runDark } = await import('./stages/dark.js')
+    if (!a.run) throw new Error('dark needs --run <run dir> (after verify)')
+    const provider = a.provider === 'both' ? 'both' : a.provider === 'meta' ? 'meta' : 'baseten'
+    const r = await runDark({ runDir: a.run, provider, log: (m) => console.log(`  ${m}`) })
+    console.log(`dark: ${r.before.pass} of ${r.before.checked} text pairs pass in the light theme, ${r.after.pass} of ${r.after.checked} in the dark theme (${r.winner.label}, ${r.winner.round}); wrote tokens.dark.css, dark.json${r.screenshot ? ', dark.png' : ''}`)
   } else if (cmd === 'doctor') {
     await doctor()
   } else if (cmd === 'serve') {
@@ -169,6 +178,7 @@ async function main() {
        s2t preview --token <name> --value <css> [--bridge http://localhost:7777] [--app-url <url>]
        s2t scoreboard [--out out/scoreboard.html]      (SAM vs DOM split-screen scoreboard: div-soup + 2 real apps)
        s2t playground --run <run dir> --app <tokenized app build> [--port 4400] [--provider baseten|meta] [--title <name>]
+       s2t dark --run <run dir> [--provider baseten|meta|both]   (tokens.dark.css + dark.json + dark.png, text contrast checked)
        s2t doctor
        s2t serve --fixture <name> [--port 4321]
 stages: ${STAGES.join(' → ')}`)
