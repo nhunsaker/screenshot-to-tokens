@@ -122,8 +122,10 @@ export default function llmNamer(presetId) {
         messages: [{ role: 'system', content: compact ? COMPACT_PROMPT : SYSTEM_PROMPT }, { role: 'user', content: user.length === 1 ? user[0].text : user }],
       })
       const parsed = extractJson(text)
-      // If the model says nothing about merges, keep the deterministic suggestions rather than losing them.
-      const merges = Array.isArray(parsed.merges) ? parsed.merges : draft.merges || []
+      // Merge suggestions are the model's plus the deterministic ones (a person decides each). Low-effort runs often
+      // return "merges": [], which used to drop acme-shop's 6px-into-4px suggestion from the review page.
+      const modelMerges = Array.isArray(parsed.merges) ? parsed.merges : []
+      const merges = [...modelMerges, ...(draft.merges || []).filter((d) => !modelMerges.some((m) => m && m.from === d.from))]
       const tokens = compact ? expandCompact(parsed, draft).tokens : parsed.tokens || []
       return { tokens, merges, namer: `${presetId}:${cfg.model}${compact ? '' : ':full'}`, meta: { mode: compact ? 'compact' : 'full', ms: Date.now() - t0, usage: cached ? { prompt_tokens: 0, completion_tokens: 0, cached_from: usage } : usage, cached: !!cached } }
     },
