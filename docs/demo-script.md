@@ -1,6 +1,12 @@
 # Demo script: Screenshot to Tokens (v2, 2026-10-27)
 
-Meta Global AI Developer Hackathon, Startup track. Target length: **2:45** (hard cap 3:00).
+Meta Global AI Developer Hackathon, Startup track. **Length cap: 3:00.** The event guide (official guide, mirrored at
+github.com/meta-ai-hackathon/meta-hack, read 2026-10-27; confirm against the Official Rules in the Cerebral Valley
+dashboard) says: "3-minute demo video" is the primary judging artifact alongside code and the live product; **"New work
+only: demo shows only what you built during the event — unclear contribution = immediate disqualification"**; scoring
+Impact 30% · Meta AI tooling 25% · Demo 25% · Technical depth 20%; pre-submit checklist: repo public, video link works,
+every contributor listed. So: nothing pre-existing on screen (the intro explains Sorb in words on a title card, no
+footage of the product), and every beat names the Meta model doing the work.
 Startup judging is technical execution and whether it holds up in production, so the spine is: one person, one
 problem, one visual proof, then evidence that it holds up on sites we didn't build.
 
@@ -21,7 +27,7 @@ rewrite she can't verify.
 
 | Time | Beat | On screen | Voiceover (plain, short) | Asset | Status |
 |---|---|---|---|---|---|
-| 0:00–0:22 | **Intro: what Sorb is, what we built** | try.sorbcloud.com live (a designer edits a token in Figma, the storefront re-themes), captioned "existed before the hackathon"; then the title card: Screenshot to Tokens, an add-on for apps with no tokens yet; Sorb existed before, everything after was built during the event | "Sorb is our design-token bridge for the running app: edit a token, see it live in your real app, ship a pull request. Sorb existed before this week. What we built for the hackathon is the front door to it: Screenshot to Tokens, for apps that have no tokens at all, with Meta's models doing the seeing and the naming." | `scripts/record-beats.mjs` beat 0 | recorded 10-27 |
+| 0:00–0:12 | **Intro: what Sorb is, what we built** | Title card only (no footage of the pre-existing product): Screenshot to Tokens, an add-on to Sorb for apps with no tokens yet; "Sorb is Metatoy's existing product and is not shown here. Everything in this video was built Oct 25 to 27, 2026." | "Sorb is our design-token bridge for the running app: propose a change, see it live, verify before you merge. For this hackathon we built its front door: Screenshot to Tokens, for apps that have no tokens at all, with Meta's models doing the seeing and the naming." | `scripts/record-beats.mjs` beat 0 | recorded 10-27 |
 | 0:22–0:37 | **The problem** | Editor scrolling Argon's compiled CSS: hex codes, pixel values | "This dashboard has no design tokens. Every color and size is typed by hand. Nobody can tell you which ones are meant to match." | Screen recording of the editor | to record |
 | 0:15–0:40 | **Pixels, not markup** | Scoreboard split screen: page structure finds **0 of 8** buttons, SAM 3.1 finds **8 of 8** (boxes reveal one by one) | "Lots of real apps give you nothing to read: divs, canvases, no roles. Reading the page's code finds zero of these eight buttons. SAM 3.1 looks at the pixels and finds all eight." | `out/scoreboard.html` hero (has the reveal animation and a Replay button) | exists; record the reveal |
 | 0:40–1:05 | **One run on a real app** | Terminal: `zsh scripts/demo-runs.sh` on Argon, stage lines scrolling; then the report's token chips (swatch, name, alias arrow, reason) | "One command. SAM finds the regions, near-duplicate values are clustered, and Muse Spark names a three-tier token set, each with a reason you can read. Twenty-three seconds, under a cent." | `scripts/demo-runs.sh` (warms Baseten first) + `out/demo-argon-baseten/report.html` | exists; recording run 10-27: 23.4 s, naming 4.9 s, $0.007 (`out/rec-argon`) |
@@ -85,4 +91,4 @@ review run), spoken 0.6 s after each beat's first line (`docs/demo-vo-extra.json
   values rewritten, and checked."
 - Beat 4: "Applying her decisions: 127 edits, zero pixels changed, and the answer key goes to twenty-one of twenty-one."
 - Beat 6: "Nothing here is merged. A link carries the proposal to the rest of the team."
-Voiced cut: `out/video/demo-v1-vo.mp4` (3:27 with the intro and the new closer, −16 LUFS). Mixer: `python3 scripts/mix-demo.py`. No public rule caps the video length (checked the Cerebral Valley event page 10-27); 2 to 3 minutes is the pattern from past winners.; the only silences are about 1.5 s at beat cuts.
+Voiced cut: `out/video/demo-v1-vo.mp4` (2:59 after the trims for the 3:00 cap, −16 LUFS). Mixer: `python3 scripts/mix-demo.py`. No public rule caps the video length (checked the Cerebral Valley event page 10-27); 2 to 3 minutes is the pattern from past winners.; the only silences are about 1.5 s at beat cuts.
