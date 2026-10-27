@@ -390,6 +390,55 @@ function verifyRow(label, v, imgs, status) {
   </div>`
 }
 
+/** One swatch for a measured color (hex only; anything else renders as text). */
+const colorChip = (hex) => {
+  const v = /^#[0-9a-f]{6}$/i.test(String(hex || '')) ? hex : null
+  return v ? `<span class="swatch swatch-sm" style="background:${v}"></span> <code>${v}</code>` : `<code>${escapeHtml(hex || '')}</code>`
+}
+
+/** Failing text pairs as a table: text, measured ratio vs the AA minimum, both colors, the token(s) behind the text color. */
+function contrastTable(list, max = 60) {
+  if (!list || !list.length) return ''
+  const rows = list.slice(0, max).map((p) => `<tr>
+    <td>${escapeHtml(p.text)}</td>
+    <td class="num">${escapeHtml(p.ratio)} : 1${p.before !== undefined ? ` <span class="muted">(was ${escapeHtml(p.before)})</span>` : ''}</td>
+    <td class="num">${escapeHtml(p.required)}${p.large ? ' <span class="muted">large</span>' : ''}</td>
+    <td>${colorChip(p.fg)}</td>
+    <td>${colorChip(p.bg)}</td>
+    <td>${(p.tokens || []).map((t) => `<code>${escapeHtml(cssVarOf(t))}</code>`).join(' ') || '<span class="muted">no token</span>'}</td>
+  </tr>`).join('')
+  const more = list.length > max ? `<p class="muted">and ${list.length - max} more in verify.json</p>` : ''
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>text</th><th>ratio</th><th>AA min</th><th>text color</th><th>background (measured)</th><th>text color token</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>${more}`
+}
+
+/** Check 4: text contrast. Not a pixel diff, so it gets its own row: counts, regressions (blocking), then existing failures. */
+function contrastRow(c) {
+  if (!c) return ''
+  const label = 'Text contrast (WCAG 2.x AA, SC 1.4.3)'
+  if (c.error) return `<div class="verify-row"><div class="verify-row-head"><span class="badge badge-info">not run</span> <strong>${label}</strong> <span class="muted">${escapeHtml(c.error)}</span></div></div>`
+  const status = c.pass ? 'pass' : 'FAIL'
+  const fa = c.failingAfter || {}
+  const counts = `${c.pairs} text pairs measured; ${c.failingBefore} below the AA minimum on the original page, ${fa.colors ?? '?'} with color tokens, ${fa.all ?? '?'} with all tokens; ${c.regressions.length} regression${c.regressions.length === 1 ? '' : 's'}`
+  const regress = c.regressions.length
+    ? `<p><strong>Newly below AA after the proposal (blocks the gate):</strong></p>${contrastTable(c.regressions)}`
+    : ''
+  const improved = c.improved && c.improved.length ? `<p class="muted">${c.improved.length} pair${c.improved.length === 1 ? '' : 's'} moved above the minimum.</p>` : ''
+  const existing = c.failing && c.failing.length
+    ? `<details${c.failing.length <= 12 ? ' open' : ''}><summary>${c.failing.length} pair${c.failing.length === 1 ? '' : 's'} below AA on the original page (reported, not blocking)</summary>${contrastTable(c.failing)}</details>`
+    : ''
+  return `<div class="verify-row">
+    <div class="verify-row-head">
+      <span class="badge ${STATUS_BADGE_CLASS[status]}">${status}</span> <strong>${label}</strong>
+      <span class="muted">${escapeHtml(counts)}</span>
+    </div>
+    <p class="muted">Text color from the computed style; background measured on the rendered pixels around the letters, so gradients and images count. Checked on this captured route only (no hover or focus states, no non-text contrast). The gate blocks a proposal that adds a failing pair.</p>
+    ${regress}${improved}${existing}
+  </div>`
+}
+
 function verifySection(data) {
   const { verify, verifyImages } = data
   if (!verify) return sectionWrap('Verify', empty('No verify yet — run the verify stage.'))
@@ -417,10 +466,11 @@ function verifySection(data) {
     verifyRow('Fallbacks only (safety)', verify.fallback, imgs.fallback, verify.fallback && verify.fallback.pass ? 'pass' : 'FAIL'),
     verifyRow('Colors merged', verify.colors, imgs.colors, verify.colors && verify.colors.pass ? 'pass' : 'FAIL'),
     verifyRow('All tokens (layout cleanup to review)', verify, imgs, verify.reviewNeeded ? 'review' : 'pass'),
+    contrastRow(verify.contrast),
   ].join('')
 
   return sectionWrap('Verify', `
-    <p>${gateBadge} rewrite gate: fallbacks must be pixel-identical and color merges must be invisible</p>
+    <p>${gateBadge} rewrite gate: fallbacks must be pixel-identical, color merges must be invisible${verify.contrast && !verify.contrast.error ? ', and no text pair may newly fall below the AA contrast minimum' : ''}</p>
     ${rows}
   `)
 }
@@ -609,6 +659,8 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
 .pill { display: inline-block; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; font-size: 0.8em; margin: 2px 2px 0 0; }
 .swatch { display: inline-block; width: 22px; height: 22px; border: 1px solid var(--border); flex-shrink: 0; }
 .swatch-neutral { background: var(--surface); }
+.swatch-sm { width: 14px; height: 14px; vertical-align: middle; border-radius: 3px; }
+td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .swatch-bar { height: 10px; border-radius: 3px; background: var(--secondary); }
 .sample { font-size: 14px; border: 1px solid var(--border); border-radius: 4px; padding: 0 6px; background: var(--surface); }
 .table-wrap { overflow-x: auto; }
@@ -765,4 +817,43 @@ export function writeReport(runDir, o = {}) {
   const outPath = join(runDir, 'report.html')
   writeFileSync(outPath, html)
   return outPath
+}
+
+/**
+ * L16: the non-text section (icon/control contrast, WCAG 1.4.11; target size, WCAG 2.5.8) from <runDir>/nontext.json,
+ * inserted into an existing report.html (replacing an earlier copy). Self-contained so it merges with other report work.
+ * Crops are embedded as data URIs. Returns the report path, or null when there is no report or no nontext.json.
+ */
+export function appendNontextSection(runDir) {
+  const nt = readJsonSafe(join(runDir, 'nontext.json'))
+  const reportPath = join(runDir, 'report.html')
+  if (!nt || !existsSync(reportPath)) return null
+  const badge = (ok, yes, no) => (ok == null ? '<span class="muted">n/a</span>' : ok ? `<span class="badge badge-pass">${yes}</span>` : `<span class="badge badge-fail">${no}</span>`)
+  const swatch = (hex) => (safeCss(hex) ? `<span style="display:inline-block;width:12px;height:12px;border:1px solid var(--border);vertical-align:middle;background:${safeCss(hex)}"></span> <code>${escapeHtml(hex)}</code>` : '')
+  const rows = (nt.items || []).map((x) => {
+    const img = readPngDataUri(join(runDir, x.crop))
+    const c = x.contrast
+    const size = x.size
+      ? `${x.size.w}&times;${x.size.h} ${x.size.pass ? badge(true, 'ok') : x.size.spacingException ? '<span class="badge badge-caution">small, spaced</span>' : badge(false, '', 'under 24')}`
+      : '<span class="muted">not a target</span>'
+    const token = x.token ? [x.token.fg, x.token.bg].map((t) => (t ? `<code>${escapeHtml(t)}</code>` : '<span class="muted">no token</span>')).join(' on ') : ''
+    return `<tr><td>${img ? `<img src="${img}" alt="${escapeHtml(x.label)} ${escapeHtml(x.id)}" style="max-height:72px;max-width:220px">` : ''}</td>
+<td><strong>${escapeHtml(x.label)}</strong> <span class="muted">${escapeHtml(x.id)}</span><br><span class="muted">${escapeHtml(x.outlineSource)}</span></td>
+<td>${c ? `${Number(c.ratio).toFixed(2)}:1 ${!c.pass && c.textLabel ? `<span class="badge badge-caution">review</span> <span class="muted">labelled &ldquo;${escapeHtml(c.textLabel)}&rdquo;</span>` : badge(c.pass, 'ok', 'below 3:1')}<br>${swatch(c.fg)} on ${swatch(c.bg)}<br><span class="muted">${escapeHtml(c.basis)}</span>` : '<span class="muted">not measured</span>'}</td>
+<td>${size}</td><td>${token}</td></tr>`
+  }).join('\n')
+  const s = nt.sam || {}
+  const summary = `${nt.controls} controls found by SAM (${Object.entries(nt.byLabel || {}).map(([k, v]) => `${v} ${escapeHtml(k)}`).join(', ')}). ` +
+    `Non-text contrast below 3:1: ${nt.contrastFailing} of ${nt.contrastMeasured} (${nt.contrastFailingNeedsBoundary ?? nt.contrastFailing} with no text label to identify them). Targets under 24&times;24 px: ${nt.undersized} of ${nt.targets} (${nt.undersizedNoSpacing} without the spacing exception).`
+  const note = `Outlines from SAM 3.1 point prompts (${s.calls || 0} calls, ${s.cached || 0} cached${s.uncachedMedianMs ? `, median ${s.uncachedMedianMs} ms uncached` : ''}). ` +
+    'Contrast compares the control (fill, border, or glyph) with a 3 px ring just outside its mask, on the captured route only; hover and focus states are not measured. ' +
+    'WCAG does not require a visible boundary on a button whose text label identifies it, so a low button ratio is a finding to review, not a failure by itself. ' +
+    'The spacing check considers only the targets found here.'
+  const section = `<!-- nontext:start -->${sectionWrap('Icon and control contrast, target size (SAM)', `<p>${summary}</p><table class="wf"><thead><tr><th>Crop</th><th>Control</th><th>Contrast (WCAG 1.4.11)</th><th>Size (WCAG 2.5.8)</th><th>Token</th></tr></thead><tbody>${rows}</tbody></table><p class="muted">${escapeHtml(note)}</p>`)}<!-- nontext:end -->`
+  let html = readFileSync(reportPath, 'utf-8').replace(/<!-- nontext:start -->[\s\S]*?<!-- nontext:end -->\n?/, '')
+  // After the last section inside .wrap (the review toolbar and script that follow have no <section>).
+  const at = html.lastIndexOf('</section>')
+  html = at >= 0 ? `${html.slice(0, at + 10)}\n${section}${html.slice(at + 10)}` : html.replace('</body>', `${section}\n</body>`)
+  writeFileSync(reportPath, html)
+  return reportPath
 }

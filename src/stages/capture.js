@@ -126,6 +126,89 @@ function walkPage(props, maxElements) {
 }
 
 /**
+ * In-page text walker for the contrast check (L12). Self-contained like walkPage. One entry per element that owns
+ * visible text: the boxes of its own text runs (Range rects, page px; tighter than the element box, so a long
+ * gradient behind a short label is measured where the letters are), its painted text color, the product of its and
+ * its ancestors' opacity, and whether it is disabled (inactive controls and their labels are exempt from SC 1.4.3).
+ * Walks open shadow roots too, so text inside web components is not skipped.
+ */
+function walkTexts(maxElements, keep) {
+  const out = []
+  const els = []
+  const pathOf = (el) => {
+    const parts = []
+    let cur = el
+    for (let d = 0; cur && cur.nodeType === 1 && d < 4; d++) {
+      let p = cur.tagName.toLowerCase()
+      const cls = (cur.getAttribute('class') || '').trim().split(/\s+/).filter(Boolean)[0]
+      if (cls) p += '.' + cls
+      parts.unshift(p)
+      cur = cur.parentElement || (cur.parentNode && cur.parentNode.host) || null
+    }
+    return parts.join('>')
+  }
+  const isDisabled = (el) => {
+    if (el.closest('[aria-disabled="true"], fieldset:disabled') || (el.matches && el.matches(':disabled'))) return true
+    const lab = el.closest('label')
+    if (lab && lab.control && (lab.control.disabled || lab.control.closest('fieldset:disabled, [aria-disabled="true"]'))) return true
+    // Text that names a disabled widget through aria-labelledby.
+    for (let n = el; n && n.nodeType === 1; n = n.parentElement) {
+      if (!n.id) continue
+      const users = document.querySelectorAll('[aria-labelledby~="' + CSS.escape(n.id) + '"]')
+      for (const u of users) if (u.matches(':disabled, [aria-disabled="true"]') || u.closest('[aria-disabled="true"], fieldset:disabled')) return true
+    }
+    return false
+  }
+  const visit = (el, opacity) => {
+    if (out.length >= maxElements) return
+    const tag = el.tagName.toLowerCase()
+    if (tag === 'script' || tag === 'style' || tag === 'noscript' || tag === 'template' || tag === 'svg') return
+    const cs = getComputedStyle(el)
+    if (cs.display === 'none') return
+    const op = opacity * (Number(cs.opacity) || 0)
+    if (op <= 0) return
+    const kids = el.shadowRoot ? [el.shadowRoot, el] : [el]
+    let text = ''
+    const rects = []
+    for (const root of kids) {
+      for (const n of root.childNodes) {
+        if (n.nodeType !== 3 || !n.textContent.trim()) continue
+        text += n.textContent
+        const r = document.createRange()
+        r.selectNodeContents(n)
+        for (const b of r.getClientRects()) if (b.width >= 1 && b.height >= 1 && rects.length < 16) rects.push([b.left + scrollX, b.top + scrollY, b.width, b.height])
+      }
+    }
+    text = text.trim().replace(/\s+/g, ' ').slice(0, 40)
+    if (text && rects.length && cs.visibility !== 'hidden') {
+      const r = el.getBoundingClientRect()
+      const fill = cs.getPropertyValue('-webkit-text-fill-color')
+      out.push({
+        path: pathOf(el), tag, text,
+        bbox: [Math.round(r.left + scrollX), Math.round(r.top + scrollY), Math.round(r.width), Math.round(r.height)],
+        rects: rects.map((b) => b.map((v) => Math.round(v * 10) / 10)),
+        color: fill && fill !== cs.color ? fill : cs.color,
+        opacity: Math.round(op * 1000) / 1000,
+        fontSize: cs.fontSize, fontWeight: cs.fontWeight,
+        disabled: isDisabled(el),
+      })
+      els.push(el)
+    }
+    for (const c of el.children) visit(c, op)
+    if (el.shadowRoot) for (const c of el.shadowRoot.children) visit(c, op)
+  }
+  if (document.body) visit(document.body, 1)
+  // Benchmarks map another tool's findings (axe nodes) back to these samples by element.
+  if (keep) window.__s2tTextEls = els
+  return out
+}
+
+/** Text samples (walkTexts) from a loaded page. keep: leave the elements on window.__s2tTextEls (benchmarks). */
+export function collectTexts(page, maxElements = 3000, keep = false) {
+  return page.evaluate(([fn, max, k]) => (new Function('return ' + fn)())(max, k), [walkTexts.toString(), maxElements, keep])
+}
+
+/**
  * @param {{url:string, runDir:string, viewport:{width:number,height:number}, maxElements?:number}} o
  * @returns {Promise<import('../types.js').Capture>}
  */
@@ -154,19 +237,30 @@ export async function runCapture(o) {
   }
 }
 
-/** Screenshot only (verify stage uses this for the "after" image). */
-export async function screenshotUrl(url, path, viewport, extraCss = '') {
+/**
+ * Screenshot only (verify stage uses this for the "after" image). With o.texts, also returns the page's text samples
+ * (walkTexts) read from the same render, for the contrast check.
+ * @returns {Promise<Array<import('../types.js').TextSample>|undefined>}
+ */
+export async function screenshotUrl(url, path, viewport, extraCss = '', o = {}) {
   const { chromium } = await import('playwright')
   const browser = await chromium.launch(LAUNCH)
   try {
-    const page = await newPage(browser, viewport)
-    await page.goto(url, { waitUntil: 'networkidle' })
-    await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
-    if (extraCss) await page.addStyleTag({ content: extraCss })
-    await loadImages(page)
-    await settle(page)
+    const page = await openSettled(browser, url, viewport, extraCss)
     await page.screenshot({ path, fullPage: true })
+    if (o.texts) return await collectTexts(page)
   } finally {
     await browser.close()
   }
+}
+
+/** A page loaded the way every verify screenshot is taken (seeded random, animations off, images loaded, settled). Benchmarks reuse it. */
+export async function openSettled(browser, url, viewport, extraCss = '') {
+  const page = await newPage(browser, viewport)
+  await page.goto(url, { waitUntil: 'networkidle' })
+  await page.addStyleTag({ content: '*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}' })
+  if (extraCss) await page.addStyleTag({ content: extraCss })
+  await loadImages(page)
+  await settle(page)
+  return page
 }

@@ -163,6 +163,15 @@ async function main() {
     const provider = a.provider === 'both' ? 'both' : a.provider === 'meta' ? 'meta' : 'baseten'
     const r = await runDark({ runDir: a.run, provider, log: (m) => console.log(`  ${m}`) })
     console.log(`dark: ${r.before.pass} of ${r.before.checked} text pairs pass in the light theme, ${r.after.pass} of ${r.after.checked} in the dark theme (${r.winner.label}, ${r.winner.round}); wrote tokens.dark.css, dark.json${r.screenshot ? ', dark.png' : ''}`)
+  } else if (cmd === 'nontext') {
+    // L16: icon/control contrast (WCAG 1.4.11) and target size (WCAG 2.5.8) on the controls SAM found; SAM point prompts.
+    const { runNontext, formatNontext } = await import('./stages/nontext.js')
+    const { appendNontextSection } = await import('./stages/report.js')
+    if (!a.run) throw new Error('nontext needs --run <run dir> (a hybrid run with regions.json)')
+    const out = await runNontext(a.run, { log: (m) => console.log(`  ${m}`), max: a.max ? Number(a.max) : undefined })
+    console.log(formatNontext(out))
+    const p = appendNontextSection(a.run)
+    if (p) console.log(`nontext: section added to ${p}`)
   } else if (cmd === 'doctor') {
     await doctor()
   } else if (cmd === 'serve') {
@@ -179,6 +188,7 @@ async function main() {
        s2t scoreboard [--out out/scoreboard.html]      (SAM vs DOM split-screen scoreboard: div-soup + 2 real apps)
        s2t playground --run <run dir> --app <tokenized app build> [--port 4400] [--provider baseten|meta] [--title <name>]
        s2t dark --run <run dir> [--provider baseten|meta|both]   (tokens.dark.css + dark.json + dark.png, text contrast checked)
+       s2t nontext --run <hybrid run dir> [--max 150]   (icon/control contrast 3:1 + target size 24x24 via SAM point prompts)
        s2t doctor
        s2t serve --fixture <name> [--port 4321]
 stages: ${STAGES.join(' → ')}`)
