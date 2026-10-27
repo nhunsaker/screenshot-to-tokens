@@ -172,6 +172,42 @@ test('expandCompact: draft primitives + renames + model tokens, aliases follow r
   assert.ok(!out.tokens.some((t) => t.name === 'oops'))
 })
 
+test('fillSemanticGaps: adds color.text.inverse from button text evidence, skips if already covered', async () => {
+  const { fillSemanticGaps } = await import('../src/providers/llm/heuristic.js')
+  const clusters = [{ id: 'color-07', kind: 'color', value: '#ffffffff', members: [], count: 4, props: {}, regionLabels: {} }]
+  const base = [{ name: 'color.white', tier: 'primitive', value: '#ffffffff', clusters: ['color-07'], why: 'Used 4 times.' }]
+  const components = [{ component: 'button', props: { color: [{ cluster: 'color-07', n: 4 }] } }]
+  const out = fillSemanticGaps(base, clusters, components)
+  const inverse = out.find((t) => t.name === 'color.text.inverse')
+  assert.ok(inverse, 'adds color.text.inverse from the button text color')
+  assert.equal(inverse.alias, 'color.white')
+  assert.match(inverse.why, /^Heuristic:/)
+
+  // Already covered by a semantic text token aliasing the same primitive: don't duplicate the role.
+  const covered = [...base, { name: 'color.text.default', tier: 'semantic', alias: 'color.white', clusters: ['color-07'], why: 'x' }]
+  const out2 = fillSemanticGaps(covered, clusters, components)
+  assert.ok(!out2.some((t) => t.name === 'color.text.inverse'))
+})
+
+test('fillSemanticGaps: status colors need 2+ hue families from badge backgrounds, not just one', async () => {
+  const { fillSemanticGaps } = await import('../src/providers/llm/heuristic.js')
+  const clusters = [
+    { id: 'color-g', kind: 'color', value: '#28a745ff', members: [], count: 2, props: {}, regionLabels: {} },
+    { id: 'color-r', kind: 'color', value: '#dc3545ff', members: [], count: 2, props: {}, regionLabels: {} },
+  ]
+  const base = [
+    { name: 'color.green.500', tier: 'primitive', value: '#28a745ff', clusters: ['color-g'], why: 'Used 2 times.' },
+    { name: 'color.red.500', tier: 'primitive', value: '#dc3545ff', clusters: ['color-r'], why: 'Used 2 times.' },
+  ]
+  const oneColor = [{ component: 'badge', props: { 'background-color': [{ cluster: 'color-g', n: 2 }] } }]
+  assert.ok(!fillSemanticGaps(base, clusters, oneColor).some((t) => t.tier === 'semantic'), 'one badge color alone is not enough signal')
+
+  const twoColors = [{ component: 'badge', props: { 'background-color': [{ cluster: 'color-g', n: 2 }, { cluster: 'color-r', n: 2 }] } }]
+  const out = fillSemanticGaps(base, clusters, twoColors)
+  assert.ok(out.find((t) => t.name === 'color.status.success' && t.alias === 'color.green.500'))
+  assert.ok(out.find((t) => t.name === 'color.status.danger' && t.alias === 'color.red.500'))
+})
+
 test('negative and fractional spacing get valid primitive names', async () => {
   const { primitiveNames } = await import('../src/providers/llm/heuristic.js')
   const names = primitiveNames([
