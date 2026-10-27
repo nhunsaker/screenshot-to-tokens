@@ -57,6 +57,11 @@ function breadthPage() {
   return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#fff;color:#1d1d1b;font:14px/1.4 system-ui;padding:28px 36px}h1{font-size:24px;margin:0 0 4px}p{color:#6b6a66;margin:0 0 16px}table{border-collapse:collapse;width:100%}td,th{padding:5px 8px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}th{position:sticky;top:0;background:#fafafa}tr.pass td:nth-child(7){color:#137a3a;font-weight:600}tr.other td:nth-child(7){color:#8a5300}</style><h1>28 public sites we didn't build</h1><p>Mirrored, tokenized and verified end to end. 23 of 23 stable sites with edits: rewrite changes 0 px. Re-checked: same verdict on all 27 reachable.</p><table><tr>${head.map((h) => `<th>${esc(h)}</th>`).join('')}</tr>${rows.map((r) => `<tr class="${cls(r)}">${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table><script>let y=0;setTimeout(()=>{const t=setInterval(()=>{y+=3;scrollTo(0,y);if(y>900)clearInterval(t)},16)},1500)</script>`
 }
 
+function reviewTerminal() {
+  const out = readFileSync('out/video/review-v2-output.txt', 'utf-8').trim().split('\n')
+  const lines = out.map((l, i) => ({ text: l, at: 0.25 * i + (/^eval/.test(l) ? 1.2 : 0) }))
+  return terminalPage('node src/cli.js review --run out/take-review --decisions review.json && node src/cli.js eval --fixture acme-shop --run out/take-review', lines, /verify|21\/21/)
+}
 const srv = await serveDir(process.cwd())
 const browser = await chromium.launch({ args: ['--disable-gpu'] })
 const size = { width: 1280, height: 720 }
@@ -81,16 +86,18 @@ await beat(3, async (p) => {
   await p.mouse.wheel(0, 500); await wait(p, 2500); await p.mouse.wheel(0, 500); await wait(p, 2000)
 })
 await beat(4, async (p) => {
+  // Paced to the voiceover: accept (about 2 s in), rename (about 7 s), merge (about 14 s), then the terminal.
+  page('review-terminal.html', reviewTerminal())
   await p.goto(`${srv.url}out/video/review-run/report.html`, { waitUntil: 'networkidle' })
   const chip = (n) => p.locator('.chip', { has: p.locator('code.chip-name', { hasText: new RegExp('^' + n.replace(/\./g, '\\.') + '$') }) }).first()
-  await chip('color.action.primary').scrollIntoViewIfNeeded(); await wait(p, 1200)
-  await chip('color.action.primary').locator('[data-action=accept]').hover(); await wait(p, 500); await chip('color.action.primary').locator('[data-action=accept]').click(); await wait(p, 1200)
-  await chip('color.surface.muted').scrollIntoViewIfNeeded(); await wait(p, 800)
+  await chip('color.action.primary').scrollIntoViewIfNeeded(); await wait(p, 1800)
+  await chip('color.action.primary').locator('[data-action=accept]').hover(); await wait(p, 600); await chip('color.action.primary').locator('[data-action=accept]').click(); await wait(p, 2600)
+  await chip('color.surface.muted').scrollIntoViewIfNeeded(); await wait(p, 1500)
   await chip('color.surface.muted').locator('[data-action=rename]').click(); await wait(p, 500)
-  await chip('color.surface.muted').locator('.rename-input').pressSequentially('color.surface.subtle', { delay: 60 }); await chip('color.surface.muted').locator('.rename-input').press('Enter'); await wait(p, 1200)
-  await p.locator('.merge-item').first().scrollIntoViewIfNeeded(); await wait(p, 1000)
-  await p.locator('.merge-item .merge-btn').first().click(); await wait(p, 1800)
-  await p.goto(`${srv.url}out/l5/terminal.html`); await wait(p, 10000)
+  await chip('color.surface.muted').locator('.rename-input').pressSequentially('color.surface.input', { delay: 70 }); await chip('color.surface.muted').locator('.rename-input').press('Enter'); await wait(p, 2200)
+  await p.locator('.merge-item').first().scrollIntoViewIfNeeded(); await wait(p, 2200)
+  await p.locator('.merge-item .merge-btn').first().click(); await wait(p, 3000)
+  await p.goto(`${srv.url}out/video/pages/review-terminal.html`); await p.waitForFunction(() => window.done, null, { timeout: 60000 }); await wait(p, 2500)
 })
 await beat(5, async (p) => {
   await p.goto(page('diff.html', diffPage())); await wait(p, 6500)

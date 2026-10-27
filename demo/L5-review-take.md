@@ -19,7 +19,7 @@ S2T_SEGMENTER=hybrid S2T_NAMER=baseten node src/cli.js run --fixture acme-shop -
 ## Shot list
 
 1. **Report, Tokens section.** Point at `color.action.primary` and click **Accept**. (The badge turns "accepted".)
-2. **Rename.** On `color.surface.muted`, click **Rename** and type `color.surface.subtle`.
+2. **Rename.** On `color.surface.muted`, click **Rename** and type `color.surface.input`.
 3. **Suggested merges.** "6px (1 use) is close to 4px (14 uses)". Click **Accept merge**. Say: *the tool never merges
    on its own; a person accepts it.*
 4. **Export** the decisions (the report saves `review.json`), then in the terminal:

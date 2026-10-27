@@ -1,5 +1,5 @@
 { "decisions": [
   { "name": "color.action.primary", "action": "accept" },
-  { "name": "color.surface.muted", "action": "rename", "to": "color.surface.subtle" },
+  { "name": "color.surface.muted", "action": "rename", "to": "color.surface.input" },
   { "action": "merge", "from": "radius-02", "into": "radius-01" }
 ] }
