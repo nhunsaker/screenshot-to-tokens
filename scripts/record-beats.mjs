@@ -78,6 +78,20 @@ async function beat(n, fn) {
 const page = (name, html) => { writeFileSync(join(PAGES, name), html); return `${srv.url}out/video/pages/${name}` }
 const wait = (p, ms) => p.waitForTimeout(ms)
 
+// Beat 0: what Sorb is (the live try page, labeled as pre-existing), then the hackathon title card.
+function titleCard() {
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh}.c{max-width:900px;padding:0 48px}.k{font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:#8a9af0;opacity:0;transition:opacity .5s}.t{font-size:60px;font-weight:700;letter-spacing:-1px;margin:10px 0 14px;opacity:0;transition:opacity .5s}.s{font-size:22px;color:#b9b8b2;line-height:1.45;opacity:0;transition:opacity .5s}.n{font-size:15px;color:#6b6a66;margin-top:22px;opacity:0;transition:opacity .5s}.on{opacity:1!important}</style>
+<div class="c"><div class="k" data-at="0.2">Meta Global AI Developer Hackathon · Startup track</div><div class="t" data-at="0.6">Screenshot to Tokens</div><div class="s" data-at="1.4">An add-on to Sorb for apps that have no design tokens yet: SAM 3.1 reads the interface from pixels, Muse Spark names the tokens, Sorb previews and verifies before anything merges.</div><div class="n" data-at="3.0">Sorb existed before the event. Everything from here on was built during it (git tag pre-event-baseline marks the line).</div></div>
+<script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},100)</script>`
+}
+await beat(0, async (p) => {
+  await p.goto('https://try.sorbcloud.com/', { waitUntil: 'networkidle', timeout: 60000 })
+  await p.evaluate(() => { const d = document.createElement('div'); d.textContent = 'Sorb · existed before the hackathon · try.sorbcloud.com'; d.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:2147483647;background:#111;color:#fff;font:600 13px system-ui;padding:6px 10px;border-radius:8px'; document.body.appendChild(d) })
+  await wait(p, 4500)
+  const next = p.getByRole('button', { name: /next/i }).first()
+  if (await next.count()) { await next.click().catch(() => {}); await wait(p, 4500) } else await wait(p, 4500)
+  await p.goto(page('title.html', titleCard())); await wait(p, 10500)
+})
 await beat(1, async (p) => { await p.goto(page('editor.html', editorPage())); await wait(p, 10000) })
 await beat(2, async (p) => { await p.goto(`${srv.url}out/scoreboard.html`, { waitUntil: 'networkidle' }); await wait(p, 600); await p.click('#replay'); await wait(p, 6500); await p.evaluate(() => document.querySelector('.headline')?.scrollIntoView({ block: 'start' })); await wait(p, 3500) })
 await beat(3, async (p) => {
