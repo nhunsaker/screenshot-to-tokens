@@ -22,6 +22,7 @@ Model API and Muse Spark (hosted, or the open-weights Muse Spark Open served on 
 | Three real dashboards (Argon, Light Bootstrap, Agency) | pass the token eval; rewrite safety **0 px** on all; Argon end to end in 23 s, naming 4.9 s, about $0.007 (`docs/latency.md`) |
 | 28 public sites we didn't build | 2,313 values rewritten; **0 px** changed on 23 of 23 stable sites with edits; re-checked, same verdict on all 27 reachable (`docs/breadth.md`) |
 | Hosted vs open weights | Muse Spark Open on Baseten names in 3 to 4.4 s vs 13.7 to 26 s hosted, identical fixture evals (`docs/f17-hosted-vs-open.md`) |
+| Open weights end to end | SAM 3.1 open weights on a Modal L4 GPU match hosted SAM 3.1 on every test (div-soup 8/8; 3 labeled sites identical; 96.6% box agreement on 27 sites); an Argon run on open weights only kept verify at 0 px (`docs/open-weights-pipeline.md`) |
 | Review | accept + rename + merge takes the fixture from 20/21 to 21/21 at 0 px (`demo/L5-review-take.md`) |
 | Text contrast check | measured on rendered pixels (gradients and images count); W3C ACT afw4f7: 32/32 consistent; vs axe-core on 28 sites: 1 opposite verdict in 2,483, and 243 of the 251 items axe leaves for manual review decided (`docs/a11y.md`) |
 | Icons and controls (SAM click prompts) | contrast (WCAG 1.4.11) and target size (2.5.8) for each control SAM outlines; 9 controls on the div page the code doesn't describe (`docs/a11y-nontext.md`) |

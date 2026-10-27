@@ -122,7 +122,7 @@ await beat(7, async (p) => { await p.goto(page('breadth.html', breadthPage())); 
 function endCard() {
   const items = [
     [3.0, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
-    [7.2, 'Muse Spark Open · on Baseten', 'names the token set', '3 to 5 s · 3 to 9× faster than hosted · same answer-key scores'],
+    [7.2, 'Open weights, end to end', 'Muse Spark Open on Baseten names the tokens · SAM 3.1 open weights on a Modal GPU segments', '3 to 9× faster than hosted Muse · open SAM matches hosted SAM on every test'],
     [11.5, 'Checked before it merges', 'text contrast on every PR · SAM-measured controls · dark mode as a token file', '28 sites vs axe-core: 1 opposite verdict in 2,483 · 243 of 251 "needs review" items decided'],
     [14.2, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 2,313 values · 0 px'],
     [19.0, 'Propose the change. See it live. Verify before you merge.', '', 'Code: github.com/nhunsaker/screenshot-to-tokens · Live demo: nhunsaker.github.io/argon-dashboard-react'],

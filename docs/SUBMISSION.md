@@ -57,9 +57,10 @@ automatic retry), and `s2t nontext` uses SAM 3.1 click prompts to outline each i
 |---|---|---|
 | **SAM 3.1** (Meta Model API) | Segments buttons, inputs and icons from pixels; click (point) prompts outline single controls for measurement | On a page built of divs and a canvas, page structure finds **0 of 8** buttons and SAM finds **8 of 8** (IoU 0.95), including one painted inside a canvas. Click-to-outline in about 1.6 s |
 | **Muse Spark Open** on Baseten (open weights) | The default namer, and dark-theme proposals | Names a page's tokens in **3 to 5 s**, 3 to 9× faster than hosted Muse Spark 1.3, with identical fixture scores |
+| **SAM 3.1 open weights** on a Modal GPU (`facebook/sam3.1`) | The same segmentation, self-hosted, so the whole pipeline runs on open weights | Matches hosted SAM 3.1 on every test: div-soup 8/8, the 3 hand-labeled sites identical, 96.6% box agreement on 27 sites (mean IoU 0.89); about $0.0003 of GPU time per screenshot warm. An Argon run on open weights only kept verify at 0 px |
 | **Muse Spark 1.3** (hosted) | Alternative namer; dark-theme proposals in `--provider both` (the better result is kept) | 13.7 to 26.2 s per naming call; won the dark-theme comparison on Light Bootstrap Dashboard |
 
-No GPU on the laptop; one full run on Argon Dashboard costs under a cent.
+No GPU on the laptop; one full run on Argon Dashboard costs under a cent. With SAM on Modal and Muse Spark Open on Baseten, the whole pipeline runs on Meta's open weights (`docs/open-weights-pipeline.md`).
 
 ## Evidence (all numbers from real runs; reproducible from the repo)
 
@@ -73,15 +74,15 @@ No GPU on the laptop; one full run on Argon Dashboard costs under a cent.
 | Text contrast vs axe-core 4.14 | 28 sites: agrees on 308 of 309 violations and 2,165 of 2,174 passes, **1 opposite verdict in 2,483**; decides **243 of the 251** items axe leaves for manual review (text on gradients and images) | `docs/a11y.md` |
 | Icons and controls (SAM) | On the div page, SAM found 9 controls the code doesn't describe; each measured for contrast and size | `docs/a11y-nontext.md` |
 | Dark mode as a token file | Light Bootstrap Dashboard: 83 of 84 text pairs pass in dark (14 of 84 in its original light theme) | `docs/dark-mode.md` |
-| Tests | 205 passing | `pnpm test` |
+| Tests | 211 passing | `pnpm test` |
 
 ## How it scores against the rubric
 
 | Rubric | Where to look |
 |---|---|
 | **Impact (30%)** | The problem above; contrast fixes and dark mode become token changes; 28-site breadth run |
-| **Use of Meta AI tooling (25%)** | SAM 3.1 on UI screenshots, where the DOM has nothing (0/8 vs 8/8); SAM click prompts to measure single controls; open-weights Muse Spark on Baseten as the fast namer; hosted Muse Spark compared on every dark theme |
-| **Technical depth & execution (20%)** | The model proposes, deterministic code guarantees the shape; four-check verify; benchmarks against the W3C ACT test cases and axe-core; 205 tests |
+| **Use of Meta AI tooling (25%)** | SAM 3.1 on UI screenshots, where the DOM has nothing (0/8 vs 8/8); SAM click prompts to measure single controls; the whole pipeline on Meta's open weights (SAM 3.1 on Modal, Muse Spark Open on Baseten) with parity shown against the hosted models; hosted Muse Spark compared on every dark theme |
+| **Technical depth & execution (20%)** | The model proposes, deterministic code guarantees the shape; four-check verify; benchmarks against the W3C ACT test cases and axe-core; 211 tests |
 | **Demo (25%)** | The video; the live demo site and playground; PR #2 on the fork |
 
 ## What existed before the hackathon, and what is new
@@ -111,7 +112,7 @@ controls, dark mode, the 28-site breadth run, the live demo site, the playground
 
 ```sh
 pnpm install --ignore-workspace
-pnpm test                                   # 205 tests
+pnpm test                                   # 211 tests
 pnpm demo                                   # fixture app, offline stand-ins → out/acme-shop/report.html
 S2T_SEGMENTER=hybrid S2T_NAMER=baseten node src/cli.js run --serve <app build> --target <css dir> --run out/my-app
 node src/cli.js dark --run out/my-app --provider both
