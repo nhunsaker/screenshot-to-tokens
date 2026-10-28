@@ -7,7 +7,7 @@ that the keyboard never reaches.
 What this is: one named check (visible focus, WCAG 2.4.13 style) and one reachability count, on the captured route in
 its default state, with numbers. What it is not: a keyboard audit, or a verdict that a page is accessible or conforms
 to WCAG. Say what was measured, for example "Argon: 0 of 25 Tab stops showed a visible focus indicator; with the focus
-tokens, 24 of 25".
+tokens, 25 of 25 (24 of 25 before the 2026-10-28 rule update)".
 
 ```
 s2t focus --run out/m12-argon            # measure only: focus.json, a fifth verify row in report.html
