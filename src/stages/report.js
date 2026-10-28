@@ -21,7 +21,8 @@ const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ESCAPES[c])
 const CSS_SAFE = /^[-+.,%#()/0-9a-zA-Z ]{0,80}$/
 const safeCss = (v) => (v != null && CSS_SAFE.test(String(v)) ? String(v) : null)
 
-const isMockId = (id) => !!id && /mock|deterministic/i.test(id)
+// Only stand-ins for a model are flagged; the deterministic rewriter is the design, not a stand-in.
+const isMockId = (id) => !!id && /mock/i.test(id) && !/sam|layout/i.test(id)
 
 const REVIEW_BADGE_CLASS = { accepted: 'badge-pass', renamed: 'badge-info', rejected: 'badge-fail' }
 
@@ -94,7 +95,12 @@ function providerIds(data) {
   const fromCaptureProviders = capture && capture.providers
     ? (typeof capture.providers === 'string' ? capture.providers : capture.providers.segment)
     : null
-  const segment = fromCaptureProviders || (regions && regions[0] && regions[0].source) || null
+  // Name the segmenter from all region sources, not the first one: a hybrid run mixes SAM, layout and DOM regions.
+  const sources = [...new Set((regions || []).map((r) => String(r.source || '')))]
+  const fromRegions = !sources.length ? null
+    : sources.some((x) => /^sam/.test(x)) && sources.some((x) => !/^sam/.test(x)) ? `hybrid: ${sources.find((x) => /^sam/.test(x)).replace(/\+inert$/, '')} + layout + DOM`
+    : sources[0]
+  const segment = fromCaptureProviders || fromRegions || null
   const namer = (tokens && tokens.namer) || null
   const coder = (rewrite && rewrite.coder) || null
   return { segment, namer, coder }
@@ -149,7 +155,7 @@ function heroSection(data) {
     ? `<label class="toggle"><input type="checkbox" id="toggle-regions" checked> Show ${regs.length} region${regs.length === 1 ? '' : 's'}</label>`
     : empty('No regions yet — run the segment stage.')
 
-  const oracleNote = regs.length && regs[0].source === 'mock-dom'
+  const oracleNote = regs.length && regs.every((r) => r.source === 'mock-dom')
     ? empty('These regions come from a mock oracle (DOM boxes), not SAM 3.1 looking at pixels. It can see the DOM, SAM only sees pixels, so these scores overstate real segmentation quality.')
     : ''
 

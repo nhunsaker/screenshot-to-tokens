@@ -42,7 +42,7 @@ function runTerminal() {
   const at = {}
   for (const s of timing.stages) { t += s.ms / 1000; at[s.stage] = t }
   const lines = text.map((l) => { const m = l.match(/^\s+(\w+)\s/); return { text: l.length > 112 ? l.slice(0, 111) + '…' : l, at: m && at[m[1]] != null ? at[m[1]] : (/^done/.test(l) ? t : 0) } })
-  return terminalPage(`node src/cli.js run --serve argon/build --run ${RUN}`, lines, /verify|done in/, 3)
+  return terminalPage(`node src/cli.js run --serve argon/build --run ${RUN}`, lines, /verify|report|done in/, 3)
 }
 function diffPage() {
   const r = JSON.parse(readFileSync(join(RUN, 'rewrite.json'), 'utf-8'))
@@ -93,10 +93,12 @@ await beat(0, async (p) => {
 await beat(1, async (p) => { await p.goto(page('editor.html', editorPage())); await wait(p, 8800) })
 await beat(2, async (p) => { await p.goto(`${srv.url}out/scoreboard.html`, { waitUntil: 'networkidle' }); await wait(p, 600); await p.click('#replay'); await wait(p, 6500); await p.evaluate(() => document.querySelector('.headline')?.scrollIntoView({ block: 'start' })); await wait(p, 3500) })
 await beat(3, async (p) => {
-  await p.goto(page('run.html', runTerminal())); await p.waitForFunction(() => window.done, null, { timeout: 60000 }); await wait(p, 1800)
+  await p.goto(page('run.html', runTerminal())); await p.waitForFunction(() => window.done, null, { timeout: 60000 }); await wait(p, 1200)
   await p.goto(`${srv.url}${RUN}/report.html`, { waitUntil: 'networkidle' })
-  await p.evaluate(() => [...document.querySelectorAll('h3.tier-head')].find((h) => /semantic/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 2600)
-  await p.mouse.wheel(0, 500); await wait(p, 2400)
+  await p.evaluate(() => { const c = document.createElement('div'); c.textContent = 'The review report it writes: every proposed token, with its reason'; c.style.cssText = 'position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(17,17,17,.92);color:#fff;font:600 18px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;padding:8px 14px;border-radius:10px'; document.body.appendChild(c) })
+  await wait(p, 2200)
+  await p.evaluate(() => [...document.querySelectorAll('h3.tier-head')].find((h) => /semantic/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 3200)
+  await p.mouse.wheel(0, 450); await wait(p, 3000)
 })
 await beat(4, async (p) => {
   // Paced to the voiceover: accept (about 2 s in), rename (about 7 s), merge (about 14 s), then the terminal.
@@ -123,7 +125,7 @@ function endCard() {
   const items = [
     [3.0, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
     [7.2, 'Open weights, end to end', 'Muse Spark Open on Baseten names the tokens · SAM 3.1 open weights on a Modal GPU segments', '3 to 9× faster than hosted Muse · open SAM matches hosted SAM on every test'],
-    [11.5, 'Checked before it merges', 'text contrast on every PR · SAM-measured controls · dark mode as a token file', '28 sites vs axe-core: 99.9% agreement · 243 of 251 "needs review" items decided'],
+    [11.5, 'Checked before it merges', 'text contrast on every PR · SAM-measured controls · dark mode as a token file', '28 sites vs axe-core: 99.9% agreement · decides 97% of what it leaves for review'],
     [14.2, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 2,313 values · 0 px'],
     [19.0, 'Propose the change. See it live. Verify before you merge.', '', 'Code: github.com/nhunsaker/screenshot-to-tokens · Live demo: nhunsaker.github.io/argon-dashboard-react'],
   ]
@@ -139,12 +141,12 @@ function axeCard() {
 <table><tr><th>axe-core says</th><th>items</th><th>we agree</th><th>opposite verdict</th></tr>
 <tr><td>violation</td><td>309</td><td class="n">308</td><td>0</td></tr>
 <tr><td>pass</td><td>2,174</td><td class="n">2,165</td><td>1 (a page that animates)</td></tr>
-<tr><td>can't decide (needs a person)</td><td>251</td><td class="n">we decide 243</td><td>—</td></tr></table>`
+<tr><td>can't decide (needs a person)</td><td>251</td><td class="n">we decide 97%; the rest flagged for review</td><td>—</td></tr></table>`
 }
 await beat(9, async (p) => {
   await p.goto(`${srv.url}out/m12-argon/report.html`, { waitUntil: 'networkidle' })
-  await p.evaluate(() => [...document.querySelectorAll('strong')].find((h) => /Text contrast/.test(h.textContent))?.scrollIntoView({ block: 'center' })); await wait(p, 8000)
-  await p.goto(page('axe.html', axeCard())); await wait(p, 9500)
+  await p.evaluate(() => [...document.querySelectorAll('strong')].find((h) => /Text contrast/.test(h.textContent))?.scrollIntoView({ block: 'center' })); await wait(p, 8500)
+  await p.goto(page('axe.html', axeCard())); await wait(p, 10500)
   // Keyboard focus on Argon: Tab with the theme's focus styles (none visible), then with the focus-ring tokens loaded.
   const argon = await serveDir(`${APPS}/argon/build`)
   const label = (t) => p.evaluate((t) => { let c = document.getElementById('s2t-cap'); if (!c) { c = document.createElement('div'); c.id = 's2t-cap'; c.style.cssText = 'position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(17,17,17,.92);color:#fff;font:600 18px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;padding:8px 14px;border-radius:10px'; document.body.appendChild(c) } c.textContent = t }, t)
@@ -158,7 +160,7 @@ await beat(9, async (p) => {
   const dark = await serveDir(resolve('out/video/assets/lightbootstrap-dark'))
   try {
     await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 1500)
-    await p.click('#sorb-theme-toggle'); await wait(p, 4200)
+    await p.click('#sorb-theme-toggle'); await wait(p, 5200)
   } finally { await dark.close() }
 })
 await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 24000) })

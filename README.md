@@ -24,7 +24,7 @@ Model API and Muse Spark (hosted, or the open-weights Muse Spark Open served on 
 | Hosted vs open weights | Muse Spark Open on Baseten names in 3 to 4.4 s vs 13.7 to 26 s hosted, identical fixture evals (`docs/f17-hosted-vs-open.md`) |
 | Open weights end to end | SAM 3.1 open weights on a Modal L4 GPU match hosted SAM 3.1 on every test (div-soup 8/8; 3 labeled sites identical; 96.6% box agreement on 27 sites); an Argon run on open weights only kept verify at 0 px (`docs/open-weights-pipeline.md`) |
 | Review | accept + rename + merge takes the fixture from 20/21 to 21/21 at 0 px (`demo/L5-review-take.md`) |
-| Text contrast check | measured on rendered pixels (gradients and images count); W3C ACT afw4f7: 32/32 consistent; vs axe-core on 28 sites: 1 opposite verdict in 2,483, and 243 of the 251 items axe leaves for manual review decided (`docs/a11y.md`) |
+| Text contrast check | measured on rendered pixels (gradients and images count); W3C ACT afw4f7: 32/32 consistent; vs axe-core on 28 sites: 99.9% agreement, and 97% of the items axe can't decide settled (the rest flagged for review) (`docs/a11y.md`) |
 | Icons and controls (SAM click prompts) | contrast (WCAG 1.4.11) and target size (2.5.8) for each control SAM outlines; 9 controls on the div page the code doesn't describe (`docs/a11y-nontext.md`) |
 | Visible keyboard focus (`s2t focus`) | Tab through every stop and compare focused vs unfocused pixels (WCAG 2.4.13 style); 30 real sites: 52% of 1,779 stops pass, 17 sites under half; fix = focus-ring tokens: Argon 0 of 25 → 25 of 25, still 0 px when nothing is focused (`docs/keyboard.md`) |
 | Dark mode as a token file | `s2t dark --provider both`: Light Bootstrap Dashboard 83 of 84 text pairs pass in dark (`docs/dark-mode.md`) |
