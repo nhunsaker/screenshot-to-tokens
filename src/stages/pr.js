@@ -9,6 +9,7 @@ import { execFileSync } from 'child_process'
 import { cssVarOf } from '../lib/props.js'
 import { evaluateReason } from './reasons.js'
 import { includeDarkInPr } from './dark.js'
+import { focusPrSection } from './focus.js'
 
 const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
 
@@ -56,7 +57,7 @@ export function contrastSection(c) {
 }
 
 /** PR body from the run artifacts. Pure; exported for tests. */
-export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clusters = [], verifiedOn = '' }) {
+export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clusters = [], verifiedOn = '', focus = null, focusCssRel = 'focus.css' }) {
   // Same grounding check as the report's spec cards: a reason that cites anything the cluster data doesn't support
   // is replaced by a plain reason built from the data and marked, and role conflicts are flagged for review.
   const byId = new Map(clusters.map((c) => [c.id, c]))
@@ -85,8 +86,10 @@ export function prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clu
     `| Colors merged | ${verify?.colors ? `${pct(verify.colors)}, ${verify.colors.pass ? 'pass' : 'FAIL'}` : 'not run'} |`,
     `| All tokens (layout cleanup, review) | ${pct(verify)} |`,
     ...(verify?.contrast && !verify.contrast.error ? [`| Text contrast, WCAG 2.x AA (no new failing pairs) | ${verify.contrast.failingBefore} of ${verify.contrast.pairs} pairs below AA before, ${verify.contrast.regressions.length} regressions, ${verify.contrast.pass ? 'pass' : 'FAIL'} |`] : []),
+    ...(focus && focus.before ? [`| Visible focus (WCAG 2.4.13), reported | ${focus.before.pass} of ${focus.before.measured} Tab stops pass before${focus.fix ? `, ${focus.fix.after.pass} of ${focus.fix.after.measured} with the focus tokens` : ''} |`] : []),
     '',
     ...contrastSection(verify?.contrast),
+    ...focusPrSection(focus, focusCssRel),
   ]
   if (score) lines.push(`Eval against the golden set: ${score.passed}/${score.total}.`, '')
   if (tokens.reviewed) lines.push(`Reviewed by a person: ${tokens.reviewed.decisions} decisions applied.`, '')
@@ -127,7 +130,15 @@ export function runPr(o) {
   const clusters = existsSync(join(o.runDir, 'clusters.json')) ? rd('clusters') : []
   const runMeta = existsSync(join(o.runDir, 'run.json')) ? rd('run') : {}
   const verifiedOn = runMeta.serve ? `the app's production build (\`${runMeta.serve.split('/').slice(-2).join('/')}\`)` : ''
-  const body = prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clusters, verifiedOn })
+  // L18: focus.json from `s2t focus`; with --fix, focus.css ships next to the tokens file (tokens.css already has the block).
+  const focus = existsSync(join(o.runDir, 'focus.json')) ? rd('focus') : null
+  let focusCssRel = 'focus.css'
+  if (focus && focus.fix && existsSync(join(o.runDir, 'focus.css'))) {
+    const dest = join(dirname(tokensCss), 'focus.css')
+    copyFileSync(join(o.runDir, 'focus.css'), dest)
+    focusCssRel = relative(o.repoDir, dest)
+  }
+  const body = prBody({ tokens, rewrite, verify, eval: score, tokensCssRel, clusters, verifiedOn, focus, focusCssRel })
   // Absolute: gh runs with cwd = the app repo, not this project.
   const bodyPath = resolve(o.runDir, 'pr-body.md')
   writeFileSync(bodyPath, body)

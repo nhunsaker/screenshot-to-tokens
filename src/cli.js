@@ -8,6 +8,7 @@
 //   s2t eval | review | pr | preview         score, apply review decisions, branch + PR, live Sorb preview
 //   s2t playground --run out/app-argon --app <build>   local token playground + Muse audit fixes / dark theme
 //   s2t dark --run out/app-argon [--provider baseten|meta|both]   dark theme as tokens.dark.css, contrast-checked
+//   s2t focus --run out/app-argon [--fix]   visible keyboard focus per Tab stop; --fix emits focus tokens + focus.css
 import { join } from 'path'
 import { totalmem, freemem, cpus } from 'os'
 import { execSync } from 'child_process'
@@ -172,6 +173,32 @@ async function main() {
     console.log(formatNontext(out))
     const p = appendNontextSection(a.run)
     if (p) console.log(`nontext: section added to ${p}`)
+  } else if (cmd === 'focus') {
+    // L18: Tab through the page; visible focus per stop (WCAG 2.4.13 style), SAM controls no Tab stop reaches, and
+    // with --fix the focus ring as component tokens + one :focus-visible rule (focus.css), re-measured.
+    const { runFocus, formatFocus, measureFolder } = await import('./stages/focus.js')
+    if (a.serve && !a.run) {
+      // Baseline only: a static folder, no run (no reachability, no fix). Writes --out (default out/focus/<name>.json).
+      const { writeFileSync, mkdirSync } = await import('fs')
+      const { dirname, basename } = await import('path')
+      const r = await measureFolder(a.serve, { cap: a.cap ? Number(a.cap) : undefined })
+      const outPath = a.out || join('out', 'focus', `${basename(a.serve.replace(/\/+$/, ''))}.json`)
+      mkdirSync(dirname(outPath), { recursive: true })
+      writeFileSync(outPath, JSON.stringify(r, null, 2))
+      const b = r.before
+      console.log(`focus: ${basename(a.serve.replace(/\/+$/, ''))}: ${b.stops} Tab stops, ${b.measured} measured: ${b.pass} pass / ${b.faint} faint / ${b.none} none; wrote ${outPath}`)
+      return
+    }
+    if (!a.run) throw new Error('focus needs --run <run dir> (a run with run.json and capture.json; regions.json for reachability)')
+    const out = await runFocus(a.run, { fix: !!a.fix, cap: a.cap ? Number(a.cap) : undefined, log: (m) => console.log(`  ${m}`) })
+    console.log(formatFocus(out))
+    const { existsSync } = await import('fs')
+    if (existsSync(join(a.run, 'report.html'))) {
+      const { writeReport, appendNontextSection } = await import('./stages/report.js')
+      const p = writeReport(a.run)
+      appendNontextSection(a.run)
+      console.log(`focus: verify row added to ${p}`)
+    }
   } else if (cmd === 'doctor') {
     await doctor()
   } else if (cmd === 'serve') {
@@ -189,6 +216,8 @@ async function main() {
        s2t playground --run <run dir> --app <tokenized app build> [--port 4400] [--provider baseten|meta] [--title <name>]
        s2t dark --run <run dir> [--provider baseten|meta|both]   (tokens.dark.css + dark.json + dark.png, text contrast checked)
        s2t nontext --run <hybrid run dir> [--max 150]   (icon/control contrast 3:1 + target size 24x24 via SAM point prompts)
+       s2t focus --serve <static dir> [--out <json>]   (visible focus only, no run)
+       s2t focus --run <run dir> [--fix] [--cap 400]   (Tab-through visible focus, SAM controls with no Tab stop; --fix adds focus tokens + focus.css)
        s2t doctor
        s2t serve --fixture <name> [--port 4321]
 stages: ${STAGES.join(' → ')}`)

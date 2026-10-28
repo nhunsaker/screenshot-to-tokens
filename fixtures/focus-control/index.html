@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Focus control page</title>
+<!-- Control page for s2t focus (L18). Expected verdicts, in Tab order:
+     1. default link            -> pass  (Chrome's default focus ring on a link)
+     2. outline removed          -> none  (outline: none, nothing replaces it)
+     3. custom 3 px ring         -> pass  (3px solid #1a5cff, offset 2px)
+     4. default button           -> faint (Chrome's thin default ring on a button is visible but under the 2.4.13 bar)
+     5. themed outline:0 button  -> none  (Bootstrap-style .btn:focus { outline: 0; box-shadow: none })
+     With the s2t focus rule loaded, every stop should pass. -->
+<style>
+  body { font: 16px system-ui, sans-serif; padding: 40px; background: #fff; color: #222; }
+  p { margin: 0 0 24px; }
+  .ring:focus-visible { outline: 3px solid #1a5cff; outline-offset: 2px; }
+  .btn { background: #5e72e4; color: #fff; border: 0; border-radius: 4px; padding: 8px 16px; }
+  .btn:focus { outline: 0; box-shadow: none; }
+</style>
+</head>
+<body>
+<p><a href="#a">Default link</a></p>
+<p><button style="outline:none">Outline removed</button></p>
+<p><button class="ring">Custom ring</button></p>
+<p><button>Default button</button></p>
+<p><button class="btn">Themed button</button></p>
+</body>
+</html>

@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, statSync, existsSync } from 'fs'
 import { join } from 'path'
 import { cssVarOf } from '../lib/props.js'
 import { evaluateReason } from './reasons.js'
+import { ringText, unchangedText, worseText } from './focus.js'
 
 // ---------------------------------------------------------------------------
 // small, dependency-free helpers
@@ -439,6 +440,41 @@ function contrastRow(c) {
   </div>`
 }
 
+/**
+ * Check 5 (L18): visible keyboard focus, from focus.json (`s2t focus`). Not a gate: counts before (and after the
+ * focus tokens, with --fix), the ring that was chosen, the unfocused-pixel check, and SAM controls with no Tab stop.
+ */
+export function focusRow(f) {
+  if (!f || !f.before) return ''
+  const label = 'Visible focus (WCAG 2.4.13)'
+  const now = f.fix ? f.fix.after : f.before
+  const status = now.measured && now.pass === now.measured ? 'pass' : 'review'
+  const cnt = (c) => `${c.pass} pass / ${c.faint} faint / ${c.none} none of ${c.measured}`
+  const counts = `${f.before.stops} Tab stops; before: ${cnt(f.before)}${f.fix ? `; with the focus tokens: ${cnt(f.fix.after)}` : ''}`
+  const chip = (c) => (c && /^#[0-9a-f]{6}$/i.test(c.value) ? `<span class="swatch swatch-sm" style="background:${c.value}"></span> ${c.token ? `<code>${escapeHtml(cssVarOf(c.token))}</code> ` : ''}<code>${c.value}</code>` : '')
+  const u = f.fix && f.fix.unchanged
+  const fix = f.fix
+    ? `<p>Fix as tokens: <code>--focus-ring-color</code> ${chip(f.ring.color)}${f.ring.mode === 'two-tone' ? `, <code>--focus-ring-inner-color</code> ${chip(f.ring.inner)}` : ''}, <code>--focus-ring-width</code> 3px, <code>--focus-ring-offset</code> 2px in tokens.css, plus one <code>:focus-visible</code> rule in focus.css. ${escapeHtml(ringText(f.ring))}.</p>
+    <p class="muted">With focus.css loaded, unfocused pixels: fallback-only ${escapeHtml(unchangedText(u && u.fallback))}; colors ${escapeHtml(unchangedText(u && u.colors))}${u && u.atLoad ? `; elements matching :focus-visible after load: ${escapeHtml(u.atLoad.focusVisible)}` : ''} (the rule only applies while a control has keyboard focus).</p>${f.fix.compare && f.fix.compare.worse.length ? `<p><span class="badge badge-caution">review</span> ${escapeHtml(worseText(f.fix.compare.worse))}</p>` : ''}`
+    : '<p class="muted">No fix applied (run <code>s2t focus --run &lt;dir&gt; --fix</code> to add focus tokens and re-measure).</p>'
+  const r = f.reachability || { flagged: [], exempt: [] }
+  const reach = r.clickable
+    ? `<p>Reachability: SAM found ${r.clickable} clickable controls; <strong>${r.flagged.length}</strong> ${r.flagged.length === 1 ? 'has' : 'have'} no Tab stop and no native focusable element${r.exempt.length ? ` (${r.exempt.length} more have no Tab stop but are links, native controls, disabled, or have a tabindex: not flagged)` : ''}.</p>${r.flagged.length ? `<div class="table-wrap"><table><thead><tr><th>control</th><th>box</th><th>element under it</th></tr></thead><tbody>${r.flagged.map((x) => `<tr><td>${escapeHtml(x.label)} <span class="muted">${escapeHtml(x.id)}</span></td><td class="num">${escapeHtml(x.bbox.join(', '))}</td><td><code>${escapeHtml(x.tag || '')}</code></td></tr>`).join('')}</tbody></table></div>` : ''}`
+    : ''
+  const worst = (f.fix ? f.fix.stops : f.stops || []).filter((x) => x.verdict && x.verdict !== 'pass').slice(0, 12)
+  const list = worst.length
+    ? `<details><summary>${worst.length}${worst.length === 12 ? '+' : ''} stop${worst.length === 1 ? '' : 's'} not passing${f.fix ? ' with the fix' : ''}</summary><div class="table-wrap"><table><thead><tr><th>element</th><th>text</th><th>changed px</th><th>at 3:1</th><th>needed</th><th>verdict</th></tr></thead><tbody>${worst.map((x) => `<tr><td><code>${escapeHtml(x.tag)}</code></td><td>${escapeHtml(x.text || '')}</td><td class="num">${x.changed}</td><td class="num">${x.strong}</td><td class="num">${x.perimeter2px}</td><td>${escapeHtml(x.verdict)}</td></tr>`).join('')}</tbody></table></div></details>`
+    : ''
+  return `<div class="verify-row">
+    <div class="verify-row-head">
+      <span class="badge ${STATUS_BADGE_CLASS[status]}">${status}</span> <strong>${label}</strong>
+      <span class="muted">${escapeHtml(counts)}</span>
+    </div>
+    <p class="muted">Tabbed through the page; each control shot focused and unfocused in a box 8 px around it. Pass: the pixels that change cover at least a 2 CSS px perimeter of the control at 3:1 or more. Faint: visible, under that. None: no visible change. Default state of the captured route only; reported, not a gate.</p>
+    ${fix}${reach}${list}
+  </div>`
+}
+
 function verifySection(data) {
   const { verify, verifyImages } = data
   if (!verify) return sectionWrap('Verify', empty('No verify yet — run the verify stage.'))
@@ -467,6 +503,7 @@ function verifySection(data) {
     verifyRow('Colors merged', verify.colors, imgs.colors, verify.colors && verify.colors.pass ? 'pass' : 'FAIL'),
     verifyRow('All tokens (layout cleanup to review)', verify, imgs, verify.reviewNeeded ? 'review' : 'pass'),
     contrastRow(verify.contrast),
+    focusRow(data.focus),
   ].join('')
 
   return sectionWrap('Verify', `
@@ -798,6 +835,7 @@ export function writeReport(runDir, o = {}) {
   const rewrite = readJsonSafe(join(runDir, 'rewrite.json'))
   const verify = readJsonSafe(join(runDir, 'verify.json'))
   const timing = readJsonSafe(join(runDir, 'timing.json'))
+  const focus = readJsonSafe(join(runDir, 'focus.json'))
 
   const rels = [capture && capture.screenshot]
   for (const v of [verify, verify && verify.fallback, verify && verify.colors]) if (v) rels.push(v.before, v.after, v.diff)
@@ -813,7 +851,7 @@ export function writeReport(runDir, o = {}) {
     ? { ...imagesFor(verify), fallback: imagesFor(verify.fallback), colors: imagesFor(verify.colors) }
     : null
 
-  const html = buildReportHtml({ capture, regions, clusters, tokens, rewrite, verify, timing, screenshot, verifyImages })
+  const html = buildReportHtml({ capture, regions, clusters, tokens, rewrite, verify, timing, screenshot, verifyImages, focus })
   const outPath = join(runDir, 'report.html')
   writeFileSync(outPath, html)
   return outPath
