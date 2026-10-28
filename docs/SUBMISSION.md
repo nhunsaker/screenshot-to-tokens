@@ -74,7 +74,7 @@ No GPU on the laptop; one full run on Argon Dashboard costs under a cent. With S
 | Text contrast vs the W3C rule | ACT rule afw4f7 (text has minimum contrast): **32 of 32** approved test cases consistent, 31 exact | `docs/a11y.md` |
 | Text contrast vs axe-core 4.14 | 28 sites: agrees on 308 of 309 violations and 2,165 of 2,174 passes, **1 opposite verdict in 2,483**; decides **243 of the 251** items axe leaves for manual review (text on gradients and images) | `docs/a11y.md` |
 | Icons and controls (SAM) | On the div page, SAM found 9 controls the code doesn't describe; each measured for contrast and size | `docs/a11y-nontext.md` |
-| Visible keyboard focus | 30 real sites, 1,779 Tab stops: 52% show a focus indicator that meets the bar, 17 sites under half. One focus-ring token set takes Argon from **0 of 25 to 24 of 25**, still 0 px when nothing is focused. SAM also finds controls a keyboard can't reach: on the div page, 7 of 7 clickable controls | `docs/keyboard.md` |
+| Visible keyboard focus | 30 real sites, 1,779 Tab stops: 52% show a focus indicator that meets the bar, 17 sites under half. One focus-ring token set takes Argon from **0 of 25 to 25 of 25**, still 0 px when nothing is focused. SAM also finds controls a keyboard can't reach: on the div page, 7 of 7 clickable controls | `docs/keyboard.md` |
 | Dark mode as a token file | Light Bootstrap Dashboard: 83 of 84 text pairs pass in dark (14 of 84 in its original light theme) | `docs/dark-mode.md` |
 | Tests | 232 passing | `pnpm test` |
 

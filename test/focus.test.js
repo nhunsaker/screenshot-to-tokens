@@ -141,7 +141,7 @@ test('focusTokensCss + withFocusTokens: component tokens alias the chosen token;
 test('focusRuleCss: :focus-visible only, !important outline; two-tone adds the light bands', () => {
   const single = focusRuleCss(pickRingColor([{ bg: '#ffffff' }], TOKENS))
   assert.match(single, /:focus-visible \{/)
-  assert.ok(single.includes(`:is(${NATIVE_FOCUSABLE})`))
+  assert.ok(single.includes(`:is(${NATIVE_FOCUSABLE}, *):focus-visible`))
   assert.match(single, /outline: var\(--focus-ring-width, 3px\) solid var\(--focus-ring-color, #5e72e4\) !important;/)
   assert.match(single, /outline-offset: var\(--focus-ring-offset, 2px\) !important;/)
   assert.ok(!/box-shadow/.test(single))

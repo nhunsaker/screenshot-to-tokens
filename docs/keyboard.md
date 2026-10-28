@@ -207,3 +207,12 @@ or badges inside links; they are now reported as exempt with the reason, not fla
   not every control on the page, and a stop "reaches" a control by box overlap.
 - **Timing.** One browser at a time; 3 to 30 s per page before, the same after, plus three page loads for the 0 px
   check (more on a page that differs between loads).
+
+## Update 2026-10-28: 25 of 25 on Argon
+
+The last failing Argon stop was the scrollable "Referral visitors" table container, which Chrome makes keyboard-focusable
+without a `tabindex`, so the rule's list of native focusables missed it. The rule is now
+`:is(<native focusables>, *):focus-visible`: `*` catches browser-focusable containers, and listing the natives keeps
+`:is()` at their specificity (it still beats `*:focus{outline:none!important}`). Argon: **0 of 25 → 25 of 25**; with
+`focus.css` loaded the page is still 0 px / 0.000% while nothing is focused, and no element matches `:focus-visible`
+after load. (The other before → after rows above were measured with the earlier rule.)

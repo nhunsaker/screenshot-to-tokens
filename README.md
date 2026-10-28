@@ -26,7 +26,7 @@ Model API and Muse Spark (hosted, or the open-weights Muse Spark Open served on 
 | Review | accept + rename + merge takes the fixture from 20/21 to 21/21 at 0 px (`demo/L5-review-take.md`) |
 | Text contrast check | measured on rendered pixels (gradients and images count); W3C ACT afw4f7: 32/32 consistent; vs axe-core on 28 sites: 1 opposite verdict in 2,483, and 243 of the 251 items axe leaves for manual review decided (`docs/a11y.md`) |
 | Icons and controls (SAM click prompts) | contrast (WCAG 1.4.11) and target size (2.5.8) for each control SAM outlines; 9 controls on the div page the code doesn't describe (`docs/a11y-nontext.md`) |
-| Visible keyboard focus (`s2t focus`) | Tab through every stop and compare focused vs unfocused pixels (WCAG 2.4.13 style); 30 real sites: 52% of 1,779 stops pass, 17 sites under half; fix = focus-ring tokens: Argon 0 of 25 → 24 of 25, still 0 px when nothing is focused (`docs/keyboard.md`) |
+| Visible keyboard focus (`s2t focus`) | Tab through every stop and compare focused vs unfocused pixels (WCAG 2.4.13 style); 30 real sites: 52% of 1,779 stops pass, 17 sites under half; fix = focus-ring tokens: Argon 0 of 25 → 25 of 25, still 0 px when nothing is focused (`docs/keyboard.md`) |
 | Dark mode as a token file | `s2t dark --provider both`: Light Bootstrap Dashboard 83 of 84 text pairs pass in dark (`docs/dark-mode.md`) |
 | Local playground | Muse Spark contrast audit 41 → 2 failing text pairs; dark theme 84/87 pairs pass (`docs/playground-muse.md`) |
 

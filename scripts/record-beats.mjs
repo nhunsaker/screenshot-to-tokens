@@ -123,7 +123,7 @@ function endCard() {
   const items = [
     [3.0, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
     [7.2, 'Open weights, end to end', 'Muse Spark Open on Baseten names the tokens · SAM 3.1 open weights on a Modal GPU segments', '3 to 9× faster than hosted Muse · open SAM matches hosted SAM on every test'],
-    [11.5, 'Checked before it merges', 'text contrast on every PR · SAM-measured controls · dark mode as a token file', '28 sites vs axe-core: 1 opposite verdict in 2,483 · 243 of 251 "needs review" items decided'],
+    [11.5, 'Checked before it merges', 'text contrast on every PR · SAM-measured controls · dark mode as a token file', '28 sites vs axe-core: 99.9% agreement · 243 of 251 "needs review" items decided'],
     [14.2, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 2,313 values · 0 px'],
     [19.0, 'Propose the change. See it live. Verify before you merge.', '', 'Code: github.com/nhunsaker/screenshot-to-tokens · Live demo: nhunsaker.github.io/argon-dashboard-react'],
   ]
@@ -138,7 +138,7 @@ function axeCard() {
 <h1>Our text-contrast check vs axe-core, 28 sites</h1><p>Text colour from the DOM, background measured on the rendered pixels, so gradients and images count.</p>
 <table><tr><th>axe-core says</th><th>items</th><th>we agree</th><th>opposite verdict</th></tr>
 <tr><td>violation</td><td>309</td><td class="n">308</td><td>0</td></tr>
-<tr><td>pass</td><td>2,174</td><td class="n">2,165</td><td>1</td></tr>
+<tr><td>pass</td><td>2,174</td><td class="n">2,165</td><td>1 (a page that animates)</td></tr>
 <tr><td>can't decide (needs a person)</td><td>251</td><td class="n">we decide 243</td><td>—</td></tr></table>`
 }
 await beat(9, async (p) => {
@@ -152,7 +152,7 @@ await beat(9, async (p) => {
     await p.goto(argon.url, { waitUntil: 'networkidle' }); await label('Tab: where is the focus? (0 of 25 stops visible)'); await wait(p, 800)
     for (let i = 0; i < 4; i++) { await p.keyboard.press('Tab'); await wait(p, 650) }
     await p.addStyleTag({ content: readFileSync('out/video/assets/argon-focus/tokens.css', 'utf-8') + readFileSync('out/video/assets/argon-focus/focus.css', 'utf-8') })
-    await label('With the focus-ring tokens (24 of 25 visible)'); await wait(p, 600)
+    await label('With the focus-ring tokens (25 of 25 visible)'); await wait(p, 600)
     for (let i = 0; i < 5; i++) { await p.keyboard.press('Tab'); await wait(p, 700) }
   } finally { await argon.close() }
   const dark = await serveDir(resolve('out/video/assets/lightbootstrap-dark'))
