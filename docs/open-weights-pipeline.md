@@ -121,3 +121,12 @@ node scripts/modal-parity.mjs breadth out/breadth4 out/l17/breadth
 
 Without GPU access, `S2T_MODAL_CHECK_ONLY=1 modal run modal/sam31_app.py::check` builds the image and the model on a CPU,
 and `::prefetch` downloads and loads the weights.
+
+## Naming failover (2026-10-27)
+
+Naming tries the same open model on another host before giving up: Muse Spark Open on **Baseten** (default, 4 to 5 s on
+Argon), then Muse Spark Open on **Fireworks** (14 to 17 s with low reasoning effort, same 86 tokens), then hosted
+**Muse Spark 1.3**. A failed attempt (error, timeout after 60 s, or unparseable JSON) is recorded in `usage.json` as
+`failover` and shown in the run log. Checked live: with Baseten's model id broken, Fireworks answered in 16 s and verify
+stayed 0 px; with both open hosts broken, hosted Muse Spark answered in 15 s. Override the chain with
+`S2T_NAMER_FALLBACK=fireworks,meta` (or `none`); `S2T_NAMER_TIMEOUT_MS` sets the per-attempt timeout.

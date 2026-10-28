@@ -126,7 +126,7 @@ export async function runPipeline(o) {
       }
       const tiers = {}
       for (const tk of set.tokens) tiers[tk.tier] = (tiers[tk.tier] || 0) + 1
-      log('name', `${set.tokens.length} tokens via ${set.namer} ${JSON.stringify(tiers)} in ${Date.now() - t} ms${set.warnings?.length ? `, ${set.warnings.length} repairs` : ''}`)
+      log('name', `${set.tokens.length} tokens via ${set.namer} ${JSON.stringify(tiers)} in ${Date.now() - t} ms${set.warnings?.length ? `, ${set.warnings.length} repairs` : ''}${set.meta?.failover ? ` (failover: ${set.meta.failover.map((f) => `${f.provider} failed`).join(', ')})` : ''}`)
     }
     const tokens = readIf('name', 'tokens')
 

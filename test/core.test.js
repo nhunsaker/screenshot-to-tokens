@@ -313,3 +313,12 @@ test('negative and fractional spacing get valid primitive names', async () => {
   assert.equal(names.get('space-01'), 'space.neg-96')
   assert.equal(names.get('space-02'), 'space.7-5')
 })
+
+test('namerChain: open-weights namer fails over to Fireworks, then hosted Muse Spark; env overrides', async () => {
+  const { namerChain } = await import('../src/providers/llm/llm-namer.js')
+  assert.deepEqual(namerChain('baseten', undefined), ['baseten', 'fireworks', 'meta'])
+  assert.deepEqual(namerChain('fireworks', undefined), ['fireworks', 'baseten', 'meta'])
+  assert.deepEqual(namerChain('meta', undefined), ['meta'])
+  assert.deepEqual(namerChain('baseten', 'none'), ['baseten'])
+  assert.deepEqual(namerChain('baseten', 'meta, baseten, nope, meta'), ['baseten', 'meta'])
+})

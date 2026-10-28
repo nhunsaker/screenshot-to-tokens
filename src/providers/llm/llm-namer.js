@@ -108,8 +108,22 @@ export function promptPayload(clusters, regions, draft, components = []) {
   }
 }
 
+const LOW_EFFORT = new Set(['meta', 'baseten', 'fireworks'])
+
 /**
- * @param {'meta'|'ollama'|'fireworks'} presetId
+ * The providers to try, in order: the chosen one, then S2T_NAMER_FALLBACK (comma list; "none" disables). Default
+ * for the open-weights namer: the same Muse Spark Open on Fireworks, then hosted Muse Spark. Pure; exported for tests.
+ * @param {string} presetId
+ * @param {string} [env]
+ */
+export function namerChain(presetId, env = process.env.S2T_NAMER_FALLBACK) {
+  const defaults = { baseten: ['fireworks', 'meta'], fireworks: ['baseten', 'meta'] }
+  const extra = env === 'none' ? [] : env ? env.split(',').map((x) => x.trim()).filter(Boolean) : defaults[presetId] || []
+  return [presetId, ...extra.filter((id, i, a) => id !== presetId && a.indexOf(id) === i && LLM_PRESETS[id])]
+}
+
+/**
+ * @param {'meta'|'ollama'|'fireworks'|'baseten'} presetId
  * @returns {import('../../types.js').NamerProvider}
  */
 export default function llmNamer(presetId) {
@@ -135,13 +149,32 @@ export default function llmNamer(presetId) {
       // Muse Spark 1.3 is a reasoning model: hidden reasoning was 70-95% of output tokens. Measured 2026-10-26 on
       // acme + div-soup: effort "low" cut naming from 53-74 s to 15-20 s and output tokens from 10-12k to about 3.2k
       // (about 65% cheaper) with the same eval scores, zero repairs and the same reason-grounding rate.
-      const { text, usage, cached } = await chat({
-        ...cfg,
-        json: true,
-        reasoningEffort: process.env.S2T_REASONING_EFFORT || (presetId === 'meta' || presetId === 'baseten' || presetId === 'fireworks' ? 'low' : ''),
-        messages: [{ role: 'system', content: compact ? COMPACT_PROMPT : SYSTEM_PROMPT }, { role: 'user', content: user.length === 1 ? user[0].text : user }],
-      })
-      const parsed = extractJson(text)
+      const messages = [{ role: 'system', content: compact ? COMPACT_PROMPT : SYSTEM_PROMPT }, { role: 'user', content: user.length === 1 ? user[0].text : user }]
+      // Failover: the same open model on another host, then hosted Muse Spark, so one provider being down never
+      // stops a run. Each attempt that fails (error, timeout, unparseable JSON) is recorded in meta.failover.
+      const chain = namerChain(presetId)
+      const failover = []
+      let answer = null
+      for (const [i, id] of chain.entries()) {
+        const c = id === presetId ? cfg : LLM_PRESETS[id]()
+        if (id !== 'ollama' && !c.apiKey) { failover.push({ provider: id, error: 'not configured' }); continue }
+        try {
+          const r = await chat({
+            ...c,
+            json: true,
+            timeoutMs: i < chain.length - 1 ? Number(process.env.S2T_NAMER_TIMEOUT_MS || 60000) : undefined,
+            reasoningEffort: process.env.S2T_REASONING_EFFORT || (LOW_EFFORT.has(id) ? 'low' : ''),
+            messages,
+          })
+          answer = { ...r, parsed: extractJson(r.text), id, model: c.model }
+          break
+        } catch (e) {
+          failover.push({ provider: id, error: String((e && e.message) || e).slice(0, 200) })
+          if (i === chain.length - 1) throw new Error(`all namers failed: ${failover.map((f) => `${f.provider}: ${f.error}`).join('; ')}`)
+        }
+      }
+      const { text, usage, cached } = answer
+      const parsed = answer.parsed
       // Merge suggestions are the model's plus the deterministic ones (a person decides each). Low-effort runs often
       // return "merges": [], which used to drop acme-shop's 6px-into-4px suggestion from the review page.
       const modelMerges = Array.isArray(parsed.merges) ? parsed.merges : []
@@ -153,7 +186,7 @@ export default function llmNamer(presetId) {
       // Same role: a text color whose own evidence (button text, or any component sitting on a
       // non-page-surface background) the model didn't name gets filled in regardless of its effort.
       const tokens = fillOnSurfaceTextTokens(fillSemanticGaps(rawTokens, clusters, components), clusters, capture)
-      return { tokens, merges, namer: `${presetId}:${cfg.model}${compact ? '' : ':full'}`, meta: { mode: compact ? 'compact' : 'full', ms: Date.now() - t0, usage: cached ? { prompt_tokens: 0, completion_tokens: 0, cached_from: usage } : usage, cached: !!cached } }
+      return { tokens, merges, namer: `${answer.id}:${answer.model}${compact ? '' : ':full'}`, meta: { mode: compact ? 'compact' : 'full', ms: Date.now() - t0, usage: cached ? { prompt_tokens: 0, completion_tokens: 0, cached_from: usage } : usage, cached: !!cached, ...(failover.length ? { failover } : {}) } }
     },
   }
 }
