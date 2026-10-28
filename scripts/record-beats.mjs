@@ -143,14 +143,22 @@ function axeCard() {
 }
 await beat(9, async (p) => {
   await p.goto(`${srv.url}out/m12-argon/report.html`, { waitUntil: 'networkidle' })
-  await p.evaluate(() => [...document.querySelectorAll('strong')].find((h) => /Text contrast/.test(h.textContent))?.scrollIntoView({ block: 'center' })); await wait(p, 6500)
-  await p.goto(page('axe.html', axeCard())); await wait(p, 9000)
-  await p.goto(`${srv.url}out/video/assets/divsoup-nontext/report.html`, { waitUntil: 'networkidle' })
-  await p.evaluate(() => [...document.querySelectorAll('h2')].find((h) => /Icon and control/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 6500)
+  await p.evaluate(() => [...document.querySelectorAll('strong')].find((h) => /Text contrast/.test(h.textContent))?.scrollIntoView({ block: 'center' })); await wait(p, 8000)
+  await p.goto(page('axe.html', axeCard())); await wait(p, 9500)
+  // Keyboard focus on Argon: Tab with the theme's focus styles (none visible), then with the focus-ring tokens loaded.
+  const argon = await serveDir(`${APPS}/argon/build`)
+  const label = (t) => p.evaluate((t) => { let c = document.getElementById('s2t-cap'); if (!c) { c = document.createElement('div'); c.id = 's2t-cap'; c.style.cssText = 'position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(17,17,17,.92);color:#fff;font:600 18px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;padding:8px 14px;border-radius:10px'; document.body.appendChild(c) } c.textContent = t }, t)
+  try {
+    await p.goto(argon.url, { waitUntil: 'networkidle' }); await label('Tab: where is the focus? (0 of 25 stops visible)'); await wait(p, 800)
+    for (let i = 0; i < 4; i++) { await p.keyboard.press('Tab'); await wait(p, 650) }
+    await p.addStyleTag({ content: readFileSync('out/video/assets/argon-focus/tokens.css', 'utf-8') + readFileSync('out/video/assets/argon-focus/focus.css', 'utf-8') })
+    await label('With the focus-ring tokens (24 of 25 visible)'); await wait(p, 600)
+    for (let i = 0; i < 5; i++) { await p.keyboard.press('Tab'); await wait(p, 700) }
+  } finally { await argon.close() }
   const dark = await serveDir(resolve('out/video/assets/lightbootstrap-dark'))
   try {
-    await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 3000)
-    await p.click('#sorb-theme-toggle'); await wait(p, 5500)
+    await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 1500)
+    await p.click('#sorb-theme-toggle'); await wait(p, 4200)
   } finally { await dark.close() }
 })
 await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 24000) })
