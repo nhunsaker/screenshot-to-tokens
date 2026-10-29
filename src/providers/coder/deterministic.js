@@ -106,7 +106,9 @@ function clusterFor(kind, normalized, clusters) {
   return clusters.find((c) => c.kind === kind && c.members.some((m) => m.value === normalized)) || null
 }
 
-const DECL_RE = /([a-zA-Z-]+)(\s*:\s*)([^;{}]+)(;)/g
+// The last declaration in a block has no `;` in minified CSS (`.text-muted{color:#8898aa!important}`), and `!important`
+// is not part of the value: both were skipped before (found by the point-and-say spike, 2026-10-28).
+const DECL_RE = /([a-zA-Z-]+)(\s*:\s*)([^;{}!]+)(\s*!important\s*)?(;|(?=\}))/g
 
 /**
  * Rewrite one CSS source string.
@@ -183,7 +185,7 @@ export function rewriteCss(source, relFile, clusters, tokens, classIdx = null) {
     let m
     DECL_RE.lastIndex = 0
     while ((m = DECL_RE.exec(line))) {
-      const [full, propRaw, sep, value, semi] = m
+      const [full, propRaw, sep, value, imp = '', semi] = m
       const prop = propRaw.trim().toLowerCase()
       const kind = propKind(prop)
       out += line.slice(last, m.index)
@@ -211,7 +213,7 @@ export function rewriteCss(source, relFile, clusters, tokens, classIdx = null) {
         edits.push({ file: relFile, line: idx + 1, prop, before: part.text, after, token: token.name })
         lineChanged = true
       }
-      out += propRaw + sep + newValue + semi
+      out += propRaw + sep + newValue + imp + semi
       last = m.index + full.length
     }
     out += line.slice(last)

@@ -63,6 +63,15 @@ test('rewriteCss: shorthand split, semantic preference, var() skip', () => {
   assert.equal(bg.line, 2)
 })
 
+test('rewriteCss: minified last declaration (no ";") and !important are rewritten, !important kept', () => {
+  const src = '.text-muted{color:#1a73e8!important}.a:hover{padding:8px}.b{border:1px solid #1a73e8 !important;padding:16px}'
+  const { code, edits } = rewriteCss(src, 'm.css', clusters, tokens)
+  assert.match(code, /\.text-muted\{color:var\(--color-[a-z-]+, #1a73e8\)!important\}/)
+  assert.match(code, /\.a:hover\{padding:var\(--space-sm, 8px\)\}/)
+  assert.match(code, /border:1px solid var\(--color-border-default, #1a73e8\) !important;padding:var\(--space-lg, 16px\)\}/)
+  assert.equal(edits.length, 4)
+})
+
 test('runRewrite: copies targetDir, writes rewritten copy + rewrite.json/.diff, leaves target untouched', async () => {
   const root = mkdtempSync(join(tmpdir(), 's2t-rewrite-'))
   const targetDir = join(root, 'target')
