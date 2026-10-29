@@ -154,8 +154,12 @@ async function main() {
     // Local only (127.0.0.1): playground + tokenized app + /api/muse (audit fixes, dark theme). Never deploy this.
     const { startPlayground } = await import('./stages/playground.js')
     if (!a.run || !a.app) throw new Error('playground needs --run <run dir> --app <dir of the tokenized app build>')
-    const s = await startPlayground({ runDir: a.run, appDir: a.app, port: Number(a.port || 4400), provider: a.provider === 'meta' ? 'meta' : 'baseten', title: a.title, log: (m) => console.log(`  ${m}`) })
+    const s = await startPlayground({ runDir: a.run, appDir: a.app, port: Number(a.port || 4400), provider: a.provider === 'meta' ? 'meta' : 'baseten', title: a.title, pas: !a['no-pas'], log: (m) => console.log(`  ${m}`) })
     console.log(`playground: ${s.tokens} tokens, ${s.pairs} text pairs at ${s.url} (local only; Ctrl+C to stop)`)
+    // Close the probe browser too (point and say), or a stray Chromium keeps the port's process alive.
+    const stop = () => { Promise.race([s.close(), new Promise((r) => setTimeout(r, 2000))]).finally(() => process.exit(0)) }
+    process.once('SIGINT', stop)
+    process.once('SIGTERM', stop)
   } else if (cmd === 'dark') {
     // L14: Muse Spark proposes dark token values; every text pair is checked in the browser; writes tokens.dark.css,
     // dark.json and dark.png into the run folder. Local only (the key stays in this process).
@@ -213,7 +217,7 @@ async function main() {
        s2t pr --run <dir> --repo <app git root> [--target <dir>] [--branch <name>] [--open]
        s2t preview --token <name> --value <css> [--bridge http://localhost:7777] [--app-url <url>]
        s2t scoreboard [--out out/scoreboard.html]      (SAM vs DOM split-screen scoreboard: div-soup + 2 real apps)
-       s2t playground --run <run dir> --app <tokenized app build> [--port 4400] [--provider baseten|meta] [--title <name>]
+       s2t playground --run <run dir> --app <tokenized app build> [--port 4400] [--provider baseten|meta] [--title <name>] [--no-pas]
        s2t dark --run <run dir> [--provider baseten|meta|both]   (tokens.dark.css + dark.json + dark.png, text contrast checked)
        s2t nontext --run <hybrid run dir> [--max 150]   (icon/control contrast 3:1 + target size 24x24 via SAM point prompts)
        s2t focus --serve <static dir> [--out <json>]   (visible focus only, no run)

@@ -164,18 +164,27 @@ function readBody(req, limit = 200000) {
 
 /**
  * Start the local playground. Returns {url, close}.
- * @param {{runDir:string, appDir:string, port?:number, provider?:'baseten'|'meta', title?:string, log?:(s:string)=>void}} o
+ * With `pas` (point and say, docs/pas-api.md) the /__pas/ routes mount here, the app's HTML gets the run's tokens.css,
+ * and a headless probe browser warms once the server listens (`pas: true`, or an injected api for tests).
+ * @param {{runDir:string, appDir:string, port?:number, provider?:'baseten'|'meta', title?:string, log?:(s:string)=>void, pas?:boolean|object}} o
  */
-export function startPlayground(o) {
+export async function startPlayground(o) {
   const appDir = resolve(o.appDir)
   const data = playgroundData(readRun(resolve(o.runDir)), { title: o.title, app: 'app/' })
   const known = new Set(data.tokens.filter((t) => t.kind === 'color').map((t) => t.name))
   const log = o.log || (() => {})
+  let pas = null
+  if (o.pas === true) {
+    const { createPasApi } = await import('./pas/api.js')
+    // A run without a screenshot/regions (older runs) still gets the plain playground.
+    try { pas = createPasApi({ runDir: resolve(o.runDir), data, log, provider: o.provider }) } catch (e) { log(`point and say off: ${String(e.message || e).slice(0, 160)}`) }
+  } else if (o.pas) pas = o.pas
   const server = createServer(async (req, res) => {
     const url = new URL(req.url || '/', 'http://127.0.0.1')
     const p = url.pathname
     const json = (code, v) => { res.writeHead(code, { 'content-type': 'application/json', 'cache-control': 'no-store' }); res.end(JSON.stringify(v)) }
     try {
+      if (pas && await pas.handle(req, res, url)) return
       if (p === '/api/muse') {
         // Same-origin only: a page on another origin (or a DNS-rebinding host name) gets nothing.
         const host = req.headers.host || ''
@@ -202,7 +211,18 @@ export function startPlayground(o) {
         let file = join(appDir, rel)
         if (!file.startsWith(appDir)) return json(403, { error: 'outside app' })
         try { if ((await stat(file)).isDirectory()) file = join(file, 'index.html') } catch (e) { file = join(appDir, 'index.html') } // SPA fallback
+        if (pas && extname(file) === '.html') {
+          res.writeHead(200, { 'content-type': TYPES['.html'], 'cache-control': 'no-store' })
+          return res.end(pas.injectHtml(await readFile(file, 'utf-8')))
+        }
         return sendFile(res, file)
+      }
+      if (pas && req.method === 'GET') {
+        // Builds with root-absolute asset URLs (CRA: /static/js/main.js, /manifest.json) loaded under /app/: serve
+        // the file from the app folder when it exists there (the playground's own routes above win).
+        const rel = normalize(decodeURIComponent(p)).replace(/^(\.\.[/\\])+/, '')
+        const file = join(appDir, rel)
+        if (file.startsWith(appDir + '/')) { try { if ((await stat(file)).isFile()) return sendFile(res, file) } catch (e) { /* not there */ } }
       }
       json(404, { error: 'not found' })
     } catch (e) {
@@ -213,7 +233,10 @@ export function startPlayground(o) {
   return new Promise((ok) => {
     server.listen(o.port || 0, '127.0.0.1', () => {
       const { port } = /** @type {any} */ (server.address())
-      ok({ url: `http://127.0.0.1:${port}/`, tokens: data.tokens.length, pairs: data.pairs.length, close: () => new Promise((r) => server.close(r)) })
+      const url = `http://127.0.0.1:${port}/`
+      const warming = pas && pas.warm ? pas.warm(url) : null
+      const close = async () => { if (pas && pas.close) await pas.close(); await new Promise((r) => server.close(r)) }
+      ok({ url, tokens: data.tokens.length, pairs: data.pairs.length, pas: pas || null, warming, close })
     })
   })
 }
