@@ -2,7 +2,9 @@
 // Short silent clip for the README (captions on screen, no voice): SAM vs DOM, one real run, the diff and the
 // three checks, the live preview, the end card. Same method as the FLS README: an mp4 attached through GitHub's
 // editor. Reuses the pages scripts/record-beats.mjs wrote under out/video/pages and the run in out/rec-argon.
-//   node scripts/record-repo-clip.mjs [--run out/rec-argon] [--apps /path/to/demo-apps]
+//   node scripts/record-repo-clip.mjs [--run out/rec-argon] [--apps /path/to/demo-apps] [--only 1]
+// --only 1: re-record just the title segment (v3 title card with the payoff loop); rebuild readme-demo.mp4 from the
+// seg-<n>.mp4 files (transcode seg-1.webm to seg-1.mp4 first, then concat list.txt with seg-<n>.mp4).
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, renameSync } from 'fs'
 import { join, resolve } from 'path'
 import { chromium } from 'playwright'
@@ -19,15 +21,17 @@ const CAPTION = (text) => `(() => { let c = document.getElementById('s2t-cap'); 
 const wait = (p, ms) => p.waitForTimeout(ms)
 const cap = (p, t) => p.evaluate(CAPTION(t))
 const segs = []
+const only = a.only ? new Set(String(a.only).split(',').map(Number)) : null
 async function seg(n, fn) {
+  if (only && !only.has(n)) { segs.push(`seg-${n}.webm`); return }
   const ctx = await browser.newContext({ viewport: size, recordVideo: { dir: join(OUT, `tmp-${n}`), size } })
   const p = await ctx.newPage()
   try { await fn(p) } finally { await ctx.close() }
   const dir = join(OUT, `tmp-${n}`), f = readdirSync(dir).find((x) => x.endsWith('.webm'))
   renameSync(join(dir, f), join(OUT, `seg-${n}.webm`)); segs.push(`seg-${n}.webm`); console.log(`seg ${n}`)
 }
-// 1. Title (3 s)
-await seg(1, async (p) => { await p.goto(`${srv.url}out/video/pages/title.html`); await wait(p, 3500) })
+// 1. Title (5 s: the tagline, and one pass of the 4 s payoff loop beside it)
+await seg(1, async (p) => { await p.goto(`${srv.url}out/video/pages/title.html`); await wait(p, 5200) })
 // 2. SAM vs DOM reveal (9 s)
 await seg(2, async (p) => {
   await p.goto(`${srv.url}out/scoreboard.html`, { waitUntil: 'networkidle' }); await cap(p, 'A page with no semantic markup. Page structure finds 0 of 8 buttons. SAM 3.1, from pixels alone, finds 8 of 8.')
