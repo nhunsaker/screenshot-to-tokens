@@ -143,24 +143,24 @@ function axeCard() {
 <tr><td>pass</td><td>2,174</td><td class="n">2,165</td><td>1 (a page that animates)</td></tr>
 <tr><td>can't decide (needs a person)</td><td>251</td><td class="n">we decide 97%; the rest flagged for review</td><td>—</td></tr></table>`
 }
+function focusCard() {
+  const f = JSON.parse(readFileSync('out/video/beat-6-pas.json', 'utf-8')).focus
+  const row = (k, s) => `<tr><td>${k}</td><td class="n">${s.pass} of ${s.measured}</td><td>${s.pass} pass · ${s.faint} faint · ${s.none} none</td></tr>`
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#fff;color:#1d1d1b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:56px 72px}h1{font-size:30px;margin:0 0 6px}p{color:#6b6a66;font-size:17px;margin:0 0 26px}table{border-collapse:collapse;font-size:24px;width:100%}td,th{padding:14px;border-bottom:1px solid #eee;text-align:left}th{font-size:15px;color:#6b6a66;font-weight:600}.n{font-weight:700;color:#137a3a;font-size:34px}tr:first-of-type+tr .n{color:#b3261e}</style>
+<h1>Keyboard focus on Argon: visible focus at each Tab stop</h1><p>Measured by tabbing through the live web app, before and after the focus-ring tokens (the ring is shown in the Point and say beat).</p>
+<table><tr><th></th><th>visible focus</th><th>Tab stops</th></tr>${row("theme's own styles", f.before)}${row('with the focus-ring tokens', f.after)}</table>`
+}
 await beat(9, async (p) => {
   await p.goto(`${srv.url}out/m12-argon/report.html`, { waitUntil: 'networkidle' })
-  await p.evaluate(() => [...document.querySelectorAll('strong')].find((h) => /Text contrast/.test(h.textContent))?.scrollIntoView({ block: 'center' })); await wait(p, 8500)
-  await p.goto(page('axe.html', axeCard())); await wait(p, 10500)
-  // Keyboard focus on Argon: Tab with the theme's focus styles (none visible), then with the focus-ring tokens loaded.
-  const argon = await serveDir(`${APPS}/argon/build`)
-  const label = (t) => p.evaluate((t) => { let c = document.getElementById('s2t-cap'); if (!c) { c = document.createElement('div'); c.id = 's2t-cap'; c.style.cssText = 'position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483647;background:rgba(17,17,17,.92);color:#fff;font:600 18px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;padding:8px 14px;border-radius:10px'; document.body.appendChild(c) } c.textContent = t }, t)
-  try {
-    await p.goto(argon.url, { waitUntil: 'networkidle' }); await label('Tab: where is the focus? (0 of 25 stops visible)'); await wait(p, 800)
-    for (let i = 0; i < 4; i++) { await p.keyboard.press('Tab'); await wait(p, 650) }
-    await p.addStyleTag({ content: readFileSync('out/video/assets/argon-focus/tokens.css', 'utf-8') + readFileSync('out/video/assets/argon-focus/focus.css', 'utf-8') })
-    await label('With the focus-ring tokens (25 of 25 visible)'); await wait(p, 600)
-    for (let i = 0; i < 5; i++) { await p.keyboard.press('Tab'); await wait(p, 700) }
-  } finally { await argon.close() }
+  await p.evaluate(() => [...document.querySelectorAll('strong')].find((h) => /Text contrast/.test(h.textContent))?.scrollIntoView({ block: 'center' })); await wait(p, 6300)
+  await p.goto(page('axe.html', axeCard())); await wait(p, 10000)
+  // Keyboard focus on Argon, as numbers only: the ring itself is shown live in beat 6 (Point and say). Numbers from
+  // that beat's recording run (out/video/beat-6-pas.json, the playground's own Tab-through).
+  await p.goto(page('focus.html', focusCard())); await wait(p, 4800)
   const dark = await serveDir(resolve('out/video/assets/lightbootstrap-dark'))
   try {
-    await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 1500)
-    await p.click('#sorb-theme-toggle'); await wait(p, 5200)
+    await p.goto(dark.url, { waitUntil: 'networkidle' }); await wait(p, 1200)
+    await p.click('#sorb-theme-toggle'); await wait(p, 3600)
   } finally { await dark.close() }
 })
 await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 24000) })
