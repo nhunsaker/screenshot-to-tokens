@@ -1,0 +1,161 @@
+{
+  "site": "Awfp1314",
+  "ms": 1527,
+  "ourPairs": 2,
+  "ourFailing": 0,
+  "axe": {
+    "violations": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 2,
+      "matched": 2,
+      "weFail": 0,
+      "wePass": 2,
+      "weSkip": {},
+      "byReason": {
+        "bgGradient": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "skipped": 0
+        }
+      }
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "EN",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#535b6e",
+          "bg": "#eeefe6",
+          "ratio": 5.87,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "中文",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#1c2131",
+          "bg": "#edefe6",
+          "ratio": 13.81,
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "incomplete",
+      "target": "#lang-en",
+      "idx": 0,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "#lang-zh",
+      "idx": 2,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "nav.site-nav>button.utility-button>span.flex>span.text-xs|EN|0",
+      "path": "nav.site-nav>button.utility-button>span.flex>span.text-xs",
+      "text": "EN",
+      "color": "rgb(83, 91, 110)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1281,
+        24,
+        17,
+        20
+      ],
+      "fg": "#535b6e",
+      "bg": "#eeefe6",
+      "ratio": 5.87,
+      "bestRatio": 5.87,
+      "worstRatio": 5.87,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.site-nav>button.utility-button>span.flex>span.text-muted-foreground|||0",
+      "path": "nav.site-nav>button.utility-button>span.flex>span.text-muted-foreground",
+      "text": "|",
+      "color": "rgb(83, 91, 110)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1304,
+        24,
+        8,
+        20
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "nav.site-nav>button.utility-button>span.flex>span.text-sm|中文|0",
+      "path": "nav.site-nav>button.utility-button>span.flex>span.text-sm",
+      "text": "中文",
+      "color": "rgb(28, 33, 49)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1319,
+        22,
+        33,
+        24
+      ],
+      "fg": "#1c2131",
+      "bg": "#edefe6",
+      "ratio": 13.81,
+      "bestRatio": 13.81,
+      "worstRatio": 13.81,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

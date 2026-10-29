@@ -1,0 +1,73 @@
+{
+  "totalMs": 19670,
+  "stages": [
+    {
+      "stage": "capture",
+      "ms": 2354,
+      "calls": 0,
+      "cached": 0,
+      "usd": 0,
+      "models": []
+    },
+    {
+      "stage": "segment",
+      "ms": 1722,
+      "calls": 3,
+      "cached": 0,
+      "usd": 0.0075,
+      "models": [
+        "sam-3.1"
+      ]
+    },
+    {
+      "stage": "cluster",
+      "ms": 4,
+      "calls": 0,
+      "cached": 0,
+      "usd": 0,
+      "models": []
+    },
+    {
+      "stage": "name",
+      "ms": 4460,
+      "calls": 1,
+      "cached": 0,
+      "usd": 0,
+      "models": [
+        "meta-models/muse-spark-open-1026"
+      ]
+    },
+    {
+      "stage": "emit",
+      "ms": 1,
+      "calls": 0,
+      "cached": 0,
+      "usd": 0,
+      "models": []
+    },
+    {
+      "stage": "rewrite",
+      "ms": 1462,
+      "calls": 0,
+      "cached": 0,
+      "usd": 0,
+      "models": []
+    },
+    {
+      "stage": "verify",
+      "ms": 9391,
+      "calls": 0,
+      "cached": 0,
+      "usd": 0,
+      "models": []
+    },
+    {
+      "stage": "report",
+      "ms": 276,
+      "calls": 0,
+      "cached": 0,
+      "usd": 0,
+      "models": []
+    }
+  ]
+}

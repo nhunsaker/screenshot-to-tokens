@@ -1,0 +1,62 @@
+{
+  "url": "http://127.0.0.1:4481/",
+  "rows": [
+    {
+      "step": "d",
+      "app": "argon",
+      "name": "blocked-red",
+      "rep": 1,
+      "target": {
+        "x": 873,
+        "y": 328
+      },
+      "transcript": "Make these buttons red.",
+      "route": "muse",
+      "result": {
+        "kind": "blocked",
+        "message": "BLOCKED: text contrast would regress on “Month” (4.20:1 → 3.77:1), and 2 more.",
+        "live": 3,
+        "server": true,
+        "reverted": true
+      },
+      "error": null,
+      "summary": "button.bg → color.red.500, button.active.bg → color.red.500, button.border → color.red.500. all buttons sharing button.bg / button.active.bg (Month/Week/Day toggles) Blocked: text contrast: \"Month\" 4.2 → 3.77 (needs 4.5) and 2 more.",
+      "point": {
+        "element": "Month",
+        "token": "button.text",
+        "pairs": 3,
+        "twins": 2,
+        "outline": "sam",
+        "ms": 1071
+      },
+      "clicked": {
+        "text": "Month",
+        "color": "rgb(255, 255, 255)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {},
+        "focusRule": false,
+        "iframePath": "/admin/index"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 2874,
+        "point": 1105,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 1689,
+        "model": 1673,
+        "focusCheck": null
+      }
+    }
+  ],
+  "afterReset": {
+    "overlay": 0,
+    "card": "",
+    "rule": false,
+    "vars": [],
+    "phase": "reset"
+  },
+  "consoleErrors": []
+}

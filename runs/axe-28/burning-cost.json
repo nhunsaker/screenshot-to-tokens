@@ -1,0 +1,3947 @@
+{
+  "site": "burning-cost",
+  "ms": 4826,
+  "ourPairs": 104,
+  "ourFailing": 55,
+  "axe": {
+    "violations": {
+      "total": 40,
+      "matched": 40,
+      "weFail": 40,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 42,
+      "matched": 42,
+      "weFail": 0,
+      "wePass": 42,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 21,
+      "matched": 21,
+      "weFail": 13,
+      "wePass": 7,
+      "weSkip": {
+        "no-glyphs": 1
+      },
+      "byReason": {
+        "bgGradient": {
+          "total": 10,
+          "pass": 1,
+          "fail": 8,
+          "skipped": 1
+        },
+        "elmPartiallyObscuring": {
+          "total": 1,
+          "pass": 1,
+          "fail": 0,
+          "skipped": 0
+        },
+        "pseudoContent": {
+          "total": 10,
+          "pass": 5,
+          "fail": 5,
+          "skipped": 0
+        }
+      }
+    }
+  },
+  "oursOnly": 2,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "Burning",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#eef0f6",
+          "bg": "#ffffff",
+          "ratio": 1.14,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Cost",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#4f7ef8",
+          "bg": "#ffffff",
+          "ratio": 3.7,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Libraries",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#8b93ac",
+          "bg": "#ffffff",
+          "ratio": 3.06,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Blog",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#8b93ac",
+          "bg": "#ffffff",
+          "ratio": 3.06,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Your outperforms.Your is still live.",
+        "axe": {
+          "reason": "elmPartiallyObscuring",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#0c1222",
+          "ratio": 18.68,
+          "required": 3
+        }
+      },
+      {
+        "text": "GBM",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#090c17",
+          "bg": "#090c17",
+          "ratio": 1,
+          "required": 3
+        }
+      },
+      {
+        "text": "GLM",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#080b15",
+          "bg": "#080b15",
+          "ratio": 1,
+          "required": 3
+        }
+      },
+      {
+        "text": "Read the Blog",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#1a1d2e",
+          "bg": "#080b15",
+          "ratio": 1.18,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "shap_relativities_demo.py",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#5b5e63",
+          "bg": "#151921",
+          "ratio": 2.71,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "from shap_relativities import SHAPRelati",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c9d1d9",
+          "bg": "#0c1018",
+          "ratio": 12.34,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "sr",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "no-glyphs",
+          "required": 4.5
+        }
+      },
+      {
+        "text": "10",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#0f1426",
+          "ratio": 18.31,
+          "required": 3
+        }
+      },
+      {
+        "text": "Flagship Libraries",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#4d5670",
+          "bg": "#0f1426",
+          "ratio": 2.51,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "34",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#0f1529",
+          "ratio": 18.1,
+          "required": 3
+        }
+      },
+      {
+        "text": "Total Libraries",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#4d5670",
+          "bg": "#0f1529",
+          "ratio": 2.48,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "14,+",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#0f1528",
+          "ratio": 18.19,
+          "required": 3
+        }
+      },
+      {
+        "text": "Tests",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#4d5670",
+          "bg": "#0f1528",
+          "ratio": 2.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "524",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#0f1426",
+          "ratio": 18.34,
+          "required": 3
+        }
+      },
+      {
+        "text": "Articles",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#4d5670",
+          "bg": "#0f1426",
+          "ratio": 2.52,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "25,+",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#101529",
+          "ratio": 18.07,
+          "required": 3
+        }
+      },
+      {
+        "text": "PyPI Downloads / month (March 2026)",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#4d5670",
+          "bg": "#0f1529",
+          "ratio": 2.49,
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": ".hero-cta > .btn-primary.btn[target=\"_blank\"]",
+      "idx": 9,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#4f7ef8",
+      "ratio": 3.7,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "summary",
+      "idx": 26,
+      "reason": null,
+      "fg": "#8b93ac",
+      "bg": "#f5f7fc",
+      "ratio": 2.85,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".course-cta-inner > .section-label",
+      "idx": 47,
+      "reason": null,
+      "fg": "#4f7ef8",
+      "bg": "#ffffff",
+      "ratio": 3.7,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"course/\"]",
+      "idx": 50,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#4f7ef8",
+      "ratio": 3.7,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(1) > span",
+      "idx": 54,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(2) > span",
+      "idx": 56,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(3) > span",
+      "idx": 58,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(4) > span",
+      "idx": 60,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(5) > span",
+      "idx": 62,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(6) > span",
+      "idx": 64,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(7) > span",
+      "idx": 66,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(8) > span",
+      "idx": 68,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(9) > span",
+      "idx": 70,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(10) > span",
+      "idx": 72,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(11) > span",
+      "idx": 74,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(12) > span",
+      "idx": 76,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(13) > span",
+      "idx": 78,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(14) > span",
+      "idx": 80,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(15) > span",
+      "idx": 82,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(16) > span",
+      "idx": 84,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(17) > span",
+      "idx": 86,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(18) > span",
+      "idx": 88,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(19) > span",
+      "idx": 90,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(20) > span",
+      "idx": 92,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(21) > span",
+      "idx": 94,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(22) > span",
+      "idx": 96,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(23) > span",
+      "idx": 98,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(24) > span",
+      "idx": 100,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(25) > span",
+      "idx": 102,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(26) > span",
+      "idx": 104,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(27) > span",
+      "idx": 106,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(28) > span",
+      "idx": 108,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(29) > span",
+      "idx": 110,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(30) > span",
+      "idx": 112,
+      "reason": null,
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".recent-articles > div > div:nth-child(3) > a[href$=\"blog/\"]",
+      "idx": 113,
+      "reason": null,
+      "fg": "#4f7ef8",
+      "bg": "#f7f8fc",
+      "ratio": 3.48,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer-newsletter",
+      "idx": 118,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#080b14",
+      "ratio": 1.17,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer-newsletter-label",
+      "idx": 119,
+      "reason": null,
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "li:nth-child(1) > a[target=\"_blank\"]",
+      "idx": 122,
+      "reason": null,
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer-links > li:nth-child(2) > a[href$=\"blog/\"]",
+      "idx": 123,
+      "reason": null,
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer-copy",
+      "idx": 124,
+      "reason": null,
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".hero-label",
+      "idx": 4,
+      "reason": null,
+      "fg": "#4f7ef8",
+      "bg": "#0e1426",
+      "ratio": 4.94,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".hero-sub",
+      "idx": 8,
+      "reason": null,
+      "fg": "#8b93ac",
+      "bg": "#080b14",
+      "ratio": 6.42,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".course-cta-inner > h2",
+      "idx": 48,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#ffffff",
+      "ratio": 16.67,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".course-cta-inner > p",
+      "idx": 49,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#ffffff",
+      "ratio": 16.67,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".btn-outline-light",
+      "idx": 51,
+      "reason": null,
+      "fg": "#3d4463",
+      "bg": "#ffffff",
+      "ratio": 9.52,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".recent-articles > div > div:nth-child(1)",
+      "idx": 52,
+      "reason": null,
+      "fg": "#5a6278",
+      "bg": "#f7f8fc",
+      "ratio": 5.73,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(1) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 53,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(2) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 55,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(3) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 57,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(4) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 59,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(5) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 61,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(6) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 63,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(7) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 65,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(8) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 67,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(9) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 69,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(10) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 71,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(11) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 73,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(12) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 75,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(13) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 77,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(14) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 79,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(15) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 81,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(16) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 83,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(17) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 85,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(18) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 87,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(19) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 89,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(20) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 91,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(21) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 93,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(22) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 95,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(23) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 97,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(24) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 99,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(25) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 101,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(26) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 103,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(27) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 105,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(28) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 107,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(29) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 109,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(30) > a[onmouseover=\"this.style.color='#4f7ef8'\"][onmouseout=\"this.style.color='#1a1d2e'\"]",
+      "idx": 111,
+      "reason": null,
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.71,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer-brand",
+      "idx": 114,
+      "reason": null,
+      "fg": "#eef0f6",
+      "bg": "#080b14",
+      "ratio": 17.25,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer-brand > span",
+      "idx": 115,
+      "reason": null,
+      "fg": "#4f7ef8",
+      "bg": "#080b14",
+      "ratio": 5.3,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer-tagline",
+      "idx": 116,
+      "reason": null,
+      "fg": "#8b93ac",
+      "bg": "#080b14",
+      "ratio": 6.42,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "strong",
+      "idx": 117,
+      "reason": null,
+      "fg": "#eef0f6",
+      "bg": "#080b14",
+      "ratio": 17.25,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer-newsletter-title",
+      "idx": 120,
+      "reason": null,
+      "fg": "#eef0f6",
+      "bg": "#080b14",
+      "ratio": 17.25,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer-newsletter-desc",
+      "idx": 121,
+      "reason": null,
+      "fg": "#8b93ac",
+      "bg": "#080b14",
+      "ratio": 6.42,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".nav-logo",
+      "idx": 0,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".logo-accent",
+      "idx": 1,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"libraries/\"]",
+      "idx": 2,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".nav-links > li:nth-child(2) > a[href$=\"blog/\"]",
+      "idx": 3,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "h1",
+      "idx": 5,
+      "reason": "elmPartiallyObscuring",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "em:nth-child(1)",
+      "idx": 6,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "em:nth-child(3)",
+      "idx": 7,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".hero-cta > .btn-outline.btn[href$=\"blog/\"]",
+      "idx": 10,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".term-title",
+      "idx": 11,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".term-line:nth-child(1)",
+      "idx": 12,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".term-line:nth-child(3)",
+      "idx": 14,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span[data-target=\"10\"]",
+      "idx": 16,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"top-10/\"] > .stat-label",
+      "idx": 17,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span[data-target=\"34\"]",
+      "idx": 18,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".stat:nth-child(2) > a > .stat-label",
+      "idx": 19,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span[data-target=\"14,600+\"]",
+      "idx": 20,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"benchmarks/\"] > .stat-label",
+      "idx": 21,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span[data-target=\"524\"]",
+      "idx": 22,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".stat:nth-child(4) > .stat-label",
+      "idx": 23,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span[data-target=\"25,000+\"]",
+      "idx": 24,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".stat:nth-child(5) > .stat-label",
+      "idx": 25,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "body>nav.nav>div.nav-inner>a.nav-logo|Burning|0",
+      "path": "body>nav.nav>div.nav-inner>a.nav-logo",
+      "text": "Burning",
+      "color": "rgb(238, 240, 246)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        184,
+        17,
+        103,
+        27
+      ],
+      "fg": "#eef0f6",
+      "bg": "#ffffff",
+      "ratio": 1.14,
+      "bestRatio": 1.14,
+      "worstRatio": 1.14,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.nav>div.nav-inner>a.nav-logo>span.logo-accent|Cost|0",
+      "path": "nav.nav>div.nav-inner>a.nav-logo>span.logo-accent",
+      "text": "Cost",
+      "color": "rgb(79, 126, 248)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        249,
+        17,
+        38,
+        27
+      ],
+      "fg": "#4f7ef8",
+      "bg": "#ffffff",
+      "ratio": 3.7,
+      "bestRatio": 3.7,
+      "worstRatio": 3.7,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.nav-inner>ul.nav-links>li>a|Libraries|0",
+      "path": "div.nav-inner>ul.nav-links>li>a",
+      "text": "Libraries",
+      "color": "rgb(139, 147, 172)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1114,
+        15,
+        84,
+        30
+      ],
+      "fg": "#8b93ac",
+      "bg": "#ffffff",
+      "ratio": 3.06,
+      "bestRatio": 3.06,
+      "worstRatio": 3.06,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.nav-inner>ul.nav-links>li>a|Blog|0",
+      "path": "div.nav-inner>ul.nav-links>li>a",
+      "text": "Blog",
+      "color": "rgb(139, 147, 172)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1201,
+        15,
+        55,
+        30
+      ],
+      "fg": "#8b93ac",
+      "bg": "#ffffff",
+      "ratio": 3.06,
+      "bestRatio": 3.06,
+      "worstRatio": 3.06,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "body>section.hero>div.hero-inner>div.hero-label|ML research · UK personal lines insuranc|0",
+      "path": "body>section.hero>div.hero-inner>div.hero-label",
+      "text": "ML research · UK personal lines insuranc",
+      "color": "rgb(79, 126, 248)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        536,
+        156,
+        368,
+        30
+      ],
+      "fg": "#4f7ef8",
+      "bg": "#0d1426",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>section.hero>div.hero-inner>h1|Your outperforms.Your is still live.|0",
+      "path": "body>section.hero>div.hero-inner>h1",
+      "text": "Your outperforms.Your is still live.",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        290,
+        218,
+        860,
+        144
+      ],
+      "fg": "#ffffff",
+      "bg": "#0c1222",
+      "ratio": 18.68,
+      "bestRatio": 19.58,
+      "worstRatio": 18.68,
+      "clusters": 2,
+      "status": "pass"
+    },
+    {
+      "key": "section.hero>div.hero-inner>h1>em|GBM|0",
+      "path": "section.hero>div.hero-inner>h1>em",
+      "text": "GBM",
+      "color": "rgba(0, 0, 0, 0)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        512,
+        214,
+        148,
+        80
+      ],
+      "fg": "#090c17",
+      "bg": "#090c17",
+      "ratio": 1,
+      "bestRatio": 1,
+      "worstRatio": 1,
+      "clusters": 2,
+      "status": "fail"
+    },
+    {
+      "key": "section.hero>div.hero-inner>h1>em|GLM|0",
+      "path": "section.hero>div.hero-inner>h1>em",
+      "text": "GLM",
+      "color": "rgba(0, 0, 0, 0)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        564,
+        287,
+        141,
+        80
+      ],
+      "fg": "#080b15",
+      "bg": "#080b15",
+      "ratio": 1,
+      "bestRatio": 1,
+      "worstRatio": 1,
+      "clusters": 2,
+      "status": "fail"
+    },
+    {
+      "key": "body>section.hero>div.hero-inner>p.hero-sub|Ten libraries for the hard problems in U|0",
+      "path": "body>section.hero>div.hero-inner>p.hero-sub",
+      "text": "Ten libraries for the hard problems in U",
+      "color": "rgb(139, 147, 172)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        420,
+        387,
+        600,
+        97
+      ],
+      "fg": "#8b93ac",
+      "bg": "#080b15",
+      "ratio": 6.42,
+      "bestRatio": 6.42,
+      "worstRatio": 6.42,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.hero>div.hero-inner>div.hero-cta>a.btn|Browse Libraries on GitHub|0",
+      "path": "section.hero>div.hero-inner>div.hero-cta>a.btn",
+      "text": "Browse Libraries on GitHub",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        538,
+        524,
+        220,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#4f7ef8",
+      "ratio": 3.71,
+      "bestRatio": 3.71,
+      "worstRatio": 3.71,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.hero>div.hero-inner>div.hero-cta>a.btn|Read the Blog|0",
+      "path": "section.hero>div.hero-inner>div.hero-cta>a.btn",
+      "text": "Read the Blog",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        771,
+        524,
+        131,
+        42
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#080b15",
+      "ratio": 1.18,
+      "bestRatio": 1.18,
+      "worstRatio": 1.18,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.hero-inner>div.hero-terminal>div.hero-terminal-bar>span.term-title|shap_relativities_demo.py|0",
+      "path": "div.hero-inner>div.hero-terminal>div.hero-terminal-bar>span.term-title",
+      "text": "shap_relativities_demo.py",
+      "color": "rgba(255, 255, 255, 0.3)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        501,
+        633,
+        168,
+        18
+      ],
+      "fg": "#5b5e63",
+      "bg": "#151921",
+      "ratio": 2.71,
+      "bestRatio": 2.71,
+      "worstRatio": 2.71,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.hero-inner>div.hero-terminal>div.hero-terminal-body>span.term-line|from shap_relativities import SHAPRelati|0",
+      "path": "div.hero-inner>div.hero-terminal>div.hero-terminal-body>span.term-line",
+      "text": "from shap_relativities import SHAPRelati",
+      "color": "rgb(201, 209, 217)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        455,
+        682,
+        530,
+        24
+      ],
+      "fg": "#c9d1d9",
+      "bg": "#0c1018",
+      "ratio": 12.34,
+      "bestRatio": 12.34,
+      "worstRatio": 12.34,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.hero-terminal>div.hero-terminal-body>span.term-line>span.term-prompt|>>>|0",
+      "path": "div.hero-terminal>div.hero-terminal-body>span.term-line>span.term-prompt",
+      "text": ">>>",
+      "color": "rgba(79, 126, 248, 0.7)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        455,
+        685,
+        32,
+        17
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.hero-inner>div.hero-terminal>div.hero-terminal-body>span.term-line|sr|0",
+      "path": "div.hero-inner>div.hero-terminal>div.hero-terminal-body>span.term-line",
+      "text": "sr",
+      "color": "rgb(201, 209, 217)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        455,
+        706,
+        530,
+        24
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "div.hero-terminal>div.hero-terminal-body>span.term-line>span.term-prompt|>>>|1",
+      "path": "div.hero-terminal>div.hero-terminal-body>span.term-line>span.term-prompt",
+      "text": ">>>",
+      "color": "rgba(79, 126, 248, 0.7)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        455,
+        709,
+        32,
+        17
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.stats-inner>div.stat>a>span.stat-number|10|0",
+      "path": "div.stats-inner>div.stat>a>span.stat-number",
+      "text": "10",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        405,
+        924,
+        129,
+        34
+      ],
+      "fg": "#ffffff",
+      "bg": "#0f1426",
+      "ratio": 18.31,
+      "bestRatio": 18.31,
+      "worstRatio": 18.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.stats-inner>div.stat>a>span.stat-label|Flagship Libraries|0",
+      "path": "div.stats-inner>div.stat>a>span.stat-label",
+      "text": "Flagship Libraries",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        405,
+        963,
+        129,
+        18
+      ],
+      "fg": "#4d5670",
+      "bg": "#0f1426",
+      "ratio": 2.51,
+      "bestRatio": 2.51,
+      "worstRatio": 2.51,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.stats-inner>div.stat>a>span.stat-number|34|0",
+      "path": "div.stats-inner>div.stat>a>span.stat-number",
+      "text": "34",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        622,
+        924,
+        108,
+        34
+      ],
+      "fg": "#ffffff",
+      "bg": "#0f1529",
+      "ratio": 18.1,
+      "bestRatio": 18.1,
+      "worstRatio": 18.1,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.stats-inner>div.stat>a>span.stat-label|Total Libraries|0",
+      "path": "div.stats-inner>div.stat>a>span.stat-label",
+      "text": "Total Libraries",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        622,
+        963,
+        108,
+        18
+      ],
+      "fg": "#4d5670",
+      "bg": "#0f1529",
+      "ratio": 2.48,
+      "bestRatio": 2.48,
+      "worstRatio": 2.48,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.stats-inner>div.stat>a>span.stat-number|14,+|0",
+      "path": "div.stats-inner>div.stat>a>span.stat-number",
+      "text": "14,+",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        817,
+        924,
+        69,
+        34
+      ],
+      "fg": "#ffffff",
+      "bg": "#0f1528",
+      "ratio": 18.19,
+      "bestRatio": 18.19,
+      "worstRatio": 18.19,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.stats-inner>div.stat>a>span.stat-label|Tests|0",
+      "path": "div.stats-inner>div.stat>a>span.stat-label",
+      "text": "Tests",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        817,
+        963,
+        69,
+        18
+      ],
+      "fg": "#4d5670",
+      "bg": "#0f1528",
+      "ratio": 2.49,
+      "bestRatio": 2.49,
+      "worstRatio": 2.49,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.stats-strip>div.stats-inner>div.stat>span.stat-number|524|0",
+      "path": "div.stats-strip>div.stats-inner>div.stat>span.stat-number",
+      "text": "524",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        974,
+        924,
+        61,
+        34
+      ],
+      "fg": "#ffffff",
+      "bg": "#0f1426",
+      "ratio": 18.34,
+      "bestRatio": 18.34,
+      "worstRatio": 18.34,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.stats-strip>div.stats-inner>div.stat>span.stat-label|Articles|0",
+      "path": "div.stats-strip>div.stats-inner>div.stat>span.stat-label",
+      "text": "Articles",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        974,
+        963,
+        61,
+        18
+      ],
+      "fg": "#4d5670",
+      "bg": "#0f1426",
+      "ratio": 2.52,
+      "bestRatio": 2.52,
+      "worstRatio": 2.52,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.stats-strip>div.stats-inner>div.stat>span.stat-number|25,+|0",
+      "path": "div.stats-strip>div.stats-inner>div.stat>span.stat-number",
+      "text": "25,+",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        586,
+        981,
+        268,
+        34
+      ],
+      "fg": "#ffffff",
+      "bg": "#101529",
+      "ratio": 18.07,
+      "bestRatio": 18.07,
+      "worstRatio": 18.07,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.stats-strip>div.stats-inner>div.stat>span.stat-label|PyPI Downloads / month (March 2026)|0",
+      "path": "div.stats-strip>div.stats-inner>div.stat>span.stat-label",
+      "text": "PyPI Downloads / month (March 2026)",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        586,
+        1020,
+        268,
+        18
+      ],
+      "fg": "#4d5670",
+      "bg": "#0f1529",
+      "ratio": 2.49,
+      "bestRatio": 2.49,
+      "worstRatio": 2.49,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "body>section.libraries>details.lib-portfolio-details>summary.lib-portfolio-summary|Show full portfolio (34 libraries)|0",
+      "path": "body>section.libraries>details.lib-portfolio-details>summary.lib-portfolio-summary",
+      "text": "Show full portfolio (34 libraries)",
+      "color": "rgb(139, 147, 172)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        24,
+        6243,
+        1392,
+        47
+      ],
+      "fg": "#8b93ac",
+      "bg": "#f5f7fc",
+      "ratio": 2.85,
+      "bestRatio": 2.85,
+      "worstRatio": 2.85,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|🔍|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "🔍",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        6290,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Model interpretation|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Model interpretation",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        6295,
+        159,
+        18
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|✓|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "✓",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        6609,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Validation & deployment|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Validation & deployment",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        6614,
+        182,
+        18
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|⚙|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "⚙",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        7163,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Techniques|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Techniques",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        7168,
+        84,
+        18
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|📈|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "📈",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        8461,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Commercial|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Commercial",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        8467,
+        88,
+        18
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|📊|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "📊",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        8760,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Tail risk & distributions|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Tail risk & distributions",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        8765,
+        178,
+        18
+      ],
+      "fg": "#8a92b2",
+      "bg": "#7d7f8b",
+      "ratio": 1.29,
+      "bestRatio": 2.88,
+      "worstRatio": 1.29,
+      "clusters": 2,
+      "status": "fail"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|⚖|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "⚖",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        9596,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Compliance|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Compliance",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        9601,
+        86,
+        18
+      ],
+      "fg": "#8a92b2",
+      "bg": "#eceef4",
+      "ratio": 2.65,
+      "bestRatio": 6.39,
+      "worstRatio": 2.65,
+      "clusters": 2,
+      "status": "fail"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|🚗|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "🚗",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        9894,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Telematics|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Telematics",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        9899,
+        81,
+        18
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|📊|1",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "📊",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        10255,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Trend & time series|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Trend & time series",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        10260,
+        140,
+        18
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|🔍|1",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "🔍",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        10595,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Advanced modelling|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Advanced modelling",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        10600,
+        151,
+        18
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon|📋|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-icon",
+      "text": "📋",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        10965,
+        28,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Covariate shift|0",
+      "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+      "text": "Covariate shift",
+      "color": "rgb(138, 146, 178)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        200,
+        10970,
+        115,
+        18
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "body>section.course-cta>div.course-cta-inner>div.section-label|Structured learning|0",
+      "path": "body>section.course-cta>div.course-cta-inner>div.section-label",
+      "text": "Structured learning",
+      "color": "rgb(79, 126, 248)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        7013,
+        1440,
+        18
+      ],
+      "fg": "#4f7ef8",
+      "bg": "#ffffff",
+      "ratio": 3.7,
+      "bestRatio": 3.7,
+      "worstRatio": 3.7,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "body>section.course-cta>div.course-cta-inner>h2|Insurance Pricing in Python — 12-module |0",
+      "path": "body>section.course-cta>div.course-cta-inner>h2",
+      "text": "Insurance Pricing in Python — 12-module ",
+      "color": "rgb(26, 29, 46)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        0,
+        7046,
+        1440,
+        38
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#ffffff",
+      "ratio": 16.68,
+      "bestRatio": 16.68,
+      "worstRatio": 16.68,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>section.course-cta>div.course-cta-inner>p|A guided path through the full pricing w|0",
+      "path": "body>section.course-cta>div.course-cta-inner>p",
+      "text": "A guided path through the full pricing w",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        7085,
+        1440,
+        51
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#ffffff",
+      "ratio": 16.68,
+      "bestRatio": 16.68,
+      "worstRatio": 16.68,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>section.course-cta>div.course-cta-inner>a.btn|View the Course →|0",
+      "path": "body>section.course-cta>div.course-cta-inner>a.btn",
+      "text": "View the Course →",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        7136,
+        166,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#4f7ef8",
+      "ratio": 3.7,
+      "bestRatio": 3.7,
+      "worstRatio": 3.7,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.posts>div.posts-inner>div.post-more>a.btn|All articles →|0",
+      "path": "section.posts>div.posts-inner>div.post-more>a.btn",
+      "text": "All articles →",
+      "color": "rgb(61, 68, 99)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        656,
+        8369,
+        128,
+        44
+      ],
+      "fg": "#3d4463",
+      "bg": "#ffffff",
+      "ratio": 9.52,
+      "bestRatio": 9.52,
+      "worstRatio": 9.52,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>section.recent-articles>div>div|Recent articles|0",
+      "path": "body>section.recent-articles>div>div",
+      "text": "Recent articles",
+      "color": "rgb(90, 98, 120)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        8541,
+        1100,
+        17
+      ],
+      "fg": "#5a6278",
+      "bg": "#f7f8fc",
+      "ratio": 5.73,
+      "bestRatio": 5.73,
+      "worstRatio": 5.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>a|Why Stacking Fairness, Calibration, and |0",
+      "path": "div>ul>li>a",
+      "text": "Why Stacking Fairness, Calibration, and ",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        8585,
+        295,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|0",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        438,
+        8610,
+        66,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|What PRA Auditors Will Ask to See in 202|0",
+      "path": "div>ul>li>a",
+      "text": "What PRA Auditors Will Ask to See in 202",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        8585,
+        296,
+        62
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|1",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        630,
+        8633,
+        66,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Repricing at the floor: how to find head|0",
+      "path": "div>ul>li>a",
+      "text": "Repricing at the floor: how to find head",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        8585,
+        331,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|2",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        8610,
+        315,
+        36
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|The Fairness Audit That Passes Without M|0",
+      "path": "div>ul>li>a",
+      "text": "The Fairness Audit That Passes Without M",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        8672,
+        338,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|3",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        178,
+        8720,
+        66,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|What PRA auditors will ask to see in 202|0",
+      "path": "div>ul>li>a",
+      "text": "What PRA auditors will ask to see in 202",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        8672,
+        340,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|4",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        8698,
+        332,
+        36
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Building a regulatory-grade AI pricing m|0",
+      "path": "div>ul>li>a",
+      "text": "Building a regulatory-grade AI pricing m",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        8672,
+        340,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|5",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1119,
+        8698,
+        66,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Who Owns Fair Value in a Delegated Autho|0",
+      "path": "div>ul>li>a",
+      "text": "Who Owns Fair Value in a Delegated Autho",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        8760,
+        305,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|6",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        227,
+        8785,
+        66,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Building a regulatory-grade AI pricing m|1",
+      "path": "div>ul>li>a",
+      "text": "Building a regulatory-grade AI pricing m",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        8760,
+        332,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|7",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        8785,
+        333,
+        36
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Conformal Prediction Passes 90% Coverage|0",
+      "path": "div>ul>li>a",
+      "text": "Conformal Prediction Passes 90% Coverage",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        8760,
+        324,
+        62
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|05 Apr 2026|8",
+      "path": "div>ul>li>span",
+      "text": "05 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        8807,
+        319,
+        36
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Whittaker-Henderson Smoothing in Python:|0",
+      "path": "div>ul>li>a",
+      "text": "Whittaker-Henderson Smoothing in Python:",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        8869,
+        341,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|0",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        8895,
+        338,
+        36
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|What Postcode Can't Tell You: Flood Pric|0",
+      "path": "div>ul>li>a",
+      "text": "What Postcode Can't Tell You: Flood Pric",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        8869,
+        291,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|1",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        704,
+        8895,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Telematics Pricing in Python: From Raw T|0",
+      "path": "div>ul>li>a",
+      "text": "Telematics Pricing in Python: From Raw T",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        8869,
+        342,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|2",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1073,
+        8895,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Survival Analysis for Insurance Lapse Mo|0",
+      "path": "div>ul>li>a",
+      "text": "Survival Analysis for Insurance Lapse Mo",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        8957,
+        332,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|3",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        367,
+        8982,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|When Your Distributional Regression Has |0",
+      "path": "div>ul>li>a",
+      "text": "When Your Distributional Regression Has ",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        8957,
+        340,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|4",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        635,
+        8982,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|The Fairness Impossibility You Cannot Op|0",
+      "path": "div>ul>li>a",
+      "text": "The Fairness Impossibility You Cannot Op",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        8957,
+        332,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|5",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        933,
+        9004,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Conformal Risk Control Assumes Your Loss|0",
+      "path": "div>ul>li>a",
+      "text": "Conformal Risk Control Assumes Your Loss",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        9044,
+        310,
+        62
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|6",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        272,
+        9092,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Motor Finance Redress: What PS26/3 Tells|0",
+      "path": "div>ul>li>a",
+      "text": "Motor Finance Redress: What PS26/3 Tells",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        9044,
+        345,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|7",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        555,
+        9092,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Your Historical Loss Ratios Have a Reser|0",
+      "path": "div>ul>li>a",
+      "text": "Your Historical Loss Ratios Have a Reser",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        9044,
+        296,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|8",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        991,
+        9069,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Is Your Model Improvement Worth Building|0",
+      "path": "div>ul>li>a",
+      "text": "Is Your Model Improvement Worth Building",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        9131,
+        319,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|9",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        365,
+        9157,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Insurance Model Monitoring in Python: A |0",
+      "path": "div>ul>li>a",
+      "text": "Insurance Model Monitoring in Python: A ",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        9131,
+        269,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|10",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        690,
+        9157,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Detection vs Mitigation: insurance-fairn|0",
+      "path": "div>ul>li>a",
+      "text": "Detection vs Mitigation: insurance-fairn",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        9131,
+        313,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|11",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1113,
+        9157,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Insurance Fairness Audit in Python: A Co|0",
+      "path": "div>ul>li>a",
+      "text": "Insurance Fairness Audit in Python: A Co",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        9196,
+        315,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|12",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        9222,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|glum Insurance Pricing in Python: Fittin|0",
+      "path": "div>ul>li>a",
+      "text": "glum Insurance Pricing in Python: Fittin",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        9196,
+        335,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|13",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        783,
+        9222,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Building a GLM Frequency Model in Python|0",
+      "path": "div>ul>li>a",
+      "text": "Building a GLM Frequency Model in Python",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        9196,
+        343,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|14",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1173,
+        9222,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|GAM Insurance Pricing in Python: An EBM |0",
+      "path": "div>ul>li>a",
+      "text": "GAM Insurance Pricing in Python: An EBM ",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        9261,
+        316,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|15",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        367,
+        9287,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Five Libraries, One Pipeline: End-to-End|0",
+      "path": "div>ul>li>a",
+      "text": "Five Libraries, One Pipeline: End-to-End",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        9261,
+        307,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|16",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        671,
+        9287,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Fairness in the Tail: Why Mean Demograph|0",
+      "path": "div>ul>li>a",
+      "text": "Fairness in the Tail: Why Mean Demograph",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        9261,
+        337,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|17",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1052,
+        9287,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Credibility Theory in Python: A Complete|0",
+      "path": "div>ul>li>a",
+      "text": "Credibility Theory in Python: A Complete",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        9326,
+        310,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|18",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        9352,
+        337,
+        36
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|Conformal Prediction for Insurance Pytho|0",
+      "path": "div>ul>li>a",
+      "text": "Conformal Prediction for Insurance Pytho",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        547,
+        9326,
+        299,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|19",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        742,
+        9352,
+        67,
+        14
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|When Empirical Bayes Goes Wrong: Lessons|0",
+      "path": "div>ul>li>a",
+      "text": "When Empirical Bayes Goes Wrong: Lessons",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        9326,
+        333,
+        39
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#f7f8fc",
+      "ratio": 15.72,
+      "bestRatio": 15.72,
+      "worstRatio": 15.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>ul>li>span|04 Apr 2026|20",
+      "path": "div>ul>li>span",
+      "text": "04 Apr 2026",
+      "color": "rgb(139, 146, 168)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        925,
+        9352,
+        324,
+        36
+      ],
+      "fg": "#8b92a8",
+      "bg": "#f7f8fc",
+      "ratio": 2.92,
+      "bestRatio": 2.92,
+      "worstRatio": 2.92,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.recent-articles>div>div>a|View all 529 articles →|0",
+      "path": "section.recent-articles>div>div>a",
+      "text": "View all 529 articles →",
+      "color": "rgb(79, 126, 248)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        170,
+        9422,
+        149,
+        17
+      ],
+      "fg": "#4f7ef8",
+      "bg": "#f7f8fc",
+      "ratio": 3.49,
+      "bestRatio": 3.49,
+      "worstRatio": 3.49,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.footer-inner>div.footer-top>div.footer-tagline-block>div.footer-brand|Burning|0",
+      "path": "div.footer-inner>div.footer-top>div.footer-tagline-block>div.footer-brand",
+      "text": "Burning",
+      "color": "rgb(238, 240, 246)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        9549,
+        528,
+        27
+      ],
+      "fg": "#eef0f6",
+      "bg": "#080b14",
+      "ratio": 17.25,
+      "bestRatio": 17.25,
+      "worstRatio": 17.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.footer-top>div.footer-tagline-block>div.footer-brand>span|Cost|0",
+      "path": "div.footer-top>div.footer-tagline-block>div.footer-brand>span",
+      "text": "Cost",
+      "color": "rgb(79, 126, 248)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        223,
+        9552,
+        38,
+        20
+      ],
+      "fg": "#4f7ef8",
+      "bg": "#080b14",
+      "ratio": 5.31,
+      "bestRatio": 5.31,
+      "worstRatio": 5.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.footer-inner>div.footer-top>div.footer-tagline-block>p.footer-tagline|34 open-source libraries covering the fu|0",
+      "path": "div.footer-inner>div.footer-top>div.footer-tagline-block>p.footer-tagline",
+      "text": "34 open-source libraries covering the fu",
+      "color": "rgb(139, 147, 172)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        9588,
+        528,
+        94
+      ],
+      "fg": "#8b93ac",
+      "bg": "#080b14",
+      "ratio": 6.43,
+      "bestRatio": 6.43,
+      "worstRatio": 6.43,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.footer-top>div.footer-tagline-block>p.footer-tagline>strong|Built for UK insurance pricing teams.|0",
+      "path": "div.footer-top>div.footer-tagline-block>p.footer-tagline>strong",
+      "text": "Built for UK insurance pricing teams.",
+      "color": "rgb(238, 240, 246)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        9591,
+        247,
+        17
+      ],
+      "fg": "#eef0f6",
+      "bg": "#080b14",
+      "ratio": 17.25,
+      "bestRatio": 17.25,
+      "worstRatio": 17.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.footer>div.footer-inner>div.footer-top>div.footer-newsletter|Get updates by email →|0",
+      "path": "footer.footer>div.footer-inner>div.footer-top>div.footer-newsletter",
+      "text": "Get updates by email →",
+      "color": "rgb(26, 29, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        752,
+        9549,
+        528,
+        139
+      ],
+      "fg": "#1a1d2e",
+      "bg": "#080b14",
+      "ratio": 1.18,
+      "bestRatio": 1.18,
+      "worstRatio": 1.18,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-label|Stay current|0",
+      "path": "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-label",
+      "text": "Stay current",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        752,
+        9549,
+        528,
+        17
+      ],
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.7,
+      "bestRatio": 2.7,
+      "worstRatio": 2.7,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-title|New libraries and articles|0",
+      "path": "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-title",
+      "text": "New libraries and articles",
+      "color": "rgb(238, 240, 246)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        752,
+        9576,
+        528,
+        22
+      ],
+      "fg": "#eef0f6",
+      "bg": "#080b14",
+      "ratio": 17.25,
+      "bestRatio": 17.25,
+      "worstRatio": 17.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.footer-inner>div.footer-top>div.footer-newsletter>p.footer-newsletter-desc|We publish articles on insurance pricing|0",
+      "path": "div.footer-inner>div.footer-top>div.footer-newsletter>p.footer-newsletter-desc",
+      "text": "We publish articles on insurance pricing",
+      "color": "rgb(139, 147, 172)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        752,
+        9608,
+        528,
+        44
+      ],
+      "fg": "#8b93ac",
+      "bg": "#080b14",
+      "ratio": 6.43,
+      "bestRatio": 6.43,
+      "worstRatio": 6.43,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.footer-bottom>ul.footer-links>li>a|GitHub|0",
+      "path": "div.footer-bottom>ul.footer-links>li>a",
+      "text": "GitHub",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        160,
+        9774,
+        44,
+        16
+      ],
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.7,
+      "bestRatio": 2.7,
+      "worstRatio": 2.7,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.footer-bottom>ul.footer-links>li>a|Blog|0",
+      "path": "div.footer-bottom>ul.footer-links>li>a",
+      "text": "Blog",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        228,
+        9774,
+        28,
+        16
+      ],
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.7,
+      "bestRatio": 2.7,
+      "worstRatio": 2.7,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-inner>div.footer-bottom>div.footer-copy|Open source · UK insurance pricing|0",
+      "path": "footer.footer>div.footer-inner>div.footer-bottom>div.footer-copy",
+      "text": "Open source · UK insurance pricing",
+      "color": "rgb(77, 86, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1070,
+        9772,
+        210,
+        20
+      ],
+      "fg": "#4d5670",
+      "bg": "#080b14",
+      "ratio": 2.7,
+      "bestRatio": 2.7,
+      "worstRatio": 2.7,
+      "clusters": 1,
+      "status": "fail"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "url": "http://127.0.0.1:4481/",
+  "rows": [
+    {
+      "step": "b",
+      "app": "argon",
+      "name": "contrast-voice",
+      "rep": 1,
+      "target": {
+        "x": 430,
+        "y": 222
+      },
+      "transcript": "This label is too light, make it readable. Keep our gray.",
+      "route": "contrast",
+      "result": {
+        "kind": "applied",
+        "changes": [
+          {
+            "token": "color.text.muted",
+            "from": "#8898aa",
+            "css": "#687889"
+          }
+        ],
+        "affected": 21,
+        "before": 2.95,
+        "after": 4.53,
+        "pageFailBefore": 41,
+        "pageFailAfter": 20,
+        "checked": 87,
+        "regressions": 0
+      },
+      "error": null,
+      "summary": "21 elements, 2.95:1 → 4.53:1, text contrast (color.text.muted, hue kept).",
+      "point": {
+        "element": "Since last month",
+        "token": "color.text.muted",
+        "pairs": 21,
+        "twins": 0,
+        "outline": "dom",
+        "ms": 0
+      },
+      "clicked": {
+        "text": "Since last month",
+        "color": "rgb(104, 120, 137)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--color-text-muted": "#687889"
+        },
+        "focusRule": false,
+        "iframePath": "/admin/index"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 6192,
+        "point": 4,
+        "afterSpeech": 1665,
+        "asr": 1566,
+        "intent": 30,
+        "model": null,
+        "focusCheck": null
+      }
+    }
+  ],
+  "afterReset": {
+    "overlay": 0,
+    "card": "",
+    "rule": false,
+    "vars": [],
+    "phase": "reset"
+  },
+  "consoleErrors": []
+}

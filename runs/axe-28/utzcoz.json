@@ -1,0 +1,1587 @@
+{
+  "site": "utzcoz",
+  "ms": 1592,
+  "ourPairs": 47,
+  "ourFailing": 1,
+  "axe": {
+    "violations": {
+      "total": 1,
+      "matched": 1,
+      "weFail": 1,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 46,
+      "matched": 46,
+      "weFail": 0,
+      "wePass": 46,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 2,
+      "matched": 2,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {
+        "decorative": 2
+      },
+      "byReason": {
+        "shortTextContent": {
+          "total": 2,
+          "pass": 0,
+          "fail": 0,
+          "skipped": 2
+        }
+      }
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "·",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": "#aaacae",
+          "bg": "#ffffff",
+          "ratio": 2.27,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "decorative",
+          "required": 4.5
+        }
+      },
+      {
+        "text": "·",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": "#aaacae",
+          "bg": "#ffffff",
+          "ratio": 2.27,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "decorative",
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": ".disabled",
+      "idx": 41,
+      "reason": null,
+      "fg": "#bbbdbe",
+      "bg": "#ffffff",
+      "ratio": 1.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".site-header__brand",
+      "idx": 0,
+      "reason": null,
+      "fg": "#202122",
+      "bg": "#ffffff",
+      "ratio": 16.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[aria-current=\"page\"]",
+      "idx": 1,
+      "reason": null,
+      "fg": "#202122",
+      "bg": "#ffffff",
+      "ratio": 16.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"about/\"]",
+      "idx": 2,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"utzcoz\"][target=\"_blank\"][rel=\"noopener\"]:nth-child(3)",
+      "idx": 3,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"utzcoz\"][target=\"_blank\"][rel=\"noopener\"]:nth-child(4)",
+      "idx": 4,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p",
+      "idx": 5,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[target=\"_blank\"][rel=\"noopener\"]:nth-child(1)",
+      "idx": 6,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"boringdroid\"]",
+      "idx": 7,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"maruos\"]",
+      "idx": 8,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p > a[target=\"_blank\"][rel=\"noopener\"]:nth-child(4)",
+      "idx": 9,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"aospbooks\"]",
+      "idx": 10,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(1) > h2 > a",
+      "idx": 11,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-10-14T16:00:00+00:00\"]",
+      "idx": 12,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(2) > h2 > a",
+      "idx": 13,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-09-03T16:00:00+00:00\"]",
+      "idx": 14,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(3) > h2 > a",
+      "idx": 15,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-06-19T16:00:00+00:00\"]",
+      "idx": 16,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(4) > h2 > a",
+      "idx": 17,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-04-26T14:00:00+00:00\"]",
+      "idx": 18,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(5) > h2 > a",
+      "idx": 19,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-04-25T16:00:00+00:00\"]",
+      "idx": 20,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(6) > h2 > a",
+      "idx": 21,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-03-20T16:00:00+00:00\"]",
+      "idx": 22,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(7) > h2 > a",
+      "idx": 23,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-03-15T16:00:00+00:00\"]",
+      "idx": 24,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(8) > h2 > a",
+      "idx": 25,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-03-07T16:00:00+00:00\"]",
+      "idx": 26,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(9) > h2 > a",
+      "idx": 27,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-03-05T16:22:00+00:00\"]",
+      "idx": 28,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(10) > h2 > a",
+      "idx": 29,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-03-05T12:00:00+00:00\"]",
+      "idx": 30,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(11) > h2 > a",
+      "idx": 31,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-03-01T08:00:00+00:00\"]",
+      "idx": 32,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(12) > h2 > a",
+      "idx": 33,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-03-01T06:15:00+00:00\"]",
+      "idx": 34,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(13) > h2 > a",
+      "idx": 35,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-02-22T17:46:00+00:00\"]",
+      "idx": 36,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(14) > h2 > a",
+      "idx": 37,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2023-03-26T06:05:00+00:00\"]",
+      "idx": 38,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(15) > h2 > a",
+      "idx": 39,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2023-03-04T10:24:00+00:00\"]",
+      "idx": 40,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".page-number",
+      "idx": 42,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href=\"/page/2/\"]",
+      "idx": 43,
+      "reason": null,
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.36,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".site-footer__inner > span:nth-child(1)",
+      "idx": 44,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"feed.xml\"]",
+      "idx": 46,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "span:nth-child(5)",
+      "idx": 48,
+      "reason": null,
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".site-footer__sep:nth-child(2)",
+      "idx": 45,
+      "reason": "shortTextContent",
+      "fg": "#aaacae",
+      "bg": "#ffffff",
+      "ratio": 2.27,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".site-footer__sep:nth-child(4)",
+      "idx": 47,
+      "reason": "shortTextContent",
+      "fg": "#aaacae",
+      "bg": "#ffffff",
+      "ratio": 2.27,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "body>header.site-header>div.site-header__inner>a.site-header__brand|utzcoz's perosnal blog|0",
+      "path": "body>header.site-header>div.site-header__inner>a.site-header__brand",
+      "text": "utzcoz's perosnal blog",
+      "color": "rgb(32, 33, 34)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        13,
+        171,
+        26
+      ],
+      "fg": "#202122",
+      "bg": "#ffffff",
+      "ratio": 16.13,
+      "bestRatio": 16.13,
+      "worstRatio": 16.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "header.site-header>div.site-header__inner>nav.site-header__nav>a|Posts|0",
+      "path": "header.site-header>div.site-header__inner>nav.site-header__nav>a",
+      "text": "Posts",
+      "color": "rgb(32, 33, 34)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        957,
+        14,
+        40,
+        24
+      ],
+      "fg": "#202122",
+      "bg": "#ffffff",
+      "ratio": 16.13,
+      "bestRatio": 16.13,
+      "worstRatio": 16.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "header.site-header>div.site-header__inner>nav.site-header__nav>a|About|0",
+      "path": "header.site-header>div.site-header__inner>nav.site-header__nav>a",
+      "text": "About",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1015,
+        14,
+        41,
+        24
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "header.site-header>div.site-header__inner>nav.site-header__nav>a|GitHub|0",
+      "path": "header.site-header>div.site-header__inner>nav.site-header__nav>a",
+      "text": "GitHub",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1074,
+        14,
+        48,
+        24
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "header.site-header>div.site-header__inner>nav.site-header__nav>a|X|0",
+      "path": "header.site-header>div.site-header__inner>nav.site-header__nav>a",
+      "text": "X",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1140,
+        14,
+        10,
+        24
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main.site-main>div.container>section.home-intro>p|Focus on AOSP, XR, and testing tools. Wo|0",
+      "path": "main.site-main>div.container>section.home-intro>p",
+      "text": "Focus on AOSP, XR, and testing tools. Wo",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        93,
+        752,
+        54
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.home-intro>p>a|Robolectric|0",
+      "path": "div.container>section.home-intro>p>a",
+      "text": "Robolectric",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        726,
+        96,
+        87,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.home-intro>p>a|boringdroid|0",
+      "path": "div.container>section.home-intro>p>a",
+      "text": "boringdroid",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        822,
+        96,
+        88,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.home-intro>p>a|MaruOS|0",
+      "path": "div.container>section.home-intro>p>a",
+      "text": "MaruOS",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        919,
+        96,
+        62,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.home-intro>p>a|DigitalisX64|0",
+      "path": "div.container>section.home-intro>p>a",
+      "text": "DigitalisX64",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        989,
+        96,
+        91,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.home-intro>p>a|aospbooks|0",
+      "path": "div.container>section.home-intro>p>a",
+      "text": "aospbooks",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        123,
+        83,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Slack snap runs but never shows its wind|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Slack snap runs but never shows its wind",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        225,
+        522,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|14 Oct 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "14 Oct 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1013,
+        225,
+        83,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Steam Frame's Lepton Architecture|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Steam Frame's Lepton Architecture",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        274,
+        269,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|3 Sep 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "3 Sep 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        274,
+        76,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Diffing AOSP Releases|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Diffing AOSP Releases",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        323,
+        171,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|19 Jun 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "19 Jun 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1013,
+        323,
+        83,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Using Claude Code on AOSP-scale projects|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Using Claude Code on AOSP-scale projects",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        372,
+        331,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|26 Apr 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "26 Apr 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1014,
+        372,
+        82,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Fixing the blurry LUKS password screen a|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Fixing the blurry LUKS password screen a",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        421,
+        550,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|25 Apr 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "25 Apr 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1014,
+        421,
+        82,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Android emulator won't boot on AMD GPU? |0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Android emulator won't boot on AMD GPU? ",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        469,
+        501,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|20 Mar 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "20 Mar 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1012,
+        469,
+        84,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|How Android Studio's @Preview Actually W|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "How Android Studio's @Preview Actually W",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        518,
+        366,
+        44
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|15 Mar 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "15 Mar 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1012,
+        518,
+        84,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|AOSP Split APK Architecture - Comprehens|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "AOSP Split APK Architecture - Comprehens",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        591,
+        474,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|7 Mar 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "7 Mar 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        591,
+        76,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|The Intelligent OS: How AppFunctions and|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "The Intelligent OS: How AppFunctions and",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        640,
+        417,
+        44
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|5 Mar 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "5 Mar 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        640,
+        76,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Building a Custom Jekyll Theme with Clau|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Building a Custom Jekyll Theme with Clau",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        712,
+        382,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|5 Mar 2026|1",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "5 Mar 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        712,
+        76,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Robolectric Native Runtime: Architecture|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Robolectric Native Runtime: Architecture",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        761,
+        503,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|1 Mar 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "1 Mar 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        761,
+        76,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|APKM File Format Spec from APKMirror|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "APKM File Format Spec from APKMirror",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        810,
+        301,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|1 Mar 2026|1",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "1 Mar 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        810,
+        76,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Layout Inspector Deep Technical Analysis|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Layout Inspector Deep Technical Analysis",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        859,
+        315,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|22 Feb 2026|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "22 Feb 2026",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1012,
+        859,
+        84,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Use swiftshader to support Vulkan for Wi|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Use swiftshader to support Vulkan for Wi",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        907,
+        580,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|26 Mar 2023|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "26 Mar 2023",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1012,
+        907,
+        84,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.post-list>article.post-row>h2.post-row__title>a|Analyze AppComponentFactory|0",
+      "path": "section.post-list>article.post-row>h2.post-row__title>a",
+      "text": "Analyze AppComponentFactory",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        956,
+        242,
+        20
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>section.post-list>article.post-row>time.post-row__date|4 Mar 2023|0",
+      "path": "div.container>section.post-list>article.post-row>time.post-row__date",
+      "text": "4 Mar 2023",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        956,
+        76,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main.site-main>div.container>nav.pagination>span.disabled|← Newer|0",
+      "path": "main.site-main>div.container>nav.pagination>span.disabled",
+      "text": "← Newer",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        1032,
+        58,
+        22
+      ],
+      "fg": "#bbbdbe",
+      "bg": "#ffffff",
+      "ratio": 1.89,
+      "bestRatio": 1.89,
+      "worstRatio": 1.89,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "main.site-main>div.container>nav.pagination>span.page-number|1 / 3|0",
+      "path": "main.site-main>div.container>nav.pagination>span.page-number",
+      "text": "1 / 3",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        709,
+        1032,
+        29,
+        22
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main.site-main>div.container>nav.pagination>a|Older →|0",
+      "path": "main.site-main>div.container>nav.pagination>a",
+      "text": "Older →",
+      "color": "rgb(51, 102, 204)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1044,
+        1032,
+        52,
+        22
+      ],
+      "fg": "#3366cc",
+      "bg": "#ffffff",
+      "ratio": 5.37,
+      "bestRatio": 5.37,
+      "worstRatio": 5.37,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>footer.site-footer>div.site-footer__inner>span|© 2018–2026 utzcoz|0",
+      "path": "body>footer.site-footer>div.site-footer__inner>span",
+      "text": "© 2018–2026 utzcoz",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        1135,
+        124,
+        20
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>footer.site-footer>div.site-footer__inner>span.site-footer__sep|·|0",
+      "path": "body>footer.site-footer>div.site-footer__inner>span.site-footer__sep",
+      "text": "·",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        376,
+        1135,
+        4,
+        20
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "body>footer.site-footer>div.site-footer__inner>a|RSS|0",
+      "path": "body>footer.site-footer>div.site-footer__inner>a",
+      "text": "RSS",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        388,
+        1135,
+        24,
+        20
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>footer.site-footer>div.site-footer__inner>span.site-footer__sep|·|1",
+      "path": "body>footer.site-footer>div.site-footer__inner>span.site-footer__sep",
+      "text": "·",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        420,
+        1135,
+        4,
+        20
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "body>footer.site-footer>div.site-footer__inner>span|Built with Jekyll|0",
+      "path": "body>footer.site-footer>div.site-footer__inner>span",
+      "text": "Built with Jekyll",
+      "color": "rgb(84, 89, 93)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        432,
+        1135,
+        91,
+        20
+      ],
+      "fg": "#54595d",
+      "bg": "#ffffff",
+      "ratio": 7.09,
+      "bestRatio": 7.09,
+      "worstRatio": 7.09,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

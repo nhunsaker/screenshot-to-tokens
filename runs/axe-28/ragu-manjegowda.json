@@ -1,0 +1,771 @@
+{
+  "site": "ragu-manjegowda",
+  "ms": 2998,
+  "ourPairs": 13,
+  "ourFailing": 9,
+  "axe": {
+    "violations": {
+      "total": 3,
+      "matched": 3,
+      "weFail": 3,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 12,
+      "matched": 12,
+      "weFail": 6,
+      "wePass": 4,
+      "weSkip": {
+        "invisible": 2
+      },
+      "byReason": {
+        "bgGradient": {
+          "total": 12,
+          "pass": 4,
+          "fail": 6,
+          "skipped": 2
+        }
+      }
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "Menu",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#eee8d5",
+          "bg": "#5e6352",
+          "ratio": 5.09,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "ಸೊಗಸು",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#eee8d5",
+          "bg": "#5c5e32",
+          "ratio": 5.53,
+          "required": 3
+        }
+      },
+      {
+        "text": "Ragu's personal portfolio",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#eee8d5",
+          "bg": "#424924",
+          "ratio": 7.74,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Continue",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#eee8d5",
+          "bg": "#535628",
+          "ratio": 6.3,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "About",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#eee8d5",
+          "bg": "#9ba9a3",
+          "ratio": 1.99,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "A bit about me!",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#eee8d5",
+          "bg": "#95a59f",
+          "ratio": 2.11,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Projects",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#eee8d5",
+          "bg": "#9daba4",
+          "ratio": 1.95,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Things I enjoyed creating",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#eee8d5",
+          "bg": "#97a7a0",
+          "ratio": 2.06,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Blog",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#eee8d5",
+          "bg": "#9caaa3",
+          "ratio": 1.97,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Exploring development workflows, travel ",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#eee8d5",
+          "bg": "#b5bdb4",
+          "ratio": 1.57,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Let's Connect",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "invisible",
+          "bg": "#faf3e0",
+          "ratio": 1.11,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "I appreciate you taking the time to expl",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "invisible",
+          "bg": "#fbf4e1",
+          "ratio": 1.11,
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": ".button",
+      "idx": 12,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#ed4933",
+      "ratio": 3.74,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".copyright > li:nth-child(1)",
+      "idx": 13,
+      "reason": null,
+      "fg": "#657b83",
+      "bg": "#fdf6e3",
+      "ratio": 4.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"credits/\"]",
+      "idx": 14,
+      "reason": null,
+      "fg": "#657b83",
+      "bg": "#fdf6e3",
+      "ratio": 4.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".menuToggle > span",
+      "idx": 0,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".inner > h1",
+      "idx": 1,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".inner > p",
+      "idx": 2,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".more",
+      "idx": 3,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"about/\"] > .content > h2",
+      "idx": 4,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"about/\"] > .content > p",
+      "idx": 5,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"projects/\"] > .content > h2",
+      "idx": 6,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"projects/\"] > .content > p",
+      "idx": 7,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"blog/\"] > .content > h2",
+      "idx": 8,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"blog/\"] > .content > p",
+      "idx": 9,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "header > h2",
+      "idx": 10,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "header > p",
+      "idx": 11,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "ul>li.special>a.menuToggle>span|Menu|0",
+      "path": "ul>li.special>a.menuToggle>span",
+      "text": "Menu",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1354,
+        15,
+        45,
+        16
+      ],
+      "fg": "#eee8d5",
+      "bg": "#5e6352",
+      "ratio": 5.09,
+      "bestRatio": 7.49,
+      "worstRatio": 5.09,
+      "clusters": 4,
+      "status": "pass"
+    },
+    {
+      "key": "div>section>div.inner>h1|ಸೊಗಸು|0",
+      "path": "div>section>div.inner>h1",
+      "text": "ಸೊಗಸು",
+      "color": "rgb(238, 232, 213)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        641,
+        389,
+        159,
+        44
+      ],
+      "fg": "#eee8d5",
+      "bg": "#5c5e32",
+      "ratio": 5.53,
+      "bestRatio": 9.56,
+      "worstRatio": 5.53,
+      "clusters": 4,
+      "status": "pass"
+    },
+    {
+      "key": "div>section>div.inner>p|Ragu's personal portfolio|0",
+      "path": "div>section>div.inner>p",
+      "text": "Ragu's personal portfolio",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        458,
+        1440,
+        24
+      ],
+      "fg": "#eee8d5",
+      "bg": "#424924",
+      "ratio": 7.74,
+      "bestRatio": 12.17,
+      "worstRatio": 7.74,
+      "clusters": 4,
+      "status": "pass"
+    },
+    {
+      "key": "body.landing>div>section>a.more|Continue|0",
+      "path": "body.landing>div>section>a.more",
+      "text": "Continue",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        620,
+        780,
+        188,
+        100
+      ],
+      "fg": "#eee8d5",
+      "bg": "#535628",
+      "ratio": 6.3,
+      "bestRatio": 11.86,
+      "worstRatio": 6.3,
+      "clusters": 5,
+      "status": "pass"
+    },
+    {
+      "key": "div.content-wrap>a>div.content>h2|About|0",
+      "path": "div.content-wrap>a>div.content>h2",
+      "text": "About",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        88,
+        1062,
+        711,
+        32
+      ],
+      "fg": "#eee8d5",
+      "bg": "#9ba9a3",
+      "ratio": 1.99,
+      "bestRatio": 1.99,
+      "worstRatio": 1.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.content-wrap>a>div.content>p|A bit about me!|0",
+      "path": "div.content-wrap>a>div.content>p",
+      "text": "A bit about me!",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        88,
+        1112,
+        711,
+        24
+      ],
+      "fg": "#eee8d5",
+      "bg": "#95a59f",
+      "ratio": 2.11,
+      "bestRatio": 2.11,
+      "worstRatio": 2.11,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.content-wrap>a>div.content>h2|Projects|0",
+      "path": "div.content-wrap>a>div.content>h2",
+      "text": "Projects",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        641,
+        1432,
+        711,
+        32
+      ],
+      "fg": "#eee8d5",
+      "bg": "#9daba4",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.content-wrap>a>div.content>p|Things I enjoyed creating|0",
+      "path": "div.content-wrap>a>div.content>p",
+      "text": "Things I enjoyed creating",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        641,
+        1483,
+        711,
+        24
+      ],
+      "fg": "#eee8d5",
+      "bg": "#97a7a0",
+      "ratio": 2.06,
+      "bestRatio": 2.06,
+      "worstRatio": 2.06,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.content-wrap>a>div.content>h2|Blog|0",
+      "path": "div.content-wrap>a>div.content>h2",
+      "text": "Blog",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        88,
+        1790,
+        711,
+        32
+      ],
+      "fg": "#eee8d5",
+      "bg": "#9caaa3",
+      "ratio": 1.97,
+      "bestRatio": 1.97,
+      "worstRatio": 1.97,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.content-wrap>a>div.content>p|Exploring development workflows, travel |0",
+      "path": "div.content-wrap>a>div.content>p",
+      "text": "Exploring development workflows, travel ",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        88,
+        1841,
+        711,
+        48
+      ],
+      "fg": "#eee8d5",
+      "bg": "#b5bdb4",
+      "ratio": 1.57,
+      "bestRatio": 1.96,
+      "worstRatio": 1.57,
+      "clusters": 2,
+      "status": "fail"
+    },
+    {
+      "key": "section.wrapper>div.inner>header>h2|Let's Connect|0",
+      "path": "section.wrapper>div.inner>header>h2",
+      "text": "Let's Connect",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        2070,
+        418,
+        32
+      ],
+      "status": "invisible",
+      "ratio": 1.11,
+      "bg": "#faf3e0"
+    },
+    {
+      "key": "section.wrapper>div.inner>header>p|I appreciate you taking the time to expl|0",
+      "path": "section.wrapper>div.inner>header>p",
+      "text": "I appreciate you taking the time to expl",
+      "color": "rgb(238, 232, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        2116,
+        418,
+        97
+      ],
+      "status": "invisible",
+      "ratio": 1.11,
+      "bg": "#fbf4e1"
+    },
+    {
+      "key": "div.inner>ul.actions>li>a.button|Contact|0",
+      "path": "div.inner>ul.actions>li>a.button",
+      "text": "Contact",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        852,
+        2070,
+        198,
+        37
+      ],
+      "fg": "#ffffff",
+      "bg": "#ed4933",
+      "ratio": 3.75,
+      "bestRatio": 3.75,
+      "worstRatio": 3.75,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>footer>ul.copyright>li|© 2019, 2026 Raghavendra Manjegowda|0",
+      "path": "div>footer>ul.copyright>li",
+      "text": "© 2019, 2026 Raghavendra Manjegowda",
+      "color": "rgb(101, 123, 131)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        504,
+        2440,
+        337,
+        12
+      ],
+      "fg": "#657b83",
+      "bg": "#fdf6e3",
+      "ratio": 4.13,
+      "bestRatio": 4.13,
+      "worstRatio": 4.13,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer>ul.copyright>li>a|Credits|0",
+      "path": "footer>ul.copyright>li>a",
+      "text": "Credits",
+      "color": "rgb(101, 123, 131)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        871,
+        2437,
+        64,
+        17
+      ],
+      "fg": "#657b83",
+      "bg": "#fdf6e3",
+      "ratio": 4.13,
+      "bestRatio": 4.13,
+      "worstRatio": 4.13,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div>ul>li>a|About|0",
+      "path": "div>ul>li>a",
+      "text": "About",
+      "color": "rgb(7, 54, 66)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1469,
+        44,
+        235,
+        24
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "div>ul>li>a|Projects|0",
+      "path": "div>ul>li>a",
+      "text": "Projects",
+      "color": "rgb(7, 54, 66)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1469,
+        84,
+        235,
+        24
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "div>ul>li>a|Blog|0",
+      "path": "div>ul>li>a",
+      "text": "Blog",
+      "color": "rgb(7, 54, 66)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1469,
+        124,
+        235,
+        24
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "div>ul>li>a|Contact|0",
+      "path": "div>ul>li>a",
+      "text": "Contact",
+      "color": "rgb(7, 54, 66)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1469,
+        164,
+        235,
+        24
+      ],
+      "status": "offscreen"
+    }
+  ]
+}

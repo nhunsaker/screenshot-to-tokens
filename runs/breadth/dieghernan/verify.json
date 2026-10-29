@@ -1,0 +1,159 @@
+{
+  "diffPixels": 0,
+  "noisePixels": 0,
+  "totalPixels": 4521600,
+  "ratio": 0,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": true,
+  "reviewNeeded": false,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 4521600,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 4521600,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 195,
+    "failingBefore": 5,
+    "failingAfter": {
+      "colors": 5,
+      "all": 5
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "invisible": 1
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|RSS|0",
+        "text": "RSS",
+        "path": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only",
+        "fg": "#0d1117",
+        "bg": "#0d1117",
+        "ratio": 1,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          625,
+          2967,
+          1,
+          1
+        ],
+        "tokens": []
+      },
+      {
+        "key": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|Stack Overflow|0",
+        "text": "Stack Overflow",
+        "path": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only",
+        "fg": "#0d1117",
+        "bg": "#0d1117",
+        "ratio": 1,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          688,
+          2967,
+          1,
+          1
+        ],
+        "tokens": []
+      },
+      {
+        "key": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|WikiCommons|0",
+        "text": "WikiCommons",
+        "path": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only",
+        "fg": "#0d1117",
+        "bg": "#0d1117",
+        "ratio": 1,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          750,
+          2967,
+          1,
+          1
+        ],
+        "tokens": []
+      },
+      {
+        "key": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|GitHub|0",
+        "text": "GitHub",
+        "path": "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only",
+        "fg": "#0d1117",
+        "bg": "#0d1117",
+        "ratio": 1,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          813,
+          2967,
+          1,
+          1
+        ],
+        "tokens": []
+      },
+      {
+        "key": "html>body.d-flex>a.sr-only|Skip to content|0",
+        "text": "Skip to content",
+        "path": "html>body.d-flex>a.sr-only",
+        "fg": "#24292f",
+        "bg": "#020605",
+        "ratio": 1.39,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "bestRatio": 10.05,
+        "tokens": [
+          "color.action.primary",
+          "color.text.default",
+          "button.bg"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "html>body.d-flex>a.sr-only|Skip to content|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|RSS|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|Stack Overflow|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|WikiCommons|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|GitHub|0"
+      ],
+      "all": [
+        "html>body.d-flex>a.sr-only|Skip to content|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|RSS|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|Stack Overflow|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|WikiCommons|0",
+        "div.col-xl-10>nav.d-flex>a.chulapa-footer-sociallink>span.sr-only|GitHub|0"
+      ]
+    }
+  }
+}

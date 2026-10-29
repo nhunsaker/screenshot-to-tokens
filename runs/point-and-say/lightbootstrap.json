@@ -1,0 +1,223 @@
+{
+  "url": "http://127.0.0.1:4482/",
+  "rows": [
+    {
+      "step": "e",
+      "app": "lightbootstrap",
+      "name": "contrast-number",
+      "rep": 1,
+      "target": {
+        "x": 460,
+        "y": 133
+      },
+      "transcript": "This label is too light. Make it readable, keep our gray.",
+      "route": "contrast",
+      "result": {
+        "kind": "applied",
+        "changes": [
+          {
+            "token": "color.text.muted",
+            "from": "#9a9a9a",
+            "css": "#767676"
+          }
+        ],
+        "affected": 12,
+        "before": 2.81,
+        "after": 4.54,
+        "pageFailBefore": 70,
+        "pageFailAfter": 58,
+        "checked": 84,
+        "regressions": 0
+      },
+      "error": null,
+      "summary": "12 elements, 2.81:1 → 4.54:1, text contrast (color.text.muted, hue kept).",
+      "point": {
+        "element": "Number",
+        "token": "color.text.muted",
+        "pairs": 12,
+        "twins": 0,
+        "outline": "dom",
+        "ms": 1447
+      },
+      "clicked": {
+        "text": "Number",
+        "color": "rgb(118, 118, 118)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--color-text-muted": "#767676"
+        },
+        "focusRule": false,
+        "iframePath": "/admin/dashboard"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 1579,
+        "point": 1457,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 19,
+        "model": null,
+        "focusCheck": null
+      }
+    },
+    {
+      "step": "f",
+      "app": "lightbootstrap",
+      "name": "blocked-brand-blue",
+      "rep": 1,
+      "target": {
+        "x": 1161,
+        "y": 38
+      },
+      "transcript": "Make these buttons our brand blue.",
+      "route": "muse",
+      "result": {
+        "kind": "blocked",
+        "message": "BLOCKED: text contrast would regress on “Dashboard” (3.54:1 → 2.02:1), and 3 more.",
+        "live": 4,
+        "server": true,
+        "reverted": true
+      },
+      "error": null,
+      "summary": "color.gray.400 → color.teal.300. 4 link spans including Account (color) Blocked: text contrast: \"Dashboard\" 3.54 → 2.02 (needs 4.5) and 4 more.",
+      "point": {
+        "element": "Account",
+        "token": "color.gray.400",
+        "pairs": 5,
+        "twins": 4,
+        "outline": "dom",
+        "ms": 902
+      },
+      "clicked": {
+        "text": "Account",
+        "color": "rgb(29, 199, 234)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {},
+        "focusRule": false,
+        "iframePath": "/admin/dashboard"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 5002,
+        "point": 944,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 3981,
+        "model": 3964,
+        "focusCheck": null
+      }
+    },
+    {
+      "step": "g",
+      "app": "lightbootstrap",
+      "name": "focus-nearest-hue",
+      "rep": 1,
+      "target": {
+        "x": 460,
+        "y": 133
+      },
+      "transcript": "Give every control a visible focus ring in our blue.",
+      "route": "focus",
+      "result": {
+        "kind": "focus",
+        "before": {
+          "stops": 35,
+          "measured": 35,
+          "pass": 12,
+          "faint": 11,
+          "none": 12,
+          "noChange": 6,
+          "skipped": 0
+        },
+        "after": {
+          "stops": 35,
+          "measured": 35,
+          "pass": 23,
+          "faint": 12,
+          "none": 0,
+          "noChange": 0,
+          "skipped": 0
+        },
+        "worse": 0,
+        "checkMs": 11864,
+        "nearest": "nearest blue in your tokens is teal (color.teal.300)"
+      },
+      "error": null,
+      "summary": "Two-tone ring in color.teal.300 (#1dc7ea) with a color.black band: color.teal.300 alone is under 3:1 next to 25 of 35 controls, so the band carries it there (35 of 35 covered). No token is blue exactly; color.teal.300 is the nearest hue.",
+      "point": {
+        "element": "Number",
+        "token": "color.text.muted",
+        "pairs": 12,
+        "twins": 0,
+        "outline": "dom",
+        "ms": 1
+      },
+      "clicked": {
+        "text": "Number",
+        "color": "rgb(154, 154, 154)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--focus-ring-color": "var(--color-teal-300, #1dc7ea)",
+          "--focus-ring-inner-color": "var(--color-black, #000000)",
+          "--focus-ring-width": "3px",
+          "--focus-ring-offset": "2px"
+        },
+        "focusRule": true,
+        "iframePath": "/admin/dashboard"
+      },
+      "tab": [
+        {
+          "tag": "button",
+          "text": "",
+          "outline": "solid 3px rgb(29, 199, 234)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "button",
+          "text": "",
+          "outline": "solid 3px rgb(52, 183, 213)",
+          "shadow": "rgba(0, 0, 0, 0.894) 0px 0px 0px 1.78467px, rgba(0, 0, 0, 0.",
+          "focusVisible": true
+        },
+        {
+          "tag": "button",
+          "text": "",
+          "outline": "solid 3px rgb(31, 199, 234)",
+          "shadow": "rgba(0, 0, 0, 0.953) 0px 0px 0px 1.90667px, rgba(0, 0, 0, 0.",
+          "focusVisible": true
+        },
+        {
+          "tag": "button",
+          "text": "",
+          "outline": "solid 3px rgb(58, 178, 207)",
+          "shadow": "rgba(0, 0, 0, 0.863) 0px 0px 0px 1.72622px, rgba(0, 0, 0, 0.",
+          "focusVisible": true
+        }
+      ],
+      "ms": {
+        "wall": 12007,
+        "point": 55,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 1,
+        "model": null,
+        "focusCheck": 11864
+      }
+    }
+  ],
+  "afterReset": {
+    "overlay": 0,
+    "card": "",
+    "rule": false,
+    "vars": [],
+    "phase": "reset"
+  },
+  "consoleErrors": []
+}

@@ -1,0 +1,987 @@
+{
+  "site": "CWWhitney",
+  "ms": 1490,
+  "ourPairs": 30,
+  "ourFailing": 0,
+  "axe": {
+    "violations": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 30,
+      "matched": 30,
+      "weFail": 0,
+      "wePass": 30,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": []
+  },
+  "axeNodes": [
+    {
+      "kind": "passes",
+      "target": "a[href$=\"cwwhitney.github.io/\"]",
+      "idx": 0,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(3)",
+      "idx": 1,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(3) > a[href$=\"cory-whitney.com/\"]",
+      "idx": 2,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "th",
+      "idx": 3,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "tr:nth-child(1) > td > a > strong",
+      "idx": 4,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "tr:nth-child(2) > td > a > strong",
+      "idx": 5,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "tr:nth-child(3) > td > a > strong",
+      "idx": 6,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "tr:nth-child(4) > td > a > strong",
+      "idx": 7,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "tr:nth-child(5) > td > a > strong",
+      "idx": 8,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "tr:nth-child(6) > td > a > strong",
+      "idx": 9,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "tr:nth-child(7) > td > a > strong",
+      "idx": 10,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "td > a[href$=\"cory-whitney.com/\"]",
+      "idx": 11,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(5)",
+      "idx": 12,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(5) > code:nth-child(1)",
+      "idx": 13,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(5) > code:nth-child(2)",
+      "idx": 14,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(5) > code:nth-child(3)",
+      "idx": 15,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "code:nth-child(4)",
+      "idx": 16,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(1) > p",
+      "idx": 17,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(1) > p > code:nth-child(1)",
+      "idx": 18,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(1) > p > code:nth-child(2)",
+      "idx": 19,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(2) > p",
+      "idx": 20,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(2) > p > code:nth-child(1)",
+      "idx": 21,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(2) > p > code:nth-child(2)",
+      "idx": 22,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(2) > p > code:nth-child(3)",
+      "idx": 23,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(3) > p",
+      "idx": 24,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(3) > p > code",
+      "idx": 25,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#f4f4f4",
+      "ratio": 13.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(4) > p",
+      "idx": 26,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#build-with-netlify",
+      "idx": 27,
+      "reason": null,
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.66,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer",
+      "idx": 29,
+      "reason": null,
+      "fg": "#586069",
+      "bg": "#ffffff",
+      "ratio": 6.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer > a",
+      "idx": 30,
+      "reason": null,
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "body>div.container-lg>h1>a|Cory Whitney|0",
+      "path": "body>div.container-lg>h1>a",
+      "text": "Cory Whitney",
+      "color": "rgb(3, 102, 214)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        230,
+        33,
+        198,
+        38
+      ],
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.42,
+      "bestRatio": 5.42,
+      "worstRatio": 5.42,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "html>body>div.container-lg>p|You have landed on my github.io page. Pl|0",
+      "path": "html>body>div.container-lg>p",
+      "text": "You have landed on my github.io page. Pl",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        230,
+        99,
+        980,
+        24
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.container-lg>p>a|my website|0",
+      "path": "body>div.container-lg>p>a",
+      "text": "my website",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        599,
+        102,
+        82,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.42,
+      "bestRatio": 5.42,
+      "worstRatio": 5.42,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "table>thead>tr>th|Quick Links|0",
+      "path": "table>thead>tr>th",
+      "text": "Quick Links",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        231,
+        344,
+        329,
+        37
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tr>td>a>strong|ORCID: 0000-0003-4988-4583|0",
+      "path": "tr>td>a>strong",
+      "text": "ORCID: 0000-0003-4988-4583",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        391,
+        247,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.42,
+      "bestRatio": 5.42,
+      "worstRatio": 5.42,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tr>td>a>strong|Scholar|0",
+      "path": "tr>td>a>strong",
+      "text": "Scholar",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        428,
+        58,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "bestRatio": 5.09,
+      "worstRatio": 5.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tr>td>a>strong|ResearchGate|0",
+      "path": "tr>td>a>strong",
+      "text": "ResearchGate",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        465,
+        106,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.42,
+      "bestRatio": 5.42,
+      "worstRatio": 5.42,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tr>td>a>strong|Academia.edu|0",
+      "path": "tr>td>a>strong",
+      "text": "Academia.edu",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        502,
+        108,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "bestRatio": 5.09,
+      "worstRatio": 5.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tr>td>a>strong|LinkedIn|0",
+      "path": "tr>td>a>strong",
+      "text": "LinkedIn",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        539,
+        64,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.42,
+      "bestRatio": 5.42,
+      "worstRatio": 5.42,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tr>td>a>strong|Center for Development Research (ZEF)|0",
+      "path": "tr>td>a>strong",
+      "text": "Center for Development Research (ZEF)",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        576,
+        302,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "bestRatio": 5.09,
+      "worstRatio": 5.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tr>td>a>strong|University of Bonn|0",
+      "path": "tr>td>a>strong",
+      "text": "University of Bonn",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        613,
+        139,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.42,
+      "bestRatio": 5.42,
+      "worstRatio": 5.42,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "tbody>tr>td>a|Cory Whitney website|0",
+      "path": "tbody>tr>td>a",
+      "text": "Cory Whitney website",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        244,
+        650,
+        158,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#f6f8fa",
+      "ratio": 5.09,
+      "bestRatio": 5.09,
+      "worstRatio": 5.09,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "html>body>div.container-lg>p|Run the site with these from , and libra|0",
+      "path": "html>body>div.container-lg>p",
+      "text": "Run the site with these from , and libra",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        230,
+        694,
+        980,
+        24
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.container-lg>p>code.language-plaintext|blogdown|0",
+      "path": "body>div.container-lg>p>code.language-plaintext",
+      "text": "blogdown",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        437,
+        696,
+        76,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.container-lg>p>code.language-plaintext|RefManageR|0",
+      "path": "body>div.container-lg>p>code.language-plaintext",
+      "text": "RefManageR",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        522,
+        696,
+        93,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.container-lg>p>code.language-plaintext|anytime|0",
+      "path": "body>div.container-lg>p>code.language-plaintext",
+      "text": "anytime",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        650,
+        696,
+        68,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.container-lg>p>code.language-plaintext|bibtex_2academic.R|0",
+      "path": "body>div.container-lg>p>code.language-plaintext",
+      "text": "bibtex_2academic.R",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        819,
+        696,
+        158,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container-lg>ul>li>p|publications: export the publications co|0",
+      "path": "div.container-lg>ul>li>p",
+      "text": "publications: export the publications co",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        262,
+        734,
+        948,
+        48
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul>li>p>code.language-plaintext|content/publication/papers.bib|0",
+      "path": "ul>li>p>code.language-plaintext",
+      "text": "content/publication/papers.bib",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        869,
+        736,
+        257,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul>li>p>code.language-plaintext|source(\"content/publication/bibtex_2acad|0",
+      "path": "ul>li>p>code.language-plaintext",
+      "text": "source(\"content/publication/bibtex_2acad",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        262,
+        760,
+        404,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container-lg>ul>li>p|activities (talks and conferences): expo|0",
+      "path": "div.container-lg>ul>li>p",
+      "text": "activities (talks and conferences): expo",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        262,
+        798,
+        948,
+        96
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul>li>p>code.language-plaintext|content/event/conferences.bib|0",
+      "path": "ul>li>p>code.language-plaintext",
+      "text": "content/event/conferences.bib",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        262,
+        824,
+        248,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul>li>p>code.language-plaintext|content/event/lectures.bib|0",
+      "path": "ul>li>p>code.language-plaintext",
+      "text": "content/event/lectures.bib",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        615,
+        824,
+        224,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul>li>p>code.language-plaintext|source(\"content/event/bibtex_2event.R\")|0",
+      "path": "ul>li>p>code.language-plaintext",
+      "text": "source(\"content/event/bibtex_2event.R\")",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        262,
+        848,
+        330,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container-lg>ul>li>p|preview the site locally:|0",
+      "path": "div.container-lg>ul>li>p",
+      "text": "preview the site locally:",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        262,
+        910,
+        948,
+        24
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul>li>p>code.language-plaintext|blogdown::serve_site()|0",
+      "path": "ul>li>p>code.language-plaintext",
+      "text": "blogdown::serve_site()",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        435,
+        912,
+        191,
+        21
+      ],
+      "fg": "#24292e",
+      "bg": "#f3f4f4",
+      "ratio": 13.31,
+      "bestRatio": 13.31,
+      "worstRatio": 13.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container-lg>ul>li>p|publish: commit and push. Netlify builds|0",
+      "path": "div.container-lg>ul>li>p",
+      "text": "publish: commit and push. Netlify builds",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        262,
+        950,
+        948,
+        24
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "html>body>div.container-lg>h1|build with Netlify|0",
+      "path": "html>body>div.container-lg>h1",
+      "text": "build with Netlify",
+      "color": "rgb(36, 41, 46)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        230,
+        998,
+        980,
+        51
+      ],
+      "fg": "#24292e",
+      "bg": "#ffffff",
+      "ratio": 14.67,
+      "bestRatio": 14.67,
+      "worstRatio": 14.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "html>body>div.container-lg>p|[|0",
+      "path": "html>body>div.container-lg>p",
+      "text": "[",
+      "color": "rgb(36, 41, 46)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        230,
+        1064,
+        980,
+        26
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "html>body>div.container-lg>div.footer|This site is open source. .|0",
+      "path": "html>body>div.container-lg>div.footer",
+      "text": "This site is open source. .",
+      "color": "rgb(88, 96, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        230,
+        1122,
+        980,
+        41
+      ],
+      "fg": "#586069",
+      "bg": "#ffffff",
+      "ratio": 6.38,
+      "bestRatio": 6.38,
+      "worstRatio": 6.38,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.container-lg>div.footer>a|Improve this page|0",
+      "path": "body>div.container-lg>div.footer>a",
+      "text": "Improve this page",
+      "color": "rgb(3, 102, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1076,
+        1142,
+        129,
+        18
+      ],
+      "fg": "#0366d6",
+      "bg": "#ffffff",
+      "ratio": 5.42,
+      "bestRatio": 5.42,
+      "worstRatio": 5.42,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

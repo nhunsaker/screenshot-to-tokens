@@ -1,0 +1,82 @@
+[
+ {
+  "tag": "a",
+  "text": "Default link",
+  "page": [
+   48,
+   64,
+   81,
+   18
+  ],
+  "fv": true,
+  "changed": 418,
+  "strong": 404,
+  "perimeter2px": 397,
+  "visible": true,
+  "passes": true
+ },
+ {
+  "tag": "button",
+  "text": "Default button",
+  "page": [
+   48,
+   98,
+   99,
+   21
+  ],
+  "fv": true,
+  "changed": 468,
+  "strong": 224,
+  "perimeter2px": 480,
+  "visible": true,
+  "passes": false
+ },
+ {
+  "tag": "input",
+  "text": "",
+  "page": [
+   48,
+   135,
+   153,
+   21
+  ],
+  "fv": true,
+  "changed": 684,
+  "strong": 336,
+  "perimeter2px": 696,
+  "visible": true,
+  "passes": false
+ },
+ {
+  "tag": "button",
+  "text": "Outline removed",
+  "page": [
+   48,
+   172,
+   114,
+   21
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 539,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "button",
+  "text": "Custom ring",
+  "page": [
+   48,
+   209,
+   88,
+   21
+  ],
+  "fv": true,
+  "changed": 738,
+  "strong": 738,
+  "perimeter2px": 435,
+  "visible": true,
+  "passes": true
+ }
+]

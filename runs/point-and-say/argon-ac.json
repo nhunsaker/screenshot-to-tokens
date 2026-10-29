@@ -1,0 +1,499 @@
+{
+  "url": "http://127.0.0.1:4481/",
+  "rows": [
+    {
+      "step": "a",
+      "app": "argon",
+      "name": "contrast-typed",
+      "rep": 1,
+      "target": {
+        "x": 430,
+        "y": 222
+      },
+      "transcript": "This label is too light. Make it readable, keep our gray.",
+      "route": "contrast",
+      "result": {
+        "kind": "applied",
+        "changes": [
+          {
+            "token": "color.text.muted",
+            "from": "#8898aa",
+            "css": "#687889"
+          }
+        ],
+        "affected": 21,
+        "before": 2.95,
+        "after": 4.53,
+        "pageFailBefore": 41,
+        "pageFailAfter": 20,
+        "checked": 87,
+        "regressions": 0
+      },
+      "error": null,
+      "summary": "21 elements, 2.95:1 → 4.53:1, text contrast (color.text.muted, hue kept).",
+      "point": {
+        "element": "Since last month",
+        "token": "color.text.muted",
+        "pairs": 21,
+        "twins": 0,
+        "outline": "dom",
+        "ms": 1158
+      },
+      "clicked": {
+        "text": "Since last month",
+        "color": "rgb(104, 120, 137)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--color-text-muted": "#687889"
+        },
+        "focusRule": false,
+        "iframePath": "/admin/index"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 1304,
+        "point": 1189,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 19,
+        "model": null,
+        "focusCheck": null
+      }
+    },
+    {
+      "step": "a",
+      "app": "argon",
+      "name": "contrast-typed",
+      "rep": 2,
+      "target": {
+        "x": 431,
+        "y": 222
+      },
+      "transcript": "This label is too light. Make it readable, keep our gray.",
+      "route": "contrast",
+      "result": {
+        "kind": "applied",
+        "changes": [
+          {
+            "token": "color.text.muted",
+            "from": "#8898aa",
+            "css": "#687889"
+          }
+        ],
+        "affected": 21,
+        "before": 2.95,
+        "after": 4.53,
+        "pageFailBefore": 41,
+        "pageFailAfter": 20,
+        "checked": 87,
+        "regressions": 0
+      },
+      "error": null,
+      "summary": "21 elements, 2.95:1 → 4.53:1, text contrast (color.text.muted, hue kept).",
+      "point": {
+        "element": "Since last month",
+        "token": "color.text.muted",
+        "pairs": 21,
+        "twins": 0,
+        "outline": "dom",
+        "ms": 957
+      },
+      "clicked": {
+        "text": "Since last month",
+        "color": "rgb(104, 120, 137)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--color-text-muted": "#687889"
+        },
+        "focusRule": false,
+        "iframePath": "/admin/index"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 1039,
+        "point": 981,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 15,
+        "model": null,
+        "focusCheck": null
+      }
+    },
+    {
+      "step": "a",
+      "app": "argon",
+      "name": "contrast-typed",
+      "rep": 3,
+      "target": {
+        "x": 432,
+        "y": 222
+      },
+      "transcript": "This label is too light. Make it readable, keep our gray.",
+      "route": "contrast",
+      "result": {
+        "kind": "applied",
+        "changes": [
+          {
+            "token": "color.text.muted",
+            "from": "#8898aa",
+            "css": "#687889"
+          }
+        ],
+        "affected": 21,
+        "before": 2.95,
+        "after": 4.53,
+        "pageFailBefore": 41,
+        "pageFailAfter": 20,
+        "checked": 87,
+        "regressions": 0
+      },
+      "error": null,
+      "summary": "21 elements, 2.95:1 → 4.53:1, text contrast (color.text.muted, hue kept).",
+      "point": {
+        "element": "Since last month",
+        "token": "color.text.muted",
+        "pairs": 21,
+        "twins": 0,
+        "outline": "dom",
+        "ms": 1049
+      },
+      "clicked": {
+        "text": "Since last month",
+        "color": "rgb(104, 120, 137)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--color-text-muted": "#687889"
+        },
+        "focusRule": false,
+        "iframePath": "/admin/index"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 1142,
+        "point": 1085,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 14,
+        "model": null,
+        "focusCheck": null
+      }
+    },
+    {
+      "step": "c",
+      "app": "argon",
+      "name": "focus-typed",
+      "rep": 1,
+      "target": {
+        "x": 85,
+        "y": 171,
+        "text": "Icons"
+      },
+      "transcript": "Give every control a visible focus ring in our blue.",
+      "route": "focus",
+      "result": {
+        "kind": "focus",
+        "before": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 0,
+          "faint": 2,
+          "none": 23,
+          "noChange": 14,
+          "skipped": 0
+        },
+        "after": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 25,
+          "faint": 0,
+          "none": 0,
+          "noChange": 0,
+          "skipped": 0
+        },
+        "worse": 0,
+        "checkMs": 9009,
+        "nearest": null
+      },
+      "error": null,
+      "summary": "Two-tone ring in color.action.primary (#5e72e4) with a #000000 band: color.action.primary alone is under 3:1 next to 3 of 25 controls, so the band carries it there (25 of 25 covered).",
+      "point": {
+        "element": "Icons",
+        "token": "link.text",
+        "pairs": 9,
+        "twins": 1,
+        "outline": "dom",
+        "ms": 1235
+      },
+      "clicked": {
+        "text": "Icons",
+        "color": "rgba(0, 0, 0, 0.7)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--focus-ring-color": "var(--color-action-primary, #5e72e4)",
+          "--focus-ring-inner-color": "#000000",
+          "--focus-ring-width": "3px",
+          "--focus-ring-offset": "2px"
+        },
+        "focusRule": true,
+        "iframePath": "/admin/index"
+      },
+      "tab": [
+        {
+          "tag": "a",
+          "text": "Maps",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "User Profile",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Tables",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Login",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        }
+      ],
+      "ms": {
+        "wall": 10340,
+        "point": 1243,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 1,
+        "model": null,
+        "focusCheck": 9009
+      }
+    },
+    {
+      "step": "c",
+      "app": "argon",
+      "name": "focus-typed",
+      "rep": 2,
+      "target": {
+        "x": 86,
+        "y": 171,
+        "text": "Icons"
+      },
+      "transcript": "Give every control a visible focus ring in our blue.",
+      "route": "focus",
+      "result": {
+        "kind": "focus",
+        "before": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 0,
+          "faint": 2,
+          "none": 23,
+          "noChange": 14,
+          "skipped": 0
+        },
+        "after": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 25,
+          "faint": 0,
+          "none": 0,
+          "noChange": 0,
+          "skipped": 0
+        },
+        "worse": 0,
+        "checkMs": 8933,
+        "nearest": null
+      },
+      "error": null,
+      "summary": "Two-tone ring in color.action.primary (#5e72e4) with a #000000 band: color.action.primary alone is under 3:1 next to 3 of 25 controls, so the band carries it there (25 of 25 covered).",
+      "point": {
+        "element": "Icons",
+        "token": "link.text",
+        "pairs": 9,
+        "twins": 1,
+        "outline": "dom",
+        "ms": 1
+      },
+      "clicked": {
+        "text": "Icons",
+        "color": "rgba(0, 0, 0, 0.7)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--focus-ring-color": "var(--color-action-primary, #5e72e4)",
+          "--focus-ring-inner-color": "#000000",
+          "--focus-ring-width": "3px",
+          "--focus-ring-offset": "2px"
+        },
+        "focusRule": true,
+        "iframePath": "/admin/index"
+      },
+      "tab": [
+        {
+          "tag": "a",
+          "text": "Maps",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "User Profile",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Tables",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Login",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        }
+      ],
+      "ms": {
+        "wall": 9011,
+        "point": 55,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 0,
+        "model": null,
+        "focusCheck": 8933
+      }
+    },
+    {
+      "step": "c",
+      "app": "argon",
+      "name": "focus-typed",
+      "rep": 3,
+      "target": {
+        "x": 87,
+        "y": 171,
+        "text": "Icons"
+      },
+      "transcript": "Give every control a visible focus ring in our blue.",
+      "route": "focus",
+      "result": {
+        "kind": "focus",
+        "before": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 0,
+          "faint": 2,
+          "none": 23,
+          "noChange": 14,
+          "skipped": 0
+        },
+        "after": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 25,
+          "faint": 0,
+          "none": 0,
+          "noChange": 0,
+          "skipped": 0
+        },
+        "worse": 0,
+        "checkMs": 8894,
+        "nearest": null
+      },
+      "error": null,
+      "summary": "Two-tone ring in color.action.primary (#5e72e4) with a #000000 band: color.action.primary alone is under 3:1 next to 3 of 25 controls, so the band carries it there (25 of 25 covered).",
+      "point": {
+        "element": "Icons",
+        "token": "link.text",
+        "pairs": 9,
+        "twins": 1,
+        "outline": "dom",
+        "ms": 1086
+      },
+      "clicked": {
+        "text": "Icons",
+        "color": "rgba(0, 0, 0, 0.7)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--focus-ring-color": "var(--color-action-primary, #5e72e4)",
+          "--focus-ring-inner-color": "#000000",
+          "--focus-ring-width": "3px",
+          "--focus-ring-offset": "2px"
+        },
+        "focusRule": true,
+        "iframePath": "/admin/index"
+      },
+      "tab": [
+        {
+          "tag": "a",
+          "text": "Maps",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "User Profile",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Tables",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Login",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        }
+      ],
+      "ms": {
+        "wall": 10083,
+        "point": 1138,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 2,
+        "model": null,
+        "focusCheck": 8894
+      }
+    }
+  ],
+  "afterReset": {
+    "overlay": 0,
+    "card": "",
+    "rule": false,
+    "vars": [],
+    "phase": "reset"
+  },
+  "consoleErrors": []
+}

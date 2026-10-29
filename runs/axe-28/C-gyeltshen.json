@@ -1,0 +1,73 @@
+{
+  "site": "C-gyeltshen",
+  "ms": 978,
+  "ourPairs": 1,
+  "ourFailing": 0,
+  "axe": {
+    "violations": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 1,
+      "matched": 1,
+      "weFail": 0,
+      "wePass": 1,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": []
+  },
+  "axeNodes": [
+    {
+      "kind": "passes",
+      "target": "body",
+      "idx": 0,
+      "reason": null,
+      "fg": "#000000",
+      "bg": "#ffffff",
+      "ratio": 21,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "html>body|--- layout: home # Index page ---|0",
+      "path": "html>body",
+      "text": "--- layout: home # Index page ---",
+      "color": "rgb(0, 0, 0)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        8,
+        8,
+        1424,
+        884
+      ],
+      "fg": "#000000",
+      "bg": "#ffffff",
+      "ratio": 21,
+      "bestRatio": 21,
+      "worstRatio": 21,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

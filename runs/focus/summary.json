@@ -1,0 +1,370 @@
+[
+ {
+  "site": "Andra-sun",
+  "stops": 43,
+  "pass": 15,
+  "weak": 26,
+  "none": 1,
+  "samControls": 41,
+  "samClickable": 30,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "Awfp1314",
+  "stops": 6,
+  "pass": 0,
+  "weak": 2,
+  "none": 4,
+  "samControls": 3,
+  "samClickable": 3,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "C-gyeltshen",
+  "stops": 0,
+  "pass": 0,
+  "weak": 0,
+  "none": 0,
+  "samControls": 0,
+  "samClickable": 0,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "CWWhitney",
+  "stops": 11,
+  "pass": 11,
+  "weak": 0,
+  "none": 0,
+  "samControls": 0,
+  "samClickable": 0,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "Geuni620",
+  "stops": 152,
+  "pass": 6,
+  "weak": 146,
+  "none": 0,
+  "samControls": 2,
+  "samClickable": 1,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "HackSocNotts",
+  "stops": 37,
+  "pass": 37,
+  "weak": 0,
+  "none": 0,
+  "samControls": 0,
+  "samClickable": 0,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "Mavrikant",
+  "stops": 74,
+  "pass": 41,
+  "weak": 22,
+  "none": 9,
+  "samControls": 34,
+  "samClickable": 24,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "Stuocs",
+  "stops": 47,
+  "pass": 17,
+  "weak": 26,
+  "none": 1,
+  "samControls": 31,
+  "samClickable": 30,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "WonYong-Jang",
+  "stops": 14,
+  "pass": 8,
+  "weak": 6,
+  "none": 0,
+  "samControls": 8,
+  "samClickable": 8,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "ZZy979",
+  "stops": 48,
+  "pass": 19,
+  "weak": 25,
+  "none": 1,
+  "samControls": 35,
+  "samClickable": 34,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "acme-shop",
+  "stops": 25,
+  "pass": 14,
+  "weak": 11,
+  "none": 0,
+  "samControls": 15,
+  "samClickable": 12,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "agency",
+  "stops": 36,
+  "pass": 10,
+  "weak": 16,
+  "none": 3,
+  "samControls": 31,
+  "samClickable": 28,
+  "unreachable": 7,
+  "examples": [
+   "button@639,6041,40,40",
+   "button@700,6042,39,39",
+   "button@604,5852,231,70"
+  ]
+ },
+ {
+  "site": "argon",
+  "stops": 25,
+  "pass": 0,
+  "weak": 2,
+  "none": 23,
+  "samControls": 22,
+  "samClickable": 16,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "burning-cost",
+  "stops": 92,
+  "pass": 48,
+  "weak": 16,
+  "none": 19,
+  "samControls": 3,
+  "samClickable": 3,
+  "unreachable": 2,
+  "examples": [
+   "button@0,7134,165,44",
+   "button@656,8369,127,43"
+  ]
+ },
+ {
+  "site": "cgoldberg",
+  "stops": 50,
+  "pass": 21,
+  "weak": 26,
+  "none": 0,
+  "samControls": 44,
+  "samClickable": 43,
+  "unreachable": 2,
+  "examples": [
+   "button@1247,380,58,29",
+   "button@1146,378,95,29"
+  ]
+ },
+ {
+  "site": "cheonjoosung",
+  "stops": 7,
+  "pass": 6,
+  "weak": 1,
+  "none": 0,
+  "samControls": 4,
+  "samClickable": 2,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "devbattery",
+  "stops": 259,
+  "pass": 21,
+  "weak": 224,
+  "none": 14,
+  "samControls": 88,
+  "samClickable": 51,
+  "unreachable": 16,
+  "examples": [
+   "button@286,1507,28,25",
+   "button@286,1151,29,25",
+   "button@287,744,27,26"
+  ]
+ },
+ {
+  "site": "dieghernan",
+  "stops": 127,
+  "pass": 69,
+  "weak": 51,
+  "none": 7,
+  "samControls": 148,
+  "samClickable": 146,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "div-soup",
+  "stops": 0,
+  "pass": 0,
+  "weak": 0,
+  "none": 0,
+  "samControls": 9,
+  "samClickable": 7,
+  "unreachable": 7,
+  "examples": [
+   "button@1302,25,109,32",
+   "button@1217,24,67,34",
+   "button@1338,851,56,26"
+  ]
+ },
+ {
+  "site": "gaotianchi",
+  "stops": 21,
+  "pass": 0,
+  "weak": 15,
+  "none": 6,
+  "samControls": 2,
+  "samClickable": 1,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "infi-defi",
+  "stops": 8,
+  "pass": 0,
+  "weak": 8,
+  "none": 0,
+  "samControls": 1,
+  "samClickable": 0,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "josh-wong",
+  "stops": 22,
+  "pass": 11,
+  "weak": 7,
+  "none": 4,
+  "samControls": 18,
+  "samClickable": 16,
+  "unreachable": 2,
+  "examples": [
+   "icon@1048,19,17,19",
+   "icon@1061,12,21,20"
+  ]
+ },
+ {
+  "site": "lightbootstrap",
+  "stops": 35,
+  "pass": 12,
+  "weak": 11,
+  "none": 12,
+  "samControls": 21,
+  "samClickable": 13,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "linkarzu",
+  "stops": 63,
+  "pass": 34,
+  "weak": 25,
+  "none": 1,
+  "samControls": 86,
+  "samClickable": 69,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "nithinbekal",
+  "stops": 322,
+  "pass": 322,
+  "weak": 0,
+  "none": 0,
+  "samControls": 6,
+  "samClickable": 6,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "proinsias",
+  "stops": 39,
+  "pass": 3,
+  "weak": 35,
+  "none": 1,
+  "samControls": 15,
+  "samClickable": 9,
+  "unreachable": 4,
+  "examples": [
+   "icon@105,532,14,15",
+   "icon@105,569,15,15",
+   "icon@104,605,16,17"
+  ]
+ },
+ {
+  "site": "ragu-manjegowda",
+  "stops": 19,
+  "pass": 4,
+  "weak": 7,
+  "none": 3,
+  "samControls": 21,
+  "samClickable": 4,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "ruzickap",
+  "stops": 49,
+  "pass": 17,
+  "weak": 29,
+  "none": 0,
+  "samControls": 63,
+  "samClickable": 57,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "tw93",
+  "stops": 23,
+  "pass": 17,
+  "weak": 5,
+  "none": 1,
+  "samControls": 4,
+  "samClickable": 4,
+  "unreachable": 1,
+  "examples": [
+   "icon@746,2756,56,55"
+  ]
+ },
+ {
+  "site": "utzcoz",
+  "stops": 28,
+  "pass": 22,
+  "weak": 6,
+  "none": 0,
+  "samControls": 1,
+  "samClickable": 1,
+  "unreachable": 0,
+  "examples": []
+ },
+ {
+  "site": "zeikar",
+  "stops": 73,
+  "pass": 33,
+  "weak": 25,
+  "none": 13,
+  "samControls": 16,
+  "samClickable": 0,
+  "unreachable": 0,
+  "examples": []
+ }
+]

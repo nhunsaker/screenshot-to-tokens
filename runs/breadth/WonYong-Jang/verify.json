@@ -1,0 +1,310 @@
+{
+  "diffPixels": 97942,
+  "noisePixels": 0,
+  "totalPixels": 4698720,
+  "ratio": 0.0208444001770695,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 4632480,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 4632480,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 28,
+    "failingBefore": 11,
+    "failingAfter": {
+      "colors": 11,
+      "all": 11
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {},
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on October 17, 20|0",
+        "text": "Posted by Wonyong Jang on October 17, 20",
+        "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          404,
+          1040,
+          632,
+          47
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|12 mins read|0",
+        "text": "12 mins read",
+        "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          954,
+          1065,
+          82,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 10, 2026 |0",
+        "text": "Posted by Wonyong Jang on July 10, 2026 ",
+        "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          404,
+          1482,
+          632,
+          47
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|18 mins read|0",
+        "text": "18 mins read",
+        "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          954,
+          1507,
+          82,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 06, 2026 |0",
+        "text": "Posted by Wonyong Jang on July 06, 2026 ",
+        "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          404,
+          1898,
+          632,
+          47
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|19 mins read|0",
+        "text": "19 mins read",
+        "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          954,
+          1923,
+          82,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 05, 2026 |0",
+        "text": "Posted by Wonyong Jang on July 05, 2026 ",
+        "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          404,
+          2314,
+          632,
+          47
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|3 mins read|0",
+        "text": "3 mins read",
+        "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          959,
+          2339,
+          77,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 01, 2026 |0",
+        "text": "Posted by Wonyong Jang on July 01, 2026 ",
+        "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          404,
+          2729,
+          632,
+          47
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|16 mins read|0",
+        "text": "16 mins read",
+        "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+        "fg": "#7f8c8d",
+        "bg": "#ffffff",
+        "ratio": 3.47,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          954,
+          2754,
+          82,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "card.text",
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.row>div.col-lg-8>div.clearfix>a.btn|View All Posts →|0",
+        "text": "View All Posts →",
+        "path": "div.row>div.col-lg-8>div.clearfix>a.btn",
+        "fg": "#ffffff",
+        "bg": "#0085a1",
+        "ratio": 4.31,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          884,
+          2912,
+          201,
+          53
+        ],
+        "tokens": [
+          "color.surface.default",
+          "color.surface.card",
+          "color.text.inverse"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on October 17, 20|0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|12 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 10, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|18 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 06, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|19 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 05, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|3 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 01, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|16 mins read|0",
+        "div.row>div.col-lg-8>div.clearfix>a.btn|View All Posts →|0"
+      ],
+      "all": [
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on October 17, 20|0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|12 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 10, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|18 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 06, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|19 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 05, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|3 mins read|0",
+        "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 01, 2026 |0",
+        "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|16 mins read|0",
+        "div.row>div.col-lg-8>div.clearfix>a.btn|View All Posts →|0"
+      ]
+    }
+  }
+}

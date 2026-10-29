@@ -1,0 +1,168 @@
+{
+  "diffPixels": 0,
+  "noisePixels": 0,
+  "totalPixels": 1296000,
+  "ratio": 0,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": true,
+  "reviewNeeded": false,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1296000,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1296000,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 9,
+    "failingBefore": 5,
+    "failingAfter": {
+      "colors": 5,
+      "all": 5
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {},
+    "pass": true,
+    "failing": [
+      {
+        "key": "body.d-flex>footer.mt-auto>small>a|portfolYOU|0",
+        "text": "portfolYOU",
+        "path": "body.d-flex>footer.mt-auto>small>a",
+        "fg": "#7fbdff",
+        "bg": "#ffffff",
+        "ratio": 1.97,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1400,
+          731,
+          17,
+          68
+        ],
+        "tokens": [
+          "color.blue.500"
+        ]
+      },
+      {
+        "key": "html.h-100>body.d-flex>footer.mt-auto>small|theme|0",
+        "text": "theme",
+        "path": "html.h-100>body.d-flex>footer.mt-auto>small",
+        "fg": "#909294",
+        "bg": "#ffffff",
+        "ratio": 3.12,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1399,
+          731,
+          19,
+          113
+        ],
+        "tokens": [
+          "color.gray.900"
+        ]
+      },
+      {
+        "key": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Projects|0",
+        "text": "Projects",
+        "path": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1065,
+          56,
+          79,
+          42
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Blog|0",
+        "text": "Blog",
+        "path": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1144,
+          56,
+          51,
+          42
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|About|0",
+        "text": "About",
+        "path": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1195,
+          56,
+          64,
+          42
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.black-a50"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Projects|0",
+        "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Blog|0",
+        "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|About|0",
+        "html.h-100>body.d-flex>footer.mt-auto>small|theme|0",
+        "body.d-flex>footer.mt-auto>small>a|portfolYOU|0"
+      ],
+      "all": [
+        "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Projects|0",
+        "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Blog|0",
+        "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|About|0",
+        "html.h-100>body.d-flex>footer.mt-auto>small|theme|0",
+        "body.d-flex>footer.mt-auto>small>a|portfolYOU|0"
+      ]
+    }
+  }
+}

@@ -1,0 +1,2946 @@
+{
+  "site": "Mavrikant",
+  "ms": 7718,
+  "ourPairs": 73,
+  "ourFailing": 1,
+  "axe": {
+    "violations": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 37,
+      "matched": 36,
+      "weFail": 0,
+      "wePass": 36,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 36,
+      "matched": 36,
+      "weFail": 0,
+      "wePass": 36,
+      "weSkip": {},
+      "byReason": {
+        "bgGradient": {
+          "total": 7,
+          "pass": 7,
+          "fail": 0,
+          "skipped": 0
+        },
+        "pseudoContent": {
+          "total": 29,
+          "pass": 29,
+          "fail": 0,
+          "skipped": 0
+        }
+      }
+    }
+  },
+  "oursOnly": 1,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "M. Serdar Karaman",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#0a121e",
+          "ratio": 18.79,
+          "required": 3
+        }
+      },
+      {
+        "text": "Ana sayfa",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#091c29",
+          "ratio": 17.35,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Hakkımda",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#091d2a",
+          "ratio": 17.14,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Yazılar",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#091e2b",
+          "ratio": 17.08,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Kategoriler",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#091c28",
+          "ratio": 17.41,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "İletişim",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#091824",
+          "ratio": 18.04,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Projeler",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#0a131f",
+          "ratio": 18.67,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "M. Serdar Karaman",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#06232f",
+          "ratio": 16.31,
+          "required": 3
+        }
+      },
+      {
+        "text": "Aviyonik yazılım, DO-178C ve emniyet kri",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#061d28",
+          "ratio": 10.76,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Sistem Mühendisliği",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#252f38",
+          "ratio": 13.62,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Emniyet Kritik",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#25323c",
+          "ratio": 13.08,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "C/C++",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#25333c",
+          "ratio": 12.99,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Aviyonik",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#25333c",
+          "ratio": 13.01,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Sinyal İşleme",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#25313a",
+          "ratio": 13.32,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Metroloji",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#252e36",
+          "ratio": 13.82,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "M. Serdar Karaman",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#081b28",
+          "ratio": 17.48,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Kıdemli Aviyonik Yazılım Tasarım Mühendi",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#081824",
+          "ratio": 11.2,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Aviyonik yazılım, DO-178C ve emniyet kri",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#08111b",
+          "ratio": 11.83,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "RSS ile takip et",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#4ec9d6",
+          "bg": "#070c15",
+          "ratio": 9.95,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Bağlantılar",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#091520",
+          "ratio": 18.46,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Ana sayfa",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#09111c",
+          "ratio": 11.78,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Hakkımda",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#080e18",
+          "ratio": 12.01,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Yazılar",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#080d17",
+          "ratio": 12.08,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Kategoriler",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#070c16",
+          "ratio": 12.15,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Etiketler",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#090f19",
+          "ratio": 11.94,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Arşiv",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#080e18",
+          "ratio": 12.02,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "İletişim",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#080d17",
+          "ratio": 12.08,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "RSS",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#070c15",
+          "ratio": 12.15,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Projeler",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#101a27",
+          "ratio": 17.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Oyunlar",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#090f19",
+          "ratio": 11.94,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "OR Araçları",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#080e18",
+          "ratio": 12.01,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Numio",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#080d17",
+          "ratio": 12.08,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Aviyonik Yazılım",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#070c15",
+          "ratio": 12.15,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "İletişim",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#09101b",
+          "ratio": 19.06,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Soru, öneri ya da iş birliği için kullan",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#c8ccd5",
+          "bg": "#080d17",
+          "ratio": 12.06,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "iletişim formunu",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#4ec9d6",
+          "bg": "#080d17",
+          "ratio": 9.85,
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "passes",
+      "target": "#search-input",
+      "idx": -1,
+      "reason": "hidden",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": null
+    },
+    {
+      "kind": "passes",
+      "target": ".post-card__badge",
+      "idx": 16,
+      "reason": null,
+      "fg": "#00788f",
+      "bg": "#ebf4f6",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-card--featured > .post-card__body > .post-card__title > a",
+      "idx": 17,
+      "reason": null,
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.89,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-card--featured > .post-card__body > .post-card__subtitle",
+      "idx": 18,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-card--featured > .post-card__body > .post-card__meta > .meta-chip:nth-child(1)",
+      "idx": 19,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#f7f8fa",
+      "ratio": 5.76,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-card--featured > .post-card__body > .post-card__meta > .meta-chip:nth-child(2) > .reading-time[title=\"Estimated read time\"]",
+      "idx": 20,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#f7f8fa",
+      "ratio": 5.76,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-card--featured > .post-card__body > .post-card__meta > .tag-chip[href$=\"tags/#sistem-muhendisligi\"]",
+      "idx": 21,
+      "reason": null,
+      "fg": "#00788f",
+      "bg": "#ebf4f6",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"tags/#sertifikasyon\"]",
+      "idx": 22,
+      "reason": null,
+      "fg": "#00788f",
+      "bg": "#ebf4f6",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".btn",
+      "idx": 23,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#00788f",
+      "ratio": 5.14,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#home-topics-title",
+      "idx": 24,
+      "reason": null,
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.89,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".home-topics__all",
+      "idx": 25,
+      "reason": null,
+      "fg": "#00788f",
+      "bg": "#ffffff",
+      "ratio": 5.14,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"categories/#yazilim\"]",
+      "idx": 26,
+      "reason": null,
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.89,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(1) > h3 > .topic-card__count",
+      "idx": 27,
+      "reason": null,
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(1) > .topic-card__desc",
+      "idx": 28,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(1) > .topic-card__posts > li:nth-child(1) > a",
+      "idx": 29,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(1) > .topic-card__posts > li:nth-child(2) > a",
+      "idx": 30,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"categories/#aviyonik\"]",
+      "idx": 31,
+      "reason": null,
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.89,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(2) > h3 > .topic-card__count",
+      "idx": 32,
+      "reason": null,
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(2) > .topic-card__desc",
+      "idx": 33,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"kalman-filtresi\"]",
+      "idx": 34,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"bandpass-sampling\"]",
+      "idx": 35,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"categories/#muhendislik\"]",
+      "idx": 36,
+      "reason": null,
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.89,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(3) > h3 > .topic-card__count",
+      "idx": 37,
+      "reason": null,
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(3) > .topic-card__desc",
+      "idx": 38,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(3) > .topic-card__posts > li:nth-child(1) > a",
+      "idx": 39,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(3) > .topic-card__posts > li:nth-child(2) > a",
+      "idx": 40,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"categories/#araclar\"]",
+      "idx": 41,
+      "reason": null,
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.89,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(4) > h3 > .topic-card__count",
+      "idx": 42,
+      "reason": null,
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(4) > .topic-card__desc",
+      "idx": 43,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(4) > .topic-card__posts > li:nth-child(1) > a",
+      "idx": 44,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(4) > .topic-card__posts > li:nth-child(2) > a",
+      "idx": 45,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"categories/#genel\"]",
+      "idx": 46,
+      "reason": null,
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.89,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(5) > h3 > .topic-card__count",
+      "idx": 47,
+      "reason": null,
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(5) > .topic-card__desc",
+      "idx": 48,
+      "reason": null,
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".topic-card:nth-child(5) > .topic-card__posts > li:nth-child(1) > a",
+      "idx": 49,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"hello-world\"]",
+      "idx": 50,
+      "reason": null,
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".copyright",
+      "idx": 73,
+      "reason": null,
+      "fg": "#8b91a0",
+      "bg": "#04070c",
+      "ratio": 6.39,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".navbar-brand",
+      "idx": 1,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".active",
+      "idx": 2,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"about\"]",
+      "idx": 3,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".nav-link[href$=\"posts\"]",
+      "idx": 4,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".nav-link[href$=\"categories\"]",
+      "idx": 5,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".nav-link[href$=\"contact\"]",
+      "idx": 6,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "#navbarDropdownProjects",
+      "idx": 7,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "h1",
+      "idx": 8,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".subheading",
+      "idx": 9,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".tag-chip--hero.tag-chip[href$=\"tags/#sistem-muhendisligi\"]",
+      "idx": 10,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"tags/#emniyet-kritik\"]",
+      "idx": 11,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"tags/#c-cpp\"]",
+      "idx": 12,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"tags/#aviyonik\"]",
+      "idx": 13,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"tags/#sinyal-isleme\"]",
+      "idx": 14,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"tags/#metroloji\"]",
+      "idx": 15,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-brand__name",
+      "idx": 52,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-brand__role",
+      "idx": 53,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-description",
+      "idx": 54,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-cta",
+      "idx": 55,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".col-md-5 > .footer-heading",
+      "idx": 56,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-links--split > li:nth-child(1) > a[href=\"/\"]",
+      "idx": 57,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "li:nth-child(2) > a[href$=\"hakkimda\"]",
+      "idx": 58,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-links--split > li:nth-child(3) > a[href$=\"posts\"]",
+      "idx": 59,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-links--split > li:nth-child(4) > a[href$=\"categories\"]",
+      "idx": 60,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"tags\"]",
+      "idx": 61,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"archive\"]",
+      "idx": 62,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "li:nth-child(7) > a[href$=\"contact\"]",
+      "idx": 63,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "li:nth-child(8) > a[href$=\"feed.xml\"]",
+      "idx": 64,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".col-lg-2 > .footer-heading",
+      "idx": 65,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "li:nth-child(1) > a[href$=\"games\"][target=\"_blank\"][rel=\"noopener\"]",
+      "idx": 66,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-links > li:nth-child(2) > a[target=\"_blank\"][rel=\"noopener\"]",
+      "idx": 67,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "li:nth-child(3) > a[href$=\"numio/\"][target=\"_blank\"][rel=\"noopener\"]",
+      "idx": 68,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "li:nth-child(4) > a[href$=\"aviyonikyazilim.com/\"][target=\"_blank\"][rel=\"noopener\"]",
+      "idx": 69,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".col-md-4 > .footer-heading",
+      "idx": 70,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-note",
+      "idx": 71,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer-note > a[href$=\"contact\"]",
+      "idx": 72,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "html.reveal-ready>body>a.skip-link|İçeriğe atla|0",
+      "path": "html.reveal-ready>body>a.skip-link",
+      "text": "İçeriğe atla",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        12,
+        -75,
+        109,
+        44
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "body>nav.navbar>div.container>a.navbar-brand|M. Serdar Karaman|0",
+      "path": "body>nav.navbar>div.container>a.navbar-brand",
+      "text": "M. Serdar Karaman",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        165,
+        8,
+        224,
+        54
+      ],
+      "fg": "#ffffff",
+      "bg": "#0a121e",
+      "ratio": 18.79,
+      "bestRatio": 18.79,
+      "worstRatio": 18.79,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Ana sayfa|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Ana sayfa",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        491,
+        14,
+        118,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#091c29",
+      "ratio": 17.35,
+      "bestRatio": 17.35,
+      "worstRatio": 17.35,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Hakkımda|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Hakkımda",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        609,
+        14,
+        114,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#091d2a",
+      "ratio": 17.14,
+      "bestRatio": 17.14,
+      "worstRatio": 17.14,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Yazılar|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Yazılar",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        723,
+        14,
+        98,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#091e2b",
+      "ratio": 17.08,
+      "bestRatio": 17.08,
+      "worstRatio": 17.08,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Kategoriler|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Kategoriler",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        821,
+        14,
+        134,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#091c28",
+      "ratio": 17.41,
+      "bestRatio": 17.41,
+      "worstRatio": 17.41,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|İletişim|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "İletişim",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        955,
+        14,
+        98,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#091824",
+      "ratio": 18.04,
+      "bestRatio": 18.04,
+      "worstRatio": 18.04,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Projeler|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Projeler",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1053,
+        14,
+        122,
+        42
+      ],
+      "fg": "#ffffff",
+      "bg": "#0a131f",
+      "ratio": 18.67,
+      "bestRatio": 18.67,
+      "worstRatio": 18.67,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>div.page-heading>h1|M. Serdar Karaman|0",
+      "path": "div.row>div.col-lg-8>div.page-heading>h1",
+      "text": "M. Serdar Karaman",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        486,
+        259,
+        469,
+        65
+      ],
+      "fg": "#ffffff",
+      "bg": "#06232f",
+      "ratio": 16.31,
+      "bestRatio": 16.31,
+      "worstRatio": 16.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>div.page-heading>span.subheading|Aviyonik yazılım, DO-178C ve emniyet kri|0",
+      "path": "div.row>div.col-lg-8>div.page-heading>span.subheading",
+      "text": "Aviyonik yazılım, DO-178C ve emniyet kri",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        466,
+        342,
+        509,
+        49
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#061d28",
+      "ratio": 10.76,
+      "bestRatio": 10.76,
+      "worstRatio": 10.76,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip|Sistem Mühendisliği|0",
+      "path": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip",
+      "text": "Sistem Mühendisliği",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        392,
+        417,
+        155,
+        30
+      ],
+      "fg": "#ffffff",
+      "bg": "#252f38",
+      "ratio": 13.62,
+      "bestRatio": 13.62,
+      "worstRatio": 13.62,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip|Emniyet Kritik|0",
+      "path": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip",
+      "text": "Emniyet Kritik",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        555,
+        417,
+        115,
+        30
+      ],
+      "fg": "#ffffff",
+      "bg": "#25323c",
+      "ratio": 13.08,
+      "bestRatio": 13.08,
+      "worstRatio": 13.08,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip|C/C++|0",
+      "path": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip",
+      "text": "C/C++",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        679,
+        417,
+        70,
+        30
+      ],
+      "fg": "#ffffff",
+      "bg": "#25333c",
+      "ratio": 12.99,
+      "bestRatio": 12.99,
+      "worstRatio": 12.99,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip|Aviyonik|0",
+      "path": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip",
+      "text": "Aviyonik",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        756,
+        417,
+        82,
+        30
+      ],
+      "fg": "#ffffff",
+      "bg": "#25333c",
+      "ratio": 13.01,
+      "bestRatio": 13.01,
+      "worstRatio": 13.01,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip|Sinyal İşleme|0",
+      "path": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip",
+      "text": "Sinyal İşleme",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        846,
+        417,
+        111,
+        30
+      ],
+      "fg": "#ffffff",
+      "bg": "#25313a",
+      "ratio": 13.32,
+      "bestRatio": 13.32,
+      "worstRatio": 13.32,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip|Metroloji|0",
+      "path": "div.col-lg-8>div.page-heading>div.hero-intro__topics>a.tag-chip",
+      "text": "Metroloji",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        965,
+        417,
+        83,
+        30
+      ],
+      "fg": "#ffffff",
+      "bg": "#252e36",
+      "ratio": 13.82,
+      "bestRatio": 13.82,
+      "worstRatio": 13.82,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.post-list>article.post-card>div.post-card__body>span.post-card__badge|Son yazı|0",
+      "path": "div.post-list>article.post-card>div.post-card__body>span.post-card__badge",
+      "text": "Son yazı",
+      "color": "rgb(0, 120, 143)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        384,
+        940,
+        83,
+        28
+      ],
+      "fg": "#00788f",
+      "bg": "#ebf4f6",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.post-card>div.post-card__body>h2.post-card__title>a|INCOSE CSEP: Sınavdan Sertifikaya Yolcul|0",
+      "path": "article.post-card>div.post-card__body>h2.post-card__title>a",
+      "text": "INCOSE CSEP: Sınavdan Sertifikaya Yolcul",
+      "color": "rgb(15, 17, 21)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        384,
+        980,
+        352,
+        76
+      ],
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.9,
+      "bestRatio": 18.9,
+      "worstRatio": 18.9,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.post-list>article.post-card>div.post-card__body>p.post-card__subtitle|My Road to INCOSE CSEP Certification|0",
+      "path": "div.post-list>article.post-card>div.post-card__body>p.post-card__subtitle",
+      "text": "My Road to INCOSE CSEP Certification",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        384,
+        1064,
+        305,
+        27
+      ],
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.13,
+      "bestRatio": 6.13,
+      "worstRatio": 6.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.post-card>div.post-card__body>div.post-card__meta>span.meta-chip|1 Ekim 2026|0",
+      "path": "article.post-card>div.post-card__body>div.post-card__meta>span.meta-chip",
+      "text": "1 Ekim 2026",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        384,
+        1104,
+        114,
+        30
+      ],
+      "fg": "#5b6270",
+      "bg": "#f7f8fa",
+      "ratio": 5.77,
+      "bestRatio": 5.77,
+      "worstRatio": 5.77,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.post-card__body>div.post-card__meta>span.meta-chip>span.reading-time|29 dk okuma süresi|0",
+      "path": "div.post-card__body>div.post-card__meta>span.meta-chip>span.reading-time",
+      "text": "29 dk okuma süresi",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        541,
+        1109,
+        119,
+        22
+      ],
+      "fg": "#5b6270",
+      "bg": "#f7f8fa",
+      "ratio": 5.77,
+      "bestRatio": 5.77,
+      "worstRatio": 5.77,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.post-card>div.post-card__body>div.post-card__meta>a.tag-chip|Sistem Mühendisliği|0",
+      "path": "article.post-card>div.post-card__body>div.post-card__meta>a.tag-chip",
+      "text": "Sistem Mühendisliği",
+      "color": "rgb(0, 120, 143)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        686,
+        1106,
+        143,
+        26
+      ],
+      "fg": "#00788f",
+      "bg": "#ebf4f6",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.post-card>div.post-card__body>div.post-card__meta>a.tag-chip|Sertifikasyon|0",
+      "path": "article.post-card>div.post-card__body>div.post-card__meta>a.tag-chip",
+      "text": "Sertifikasyon",
+      "color": "rgb(0, 120, 143)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        843,
+        1106,
+        101,
+        26
+      ],
+      "fg": "#00788f",
+      "bg": "#ebf4f6",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>div.pager-row>a.btn|Tüm yazılar →|0",
+      "path": "div.row>div.col-lg-8>div.pager-row>a.btn",
+      "text": "Tüm yazılar →",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        932,
+        2145,
+        153,
+        41
+      ],
+      "fg": "#ffffff",
+      "bg": "#00788f",
+      "ratio": 5.14,
+      "bestRatio": 5.14,
+      "worstRatio": 5.14,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>section.home-topics>div.home-topics__header>h2.home-topics__title|Konulara göre keşfet|0",
+      "path": "div.col-lg-8>section.home-topics>div.home-topics__header>h2.home-topics__title",
+      "text": "Konulara göre keşfet",
+      "color": "rgb(15, 17, 21)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        355,
+        2241,
+        251,
+        32
+      ],
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.9,
+      "bestRatio": 18.9,
+      "worstRatio": 18.9,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>section.home-topics>div.home-topics__header>a.home-topics__all|Tüm kategoriler →|0",
+      "path": "div.col-lg-8>section.home-topics>div.home-topics__header>a.home-topics__all",
+      "text": "Tüm kategoriler →",
+      "color": "rgb(0, 120, 143)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        959,
+        2249,
+        126,
+        24
+      ],
+      "fg": "#00788f",
+      "bg": "#ffffff",
+      "ratio": 5.14,
+      "bestRatio": 5.14,
+      "worstRatio": 5.14,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a|Yazılım|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a",
+      "text": "Yazılım",
+      "color": "rgb(15, 17, 21)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2314,
+        57,
+        21
+      ],
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.9,
+      "bestRatio": 18.9,
+      "worstRatio": 18.9,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count|10 yazı|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count",
+      "text": "10 yazı",
+      "color": "rgb(104, 112, 131)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        654,
+        2318,
+        38,
+        15
+      ],
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.96,
+      "bestRatio": 4.96,
+      "worstRatio": 4.96,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc|Yazılım mühendisliği, programlama ve tas|0",
+      "path": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc",
+      "text": "Yazılım mühendisliği, programlama ve tas",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2340,
+        317,
+        20
+      ],
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.13,
+      "bestRatio": 6.13,
+      "worstRatio": 6.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|MISRA C:2025 ile Neler Değişti?|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "MISRA C:2025 ile Neler Değişti?",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2391,
+        215,
+        17
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Kayan Nokta Sayılarının Tehlikeleri|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Kayan Nokta Sayılarının Tehlikeleri",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2423,
+        231,
+        17
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a|Aviyonik|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a",
+      "text": "Aviyonik",
+      "color": "rgb(15, 17, 21)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2314,
+        69,
+        21
+      ],
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.9,
+      "bestRatio": 18.9,
+      "worstRatio": 18.9,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count|3 yazı|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count",
+      "text": "3 yazı",
+      "color": "rgb(104, 112, 131)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1032,
+        2318,
+        33,
+        15
+      ],
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.96,
+      "bestRatio": 4.96,
+      "worstRatio": 4.96,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc|Aviyonik, sinyal işleme ve gömülü sistem|0",
+      "path": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc",
+      "text": "Aviyonik, sinyal işleme ve gömülü sistem",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2340,
+        317,
+        20
+      ],
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.13,
+      "bestRatio": 6.13,
+      "worstRatio": 6.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Kalman Filtresi ve EKF: Gürültülü Veride|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Kalman Filtresi ve EKF: Gürültülü Veride",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2391,
+        308,
+        37
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Bandpass Sampling: 1 GHz Sinyali 50 MHz |0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Bandpass Sampling: 1 GHz Sinyali 50 MHz ",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2443,
+        283,
+        37
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a|Mühendislik|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a",
+      "text": "Mühendislik",
+      "color": "rgb(15, 17, 21)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2540,
+        98,
+        21
+      ],
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.9,
+      "bestRatio": 18.9,
+      "worstRatio": 18.9,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count|7 yazı|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count",
+      "text": "7 yazı",
+      "color": "rgb(104, 112, 131)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        660,
+        2544,
+        32,
+        15
+      ],
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.96,
+      "bestRatio": 4.96,
+      "worstRatio": 4.96,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc|Sistem mühendisliği, metroloji ve yöneyl|0",
+      "path": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc",
+      "text": "Sistem mühendisliği, metroloji ve yöneyl",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2566,
+        317,
+        41
+      ],
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.13,
+      "bestRatio": 6.13,
+      "worstRatio": 6.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Sistem Mühendisliği Nedir?|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Sistem Mühendisliği Nedir?",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2637,
+        183,
+        17
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Saatçinin Saatini Kim Kalibre Eder? Kali|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Saatçinin Saatini Kim Kalibre Eder? Kali",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2669,
+        317,
+        37
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a|Araçlar & İpuçları|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a",
+      "text": "Araçlar & İpuçları",
+      "color": "rgb(15, 17, 21)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2540,
+        136,
+        21
+      ],
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.9,
+      "bestRatio": 18.9,
+      "worstRatio": 18.9,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count|5 yazı|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count",
+      "text": "5 yazı",
+      "color": "rgb(104, 112, 131)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1032,
+        2544,
+        33,
+        15
+      ],
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.96,
+      "bestRatio": 4.96,
+      "worstRatio": 4.96,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc|Geliştirme araçları ve pratik ipuçları|0",
+      "path": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc",
+      "text": "Geliştirme araçları ve pratik ipuçları",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2566,
+        317,
+        20
+      ],
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.13,
+      "bestRatio": 6.13,
+      "worstRatio": 6.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Versiyon Kontrol Sistemleri: Git vs SVN |0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Versiyon Kontrol Sistemleri: Git vs SVN ",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2616,
+        280,
+        37
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Merge Files with FFmpeg|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Merge Files with FFmpeg",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        748,
+        2669,
+        169,
+        17
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a|Genel|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>a",
+      "text": "Genel",
+      "color": "rgb(15, 17, 21)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2766,
+        46,
+        21
+      ],
+      "fg": "#0f1115",
+      "bg": "#ffffff",
+      "ratio": 18.9,
+      "bestRatio": 18.9,
+      "worstRatio": 18.9,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count|2 yazı|0",
+      "path": "div.home-topics__grid>article.topic-card>h3.topic-card__name>span.topic-card__count",
+      "text": "2 yazı",
+      "color": "rgb(104, 112, 131)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1032,
+        2770,
+        33,
+        15
+      ],
+      "fg": "#687083",
+      "bg": "#ffffff",
+      "ratio": 4.96,
+      "bestRatio": 4.96,
+      "worstRatio": 4.96,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc|Genel konular|0",
+      "path": "section.home-topics>div.home-topics__grid>article.topic-card>p.topic-card__desc",
+      "text": "Genel konular",
+      "color": "rgb(91, 98, 112)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2792,
+        690,
+        20
+      ],
+      "fg": "#5b6270",
+      "bg": "#ffffff",
+      "ratio": 6.13,
+      "bestRatio": 6.13,
+      "worstRatio": 6.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Türkiye'de Debugging aşamaları|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Türkiye'de Debugging aşamaları",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2842,
+        217,
+        17
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.topic-card>ul.topic-card__posts>li>a|Hello world!|0",
+      "path": "article.topic-card>ul.topic-card__posts>li>a",
+      "text": "Hello world!",
+      "color": "rgb(26, 29, 35)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        2875,
+        80,
+        17
+      ],
+      "fg": "#1a1d23",
+      "bg": "#ffffff",
+      "ratio": 16.88,
+      "bestRatio": 16.88,
+      "worstRatio": 16.88,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-4>h2.sr-only|M. Serdar Karaman|0",
+      "path": "div.container>div.row>div.col-lg-4>h2.sr-only",
+      "text": "M. Serdar Karaman",
+      "color": "rgb(15, 17, 21)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        164,
+        3061,
+        1,
+        1
+      ],
+      "fg": "#0f1115",
+      "bg": "#0d2834",
+      "ratio": 1.23,
+      "bestRatio": 3.73,
+      "worstRatio": 1.23,
+      "clusters": 3,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-4>a.footer-brand>span.footer-brand__text>span.footer-brand__name|M. Serdar Karaman|0",
+      "path": "div.col-lg-4>a.footer-brand>span.footer-brand__text>span.footer-brand__name",
+      "text": "M. Serdar Karaman",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        231,
+        3068,
+        262,
+        22
+      ],
+      "fg": "#ffffff",
+      "bg": "#081b28",
+      "ratio": 17.48,
+      "bestRatio": 17.48,
+      "worstRatio": 17.48,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-4>a.footer-brand>span.footer-brand__text>span.footer-brand__role|Kıdemli Aviyonik Yazılım Tasarım Mühendi|0",
+      "path": "div.col-lg-4>a.footer-brand>span.footer-brand__text>span.footer-brand__role",
+      "text": "Kıdemli Aviyonik Yazılım Tasarım Mühendi",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        231,
+        3090,
+        262,
+        17
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#081824",
+      "ratio": 11.2,
+      "bestRatio": 11.2,
+      "worstRatio": 11.2,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-4>p.footer-description|Aviyonik yazılım, DO-178C ve emniyet kri|0",
+      "path": "div.container>div.row>div.col-lg-4>p.footer-description",
+      "text": "Aviyonik yazılım, DO-178C ve emniyet kri",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        165,
+        3130,
+        270,
+        78
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#08111b",
+      "ratio": 11.83,
+      "bestRatio": 11.83,
+      "worstRatio": 11.83,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-4>a.footer-cta|RSS ile takip et|0",
+      "path": "div.container>div.row>div.col-lg-4>a.footer-cta",
+      "text": "RSS ile takip et",
+      "color": "rgb(78, 201, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        165,
+        3227,
+        152,
+        39
+      ],
+      "fg": "#4ec9d6",
+      "bg": "#070c15",
+      "ratio": 9.95,
+      "bestRatio": 9.95,
+      "worstRatio": 9.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-3>h2.footer-heading|Bağlantılar|0",
+      "path": "div.container>div.row>div.col-lg-3>h2.footer-heading",
+      "text": "Bağlantılar",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        545,
+        3062,
+        255,
+        27
+      ],
+      "fg": "#ffffff",
+      "bg": "#091520",
+      "ratio": 18.46,
+      "bestRatio": 18.46,
+      "worstRatio": 18.46,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|Ana sayfa|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "Ana sayfa",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        545,
+        3108,
+        68,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#09111c",
+      "ratio": 11.78,
+      "bestRatio": 11.78,
+      "worstRatio": 11.78,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|Hakkımda|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "Hakkımda",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        545,
+        3141,
+        68,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#080e18",
+      "ratio": 12.01,
+      "bestRatio": 12.01,
+      "worstRatio": 12.01,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|Yazılar|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "Yazılar",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        545,
+        3175,
+        45,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#080d17",
+      "ratio": 12.08,
+      "bestRatio": 12.08,
+      "worstRatio": 12.08,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|Kategoriler|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "Kategoriler",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        545,
+        3208,
+        75,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#070c16",
+      "ratio": 12.15,
+      "bestRatio": 12.15,
+      "worstRatio": 12.15,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|Etiketler|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "Etiketler",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        685,
+        3108,
+        55,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#090f19",
+      "ratio": 11.94,
+      "bestRatio": 11.94,
+      "worstRatio": 11.94,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|Arşiv|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "Arşiv",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        685,
+        3141,
+        35,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#080e18",
+      "ratio": 12.02,
+      "bestRatio": 12.02,
+      "worstRatio": 12.02,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|İletişim|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "İletişim",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        685,
+        3175,
+        48,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#080d17",
+      "ratio": 12.08,
+      "bestRatio": 12.08,
+      "worstRatio": 12.08,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-3>ul.footer-links>li>a|RSS|0",
+      "path": "div.col-lg-3>ul.footer-links>li>a",
+      "text": "RSS",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        685,
+        3208,
+        28,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#070c15",
+      "ratio": 12.15,
+      "bestRatio": 12.15,
+      "worstRatio": 12.15,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-2>h2.footer-heading|Projeler|0",
+      "path": "div.container>div.row>div.col-lg-2>h2.footer-heading",
+      "text": "Projeler",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        830,
+        3062,
+        160,
+        27
+      ],
+      "fg": "#ffffff",
+      "bg": "#101a27",
+      "ratio": 17.47,
+      "bestRatio": 19.08,
+      "worstRatio": 17.47,
+      "clusters": 2,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-2>ul.footer-links>li>a|Oyunlar|0",
+      "path": "div.col-lg-2>ul.footer-links>li>a",
+      "text": "Oyunlar",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        830,
+        3108,
+        53,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#090f19",
+      "ratio": 11.94,
+      "bestRatio": 11.94,
+      "worstRatio": 11.94,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-2>ul.footer-links>li>a|OR Araçları|0",
+      "path": "div.col-lg-2>ul.footer-links>li>a",
+      "text": "OR Araçları",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        830,
+        3141,
+        77,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#080e18",
+      "ratio": 12.01,
+      "bestRatio": 12.01,
+      "worstRatio": 12.01,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-2>ul.footer-links>li>a|Numio|0",
+      "path": "div.col-lg-2>ul.footer-links>li>a",
+      "text": "Numio",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        830,
+        3175,
+        44,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#080d17",
+      "ratio": 12.08,
+      "bestRatio": 12.08,
+      "worstRatio": 12.08,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-2>ul.footer-links>li>a|Aviyonik Yazılım|0",
+      "path": "div.col-lg-2>ul.footer-links>li>a",
+      "text": "Aviyonik Yazılım",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        830,
+        3208,
+        109,
+        24
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#070c15",
+      "ratio": 12.15,
+      "bestRatio": 12.15,
+      "worstRatio": 12.15,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-3>h2.footer-heading|İletişim|0",
+      "path": "div.container>div.row>div.col-lg-3>h2.footer-heading",
+      "text": "İletişim",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        3062,
+        255,
+        27
+      ],
+      "fg": "#ffffff",
+      "bg": "#09101b",
+      "ratio": 19.06,
+      "bestRatio": 19.06,
+      "worstRatio": 19.06,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-3>p.footer-note|Soru, öneri ya da iş birliği için kullan|0",
+      "path": "div.container>div.row>div.col-lg-3>p.footer-note",
+      "text": "Soru, öneri ya da iş birliği için kullan",
+      "color": "rgb(200, 204, 213)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        3162,
+        255,
+        44
+      ],
+      "fg": "#c8ccd5",
+      "bg": "#080d17",
+      "ratio": 12.06,
+      "bestRatio": 12.06,
+      "worstRatio": 12.06,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-3>p.footer-note>a|iletişim formunu|0",
+      "path": "div.row>div.col-lg-3>p.footer-note>a",
+      "text": "iletişim formunu",
+      "color": "rgb(78, 201, 214)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        3164,
+        237,
+        38
+      ],
+      "fg": "#4ec9d6",
+      "bg": "#080d17",
+      "ratio": 9.85,
+      "bestRatio": 9.85,
+      "worstRatio": 9.85,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.footer-modern>div.footer-bottom>div.container>p.copyright|© 2026 M. Serdar Karaman. Tüm hakları sa|0",
+      "path": "footer.footer-modern>div.footer-bottom>div.container>p.copyright",
+      "text": "© 2026 M. Serdar Karaman. Tüm hakları sa",
+      "color": "rgb(139, 145, 160)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        165,
+        3331,
+        1110,
+        25
+      ],
+      "fg": "#8b91a0",
+      "bg": "#04070c",
+      "ratio": 6.39,
+      "bestRatio": 6.39,
+      "worstRatio": 6.39,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

@@ -1,0 +1,1776 @@
+{
+  "site": "proinsias",
+  "ms": 1802,
+  "ourPairs": 54,
+  "ourFailing": 1,
+  "axe": {
+    "violations": {
+      "total": 1,
+      "matched": 1,
+      "weFail": 1,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 53,
+      "matched": 52,
+      "weFail": 0,
+      "wePass": 52,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    }
+  },
+  "oursOnly": 1,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": []
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": "span[aria-hidden=\"true\"]",
+      "idx": 46,
+      "reason": null,
+      "fg": "#b2b3b4",
+      "bg": "#ffffff",
+      "ratio": 2.09,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".site-title",
+      "idx": 3,
+      "reason": null,
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"portfolio/\"]",
+      "idx": 4,
+      "reason": null,
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"posts/\"]",
+      "idx": 5,
+      "reason": null,
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"categories/\"]",
+      "idx": 6,
+      "reason": null,
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"tags/\"]",
+      "idx": 7,
+      "reason": null,
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"about/\"]",
+      "idx": 8,
+      "reason": null,
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".u-url",
+      "idx": 10,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".author__bio > p",
+      "idx": 11,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".p-locality",
+      "idx": 12,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"proinsias.github.io/\"][itemprop=\"sameAs\"] > .label",
+      "idx": 13,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(3) > a[itemprop=\"sameAs\"] > .label",
+      "idx": 14,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(4) > a[href$=\"proinsias/\"][itemprop=\"sameAs\"] > .label",
+      "idx": 15,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(5) > a[itemprop=\"sameAs\"] > .label",
+      "idx": 16,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(6) > a[href$=\"proinsias/\"][itemprop=\"sameAs\"] > .label",
+      "idx": 17,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(7) > a[itemprop=\"sameAs\"] > .label",
+      "idx": 18,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"@proinsias\"] > .label",
+      "idx": 19,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(9) > a[itemprop=\"sameAs\"] > .label",
+      "idx": 20,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(10) > a[itemprop=\"sameAs\"] > .label",
+      "idx": 21,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(11) > a[itemprop=\"sameAs\"] > .label",
+      "idx": 22,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"@francis\"] > .label",
+      "idx": 23,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(13) > a[itemprop=\"sameAs\"] > .label",
+      "idx": 24,
+      "reason": null,
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".archive__subtitle",
+      "idx": 25,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"stoic-ic-ds/\"] > p",
+      "idx": 26,
+      "reason": null,
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.67,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-01-25T18:02:00-05:00\"]",
+      "idx": 27,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(1) > article > .page__meta > .page__meta-readtime",
+      "idx": 28,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(1) > article > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 29,
+      "reason": null,
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(2) > article > h2 > a[rel=\"permalink\"] > p",
+      "idx": 30,
+      "reason": null,
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.67,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-01-22T08:55:03-05:00\"]",
+      "idx": 31,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(2) > article > .page__meta > .page__meta-readtime",
+      "idx": 32,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(2) > article > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 33,
+      "reason": null,
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"how-uv-got-so-fast/\"] > p",
+      "idx": 34,
+      "reason": null,
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.67,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2026-01-09T10:34:57-05:00\"]",
+      "idx": 35,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(3) > article > .page__meta > .page__meta-readtime",
+      "idx": 36,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(3) > article > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 37,
+      "reason": null,
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(4) > article > h2 > a[rel=\"permalink\"] > p",
+      "idx": 38,
+      "reason": null,
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.67,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2025-12-17T13:32:00-05:00\"]",
+      "idx": 39,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(4) > article > .page__meta > .page__meta-readtime",
+      "idx": 40,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(4) > article > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 41,
+      "reason": null,
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(5) > article > h2 > a[rel=\"permalink\"] > p",
+      "idx": 42,
+      "reason": null,
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.67,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "time[datetime=\"2025-12-17T05:04:00-05:00\"]",
+      "idx": 43,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(5) > article > .page__meta > .page__meta-readtime",
+      "idx": 44,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".list__item:nth-child(5) > article > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 45,
+      "reason": null,
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".current",
+      "idx": 47,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#6f777d",
+      "ratio": 4.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(3) > a[href$=\"page2/\"]",
+      "idx": 48,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page3/\"]",
+      "idx": 49,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page87/\"]",
+      "idx": 51,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(7) > a[href$=\"page2/\"]",
+      "idx": 52,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.69,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#search",
+      "idx": -1,
+      "reason": "hidden",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": null
+    },
+    {
+      "kind": "passes",
+      "target": "strong",
+      "idx": 53,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"feed.xml\"]",
+      "idx": 54,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".page__footer-copyright",
+      "idx": 55,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"jekyllrb.com\"]",
+      "idx": 56,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[rel=\"nofollow\"]:nth-child(2)",
+      "idx": 57,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "nav.skip-links>ul>li>a.screen-reader-shortcut|Skip to primary navigation|0",
+      "path": "nav.skip-links>ul>li>a.screen-reader-shortcut",
+      "text": "Skip to primary navigation",
+      "color": "rgb(47, 125, 149)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "nav.skip-links>ul>li>a.screen-reader-shortcut|Skip to content|0",
+      "path": "nav.skip-links>ul>li>a.screen-reader-shortcut",
+      "text": "Skip to content",
+      "color": "rgb(47, 125, 149)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "nav.skip-links>ul>li>a.screen-reader-shortcut|Skip to footer|0",
+      "path": "nav.skip-links>ul>li>a.screen-reader-shortcut",
+      "text": "Skip to footer",
+      "color": "rgb(47, 125, 149)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "div.masthead__inner-wrap>div.masthead__menu>nav.greedy-nav>a.site-title|Looking for data in all the right places|0",
+      "path": "div.masthead__inner-wrap>div.masthead__menu>nav.greedy-nav>a.site-title",
+      "text": "Looking for data in all the right places",
+      "color": "rgb(111, 119, 125)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        102,
+        28,
+        399,
+        33
+      ],
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a|Portfolio|0",
+      "path": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a",
+      "text": "Portfolio",
+      "color": "rgb(111, 119, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        724,
+        28,
+        79,
+        33
+      ],
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a|Posts|0",
+      "path": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a",
+      "text": "Posts",
+      "color": "rgb(111, 119, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        847,
+        28,
+        53,
+        33
+      ],
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a|Categories|0",
+      "path": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a",
+      "text": "Categories",
+      "color": "rgb(111, 119, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        944,
+        28,
+        104,
+        33
+      ],
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a|Tags|0",
+      "path": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a",
+      "text": "Tags",
+      "color": "rgb(111, 119, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1092,
+        28,
+        45,
+        33
+      ],
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a|About|0",
+      "path": "nav.greedy-nav>ul.visible-links>li.masthead__menu-item>a",
+      "text": "About",
+      "color": "rgb(111, 119, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1180,
+        28,
+        58,
+        33
+      ],
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.masthead__menu>nav.greedy-nav>button.search__toggle>span.visually-hidden|Toggle search|0",
+      "path": "div.masthead__menu>nav.greedy-nav>button.search__toggle>span.visually-hidden",
+      "text": "Toggle search",
+      "color": "rgb(111, 119, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1288,
+        31,
+        1,
+        1
+      ],
+      "fg": "#6f777d",
+      "bg": "#ffffff",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.h-card>div.author__content>h3.author__name>a.u-url|Francis T. O'Donovan|0",
+      "path": "div.h-card>div.author__content>h3.author__name>a.u-url",
+      "text": "Francis T. O'Donovan",
+      "color": "rgb(61, 65, 68)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        102,
+        231,
+        216,
+        26
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.h-card>div.author__content>div.author__bio>p|Data Scientist – Planet discoverer, rese|0",
+      "path": "div.h-card>div.author__content>div.author__bio>p",
+      "text": "Data Scientist – Planet discoverer, rese",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        102,
+        274,
+        278,
+        50
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.author__urls-wrapper>ul.author__urls>li>span.p-locality|Boston, MA|0",
+      "path": "div.author__urls-wrapper>ul.author__urls>li>span.p-locality",
+      "text": "Boston, MA",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        127,
+        347,
+        86,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|Website|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "Website",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        382,
+        65,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|Email|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "Email",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        419,
+        45,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|GitHub|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "GitHub",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        456,
+        57,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|Google Scholar|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "Google Scholar",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        493,
+        119,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|KeyBase|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "KeyBase",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        530,
+        69,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|LinkedIn|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "LinkedIn",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        567,
+        67,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|Medium|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "Medium",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        604,
+        65,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|ORCiD|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "ORCiD",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        641,
+        55,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|ResearchGate|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "ResearchGate",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        678,
+        109,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|StackOverflow|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "StackOverflow",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        715,
+        114,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|Mastodon|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "Mastodon",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        752,
+        79,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.author__urls>li>a>span.label|Keyoxide|0",
+      "path": "ul.author__urls>li>a>span.label",
+      "text": "Keyoxide",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        123,
+        789,
+        72,
+        19
+      ],
+      "fg": "#6e7173",
+      "bg": "#ffffff",
+      "ratio": 4.95,
+      "bestRatio": 4.95,
+      "worstRatio": 4.95,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.initial-content>div>div.archive>h3.archive__subtitle|Recent posts|0",
+      "path": "div.initial-content>div>div.archive>h3.archive__subtitle",
+      "text": "Recent posts",
+      "color": "rgb(100, 103, 105)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        402,
+        142,
+        636,
+        38
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>h2.archive__item-title>a>p|Using Stoicism to thrive as an IC Data S|0",
+      "path": "article.archive__item>h2.archive__item-title>a>p",
+      "text": "Using Stoicism to thrive as an IC Data S",
+      "color": "rgb(47, 125, 149)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        402,
+        263,
+        636,
+        33
+      ],
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "bestRatio": 4.68,
+      "worstRatio": 4.68,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>p.page__meta>span.page__meta-date>time|January 25, 2026|0",
+      "path": "article.archive__item>p.page__meta>span.page__meta-date>time",
+      "text": "January 25, 2026",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        340,
+        108,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime|6 minute read|0",
+      "path": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime",
+      "text": "6 minute read",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        551,
+        340,
+        102,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt|For Data Scientists facing lack of contr|0",
+      "path": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt",
+      "text": "For Data Scientists facing lack of contr",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        402,
+        362,
+        636,
+        50
+      ],
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "bestRatio": 10.3,
+      "worstRatio": 10.3,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>h2.archive__item-title>a>p|Culture turns strategy into action|0",
+      "path": "article.archive__item>h2.archive__item-title>a>p",
+      "text": "Culture turns strategy into action",
+      "color": "rgb(47, 125, 149)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        402,
+        494,
+        636,
+        33
+      ],
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "bestRatio": 4.68,
+      "worstRatio": 4.68,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>p.page__meta>span.page__meta-date>time|January 22, 2026|0",
+      "path": "article.archive__item>p.page__meta>span.page__meta-date>time",
+      "text": "January 22, 2026",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        571,
+        108,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime|2 minute read|0",
+      "path": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime",
+      "text": "2 minute read",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        551,
+        571,
+        101,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt|Like many people, I enjoy working at sta|0",
+      "path": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt",
+      "text": "Like many people, I enjoy working at sta",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        402,
+        594,
+        636,
+        50
+      ],
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "bestRatio": 10.3,
+      "worstRatio": 10.3,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>h2.archive__item-title>a>p|Python: How uv got so fast|0",
+      "path": "article.archive__item>h2.archive__item-title>a>p",
+      "text": "Python: How uv got so fast",
+      "color": "rgb(47, 125, 149)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        402,
+        726,
+        636,
+        33
+      ],
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "bestRatio": 4.68,
+      "worstRatio": 4.68,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>p.page__meta>span.page__meta-date>time|January 9, 2026|0",
+      "path": "article.archive__item>p.page__meta>span.page__meta-date>time",
+      "text": "January 9, 2026",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        802,
+        100,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime|less than 1 minute read|0",
+      "path": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime",
+      "text": "less than 1 minute read",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        544,
+        802,
+        158,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt|I love uv, the latest python dependencie|0",
+      "path": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt",
+      "text": "I love uv, the latest python dependencie",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        402,
+        825,
+        636,
+        25
+      ],
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "bestRatio": 10.3,
+      "worstRatio": 10.3,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>h2.archive__item-title>a>p|Stoicism and the pursuit of a good life|0",
+      "path": "article.archive__item>h2.archive__item-title>a>p",
+      "text": "Stoicism and the pursuit of a good life",
+      "color": "rgb(47, 125, 149)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        402,
+        933,
+        636,
+        33
+      ],
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "bestRatio": 4.68,
+      "worstRatio": 4.68,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>p.page__meta>span.page__meta-date>time|December 17, 2025|0",
+      "path": "article.archive__item>p.page__meta>span.page__meta-date>time",
+      "text": "December 17, 2025",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        1009,
+        119,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime|2 minute read|1",
+      "path": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime",
+      "text": "2 minute read",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        562,
+        1009,
+        101,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt|Stoicism emphasizes focusing on the cont|0",
+      "path": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt",
+      "text": "Stoicism emphasizes focusing on the cont",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        402,
+        1032,
+        636,
+        50
+      ],
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "bestRatio": 10.3,
+      "worstRatio": 10.3,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>h2.archive__item-title>a>p|30 learnings from 30 years as a Python f|0",
+      "path": "article.archive__item>h2.archive__item-title>a>p",
+      "text": "30 learnings from 30 years as a Python f",
+      "color": "rgb(47, 125, 149)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        402,
+        1164,
+        636,
+        66
+      ],
+      "fg": "#2f7d95",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "bestRatio": 4.68,
+      "worstRatio": 4.68,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>p.page__meta>span.page__meta-date>time|December 17, 2025|1",
+      "path": "article.archive__item>p.page__meta>span.page__meta-date>time",
+      "text": "December 17, 2025",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        1274,
+        119,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime|less than 1 minute read|1",
+      "path": "div.list__item>article.archive__item>p.page__meta>span.page__meta-readtime",
+      "text": "less than 1 minute read",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        562,
+        1274,
+        158,
+        16
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt|I found some tips and general thoughts o|0",
+      "path": "div.entries-list>div.list__item>article.archive__item>p.archive__item-excerpt",
+      "text": "I found some tips and general thoughts o",
+      "color": "rgb(61, 65, 68)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        402,
+        1296,
+        636,
+        50
+      ],
+      "fg": "#3d4144",
+      "bg": "#ffffff",
+      "ratio": 10.3,
+      "bestRatio": 10.3,
+      "worstRatio": 10.3,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul>li>a.disabled>span|Previous|0",
+      "path": "ul>li>a.disabled>span",
+      "text": "Previous",
+      "color": "rgba(100, 103, 105, 0.5)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        1421,
+        60,
+        17
+      ],
+      "fg": "#b2b3b4",
+      "bg": "#ffffff",
+      "ratio": 2.1,
+      "bestRatio": 2.1,
+      "worstRatio": 2.1,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.pagination>ul>li>a.disabled|1|0",
+      "path": "nav.pagination>ul>li>a.disabled",
+      "text": "1",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        491,
+        1411,
+        37,
+        37
+      ],
+      "fg": "#ffffff",
+      "bg": "#6f777d",
+      "ratio": 4.55,
+      "bestRatio": 4.55,
+      "worstRatio": 4.55,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|2|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "2",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        527,
+        1411,
+        39,
+        37
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|3|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "3",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        565,
+        1411,
+        39,
+        37
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.pagination>ul>li>a.disabled|…|0",
+      "path": "nav.pagination>ul>li>a.disabled",
+      "text": "…",
+      "color": "rgba(100, 103, 105, 0.5)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        603,
+        1411,
+        43,
+        37
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|87|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "87",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        645,
+        1411,
+        48,
+        37
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|Next|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "Next",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        692,
+        1411,
+        62,
+        37
+      ],
+      "fg": "#646769",
+      "bg": "#ffffff",
+      "ratio": 5.7,
+      "bestRatio": 5.7,
+      "worstRatio": 5.7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.page__footer-follow>ul.social-icons>li>strong|Follow:|0",
+      "path": "div.page__footer-follow>ul.social-icons>li>strong",
+      "text": "Follow:",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        102,
+        1614,
+        74,
+        19
+      ],
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "bestRatio": 5.12,
+      "worstRatio": 5.12,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.page__footer-follow>ul.social-icons>li>a|Feed|0",
+      "path": "div.page__footer-follow>ul.social-icons>li>a",
+      "text": "Feed",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        186,
+        1614,
+        76,
+        19
+      ],
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "bestRatio": 5.12,
+      "worstRatio": 5.12,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body.layout--home>div.page__footer>footer>div.page__footer-copyright|© 2026 Francis T. O'Donovan. Powered by |0",
+      "path": "body.layout--home>div.page__footer>footer>div.page__footer-copyright",
+      "text": "© 2026 Francis T. O'Donovan. Powered by ",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        102,
+        1650,
+        1236,
+        23
+      ],
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "bestRatio": 5.12,
+      "worstRatio": 5.12,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.page__footer>footer>div.page__footer-copyright>a|Jekyll|0",
+      "path": "div.page__footer>footer>div.page__footer-copyright>a",
+      "text": "Jekyll",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        399,
+        1652,
+        39,
+        18
+      ],
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "bestRatio": 5.12,
+      "worstRatio": 5.12,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.page__footer>footer>div.page__footer-copyright>a|Minimal Mistakes|0",
+      "path": "div.page__footer>footer>div.page__footer-copyright>a",
+      "text": "Minimal Mistakes",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        457,
+        1652,
+        118,
+        18
+      ],
+      "fg": "#646769",
+      "bg": "#f2f3f3",
+      "ratio": 5.12,
+      "bestRatio": 5.12,
+      "worstRatio": 5.12,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

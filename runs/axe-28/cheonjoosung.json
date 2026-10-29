@@ -1,0 +1,321 @@
+{
+  "site": "cheonjoosung",
+  "ms": 2709,
+  "ourPairs": 9,
+  "ourFailing": 5,
+  "axe": {
+    "violations": {
+      "total": 5,
+      "matched": 5,
+      "weFail": 5,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 4,
+      "matched": 4,
+      "weFail": 0,
+      "wePass": 4,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": []
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": "a[href$=\"projects/\"]",
+      "idx": 1,
+      "reason": null,
+      "fg": "#808080",
+      "bg": "#ffffff",
+      "ratio": 3.94,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"blog/\"]",
+      "idx": 2,
+      "reason": null,
+      "fg": "#808080",
+      "bg": "#ffffff",
+      "ratio": 3.94,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"about/\"]",
+      "idx": 3,
+      "reason": null,
+      "fg": "#808080",
+      "bg": "#ffffff",
+      "ratio": 3.94,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "#attribution",
+      "idx": 7,
+      "reason": null,
+      "fg": "#909294",
+      "bg": "#ffffff",
+      "ratio": 3.12,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "#attribution > a",
+      "idx": 8,
+      "reason": null,
+      "fg": "#80bdff",
+      "bg": "#ffffff",
+      "ratio": 1.97,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "b",
+      "idx": 0,
+      "reason": null,
+      "fg": "#191919",
+      "bg": "#ffffff",
+      "ratio": 17.58,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p",
+      "idx": 4,
+      "reason": null,
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".mb-2",
+      "idx": 5,
+      "reason": null,
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "strong",
+      "idx": 6,
+      "reason": null,
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "nav.navbar>a.navbar-brand>h5>b|Joo's IT|0",
+      "path": "nav.navbar>a.navbar-brand>h5>b",
+      "text": "Joo's IT",
+      "color": "rgba(0, 0, 0, 0.9)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        181,
+        67,
+        71,
+        28
+      ],
+      "fg": "#191919",
+      "bg": "#ffffff",
+      "ratio": 17.47,
+      "bestRatio": 17.47,
+      "worstRatio": 17.47,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Projects|0",
+      "path": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item",
+      "text": "Projects",
+      "color": "rgba(0, 0, 0, 0.5)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1065,
+        56,
+        79,
+        42
+      ],
+      "fg": "#808080",
+      "bg": "#ffffff",
+      "ratio": 3.98,
+      "bestRatio": 3.98,
+      "worstRatio": 3.98,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|Blog|0",
+      "path": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item",
+      "text": "Blog",
+      "color": "rgba(0, 0, 0, 0.5)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1144,
+        56,
+        51,
+        42
+      ],
+      "fg": "#808080",
+      "bg": "#ffffff",
+      "ratio": 3.98,
+      "bestRatio": 3.98,
+      "worstRatio": 3.98,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item|About|0",
+      "path": "nav.navbar>div.collapse>div.navbar-nav>a.nav-item",
+      "text": "About",
+      "color": "rgba(0, 0, 0, 0.5)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1195,
+        56,
+        64,
+        42
+      ],
+      "fg": "#808080",
+      "bg": "#ffffff",
+      "ratio": 3.98,
+      "bestRatio": 3.98,
+      "worstRatio": 3.98,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "main.flex-shrink-0>div.row>div.col-lg-4>p.text-muted|\"BELIEVE IN YOURSELF,then...ANYTHING IS |0",
+      "path": "main.flex-shrink-0>div.row>div.col-lg-4>p.text-muted",
+      "text": "\"BELIEVE IN YOURSELF,then...ANYTHING IS ",
+      "color": "rgb(108, 117, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        553,
+        511,
+        334,
+        72
+      ],
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.69,
+      "bestRatio": 4.69,
+      "worstRatio": 4.69,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "html.h-100>body.d-flex>footer.mt-auto>small.text-muted|with by|0",
+      "path": "html.h-100>body.d-flex>footer.mt-auto>small.text-muted",
+      "text": "with by",
+      "color": "rgb(108, 117, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        627,
+        840,
+        186,
+        17
+      ],
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.69,
+      "bestRatio": 4.69,
+      "worstRatio": 4.69,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body.d-flex>footer.mt-auto>small.text-muted>strong|JooSung Cheon|0",
+      "path": "body.d-flex>footer.mt-auto>small.text-muted>strong",
+      "text": "JooSung Cheon",
+      "color": "rgb(108, 117, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        712,
+        840,
+        102,
+        17
+      ],
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.69,
+      "bestRatio": 4.69,
+      "worstRatio": 4.69,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "html.h-100>body.d-flex>footer.mt-auto>small|theme|0",
+      "path": "html.h-100>body.d-flex>footer.mt-auto>small",
+      "text": "theme",
+      "color": "rgb(33, 37, 41)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1399,
+        731,
+        19,
+        113
+      ],
+      "fg": "#909294",
+      "bg": "#ffffff",
+      "ratio": 3.12,
+      "bestRatio": 3.12,
+      "worstRatio": 3.12,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "body.d-flex>footer.mt-auto>small>a|portfolYOU|0",
+      "path": "body.d-flex>footer.mt-auto>small>a",
+      "text": "portfolYOU",
+      "color": "rgb(0, 123, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1400,
+        731,
+        17,
+        68
+      ],
+      "fg": "#7fbdff",
+      "bg": "#ffffff",
+      "ratio": 1.97,
+      "bestRatio": 1.97,
+      "worstRatio": 1.97,
+      "clusters": 1,
+      "status": "fail"
+    }
+  ]
+}

@@ -1,0 +1,1262 @@
+{
+  "diffPixels": 0,
+  "noisePixels": 49,
+  "totalPixels": 14162400,
+  "ratio": 0,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": true,
+  "reviewNeeded": false,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 49,
+    "totalPixels": 14162400,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 49,
+    "totalPixels": 14162400,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 104,
+    "failingBefore": 55,
+    "failingAfter": {
+      "colors": 55,
+      "all": 55
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "decorative": 12,
+      "no-glyphs": 5,
+      "offscreen": 4
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "section.hero>div.hero-inner>h1>em|GBM|0",
+        "text": "GBM",
+        "path": "section.hero>div.hero-inner>h1>em",
+        "fg": "#090c17",
+        "bg": "#090c17",
+        "ratio": 1,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          512,
+          214,
+          148,
+          80
+        ],
+        "tokens": []
+      },
+      {
+        "key": "section.hero>div.hero-inner>h1>em|GLM|0",
+        "text": "GLM",
+        "path": "section.hero>div.hero-inner>h1>em",
+        "fg": "#080b15",
+        "bg": "#080b15",
+        "ratio": 1,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          564,
+          287,
+          141,
+          80
+        ],
+        "tokens": []
+      },
+      {
+        "key": "body>nav.nav>div.nav-inner>a.nav-logo|Burning|0",
+        "text": "Burning",
+        "path": "body>nav.nav>div.nav-inner>a.nav-logo",
+        "fg": "#eef0f6",
+        "bg": "#ffffff",
+        "ratio": 1.14,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          184,
+          17,
+          103,
+          27
+        ],
+        "tokens": [
+          "color.surface.default",
+          "color.slate.50"
+        ]
+      },
+      {
+        "key": "section.hero>div.hero-inner>div.hero-cta>a.btn|Read the Blog|0",
+        "text": "Read the Blog",
+        "path": "section.hero>div.hero-inner>div.hero-cta>a.btn",
+        "fg": "#1a1d2e",
+        "bg": "#080b15",
+        "ratio": 1.18,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          771,
+          524,
+          131,
+          42
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.slate.800"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-inner>div.footer-top>div.footer-newsletter|Get updates by email →|0",
+        "text": "Get updates by email →",
+        "path": "footer.footer>div.footer-inner>div.footer-top>div.footer-newsletter",
+        "fg": "#1a1d2e",
+        "bg": "#080b14",
+        "ratio": 1.18,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          752,
+          9549,
+          528,
+          139
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.slate.800"
+        ]
+      },
+      {
+        "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Tail risk & distributions|0",
+        "text": "Tail risk & distributions",
+        "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+        "fg": "#8a92b2",
+        "bg": "#7d7f8b",
+        "ratio": 1.29,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          200,
+          8765,
+          178,
+          18
+        ],
+        "bestRatio": 2.88,
+        "tokens": [
+          "color.blue.400-3"
+        ]
+      },
+      {
+        "key": "div.stats-inner>div.stat>a>span.stat-label|Total Libraries|0",
+        "text": "Total Libraries",
+        "path": "div.stats-inner>div.stat>a>span.stat-label",
+        "fg": "#4d5670",
+        "bg": "#0f1529",
+        "ratio": 2.48,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          622,
+          963,
+          108,
+          18
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.stats-inner>div.stat>a>span.stat-label|Tests|0",
+        "text": "Tests",
+        "path": "div.stats-inner>div.stat>a>span.stat-label",
+        "fg": "#4d5670",
+        "bg": "#0f1528",
+        "ratio": 2.49,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          817,
+          963,
+          69,
+          18
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.stats-strip>div.stats-inner>div.stat>span.stat-label|PyPI Downloads / month (March 2026)|0",
+        "text": "PyPI Downloads / month (March 2026)",
+        "path": "div.stats-strip>div.stats-inner>div.stat>span.stat-label",
+        "fg": "#4d5670",
+        "bg": "#0f1529",
+        "ratio": 2.49,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          586,
+          1020,
+          268,
+          18
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.stats-inner>div.stat>a>span.stat-label|Flagship Libraries|0",
+        "text": "Flagship Libraries",
+        "path": "div.stats-inner>div.stat>a>span.stat-label",
+        "fg": "#4d5670",
+        "bg": "#0f1426",
+        "ratio": 2.51,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          405,
+          963,
+          129,
+          18
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.stats-strip>div.stats-inner>div.stat>span.stat-label|Articles|0",
+        "text": "Articles",
+        "path": "div.stats-strip>div.stats-inner>div.stat>span.stat-label",
+        "fg": "#4d5670",
+        "bg": "#0f1426",
+        "ratio": 2.52,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          974,
+          963,
+          61,
+          18
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Compliance|0",
+        "text": "Compliance",
+        "path": "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label",
+        "fg": "#8a92b2",
+        "bg": "#eceef4",
+        "ratio": 2.65,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          200,
+          9601,
+          86,
+          18
+        ],
+        "bestRatio": 6.39,
+        "tokens": [
+          "color.blue.400-3"
+        ]
+      },
+      {
+        "key": "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-label|Stay current|0",
+        "text": "Stay current",
+        "path": "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-label",
+        "fg": "#4d5670",
+        "bg": "#080b14",
+        "ratio": 2.7,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          752,
+          9549,
+          528,
+          17
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.footer-bottom>ul.footer-links>li>a|GitHub|0",
+        "text": "GitHub",
+        "path": "div.footer-bottom>ul.footer-links>li>a",
+        "fg": "#4d5670",
+        "bg": "#080b14",
+        "ratio": 2.7,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          160,
+          9774,
+          44,
+          16
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.footer-bottom>ul.footer-links>li>a|Blog|0",
+        "text": "Blog",
+        "path": "div.footer-bottom>ul.footer-links>li>a",
+        "fg": "#4d5670",
+        "bg": "#080b14",
+        "ratio": 2.7,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          228,
+          9774,
+          28,
+          16
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-inner>div.footer-bottom>div.footer-copy|Open source · UK insurance pricing|0",
+        "text": "Open source · UK insurance pricing",
+        "path": "footer.footer>div.footer-inner>div.footer-bottom>div.footer-copy",
+        "fg": "#4d5670",
+        "bg": "#080b14",
+        "ratio": 2.7,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          9772,
+          210,
+          20
+        ],
+        "tokens": [
+          "color.slate.500"
+        ]
+      },
+      {
+        "key": "div.hero-inner>div.hero-terminal>div.hero-terminal-bar>span.term-title|shap_relativities_demo.py|0",
+        "text": "shap_relativities_demo.py",
+        "path": "div.hero-inner>div.hero-terminal>div.hero-terminal-bar>span.term-title",
+        "fg": "#5b5e63",
+        "bg": "#151921",
+        "ratio": 2.71,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          501,
+          633,
+          168,
+          18
+        ],
+        "tokens": [
+          "color.white-a30"
+        ]
+      },
+      {
+        "key": "body>section.libraries>details.lib-portfolio-details>summary.lib-portfolio-summary|Show full portfolio (34 libraries)|0",
+        "text": "Show full portfolio (34 libraries)",
+        "path": "body>section.libraries>details.lib-portfolio-details>summary.lib-portfolio-summary",
+        "fg": "#8b93ac",
+        "bg": "#f5f7fc",
+        "ratio": 2.85,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          24,
+          6243,
+          1392,
+          47
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|0",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          438,
+          8610,
+          66,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|1",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          630,
+          8633,
+          66,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|2",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          925,
+          8610,
+          315,
+          36
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|3",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          178,
+          8720,
+          66,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|4",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          547,
+          8698,
+          332,
+          36
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|5",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1119,
+          8698,
+          66,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|6",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          227,
+          8785,
+          66,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|7",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          547,
+          8785,
+          333,
+          36
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|05 Apr 2026|8",
+        "text": "05 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          925,
+          8807,
+          319,
+          36
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|0",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          170,
+          8895,
+          338,
+          36
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|1",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          704,
+          8895,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|2",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1073,
+          8895,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|3",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          367,
+          8982,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|4",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          635,
+          8982,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|5",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          933,
+          9004,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|6",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          272,
+          9092,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|7",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          555,
+          9092,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|8",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          991,
+          9069,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|9",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          365,
+          9157,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|10",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          690,
+          9157,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|11",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1113,
+          9157,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|12",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          404,
+          9222,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|13",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          783,
+          9222,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|14",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1173,
+          9222,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|15",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          367,
+          9287,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|16",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          671,
+          9287,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|17",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1052,
+          9287,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|18",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          170,
+          9352,
+          337,
+          36
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|19",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          742,
+          9352,
+          67,
+          14
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div>ul>li>span|04 Apr 2026|20",
+        "text": "04 Apr 2026",
+        "path": "div>ul>li>span",
+        "fg": "#8b92a8",
+        "bg": "#f7f8fc",
+        "ratio": 2.92,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          925,
+          9352,
+          324,
+          36
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div.nav-inner>ul.nav-links>li>a|Libraries|0",
+        "text": "Libraries",
+        "path": "div.nav-inner>ul.nav-links>li>a",
+        "fg": "#8b93ac",
+        "bg": "#ffffff",
+        "ratio": 3.06,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1114,
+          15,
+          84,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "div.nav-inner>ul.nav-links>li>a|Blog|0",
+        "text": "Blog",
+        "path": "div.nav-inner>ul.nav-links>li>a",
+        "fg": "#8b93ac",
+        "bg": "#ffffff",
+        "ratio": 3.06,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1201,
+          15,
+          55,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.blue.400-2"
+        ]
+      },
+      {
+        "key": "section.recent-articles>div>div>a|View all 529 articles →|0",
+        "text": "View all 529 articles →",
+        "path": "section.recent-articles>div>div>a",
+        "fg": "#4f7ef8",
+        "bg": "#f7f8fc",
+        "ratio": 3.49,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          170,
+          9422,
+          149,
+          17
+        ],
+        "tokens": [
+          "color.action.primary",
+          "button.bg",
+          "badge.text"
+        ]
+      },
+      {
+        "key": "nav.nav>div.nav-inner>a.nav-logo>span.logo-accent|Cost|0",
+        "text": "Cost",
+        "path": "nav.nav>div.nav-inner>a.nav-logo>span.logo-accent",
+        "fg": "#4f7ef8",
+        "bg": "#ffffff",
+        "ratio": 3.7,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          249,
+          17,
+          38,
+          27
+        ],
+        "tokens": [
+          "color.action.primary",
+          "button.bg",
+          "badge.text"
+        ]
+      },
+      {
+        "key": "body>section.course-cta>div.course-cta-inner>div.section-label|Structured learning|0",
+        "text": "Structured learning",
+        "path": "body>section.course-cta>div.course-cta-inner>div.section-label",
+        "fg": "#4f7ef8",
+        "bg": "#ffffff",
+        "ratio": 3.7,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          7013,
+          1440,
+          18
+        ],
+        "tokens": [
+          "color.action.primary",
+          "button.bg",
+          "badge.text"
+        ]
+      },
+      {
+        "key": "body>section.course-cta>div.course-cta-inner>a.btn|View the Course →|0",
+        "text": "View the Course →",
+        "path": "body>section.course-cta>div.course-cta-inner>a.btn",
+        "fg": "#ffffff",
+        "bg": "#4f7ef8",
+        "ratio": 3.7,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          7136,
+          166,
+          42
+        ],
+        "tokens": [
+          "color.text.inverse",
+          "button.text",
+          "color.white"
+        ]
+      },
+      {
+        "key": "section.hero>div.hero-inner>div.hero-cta>a.btn|Browse Libraries on GitHub|0",
+        "text": "Browse Libraries on GitHub",
+        "path": "section.hero>div.hero-inner>div.hero-cta>a.btn",
+        "fg": "#ffffff",
+        "bg": "#4f7ef8",
+        "ratio": 3.71,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          538,
+          524,
+          220,
+          42
+        ],
+        "tokens": [
+          "color.text.inverse",
+          "button.text",
+          "color.white"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "body>nav.nav>div.nav-inner>a.nav-logo|Burning|0",
+        "nav.nav>div.nav-inner>a.nav-logo>span.logo-accent|Cost|0",
+        "div.nav-inner>ul.nav-links>li>a|Libraries|0",
+        "div.nav-inner>ul.nav-links>li>a|Blog|0",
+        "section.hero>div.hero-inner>h1>em|GBM|0",
+        "section.hero>div.hero-inner>h1>em|GLM|0",
+        "section.hero>div.hero-inner>div.hero-cta>a.btn|Browse Libraries on GitHub|0",
+        "section.hero>div.hero-inner>div.hero-cta>a.btn|Read the Blog|0",
+        "div.hero-inner>div.hero-terminal>div.hero-terminal-bar>span.term-title|shap_relativities_demo.py|0",
+        "div.stats-inner>div.stat>a>span.stat-label|Flagship Libraries|0",
+        "div.stats-inner>div.stat>a>span.stat-label|Total Libraries|0",
+        "div.stats-inner>div.stat>a>span.stat-label|Tests|0",
+        "div.stats-strip>div.stats-inner>div.stat>span.stat-label|Articles|0",
+        "div.stats-strip>div.stats-inner>div.stat>span.stat-label|PyPI Downloads / month (March 2026)|0",
+        "body>section.libraries>details.lib-portfolio-details>summary.lib-portfolio-summary|Show full portfolio (34 libraries)|0",
+        "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Tail risk & distributions|0",
+        "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Compliance|0",
+        "body>section.course-cta>div.course-cta-inner>div.section-label|Structured learning|0",
+        "body>section.course-cta>div.course-cta-inner>a.btn|View the Course →|0",
+        "div>ul>li>span|05 Apr 2026|0",
+        "div>ul>li>span|05 Apr 2026|1",
+        "div>ul>li>span|05 Apr 2026|2",
+        "div>ul>li>span|05 Apr 2026|3",
+        "div>ul>li>span|05 Apr 2026|4",
+        "div>ul>li>span|05 Apr 2026|5",
+        "div>ul>li>span|05 Apr 2026|6",
+        "div>ul>li>span|05 Apr 2026|7",
+        "div>ul>li>span|05 Apr 2026|8",
+        "div>ul>li>span|04 Apr 2026|0",
+        "div>ul>li>span|04 Apr 2026|1",
+        "div>ul>li>span|04 Apr 2026|2",
+        "div>ul>li>span|04 Apr 2026|3",
+        "div>ul>li>span|04 Apr 2026|4",
+        "div>ul>li>span|04 Apr 2026|5",
+        "div>ul>li>span|04 Apr 2026|6",
+        "div>ul>li>span|04 Apr 2026|7",
+        "div>ul>li>span|04 Apr 2026|8",
+        "div>ul>li>span|04 Apr 2026|9",
+        "div>ul>li>span|04 Apr 2026|10",
+        "div>ul>li>span|04 Apr 2026|11",
+        "div>ul>li>span|04 Apr 2026|12",
+        "div>ul>li>span|04 Apr 2026|13",
+        "div>ul>li>span|04 Apr 2026|14",
+        "div>ul>li>span|04 Apr 2026|15",
+        "div>ul>li>span|04 Apr 2026|16",
+        "div>ul>li>span|04 Apr 2026|17",
+        "div>ul>li>span|04 Apr 2026|18",
+        "div>ul>li>span|04 Apr 2026|19",
+        "div>ul>li>span|04 Apr 2026|20",
+        "section.recent-articles>div>div>a|View all 529 articles →|0",
+        "footer.footer>div.footer-inner>div.footer-top>div.footer-newsletter|Get updates by email →|0",
+        "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-label|Stay current|0",
+        "div.footer-bottom>ul.footer-links>li>a|GitHub|0",
+        "div.footer-bottom>ul.footer-links>li>a|Blog|0",
+        "footer.footer>div.footer-inner>div.footer-bottom>div.footer-copy|Open source · UK insurance pricing|0"
+      ],
+      "all": [
+        "body>nav.nav>div.nav-inner>a.nav-logo|Burning|0",
+        "nav.nav>div.nav-inner>a.nav-logo>span.logo-accent|Cost|0",
+        "div.nav-inner>ul.nav-links>li>a|Libraries|0",
+        "div.nav-inner>ul.nav-links>li>a|Blog|0",
+        "section.hero>div.hero-inner>h1>em|GBM|0",
+        "section.hero>div.hero-inner>h1>em|GLM|0",
+        "section.hero>div.hero-inner>div.hero-cta>a.btn|Browse Libraries on GitHub|0",
+        "section.hero>div.hero-inner>div.hero-cta>a.btn|Read the Blog|0",
+        "div.hero-inner>div.hero-terminal>div.hero-terminal-bar>span.term-title|shap_relativities_demo.py|0",
+        "div.stats-inner>div.stat>a>span.stat-label|Flagship Libraries|0",
+        "div.stats-inner>div.stat>a>span.stat-label|Total Libraries|0",
+        "div.stats-inner>div.stat>a>span.stat-label|Tests|0",
+        "div.stats-strip>div.stats-inner>div.stat>span.stat-label|Articles|0",
+        "div.stats-strip>div.stats-inner>div.stat>span.stat-label|PyPI Downloads / month (March 2026)|0",
+        "body>section.libraries>details.lib-portfolio-details>summary.lib-portfolio-summary|Show full portfolio (34 libraries)|0",
+        "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Tail risk & distributions|0",
+        "details.lib-portfolio-details>div.lib-group>div.lib-group-header>span.lib-group-label|Compliance|0",
+        "body>section.course-cta>div.course-cta-inner>div.section-label|Structured learning|0",
+        "body>section.course-cta>div.course-cta-inner>a.btn|View the Course →|0",
+        "div>ul>li>span|05 Apr 2026|0",
+        "div>ul>li>span|05 Apr 2026|1",
+        "div>ul>li>span|05 Apr 2026|2",
+        "div>ul>li>span|05 Apr 2026|3",
+        "div>ul>li>span|05 Apr 2026|4",
+        "div>ul>li>span|05 Apr 2026|5",
+        "div>ul>li>span|05 Apr 2026|6",
+        "div>ul>li>span|05 Apr 2026|7",
+        "div>ul>li>span|05 Apr 2026|8",
+        "div>ul>li>span|04 Apr 2026|0",
+        "div>ul>li>span|04 Apr 2026|1",
+        "div>ul>li>span|04 Apr 2026|2",
+        "div>ul>li>span|04 Apr 2026|3",
+        "div>ul>li>span|04 Apr 2026|4",
+        "div>ul>li>span|04 Apr 2026|5",
+        "div>ul>li>span|04 Apr 2026|6",
+        "div>ul>li>span|04 Apr 2026|7",
+        "div>ul>li>span|04 Apr 2026|8",
+        "div>ul>li>span|04 Apr 2026|9",
+        "div>ul>li>span|04 Apr 2026|10",
+        "div>ul>li>span|04 Apr 2026|11",
+        "div>ul>li>span|04 Apr 2026|12",
+        "div>ul>li>span|04 Apr 2026|13",
+        "div>ul>li>span|04 Apr 2026|14",
+        "div>ul>li>span|04 Apr 2026|15",
+        "div>ul>li>span|04 Apr 2026|16",
+        "div>ul>li>span|04 Apr 2026|17",
+        "div>ul>li>span|04 Apr 2026|18",
+        "div>ul>li>span|04 Apr 2026|19",
+        "div>ul>li>span|04 Apr 2026|20",
+        "section.recent-articles>div>div>a|View all 529 articles →|0",
+        "footer.footer>div.footer-inner>div.footer-top>div.footer-newsletter|Get updates by email →|0",
+        "div.footer-inner>div.footer-top>div.footer-newsletter>div.footer-newsletter-label|Stay current|0",
+        "div.footer-bottom>ul.footer-links>li>a|GitHub|0",
+        "div.footer-bottom>ul.footer-links>li>a|Blog|0",
+        "footer.footer>div.footer-inner>div.footer-bottom>div.footer-copy|Open source · UK insurance pricing|0"
+      ]
+    }
+  }
+}

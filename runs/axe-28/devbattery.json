@@ -1,0 +1,5194 @@
+{
+  "site": "devbattery",
+  "ms": 4757,
+  "ourPairs": 142,
+  "ourFailing": 23,
+  "axe": {
+    "violations": {
+      "total": 3,
+      "matched": 3,
+      "weFail": 3,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 6,
+      "matched": 5,
+      "weFail": 0,
+      "wePass": 5,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 132,
+      "matched": 132,
+      "weFail": 20,
+      "wePass": 112,
+      "weSkip": {},
+      "byReason": {
+        "pseudoContent": {
+          "total": 53,
+          "pass": 38,
+          "fail": 15,
+          "skipped": 0
+        },
+        "bgGradient": {
+          "total": 70,
+          "pass": 66,
+          "fail": 4,
+          "skipped": 0
+        },
+        "shortTextContent": {
+          "total": 9,
+          "pass": 8,
+          "fail": 1,
+          "skipped": 0
+        }
+      }
+    }
+  },
+  "oursOnly": 2,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "Dev Battery",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#10b981",
+          "bg": "#f4f7f9",
+          "ratio": 2.36,
+          "required": 3
+        }
+      },
+      {
+        "text": "Sustaining engineering momentum through ",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#71717a",
+          "bg": "#f6f8fa",
+          "ratio": 4.54,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "LV",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#047857",
+          "bg": "#e3f4ee",
+          "ratio": 4.81,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "1",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#047857",
+          "bg": "#e2f4ee",
+          "ratio": 4.8,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Wonjun Jeong",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#18181b",
+          "bg": "#f9fefc",
+          "ratio": 17.35,
+          "required": 3
+        }
+      },
+      {
+        "text": "Backend engineer focused on scalable sys",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#71717a",
+          "bg": "#ebf9f5",
+          "ratio": 4.48,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Continuous practice mode",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#047857",
+          "bg": "#e6f8f2",
+          "ratio": 4.97,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Learning Capacity",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#71717a",
+          "bg": "#feffff",
+          "ratio": 4.82,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "0%",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#10b981",
+          "bg": "#feffff",
+          "ratio": 2.53,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Read a post, open search, or like an art",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#71717a",
+          "bg": "#feffff",
+          "ratio": 4.82,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Manual boost +10%",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#18181b",
+          "ratio": 17.72,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Categories",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#71717a",
+          "bg": "#ffffff",
+          "ratio": 4.83,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Baekjoon",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "153",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Codeforces",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "43",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Database",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "13",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "DevOps",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "3",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "HackerRank",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "130",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Inflearn",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "2",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Java",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "15",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "LeetCode",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "116",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "NeetCode",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "13",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Network",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "7",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Programmers",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "88",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Project",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "23",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "React",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "2",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Recap",
+        "axe": {
+          "reason": "bgGradient",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ffffff",
+          "ratio": 7.73,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "4",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#52525b",
+          "bg": "#ebebed",
+          "ratio": 6.49,
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": ".is-active > span",
+      "idx": 17,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#10b981",
+      "ratio": 2.53,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".is-active > strong",
+      "idx": 18,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#add9cc",
+      "ratio": 1.54,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".disabled[href=\"#\"] > span[aria-hidden=\"true\"]",
+      "idx": 129,
+      "reason": null,
+      "fg": "#b1b3b4",
+      "bg": "#fefefe",
+      "ratio": 2.08,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".db-feed-heading__search > span",
+      "idx": 74,
+      "reason": null,
+      "fg": "#71717a",
+      "bg": "#ffffff",
+      "ratio": 4.83,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(3) > a[href$=\"page2/\"]",
+      "idx": 131,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.64,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page3/\"]",
+      "idx": 132,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.64,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page158/\"]",
+      "idx": 134,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.64,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(7) > a[href$=\"page2/\"]",
+      "idx": 135,
+      "reason": null,
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.64,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#search",
+      "idx": -1,
+      "reason": "hidden",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": null
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-topbar__brand",
+      "idx": 3,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".site-subtitle",
+      "idx": 4,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-topbar__level",
+      "idx": 6,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-topbar__level > span[data-dashboard-level=\"\"]",
+      "idx": 7,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-profile__identity > div > h2",
+      "idx": 9,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-profile__identity > div > p",
+      "idx": 10,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-profile__identity > div > span",
+      "idx": 11,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-energy__label > span",
+      "idx": 12,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "strong[data-dashboard-battery-text=\"\"]",
+      "idx": 13,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-energy > p",
+      "idx": 14,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-charge > span",
+      "idx": 15,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-categories > h2",
+      "idx": 16,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"baekjoon/\"] > span",
+      "idx": 19,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"baekjoon/\"] > strong",
+      "idx": 20,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"codeforces/\"] > span",
+      "idx": 21,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"codeforces/\"] > strong",
+      "idx": 22,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"database/\"] > span",
+      "idx": 23,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"database/\"] > strong",
+      "idx": 24,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"devops/\"] > span",
+      "idx": 25,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"devops/\"] > strong",
+      "idx": 26,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"hackerrank/\"] > span",
+      "idx": 27,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"hackerrank/\"] > strong",
+      "idx": 28,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"inflearn/\"] > span",
+      "idx": 29,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"inflearn/\"] > strong",
+      "idx": 30,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"java/\"] > span",
+      "idx": 31,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"java/\"] > strong",
+      "idx": 32,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"leetcode/\"] > span",
+      "idx": 33,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"leetcode/\"] > strong",
+      "idx": 34,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"neetcode/\"] > span",
+      "idx": 35,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"neetcode/\"] > strong",
+      "idx": 36,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"network/\"] > span",
+      "idx": 37,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"network/\"] > strong",
+      "idx": 38,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"programmers/\"] > span",
+      "idx": 39,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"programmers/\"] > strong",
+      "idx": 40,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"project/\"] > span",
+      "idx": 41,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"project/\"] > strong",
+      "idx": 42,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"react/\"] > span",
+      "idx": 43,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"react/\"] > strong",
+      "idx": 44,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"recap/\"] > span",
+      "idx": 45,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"recap/\"] > strong",
+      "idx": 46,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"spring/\"] > span",
+      "idx": 47,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"spring/\"] > strong",
+      "idx": 48,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"til/\"] > span",
+      "idx": 49,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"til/\"] > strong",
+      "idx": 50,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"vue/\"] > span",
+      "idx": 51,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"vue/\"] > strong",
+      "idx": 52,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"data-structure/\"] > span",
+      "idx": 53,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"data-structure/\"] > strong",
+      "idx": 54,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"operating-system/\"] > span",
+      "idx": 55,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"operating-system/\"] > strong",
+      "idx": 56,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "header > div:nth-child(1) > p",
+      "idx": 57,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "h1",
+      "idx": 58,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "header > div:nth-child(1) > span",
+      "idx": 59,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-hero__stats > span:nth-child(1)",
+      "idx": 60,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span:nth-child(1) > strong",
+      "idx": 61,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-hero__stats > span:nth-child(2)",
+      "idx": 62,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span:nth-child(2) > strong",
+      "idx": 63,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-dashboard-hero__stats > span:nth-child(3)",
+      "idx": 64,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "span:nth-child(3) > strong",
+      "idx": 65,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "strong > span[data-dashboard-level=\"\"]",
+      "idx": 66,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-momentum__header > div > h2",
+      "idx": 67,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-momentum__header > div > p",
+      "idx": 68,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-momentum__header > strong",
+      "idx": 69,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-momentum__legend > span:nth-child(1)",
+      "idx": 70,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-momentum__legend > span:nth-child(3)",
+      "idx": 71,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-feed-heading > div > h2",
+      "idx": 72,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-feed-heading > div > span",
+      "idx": 73,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(1) > article > .db-archive-item__content > .db-archive-item__topline > .db-eyebrow-chip",
+      "idx": 75,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "time[datetime=\"2026-05-28T21:53:42+09:00\"]",
+      "idx": 76,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".archive__item-title.no_toc[itemprop=\"headline\"] > a[href$=\"log-95/\"][rel=\"permalink\"]",
+      "idx": 77,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(1) > article > .db-archive-item__content > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 78,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(1) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(1)",
+      "idx": 79,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(1) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(2)",
+      "idx": 80,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(1) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(3)",
+      "idx": 81,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/til/log-95\"] > .db-post-metrics__button[data-post-like=\"\"][aria-label=\"Like this post\"] > span[data-post-likes=\"\"]",
+      "idx": 82,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/til/log-95\"] > .db-post-metrics__item[aria-label=\"Post views\"] > span[data-post-views=\"\"]",
+      "idx": 83,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(2) > article > .db-archive-item__content > .db-archive-item__topline > .db-eyebrow-chip",
+      "idx": 84,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "time[datetime=\"2026-05-20T22:19:25+09:00\"]",
+      "idx": 85,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".archive__item-title.no_toc[itemprop=\"headline\"] > a[href$=\"log-94/\"][rel=\"permalink\"]",
+      "idx": 86,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(2) > article > .db-archive-item__content > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 87,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(2) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(1)",
+      "idx": 88,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(2) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(2)",
+      "idx": 89,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(2) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(3)",
+      "idx": 90,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/til/log-94\"] > .db-post-metrics__button[data-post-like=\"\"][aria-label=\"Like this post\"] > span[data-post-likes=\"\"]",
+      "idx": 91,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/til/log-94\"] > .db-post-metrics__item[aria-label=\"Post views\"] > span[data-post-views=\"\"]",
+      "idx": 92,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .db-archive-item__topline > .db-eyebrow-chip",
+      "idx": 93,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "time[datetime=\"2026-05-20T18:10:00+09:00\"]",
+      "idx": 94,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .archive__item-title.no_toc[itemprop=\"headline\"] > a[rel=\"permalink\"]",
+      "idx": 95,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 96,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(1)",
+      "idx": 97,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(2)",
+      "idx": 98,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(3)",
+      "idx": 99,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .db-post-metrics.db-post-metrics--card[data-post-metrics=\"\"] > .db-post-metrics__button[data-post-like=\"\"][aria-label=\"Like this post\"] > span[data-post-likes=\"\"]",
+      "idx": 100,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(3) > article > .db-archive-item__content > .db-post-metrics.db-post-metrics--card[data-post-metrics=\"\"] > .db-post-metrics__item[aria-label=\"Post views\"] > span[data-post-views=\"\"]",
+      "idx": 101,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(4) > article > .db-archive-item__content > .db-archive-item__topline > .db-eyebrow-chip",
+      "idx": 102,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "time[datetime=\"2026-05-20T16:29:56+09:00\"]",
+      "idx": 103,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".archive__item-title.no_toc[itemprop=\"headline\"] > a[href$=\"sort-colors/\"][rel=\"permalink\"]",
+      "idx": 104,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(4) > article > .db-archive-item__content > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 105,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(4) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(1)",
+      "idx": 106,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(4) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(2)",
+      "idx": 107,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(4) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(3)",
+      "idx": 108,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/neetcode/sort-colors\"] > .db-post-metrics__button[data-post-like=\"\"][aria-label=\"Like this post\"] > span[data-post-likes=\"\"]",
+      "idx": 109,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/neetcode/sort-colors\"] > .db-post-metrics__item[aria-label=\"Post views\"] > span[data-post-views=\"\"]",
+      "idx": 110,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(5) > article > .db-archive-item__content > .db-archive-item__topline > .db-eyebrow-chip",
+      "idx": 111,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "time[datetime=\"2026-05-13T16:34:05+09:00\"]",
+      "idx": 112,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".archive__item-title.no_toc[itemprop=\"headline\"] > a[href$=\"sort-an-array/\"][rel=\"permalink\"]",
+      "idx": 113,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(5) > article > .db-archive-item__content > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 114,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(5) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(1)",
+      "idx": 115,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(5) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(2)",
+      "idx": 116,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(5) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(3)",
+      "idx": 117,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/neetcode/sort-an-array\"] > .db-post-metrics__button[data-post-like=\"\"][aria-label=\"Like this post\"] > span[data-post-likes=\"\"]",
+      "idx": 118,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/neetcode/sort-an-array\"] > .db-post-metrics__item[aria-label=\"Post views\"] > span[data-post-views=\"\"]",
+      "idx": 119,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(6) > article > .db-archive-item__content > .db-archive-item__topline > .db-eyebrow-chip",
+      "idx": 120,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "time[datetime=\"2026-05-12T22:06:17+09:00\"]",
+      "idx": 121,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".archive__item-title.no_toc[itemprop=\"headline\"] > a[href$=\"log-93/\"][rel=\"permalink\"]",
+      "idx": 122,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(6) > article > .db-archive-item__content > .archive__item-excerpt[itemprop=\"description\"]",
+      "idx": 123,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(6) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(1)",
+      "idx": 124,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(6) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(2)",
+      "idx": 125,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".grid__item:nth-child(6) > article > .db-archive-item__content > .db-archive-item__tags > .db-tag-chip:nth-child(3)",
+      "idx": 126,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/til/log-93\"] > .db-post-metrics__button[data-post-like=\"\"][aria-label=\"Like this post\"] > span[data-post-likes=\"\"]",
+      "idx": 127,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "div[data-post-id=\"/til/log-93\"] > .db-post-metrics__item[aria-label=\"Post views\"] > span[data-post-views=\"\"]",
+      "idx": 128,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".current",
+      "idx": 130,
+      "reason": "shortTextContent",
+      "fg": "#ffffff",
+      "bg": "#10b981",
+      "ratio": 2.53,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-footer__eyebrow",
+      "idx": 136,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-footer__title",
+      "idx": 137,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-footer__description",
+      "idx": 138,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-footer__links > a[target=\"_blank\"][rel=\"noopener noreferrer\"]",
+      "idx": 139,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-footer__links > a[href$=\"categories/\"]",
+      "idx": 140,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-footer__links > a[href$=\"tags/\"]",
+      "idx": 141,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"feed.xml\"]",
+      "idx": 142,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".db-footer__links > a:nth-child(5)",
+      "idx": 143,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".page__footer-copyright",
+      "idx": 144,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".sidebar__top-text",
+      "idx": 145,
+      "reason": "bgGradient",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "nav.skip-links>ul>li>a.screen-reader-shortcut|Skip to primary navigation|0",
+      "path": "nav.skip-links>ul>li>a.screen-reader-shortcut",
+      "text": "Skip to primary navigation",
+      "color": "rgb(63, 82, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "nav.skip-links>ul>li>a.screen-reader-shortcut|Skip to content|0",
+      "path": "nav.skip-links>ul>li>a.screen-reader-shortcut",
+      "text": "Skip to content",
+      "color": "rgb(63, 82, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "nav.skip-links>ul>li>a.screen-reader-shortcut|Skip to footer|0",
+      "path": "nav.skip-links>ul>li>a.screen-reader-shortcut",
+      "text": "Skip to footer",
+      "color": "rgb(63, 82, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.db-topbar__brand|Dev Battery|0",
+      "path": "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.db-topbar__brand",
+      "text": "Dev Battery",
+      "color": "rgb(16, 185, 129)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        86,
+        31,
+        324,
+        21
+      ],
+      "fg": "#10b981",
+      "bg": "#f4f7f9",
+      "ratio": 2.36,
+      "bestRatio": 2.36,
+      "worstRatio": 2.36,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.site-subtitle|Sustaining engineering momentum through |0",
+      "path": "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.site-subtitle",
+      "text": "Sustaining engineering momentum through ",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        86,
+        54,
+        324,
+        36
+      ],
+      "fg": "#71717a",
+      "bg": "#f6f8fa",
+      "ratio": 4.54,
+      "bestRatio": 4.54,
+      "worstRatio": 4.54,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-topbar__dock>div.db-topbar__actions>button.theme-toggle>span.visually-hidden|Switch to dark mode|0",
+      "path": "div.db-topbar__dock>div.db-topbar__actions>button.theme-toggle>span.visually-hidden",
+      "text": "Switch to dark mode",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1026,
+        60,
+        1,
+        1
+      ],
+      "fg": "#52525b",
+      "bg": "#f5f6f6",
+      "ratio": 7.13,
+      "bestRatio": 7.13,
+      "worstRatio": 7.13,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.greedy-nav>div.db-topbar__dock>div.db-topbar__actions>span.db-topbar__level|LV|0",
+      "path": "nav.greedy-nav>div.db-topbar__dock>div.db-topbar__actions>span.db-topbar__level",
+      "text": "LV",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1277,
+        40,
+        71,
+        41
+      ],
+      "fg": "#047857",
+      "bg": "#e3f4ee",
+      "ratio": 4.81,
+      "bestRatio": 4.81,
+      "worstRatio": 4.81,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-topbar__dock>div.db-topbar__actions>span.db-topbar__level>span|1|0",
+      "path": "div.db-topbar__dock>div.db-topbar__actions>span.db-topbar__level>span",
+      "text": "1",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1328,
+        50,
+        7,
+        21
+      ],
+      "fg": "#047857",
+      "bg": "#e2f4ee",
+      "ratio": 4.8,
+      "bestRatio": 4.8,
+      "worstRatio": 4.8,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-topbar__dock>div.db-topbar__actions>button.search__toggle>span.visually-hidden|Toggle search panel|0",
+      "path": "div.db-topbar__dock>div.db-topbar__actions>button.search__toggle>span.visually-hidden",
+      "text": "Toggle search panel",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1379,
+        60,
+        1,
+        1
+      ],
+      "fg": "#52525b",
+      "bg": "#f9fafa",
+      "ratio": 7.36,
+      "bestRatio": 7.36,
+      "worstRatio": 7.36,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>h2|Wonjun Jeong|0",
+      "path": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>h2",
+      "text": "Wonjun Jeong",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        127,
+        174,
+        201,
+        26
+      ],
+      "fg": "#18181b",
+      "bg": "#f9fefc",
+      "ratio": 17.35,
+      "bestRatio": 17.35,
+      "worstRatio": 17.35,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>p|Backend engineer focused on scalable sys|0",
+      "path": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>p",
+      "text": "Backend engineer focused on scalable sys",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        127,
+        200,
+        201,
+        64
+      ],
+      "fg": "#71717a",
+      "bg": "#ebf9f5",
+      "ratio": 4.48,
+      "bestRatio": 4.77,
+      "worstRatio": 4.48,
+      "clusters": 2,
+      "status": "fail"
+    },
+    {
+      "key": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>span|Continuous practice mode|0",
+      "path": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>span",
+      "text": "Continuous practice mode",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        127,
+        271,
+        166,
+        27
+      ],
+      "fg": "#047857",
+      "bg": "#e6f8f2",
+      "ratio": 4.97,
+      "bestRatio": 4.97,
+      "worstRatio": 4.97,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>span|Learning Capacity|0",
+      "path": "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>span",
+      "text": "Learning Capacity",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        54,
+        319,
+        111,
+        21
+      ],
+      "fg": "#71717a",
+      "bg": "#feffff",
+      "ratio": 4.82,
+      "bestRatio": 4.82,
+      "worstRatio": 4.82,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>strong|0%|0",
+      "path": "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>strong",
+      "text": "0%",
+      "color": "rgb(16, 185, 129)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        306,
+        319,
+        21,
+        21
+      ],
+      "fg": "#10b981",
+      "bg": "#feffff",
+      "ratio": 2.53,
+      "bestRatio": 2.53,
+      "worstRatio": 2.53,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "aside.db-dashboard__sidebar>section.db-dashboard-card>div.db-dashboard-energy>p|Read a post, open search, or like an art|0",
+      "path": "aside.db-dashboard__sidebar>section.db-dashboard-card>div.db-dashboard-energy>p",
+      "text": "Read a post, open search, or like an art",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        54,
+        370,
+        273,
+        35
+      ],
+      "fg": "#71717a",
+      "bg": "#feffff",
+      "ratio": 4.82,
+      "bestRatio": 4.82,
+      "worstRatio": 4.82,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "aside.db-dashboard__sidebar>section.db-dashboard-card>button.db-dashboard-charge>span|Manual boost +10%|0",
+      "path": "aside.db-dashboard__sidebar>section.db-dashboard-card>button.db-dashboard-charge>span",
+      "text": "Manual boost +10%",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        137,
+        434,
+        127,
+        16
+      ],
+      "fg": "#ffffff",
+      "bg": "#18181b",
+      "ratio": 17.72,
+      "bestRatio": 17.72,
+      "worstRatio": 17.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-dashboard>aside.db-dashboard__sidebar>section.db-dashboard-card>h2|Categories|0",
+      "path": "div.db-dashboard>aside.db-dashboard__sidebar>section.db-dashboard-card>h2",
+      "text": "Categories",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        54,
+        547,
+        109,
+        14
+      ],
+      "fg": "#71717a",
+      "bg": "#ffffff",
+      "ratio": 4.83,
+      "bestRatio": 4.83,
+      "worstRatio": 4.83,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a.is-active>span|All|0",
+      "path": "section.db-dashboard-card>nav>a.is-active>span",
+      "text": "All",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        594,
+        17,
+        22
+      ],
+      "fg": "#ffffff",
+      "bg": "#10b981",
+      "ratio": 2.54,
+      "bestRatio": 2.54,
+      "worstRatio": 2.54,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a.is-active>strong|943|0",
+      "path": "section.db-dashboard-card>nav>a.is-active>strong",
+      "text": "943",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        279,
+        592,
+        35,
+        25
+      ],
+      "fg": "#ffffff",
+      "bg": "#add9cc",
+      "ratio": 1.55,
+      "bestRatio": 1.55,
+      "worstRatio": 1.55,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Baekjoon|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Baekjoon",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        645,
+        60,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|153|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "153",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        282,
+        643,
+        32,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Codeforces|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Codeforces",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        695,
+        75,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|43|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "43",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        694,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Database|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Database",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        746,
+        61,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|13|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "13",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        745,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|DevOps|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "DevOps",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        797,
+        51,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|3|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "3",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        796,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|HackerRank|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "HackerRank",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        848,
+        78,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|130|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "130",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        282,
+        847,
+        33,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Inflearn|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Inflearn",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        899,
+        50,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|2|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "2",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        897,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Java|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Java",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        950,
+        30,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|15|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "15",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        948,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|LeetCode|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "LeetCode",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1000,
+        62,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|116|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "116",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        284,
+        999,
+        30,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|NeetCode|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "NeetCode",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1051,
+        64,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|13|1",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "13",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1050,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Network|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Network",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1102,
+        55,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|7|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "7",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1101,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Programmers|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Programmers",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1153,
+        87,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|88|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "88",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1152,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Project|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Project",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1204,
+        46,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|23|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "23",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1202,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|React|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "React",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1255,
+        37,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|2|1",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "2",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1253,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Recap|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Recap",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1306,
+        40,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|4|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "4",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1304,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Spring|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Spring",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1356,
+        42,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|21|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "21",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1355,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|TIL|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "TIL",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1407,
+        20,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|293|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "293",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        280,
+        1406,
+        35,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|Vue|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "Vue",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1458,
+        26,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|1|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "1",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1457,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|data-structure|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "data-structure",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1509,
+        94,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|14|0",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "14",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1508,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>span|operating-system|0",
+      "path": "section.db-dashboard-card>nav>a>span",
+      "text": "operating-system",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        67,
+        1560,
+        116,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#ffffff",
+      "ratio": 7.73,
+      "bestRatio": 7.73,
+      "worstRatio": 7.73,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>nav>a>strong|2|2",
+      "path": "section.db-dashboard-card>nav>a>strong",
+      "text": "2",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        287,
+        1558,
+        28,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#ebebed",
+      "ratio": 6.49,
+      "bestRatio": 6.49,
+      "worstRatio": 6.49,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>header.db-dashboard-hero>div>p|Engineering Notes|0",
+      "path": "section.db-dashboard__main>header.db-dashboard-hero>div>p",
+      "text": "Engineering Notes",
+      "color": "rgb(16, 185, 129)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        178,
+        495,
+        21
+      ],
+      "fg": "#10b981",
+      "bg": "#ffffff",
+      "ratio": 2.54,
+      "bestRatio": 2.54,
+      "worstRatio": 2.54,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.db-dashboard__main>header.db-dashboard-hero>div>h1|Dev Battery|0",
+      "path": "section.db-dashboard__main>header.db-dashboard-hero>div>h1",
+      "text": "Dev Battery",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        417,
+        206,
+        495,
+        55
+      ],
+      "fg": "#18181b",
+      "bg": "#ffffff",
+      "ratio": 17.72,
+      "bestRatio": 17.72,
+      "worstRatio": 17.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>header.db-dashboard-hero>div>span|A technical journal about algorithms, ba|0",
+      "path": "section.db-dashboard__main>header.db-dashboard-hero>div>span",
+      "text": "A technical journal about algorithms, ba",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        417,
+        273,
+        495,
+        52
+      ],
+      "fg": "#71717a",
+      "bg": "#ffffff",
+      "ratio": 4.83,
+      "bestRatio": 4.83,
+      "worstRatio": 4.83,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|articles|0",
+      "path": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span",
+      "text": "articles",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        934,
+        271,
+        129,
+        54
+      ],
+      "fg": "#71717a",
+      "bg": "#f2f3f3",
+      "ratio": 4.34,
+      "bestRatio": 4.34,
+      "worstRatio": 4.34,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "header.db-dashboard-hero>div.db-dashboard-hero__stats>span>strong|943|0",
+      "path": "header.db-dashboard-hero>div.db-dashboard-hero__stats>span>strong",
+      "text": "943",
+      "color": "rgb(24, 24, 27)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        949,
+        286,
+        36,
+        21
+      ],
+      "fg": "#18181b",
+      "bg": "#f3f3f4",
+      "ratio": 15.98,
+      "bestRatio": 15.98,
+      "worstRatio": 15.98,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|categories|0",
+      "path": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span",
+      "text": "categories",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1073,
+        271,
+        138,
+        54
+      ],
+      "fg": "#71717a",
+      "bg": "#edf1f0",
+      "ratio": 4.25,
+      "bestRatio": 4.25,
+      "worstRatio": 4.25,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "header.db-dashboard-hero>div.db-dashboard-hero__stats>span>strong|19|0",
+      "path": "header.db-dashboard-hero>div.db-dashboard-hero__stats>span>strong",
+      "text": "19",
+      "color": "rgb(24, 24, 27)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1087,
+        286,
+        20,
+        21
+      ],
+      "fg": "#18181b",
+      "bg": "#eff2f1",
+      "ratio": 15.69,
+      "bestRatio": 15.69,
+      "worstRatio": 15.69,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|local profile|0",
+      "path": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span",
+      "text": "local profile",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1220,
+        271,
+        162,
+        54
+      ],
+      "fg": "#71717a",
+      "bg": "#e8f0ee",
+      "ratio": 4.16,
+      "bestRatio": 4.16,
+      "worstRatio": 4.16,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "header.db-dashboard-hero>div.db-dashboard-hero__stats>span>strong|LV|0",
+      "path": "header.db-dashboard-hero>div.db-dashboard-hero__stats>span>strong",
+      "text": "LV",
+      "color": "rgb(24, 24, 27)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1234,
+        286,
+        34,
+        21
+      ],
+      "fg": "#18181b",
+      "bg": "#e9f0ef",
+      "ratio": 15.34,
+      "bestRatio": 15.34,
+      "worstRatio": 15.34,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-dashboard-hero__stats>span>strong>span|1|0",
+      "path": "div.db-dashboard-hero__stats>span>strong>span",
+      "text": "1",
+      "color": "rgb(24, 24, 27)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1261,
+        286,
+        8,
+        21
+      ],
+      "fg": "#18181b",
+      "bg": "#e9f0ef",
+      "ratio": 15.33,
+      "bestRatio": 15.33,
+      "worstRatio": 15.33,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>div.db-momentum__header>div>h2|Practice Calendar|0",
+      "path": "section.db-dashboard-card>div.db-momentum__header>div>h2",
+      "text": "Practice Calendar",
+      "color": "rgb(24, 24, 27)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        413,
+        401,
+        308,
+        20
+      ],
+      "fg": "#18181b",
+      "bg": "#ffffff",
+      "ratio": 17.72,
+      "bestRatio": 17.72,
+      "worstRatio": 17.72,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard-card>div.db-momentum__header>div>p|Daily publishing activity from the last |0",
+      "path": "section.db-dashboard-card>div.db-momentum__header>div>p",
+      "text": "Daily publishing activity from the last ",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        413,
+        421,
+        308,
+        21
+      ],
+      "fg": "#71717a",
+      "bg": "#ffffff",
+      "ratio": 4.83,
+      "bestRatio": 4.83,
+      "worstRatio": 4.83,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>section.db-dashboard-card>div.db-momentum__header>strong|2026.05.28 active|0",
+      "path": "section.db-dashboard__main>section.db-dashboard-card>div.db-momentum__header>strong",
+      "text": "2026.05.28 active",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1267,
+        401,
+        119,
+        25
+      ],
+      "fg": "#047857",
+      "bg": "#e6f8f1",
+      "ratio": 4.98,
+      "bestRatio": 4.98,
+      "worstRatio": 4.98,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>section.db-dashboard-card>div.db-momentum__legend>span|Idle|0",
+      "path": "section.db-dashboard__main>section.db-dashboard-card>div.db-momentum__legend>span",
+      "text": "Idle",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        413,
+        587,
+        20,
+        19
+      ],
+      "fg": "#71717a",
+      "bg": "#ffffff",
+      "ratio": 4.83,
+      "bestRatio": 4.83,
+      "worstRatio": 4.83,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>section.db-dashboard-card>div.db-momentum__legend>span|Charged|0",
+      "path": "section.db-dashboard__main>section.db-dashboard-card>div.db-momentum__legend>span",
+      "text": "Charged",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1339,
+        587,
+        47,
+        19
+      ],
+      "fg": "#71717a",
+      "bg": "#feffff",
+      "ratio": 4.82,
+      "bestRatio": 4.82,
+      "worstRatio": 4.82,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>div.db-feed-heading>div>h2|Technical Articles|0",
+      "path": "section.db-dashboard__main>div.db-feed-heading>div>h2",
+      "text": "Technical Articles",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        387,
+        655,
+        179,
+        24
+      ],
+      "fg": "#18181b",
+      "bg": "#fcfdfc",
+      "ratio": 17.32,
+      "bestRatio": 17.32,
+      "worstRatio": 17.32,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>div.db-feed-heading>div>span|6 shown on page 1 of 158|0",
+      "path": "section.db-dashboard__main>div.db-feed-heading>div>span",
+      "text": "6 shown on page 1 of 158",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        387,
+        687,
+        164,
+        16
+      ],
+      "fg": "#71717a",
+      "bg": "#fdfdfd",
+      "ratio": 4.76,
+      "bestRatio": 4.76,
+      "worstRatio": 4.76,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section.db-dashboard__main>div.db-feed-heading>button.search__toggle>span|Search|0",
+      "path": "section.db-dashboard__main>div.db-feed-heading>button.search__toggle>span",
+      "text": "Search",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1330,
+        672,
+        48,
+        21
+      ],
+      "fg": "#71717a",
+      "bg": "#ffffff",
+      "ratio": 4.83,
+      "bestRatio": 4.83,
+      "worstRatio": 4.83,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip|TIL|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip",
+      "text": "TIL",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        913,
+        47,
+        34
+      ],
+      "fg": "#047857",
+      "bg": "#e4f5ef",
+      "ratio": 4.86,
+      "bestRatio": 4.86,
+      "worstRatio": 4.86,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time|2026-05-28|0",
+      "path": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time",
+      "text": "2026-05-28",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        488,
+        922,
+        76,
+        16
+      ],
+      "fg": "#46494c",
+      "bg": "#fbfbfb",
+      "ratio": 8.75,
+      "bestRatio": 8.75,
+      "worstRatio": 8.75,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a|[TIL] Junior Web Developer Log - Day 95|0",
+      "path": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a",
+      "text": "[TIL] Junior Web Developer Log - Day 95",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        430,
+        960,
+        413,
+        56
+      ],
+      "fg": "#18181b",
+      "bg": "#fafafa",
+      "ratio": 16.98,
+      "bestRatio": 16.98,
+      "worstRatio": 16.98,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt|TIL|0",
+      "path": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt",
+      "text": "TIL",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        1023,
+        413,
+        70
+      ],
+      "fg": "#46494c",
+      "bg": "#f9f9f9",
+      "ratio": 8.6,
+      "bestRatio": 8.6,
+      "worstRatio": 8.6,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|work|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "work",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        1105,
+        57,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|work-out|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "work-out",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        495,
+        1105,
+        84,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|cs|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "cs",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        585,
+        1105,
+        41,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+      "text": "1",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        460,
+        1177,
+        6,
+        16
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|78|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+      "text": "78",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        518,
+        1179,
+        16,
+        13
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip|TIL|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip",
+      "text": "TIL",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        913,
+        47,
+        34
+      ],
+      "fg": "#047857",
+      "bg": "#e4f5ef",
+      "ratio": 4.86,
+      "bestRatio": 4.86,
+      "worstRatio": 4.86,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time|2026-05-20|0",
+      "path": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time",
+      "text": "2026-05-20",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1014,
+        922,
+        76,
+        16
+      ],
+      "fg": "#46494c",
+      "bg": "#fbfbfb",
+      "ratio": 8.75,
+      "bestRatio": 8.75,
+      "worstRatio": 8.75,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a|[TIL] Junior Web Developer Log - Day 94|0",
+      "path": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a",
+      "text": "[TIL] Junior Web Developer Log - Day 94",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        956,
+        960,
+        413,
+        56
+      ],
+      "fg": "#18181b",
+      "bg": "#fafafa",
+      "ratio": 16.98,
+      "bestRatio": 16.98,
+      "worstRatio": 16.98,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt|TIL|1",
+      "path": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt",
+      "text": "TIL",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        1023,
+        413,
+        70
+      ],
+      "fg": "#46494c",
+      "bg": "#f9f9f9",
+      "ratio": 8.6,
+      "bestRatio": 8.6,
+      "worstRatio": 8.6,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|work|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "work",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        1105,
+        57,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|work-out|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "work-out",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        1105,
+        84,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|neetcode|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "neetcode",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1111,
+        1105,
+        85,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+      "text": "0",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        986,
+        1177,
+        9,
+        16
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|81|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+      "text": "81",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1046,
+        1179,
+        14,
+        13
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip|NeetCode|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip",
+      "text": "NeetCode",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        1471,
+        100,
+        34
+      ],
+      "fg": "#047857",
+      "bg": "#e4f5ef",
+      "ratio": 4.86,
+      "bestRatio": 4.86,
+      "worstRatio": 4.86,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time|2026-05-20|1",
+      "path": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time",
+      "text": "2026-05-20",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        541,
+        1480,
+        76,
+        16
+      ],
+      "fg": "#46494c",
+      "bg": "#fbfbfb",
+      "ratio": 8.75,
+      "bestRatio": 8.75,
+      "worstRatio": 8.75,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a|[NeetCode] Top K Elements In List|0",
+      "path": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a",
+      "text": "[NeetCode] Top K Elements In List",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        430,
+        1518,
+        413,
+        28
+      ],
+      "fg": "#18181b",
+      "bg": "#fafafa",
+      "ratio": 16.99,
+      "bestRatio": 16.99,
+      "worstRatio": 16.99,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt|Synced attempt history for Top K Element|0",
+      "path": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt",
+      "text": "Synced attempt history for Top K Element",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        1581,
+        413,
+        70
+      ],
+      "fg": "#46494c",
+      "bg": "#f9f9f9",
+      "ratio": 8.6,
+      "bestRatio": 8.6,
+      "worstRatio": 8.6,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|algorithms|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "algorithms",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        1663,
+        94,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|neetcode|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "neetcode",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        531,
+        1663,
+        85,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|python|0",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "python",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        623,
+        1663,
+        70,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|1",
+      "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+      "text": "0",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        460,
+        1735,
+        9,
+        16
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|97|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+      "text": "97",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        521,
+        1737,
+        16,
+        13
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip|NeetCode|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip",
+      "text": "NeetCode",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        1471,
+        100,
+        34
+      ],
+      "fg": "#047857",
+      "bg": "#e4f5ef",
+      "ratio": 4.86,
+      "bestRatio": 4.86,
+      "worstRatio": 4.86,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time|2026-05-20|2",
+      "path": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time",
+      "text": "2026-05-20",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1067,
+        1480,
+        76,
+        16
+      ],
+      "fg": "#46494c",
+      "bg": "#fbfbfb",
+      "ratio": 8.75,
+      "bestRatio": 8.75,
+      "worstRatio": 8.75,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a|[NeetCode] 75. Sort Colors|0",
+      "path": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a",
+      "text": "[NeetCode] 75. Sort Colors",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        956,
+        1518,
+        413,
+        28
+      ],
+      "fg": "#18181b",
+      "bg": "#fafafa",
+      "ratio": 16.99,
+      "bestRatio": 16.99,
+      "worstRatio": 16.99,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt|Synced attempt history for LeetCode 75: |0",
+      "path": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt",
+      "text": "Synced attempt history for LeetCode 75: ",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        1581,
+        413,
+        70
+      ],
+      "fg": "#46494c",
+      "bg": "#f9f9f9",
+      "ratio": 8.6,
+      "bestRatio": 8.6,
+      "worstRatio": 8.6,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|algorithms|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "algorithms",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        1663,
+        94,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|neetcode|2",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "neetcode",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1057,
+        1663,
+        85,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|python|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "python",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1149,
+        1663,
+        70,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|1",
+      "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+      "text": "1",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        986,
+        1735,
+        6,
+        16
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|96|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+      "text": "96",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1043,
+        1737,
+        17,
+        13
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip|NeetCode|2",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip",
+      "text": "NeetCode",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        2029,
+        100,
+        34
+      ],
+      "fg": "#047857",
+      "bg": "#e4f5ef",
+      "ratio": 4.86,
+      "bestRatio": 4.86,
+      "worstRatio": 4.86,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time|2026-05-13|0",
+      "path": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time",
+      "text": "2026-05-13",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        541,
+        2038,
+        74,
+        16
+      ],
+      "fg": "#46494c",
+      "bg": "#fbfbfb",
+      "ratio": 8.75,
+      "bestRatio": 8.75,
+      "worstRatio": 8.75,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a|[NeetCode] 912. Sort an Array|0",
+      "path": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a",
+      "text": "[NeetCode] 912. Sort an Array",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        430,
+        2076,
+        413,
+        28
+      ],
+      "fg": "#18181b",
+      "bg": "#fafafa",
+      "ratio": 16.99,
+      "bestRatio": 16.99,
+      "worstRatio": 16.99,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt|Synced attempt history for LeetCode 912:|0",
+      "path": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt",
+      "text": "Synced attempt history for LeetCode 912:",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        2139,
+        413,
+        70
+      ],
+      "fg": "#46494c",
+      "bg": "#f9f9f9",
+      "ratio": 8.6,
+      "bestRatio": 8.6,
+      "worstRatio": 8.6,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|algorithms|2",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "algorithms",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        430,
+        2221,
+        94,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|neetcode|3",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "neetcode",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        531,
+        2221,
+        85,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|python|2",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "python",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        623,
+        2221,
+        70,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|5|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+      "text": "5",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        460,
+        2293,
+        8,
+        16
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|93|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+      "text": "93",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        520,
+        2295,
+        17,
+        13
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip|TIL|2",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__topline>span.db-eyebrow-chip",
+      "text": "TIL",
+      "color": "rgb(4, 120, 87)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        2029,
+        47,
+        34
+      ],
+      "fg": "#047857",
+      "bg": "#e4f5ef",
+      "ratio": 4.86,
+      "bestRatio": 4.86,
+      "worstRatio": 4.86,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time|2026-05-12|0",
+      "path": "div.db-archive-item__topline>p.page__meta>span.page__meta-date>time",
+      "text": "2026-05-12",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1014,
+        2038,
+        74,
+        16
+      ],
+      "fg": "#46494c",
+      "bg": "#fbfbfb",
+      "ratio": 8.75,
+      "bestRatio": 8.75,
+      "worstRatio": 8.75,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a|[TIL] Junior Web Developer Log - Day 93|0",
+      "path": "article.archive__item>div.db-archive-item__content>h2.archive__item-title>a",
+      "text": "[TIL] Junior Web Developer Log - Day 93",
+      "color": "rgb(24, 24, 27)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        956,
+        2076,
+        413,
+        56
+      ],
+      "fg": "#18181b",
+      "bg": "#fafafa",
+      "ratio": 16.98,
+      "bestRatio": 16.98,
+      "worstRatio": 16.98,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt|TIL|2",
+      "path": "div.grid__item>article.archive__item>div.db-archive-item__content>p.archive__item-excerpt",
+      "text": "TIL",
+      "color": "rgb(70, 73, 76)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        2139,
+        413,
+        70
+      ],
+      "fg": "#46494c",
+      "bg": "#f9f9f9",
+      "ratio": 8.6,
+      "bestRatio": 8.6,
+      "worstRatio": 8.6,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|work|2",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "work",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        956,
+        2221,
+        57,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|work-out|2",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "work-out",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1020,
+        2221,
+        84,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip|cs|1",
+      "path": "article.archive__item>div.db-archive-item__content>div.db-archive-item__tags>span.db-tag-chip",
+      "text": "cs",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1111,
+        2221,
+        41,
+        34
+      ],
+      "fg": "#52525b",
+      "bg": "#e8e8ea",
+      "ratio": 6.31,
+      "bestRatio": 6.31,
+      "worstRatio": 6.31,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|2",
+      "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+      "text": "0",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        986,
+        2293,
+        9,
+        16
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|57|0",
+      "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+      "text": "57",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1046,
+        2295,
+        16,
+        13
+      ],
+      "fg": "#71717a",
+      "bg": "#e9e9eb",
+      "ratio": 3.99,
+      "bestRatio": 3.99,
+      "worstRatio": 3.99,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "ul>li>a.disabled>span|Previous|0",
+      "path": "ul>li>a.disabled>span",
+      "text": "Previous",
+      "color": "rgba(100, 103, 105, 0.5)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        681,
+        2436,
+        60,
+        17
+      ],
+      "fg": "#b1b3b4",
+      "bg": "#fefefe",
+      "ratio": 2.1,
+      "bestRatio": 2.1,
+      "worstRatio": 2.1,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.pagination>ul>li>a.disabled|1|0",
+      "path": "nav.pagination>ul>li>a.disabled",
+      "text": "1",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        767,
+        2422,
+        50,
+        45
+      ],
+      "fg": "#ffffff",
+      "bg": "#10b981",
+      "ratio": 2.54,
+      "bestRatio": 2.54,
+      "worstRatio": 2.54,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|2|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "2",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        825,
+        2422,
+        50,
+        45
+      ],
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.65,
+      "bestRatio": 5.65,
+      "worstRatio": 5.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|3|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "3",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        882,
+        2422,
+        50,
+        45
+      ],
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.65,
+      "bestRatio": 5.65,
+      "worstRatio": 5.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.pagination>ul>li>a.disabled|…|0",
+      "path": "nav.pagination>ul>li>a.disabled",
+      "text": "…",
+      "color": "rgba(100, 103, 105, 0.5)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        940,
+        2422,
+        50,
+        45
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|158|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "158",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        997,
+        2422,
+        62,
+        45
+      ],
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.65,
+      "bestRatio": 5.65,
+      "worstRatio": 5.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.pagination>ul>li>a|Next|0",
+      "path": "nav.pagination>ul>li>a",
+      "text": "Next",
+      "color": "rgb(100, 103, 105)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1067,
+        2422,
+        68,
+        45
+      ],
+      "fg": "#646769",
+      "bg": "#fefefe",
+      "ratio": 5.65,
+      "bestRatio": 5.65,
+      "worstRatio": 5.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__brand>p.db-footer__eyebrow|Engineered Writing|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__brand>p.db-footer__eyebrow",
+      "text": "Engineered Writing",
+      "color": "rgb(113, 113, 122)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        30,
+        2569,
+        1380,
+        24
+      ],
+      "fg": "#71717a",
+      "bg": "#fdfdfd",
+      "ratio": 4.76,
+      "bestRatio": 4.76,
+      "worstRatio": 4.76,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__brand>h2.db-footer__title|Dev Battery|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__brand>h2.db-footer__title",
+      "text": "Dev Battery",
+      "color": "rgb(82, 82, 91)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        30,
+        2603,
+        1380,
+        35
+      ],
+      "fg": "#52525b",
+      "bg": "#fcfcfc",
+      "ratio": 7.51,
+      "bestRatio": 7.51,
+      "worstRatio": 7.51,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__brand>p.db-footer__description|A technical journal about algorithms, ba|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__brand>p.db-footer__description",
+      "text": "A technical journal about algorithms, ba",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        30,
+        2655,
+        1380,
+        31
+      ],
+      "fg": "#52525b",
+      "bg": "#fafafa",
+      "ratio": 7.38,
+      "bestRatio": 7.38,
+      "worstRatio": 7.38,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a|LinkedIn|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a",
+      "text": "LinkedIn",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        30,
+        2710,
+        144,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#f7f7f8",
+      "ratio": 7.25,
+      "bestRatio": 7.25,
+      "worstRatio": 7.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a|Category|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a",
+      "text": "Category",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        185,
+        2710,
+        144,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#f7f7f8",
+      "ratio": 7.25,
+      "bestRatio": 7.25,
+      "worstRatio": 7.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a|Tag|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a",
+      "text": "Tag",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        339,
+        2710,
+        144,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#f7f7f8",
+      "ratio": 7.25,
+      "bestRatio": 7.25,
+      "worstRatio": 7.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a|RSS|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a",
+      "text": "RSS",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        494,
+        2710,
+        144,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#f7f7f8",
+      "ratio": 7.25,
+      "bestRatio": 7.25,
+      "worstRatio": 7.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a|GitHub|0",
+      "path": "footer.page__footer>div.page__footer-inner>div.db-footer__links>a",
+      "text": "GitHub",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        649,
+        2710,
+        144,
+        25
+      ],
+      "fg": "#52525b",
+      "bg": "#f7f7f8",
+      "ratio": 7.25,
+      "bestRatio": 7.25,
+      "worstRatio": 7.25,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body.layout--home>footer.page__footer>div.page__footer-inner>div.page__footer-copyright|© 2026 Dev Battery. Built with Jekyll.|0",
+      "path": "body.layout--home>footer.page__footer>div.page__footer-inner>div.page__footer-copyright",
+      "text": "© 2026 Dev Battery. Built with Jekyll.",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        30,
+        2753,
+        1380,
+        21
+      ],
+      "fg": "#52525b",
+      "bg": "#f6f6f7",
+      "ratio": 7.14,
+      "bestRatio": 7.14,
+      "worstRatio": 7.14,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body.layout--home>aside.sidebar__top>a>span.sidebar__top-text|Top|0",
+      "path": "body.layout--home>aside.sidebar__top>a>span.sidebar__top-text",
+      "text": "Top",
+      "color": "rgb(82, 82, 91)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1338,
+        828,
+        30,
+        22
+      ],
+      "fg": "#52525b",
+      "bg": "#fafafa",
+      "ratio": 7.39,
+      "bestRatio": 7.39,
+      "worstRatio": 7.39,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

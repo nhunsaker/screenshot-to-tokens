@@ -33,6 +33,7 @@ Model API and Muse Spark (hosted, or the open-weights Muse Spark Open served on 
 | Point and say: contrast | click a label in the live web app, say *"make it readable, keep our gray"*: Argon 21 elements 2.95:1 → 4.53:1, whole page 41 → 20 failing text pairs, 0 regressions, 3 of 3 runs; Light Bootstrap 12 elements 2.81:1 → 4.54:1 (`docs/point-and-say.md`) |
 | Point and say: focus and blocks | *"a visible focus ring in our blue"*: Argon visible focus 0 → 25 of 25, 3 of 3; *"make these buttons red"*: blocked and reverted, naming "Month" (4.20:1 → 3.77:1) (`docs/point-and-say.md`) |
 | Tests | 291 passing (`pnpm test`) |
+| Run outputs | `runs/` holds the verify and timing summaries behind every number above |
 
 Live demo: [original](https://nhunsaker.github.io/argon-dashboard-react/original/) · [tokenized](https://nhunsaker.github.io/argon-dashboard-react/tokens/) ·
 [a proposed change, previewed](https://nhunsaker.github.io/argon-dashboard-react/tokens/?tokens=color-action-primary:e8711a) ·
@@ -144,3 +145,7 @@ Full write-up: [`docs/SUBMISSION.md`](docs/SUBMISSION.md).
 
 Hackathon submission text, built-with-Meta-models detail, what was proven with real numbers, and
 honest limits: [`docs/SUBMISSION.md`](docs/SUBMISSION.md).
+
+## License
+
+Apache-2.0 (`LICENSE`). Clone it and run it on your app.

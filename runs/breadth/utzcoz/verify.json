@@ -1,0 +1,82 @@
+{
+  "diffPixels": 1374,
+  "noisePixels": 0,
+  "totalPixels": 1686240,
+  "ratio": 0.0008148306290919442,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": true,
+  "reviewNeeded": false,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1686240,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1686240,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 47,
+    "failingBefore": 1,
+    "failingAfter": {
+      "colors": 1,
+      "all": 1
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "decorative": 2
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "main.site-main>div.container>nav.pagination>span.disabled|← Newer|0",
+        "text": "← Newer",
+        "path": "main.site-main>div.container>nav.pagination>span.disabled",
+        "fg": "#bbbdbe",
+        "bg": "#ffffff",
+        "ratio": 1.89,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          344,
+          1032,
+          58,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "nav.text",
+          "footer.text"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "main.site-main>div.container>nav.pagination>span.disabled|← Newer|0"
+      ],
+      "all": [
+        "main.site-main>div.container>nav.pagination>span.disabled|← Newer|0"
+      ]
+    }
+  }
+}

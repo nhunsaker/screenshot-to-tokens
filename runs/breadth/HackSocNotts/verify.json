@@ -1,0 +1,789 @@
+{
+  "diffPixels": 0,
+  "noisePixels": 0,
+  "totalPixels": 3222720,
+  "ratio": 0,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": true,
+  "reviewNeeded": false,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 3222720,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 3222720,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 73,
+    "failingBefore": 32,
+    "failingAfter": {
+      "colors": 32,
+      "all": 32
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "decorative": 2
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "div>ul.event-list>li>time|4 Nov 2026—|0",
+        "text": "4 Nov 2026—",
+        "path": "div>ul.event-list>li>time",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          685,
+          1128,
+          116,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div>ul.event-list>li>time|18 Nov 2026—|0",
+        "text": "18 Nov 2026—",
+        "path": "div>ul.event-list>li>time",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          685,
+          1158,
+          126,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div>ul.event-list>li>time|2 Dec 2026—|0",
+        "text": "2 Dec 2026—",
+        "path": "div>ul.event-list>li>time",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          685,
+          1188,
+          113,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div>ul.event-list>li>time|16 Dec 2026—|0",
+        "text": "16 Dec 2026—",
+        "path": "div>ul.event-list>li>time",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          685,
+          1218,
+          123,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div>ul.news-list>li>time|25/08/2025—|0",
+        "text": "25/08/2025—",
+        "path": "div>ul.news-list>li>time",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          235,
+          1616,
+          121,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div>ul.news-list>li>time|12/06/2022—|0",
+        "text": "12/06/2022—",
+        "path": "div>ul.news-list>li>time",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          235,
+          1646,
+          121,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div>ul.news-list>li>time|02/01/2022—|0",
+        "text": "02/01/2022—",
+        "path": "div>ul.news-list>li>time",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          235,
+          1676,
+          121,
+          30
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div.wrapper>footer>div.footer-left>p|© 2026|0",
+        "text": "© 2026",
+        "path": "div.wrapper>footer>div.footer-left>p",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          220,
+          1983,
+          550,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div.wrapper>footer>div.footer-left>p|Website by Zac Garby and contributors. F|0",
+        "text": "Website by Zac Garby and contributors. F",
+        "path": "div.wrapper>footer>div.footer-left>p",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          220,
+          2006,
+          550,
+          42
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div.wrapper>footer>div.footer-left>p.small|HackSoc is a part of the .|0",
+        "text": "HackSoc is a part of the .",
+        "path": "div.wrapper>footer>div.footer-left>p.small",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          220,
+          2168,
+          550,
+          18
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div.wrapper>footer>div.footer-mid>h2|USEFUL LINKS|0",
+        "text": "USEFUL LINKS",
+        "path": "div.wrapper>footer>div.footer-mid>h2",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          845,
+          1983,
+          150,
+          19
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "div.wrapper>footer>div.footer-right>h2|SITEMAP|0",
+        "text": "SITEMAP",
+        "path": "div.wrapper>footer>div.footer-right>h2",
+        "fg": "#636363",
+        "bg": "#131313",
+        "ratio": 3.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          1983,
+          150,
+          19
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.600"
+        ]
+      },
+      {
+        "key": "main>div.split>figure>figcaption|Karaoke at HackNotts '25 :)|0",
+        "text": "Karaoke at HackNotts '25 :)",
+        "path": "main>div.split>figure>figcaption",
+        "fg": "#6d6d6d",
+        "bg": "#131313",
+        "ratio": 3.59,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          795,
+          718,
+          425,
+          17
+        ],
+        "tokens": [
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "main>div.split>figure>figcaption|Project Judging at HackNotts '25.|0",
+        "text": "Project Judging at HackNotts '25.",
+        "path": "main>div.split>figure>figcaption",
+        "fg": "#6d6d6d",
+        "bg": "#131313",
+        "ratio": 3.59,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          220,
+          1223,
+          425,
+          17
+        ],
+        "tokens": [
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "main>div.split>figure>figcaption|Hard at work :)|0",
+        "text": "Hard at work :)",
+        "path": "main>div.split>figure>figcaption",
+        "fg": "#6d6d6d",
+        "bg": "#131313",
+        "ratio": 3.59,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          795,
+          1763,
+          425,
+          17
+        ],
+        "tokens": [
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "footer>div.footer-left>p>a|HackSoc|0",
+        "text": "HackSoc",
+        "path": "footer>div.footer-left>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          275,
+          1980,
+          60,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-left>p>a|pull request|0",
+        "text": "pull request",
+        "path": "footer>div.footer-left>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          628,
+          2003,
+          85,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-left>p.small>a|University of Nottingham Students' Union|0",
+        "text": "University of Nottingham Students' Union",
+        "path": "footer>div.footer-left>p.small>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          357,
+          2166,
+          253,
+          21
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-mid>p>a|Our GitHub|0",
+        "text": "Our GitHub",
+        "path": "footer>div.footer-mid>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          845,
+          2009,
+          82,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-mid>p>a|Code of Conduct|0",
+        "text": "Code of Conduct",
+        "path": "footer>div.footer-mid>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          845,
+          2032,
+          117,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-mid>p>a|Constitution|0",
+        "text": "Constitution",
+        "path": "footer>div.footer-mid>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          845,
+          2055,
+          88,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-mid>p>a|Discord|0",
+        "text": "Discord",
+        "path": "footer>div.footer-mid>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          845,
+          2078,
+          54,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-mid>p>a|UoN SU Page|0",
+        "text": "UoN SU Page",
+        "path": "footer>div.footer-mid>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          845,
+          2101,
+          92,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-mid>p>a|HackNotts|0",
+        "text": "HackNotts",
+        "path": "footer>div.footer-mid>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          845,
+          2124,
+          74,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|Home|0",
+        "text": "Home",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          2009,
+          42,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|Calendar|0",
+        "text": "Calendar",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          2032,
+          64,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|Contact Us|0",
+        "text": "Contact Us",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          2055,
+          76,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|All Events|0",
+        "text": "All Events",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          2078,
+          71,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|JSON|0",
+        "text": "JSON",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1165,
+          2078,
+          38,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|All Newsletters|0",
+        "text": "All Newsletters",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          2101,
+          108,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|Committee|0",
+        "text": "Committee",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1070,
+          2124,
+          77,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      },
+      {
+        "key": "footer>div.footer-right>p>a|Past|0",
+        "text": "Past",
+        "path": "footer>div.footer-right>p>a",
+        "fg": "#777777",
+        "bg": "#131313",
+        "ratio": 4.15,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1171,
+          2124,
+          30,
+          25
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "color.gray.550"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "main>div.split>figure>figcaption|Karaoke at HackNotts '25 :)|0",
+        "div>ul.event-list>li>time|4 Nov 2026—|0",
+        "div>ul.event-list>li>time|18 Nov 2026—|0",
+        "div>ul.event-list>li>time|2 Dec 2026—|0",
+        "div>ul.event-list>li>time|16 Dec 2026—|0",
+        "main>div.split>figure>figcaption|Project Judging at HackNotts '25.|0",
+        "div>ul.news-list>li>time|25/08/2025—|0",
+        "div>ul.news-list>li>time|12/06/2022—|0",
+        "div>ul.news-list>li>time|02/01/2022—|0",
+        "main>div.split>figure>figcaption|Hard at work :)|0",
+        "div.wrapper>footer>div.footer-left>p|© 2026|0",
+        "footer>div.footer-left>p>a|HackSoc|0",
+        "div.wrapper>footer>div.footer-left>p|Website by Zac Garby and contributors. F|0",
+        "footer>div.footer-left>p>a|pull request|0",
+        "div.wrapper>footer>div.footer-left>p.small|HackSoc is a part of the .|0",
+        "footer>div.footer-left>p.small>a|University of Nottingham Students' Union|0",
+        "div.wrapper>footer>div.footer-mid>h2|USEFUL LINKS|0",
+        "footer>div.footer-mid>p>a|Our GitHub|0",
+        "footer>div.footer-mid>p>a|Code of Conduct|0",
+        "footer>div.footer-mid>p>a|Constitution|0",
+        "footer>div.footer-mid>p>a|Discord|0",
+        "footer>div.footer-mid>p>a|UoN SU Page|0",
+        "footer>div.footer-mid>p>a|HackNotts|0",
+        "div.wrapper>footer>div.footer-right>h2|SITEMAP|0",
+        "footer>div.footer-right>p>a|Home|0",
+        "footer>div.footer-right>p>a|Calendar|0",
+        "footer>div.footer-right>p>a|Contact Us|0",
+        "footer>div.footer-right>p>a|All Events|0",
+        "footer>div.footer-right>p>a|JSON|0",
+        "footer>div.footer-right>p>a|All Newsletters|0",
+        "footer>div.footer-right>p>a|Committee|0",
+        "footer>div.footer-right>p>a|Past|0"
+      ],
+      "all": [
+        "main>div.split>figure>figcaption|Karaoke at HackNotts '25 :)|0",
+        "div>ul.event-list>li>time|4 Nov 2026—|0",
+        "div>ul.event-list>li>time|18 Nov 2026—|0",
+        "div>ul.event-list>li>time|2 Dec 2026—|0",
+        "div>ul.event-list>li>time|16 Dec 2026—|0",
+        "main>div.split>figure>figcaption|Project Judging at HackNotts '25.|0",
+        "div>ul.news-list>li>time|25/08/2025—|0",
+        "div>ul.news-list>li>time|12/06/2022—|0",
+        "div>ul.news-list>li>time|02/01/2022—|0",
+        "main>div.split>figure>figcaption|Hard at work :)|0",
+        "div.wrapper>footer>div.footer-left>p|© 2026|0",
+        "footer>div.footer-left>p>a|HackSoc|0",
+        "div.wrapper>footer>div.footer-left>p|Website by Zac Garby and contributors. F|0",
+        "footer>div.footer-left>p>a|pull request|0",
+        "div.wrapper>footer>div.footer-left>p.small|HackSoc is a part of the .|0",
+        "footer>div.footer-left>p.small>a|University of Nottingham Students' Union|0",
+        "div.wrapper>footer>div.footer-mid>h2|USEFUL LINKS|0",
+        "footer>div.footer-mid>p>a|Our GitHub|0",
+        "footer>div.footer-mid>p>a|Code of Conduct|0",
+        "footer>div.footer-mid>p>a|Constitution|0",
+        "footer>div.footer-mid>p>a|Discord|0",
+        "footer>div.footer-mid>p>a|UoN SU Page|0",
+        "footer>div.footer-mid>p>a|HackNotts|0",
+        "div.wrapper>footer>div.footer-right>h2|SITEMAP|0",
+        "footer>div.footer-right>p>a|Home|0",
+        "footer>div.footer-right>p>a|Calendar|0",
+        "footer>div.footer-right>p>a|Contact Us|0",
+        "footer>div.footer-right>p>a|All Events|0",
+        "footer>div.footer-right>p>a|JSON|0",
+        "footer>div.footer-right>p>a|All Newsletters|0",
+        "footer>div.footer-right>p>a|Committee|0",
+        "footer>div.footer-right>p>a|Past|0"
+      ]
+    }
+  }
+}

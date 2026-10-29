@@ -1,0 +1,130 @@
+{
+  "diffPixels": 10764,
+  "noisePixels": 0,
+  "totalPixels": 1296000,
+  "ratio": 0.008305555555555556,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1296000,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1296000,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 20,
+    "failingBefore": 3,
+    "failingAfter": {
+      "colors": 3,
+      "all": 3
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "offscreen": 1,
+      "decorative": 1,
+      "no-glyphs": 3
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key|K|0",
+        "text": "K",
+        "path": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key",
+        "fg": "#969faf",
+        "bg": "#e6e9ee",
+        "ratio": 2.19,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1390,
+          20,
+          20,
+          18
+        ],
+        "tokens": [
+          "color.text.muted",
+          "input.text",
+          "color.gray.400"
+        ]
+      },
+      {
+        "key": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Container>span.DocSearch-Button-Placeholder|Search|0",
+        "text": "Search",
+        "path": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Container>span.DocSearch-Button-Placeholder",
+        "fg": "#969faf",
+        "bg": "#ebedf0",
+        "ratio": 2.27,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1297,
+          21,
+          69,
+          18
+        ],
+        "tokens": [
+          "color.text.muted",
+          "input.text",
+          "color.gray.400"
+        ]
+      },
+      {
+        "key": "div.navbar__inner>div.theme-layout-navbar-right>div.notification-wrapper>span.notification-count|4|0",
+        "text": "4",
+        "path": "div.navbar__inner>div.theme-layout-navbar-right>div.notification-wrapper>span.notification-count",
+        "fg": "#ffffff",
+        "bg": "#ff0000",
+        "ratio": 4,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1063,
+          12,
+          20,
+          20
+        ],
+        "tokens": [
+          "color.text.inverse",
+          "color.surface.default",
+          "header.text"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "div.navbar__inner>div.theme-layout-navbar-right>div.notification-wrapper>span.notification-count|4|0",
+        "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Container>span.DocSearch-Button-Placeholder|Search|0",
+        "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key|K|0"
+      ],
+      "all": [
+        "div.navbar__inner>div.theme-layout-navbar-right>div.notification-wrapper>span.notification-count|4|0",
+        "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Container>span.DocSearch-Button-Placeholder|Search|0",
+        "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key|K|0"
+      ]
+    }
+  }
+}

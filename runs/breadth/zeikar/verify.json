@@ -1,0 +1,80 @@
+{
+  "diffPixels": 25306,
+  "noisePixels": 50590,
+  "totalPixels": 9393120,
+  "ratio": 0.0026940995111315517,
+  "pass": false,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 24373,
+    "noisePixels": 50590,
+    "totalPixels": 9393120,
+    "ratio": 0.0025947714923262983,
+    "pass": false,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 21658,
+    "noisePixels": 50590,
+    "totalPixels": 9393120,
+    "ratio": 0.002305730151429983,
+    "pass": false,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 203,
+    "failingBefore": 1,
+    "failingAfter": {
+      "colors": 1,
+      "all": 1
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {},
+    "pass": true,
+    "failing": [
+      {
+        "key": "section.page-hero>div.container>p.hero-count>a|Browse the catalogue|0",
+        "text": "Browse the catalogue",
+        "path": "section.page-hero>div.container>p.hero-count>a",
+        "fg": "#1f2a37",
+        "bg": "#6d3fd6",
+        "ratio": 2.31,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          492,
+          442,
+          186,
+          21
+        ],
+        "bestRatio": 13.07,
+        "tokens": [
+          "color.text.default",
+          "color.blue.800"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "section.page-hero>div.container>p.hero-count>a|Browse the catalogue|0"
+      ],
+      "all": [
+        "section.page-hero>div.container>p.hero-count>a|Browse the catalogue|0"
+      ]
+    }
+  }
+}

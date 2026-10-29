@@ -1,0 +1,1376 @@
+{
+  "site": "WonYong-Jang",
+  "ms": 3122,
+  "ourPairs": 28,
+  "ourFailing": 11,
+  "axe": {
+    "violations": {
+      "total": 1,
+      "matched": 1,
+      "weFail": 1,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 2,
+      "matched": 1,
+      "weFail": 0,
+      "wePass": 1,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 26,
+      "matched": 26,
+      "weFail": 10,
+      "wePass": 16,
+      "weSkip": {},
+      "byReason": {
+        "bgImage": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0,
+          "skipped": 0
+        },
+        "pseudoContent": {
+          "total": 20,
+          "pass": 10,
+          "fail": 10,
+          "skipped": 0
+        }
+      }
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "Data Engineer",
+        "axe": {
+          "reason": "bgImage",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#7a7c81",
+          "ratio": 4.19,
+          "required": 3
+        }
+      },
+      {
+        "text": "Home",
+        "axe": {
+          "reason": "bgImage",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#818287",
+          "ratio": 3.82,
+          "required": 3
+        }
+      },
+      {
+        "text": "Resume",
+        "axe": {
+          "reason": "bgImage",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#818388",
+          "ratio": 3.8,
+          "required": 3
+        }
+      },
+      {
+        "text": "Posts",
+        "axe": {
+          "reason": "bgImage",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#767477",
+          "ratio": 4.64,
+          "required": 3
+        }
+      },
+      {
+        "text": "Data Engineer",
+        "axe": {
+          "reason": "bgImage",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#808185",
+          "ratio": 3.89,
+          "required": 3
+        }
+      },
+      {
+        "text": "Deep dive into code to unlock innovation",
+        "axe": {
+          "reason": "bgImage",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#818285",
+          "ratio": 3.84,
+          "required": 3
+        }
+      },
+      {
+        "text": "[Airflow] Ephemeral Airflow PoC 진행하기",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#2c3e50",
+          "bg": "#ffffff",
+          "ratio": 10.97,
+          "required": 3
+        }
+      },
+      {
+        "text": "Ephemeral Airflow / ArgoCD SCM provider",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#5a6c7d",
+          "bg": "#ffffff",
+          "ratio": 5.41,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Posted by Wonyong Jang on October 17, 20",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "12 mins read",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "[Airflow] Airflow 3 DAG Bundle 동작 원리와 버그",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#2c3e50",
+          "bg": "#ffffff",
+          "ratio": 10.97,
+          "required": 3
+        }
+      },
+      {
+        "text": "GitDagBundle 도입 시 고려사항과 MySQL 조회 오류, 번들 ",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#5a6c7d",
+          "bg": "#ffffff",
+          "ratio": 5.41,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Posted by Wonyong Jang on July 10, 2026 ",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "18 mins read",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "[Airflow] Rebuilding Our Airflow Deploym",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#2c3e50",
+          "bg": "#ffffff",
+          "ratio": 10.97,
+          "required": 3
+        }
+      },
+      {
+        "text": "Dag Bundle / Module Management / 여러 사용자의",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#5a6c7d",
+          "bg": "#ffffff",
+          "ratio": 5.41,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Posted by Wonyong Jang on July 06, 2026 ",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "19 mins read",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "[Airflow] Dag Parsing 진단 및 최적화하기",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#2c3e50",
+          "bg": "#ffffff",
+          "ratio": 10.97,
+          "required": 3
+        }
+      },
+      {
+        "text": "Dag Parsing 최적화",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#5a6c7d",
+          "bg": "#ffffff",
+          "ratio": 5.41,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Posted by Wonyong Jang on July 05, 2026 ",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "3 mins read",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "[Airflow] 메트릭 수집 파이프라인 이해와 Prometheus, v",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "3:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#2c3e50",
+          "bg": "#ffffff",
+          "ratio": 10.97,
+          "required": 3
+        }
+      },
+      {
+        "text": "StatsD / Prometheus, VictoriaMetrics, vm",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#5a6c7d",
+          "bg": "#ffffff",
+          "ratio": 5.41,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "Posted by Wonyong Jang on July 01, 2026 ",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "16 mins read",
+        "axe": {
+          "reason": "pseudoContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#7f8c8d",
+          "bg": "#ffffff",
+          "ratio": 3.47,
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": ".btn",
+      "idx": 26,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#0085a1",
+      "ratio": 4.31,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#post-search-input",
+      "idx": -1,
+      "reason": null,
+      "fg": "#212529",
+      "bg": "#ffffff",
+      "ratio": 15.42,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".copyright",
+      "idx": 27,
+      "reason": null,
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.68,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".navbar-brand",
+      "idx": 0,
+      "reason": "bgImage",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".nav-link[href=\"/\"]",
+      "idx": 1,
+      "reason": "bgImage",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "a[href$=\"about\"]",
+      "idx": 2,
+      "reason": "bgImage",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".nav-link[href$=\"posts\"]",
+      "idx": 3,
+      "reason": "bgImage",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "h1",
+      "idx": 4,
+      "reason": "bgImage",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".subheading",
+      "idx": 5,
+      "reason": "bgImage",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(2) > a > h2",
+      "idx": 6,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(2) > a > h3",
+      "idx": 7,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(2) > .post-meta",
+      "idx": 8,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(2) > .post-meta > .reading-time[title=\"Estimated read time\"]",
+      "idx": 9,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(4) > a > h2",
+      "idx": 10,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(4) > a > h3",
+      "idx": 11,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(4) > .post-meta",
+      "idx": 12,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(4) > .post-meta > .reading-time[title=\"Estimated read time\"]",
+      "idx": 13,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(6) > a > h2",
+      "idx": 14,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(6) > a > h3",
+      "idx": 15,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(6) > .post-meta",
+      "idx": 16,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(6) > .post-meta > .reading-time[title=\"Estimated read time\"]",
+      "idx": 17,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(8) > a > h2",
+      "idx": 18,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(8) > a > h3",
+      "idx": 19,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(8) > .post-meta",
+      "idx": 20,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(8) > .post-meta > .reading-time[title=\"Estimated read time\"]",
+      "idx": 21,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(10) > a > h2",
+      "idx": 22,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(10) > a > h3",
+      "idx": 23,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(10) > .post-meta",
+      "idx": 24,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "article:nth-child(10) > .post-meta > .reading-time[title=\"Estimated read time\"]",
+      "idx": 25,
+      "reason": "pseudoContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "body>nav.navbar>div.container>a.navbar-brand|Data Engineer|0",
+      "path": "body>nav.navbar>div.container>a.navbar-brand",
+      "text": "Data Engineer",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        165,
+        8,
+        185,
+        50
+      ],
+      "fg": "#ffffff",
+      "bg": "#7a7c81",
+      "ratio": 4.19,
+      "bestRatio": 5.23,
+      "worstRatio": 4.19,
+      "clusters": 2,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Home|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Home",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        933,
+        8,
+        106,
+        50
+      ],
+      "fg": "#ffffff",
+      "bg": "#818287",
+      "ratio": 3.82,
+      "bestRatio": 3.82,
+      "worstRatio": 3.82,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Resume|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Resume",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        1039,
+        8,
+        128,
+        50
+      ],
+      "fg": "#ffffff",
+      "bg": "#818388",
+      "ratio": 3.8,
+      "bestRatio": 3.8,
+      "worstRatio": 3.8,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Posts|0",
+      "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+      "text": "Posts",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        1167,
+        8,
+        108,
+        50
+      ],
+      "fg": "#ffffff",
+      "bg": "#767477",
+      "ratio": 4.64,
+      "bestRatio": 13.73,
+      "worstRatio": 4.64,
+      "clusters": 2,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>div.page-heading>h1|Data Engineer|0",
+      "path": "div.row>div.col-lg-8>div.page-heading>h1",
+      "text": "Data Engineer",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        355,
+        200,
+        730,
+        120
+      ],
+      "fg": "#ffffff",
+      "bg": "#808185",
+      "ratio": 3.89,
+      "bestRatio": 3.89,
+      "worstRatio": 3.89,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>div.page-heading>span.subheading|Deep dive into code to unlock innovation|0",
+      "path": "div.row>div.col-lg-8>div.page-heading>span.subheading",
+      "text": "Deep dive into code to unlock innovation",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        355,
+        350,
+        730,
+        26
+      ],
+      "fg": "#ffffff",
+      "bg": "#818285",
+      "ratio": 3.84,
+      "bestRatio": 3.84,
+      "worstRatio": 3.84,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h2.post-title|[Airflow] Ephemeral Airflow PoC 진행하기|0",
+      "path": "div.col-lg-8>article.post-preview>a>h2.post-title",
+      "text": "[Airflow] Ephemeral Airflow PoC 진행하기",
+      "color": "rgb(44, 62, 80)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        404,
+        886,
+        632,
+        94
+      ],
+      "fg": "#2c3e50",
+      "bg": "#ffffff",
+      "ratio": 10.97,
+      "bestRatio": 10.97,
+      "worstRatio": 10.97,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h3.post-subtitle|Ephemeral Airflow / ArgoCD SCM provider|0",
+      "path": "div.col-lg-8>article.post-preview>a>h3.post-subtitle",
+      "text": "Ephemeral Airflow / ArgoCD SCM provider",
+      "color": "rgb(90, 108, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        990,
+        632,
+        26
+      ],
+      "fg": "#5a6c7d",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "bestRatio": 5.41,
+      "worstRatio": 5.41,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on October 17, 20|0",
+      "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+      "text": "Posted by Wonyong Jang on October 17, 20",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        1040,
+        632,
+        47
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|12 mins read|0",
+      "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+      "text": "12 mins read",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        954,
+        1065,
+        82,
+        22
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h2.post-title|[Airflow] Airflow 3 DAG Bundle 동작 원리와 버그|0",
+      "path": "div.col-lg-8>article.post-preview>a>h2.post-title",
+      "text": "[Airflow] Airflow 3 DAG Bundle 동작 원리와 버그",
+      "color": "rgb(44, 62, 80)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        404,
+        1302,
+        632,
+        94
+      ],
+      "fg": "#2c3e50",
+      "bg": "#ffffff",
+      "ratio": 10.97,
+      "bestRatio": 10.97,
+      "worstRatio": 10.97,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h3.post-subtitle|GitDagBundle 도입 시 고려사항과 MySQL 조회 오류, 번들 |0",
+      "path": "div.col-lg-8>article.post-preview>a>h3.post-subtitle",
+      "text": "GitDagBundle 도입 시 고려사항과 MySQL 조회 오류, 번들 ",
+      "color": "rgb(90, 108, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        1406,
+        632,
+        53
+      ],
+      "fg": "#5a6c7d",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "bestRatio": 5.41,
+      "worstRatio": 5.41,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 10, 2026 |0",
+      "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+      "text": "Posted by Wonyong Jang on July 10, 2026 ",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        1482,
+        632,
+        47
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|18 mins read|0",
+      "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+      "text": "18 mins read",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        954,
+        1507,
+        82,
+        22
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h2.post-title|[Airflow] Rebuilding Our Airflow Deploym|0",
+      "path": "div.col-lg-8>article.post-preview>a>h2.post-title",
+      "text": "[Airflow] Rebuilding Our Airflow Deploym",
+      "color": "rgb(44, 62, 80)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        404,
+        1744,
+        632,
+        94
+      ],
+      "fg": "#2c3e50",
+      "bg": "#ffffff",
+      "ratio": 10.97,
+      "bestRatio": 10.97,
+      "worstRatio": 10.97,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h3.post-subtitle|Dag Bundle / Module Management / 여러 사용자의|0",
+      "path": "div.col-lg-8>article.post-preview>a>h3.post-subtitle",
+      "text": "Dag Bundle / Module Management / 여러 사용자의",
+      "color": "rgb(90, 108, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        1848,
+        632,
+        26
+      ],
+      "fg": "#5a6c7d",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "bestRatio": 5.41,
+      "worstRatio": 5.41,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 06, 2026 |0",
+      "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+      "text": "Posted by Wonyong Jang on July 06, 2026 ",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        1898,
+        632,
+        47
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|19 mins read|0",
+      "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+      "text": "19 mins read",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        954,
+        1923,
+        82,
+        22
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h2.post-title|[Airflow] Dag Parsing 진단 및 최적화하기|0",
+      "path": "div.col-lg-8>article.post-preview>a>h2.post-title",
+      "text": "[Airflow] Dag Parsing 진단 및 최적화하기",
+      "color": "rgb(44, 62, 80)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        404,
+        2160,
+        632,
+        94
+      ],
+      "fg": "#2c3e50",
+      "bg": "#ffffff",
+      "ratio": 10.97,
+      "bestRatio": 10.97,
+      "worstRatio": 10.97,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h3.post-subtitle|Dag Parsing 최적화|0",
+      "path": "div.col-lg-8>article.post-preview>a>h3.post-subtitle",
+      "text": "Dag Parsing 최적화",
+      "color": "rgb(90, 108, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        2263,
+        632,
+        26
+      ],
+      "fg": "#5a6c7d",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "bestRatio": 5.41,
+      "worstRatio": 5.41,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 05, 2026 |0",
+      "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+      "text": "Posted by Wonyong Jang on July 05, 2026 ",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        2314,
+        632,
+        47
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|3 mins read|0",
+      "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+      "text": "3 mins read",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        959,
+        2339,
+        77,
+        22
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h2.post-title|[Airflow] 메트릭 수집 파이프라인 이해와 Prometheus, v|0",
+      "path": "div.col-lg-8>article.post-preview>a>h2.post-title",
+      "text": "[Airflow] 메트릭 수집 파이프라인 이해와 Prometheus, v",
+      "color": "rgb(44, 62, 80)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        404,
+        2575,
+        632,
+        94
+      ],
+      "fg": "#2c3e50",
+      "bg": "#ffffff",
+      "ratio": 10.97,
+      "bestRatio": 10.97,
+      "worstRatio": 10.97,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>a>h3.post-subtitle|StatsD / Prometheus, VictoriaMetrics, vm|0",
+      "path": "div.col-lg-8>article.post-preview>a>h3.post-subtitle",
+      "text": "StatsD / Prometheus, VictoriaMetrics, vm",
+      "color": "rgb(90, 108, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        2679,
+        632,
+        26
+      ],
+      "fg": "#5a6c7d",
+      "bg": "#ffffff",
+      "ratio": 5.41,
+      "bestRatio": 5.41,
+      "worstRatio": 5.41,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-lg-8>article.post-preview>p.post-meta|Posted by Wonyong Jang on July 01, 2026 |0",
+      "path": "div.row>div.col-lg-8>article.post-preview>p.post-meta",
+      "text": "Posted by Wonyong Jang on July 01, 2026 ",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        404,
+        2729,
+        632,
+        47
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time|16 mins read|0",
+      "path": "div.col-lg-8>article.post-preview>p.post-meta>span.reading-time",
+      "text": "16 mins read",
+      "color": "rgb(127, 140, 141)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        954,
+        2754,
+        82,
+        22
+      ],
+      "fg": "#7f8c8d",
+      "bg": "#ffffff",
+      "ratio": 3.47,
+      "bestRatio": 3.47,
+      "worstRatio": 3.47,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.row>div.col-lg-8>div.clearfix>a.btn|View All Posts →|0",
+      "path": "div.row>div.col-lg-8>div.clearfix>a.btn",
+      "text": "View All Posts →",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        884,
+        2912,
+        201,
+        53
+      ],
+      "fg": "#ffffff",
+      "bg": "#0085a1",
+      "ratio": 4.31,
+      "bestRatio": 4.31,
+      "worstRatio": 4.31,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.container>div.row>div.col-lg-8>p.copyright|Copyright © Wonyong Jang 2026|0",
+      "path": "div.container>div.row>div.col-lg-8>p.copyright",
+      "text": "Copyright © Wonyong Jang 2026",
+      "color": "rgb(108, 117, 125)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        355,
+        3131,
+        730,
+        21
+      ],
+      "fg": "#6c757d",
+      "bg": "#ffffff",
+      "ratio": 4.69,
+      "bestRatio": 4.69,
+      "worstRatio": 4.69,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

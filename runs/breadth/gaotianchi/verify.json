@@ -1,0 +1,628 @@
+{
+  "diffPixels": 12458,
+  "noisePixels": 0,
+  "totalPixels": 1687680,
+  "ratio": 0.00738173113386424,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1687680,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1687680,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 31,
+    "failingBefore": 25,
+    "failingAfter": {
+      "colors": 25,
+      "all": 25
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "decorative": 2
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.wrapper>footer.footer>div.footer_bottom>a.footer_item|留白|0",
+        "text": "留白",
+        "path": "div.wrapper>footer.footer>div.footer_bottom>a.footer_item",
+        "fg": "#cdccca",
+        "bg": "#f0eeea",
+        "ratio": 1.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          814,
+          1110,
+          27,
+          30
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "body>div.wrapper>div.emblem>p.emblem-motto|生活设下枷锁，文字构筑愿景|0",
+        "text": "生活设下枷锁，文字构筑愿景",
+        "path": "body>div.wrapper>div.emblem>p.emblem-motto",
+        "fg": "#adb3b8",
+        "bg": "#f0eeea",
+        "ratio": 1.82,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          619,
+          378,
+          203,
+          26
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "html>body>div.navbar-quote>span.navbar-quote-text|我们亵渎了人与人之间所有神圣的纽带，把一场斗争，变成了一场猎杀。|0",
+        "text": "我们亵渎了人与人之间所有神圣的纽带，把一场斗争，变成了一场猎杀。",
+        "path": "html>body>div.navbar-quote>span.navbar-quote-text",
+        "fg": "#a7adb3",
+        "bg": "#f0eeea",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          390,
+          59,
+          352,
+          11
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "html>body>div.navbar-quote>span.navbar-quote-source|《奥德赛》|0",
+        "text": "《奥德赛》",
+        "path": "html>body>div.navbar-quote>span.navbar-quote-source",
+        "fg": "#a7adb3",
+        "bg": "#f0eeea",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          995,
+          59,
+          55,
+          11
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.09.12|0",
+        "text": "2026.09.12",
+        "path": "main>section.home-posts>article.post-item>time.post-item-date",
+        "fg": "#a7adb3",
+        "bg": "#f0eeea",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          946,
+          452,
+          104,
+          12
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.07.13|0",
+        "text": "2026.07.13",
+        "path": "main>section.home-posts>article.post-item>time.post-item-date",
+        "fg": "#a7adb3",
+        "bg": "#f0eeea",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          946,
+          495,
+          104,
+          12
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.07.09|0",
+        "text": "2026.07.09",
+        "path": "main>section.home-posts>article.post-item>time.post-item-date",
+        "fg": "#a7adb3",
+        "bg": "#f0eeea",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          946,
+          537,
+          104,
+          12
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.06.22|0",
+        "text": "2026.06.22",
+        "path": "main>section.home-posts>article.post-item>time.post-item-date",
+        "fg": "#a7adb3",
+        "bg": "#f0eeea",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          946,
+          579,
+          104,
+          12
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.04.02|0",
+        "text": "2026.04.02",
+        "path": "main>section.home-posts>article.post-item>time.post-item-date",
+        "fg": "#a7adb3",
+        "bg": "#f0eeea",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          946,
+          621,
+          104,
+          12
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.wrapper>footer.footer>div.footer_bottom>small.footer_copyright|Copyright © 2022-2026 Tianchi|0",
+        "text": "Copyright © 2022-2026 Tianchi",
+        "path": "div.wrapper>footer.footer>div.footer_bottom>small.footer_copyright",
+        "fg": "#a0a7ae",
+        "bg": "#f0eeea",
+        "ratio": 2.09,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          599,
+          1113,
+          195,
+          24
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.wrapper>main>div.home-archive>a.home-archive-link|更多文字 →|0",
+        "text": "更多文字 →",
+        "path": "div.wrapper>main>div.home-archive>a.home-archive-link",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          963,
+          672,
+          87,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|关于作者|0",
+        "text": "关于作者",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          390,
+          889,
+          58,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|邮箱联系|0",
+        "text": "邮箱联系",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          390,
+          927,
+          58,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|文章归档|0",
+        "text": "文章归档",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          684,
+          889,
+          73,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|书影音记录|0",
+        "text": "书影音记录",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          684,
+          927,
+          73,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|摄影|0",
+        "text": "摄影",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          684,
+          965,
+          73,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|RSS 订阅|0",
+        "text": "RSS 订阅",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          684,
+          1003,
+          73,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|变更记录|0",
+        "text": "变更记录",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          992,
+          889,
+          58,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|站点信息|0",
+        "text": "站点信息",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          992,
+          927,
+          58,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|AI 声明|0",
+        "text": "AI 声明",
+        "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+        "fg": "#808181",
+        "bg": "#f0eeea",
+        "ratio": 3.38,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          992,
+          965,
+          58,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "nav.menu>div.trigger>div.trigger-container>a.menu-link|归档|0",
+        "text": "归档",
+        "path": "nav.menu>div.trigger>div.trigger-container>a.menu-link",
+        "fg": "#777879",
+        "bg": "#f0eeea",
+        "ratio": 3.8,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          890,
+          18,
+          54,
+          30
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "nav.menu>div.trigger>div.trigger-container>a.menu-link|关于|0",
+        "text": "关于",
+        "path": "nav.menu>div.trigger>div.trigger-container>a.menu-link",
+        "fg": "#777879",
+        "bg": "#f0eeea",
+        "ratio": 3.8,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          949,
+          18,
+          54,
+          30
+        ],
+        "tokens": [
+          "color.text.default",
+          "link.text",
+          "link.active.text"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|关于|0",
+        "text": "关于",
+        "path": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading",
+        "fg": "#737581",
+        "bg": "#f0eeea",
+        "ratio": 3.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          390,
+          854,
+          58,
+          24
+        ],
+        "tokens": [
+          "color.navy.900"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|内容|0",
+        "text": "内容",
+        "path": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading",
+        "fg": "#737581",
+        "bg": "#f0eeea",
+        "ratio": 3.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          684,
+          854,
+          73,
+          24
+        ],
+        "tokens": [
+          "color.navy.900"
+        ]
+      },
+      {
+        "key": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|站点|0",
+        "text": "站点",
+        "path": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading",
+        "fg": "#737581",
+        "bg": "#f0eeea",
+        "ratio": 3.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          992,
+          854,
+          58,
+          24
+        ],
+        "tokens": [
+          "color.navy.900"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "nav.menu>div.trigger>div.trigger-container>a.menu-link|归档|0",
+        "nav.menu>div.trigger>div.trigger-container>a.menu-link|关于|0",
+        "html>body>div.navbar-quote>span.navbar-quote-text|我们亵渎了人与人之间所有神圣的纽带，把一场斗争，变成了一场猎杀。|0",
+        "html>body>div.navbar-quote>span.navbar-quote-source|《奥德赛》|0",
+        "body>div.wrapper>div.emblem>p.emblem-motto|生活设下枷锁，文字构筑愿景|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.09.12|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.07.13|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.07.09|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.06.22|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.04.02|0",
+        "div.wrapper>main>div.home-archive>a.home-archive-link|更多文字 →|0",
+        "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|关于|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|关于作者|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|邮箱联系|0",
+        "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|内容|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|文章归档|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|书影音记录|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|摄影|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|RSS 订阅|0",
+        "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|站点|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|变更记录|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|站点信息|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|AI 声明|0",
+        "div.wrapper>footer.footer>div.footer_bottom>small.footer_copyright|Copyright © 2022-2026 Tianchi|0",
+        "div.wrapper>footer.footer>div.footer_bottom>a.footer_item|留白|0"
+      ],
+      "all": [
+        "nav.menu>div.trigger>div.trigger-container>a.menu-link|归档|0",
+        "nav.menu>div.trigger>div.trigger-container>a.menu-link|关于|0",
+        "html>body>div.navbar-quote>span.navbar-quote-text|我们亵渎了人与人之间所有神圣的纽带，把一场斗争，变成了一场猎杀。|0",
+        "html>body>div.navbar-quote>span.navbar-quote-source|《奥德赛》|0",
+        "body>div.wrapper>div.emblem>p.emblem-motto|生活设下枷锁，文字构筑愿景|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.09.12|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.07.13|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.07.09|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.06.22|0",
+        "main>section.home-posts>article.post-item>time.post-item-date|2026.04.02|0",
+        "div.wrapper>main>div.home-archive>a.home-archive-link|更多文字 →|0",
+        "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|关于|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|关于作者|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|邮箱联系|0",
+        "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|内容|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|文章归档|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|书影音记录|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|摄影|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|RSS 订阅|0",
+        "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|站点|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|变更记录|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|站点信息|0",
+        "footer.footer>div.footer-grid>div.footer-column>a.footer_item|AI 声明|0",
+        "div.wrapper>footer.footer>div.footer_bottom>small.footer_copyright|Copyright © 2022-2026 Tianchi|0",
+        "div.wrapper>footer.footer>div.footer_bottom>a.footer_item|留白|0"
+      ]
+    }
+  }
+}

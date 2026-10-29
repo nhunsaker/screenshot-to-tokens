@@ -1,0 +1,224 @@
+{
+  "url": "http://127.0.0.1:4481/",
+  "rows": [
+    {
+      "step": "a",
+      "app": "argon",
+      "name": "contrast-typed",
+      "rep": 1,
+      "target": {
+        "x": 430,
+        "y": 222
+      },
+      "transcript": "This label is too light. Make it readable, keep our gray.",
+      "route": "contrast",
+      "result": {
+        "kind": "applied",
+        "changes": [
+          {
+            "token": "color.text.muted",
+            "from": "#8898aa",
+            "css": "#687889"
+          }
+        ],
+        "affected": 21,
+        "before": 2.95,
+        "after": 4.53,
+        "pageFailBefore": 41,
+        "pageFailAfter": 20,
+        "checked": 87,
+        "regressions": 0
+      },
+      "error": null,
+      "summary": "21 elements, 2.95:1 → 4.53:1, text contrast (color.text.muted, hue kept).",
+      "point": {
+        "element": "Since last month",
+        "token": "color.text.muted",
+        "pairs": 21,
+        "twins": 0,
+        "outline": "dom",
+        "ms": 0
+      },
+      "clicked": {
+        "text": "Since last month",
+        "color": "rgb(104, 120, 137)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--color-text-muted": "#687889"
+        },
+        "focusRule": false,
+        "iframePath": "/admin/index"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 191,
+        "point": 55,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 19,
+        "model": null,
+        "focusCheck": null
+      }
+    },
+    {
+      "step": "c",
+      "app": "argon",
+      "name": "focus-typed",
+      "rep": 1,
+      "target": {
+        "x": 85,
+        "y": 171,
+        "text": "Icons"
+      },
+      "transcript": "Give every control a visible focus ring in our blue.",
+      "route": "focus",
+      "result": {
+        "kind": "focus",
+        "before": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 0,
+          "faint": 2,
+          "none": 23,
+          "noChange": 14,
+          "skipped": 0
+        },
+        "after": {
+          "stops": 25,
+          "measured": 25,
+          "pass": 25,
+          "faint": 0,
+          "none": 0,
+          "noChange": 0,
+          "skipped": 0
+        },
+        "worse": 0,
+        "checkMs": 9175,
+        "nearest": null
+      },
+      "error": null,
+      "summary": "Two-tone ring in color.action.primary (#5e72e4) with a #000000 band: color.action.primary alone is under 3:1 next to 3 of 25 controls, so the band carries it there (25 of 25 covered).",
+      "point": {
+        "element": "Icons",
+        "token": "link.text",
+        "pairs": 9,
+        "twins": 1,
+        "outline": "dom",
+        "ms": 0
+      },
+      "clicked": {
+        "text": "Icons",
+        "color": "rgba(0, 0, 0, 0.7)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {
+          "--focus-ring-color": "var(--color-action-primary, #5e72e4)",
+          "--focus-ring-inner-color": "#000000",
+          "--focus-ring-width": "3px",
+          "--focus-ring-offset": "2px"
+        },
+        "focusRule": true,
+        "iframePath": "/admin/index"
+      },
+      "tab": [
+        {
+          "tag": "a",
+          "text": "Maps",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "User Profile",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Tables",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        },
+        {
+          "tag": "a",
+          "text": "Login",
+          "outline": "solid 3px rgb(94, 114, 228)",
+          "shadow": "rgb(0, 0, 0) 0px 0px 0px 2px, rgb(0, 0, 0) 0px 0px 0px 7px",
+          "focusVisible": true
+        }
+      ],
+      "ms": {
+        "wall": 9275,
+        "point": 7,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 1,
+        "model": null,
+        "focusCheck": 9175
+      }
+    },
+    {
+      "step": "d",
+      "app": "argon",
+      "name": "blocked-red",
+      "rep": 1,
+      "target": {
+        "x": 873,
+        "y": 328
+      },
+      "transcript": "Make these buttons red.",
+      "route": "muse",
+      "result": {
+        "kind": "blocked",
+        "message": "BLOCKED: text contrast would regress on “Month” (4.20:1 → 3.77:1), and 2 more.",
+        "live": 3,
+        "server": true,
+        "reverted": true
+      },
+      "error": null,
+      "summary": "button.bg → color.red.500, button.active.bg → color.red.500, button.border → color.red.500. all segmented buttons (Month/Week etc) and their active state Blocked: text contrast: \"Month\" 4.2 → 3.77 (needs 4.5) and 2 more.",
+      "point": {
+        "element": "Month",
+        "token": "button.text",
+        "pairs": 3,
+        "twins": 2,
+        "outline": "sam",
+        "ms": 0
+      },
+      "clicked": {
+        "text": "Month",
+        "color": "rgb(255, 255, 255)",
+        "controlBg": "rgba(0, 0, 0, 0)"
+      },
+      "live": {
+        "vars": {},
+        "focusRule": false,
+        "iframePath": "/admin/index"
+      },
+      "tab": null,
+      "ms": {
+        "wall": 2383,
+        "point": 5,
+        "afterSpeech": null,
+        "asr": null,
+        "intent": 2286,
+        "model": 2274,
+        "focusCheck": null
+      }
+    }
+  ],
+  "afterReset": {
+    "overlay": 0,
+    "card": "",
+    "rule": false,
+    "vars": [],
+    "phase": "reset"
+  },
+  "consoleErrors": []
+}

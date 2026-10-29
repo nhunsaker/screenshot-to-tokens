@@ -1,0 +1,594 @@
+[
+ {
+  "tag": "a",
+  "text": "",
+  "page": [
+   24,
+   16,
+   202,
+   56
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 1032,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Dashboard",
+  "page": [
+   0,
+   104,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Icons",
+  "page": [
+   0,
+   149,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 151,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Maps",
+  "page": [
+   0,
+   194,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 193,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "User Profile",
+  "page": [
+   0,
+   238,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 348,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Tables",
+  "page": [
+   0,
+   283,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 212,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Login",
+  "page": [
+   0,
+   328,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 175,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Register",
+  "page": [
+   0,
+   373,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 272,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Getting started",
+  "page": [
+   0,
+   484,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 589,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Foundation",
+  "page": [
+   0,
+   529,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 494,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Components",
+  "page": [
+   0,
+   574,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 498,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Upgrade to PRO",
+  "page": [
+   0,
+   845,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "DASHBOARD",
+  "page": [
+   289,
+   28,
+   93,
+   23
+  ],
+  "fv": true,
+  "changed": 596,
+  "strong": 0,
+  "perimeter2px": 460,
+  "visible": true,
+  "passes": false
+ },
+ {
+  "tag": "input",
+  "text": "",
+  "page": [
+   968,
+   18,
+   270,
+   43
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 1252,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Jessica Jones",
+  "page": [
+   1256,
+   18,
+   145,
+   44
+  ],
+  "fv": true,
+  "changed": 462,
+  "strong": 0,
+  "perimeter2px": 756,
+  "visible": true,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Month",
+  "page": [
+   836,
+   310,
+   75,
+   37
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 449,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Week",
+  "page": [
+   927,
+   310,
+   68,
+   37
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 420,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "See all",
+  "page": [
+   938,
+   842,
+   57,
+   28
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 341,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "See all",
+  "page": [
+   1319,
+   842,
+   57,
+   28
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 341,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "div",
+  "text": "REFERRAL VISITORS Facebook 1,4",
+  "page": [
+   1051,
+   890,
+   349,
+   303
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 2607,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Creative Tim",
+  "page": [
+   344,
+   1239,
+   85,
+   19
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 416,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Creative Tim",
+  "page": [
+   1071,
+   1234,
+   105,
+   29
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 538,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "About Us",
+  "page": [
+   1176,
+   1234,
+   84,
+   29
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 452,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Blog",
+  "page": [
+   1260,
+   1234,
+   53,
+   29
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 326,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "MIT License",
+  "page": [
+   1313,
+   1234,
+   88,
+   29
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 470,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "",
+  "page": [
+   24,
+   419,
+   202,
+   56
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 1032,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Dashboard",
+  "page": [
+   0,
+   507,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Icons",
+  "page": [
+   0,
+   552,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 151,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Maps",
+  "page": [
+   0,
+   597,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 193,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "User Profile",
+  "page": [
+   0,
+   641,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 348,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Tables",
+  "page": [
+   0,
+   686,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 212,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Login",
+  "page": [
+   0,
+   731,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 175,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Register",
+  "page": [
+   0,
+   776,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 272,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Getting started",
+  "page": [
+   0,
+   887,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 589,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Foundation",
+  "page": [
+   0,
+   932,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 494,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Components",
+  "page": [
+   0,
+   977,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 498,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ },
+ {
+  "tag": "a",
+  "text": "Upgrade to PRO",
+  "page": [
+   0,
+   1248,
+   250,
+   45
+  ],
+  "fv": true,
+  "changed": 0,
+  "strong": 0,
+  "perimeter2px": 1179,
+  "visible": false,
+  "passes": false
+ }
+]

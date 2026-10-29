@@ -1,0 +1,174 @@
+{
+  "diffPixels": 334102,
+  "noisePixels": 0,
+  "totalPixels": 3444480,
+  "ratio": 0.0969963535860275,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 3353760,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 3353760,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 76,
+    "failingBefore": 5,
+    "failingAfter": {
+      "colors": 5,
+      "all": 5
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "decorative": 2
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "ul.nav>li.nav-item>a.nav-link>span|CATEGORIES|0",
+        "text": "CATEGORIES",
+        "path": "ul.nav>li.nav-item>a.nav-link>span",
+        "fg": "#7c7c7c",
+        "bg": "#1e1e1e",
+        "ratio": 3.97,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          83,
+          340,
+          80,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "button.text",
+          "header.text"
+        ]
+      },
+      {
+        "key": "ul.nav>li.nav-item>a.nav-link>span|TAGS|0",
+        "text": "TAGS",
+        "path": "ul.nav>li.nav-item>a.nav-link>span",
+        "fg": "#7c7c7c",
+        "bg": "#1e1e1e",
+        "ratio": 3.97,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          83,
+          385,
+          33,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "button.text",
+          "header.text"
+        ]
+      },
+      {
+        "key": "ul.nav>li.nav-item>a.nav-link>span|ARCHIVES|0",
+        "text": "ARCHIVES",
+        "path": "ul.nav>li.nav-item>a.nav-link>span",
+        "fg": "#7c7c7c",
+        "bg": "#1e1e1e",
+        "ratio": 3.97,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          83,
+          430,
+          63,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "button.text",
+          "header.text"
+        ]
+      },
+      {
+        "key": "ul.nav>li.nav-item>a.nav-link>span|PROJECTS|0",
+        "text": "PROJECTS",
+        "path": "ul.nav>li.nav-item>a.nav-link>span",
+        "fg": "#7c7c7c",
+        "bg": "#1e1e1e",
+        "ratio": 3.97,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          83,
+          474,
+          66,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "button.text",
+          "header.text"
+        ]
+      },
+      {
+        "key": "ul.nav>li.nav-item>a.nav-link>span|ABOUT|0",
+        "text": "ABOUT",
+        "path": "ul.nav>li.nav-item>a.nav-link>span",
+        "fg": "#7c7c7c",
+        "bg": "#1e1e1e",
+        "ratio": 3.97,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          83,
+          519,
+          45,
+          22
+        ],
+        "tokens": [
+          "color.text.default",
+          "button.text",
+          "header.text"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "ul.nav>li.nav-item>a.nav-link>span|CATEGORIES|0",
+        "ul.nav>li.nav-item>a.nav-link>span|TAGS|0",
+        "ul.nav>li.nav-item>a.nav-link>span|ARCHIVES|0",
+        "ul.nav>li.nav-item>a.nav-link>span|PROJECTS|0",
+        "ul.nav>li.nav-item>a.nav-link>span|ABOUT|0"
+      ],
+      "all": [
+        "ul.nav>li.nav-item>a.nav-link>span|CATEGORIES|0",
+        "ul.nav>li.nav-item>a.nav-link>span|TAGS|0",
+        "ul.nav>li.nav-item>a.nav-link>span|ARCHIVES|0",
+        "ul.nav>li.nav-item>a.nav-link>span|PROJECTS|0",
+        "ul.nav>li.nav-item>a.nav-link>span|ABOUT|0"
+      ]
+    }
+  }
+}

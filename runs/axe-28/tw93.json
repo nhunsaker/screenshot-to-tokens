@@ -1,0 +1,1337 @@
+{
+  "site": "tw93",
+  "ms": 3311,
+  "ourPairs": 40,
+  "ourFailing": 0,
+  "axe": {
+    "violations": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 40,
+      "matched": 40,
+      "weFail": 0,
+      "wePass": 40,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 1,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": []
+  },
+  "axeNodes": [
+    {
+      "kind": "passes",
+      "target": ".title",
+      "idx": 0,
+      "reason": null,
+      "fg": "#24292f",
+      "bg": "#ffffff",
+      "ratio": 14.65,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"en/\"]",
+      "idx": 1,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"weekly.tw93.fun/\"]",
+      "idx": 3,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"about.html\"]",
+      "idx": 4,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".header-item:nth-child(5) > a",
+      "idx": 5,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"别相信直觉 - 读书笔记\"] > article > h1",
+      "idx": 6,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"别相信直觉 - 读书笔记\"] > article > .entry-content",
+      "idx": 7,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"别相信直觉 - 读书笔记\"] > article > .entry-content > .index-content-time",
+      "idx": 8,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"聊聊未来技术趋势\"] > article > h1",
+      "idx": 9,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"聊聊未来技术趋势\"] > article > .entry-content",
+      "idx": 10,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"聊聊未来技术趋势\"] > article > .entry-content > .index-content-time",
+      "idx": 11,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"置身事内 - 读书笔记\"] > article > h1",
+      "idx": 12,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"置身事内 - 读书笔记\"] > article > .entry-content",
+      "idx": 13,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"置身事内 - 读书笔记\"] > article > .entry-content > .index-content-time",
+      "idx": 14,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我居然用回有线耳机了\"] > article > h1",
+      "idx": 15,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我居然用回有线耳机了\"] > article > .entry-content",
+      "idx": 16,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我居然用回有线耳机了\"] > article > .entry-content > .index-content-time",
+      "idx": 17,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"埃隆·马斯克传 - 读书笔记\"] > article > h1",
+      "idx": 18,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"埃隆·马斯克传 - 读书笔记\"] > article > .entry-content",
+      "idx": 19,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"埃隆·马斯克传 - 读书笔记\"] > article > .entry-content > .index-content-time",
+      "idx": 20,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的极简生活经验\"] > article > h1",
+      "idx": 21,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的极简生活经验\"] > article > .entry-content",
+      "idx": 22,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的极简生活经验\"] > article > .entry-content > .index-content-time",
+      "idx": 23,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"2023年总结 - 随心而行\"] > article > h1",
+      "idx": 24,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"2023年总结 - 随心而行\"] > article > .entry-content",
+      "idx": 25,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"2023年总结 - 随心而行\"] > article > .entry-content > .index-content-time",
+      "idx": 26,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的年度工具折腾之旅\"] > article > h1",
+      "idx": 27,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的年度工具折腾之旅\"] > article > .entry-content",
+      "idx": 28,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的年度工具折腾之旅\"] > article > .entry-content > .index-content-time",
+      "idx": 29,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的开源成长之旅\"] > article > h1",
+      "idx": 30,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的开源成长之旅\"] > article > .entry-content",
+      "idx": 31,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我的开源成长之旅\"] > article > .entry-content > .index-content-time",
+      "idx": 32,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我居然 30 岁了\"] > article > h1",
+      "idx": 33,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我居然 30 岁了\"] > article > .entry-content",
+      "idx": 34,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[title=\"我居然 30 岁了\"] > article > .entry-content > .index-content-time",
+      "idx": 35,
+      "reason": null,
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.62,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "strong",
+      "idx": 36,
+      "reason": null,
+      "fg": "#393d42",
+      "bg": "#f5f4ed",
+      "ratio": 9.91,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "li:nth-child(2) > a[href$=\"page2/\"]",
+      "idx": 37,
+      "reason": null,
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.15,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page3/\"]",
+      "idx": 38,
+      "reason": null,
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.15,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page8/\"]",
+      "idx": 40,
+      "reason": null,
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.15,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".repo-time",
+      "idx": 42,
+      "reason": null,
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.15,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "textpath",
+      "idx": -1,
+      "reason": "imgNode",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "3:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "div.header-menu>ul.header-item-container>li.header-item-title>a.title|Tw93|0",
+      "path": "div.header-menu>ul.header-item-container>li.header-item-title>a.title",
+      "text": "Tw93",
+      "color": "rgb(36, 41, 47)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        270,
+        0,
+        85,
+        60
+      ],
+      "fg": "#24292f",
+      "bg": "#ffffff",
+      "ratio": 14.65,
+      "bestRatio": 14.65,
+      "worstRatio": 14.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.header-menu>ul.header-item-container>li.header-item>a|EN|0",
+      "path": "div.header-menu>ul.header-item-container>li.header-item>a",
+      "text": "EN",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        3,
+        36,
+        54
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.header-item-container>li.header-item>a>span|🇬🇧|0",
+      "path": "ul.header-item-container>li.header-item>a>span",
+      "text": "🇬🇧",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        375,
+        7,
+        21,
+        18
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.header-menu>ul.header-item-container>li.header-item>a|Weekly|0",
+      "path": "div.header-menu>ul.header-item-container>li.header-item>a",
+      "text": "Weekly",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        419,
+        16,
+        60,
+        27
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.header-menu>ul.header-item-container>li.header-item>a|About|0",
+      "path": "div.header-menu>ul.header-item-container>li.header-item>a",
+      "text": "About",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        495,
+        16,
+        50,
+        27
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.header-menu>ul.header-item-container>li.header-item>a|Categories|0",
+      "path": "div.header-menu>ul.header-item-container>li.header-item>a",
+      "text": "Categories",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        561,
+        16,
+        91,
+        27
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|别相信直觉 - 读书笔记|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "别相信直觉 - 读书笔记",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        330,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|最近看完了「别相信直觉」用数据思维获取你想要的生活这本小书，比较简单好读，基本上|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "最近看完了「别相信直觉」用数据思维获取你想要的生活这本小书，比较简单好读，基本上",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        379,
+        800,
+        87
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-10-13】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-10-13】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        383,
+        133,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|聊聊未来技术趋势|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "聊聊未来技术趋势",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        567,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|最近在团队的一个分享，基于自己对 AI、投资、下一代技术的一些理解，结合网络上的|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "最近在团队的一个分享，基于自己对 AI、投资、下一代技术的一些理解，结合网络上的",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        616,
+        800,
+        87
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-09-09】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-09-09】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        620,
+        139,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|置身事内 - 读书笔记|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "置身事内 - 读书笔记",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        804,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|最近把「置身事内 - 中国政府与经济发展」这本书读完了，去年粗读了下，最近趁着杭|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "最近把「置身事内 - 中国政府与经济发展」这本书读完了，去年粗读了下，最近趁着杭",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        853,
+        800,
+        87
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-06-30】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-06-30】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        857,
+        138,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|我居然用回有线耳机了|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "我居然用回有线耳机了",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        1042,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|男人的快乐，我居然用回有线耳机了，最近周末抽时间去线下试了不少好耳机，最后很意外|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "男人的快乐，我居然用回有线耳机了，最近周末抽时间去线下试了不少好耳机，最后很意外",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1090,
+        800,
+        87
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-05-08】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-05-08】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1094,
+        138,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|埃隆·马斯克传 - 读书笔记|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "埃隆·马斯克传 - 读书笔记",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        1279,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|最近利用早上的阅读时间陆陆续续把《埃隆·马斯克传》给看完了，很推荐工程师同学一读|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "最近利用早上的阅读时间陆陆续续把《埃隆·马斯克传》给看完了，很推荐工程师同学一读",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1327,
+        800,
+        116
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-04-14】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-04-14】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1331,
+        136,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|我的极简生活经验|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "我的极简生活经验",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        1545,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|想和大伙随便聊聊的极简主义，我挺喜欢这种生活方式，但并不是说每个人需要极简，有的|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "想和大伙随便聊聊的极简主义，我挺喜欢这种生活方式，但并不是说每个人需要极简，有的",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1593,
+        800,
+        87
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-03-03】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-03-03】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1597,
+        138,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|2023年总结 - 随心而行|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "2023年总结 - 随心而行",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        1782,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|今天是大年初四，哈哈我的年度总结又拖延了，2022 年总结「率性而活」也是这个时|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "今天是大年初四，哈哈我的年度总结又拖延了，2022 年总结「率性而活」也是这个时",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1830,
+        800,
+        87
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-02-13】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-02-13】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        1834,
+        135,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|我的年度工具折腾之旅|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "我的年度工具折腾之旅",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        2019,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|最近趁着过年有空，将一年自己使用的比较不错的 Mac 软件、网站、生活好物给整理|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "最近趁着过年有空，将一年自己使用的比较不错的 Mac 软件、网站、生活好物给整理",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        2068,
+        800,
+        58
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-02-09】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-02-09】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        2072,
+        138,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|我的开源成长之旅|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "我的开源成长之旅",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        2227,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|在微软上海 Github Universe 2023 的一个分享，主要是讲我从大|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "在微软上海 Github Universe 2023 的一个分享，主要是讲我从大",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        2276,
+        800,
+        58
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2024-01-12】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2024-01-12】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        2280,
+        132,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>h1.entry-title|我居然 30 岁了|0",
+      "path": "div>a.header-href>article.hentry>h1.entry-title",
+      "text": "我居然 30 岁了",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        320,
+        2436,
+        800,
+        41
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>a.header-href>article.hentry>div.entry-content|过完今晚我居然就满 30 岁了，一直很无耻的感觉自己才 24 岁，虽然在这之前，|0",
+      "path": "div>a.header-href>article.hentry>div.entry-content",
+      "text": "过完今晚我居然就满 30 岁了，一直很无耻的感觉自己才 24 岁，虽然在这之前，",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        2484,
+        800,
+        116
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.header-href>article.hentry>div.entry-content>span.index-content-time|【2023-12-30】|0",
+      "path": "a.header-href>article.hentry>div.entry-content>span.index-content-time",
+      "text": "【2023-12-30】",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        320,
+        2488,
+        135,
+        20
+      ],
+      "fg": "#505459",
+      "bg": "#ffffff",
+      "ratio": 7.65,
+      "bestRatio": 7.65,
+      "worstRatio": 7.65,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.pagination>ul.inline-list>li>strong.current-page|1|0",
+      "path": "div.pagination>ul.inline-list>li>strong.current-page",
+      "text": "1",
+      "color": "rgba(36, 41, 47, 0.9)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        619,
+        2679,
+        10,
+        23
+      ],
+      "fg": "#393d42",
+      "bg": "#f5f4ed",
+      "ratio": 9.89,
+      "bestRatio": 9.89,
+      "worstRatio": 9.89,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.pagination>ul.inline-list>li>a|2|0",
+      "path": "div.pagination>ul.inline-list>li>a",
+      "text": "2",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        652,
+        2679,
+        12,
+        23
+      ],
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.19,
+      "bestRatio": 7.19,
+      "worstRatio": 7.19,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.pagination>ul.inline-list>li>a|3|0",
+      "path": "div.pagination>ul.inline-list>li>a",
+      "text": "3",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        688,
+        2679,
+        13,
+        23
+      ],
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.19,
+      "bestRatio": 7.19,
+      "worstRatio": 7.19,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.pagination>ul.inline-list>li|…|0",
+      "path": "div>div.pagination>ul.inline-list>li",
+      "text": "…",
+      "color": "rgba(36, 41, 47, 0.9)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        720,
+        2679,
+        23,
+        23
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.pagination>ul.inline-list>li>a|8|0",
+      "path": "div.pagination>ul.inline-list>li>a",
+      "text": "8",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        762,
+        2679,
+        13,
+        23
+      ],
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.19,
+      "bestRatio": 7.19,
+      "worstRatio": 7.19,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.pagination>ul.inline-list>li>a.btn-arrow|>|0",
+      "path": "div.pagination>ul.inline-list>li>a.btn-arrow",
+      "text": ">",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        799,
+        2672,
+        13,
+        42
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.footer-wrapper>footer>a>span.repo-time|2015~2025|0",
+      "path": "div.footer-wrapper>footer>a>span.repo-time",
+      "text": "2015~2025",
+      "color": "rgba(36, 41, 47, 0.8)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        811,
+        2752,
+        93,
+        29
+      ],
+      "fg": "#4e5255",
+      "bg": "#f5f4ed",
+      "ratio": 7.19,
+      "bestRatio": 7.19,
+      "worstRatio": 7.19,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

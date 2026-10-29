@@ -1,0 +1,489 @@
+{
+  "diffPixels": 32076,
+  "noisePixels": 0,
+  "totalPixels": 1296000,
+  "ratio": 0.02475,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1296000,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1296000,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 40,
+    "failingBefore": 20,
+    "failingAfter": {
+      "colors": 20,
+      "all": 20
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "offscreen": 14
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Update Now|0",
+        "text": "Update Now",
+        "path": "div.col-lg-3>div.card-stats>div.card-footer>div.stats",
+        "fg": "#a9a9a9",
+        "bg": "#ffffff",
+        "ratio": 2.35,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          306,
+          206,
+          101,
+          30
+        ],
+        "tokens": [
+          "color.gray.300"
+        ]
+      },
+      {
+        "key": "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Last day|0",
+        "text": "Last day",
+        "path": "div.col-lg-3>div.card-stats>div.card-footer>div.stats",
+        "fg": "#a9a9a9",
+        "bg": "#ffffff",
+        "ratio": 2.35,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          594,
+          206,
+          75,
+          30
+        ],
+        "tokens": [
+          "color.gray.300"
+        ]
+      },
+      {
+        "key": "div.col-lg-3>div.card-stats>div.card-footer>div.stats|In the last hour|0",
+        "text": "In the last hour",
+        "path": "div.col-lg-3>div.card-stats>div.card-footer>div.stats",
+        "fg": "#a9a9a9",
+        "bg": "#ffffff",
+        "ratio": 2.35,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          881,
+          206,
+          115,
+          30
+        ],
+        "tokens": [
+          "color.gray.300"
+        ]
+      },
+      {
+        "key": "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Update now|0",
+        "text": "Update now",
+        "path": "div.col-lg-3>div.card-stats>div.card-footer>div.stats",
+        "fg": "#a9a9a9",
+        "bg": "#ffffff",
+        "ratio": 2.35,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1169,
+          206,
+          98,
+          30
+        ],
+        "tokens": [
+          "color.gray.300"
+        ]
+      },
+      {
+        "key": "div.col-md-8>div.card>div.card-footer>div.stats|Updated 3 minutes ago|0",
+        "text": "Updated 3 minutes ago",
+        "path": "div.col-md-8>div.card>div.card-footer>div.stats",
+        "fg": "#a9a9a9",
+        "bg": "#ffffff",
+        "ratio": 2.35,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          311,
+          725,
+          165,
+          30
+        ],
+        "tokens": [
+          "color.gray.300"
+        ]
+      },
+      {
+        "key": "div.col-md-4>div.card>div.card-body>div.stats|Campaign sent 2 days ago|0",
+        "text": "Campaign sent 2 days ago",
+        "path": "div.col-md-4>div.card>div.card-body>div.stats",
+        "fg": "#a9a9a9",
+        "bg": "#ffffff",
+        "ratio": 2.35,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1073,
+          721,
+          321,
+          24
+        ],
+        "tokens": [
+          "color.gray.300"
+        ]
+      },
+      {
+        "key": "div.row>div.col-7>div.numbers>p.card-category|Number|0",
+        "text": "Number",
+        "path": "div.row>div.col-7>div.numbers>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          412,
+          123,
+          119,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "div.row>div.col-7>div.numbers>p.card-category|Revenue|0",
+        "text": "Revenue",
+        "path": "div.row>div.col-7>div.numbers>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          700,
+          123,
+          119,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "div.row>div.col-7>div.numbers>p.card-category|Errors|0",
+        "text": "Errors",
+        "path": "div.row>div.col-7>div.numbers>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          987,
+          123,
+          119,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "div.row>div.col-7>div.numbers>p.card-category|Followers|0",
+        "text": "Followers",
+        "path": "div.row>div.col-7>div.numbers>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1275,
+          123,
+          119,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "div.col-md-8>div.card>div.card-header>p.card-category|24 Hours performance|0",
+        "text": "24 Hours performance",
+        "path": "div.col-md-8>div.card>div.card-header>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          306,
+          323,
+          705,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "div.col-md-4>div.card>div.card-header>p.card-category|Last Campaign Performance|0",
+        "text": "Last Campaign Performance",
+        "path": "div.col-md-4>div.card>div.card-header>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1073,
+          323,
+          321,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "div.col-md-6>div.card>div.card-header>p.card-category|All products including Taxes|0",
+        "text": "All products including Taxes",
+        "path": "div.col-md-6>div.card>div.card-header>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          306,
+          844,
+          513,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "div.col-md-6>div.card-tasks>div.card-header>p.card-category|Backend development|0",
+        "text": "Backend development",
+        "path": "div.col-md-6>div.card-tasks>div.card-header>p.card-category",
+        "fg": "#9a9a9a",
+        "bg": "#ffffff",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          881,
+          844,
+          513,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.400-2"
+        ]
+      },
+      {
+        "key": "nav.navbar>div.container-fluid>div.d-flex>a.mr-2|Dashboard|0",
+        "text": "Dashboard",
+        "path": "nav.navbar>div.container-fluid>div.d-flex>a.mr-2",
+        "fg": "#888888",
+        "bg": "#f8f9fa",
+        "ratio": 3.36,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          291,
+          18,
+          98,
+          40
+        ],
+        "tokens": [
+          "color.gray.400"
+        ]
+      },
+      {
+        "key": "div.nav>div.nav-item>a.m-0>span.d-lg-block|Search|0",
+        "text": "Search",
+        "path": "div.nav>div.nav-item>a.m-0>span.d-lg-block",
+        "fg": "#888888",
+        "bg": "#f8f9fa",
+        "ratio": 3.36,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          533,
+          18,
+          55,
+          40
+        ],
+        "tokens": [
+          "color.gray.400"
+        ]
+      },
+      {
+        "key": "div.ml-auto>div.nav-item>a.m-0>span.no-icon|Account|0",
+        "text": "Account",
+        "path": "div.ml-auto>div.nav-item>a.m-0>span.no-icon",
+        "fg": "#888888",
+        "bg": "#f8f9fa",
+        "ratio": 3.36,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1132,
+          18,
+          60,
+          40
+        ],
+        "tokens": [
+          "color.gray.400"
+        ]
+      },
+      {
+        "key": "div.ml-auto>div.dropdown>a.m-0>span.no-icon|Dropdown|0",
+        "text": "Dropdown",
+        "path": "div.ml-auto>div.dropdown>a.m-0>span.no-icon",
+        "fg": "#888888",
+        "bg": "#f8f9fa",
+        "ratio": 3.36,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1221,
+          18,
+          75,
+          40
+        ],
+        "tokens": [
+          "color.gray.400"
+        ]
+      },
+      {
+        "key": "div.ml-auto>div.nav-item>a.m-0>span.no-icon|Log out|0",
+        "text": "Log out",
+        "path": "div.ml-auto>div.nav-item>a.m-0>span.no-icon",
+        "fg": "#888888",
+        "bg": "#f8f9fa",
+        "ratio": 3.36,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1339,
+          18,
+          55,
+          40
+        ],
+        "tokens": [
+          "color.gray.400"
+        ]
+      },
+      {
+        "key": "div.nav>div.dropdown>a.m-0>span.notification|5|0",
+        "text": "5",
+        "path": "div.nav>div.dropdown>a.m-0>span.notification",
+        "fg": "#ffffff",
+        "bg": "#fb404b",
+        "ratio": 3.54,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          450,
+          18,
+          18,
+          18
+        ],
+        "tokens": [
+          "color.surface.default",
+          "color.surface.card",
+          "color.text.inverse"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "nav.navbar>div.container-fluid>div.d-flex>a.mr-2|Dashboard|0",
+        "div.nav>div.dropdown>a.m-0>span.notification|5|0",
+        "div.nav>div.nav-item>a.m-0>span.d-lg-block|Search|0",
+        "div.ml-auto>div.nav-item>a.m-0>span.no-icon|Account|0",
+        "div.ml-auto>div.dropdown>a.m-0>span.no-icon|Dropdown|0",
+        "div.ml-auto>div.nav-item>a.m-0>span.no-icon|Log out|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Number|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Update Now|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Revenue|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Last day|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Errors|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|In the last hour|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Followers|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Update now|0",
+        "div.col-md-8>div.card>div.card-header>p.card-category|24 Hours performance|0",
+        "div.col-md-8>div.card>div.card-footer>div.stats|Updated 3 minutes ago|0",
+        "div.col-md-4>div.card>div.card-header>p.card-category|Last Campaign Performance|0",
+        "div.col-md-4>div.card>div.card-body>div.stats|Campaign sent 2 days ago|0",
+        "div.col-md-6>div.card>div.card-header>p.card-category|All products including Taxes|0",
+        "div.col-md-6>div.card-tasks>div.card-header>p.card-category|Backend development|0"
+      ],
+      "all": [
+        "nav.navbar>div.container-fluid>div.d-flex>a.mr-2|Dashboard|0",
+        "div.nav>div.dropdown>a.m-0>span.notification|5|0",
+        "div.nav>div.nav-item>a.m-0>span.d-lg-block|Search|0",
+        "div.ml-auto>div.nav-item>a.m-0>span.no-icon|Account|0",
+        "div.ml-auto>div.dropdown>a.m-0>span.no-icon|Dropdown|0",
+        "div.ml-auto>div.nav-item>a.m-0>span.no-icon|Log out|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Number|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Update Now|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Revenue|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Last day|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Errors|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|In the last hour|0",
+        "div.row>div.col-7>div.numbers>p.card-category|Followers|0",
+        "div.col-lg-3>div.card-stats>div.card-footer>div.stats|Update now|0",
+        "div.col-md-8>div.card>div.card-header>p.card-category|24 Hours performance|0",
+        "div.col-md-8>div.card>div.card-footer>div.stats|Updated 3 minutes ago|0",
+        "div.col-md-4>div.card>div.card-header>p.card-category|Last Campaign Performance|0",
+        "div.col-md-4>div.card>div.card-body>div.stats|Campaign sent 2 days ago|0",
+        "div.col-md-6>div.card>div.card-header>p.card-category|All products including Taxes|0",
+        "div.col-md-6>div.card-tasks>div.card-header>p.card-category|Backend development|0"
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "totalMs": 17123,
+  "stages": [
+    {
+      "stage": "verify",
+      "ms": 17122,
+      "calls": 0,
+      "cached": 0,
+      "usd": 0,
+      "models": []
+    }
+  ]
+}

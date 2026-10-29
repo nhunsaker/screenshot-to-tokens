@@ -1,0 +1,868 @@
+{
+  "site": "josh-wong",
+  "ms": 2830,
+  "ourPairs": 20,
+  "ourFailing": 3,
+  "axe": {
+    "violations": {
+      "total": 2,
+      "matched": 2,
+      "weFail": 1,
+      "wePass": 0,
+      "weSkip": {
+        "no-glyphs": 1
+      },
+      "byReason": {}
+    },
+    "passes": {
+      "total": 18,
+      "matched": 18,
+      "weFail": 0,
+      "wePass": 16,
+      "weSkip": {
+        "no-glyphs": 2
+      },
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 4,
+      "matched": 4,
+      "weFail": 2,
+      "wePass": 1,
+      "weSkip": {
+        "decorative": 1
+      },
+      "byReason": {
+        "shortTextContent": {
+          "total": 2,
+          "pass": 0,
+          "fail": 2,
+          "skipped": 0
+        },
+        "nonBmp": {
+          "total": 1,
+          "pass": 0,
+          "fail": 0,
+          "skipped": 1
+        },
+        "elmPartiallyObscuring": {
+          "total": 1,
+          "pass": 1,
+          "fail": 0,
+          "skipped": 0
+        }
+      }
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "4",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": "#ffffff",
+          "bg": "#ff0000",
+          "ratio": 3.99,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#ffffff",
+          "bg": "#ff0000",
+          "ratio": 4,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "⌘",
+        "axe": {
+          "reason": "nonBmp",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": null
+        },
+        "ours": {
+          "status": "decorative",
+          "required": 4.5
+        }
+      },
+      {
+        "text": "K",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "fail",
+          "fg": "#969faf",
+          "bg": "#e6e9ee",
+          "ratio": 2.19,
+          "required": 4.5
+        }
+      },
+      {
+        "text": "This website uses cookies to enhance the",
+        "axe": {
+          "reason": "elmPartiallyObscuring",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "pass",
+          "fg": "#ffffff",
+          "bg": "#353535",
+          "ratio": 12.27,
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": ".DocSearch-Button-Placeholder",
+      "idx": 5,
+      "reason": null,
+      "fg": "#969faf",
+      "bg": "#ebedf0",
+      "ratio": 2.27,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"docusaurus.io/\"]",
+      "idx": 21,
+      "reason": null,
+      "fg": "#757cbd",
+      "bg": "#303846",
+      "ratio": 3.01,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".navbar__item.navbar__link[href$=\"blog\"]",
+      "idx": 1,
+      "reason": null,
+      "fg": "#1c1e21",
+      "bg": "#ffffff",
+      "ratio": 16.7,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[aria-haspopup=\"true\"]",
+      "idx": 2,
+      "reason": null,
+      "fg": "#1c1e21",
+      "bg": "#ffffff",
+      "ratio": 16.7,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".navbar__item.navbar__link[href$=\"about\"]",
+      "idx": 3,
+      "reason": null,
+      "fg": "#1c1e21",
+      "bg": "#ffffff",
+      "ratio": 16.7,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "h1",
+      "idx": 8,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#080f53",
+      "ratio": 17.44,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p",
+      "idx": 9,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#080f53",
+      "ratio": 17.44,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"blog/\"]",
+      "idx": 10,
+      "reason": null,
+      "fg": "#1c1e21",
+      "bg": "#ebedf0",
+      "ratio": 14.24,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"projects/\"]",
+      "idx": 11,
+      "reason": null,
+      "fg": "#1c1e21",
+      "bg": "#ebedf0",
+      "ratio": 14.24,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".col.footer__col:nth-child(1) > .footer__title",
+      "idx": 12,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#303846",
+      "ratio": 11.79,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer__link-item[href$=\"blog\"]",
+      "idx": 13,
+      "reason": null,
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.05,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer__link-item[href$=\"projects\"]",
+      "idx": 14,
+      "reason": null,
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.05,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer__link-item[href$=\"about\"]",
+      "idx": 15,
+      "reason": null,
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.05,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".col.footer__col:nth-child(2) > .footer__title",
+      "idx": 16,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#303846",
+      "ratio": 11.79,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"josh-wong\"]",
+      "idx": 17,
+      "reason": null,
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.05,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer__item:nth-child(2) > .footer__link-item[target=\"_blank\"][rel=\"noopener noreferrer\"]",
+      "idx": 18,
+      "reason": null,
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.05,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href=\"https://twitter.com/080f53\"]",
+      "idx": 19,
+      "reason": null,
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.05,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer__copyright",
+      "idx": 20,
+      "reason": null,
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.05,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"cookies\"]",
+      "idx": 23,
+      "reason": null,
+      "fg": "#ffffff",
+      "bg": "#353535",
+      "ratio": 12.26,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#rcc-confirm-button",
+      "idx": 24,
+      "reason": null,
+      "fg": "#000000",
+      "bg": "#ffffff",
+      "ratio": 21,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".notification-count",
+      "idx": 4,
+      "reason": "shortTextContent",
+      "fg": "#ffffff",
+      "bg": "#ff0000",
+      "ratio": 3.99,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": "kbd:nth-child(1)",
+      "idx": 6,
+      "reason": "nonBmp",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": null
+    },
+    {
+      "kind": "incomplete",
+      "target": "kbd:nth-child(2)",
+      "idx": 7,
+      "reason": "shortTextContent",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".CookieConsent > div:nth-child(1)",
+      "idx": 22,
+      "reason": "elmPartiallyObscuring",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "body.navigation-with-keyboard>div>div>a.skipToContent_fXgn|Skip to main content|0",
+      "path": "body.navigation-with-keyboard>div>div>a.skipToContent_fXgn",
+      "text": "Skip to main content",
+      "color": "rgb(28, 30, 33)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1440,
+        16,
+        88,
+        95
+      ],
+      "status": "offscreen"
+    },
+    {
+      "key": "nav.theme-layout-navbar>div.navbar__inner>div.theme-layout-navbar-left>a.navbar__item|Blog|0",
+      "path": "nav.theme-layout-navbar>div.navbar__inner>div.theme-layout-navbar-left>a.navbar__item",
+      "text": "Blog",
+      "color": "rgb(28, 30, 33)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        72,
+        13,
+        57,
+        34
+      ],
+      "fg": "#1c1e21",
+      "bg": "#ffffff",
+      "ratio": 16.71,
+      "bestRatio": 16.71,
+      "worstRatio": 16.71,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.navbar__inner>div.theme-layout-navbar-left>div.navbar__item>a.navbar__link|Projects|0",
+      "path": "div.navbar__inner>div.theme-layout-navbar-left>div.navbar__item>a.navbar__link",
+      "text": "Projects",
+      "color": "rgb(28, 30, 33)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        141,
+        21,
+        78,
+        18
+      ],
+      "fg": "#1c1e21",
+      "bg": "#ffffff",
+      "ratio": 16.71,
+      "bestRatio": 16.71,
+      "worstRatio": 16.71,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.theme-layout-navbar>div.navbar__inner>div.theme-layout-navbar-left>a.navbar__item|About|0",
+      "path": "nav.theme-layout-navbar>div.navbar__inner>div.theme-layout-navbar-left>a.navbar__item",
+      "text": "About",
+      "color": "rgb(28, 30, 33)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        231,
+        13,
+        69,
+        34
+      ],
+      "fg": "#1c1e21",
+      "bg": "#ffffff",
+      "ratio": 16.71,
+      "bestRatio": 16.71,
+      "worstRatio": 16.71,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.navbar__inner>div.theme-layout-navbar-right>div.notification-wrapper>span.notification-count|4|0",
+      "path": "div.navbar__inner>div.theme-layout-navbar-right>div.notification-wrapper>span.notification-count",
+      "text": "4",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1063,
+        12,
+        20,
+        20
+      ],
+      "fg": "#ffffff",
+      "bg": "#ff0000",
+      "ratio": 4,
+      "bestRatio": 4,
+      "worstRatio": 4,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Container>span.DocSearch-Button-Placeholder|Search|0",
+      "path": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Container>span.DocSearch-Button-Placeholder",
+      "text": "Search",
+      "color": "rgb(150, 159, 175)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1297,
+        21,
+        69,
+        18
+      ],
+      "fg": "#969faf",
+      "bg": "#ebedf0",
+      "ratio": 2.27,
+      "bestRatio": 2.27,
+      "worstRatio": 2.27,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key|⌘|0",
+      "path": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key",
+      "text": "⌘",
+      "color": "rgb(150, 159, 175)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1365,
+        20,
+        20,
+        18
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key|K|0",
+      "path": "div.navbarSearchContainer_Bca1>button.DocSearch>span.DocSearch-Button-Keys>kbd.DocSearch-Button-Key",
+      "text": "K",
+      "color": "rgb(150, 159, 175)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1390,
+        20,
+        20,
+        18
+      ],
+      "fg": "#969faf",
+      "bg": "#e6e9ee",
+      "ratio": 2.19,
+      "bestRatio": 2.19,
+      "worstRatio": 2.19,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.theme-layout-main>header.hero>div.container>h1.hero__title|080f53|0",
+      "path": "div.theme-layout-main>header.hero>div.container>h1.hero__title",
+      "text": "080f53",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        76,
+        124,
+        1288,
+        60
+      ],
+      "fg": "#ffffff",
+      "bg": "#080f53",
+      "ratio": 17.45,
+      "bestRatio": 17.45,
+      "worstRatio": 17.45,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.theme-layout-main>header.hero>div.container>p.hero__subtitle|Ramblings of a technical writer in Japan|0",
+      "path": "div.theme-layout-main>header.hero>div.container>p.hero__subtitle",
+      "text": "Ramblings of a technical writer in Japan",
+      "color": "rgb(255, 255, 255)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        76,
+        200,
+        1288,
+        40
+      ],
+      "fg": "#ffffff",
+      "bg": "#080f53",
+      "ratio": 17.45,
+      "bestRatio": 17.45,
+      "worstRatio": 17.45,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "header.hero>div.container>div.buttons_AeoN>a.button|Blog|0",
+      "path": "header.hero>div.container>div.buttons_AeoN>a.button",
+      "text": "Blog",
+      "color": "rgb(28, 30, 33)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        581,
+        260,
+        107,
+        47
+      ],
+      "fg": "#1c1e21",
+      "bg": "#ebedf0",
+      "ratio": 14.24,
+      "bestRatio": 14.24,
+      "worstRatio": 14.24,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "header.hero>div.container>div.buttons_AeoN>a.button|Projects|0",
+      "path": "header.hero>div.container>div.buttons_AeoN>a.button",
+      "text": "Projects",
+      "color": "rgb(28, 30, 33)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        718,
+        260,
+        141,
+        47
+      ],
+      "fg": "#1c1e21",
+      "bg": "#ebedf0",
+      "ratio": 14.24,
+      "bestRatio": 14.24,
+      "worstRatio": 14.24,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.row>div.col>div.footer__title|080F53|0",
+      "path": "div.container>div.row>div.col>div.footer__title",
+      "text": "080F53",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        76,
+        694,
+        524,
+        20
+      ],
+      "fg": "#ffffff",
+      "bg": "#303846",
+      "ratio": 11.8,
+      "bestRatio": 11.8,
+      "worstRatio": 11.8,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col>ul.footer__items>li.footer__item>a.footer__link-item|Blog|0",
+      "path": "div.col>ul.footer__items>li.footer__item>a.footer__link-item",
+      "text": "Blog",
+      "color": "rgb(235, 237, 240)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        76,
+        737,
+        33,
+        18
+      ],
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.06,
+      "bestRatio": 10.06,
+      "worstRatio": 10.06,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col>ul.footer__items>li.footer__item>a.footer__link-item|Projects|0",
+      "path": "div.col>ul.footer__items>li.footer__item>a.footer__link-item",
+      "text": "Projects",
+      "color": "rgb(235, 237, 240)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        76,
+        769,
+        59,
+        18
+      ],
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.06,
+      "bestRatio": 10.46,
+      "worstRatio": 10.06,
+      "clusters": 2,
+      "status": "pass"
+    },
+    {
+      "key": "div.col>ul.footer__items>li.footer__item>a.footer__link-item|About|0",
+      "path": "div.col>ul.footer__items>li.footer__item>a.footer__link-item",
+      "text": "About",
+      "color": "rgb(235, 237, 240)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        76,
+        801,
+        44,
+        18
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "div.container>div.row>div.col>div.footer__title|Community|0",
+      "path": "div.container>div.row>div.col>div.footer__title",
+      "text": "Community",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        632,
+        694,
+        524,
+        20
+      ],
+      "fg": "#ffffff",
+      "bg": "#303846",
+      "ratio": 11.8,
+      "bestRatio": 11.8,
+      "worstRatio": 11.8,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col>ul.footer__items>li.footer__item>a.footer__link-item|GitHub|0",
+      "path": "div.col>ul.footer__items>li.footer__item>a.footer__link-item",
+      "text": "GitHub",
+      "color": "rgb(235, 237, 240)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        632,
+        737,
+        69,
+        18
+      ],
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.06,
+      "bestRatio": 10.06,
+      "worstRatio": 10.06,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col>ul.footer__items>li.footer__item>a.footer__link-item|LinkedIn|0",
+      "path": "div.col>ul.footer__items>li.footer__item>a.footer__link-item",
+      "text": "LinkedIn",
+      "color": "rgb(235, 237, 240)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        632,
+        769,
+        79,
+        18
+      ],
+      "fg": "#ebedf0",
+      "bg": "#303846",
+      "ratio": 10.06,
+      "bestRatio": 10.46,
+      "worstRatio": 10.06,
+      "clusters": 2,
+      "status": "pass"
+    },
+    {
+      "key": "div.col>ul.footer__items>li.footer__item>a.footer__link-item|Twitter|0",
+      "path": "div.col>ul.footer__items>li.footer__item>a.footer__link-item",
+      "text": "Twitter",
+      "color": "rgb(235, 237, 240)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        632,
+        801,
+        68,
+        18
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "footer.theme-layout-footer>div.container>div.footer__bottom>div.footer__copyright|Copyright © 2026 080f53. .|0",
+      "path": "footer.theme-layout-footer>div.container>div.footer__bottom>div.footer__copyright",
+      "text": "Copyright © 2026 080f53. .",
+      "color": "rgb(235, 237, 240)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        76,
+        842,
+        1288,
+        26
+      ],
+      "fg": "#ebedf0",
+      "bg": "#353535",
+      "ratio": 10.46,
+      "bestRatio": 10.46,
+      "worstRatio": 10.46,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.container>div.footer__bottom>div.footer__copyright>a|Built with Docusaurus|0",
+      "path": "div.container>div.footer__bottom>div.footer__copyright>a",
+      "text": "Built with Docusaurus",
+      "color": "rgb(117, 124, 189)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        738,
+        846,
+        157,
+        18
+      ],
+      "status": "no-glyphs"
+    },
+    {
+      "key": "div>div>div.CookieConsent>div|This website uses cookies to enhance the|0",
+      "path": "div>div>div.CookieConsent>div",
+      "text": "This website uses cookies to enhance the",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        35,
+        812,
+        1232,
+        53
+      ],
+      "fg": "#ffffff",
+      "bg": "#353535",
+      "ratio": 12.27,
+      "bestRatio": 12.27,
+      "worstRatio": 12.27,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.CookieConsent>div>a|cookie policy|0",
+      "path": "div>div.CookieConsent>div>a",
+      "text": "cookie policy",
+      "color": "rgb(255, 255, 255)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1137,
+        816,
+        95,
+        18
+      ],
+      "fg": "#ffffff",
+      "bg": "#353535",
+      "ratio": 12.27,
+      "bestRatio": 12.27,
+      "worstRatio": 12.27,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.CookieConsent>div>button|I understand|0",
+      "path": "div>div.CookieConsent>div>button",
+      "text": "I understand",
+      "color": "rgb(0, 0, 0)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1297,
+        811,
+        108,
+        28
+      ],
+      "fg": "#000000",
+      "bg": "#ffffff",
+      "ratio": 21,
+      "bestRatio": 21,
+      "worstRatio": 21,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

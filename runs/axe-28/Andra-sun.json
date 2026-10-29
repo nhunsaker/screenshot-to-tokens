@@ -1,0 +1,1799 @@
+{
+  "site": "Andra-sun",
+  "ms": 5098,
+  "ourPairs": 55,
+  "ourFailing": 0,
+  "axe": {
+    "violations": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 57,
+      "matched": 56,
+      "weFail": 0,
+      "wePass": 55,
+      "weSkip": {
+        "decorative": 1
+      },
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": []
+  },
+  "axeNodes": [
+    {
+      "kind": "passes",
+      "target": ".site-title",
+      "idx": 0,
+      "reason": null,
+      "fg": "#717171",
+      "bg": "#f6f8fa",
+      "ratio": 4.58,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".site-subtitle",
+      "idx": 1,
+      "reason": null,
+      "fg": "#717171",
+      "bg": "#f6f8fa",
+      "ratio": 4.58,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".nav-link[href=\"/\"] > span",
+      "idx": 2,
+      "reason": null,
+      "fg": "#313233",
+      "bg": "#e9eff5",
+      "ratio": 11.09,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"categories/\"] > span",
+      "idx": 3,
+      "reason": null,
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"tags/\"] > span",
+      "idx": 4,
+      "reason": null,
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"archives/\"] > span",
+      "idx": 5,
+      "reason": null,
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"about/\"] > span",
+      "idx": 6,
+      "reason": null,
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.55,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#breadcrumb > span",
+      "idx": 7,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#search-input",
+      "idx": -1,
+      "reason": null,
+      "fg": "#34343c",
+      "bg": "#ffffff",
+      "ratio": 12.33,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"inovacao/\"] > .col-md-7 > .card-body.flex-column.d-flex > h1",
+      "idx": 8,
+      "reason": null,
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"inovacao/\"] > .col-md-7 > .card-body.flex-column.d-flex > .card-text.mt-0.mb-3 > p",
+      "idx": 9,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"inovacao/\"] > .col-md-7 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > time",
+      "idx": 10,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"inovacao/\"] > .col-md-7 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > .categories",
+      "idx": 11,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"marketing/\"] > .col-md-7 > .card-body.flex-column.d-flex > h1",
+      "idx": 12,
+      "reason": null,
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"marketing/\"] > .col-md-7 > .card-body.flex-column.d-flex > .card-text.mt-0.mb-3 > p",
+      "idx": 13,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"marketing/\"] > .col-md-7 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > time",
+      "idx": 14,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"marketing/\"] > .col-md-7 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > .categories",
+      "idx": 15,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"gestao-e-qualidade/\"] > .col-md-12 > .card-body.flex-column.d-flex > h1",
+      "idx": 16,
+      "reason": null,
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"gestao-e-qualidade/\"] > .col-md-12 > .card-body.flex-column.d-flex > .card-text.mt-0.mb-3 > p",
+      "idx": 17,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"gestao-e-qualidade/\"] > .col-md-12 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > time",
+      "idx": 18,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"gestao-e-qualidade/\"] > .col-md-12 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > .categories",
+      "idx": 19,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"engenharia-de-software/\"] > .col-md-12 > .card-body.flex-column.d-flex > h1",
+      "idx": 20,
+      "reason": null,
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"engenharia-de-software/\"] > .col-md-12 > .card-body.flex-column.d-flex > .card-text.mt-0.mb-3 > p",
+      "idx": 21,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"engenharia-de-software/\"] > .col-md-12 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > time",
+      "idx": 22,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".post-preview.g-0[href$=\"engenharia-de-software/\"] > .col-md-12 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > .categories",
+      "idx": 23,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"sugestao-automatica/\"] > .col-md-7 > .card-body.flex-column.d-flex > h1",
+      "idx": 24,
+      "reason": null,
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"sugestao-automatica/\"] > .col-md-7 > .card-body.flex-column.d-flex > .card-text.mt-0.mb-3 > p",
+      "idx": 25,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"sugestao-automatica/\"] > .col-md-7 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > time",
+      "idx": 26,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"sugestao-automatica/\"] > .col-md-7 > .card-body.flex-column.d-flex > .post-meta.align-items-end.flex-grow-1 > .me-auto > .categories",
+      "idx": 27,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".page-link[href=\"/\"]",
+      "idx": 28,
+      "reason": null,
+      "fg": "#555555",
+      "bg": "#f6f8fa",
+      "ratio": 7,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".page-item:nth-child(3) > .page-link[href$=\"page2\"]",
+      "idx": 29,
+      "reason": null,
+      "fg": "#555555",
+      "bg": "#ffffff",
+      "ratio": 7.45,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page3\"]",
+      "idx": 30,
+      "reason": null,
+      "fg": "#555555",
+      "bg": "#ffffff",
+      "ratio": 7.45,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"page6\"]",
+      "idx": 32,
+      "reason": null,
+      "fg": "#555555",
+      "bg": "#ffffff",
+      "ratio": 7.45,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "#access-lastmod > h2",
+      "idx": 33,
+      "reason": null,
+      "fg": "#585858",
+      "bg": "#ffffff",
+      "ratio": 7.11,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".text-truncate.lh-lg:nth-child(1) > a[href$=\"inovacao/\"]",
+      "idx": 34,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".text-truncate.lh-lg:nth-child(2) > a[href$=\"marketing/\"]",
+      "idx": 35,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".text-truncate.lh-lg:nth-child(3) > a[href$=\"gestao-e-qualidade/\"]",
+      "idx": 36,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".text-truncate.lh-lg:nth-child(4) > a[href$=\"engenharia-de-software/\"]",
+      "idx": 37,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"commit-semantico/\"]",
+      "idx": 38,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > h2",
+      "idx": 39,
+      "reason": null,
+      "fg": "#585858",
+      "bg": "#ffffff",
+      "ratio": 7.11,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"estudo/\"]",
+      "idx": 40,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary.btn:nth-child(2)",
+      "idx": 41,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"desafio/\"]",
+      "idx": 42,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"front-end/\"]",
+      "idx": 43,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"js/\"]",
+      "idx": 44,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"programa%C3%A7%C3%A3o/\"]",
+      "idx": 45,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"redes/\"]",
+      "idx": 46,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"cisco/\"]",
+      "idx": 47,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"dicas/\"]",
+      "idx": 48,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "section:nth-child(2) > .mb-1.me-3.mt-3 > .post-tag.btn-outline-primary[href$=\"bin%C3%A1rio/\"]",
+      "idx": 49,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "footer > p:nth-child(1)",
+      "idx": 50,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(1) > time",
+      "idx": 51,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(1) > a[href$=\"Andra-sun\"]",
+      "idx": 52,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "span[data-bs-toggle=\"tooltip\"][data-bs-placement=\"top\"]",
+      "idx": 53,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(2)",
+      "idx": 54,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"jekyllrb.com\"]",
+      "idx": 55,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[data-bs-original-title=\"v7.5.0\"]",
+      "idx": 56,
+      "reason": null,
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.6,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "body>aside.d-flex>header.profile-wrapper>a.site-title|Shark|0",
+      "path": "body>aside.d-flex>header.profile-wrapper>a.site-title",
+      "text": "Shark",
+      "color": "rgb(113, 113, 113)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        40,
+        180,
+        76,
+        34
+      ],
+      "fg": "#717171",
+      "bg": "#f6f8fa",
+      "ratio": 4.58,
+      "bestRatio": 4.58,
+      "worstRatio": 4.58,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>aside.d-flex>header.profile-wrapper>p.site-subtitle|Blog de estudos.|0",
+      "path": "body>aside.d-flex>header.profile-wrapper>p.site-subtitle",
+      "text": "Blog de estudos.",
+      "color": "rgb(113, 113, 113)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        40,
+        222,
+        199,
+        23
+      ],
+      "fg": "#717171",
+      "bg": "#f6f8fa",
+      "ratio": 4.58,
+      "bestRatio": 4.58,
+      "worstRatio": 4.58,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.nav>li.nav-item>a.nav-link>span|HOME|0",
+      "path": "ul.nav>li.nav-item>a.nav-link>span",
+      "text": "HOME",
+      "color": "rgb(29, 29, 29)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        83,
+        294,
+        39,
+        22
+      ],
+      "fg": "#313233",
+      "bg": "#e9f0f5",
+      "ratio": 11.14,
+      "bestRatio": 11.14,
+      "worstRatio": 11.14,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.nav>li.nav-item>a.nav-link>span|CATEGORIAS|0",
+      "path": "ul.nav>li.nav-item>a.nav-link>span",
+      "text": "CATEGORIAS",
+      "color": "rgb(84, 84, 84)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        83,
+        339,
+        80,
+        22
+      ],
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.53,
+      "bestRatio": 5.53,
+      "worstRatio": 5.53,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.nav>li.nav-item>a.nav-link>span|TAGS|0",
+      "path": "ul.nav>li.nav-item>a.nav-link>span",
+      "text": "TAGS",
+      "color": "rgb(84, 84, 84)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        83,
+        384,
+        33,
+        22
+      ],
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.53,
+      "bestRatio": 5.53,
+      "worstRatio": 5.53,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.nav>li.nav-item>a.nav-link>span|ARQUIVOS|0",
+      "path": "ul.nav>li.nav-item>a.nav-link>span",
+      "text": "ARQUIVOS",
+      "color": "rgb(84, 84, 84)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        83,
+        428,
+        67,
+        22
+      ],
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.53,
+      "bestRatio": 5.53,
+      "worstRatio": 5.53,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "ul.nav>li.nav-item>a.nav-link>span|SOBRE|0",
+      "path": "ul.nav>li.nav-item>a.nav-link>span",
+      "text": "SOBRE",
+      "color": "rgb(84, 84, 84)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        83,
+        473,
+        43,
+        22
+      ],
+      "fg": "#646465",
+      "bg": "#f6f8fa",
+      "ratio": 5.53,
+      "bestRatio": 5.53,
+      "worstRatio": 5.53,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "header.flex-shrink-0>div.d-flex>nav>span|Home|0",
+      "path": "header.flex-shrink-0>div.d-flex>nav>span",
+      "text": "Home",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        332,
+        14,
+        40,
+        20
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.post-preview>div.col-md-7>div.card-body>h1.card-title|Inovação empresarial|0",
+      "path": "a.post-preview>div.col-md-7>div.card-body>h1.card-title",
+      "text": "Inovação empresarial",
+      "color": "rgb(42, 42, 42)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        116,
+        386,
+        24
+      ],
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "bestRatio": 14.35,
+      "worstRatio": 14.35,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-md-7>div.card-body>div.card-text>p|Inovação Empresarial Inovação é o proces|0",
+      "path": "div.col-md-7>div.card-body>div.card-text>p",
+      "text": "Inovação Empresarial Inovação é o proces",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        148,
+        386,
+        49
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>time|04/05/2026|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>time",
+      "text": "04/05/2026",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        388,
+        216,
+        64,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>span.categories|estudo, marketing, inovação, empresa|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>span.categories",
+      "text": "estudo, marketing, inovação, empresa",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        506,
+        216,
+        216,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.post-preview>div.col-md-7>div.card-body>h1.card-title|Marketing Digital|0",
+      "path": "a.post-preview>div.col-md-7>div.card-body>h1.card-title",
+      "text": "Marketing Digital",
+      "color": "rgb(42, 42, 42)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        305,
+        386,
+        24
+      ],
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "bestRatio": 14.35,
+      "worstRatio": 14.35,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-md-7>div.card-body>div.card-text>p|Primeira unidade Fundamentos do marketin|0",
+      "path": "div.col-md-7>div.card-body>div.card-text>p",
+      "text": "Primeira unidade Fundamentos do marketin",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        337,
+        386,
+        49
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>time|13/04/2026|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>time",
+      "text": "13/04/2026",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        388,
+        406,
+        64,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>span.categories|estudo, marketing|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>span.categories",
+      "text": "estudo, marketing",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        506,
+        406,
+        103,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.post-preview>div.col-md-12>div.card-body>h1.card-title|Gestão e qualidade de software|0",
+      "path": "a.post-preview>div.col-md-12>div.card-body>h1.card-title",
+      "text": "Gestão e qualidade de software",
+      "color": "rgb(42, 42, 42)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        494,
+        701,
+        24
+      ],
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "bestRatio": 14.35,
+      "worstRatio": 14.35,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-md-12>div.card-body>div.card-text>p|Qualidade: Entrega de produtos/serviço c|0",
+      "path": "div.col-md-12>div.card-body>div.card-text>p",
+      "text": "Qualidade: Entrega de produtos/serviço c",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        526,
+        701,
+        49
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>time|29/10/2025|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>time",
+      "text": "29/10/2025",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        388,
+        595,
+        64,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>span.categories|estudo, teste, gestão, qualidade|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>span.categories",
+      "text": "estudo, teste, gestão, qualidade",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        506,
+        595,
+        180,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.post-preview>div.col-md-12>div.card-body>h1.card-title|Engenharia de Software|0",
+      "path": "a.post-preview>div.col-md-12>div.card-body>h1.card-title",
+      "text": "Engenharia de Software",
+      "color": "rgb(42, 42, 42)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        684,
+        701,
+        24
+      ],
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "bestRatio": 14.35,
+      "worstRatio": 14.35,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-md-12>div.card-body>div.card-text>p|Engenharia de Software Nada mais é que a|0",
+      "path": "div.col-md-12>div.card-body>div.card-text>p",
+      "text": "Engenharia de Software Nada mais é que a",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        716,
+        701,
+        49
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>time|27/10/2025|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>time",
+      "text": "27/10/2025",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        388,
+        784,
+        64,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>span.categories|estudo, engenharia|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>span.categories",
+      "text": "estudo, engenharia",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        506,
+        784,
+        109,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "a.post-preview>div.col-md-7>div.card-body>h1.card-title|Sugestão Automática.|0",
+      "path": "a.post-preview>div.col-md-7>div.card-body>h1.card-title",
+      "text": "Sugestão Automática.",
+      "color": "rgb(42, 42, 42)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        873,
+        386,
+        24
+      ],
+      "fg": "#2a2a2a",
+      "bg": "#ffffff",
+      "ratio": 14.35,
+      "bestRatio": 14.35,
+      "worstRatio": 14.35,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-md-7>div.card-body>div.card-text>p|Dia 15 do projeto 30 dias com js|0",
+      "path": "div.col-md-7>div.card-body>div.card-text>p",
+      "text": "Dia 15 do projeto 30 dias com js",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        364,
+        905,
+        216,
+        25
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>time|23/03/2025|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>time",
+      "text": "23/03/2025",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        388,
+        970,
+        64,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.card-body>div.post-meta>div.me-auto>span.categories|30days|0",
+      "path": "div.card-body>div.post-meta>div.me-auto>span.categories",
+      "text": "30days",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        506,
+        970,
+        40,
+        17
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav>ul.pagination>li.page-item>a.page-link|1|0",
+      "path": "nav>ul.pagination>li.page-item>a.page-link",
+      "text": "1",
+      "color": "rgb(85, 85, 85)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        623,
+        1034,
+        28,
+        28
+      ],
+      "fg": "#555555",
+      "bg": "#f6f8fa",
+      "ratio": 7,
+      "bestRatio": 7,
+      "worstRatio": 7,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav>ul.pagination>li.page-item>a.page-link|2|0",
+      "path": "nav>ul.pagination>li.page-item>a.page-link",
+      "text": "2",
+      "color": "rgb(85, 85, 85)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        661,
+        1034,
+        28,
+        28
+      ],
+      "fg": "#555555",
+      "bg": "#ffffff",
+      "ratio": 7.46,
+      "bestRatio": 7.46,
+      "worstRatio": 7.46,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav>ul.pagination>li.page-item>a.page-link|3|0",
+      "path": "nav>ul.pagination>li.page-item>a.page-link",
+      "text": "3",
+      "color": "rgb(85, 85, 85)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        700,
+        1034,
+        28,
+        28
+      ],
+      "fg": "#555555",
+      "bg": "#ffffff",
+      "ratio": 7.46,
+      "bestRatio": 7.46,
+      "worstRatio": 7.46,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav>ul.pagination>li.page-item>span.page-link|...|0",
+      "path": "nav>ul.pagination>li.page-item>span.page-link",
+      "text": "...",
+      "color": "rgba(108, 117, 125, 0.57)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        738,
+        1034,
+        29,
+        28
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "nav>ul.pagination>li.page-item>a.page-link|6|0",
+      "path": "nav>ul.pagination>li.page-item>a.page-link",
+      "text": "6",
+      "color": "rgb(85, 85, 85)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        778,
+        1034,
+        28,
+        28
+      ],
+      "fg": "#555555",
+      "bg": "#ffffff",
+      "ratio": 7.46,
+      "bestRatio": 7.46,
+      "worstRatio": 7.46,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "aside.col-xl-3>div.access>section>h2.panel-heading|Atualizados recentemente|0",
+      "path": "aside.col-xl-3>div.access>section>h2.panel-heading",
+      "text": "Atualizados recentemente",
+      "color": "rgb(88, 88, 88)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1146,
+        96,
+        234,
+        24
+      ],
+      "fg": "#585858",
+      "bg": "#ffffff",
+      "ratio": 7.11,
+      "bestRatio": 7.11,
+      "worstRatio": 7.11,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section>ul.content>li.text-truncate>a|Inovação empresarial|0",
+      "path": "section>ul.content>li.text-truncate>a",
+      "text": "Inovação empresarial",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1150,
+        133,
+        129,
+        18
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section>ul.content>li.text-truncate>a|Marketing Digital|0",
+      "path": "section>ul.content>li.text-truncate>a",
+      "text": "Marketing Digital",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1150,
+        162,
+        102,
+        18
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section>ul.content>li.text-truncate>a|Gestão e qualidade de software|0",
+      "path": "section>ul.content>li.text-truncate>a",
+      "text": "Gestão e qualidade de software",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1150,
+        191,
+        188,
+        18
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section>ul.content>li.text-truncate>a|Engenharia de Software|0",
+      "path": "section>ul.content>li.text-truncate>a",
+      "text": "Engenharia de Software",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1150,
+        219,
+        143,
+        18
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "section>ul.content>li.text-truncate>a|Commit Semântico.|0",
+      "path": "section>ul.content>li.text-truncate>a",
+      "text": "Commit Semântico.",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1150,
+        248,
+        119,
+        18
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "aside.col-xl-3>div.access>section>h2.panel-heading|Trending Tags|0",
+      "path": "aside.col-xl-3>div.access>section>h2.panel-heading",
+      "text": "Trending Tags",
+      "color": "rgb(88, 88, 88)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1146,
+        340,
+        234,
+        24
+      ],
+      "fg": "#585858",
+      "bg": "#ffffff",
+      "ratio": 7.11,
+      "bestRatio": 7.11,
+      "worstRatio": 7.11,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|estudo|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "estudo",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1146,
+        380,
+        57,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|ambientes computacionais|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "ambientes computacionais",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1146,
+        416,
+        172,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|desafio|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "desafio",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1146,
+        453,
+        60,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|front-end|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "front-end",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1211,
+        453,
+        72,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|js|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "js",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1288,
+        453,
+        32,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|programação|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "programação",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1146,
+        489,
+        94,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|redes|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "redes",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1246,
+        489,
+        49,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|cisco|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "cisco",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1301,
+        489,
+        47,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|dicas|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "dicas",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1146,
+        526,
+        48,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.access>section>div.d-flex>a.post-tag|binário|0",
+      "path": "div.access>section>div.d-flex>a.post-tag",
+      "text": "binário",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1199,
+        526,
+        59,
+        28
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-12>footer.d-flex>p|© .|0",
+      "path": "div.row>div.col-12>footer.d-flex>p",
+      "text": "© .",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        332,
+        1133,
+        222,
+        19
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.col-12>footer.d-flex>p>time|2026|0",
+      "path": "div.col-12>footer.d-flex>p>time",
+      "text": "2026",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        344,
+        1134,
+        25,
+        16
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-12>footer.d-flex>p>a|Andra|0",
+      "path": "div.col-12>footer.d-flex>p>a",
+      "text": "Andra",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        372,
+        1134,
+        33,
+        16
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-12>footer.d-flex>p>span|Alguns direitos reservados.|0",
+      "path": "div.col-12>footer.d-flex>p>span",
+      "text": "Alguns direitos reservados.",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        410,
+        1134,
+        144,
+        16
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.row>div.col-12>footer.d-flex>p|Feito com usando o tema|0",
+      "path": "div.row>div.col-12>footer.d-flex>p",
+      "text": "Feito com usando o tema",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        889,
+        1133,
+        208,
+        19
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-12>footer.d-flex>p>a|Jekyll|0",
+      "path": "div.col-12>footer.d-flex>p>a",
+      "text": "Jekyll",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        944,
+        1134,
+        33,
+        16
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.col-12>footer.d-flex>p>a|Chirpy|0",
+      "path": "div.col-12>footer.d-flex>p>a",
+      "text": "Chirpy",
+      "color": "rgb(117, 117, 117)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        1061,
+        1134,
+        36,
+        16
+      ],
+      "fg": "#757575",
+      "bg": "#ffffff",
+      "ratio": 4.61,
+      "bestRatio": 4.61,
+      "worstRatio": 4.61,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

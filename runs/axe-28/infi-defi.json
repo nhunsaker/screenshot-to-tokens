@@ -1,0 +1,414 @@
+{
+  "site": "infi-defi",
+  "ms": 1313,
+  "ourPairs": 12,
+  "ourFailing": 0,
+  "axe": {
+    "violations": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 12,
+      "matched": 12,
+      "weFail": 0,
+      "wePass": 12,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 0,
+      "matched": 0,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": []
+  },
+  "axeNodes": [
+    {
+      "kind": "passes",
+      "target": "a[href=\"/\"]",
+      "idx": 0,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.23,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"shoutbox\"]",
+      "idx": 1,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.23,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"uses\"]",
+      "idx": 2,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.23,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "h1",
+      "idx": 3,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "expected": "3:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"@infdv\"]",
+      "idx": 4,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"infi-defi\"]",
+      "idx": 5,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"un7CqBcZga\"]",
+      "idx": 6,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a:nth-child(4)",
+      "idx": 7,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"mailto:infdv.me@gmail.com\"]",
+      "idx": 8,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(1)",
+      "idx": 9,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.23,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "p:nth-child(2)",
+      "idx": 10,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.23,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".footer",
+      "idx": 11,
+      "reason": null,
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "body>div.wrapper>nav.sidebar>a|Home|0",
+      "path": "body>div.wrapper>nav.sidebar>a",
+      "text": "Home",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        571,
+        10,
+        92,
+        42
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.24,
+      "bestRatio": 13.24,
+      "worstRatio": 13.24,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.wrapper>nav.sidebar>a|Shoutbox|0",
+      "path": "body>div.wrapper>nav.sidebar>a",
+      "text": "Shoutbox",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        663,
+        10,
+        124,
+        42
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.24,
+      "bestRatio": 13.24,
+      "worstRatio": 13.24,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "body>div.wrapper>nav.sidebar>a|Uses|0",
+      "path": "body>div.wrapper>nav.sidebar>a",
+      "text": "Uses",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        787,
+        10,
+        82,
+        42
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.24,
+      "bestRatio": 13.24,
+      "worstRatio": 13.24,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div.wrapper>div>div.profile>h1|infdv|0",
+      "path": "div.wrapper>div>div.profile>h1",
+      "text": "infdv",
+      "color": "rgb(224, 225, 221)",
+      "large": true,
+      "required": 3,
+      "bbox": [
+        140,
+        254,
+        1160,
+        39
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "bestRatio": 11.52,
+      "worstRatio": 11.52,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.profile>div.social-links>a|YouTube|0",
+      "path": "div>div.profile>div.social-links>a",
+      "text": "YouTube",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        528,
+        315,
+        71,
+        19
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "bestRatio": 11.52,
+      "worstRatio": 11.52,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.profile>div.social-links>a|GitHub|0",
+      "path": "div>div.profile>div.social-links>a",
+      "text": "GitHub",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        624,
+        315,
+        56,
+        19
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "bestRatio": 11.52,
+      "worstRatio": 11.52,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.profile>div.social-links>a|Discord|0",
+      "path": "div>div.profile>div.social-links>a",
+      "text": "Discord",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        705,
+        315,
+        61,
+        19
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "bestRatio": 11.52,
+      "worstRatio": 11.52,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.profile>div.social-links>a|Bluesky|0",
+      "path": "div>div.profile>div.social-links>a",
+      "text": "Bluesky",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        790,
+        315,
+        63,
+        19
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "bestRatio": 11.52,
+      "worstRatio": 11.52,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.profile>div.social-links>a|Mail|0",
+      "path": "div>div.profile>div.social-links>a",
+      "text": "Mail",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        878,
+        315,
+        34,
+        19
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "bestRatio": 11.52,
+      "worstRatio": 11.52,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.profile>div.about-me>p|Sup, I’m infdv, a second-year computer s|0",
+      "path": "div>div.profile>div.about-me>p",
+      "text": "Sup, I’m infdv, a second-year computer s",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        245,
+        390,
+        950,
+        57
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.24,
+      "bestRatio": 13.24,
+      "worstRatio": 13.24,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "div>div.profile>div.about-me>p|This is my personal website. I used to h|0",
+      "path": "div>div.profile>div.about-me>p",
+      "text": "This is my personal website. I used to h",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        245,
+        463,
+        950,
+        76
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#0d1b2a",
+      "ratio": 13.24,
+      "bestRatio": 13.24,
+      "worstRatio": 13.24,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "html>body>div.footer|© infdv. All rights reserved.|0",
+      "path": "html>body>div.footer",
+      "text": "© infdv. All rights reserved.",
+      "color": "rgb(224, 225, 221)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        0,
+        874,
+        1440,
+        26
+      ],
+      "fg": "#e0e1dd",
+      "bg": "#1b263b",
+      "ratio": 11.52,
+      "bestRatio": 11.52,
+      "worstRatio": 11.52,
+      "clusters": 1,
+      "status": "pass"
+    }
+  ]
+}

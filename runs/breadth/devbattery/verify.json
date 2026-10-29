@@ -1,0 +1,566 @@
+{
+  "diffPixels": 0,
+  "noisePixels": 0,
+  "totalPixels": 4089600,
+  "ratio": 0,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": true,
+  "reviewNeeded": false,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 4089600,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 4089600,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 142,
+    "failingBefore": 23,
+    "failingAfter": {
+      "colors": 23,
+      "all": 23
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "no-glyphs": 3,
+      "decorative": 1
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "section.db-dashboard-card>nav>a.is-active>strong|943|0",
+        "text": "943",
+        "path": "section.db-dashboard-card>nav>a.is-active>strong",
+        "fg": "#ffffff",
+        "bg": "#add9cc",
+        "ratio": 1.55,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          279,
+          592,
+          35,
+          25
+        ],
+        "tokens": [
+          "color.text.on-primary",
+          "color.white"
+        ]
+      },
+      {
+        "key": "ul>li>a.disabled>span|Previous|0",
+        "text": "Previous",
+        "path": "ul>li>a.disabled>span",
+        "fg": "#b1b3b4",
+        "bg": "#fefefe",
+        "ratio": 2.1,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          681,
+          2436,
+          60,
+          17
+        ],
+        "tokens": [
+          "color.gray.600-a50"
+        ]
+      },
+      {
+        "key": "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.db-topbar__brand|Dev Battery|0",
+        "text": "Dev Battery",
+        "path": "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.db-topbar__brand",
+        "fg": "#10b981",
+        "bg": "#f4f7f9",
+        "ratio": 2.36,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          86,
+          31,
+          324,
+          21
+        ],
+        "tokens": [
+          "color.action.primary",
+          "color.teal.300"
+        ]
+      },
+      {
+        "key": "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>strong|0%|0",
+        "text": "0%",
+        "path": "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>strong",
+        "fg": "#10b981",
+        "bg": "#feffff",
+        "ratio": 2.53,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          306,
+          319,
+          21,
+          21
+        ],
+        "tokens": [
+          "color.action.primary",
+          "color.teal.300"
+        ]
+      },
+      {
+        "key": "section.db-dashboard-card>nav>a.is-active>span|All|0",
+        "text": "All",
+        "path": "section.db-dashboard-card>nav>a.is-active>span",
+        "fg": "#ffffff",
+        "bg": "#10b981",
+        "ratio": 2.54,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          67,
+          594,
+          17,
+          22
+        ],
+        "tokens": [
+          "color.text.on-primary",
+          "color.white"
+        ]
+      },
+      {
+        "key": "section.db-dashboard__main>header.db-dashboard-hero>div>p|Engineering Notes|0",
+        "text": "Engineering Notes",
+        "path": "section.db-dashboard__main>header.db-dashboard-hero>div>p",
+        "fg": "#10b981",
+        "bg": "#ffffff",
+        "ratio": 2.54,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          417,
+          178,
+          495,
+          21
+        ],
+        "tokens": [
+          "color.action.primary",
+          "color.teal.300"
+        ]
+      },
+      {
+        "key": "nav.pagination>ul>li>a.disabled|1|0",
+        "text": "1",
+        "path": "nav.pagination>ul>li>a.disabled",
+        "fg": "#ffffff",
+        "bg": "#10b981",
+        "ratio": 2.54,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          767,
+          2422,
+          50,
+          45
+        ],
+        "tokens": [
+          "color.text.on-primary",
+          "color.white"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|0",
+        "text": "1",
+        "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          460,
+          1177,
+          6,
+          16
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|78|0",
+        "text": "78",
+        "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          518,
+          1179,
+          16,
+          13
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|0",
+        "text": "0",
+        "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          986,
+          1177,
+          9,
+          16
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|81|0",
+        "text": "81",
+        "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1046,
+          1179,
+          14,
+          13
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|1",
+        "text": "0",
+        "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          460,
+          1735,
+          9,
+          16
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|100|0",
+        "text": "100",
+        "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          521,
+          1737,
+          23,
+          13
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|1",
+        "text": "1",
+        "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          986,
+          1735,
+          6,
+          16
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|98|0",
+        "text": "98",
+        "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1043,
+          1737,
+          17,
+          13
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|5|0",
+        "text": "5",
+        "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          460,
+          2293,
+          8,
+          16
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|95|0",
+        "text": "95",
+        "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          520,
+          2295,
+          16,
+          13
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|2",
+        "text": "0",
+        "path": "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          986,
+          2293,
+          9,
+          16
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|57|0",
+        "text": "57",
+        "path": "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span",
+        "fg": "#71717a",
+        "bg": "#e9e9eb",
+        "ratio": 3.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1046,
+          2295,
+          16,
+          13
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|local profile|0",
+        "text": "local profile",
+        "path": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span",
+        "fg": "#71717a",
+        "bg": "#e8f0ee",
+        "ratio": 4.16,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1220,
+          271,
+          162,
+          54
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|categories|0",
+        "text": "categories",
+        "path": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span",
+        "fg": "#71717a",
+        "bg": "#edf1f0",
+        "ratio": 4.25,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1073,
+          271,
+          138,
+          54
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|articles|0",
+        "text": "articles",
+        "path": "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span",
+        "fg": "#71717a",
+        "bg": "#f2f3f3",
+        "ratio": 4.34,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          934,
+          271,
+          129,
+          54
+        ],
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      },
+      {
+        "key": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>p|Backend engineer focused on scalable sys|0",
+        "text": "Backend engineer focused on scalable sys",
+        "path": "section.db-dashboard-card>div.db-dashboard-profile__identity>div>p",
+        "fg": "#71717a",
+        "bg": "#ebf9f5",
+        "ratio": 4.48,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          127,
+          200,
+          201,
+          64
+        ],
+        "bestRatio": 4.77,
+        "tokens": [
+          "color.text.muted",
+          "color.gray.500"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.db-topbar__brand|Dev Battery|0",
+        "section.db-dashboard-card>div.db-dashboard-profile__identity>div>p|Backend engineer focused on scalable sys|0",
+        "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>strong|0%|0",
+        "section.db-dashboard-card>nav>a.is-active>span|All|0",
+        "section.db-dashboard-card>nav>a.is-active>strong|943|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div>p|Engineering Notes|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|articles|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|categories|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|local profile|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|0",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|78|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|0",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|81|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|1",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|100|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|1",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|98|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|5|0",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|95|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|2",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|57|0",
+        "ul>li>a.disabled>span|Previous|0",
+        "nav.pagination>ul>li>a.disabled|1|0"
+      ],
+      "all": [
+        "nav.greedy-nav>a.site-title>span.db-battery-brand__copy>span.db-topbar__brand|Dev Battery|0",
+        "section.db-dashboard-card>div.db-dashboard-profile__identity>div>p|Backend engineer focused on scalable sys|0",
+        "section.db-dashboard-card>div.db-dashboard-energy>div.db-dashboard-energy__label>strong|0%|0",
+        "section.db-dashboard-card>nav>a.is-active>span|All|0",
+        "section.db-dashboard-card>nav>a.is-active>strong|943|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div>p|Engineering Notes|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|articles|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|categories|0",
+        "section.db-dashboard__main>header.db-dashboard-hero>div.db-dashboard-hero__stats>span|local profile|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|0",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|78|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|0",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|81|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|1",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|100|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|1|1",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|98|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|5|0",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|95|0",
+        "div.db-archive-item__content>div.db-post-metrics>button.db-post-metrics__item>span|0|2",
+        "div.db-archive-item__content>div.db-post-metrics>span.db-post-metrics__item>span|57|0",
+        "ul>li>a.disabled>span|Previous|0",
+        "nav.pagination>ul>li>a.disabled|1|0"
+      ]
+    }
+  }
+}

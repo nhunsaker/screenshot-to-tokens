@@ -1,0 +1,268 @@
+{
+  "diffPixels": 0,
+  "noisePixels": 0,
+  "totalPixels": 3656160,
+  "ratio": 0,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": true,
+  "reviewNeeded": false,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 3656160,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 3656160,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 13,
+    "failingBefore": 9,
+    "failingAfter": {
+      "colors": 9,
+      "all": 9
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "invisible": 2,
+      "offscreen": 4
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.content-wrap>a>div.content>p|Exploring development workflows, travel |0",
+        "text": "Exploring development workflows, travel ",
+        "path": "div.content-wrap>a>div.content>p",
+        "fg": "#eee8d5",
+        "bg": "#b5bdb4",
+        "ratio": 1.57,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          88,
+          1841,
+          711,
+          48
+        ],
+        "bestRatio": 1.96,
+        "tokens": [
+          "color.text.default",
+          "header.text",
+          "nav.text"
+        ]
+      },
+      {
+        "key": "div.content-wrap>a>div.content>h2|Projects|0",
+        "text": "Projects",
+        "path": "div.content-wrap>a>div.content>h2",
+        "fg": "#eee8d5",
+        "bg": "#9daba4",
+        "ratio": 1.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          641,
+          1432,
+          711,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "header.text",
+          "nav.text"
+        ]
+      },
+      {
+        "key": "div.content-wrap>a>div.content>h2|Blog|0",
+        "text": "Blog",
+        "path": "div.content-wrap>a>div.content>h2",
+        "fg": "#eee8d5",
+        "bg": "#9caaa3",
+        "ratio": 1.97,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          88,
+          1790,
+          711,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "header.text",
+          "nav.text"
+        ]
+      },
+      {
+        "key": "div.content-wrap>a>div.content>h2|About|0",
+        "text": "About",
+        "path": "div.content-wrap>a>div.content>h2",
+        "fg": "#eee8d5",
+        "bg": "#9ba9a3",
+        "ratio": 1.99,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          88,
+          1062,
+          711,
+          32
+        ],
+        "tokens": [
+          "color.text.default",
+          "header.text",
+          "nav.text"
+        ]
+      },
+      {
+        "key": "div.content-wrap>a>div.content>p|Things I enjoyed creating|0",
+        "text": "Things I enjoyed creating",
+        "path": "div.content-wrap>a>div.content>p",
+        "fg": "#eee8d5",
+        "bg": "#97a7a0",
+        "ratio": 2.06,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          641,
+          1483,
+          711,
+          24
+        ],
+        "tokens": [
+          "color.text.default",
+          "header.text",
+          "nav.text"
+        ]
+      },
+      {
+        "key": "div.content-wrap>a>div.content>p|A bit about me!|0",
+        "text": "A bit about me!",
+        "path": "div.content-wrap>a>div.content>p",
+        "fg": "#eee8d5",
+        "bg": "#95a59f",
+        "ratio": 2.11,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          88,
+          1112,
+          711,
+          24
+        ],
+        "tokens": [
+          "color.text.default",
+          "header.text",
+          "nav.text"
+        ]
+      },
+      {
+        "key": "div.inner>ul.actions>li>a.button|Contact|0",
+        "text": "Contact",
+        "path": "div.inner>ul.actions>li>a.button",
+        "fg": "#ffffff",
+        "bg": "#ed4933",
+        "ratio": 3.75,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          852,
+          2070,
+          198,
+          37
+        ],
+        "tokens": [
+          "color.text.on-primary",
+          "button.text",
+          "color.white"
+        ]
+      },
+      {
+        "key": "div>footer>ul.copyright>li|© 2019, 2026 Raghavendra Manjegowda|0",
+        "text": "© 2019, 2026 Raghavendra Manjegowda",
+        "path": "div>footer>ul.copyright>li",
+        "fg": "#657b83",
+        "bg": "#fdf6e3",
+        "ratio": 4.13,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          504,
+          2440,
+          337,
+          12
+        ],
+        "tokens": [
+          "footer.text",
+          "link.border",
+          "color.teal.500"
+        ]
+      },
+      {
+        "key": "footer>ul.copyright>li>a|Credits|0",
+        "text": "Credits",
+        "path": "footer>ul.copyright>li>a",
+        "fg": "#657b83",
+        "bg": "#fdf6e3",
+        "ratio": 4.13,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          871,
+          2437,
+          64,
+          17
+        ],
+        "tokens": [
+          "footer.text",
+          "link.border",
+          "color.teal.500"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "div.content-wrap>a>div.content>h2|About|0",
+        "div.content-wrap>a>div.content>p|A bit about me!|0",
+        "div.content-wrap>a>div.content>h2|Projects|0",
+        "div.content-wrap>a>div.content>p|Things I enjoyed creating|0",
+        "div.content-wrap>a>div.content>h2|Blog|0",
+        "div.content-wrap>a>div.content>p|Exploring development workflows, travel |0",
+        "div.inner>ul.actions>li>a.button|Contact|0",
+        "div>footer>ul.copyright>li|© 2019, 2026 Raghavendra Manjegowda|0",
+        "footer>ul.copyright>li>a|Credits|0"
+      ],
+      "all": [
+        "div.content-wrap>a>div.content>h2|About|0",
+        "div.content-wrap>a>div.content>p|A bit about me!|0",
+        "div.content-wrap>a>div.content>h2|Projects|0",
+        "div.content-wrap>a>div.content>p|Things I enjoyed creating|0",
+        "div.content-wrap>a>div.content>h2|Blog|0",
+        "div.content-wrap>a>div.content>p|Exploring development workflows, travel |0",
+        "div.inner>ul.actions>li>a.button|Contact|0",
+        "div>footer>ul.copyright>li|© 2019, 2026 Raghavendra Manjegowda|0",
+        "footer>ul.copyright>li>a|Credits|0"
+      ]
+    }
+  }
+}

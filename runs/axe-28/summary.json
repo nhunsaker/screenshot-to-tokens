@@ -1,0 +1,1168 @@
+{
+  "axeVersion": "4.14.0",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "ranAt": "2026-10-27T14:09:58.427Z",
+  "total": {
+    "sites": 28,
+    "violations": {
+      "total": 309,
+      "matched": 309,
+      "weFail": 308
+    },
+    "passes": {
+      "total": 2185,
+      "matched": 2174,
+      "wePass": 2165
+    },
+    "incomplete": {
+      "total": 253,
+      "matched": 251,
+      "wePass": 190,
+      "weFail": 53,
+      "byReason": {
+        "bgGradient": {
+          "total": 107,
+          "pass": 84,
+          "fail": 20,
+          "skipped": 3
+        },
+        "bgImage": {
+          "total": 7,
+          "pass": 7,
+          "fail": 0,
+          "skipped": 0
+        },
+        "pseudoContent": {
+          "total": 112,
+          "pass": 82,
+          "fail": 30,
+          "skipped": 0
+        },
+        "elmPartiallyObscuring": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "skipped": 0
+        },
+        "shortTextContent": {
+          "total": 14,
+          "pass": 8,
+          "fail": 3,
+          "skipped": 3
+        },
+        "nonBmp": {
+          "total": 2,
+          "pass": 0,
+          "fail": 0,
+          "skipped": 2
+        },
+        "bgOverlap": {
+          "total": 7,
+          "pass": 7,
+          "fail": 0,
+          "skipped": 0
+        }
+      }
+    }
+  },
+  "sites": [
+    {
+      "site": "argon",
+      "ms": 2539,
+      "ourPairs": 87,
+      "ourFailing": 41,
+      "axe": {
+        "violations": {
+          "total": 39,
+          "matched": 39,
+          "weFail": 39,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 45,
+          "matched": 44,
+          "weFail": 0,
+          "wePass": 44,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 5,
+          "matched": 4,
+          "weFail": 2,
+          "wePass": 2,
+          "weSkip": {},
+          "byReason": {
+            "bgGradient": {
+              "total": 4,
+              "pass": 2,
+              "fail": 2,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "Andra-sun",
+      "ms": 5098,
+      "ourPairs": 55,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 57,
+          "matched": 56,
+          "weFail": 0,
+          "wePass": 55,
+          "weSkip": {
+            "decorative": 1
+          },
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "Awfp1314",
+      "ms": 1527,
+      "ourPairs": 2,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 2,
+          "matched": 2,
+          "weFail": 0,
+          "wePass": 2,
+          "weSkip": {},
+          "byReason": {
+            "bgGradient": {
+              "total": 2,
+              "pass": 2,
+              "fail": 0,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "C-gyeltshen",
+      "ms": 978,
+      "ourPairs": 1,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 1,
+          "matched": 1,
+          "weFail": 0,
+          "wePass": 1,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "CWWhitney",
+      "ms": 1490,
+      "ourPairs": 30,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 30,
+          "matched": 30,
+          "weFail": 0,
+          "wePass": 30,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "DiogoRibeiro7",
+      "ms": 3062,
+      "ourPairs": 101,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 100,
+          "matched": 100,
+          "weFail": 0,
+          "wePass": 100,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 1,
+          "matched": 1,
+          "weFail": 0,
+          "wePass": 1,
+          "weSkip": {},
+          "byReason": {
+            "bgImage": {
+              "total": 1,
+              "pass": 1,
+              "fail": 0,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "Geuni620",
+      "ms": 4608,
+      "ourPairs": 501,
+      "ourFailing": 147,
+      "axe": {
+        "violations": {
+          "total": 147,
+          "matched": 147,
+          "weFail": 147,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 354,
+          "matched": 354,
+          "weFail": 0,
+          "wePass": 354,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "HackSocNotts",
+      "ms": 2208,
+      "ourPairs": 73,
+      "ourFailing": 32,
+      "axe": {
+        "violations": {
+          "total": 32,
+          "matched": 32,
+          "weFail": 32,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 41,
+          "matched": 41,
+          "weFail": 0,
+          "wePass": 41,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "Mavrikant",
+      "ms": 7718,
+      "ourPairs": 73,
+      "ourFailing": 1,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 37,
+          "matched": 36,
+          "weFail": 0,
+          "wePass": 36,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 36,
+          "matched": 36,
+          "weFail": 0,
+          "wePass": 36,
+          "weSkip": {},
+          "byReason": {
+            "bgGradient": {
+              "total": 7,
+              "pass": 7,
+              "fail": 0,
+              "skipped": 0
+            },
+            "pseudoContent": {
+              "total": 29,
+              "pass": 29,
+              "fail": 0,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 1
+    },
+    {
+      "site": "Stuocs",
+      "ms": 2274,
+      "ourPairs": 73,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 75,
+          "matched": 74,
+          "weFail": 0,
+          "wePass": 73,
+          "weSkip": {
+            "decorative": 1
+          },
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "WonYong-Jang",
+      "ms": 3122,
+      "ourPairs": 28,
+      "ourFailing": 11,
+      "axe": {
+        "violations": {
+          "total": 1,
+          "matched": 1,
+          "weFail": 1,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 2,
+          "matched": 1,
+          "weFail": 0,
+          "wePass": 1,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 26,
+          "matched": 26,
+          "weFail": 10,
+          "wePass": 16,
+          "weSkip": {},
+          "byReason": {
+            "bgImage": {
+              "total": 6,
+              "pass": 6,
+              "fail": 0,
+              "skipped": 0
+            },
+            "pseudoContent": {
+              "total": 20,
+              "pass": 10,
+              "fail": 10,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "ZZy979",
+      "ms": 2290,
+      "ourPairs": 75,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 77,
+          "matched": 76,
+          "weFail": 0,
+          "wePass": 75,
+          "weSkip": {
+            "decorative": 1
+          },
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "burning-cost",
+      "ms": 4826,
+      "ourPairs": 104,
+      "ourFailing": 55,
+      "axe": {
+        "violations": {
+          "total": 40,
+          "matched": 40,
+          "weFail": 40,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 42,
+          "matched": 42,
+          "weFail": 0,
+          "wePass": 42,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 21,
+          "matched": 21,
+          "weFail": 13,
+          "wePass": 7,
+          "weSkip": {
+            "no-glyphs": 1
+          },
+          "byReason": {
+            "bgGradient": {
+              "total": 10,
+              "pass": 1,
+              "fail": 8,
+              "skipped": 1
+            },
+            "elmPartiallyObscuring": {
+              "total": 1,
+              "pass": 1,
+              "fail": 0,
+              "skipped": 0
+            },
+            "pseudoContent": {
+              "total": 10,
+              "pass": 5,
+              "fail": 5,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 2
+    },
+    {
+      "site": "cgoldberg",
+      "ms": 2549,
+      "ourPairs": 78,
+      "ourFailing": 4,
+      "axe": {
+        "violations": {
+          "total": 4,
+          "matched": 4,
+          "weFail": 4,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 76,
+          "matched": 75,
+          "weFail": 0,
+          "wePass": 74,
+          "weSkip": {
+            "decorative": 1
+          },
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "cheonjoosung",
+      "ms": 2709,
+      "ourPairs": 9,
+      "ourFailing": 5,
+      "axe": {
+        "violations": {
+          "total": 5,
+          "matched": 5,
+          "weFail": 5,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 4,
+          "matched": 4,
+          "weFail": 0,
+          "wePass": 4,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "devbattery",
+      "ms": 4757,
+      "ourPairs": 142,
+      "ourFailing": 23,
+      "axe": {
+        "violations": {
+          "total": 3,
+          "matched": 3,
+          "weFail": 3,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 6,
+          "matched": 5,
+          "weFail": 0,
+          "wePass": 5,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 132,
+          "matched": 132,
+          "weFail": 20,
+          "wePass": 112,
+          "weSkip": {},
+          "byReason": {
+            "pseudoContent": {
+              "total": 53,
+              "pass": 38,
+              "fail": 15,
+              "skipped": 0
+            },
+            "bgGradient": {
+              "total": 70,
+              "pass": 66,
+              "fail": 4,
+              "skipped": 0
+            },
+            "shortTextContent": {
+              "total": 9,
+              "pass": 8,
+              "fail": 1,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 2
+    },
+    {
+      "site": "dieghernan",
+      "ms": 3220,
+      "ourPairs": 195,
+      "ourFailing": 5,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 184,
+          "matched": 184,
+          "weFail": 0,
+          "wePass": 184,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 2,
+          "matched": 2,
+          "weFail": 0,
+          "wePass": 2,
+          "weSkip": {},
+          "byReason": {
+            "bgGradient": {
+              "total": 2,
+              "pass": 2,
+              "fail": 0,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 9
+    },
+    {
+      "site": "gaotianchi",
+      "ms": 1896,
+      "ourPairs": 31,
+      "ourFailing": 25,
+      "axe": {
+        "violations": {
+          "total": 25,
+          "matched": 25,
+          "weFail": 25,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 6,
+          "matched": 6,
+          "weFail": 0,
+          "wePass": 6,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 2,
+          "matched": 2,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {
+            "decorative": 2
+          },
+          "byReason": {
+            "nonBmp": {
+              "total": 1,
+              "pass": 0,
+              "fail": 0,
+              "skipped": 1
+            },
+            "shortTextContent": {
+              "total": 1,
+              "pass": 0,
+              "fail": 0,
+              "skipped": 1
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "infi-defi",
+      "ms": 1313,
+      "ourPairs": 12,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 12,
+          "matched": 12,
+          "weFail": 0,
+          "wePass": 12,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "josh-wong",
+      "ms": 2830,
+      "ourPairs": 20,
+      "ourFailing": 3,
+      "axe": {
+        "violations": {
+          "total": 2,
+          "matched": 2,
+          "weFail": 1,
+          "wePass": 0,
+          "weSkip": {
+            "no-glyphs": 1
+          },
+          "byReason": {}
+        },
+        "passes": {
+          "total": 18,
+          "matched": 18,
+          "weFail": 0,
+          "wePass": 16,
+          "weSkip": {
+            "no-glyphs": 2
+          },
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 4,
+          "matched": 4,
+          "weFail": 2,
+          "wePass": 1,
+          "weSkip": {
+            "decorative": 1
+          },
+          "byReason": {
+            "shortTextContent": {
+              "total": 2,
+              "pass": 0,
+              "fail": 2,
+              "skipped": 0
+            },
+            "nonBmp": {
+              "total": 1,
+              "pass": 0,
+              "fail": 0,
+              "skipped": 1
+            },
+            "elmPartiallyObscuring": {
+              "total": 1,
+              "pass": 1,
+              "fail": 0,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "linkarzu",
+      "ms": 3812,
+      "ourPairs": 135,
+      "ourFailing": 1,
+      "axe": {
+        "violations": {
+          "total": 1,
+          "matched": 1,
+          "weFail": 1,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 136,
+          "matched": 135,
+          "weFail": 0,
+          "wePass": 134,
+          "weSkip": {
+            "decorative": 1
+          },
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "nithinbekal",
+      "ms": 2935,
+      "ourPairs": 474,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 474,
+          "matched": 474,
+          "weFail": 0,
+          "wePass": 474,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "proinsias",
+      "ms": 1802,
+      "ourPairs": 54,
+      "ourFailing": 1,
+      "axe": {
+        "violations": {
+          "total": 1,
+          "matched": 1,
+          "weFail": 1,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 53,
+          "matched": 52,
+          "weFail": 0,
+          "wePass": 52,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 1
+    },
+    {
+      "site": "ragu-manjegowda",
+      "ms": 2998,
+      "ourPairs": 13,
+      "ourFailing": 9,
+      "axe": {
+        "violations": {
+          "total": 3,
+          "matched": 3,
+          "weFail": 3,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 12,
+          "matched": 12,
+          "weFail": 6,
+          "wePass": 4,
+          "weSkip": {
+            "invisible": 2
+          },
+          "byReason": {
+            "bgGradient": {
+              "total": 12,
+              "pass": 4,
+              "fail": 6,
+              "skipped": 2
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "ruzickap",
+      "ms": 2940,
+      "ourPairs": 76,
+      "ourFailing": 5,
+      "axe": {
+        "violations": {
+          "total": 5,
+          "matched": 5,
+          "weFail": 5,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 73,
+          "matched": 72,
+          "weFail": 0,
+          "wePass": 71,
+          "weSkip": {
+            "decorative": 1
+          },
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "tw93",
+      "ms": 3311,
+      "ourPairs": 40,
+      "ourFailing": 0,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 40,
+          "matched": 40,
+          "weFail": 0,
+          "wePass": 40,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 1,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "utzcoz",
+      "ms": 1592,
+      "ourPairs": 47,
+      "ourFailing": 1,
+      "axe": {
+        "violations": {
+          "total": 1,
+          "matched": 1,
+          "weFail": 1,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 46,
+          "matched": 46,
+          "weFail": 0,
+          "wePass": 46,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 2,
+          "matched": 2,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {
+            "decorative": 2
+          },
+          "byReason": {
+            "shortTextContent": {
+              "total": 2,
+              "pass": 0,
+              "fail": 0,
+              "skipped": 2
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    },
+    {
+      "site": "zeikar",
+      "ms": 8516,
+      "ourPairs": 203,
+      "ourFailing": 1,
+      "axe": {
+        "violations": {
+          "total": 0,
+          "matched": 0,
+          "weFail": 0,
+          "wePass": 0,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "passes": {
+          "total": 196,
+          "matched": 196,
+          "weFail": 1,
+          "wePass": 195,
+          "weSkip": {},
+          "byReason": {}
+        },
+        "incomplete": {
+          "total": 7,
+          "matched": 7,
+          "weFail": 0,
+          "wePass": 7,
+          "weSkip": {},
+          "byReason": {
+            "bgOverlap": {
+              "total": 7,
+              "pass": 7,
+              "fail": 0,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      "oursOnly": 0
+    }
+  ]
+}

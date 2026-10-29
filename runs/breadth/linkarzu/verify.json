@@ -1,0 +1,80 @@
+{
+  "diffPixels": 1086041,
+  "noisePixels": 0,
+  "totalPixels": 7915680,
+  "ratio": 0.13720122592120954,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 7652160,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 7652160,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 135,
+    "failingBefore": 1,
+    "failingAfter": {
+      "colors": 1,
+      "all": 1
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "decorative": 1
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "ul.nav>li.nav-item>a.nav-link>span|MERCH|0",
+        "text": "MERCH",
+        "path": "ul.nav>li.nav-item>a.nav-link>span",
+        "fg": "#4af4a3",
+        "bg": "#f6f8fa",
+        "ratio": 1.33,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          83,
+          519,
+          46,
+          22
+        ],
+        "tokens": [
+          "color.green.100"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "ul.nav>li.nav-item>a.nav-link>span|MERCH|0"
+      ],
+      "all": [
+        "ul.nav>li.nav-item>a.nav-link>span|MERCH|0"
+      ]
+    }
+  }
+}

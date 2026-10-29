@@ -1,0 +1,82 @@
+{
+  "diffPixels": 36806,
+  "noisePixels": 0,
+  "totalPixels": 2475360,
+  "ratio": 0.01486894835498675,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 2471040,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 2471040,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 54,
+    "failingBefore": 1,
+    "failingAfter": {
+      "colors": 1,
+      "all": 1
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "no-glyphs": 3,
+      "decorative": 1
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "ul>li>a.disabled>span|Previous|0",
+        "text": "Previous",
+        "path": "ul>li>a.disabled>span",
+        "fg": "#b2b3b4",
+        "bg": "#ffffff",
+        "ratio": 2.1,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          417,
+          1421,
+          60,
+          17
+        ],
+        "tokens": [
+          "color.text.on-dark",
+          "color.gray.600-a50"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "ul>li>a.disabled>span|Previous|0"
+      ],
+      "all": [
+        "ul>li>a.disabled>span|Previous|0"
+      ]
+    }
+  }
+}

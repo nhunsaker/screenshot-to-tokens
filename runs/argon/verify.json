@@ -1,0 +1,981 @@
+{
+  "diffPixels": 17250,
+  "noisePixels": 0,
+  "totalPixels": 1876320,
+  "ratio": 0.009193527756459452,
+  "pass": true,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1876320,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 0,
+    "noisePixels": 0,
+    "totalPixels": 1876320,
+    "ratio": 0,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 87,
+    "failingBefore": 41,
+    "failingAfter": {
+      "colors": 41,
+      "all": 41
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {},
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-success|3.48%|0",
+        "text": "3.48%",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-success",
+        "fg": "#2dce89",
+        "bg": "#ffffff",
+        "ratio": 2.04,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          314,
+          213,
+          53,
+          19
+        ],
+        "tokens": [
+          "color.green.300"
+        ]
+      },
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-success|12%|0",
+        "text": "12%",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-success",
+        "fg": "#2dce89",
+        "bg": "#ffffff",
+        "ratio": 2.04,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1171,
+          213,
+          41,
+          19
+        ],
+        "tokens": [
+          "color.green.300"
+        ]
+      },
+      {
+        "key": "div.main-content>nav.navbar-top>div.container-fluid>a.h4|Dashboard|0",
+        "text": "Dashboard",
+        "path": "div.main-content>nav.navbar-top>div.container-fluid>a.h4",
+        "fg": "#ffffff",
+        "bg": "#11c5ef",
+        "ratio": 2.05,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          289,
+          28,
+          93,
+          23
+        ],
+        "tokens": [
+          "color.surface.default",
+          "color.surface.card",
+          "color.text.on-primary"
+        ]
+      },
+      {
+        "key": "table.align-items-center>thead.thead-light>tr>th|Page name|0",
+        "text": "Page name",
+        "path": "table.align-items-center>thead.thead-light>tr>th",
+        "fg": "#8898aa",
+        "bg": "#f6f9fc",
+        "ratio": 2.79,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          290,
+          891,
+          230,
+          41
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "table.align-items-center>thead.thead-light>tr>th|Visitors|0",
+        "text": "Visitors",
+        "path": "table.align-items-center>thead.thead-light>tr>th",
+        "fg": "#8898aa",
+        "bg": "#f6f9fc",
+        "ratio": 2.79,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          520,
+          891,
+          138,
+          41
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "table.align-items-center>thead.thead-light>tr>th|Unique users|0",
+        "text": "Unique users",
+        "path": "table.align-items-center>thead.thead-light>tr>th",
+        "fg": "#8898aa",
+        "bg": "#f6f9fc",
+        "ratio": 2.79,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          658,
+          891,
+          184,
+          41
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "table.align-items-center>thead.thead-light>tr>th|Bounce rate|0",
+        "text": "Bounce rate",
+        "path": "table.align-items-center>thead.thead-light>tr>th",
+        "fg": "#8898aa",
+        "bg": "#f6f9fc",
+        "ratio": 2.79,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          842,
+          891,
+          178,
+          41
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "table.align-items-center>thead.thead-light>tr>th|Referral|0",
+        "text": "Referral",
+        "path": "table.align-items-center>thead.thead-light>tr>th",
+        "fg": "#8898aa",
+        "bg": "#f6f9fc",
+        "ratio": 2.79,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1051,
+          891,
+          112,
+          41
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "table.align-items-center>thead.thead-light>tr>th|Visitors|1",
+        "text": "Visitors",
+        "path": "table.align-items-center>thead.thead-light>tr>th",
+        "fg": "#8898aa",
+        "bg": "#f6f9fc",
+        "ratio": 2.79,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1163,
+          891,
+          101,
+          41
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "footer.footer>div.align-items-center>div.col-xl-6>div.copyright|© 2026|0",
+        "text": "© 2026",
+        "path": "footer.footer>div.align-items-center>div.col-xl-6>div.copyright",
+        "fg": "#8898aa",
+        "bg": "#f7fafc",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          289,
+          1238,
+          541,
+          21
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|Creative Tim|0",
+        "text": "Creative Tim",
+        "path": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link",
+        "fg": "#8898aa",
+        "bg": "#f7fafc",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1071,
+          1234,
+          105,
+          29
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|About Us|0",
+        "text": "About Us",
+        "path": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link",
+        "fg": "#8898aa",
+        "bg": "#f7fafc",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1176,
+          1234,
+          84,
+          29
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|Blog|0",
+        "text": "Blog",
+        "path": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link",
+        "fg": "#8898aa",
+        "bg": "#f7fafc",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1260,
+          1234,
+          53,
+          29
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|MIT License|0",
+        "text": "MIT License",
+        "path": "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link",
+        "fg": "#8898aa",
+        "bg": "#f7fafc",
+        "ratio": 2.81,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1313,
+          1234,
+          88,
+          29
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "nav.navbar-vertical>div.container-fluid>div.collapse>h6.navbar-heading|Documentation|0",
+        "text": "Documentation",
+        "path": "nav.navbar-vertical>div.container-fluid>div.collapse>h6.navbar-heading",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          24,
+          450,
+          202,
+          26
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-body>div.row>div.col>h5.text-uppercase|Traffic|0",
+        "text": "Traffic",
+        "path": "div.card-body>div.row>div.col>h5.text-uppercase",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          314,
+          145,
+          128,
+          20
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last month|0",
+        "text": "Since last month",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          378,
+          213,
+          104,
+          19
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-body>div.row>div.col>h5.text-uppercase|New users|0",
+        "text": "New users",
+        "path": "div.card-body>div.row>div.col>h5.text-uppercase",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          600,
+          145,
+          128,
+          20
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last week|0",
+        "text": "Since last week",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          664,
+          213,
+          95,
+          19
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-body>div.row>div.col>h5.text-uppercase|Sales|0",
+        "text": "Sales",
+        "path": "div.card-body>div.row>div.col>h5.text-uppercase",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          885,
+          145,
+          128,
+          20
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since yesterday|0",
+        "text": "Since yesterday",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          949,
+          213,
+          98,
+          19
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-body>div.row>div.col>h5.text-uppercase|Performance|0",
+        "text": "Performance",
+        "path": "div.card-body>div.row>div.col>h5.text-uppercase",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1171,
+          145,
+          128,
+          20
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last month|1",
+        "text": "Since last month",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-nowrap",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1224,
+          213,
+          104,
+          19
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.bg-transparent>div.align-items-center>div.col>h6.text-uppercase|Performance|0",
+        "text": "Performance",
+        "path": "div.bg-transparent>div.align-items-center>div.col>h6.text-uppercase",
+        "fg": "#8898aa",
+        "bg": "#ffffff",
+        "ratio": 2.95,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1075,
+          304,
+          301,
+          15
+        ],
+        "tokens": [
+          "color.text.muted",
+          "footer.text",
+          "color.blue.400"
+        ]
+      },
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-warning|1.10%|0",
+        "text": "1.10%",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-warning",
+        "fg": "#fb6340",
+        "bg": "#ffffff",
+        "ratio": 3.02,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          885,
+          213,
+          53,
+          19
+        ],
+        "tokens": [
+          "color.red.400"
+        ]
+      },
+      {
+        "key": "div.card-stats>div.card-body>p.mt-3>span.text-danger|3.48%|0",
+        "text": "3.48%",
+        "path": "div.card-stats>div.card-body>p.mt-3>span.text-danger",
+        "fg": "#f5365c",
+        "bg": "#ffffff",
+        "ratio": 3.77,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          600,
+          213,
+          53,
+          19
+        ],
+        "tokens": [
+          "color.red.500"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Icons|0",
+        "text": "Icons",
+        "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          149,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Maps|0",
+        "text": "Maps",
+        "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          194,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|User Profile|0",
+        "text": "User Profile",
+        "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          238,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Tables|0",
+        "text": "Tables",
+        "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          283,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Login|0",
+        "text": "Login",
+        "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          328,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Register|0",
+        "text": "Register",
+        "path": "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          373,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Getting started|0",
+        "text": "Getting started",
+        "path": "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          484,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Foundation|0",
+        "text": "Foundation",
+        "path": "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          529,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Components|0",
+        "text": "Components",
+        "path": "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link",
+        "fg": "#808080",
+        "bg": "#ffffff",
+        "ratio": 3.98,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          0,
+          574,
+          250,
+          45
+        ],
+        "tokens": [
+          "link.text",
+          "color.black-a50"
+        ]
+      },
+      {
+        "key": "a.pr-0>div.align-items-center>div.ml-2>span.mb-0|Jessica Jones|0",
+        "text": "Jessica Jones",
+        "path": "a.pr-0>div.align-items-center>div.ml-2>span.mb-0",
+        "fg": "#f3f8fe",
+        "bg": "#1177ef",
+        "ratio": 4,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1316,
+          31,
+          85,
+          19
+        ],
+        "tokens": [
+          "color.white-a95"
+        ]
+      },
+      {
+        "key": "div.align-items-center>div.col-xl-6>div.copyright>a.font-weight-bold|Creative Tim|0",
+        "text": "Creative Tim",
+        "path": "div.align-items-center>div.col-xl-6>div.copyright>a.font-weight-bold",
+        "fg": "#5e72e4",
+        "bg": "#f7fafc",
+        "ratio": 4,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          344,
+          1239,
+          85,
+          19
+        ],
+        "tokens": [
+          "color.action.primary",
+          "button.bg",
+          "button.border"
+        ]
+      },
+      {
+        "key": "ul.justify-content-end>li.nav-item>a.py-2>span.d-none|Month|0",
+        "text": "Month",
+        "path": "ul.justify-content-end>li.nav-item>a.py-2>span.d-none",
+        "fg": "#ffffff",
+        "bg": "#5e72e4",
+        "ratio": 4.2,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          852,
+          318,
+          43,
+          21
+        ],
+        "tokens": [
+          "color.surface.default",
+          "color.surface.card",
+          "color.text.on-primary"
+        ]
+      },
+      {
+        "key": "ul.justify-content-end>li.nav-item>a.py-2>span.d-none|Week|0",
+        "text": "Week",
+        "path": "ul.justify-content-end>li.nav-item>a.py-2>span.d-none",
+        "fg": "#5e72e4",
+        "bg": "#ffffff",
+        "ratio": 4.2,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          943,
+          318,
+          36,
+          21
+        ],
+        "tokens": [
+          "color.action.primary",
+          "button.bg",
+          "button.border"
+        ]
+      },
+      {
+        "key": "div.border-0>div.align-items-center>div.col>a.btn|See all|0",
+        "text": "See all",
+        "path": "div.border-0>div.align-items-center>div.col>a.btn",
+        "fg": "#ffffff",
+        "bg": "#5e72e4",
+        "ratio": 4.2,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          938,
+          842,
+          57,
+          28
+        ],
+        "tokens": [
+          "color.surface.default",
+          "color.surface.card",
+          "color.text.on-primary"
+        ]
+      },
+      {
+        "key": "div.border-0>div.align-items-center>div.col>a.btn|See all|1",
+        "text": "See all",
+        "path": "div.border-0>div.align-items-center>div.col>a.btn",
+        "fg": "#ffffff",
+        "bg": "#5e72e4",
+        "ratio": 4.2,
+        "required": 4.5,
+        "large": false,
+        "bbox": [
+          1319,
+          842,
+          57,
+          28
+        ],
+        "tokens": [
+          "color.surface.default",
+          "color.surface.card",
+          "color.text.on-primary"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Icons|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Maps|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|User Profile|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Tables|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Login|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Register|0",
+        "nav.navbar-vertical>div.container-fluid>div.collapse>h6.navbar-heading|Documentation|0",
+        "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Getting started|0",
+        "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Foundation|0",
+        "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Components|0",
+        "div.main-content>nav.navbar-top>div.container-fluid>a.h4|Dashboard|0",
+        "a.pr-0>div.align-items-center>div.ml-2>span.mb-0|Jessica Jones|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|Traffic|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-success|3.48%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last month|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|New users|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-danger|3.48%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last week|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|Sales|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-warning|1.10%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since yesterday|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|Performance|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-success|12%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last month|1",
+        "ul.justify-content-end>li.nav-item>a.py-2>span.d-none|Month|0",
+        "ul.justify-content-end>li.nav-item>a.py-2>span.d-none|Week|0",
+        "div.bg-transparent>div.align-items-center>div.col>h6.text-uppercase|Performance|0",
+        "div.border-0>div.align-items-center>div.col>a.btn|See all|0",
+        "table.align-items-center>thead.thead-light>tr>th|Page name|0",
+        "table.align-items-center>thead.thead-light>tr>th|Visitors|0",
+        "table.align-items-center>thead.thead-light>tr>th|Unique users|0",
+        "table.align-items-center>thead.thead-light>tr>th|Bounce rate|0",
+        "div.border-0>div.align-items-center>div.col>a.btn|See all|1",
+        "table.align-items-center>thead.thead-light>tr>th|Referral|0",
+        "table.align-items-center>thead.thead-light>tr>th|Visitors|1",
+        "footer.footer>div.align-items-center>div.col-xl-6>div.copyright|© 2026|0",
+        "div.align-items-center>div.col-xl-6>div.copyright>a.font-weight-bold|Creative Tim|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|Creative Tim|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|About Us|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|Blog|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|MIT License|0"
+      ],
+      "all": [
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Icons|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Maps|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|User Profile|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Tables|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Login|0",
+        "div.collapse>ul.navbar-nav>li.nav-item>a.nav-link|Register|0",
+        "nav.navbar-vertical>div.container-fluid>div.collapse>h6.navbar-heading|Documentation|0",
+        "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Getting started|0",
+        "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Foundation|0",
+        "div.collapse>ul.mb-md-3>li.nav-item>a.nav-link|Components|0",
+        "div.main-content>nav.navbar-top>div.container-fluid>a.h4|Dashboard|0",
+        "a.pr-0>div.align-items-center>div.ml-2>span.mb-0|Jessica Jones|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|Traffic|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-success|3.48%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last month|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|New users|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-danger|3.48%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last week|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|Sales|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-warning|1.10%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since yesterday|0",
+        "div.card-body>div.row>div.col>h5.text-uppercase|Performance|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-success|12%|0",
+        "div.card-stats>div.card-body>p.mt-3>span.text-nowrap|Since last month|1",
+        "ul.justify-content-end>li.nav-item>a.py-2>span.d-none|Month|0",
+        "ul.justify-content-end>li.nav-item>a.py-2>span.d-none|Week|0",
+        "div.bg-transparent>div.align-items-center>div.col>h6.text-uppercase|Performance|0",
+        "div.border-0>div.align-items-center>div.col>a.btn|See all|0",
+        "table.align-items-center>thead.thead-light>tr>th|Page name|0",
+        "table.align-items-center>thead.thead-light>tr>th|Visitors|0",
+        "table.align-items-center>thead.thead-light>tr>th|Unique users|0",
+        "table.align-items-center>thead.thead-light>tr>th|Bounce rate|0",
+        "div.border-0>div.align-items-center>div.col>a.btn|See all|1",
+        "table.align-items-center>thead.thead-light>tr>th|Referral|0",
+        "table.align-items-center>thead.thead-light>tr>th|Visitors|1",
+        "footer.footer>div.align-items-center>div.col-xl-6>div.copyright|© 2026|0",
+        "div.align-items-center>div.col-xl-6>div.copyright>a.font-weight-bold|Creative Tim|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|Creative Tim|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|About Us|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|Blog|0",
+        "div.col-xl-6>ul.nav-footer>li.nav-item>a.nav-link|MIT License|0"
+      ]
+    }
+  }
+}

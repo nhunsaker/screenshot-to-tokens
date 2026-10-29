@@ -1,0 +1,83 @@
+{
+  "diffPixels": 54960,
+  "noisePixels": 1437,
+  "totalPixels": 4854240,
+  "ratio": 0.011322060713932562,
+  "pass": false,
+  "threshold": 0.001,
+  "before": "screenshot.png",
+  "after": "after.png",
+  "diff": "diff.png",
+  "allTokensWithinThreshold": false,
+  "reviewNeeded": true,
+  "fallback": {
+    "diffPixels": 1260,
+    "noisePixels": 1437,
+    "totalPixels": 4854240,
+    "ratio": 0.0002595668940967072,
+    "pass": false,
+    "threshold": 0,
+    "before": "screenshot.png",
+    "after": "after-fallback.png",
+    "diff": "diff-fallback.png"
+  },
+  "colors": {
+    "diffPixels": 538,
+    "noisePixels": 1437,
+    "totalPixels": 4854240,
+    "ratio": 0.00011083094366986387,
+    "pass": true,
+    "threshold": 0.001,
+    "before": "screenshot.png",
+    "after": "after-colors.png",
+    "diff": "diff-colors.png"
+  },
+  "contrast": {
+    "check": "text contrast (WCAG 2.x AA, SC 1.4.3)",
+    "method": "text color from computed style; background measured on the rendered pixels around the glyphs (worst cluster covering 5%+)",
+    "pairs": 73,
+    "failingBefore": 1,
+    "failingAfter": {
+      "colors": 1,
+      "all": 1
+    },
+    "regressions": [],
+    "improved": [],
+    "skipped": {
+      "offscreen": 1
+    },
+    "pass": true,
+    "failing": [
+      {
+        "key": "div.container>div.row>div.col-lg-4>h2.sr-only|M. Serdar Karaman|0",
+        "text": "M. Serdar Karaman",
+        "path": "div.container>div.row>div.col-lg-4>h2.sr-only",
+        "fg": "#0f1115",
+        "bg": "#0d2834",
+        "ratio": 1.23,
+        "required": 3,
+        "large": true,
+        "bbox": [
+          164,
+          3061,
+          1,
+          1
+        ],
+        "bestRatio": 3.73,
+        "tokens": [
+          "color.text.default",
+          "footer.bg",
+          "color.gray.900"
+        ]
+      }
+    ],
+    "failingAfterKeys": {
+      "colors": [
+        "div.container>div.row>div.col-lg-4>h2.sr-only|M. Serdar Karaman|0"
+      ],
+      "all": [
+        "div.container>div.row>div.col-lg-4>h2.sr-only|M. Serdar Karaman|0"
+      ]
+    }
+  }
+}

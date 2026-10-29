@@ -1,0 +1,1097 @@
+{
+  "site": "gaotianchi",
+  "ms": 1896,
+  "ourPairs": 31,
+  "ourFailing": 25,
+  "axe": {
+    "violations": {
+      "total": 25,
+      "matched": 25,
+      "weFail": 25,
+      "wePass": 0,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "passes": {
+      "total": 6,
+      "matched": 6,
+      "weFail": 0,
+      "wePass": 6,
+      "weSkip": {},
+      "byReason": {}
+    },
+    "incomplete": {
+      "total": 2,
+      "matched": 2,
+      "weFail": 0,
+      "wePass": 0,
+      "weSkip": {
+        "decorative": 2
+      },
+      "byReason": {
+        "nonBmp": {
+          "total": 1,
+          "pass": 0,
+          "fail": 0,
+          "skipped": 1
+        },
+        "shortTextContent": {
+          "total": 1,
+          "pass": 0,
+          "fail": 0,
+          "skipped": 1
+        }
+      }
+    }
+  },
+  "oursOnly": 0,
+  "examples": {
+    "violationsWePass": [],
+    "passesWeFail": [],
+    "incomplete": [
+      {
+        "text": "◆",
+        "axe": {
+          "reason": "nonBmp",
+          "fg": null,
+          "bg": null,
+          "ratio": null,
+          "expected": null
+        },
+        "ours": {
+          "status": "decorative",
+          "required": 4.5
+        }
+      },
+      {
+        "text": "·",
+        "axe": {
+          "reason": "shortTextContent",
+          "fg": "#bbbfc2",
+          "bg": "#f0eeea",
+          "ratio": 1.59,
+          "expected": "4.5:1"
+        },
+        "ours": {
+          "status": "decorative",
+          "required": 4.5
+        }
+      }
+    ]
+  },
+  "axeNodes": [
+    {
+      "kind": "violations",
+      "target": ".menu-link[href$=\"archive/\"]",
+      "idx": 1,
+      "reason": null,
+      "fg": "#777879",
+      "bg": "#f0eeea",
+      "ratio": 3.81,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".menu-link[href$=\"about/\"]",
+      "idx": 2,
+      "reason": null,
+      "fg": "#777879",
+      "bg": "#f0eeea",
+      "ratio": 3.81,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".navbar-quote-text",
+      "idx": 3,
+      "reason": null,
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".navbar-quote-source",
+      "idx": 4,
+      "reason": null,
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "p",
+      "idx": 6,
+      "reason": null,
+      "fg": "#aeb3b8",
+      "bg": "#f0eeea",
+      "ratio": 1.82,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "time[datetime=\"2026-09-12T12:29:28+08:00\"]",
+      "idx": 8,
+      "reason": null,
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "time[datetime=\"2026-07-13T08:54:28+08:00\"]",
+      "idx": 10,
+      "reason": null,
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "time[datetime=\"2026-07-09T17:13:28+08:00\"]",
+      "idx": 12,
+      "reason": null,
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "time[datetime=\"2026-06-22T21:04:00+08:00\"]",
+      "idx": 14,
+      "reason": null,
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "time[datetime=\"2026-04-02T17:35:10+08:00\"]",
+      "idx": 16,
+      "reason": null,
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".home-archive-link",
+      "idx": 17,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer-column:nth-child(1) > h4",
+      "idx": 18,
+      "reason": null,
+      "fg": "#737581",
+      "bg": "#f0eeea",
+      "ratio": 3.94,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer_item[href$=\"about/\"]",
+      "idx": 19,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href=\"mailto:gaootianchi@outlook.com\"]",
+      "idx": 20,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer-column:nth-child(2) > h4",
+      "idx": 21,
+      "reason": null,
+      "fg": "#737581",
+      "bg": "#f0eeea",
+      "ratio": 3.94,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer_item[href$=\"archive/\"]",
+      "idx": 22,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"library/\"]",
+      "idx": 23,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"photography/\"]",
+      "idx": 24,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer_item[href$=\"feed.xml\"]",
+      "idx": 25,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer-column:nth-child(3) > h4",
+      "idx": 26,
+      "reason": null,
+      "fg": "#737581",
+      "bg": "#f0eeea",
+      "ratio": 3.94,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"changelog/\"]",
+      "idx": 27,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"colophon/\"]",
+      "idx": 28,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "a[href$=\"ai/\"]",
+      "idx": 29,
+      "reason": null,
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.37,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": "small",
+      "idx": 30,
+      "reason": null,
+      "fg": "#a0a7ae",
+      "bg": "#f0eeea",
+      "ratio": 2.09,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "violations",
+      "target": ".footer_legacy",
+      "idx": 32,
+      "reason": null,
+      "fg": "#cdccca",
+      "bg": "#f0eeea",
+      "ratio": 1.38,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": ".active",
+      "idx": 0,
+      "reason": null,
+      "fg": "#434648",
+      "bg": "#f0eeea",
+      "ratio": 8.2,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"today-ramblings/\"]",
+      "idx": 7,
+      "reason": null,
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"awaken-courage/\"]",
+      "idx": 9,
+      "reason": null,
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href=\"/stillness-and-mind-sandbox/\"]",
+      "idx": 11,
+      "reason": null,
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "a[href$=\"easy-health-tips/\"]",
+      "idx": 13,
+      "reason": null,
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "passes",
+      "target": "article:nth-child(5) > h3 > a",
+      "idx": 15,
+      "reason": null,
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.91,
+      "expected": "4.5:1"
+    },
+    {
+      "kind": "incomplete",
+      "target": ".emblem-divider-ornament",
+      "idx": 5,
+      "reason": "nonBmp",
+      "fg": null,
+      "bg": null,
+      "ratio": null,
+      "expected": null
+    },
+    {
+      "kind": "incomplete",
+      "target": ".footer_sep",
+      "idx": 31,
+      "reason": "shortTextContent",
+      "fg": "#bbbfc2",
+      "bg": "#f0eeea",
+      "ratio": 1.59,
+      "expected": "4.5:1"
+    }
+  ],
+  "ours": [
+    {
+      "key": "nav.menu>div.trigger>div.trigger-container>a.menu-link|主页|0",
+      "path": "nav.menu>div.trigger>div.trigger-container>a.menu-link",
+      "text": "主页",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        831,
+        18,
+        53,
+        30
+      ],
+      "fg": "#434648",
+      "bg": "#f0eeea",
+      "ratio": 8.21,
+      "bestRatio": 8.21,
+      "worstRatio": 8.21,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "nav.menu>div.trigger>div.trigger-container>a.menu-link|归档|0",
+      "path": "nav.menu>div.trigger>div.trigger-container>a.menu-link",
+      "text": "归档",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        890,
+        18,
+        54,
+        30
+      ],
+      "fg": "#777879",
+      "bg": "#f0eeea",
+      "ratio": 3.8,
+      "bestRatio": 3.8,
+      "worstRatio": 3.8,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "nav.menu>div.trigger>div.trigger-container>a.menu-link|关于|0",
+      "path": "nav.menu>div.trigger>div.trigger-container>a.menu-link",
+      "text": "关于",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        949,
+        18,
+        54,
+        30
+      ],
+      "fg": "#777879",
+      "bg": "#f0eeea",
+      "ratio": 3.8,
+      "bestRatio": 3.8,
+      "worstRatio": 3.8,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "html>body>div.navbar-quote>span.navbar-quote-text|我们亵渎了人与人之间所有神圣的纽带，把一场斗争，变成了一场猎杀。|0",
+      "path": "html>body>div.navbar-quote>span.navbar-quote-text",
+      "text": "我们亵渎了人与人之间所有神圣的纽带，把一场斗争，变成了一场猎杀。",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        59,
+        352,
+        11
+      ],
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "html>body>div.navbar-quote>span.navbar-quote-source|《奥德赛》|0",
+      "path": "html>body>div.navbar-quote>span.navbar-quote-source",
+      "text": "《奥德赛》",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        995,
+        59,
+        55,
+        11
+      ],
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.wrapper>div.emblem>div.emblem-divider>span.emblem-divider-ornament|◆|0",
+      "path": "div.wrapper>div.emblem>div.emblem-divider>span.emblem-divider-ornament",
+      "text": "◆",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        702,
+        342,
+        36,
+        8
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "body>div.wrapper>div.emblem>p.emblem-motto|生活设下枷锁，文字构筑愿景|0",
+      "path": "body>div.wrapper>div.emblem>p.emblem-motto",
+      "text": "生活设下枷锁，文字构筑愿景",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        619,
+        378,
+        203,
+        26
+      ],
+      "fg": "#adb3b8",
+      "bg": "#f0eeea",
+      "ratio": 1.82,
+      "bestRatio": 1.82,
+      "worstRatio": 1.82,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.home-posts>article.post-item>h3.post-item-title>a|今日胡言乱语|0",
+      "path": "section.home-posts>article.post-item>h3.post-item-title>a",
+      "text": "今日胡言乱语",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        447,
+        119,
+        18
+      ],
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.92,
+      "bestRatio": 15.92,
+      "worstRatio": 15.92,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.09.12|0",
+      "path": "main>section.home-posts>article.post-item>time.post-item-date",
+      "text": "2026.09.12",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        946,
+        452,
+        104,
+        12
+      ],
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.home-posts>article.post-item>h3.post-item-title>a|唤醒勇气|0",
+      "path": "section.home-posts>article.post-item>h3.post-item-title>a",
+      "text": "唤醒勇气",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        490,
+        79,
+        18
+      ],
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.92,
+      "bestRatio": 15.92,
+      "worstRatio": 15.92,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.07.13|0",
+      "path": "main>section.home-posts>article.post-item>time.post-item-date",
+      "text": "2026.07.13",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        946,
+        495,
+        104,
+        12
+      ],
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.home-posts>article.post-item>h3.post-item-title>a|静止与思想沙盒|0",
+      "path": "section.home-posts>article.post-item>h3.post-item-title>a",
+      "text": "静止与思想沙盒",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        532,
+        139,
+        18
+      ],
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.92,
+      "bestRatio": 15.92,
+      "worstRatio": 15.92,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.07.09|0",
+      "path": "main>section.home-posts>article.post-item>time.post-item-date",
+      "text": "2026.07.09",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        946,
+        537,
+        104,
+        12
+      ],
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.home-posts>article.post-item>h3.post-item-title>a|一些改善健康的小技巧|0",
+      "path": "section.home-posts>article.post-item>h3.post-item-title>a",
+      "text": "一些改善健康的小技巧",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        574,
+        198,
+        18
+      ],
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.92,
+      "bestRatio": 15.92,
+      "worstRatio": 15.92,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.06.22|0",
+      "path": "main>section.home-posts>article.post-item>time.post-item-date",
+      "text": "2026.06.22",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        946,
+        579,
+        104,
+        12
+      ],
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "section.home-posts>article.post-item>h3.post-item-title>a|《中间人经济》读后感|0",
+      "path": "section.home-posts>article.post-item>h3.post-item-title>a",
+      "text": "《中间人经济》读后感",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        616,
+        198,
+        18
+      ],
+      "fg": "#0d122b",
+      "bg": "#f0eeea",
+      "ratio": 15.92,
+      "bestRatio": 15.92,
+      "worstRatio": 15.92,
+      "clusters": 1,
+      "status": "pass"
+    },
+    {
+      "key": "main>section.home-posts>article.post-item>time.post-item-date|2026.04.02|0",
+      "path": "main>section.home-posts>article.post-item>time.post-item-date",
+      "text": "2026.04.02",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        946,
+        621,
+        104,
+        12
+      ],
+      "fg": "#a7adb3",
+      "bg": "#f0eeea",
+      "ratio": 1.95,
+      "bestRatio": 1.95,
+      "worstRatio": 1.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.wrapper>main>div.home-archive>a.home-archive-link|更多文字 →|0",
+      "path": "div.wrapper>main>div.home-archive>a.home-archive-link",
+      "text": "更多文字 →",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        963,
+        672,
+        87,
+        22
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|关于|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading",
+      "text": "关于",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        854,
+        58,
+        24
+      ],
+      "fg": "#737581",
+      "bg": "#f0eeea",
+      "ratio": 3.95,
+      "bestRatio": 3.95,
+      "worstRatio": 3.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|关于作者|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "关于作者",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        889,
+        58,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|邮箱联系|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "邮箱联系",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        390,
+        927,
+        58,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|内容|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading",
+      "text": "内容",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        684,
+        854,
+        73,
+        24
+      ],
+      "fg": "#737581",
+      "bg": "#f0eeea",
+      "ratio": 3.95,
+      "bestRatio": 3.95,
+      "worstRatio": 3.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|文章归档|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "文章归档",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        684,
+        889,
+        73,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|书影音记录|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "书影音记录",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        684,
+        927,
+        73,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|摄影|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "摄影",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        684,
+        965,
+        73,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|RSS 订阅|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "RSS 订阅",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        684,
+        1003,
+        73,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading|站点|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>h4.footer-heading",
+      "text": "站点",
+      "color": "rgb(13, 18, 43)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        992,
+        854,
+        58,
+        24
+      ],
+      "fg": "#737581",
+      "bg": "#f0eeea",
+      "ratio": 3.95,
+      "bestRatio": 3.95,
+      "worstRatio": 3.95,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|变更记录|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "变更记录",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        992,
+        889,
+        58,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|站点信息|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "站点信息",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        992,
+        927,
+        58,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "footer.footer>div.footer-grid>div.footer-column>a.footer_item|AI 声明|0",
+      "path": "footer.footer>div.footer-grid>div.footer-column>a.footer_item",
+      "text": "AI 声明",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        992,
+        965,
+        58,
+        32
+      ],
+      "fg": "#808181",
+      "bg": "#f0eeea",
+      "ratio": 3.38,
+      "bestRatio": 3.38,
+      "worstRatio": 3.38,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.wrapper>footer.footer>div.footer_bottom>small.footer_copyright|Copyright © 2022-2026 Tianchi|0",
+      "path": "div.wrapper>footer.footer>div.footer_bottom>small.footer_copyright",
+      "text": "Copyright © 2022-2026 Tianchi",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        599,
+        1113,
+        195,
+        24
+      ],
+      "fg": "#a0a7ae",
+      "bg": "#f0eeea",
+      "ratio": 2.09,
+      "bestRatio": 2.09,
+      "worstRatio": 2.09,
+      "clusters": 1,
+      "status": "fail"
+    },
+    {
+      "key": "div.wrapper>footer.footer>div.footer_bottom>span.footer_sep|·|0",
+      "path": "div.wrapper>footer.footer>div.footer_bottom>span.footer_sep",
+      "text": "·",
+      "color": "rgb(107, 120, 134)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        802,
+        1113,
+        4,
+        24
+      ],
+      "status": "decorative"
+    },
+    {
+      "key": "div.wrapper>footer.footer>div.footer_bottom>a.footer_item|留白|0",
+      "path": "div.wrapper>footer.footer>div.footer_bottom>a.footer_item",
+      "text": "留白",
+      "color": "rgb(67, 70, 72)",
+      "large": false,
+      "required": 4.5,
+      "bbox": [
+        814,
+        1110,
+        27,
+        30
+      ],
+      "fg": "#cdccca",
+      "bg": "#f0eeea",
+      "ratio": 1.38,
+      "bestRatio": 1.38,
+      "worstRatio": 1.38,
+      "clusters": 1,
+      "status": "fail"
+    }
+  ]
+}

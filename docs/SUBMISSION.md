@@ -89,6 +89,7 @@ No GPU on the laptop; one full run on Argon Dashboard costs under a cent. With S
 | Point and say: keyboard focus | Argon, *"Give every control a visible focus ring in our blue."*: visible focus on **0 → 25 of 25** controls, 0 worse, 3 of 3 runs | `docs/point-and-say.md` |
 | Point and say: blocked on regression | Argon, *"Make these buttons red."*: **blocked** and reverted, naming "Month" (4.20:1 → 3.77:1) and 2 more | `docs/point-and-say.md` |
 | Tests | 291 passing | `pnpm test` |
+| Run outputs | the verify and timing summaries behind every row above are committed | `runs/` |
 
 ## How it scores against the rubric
 
@@ -141,6 +142,10 @@ node src/cli.js playground --run out/my-app --app <app build>   # Point and say 
 Only public pages go to hosted models. Meta's "Contributor" tier (cheaper because it trains on your data) is never
 used; the code refuses `-contributor` model ids. SAM requests send `store: false`. Keys are read from the macOS Keychain
 or a git-ignored `.env`, never from code.
+
+## License
+
+Open source under Apache-2.0 (`LICENSE`): clone it and run it on your own app.
 
 ## Team
 
