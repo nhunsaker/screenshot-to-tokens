@@ -22,6 +22,12 @@ const SCENARIOS = {
     { id: 'focus', phrase: 'b', click: null, focusCheck: true, expect: (r) => r.route === 'focus' && r.changes.some((c) => c.token === 'focus.ring.color') },
     { id: 'muse-month', phrase: 'e', click: { x: 873, y: 328 }, expect: (r, pt) => r.route === 'muse' && r.changes.some((c) => c.alias === 'color.action.primary') && r.changes.every((c) => pt.changeable.includes(c.token)) },
   ],
+  // Typed requests (no speech): a real Muse change on Month, a radius request, and a regression the gate must block.
+  'argon-typed': [
+    { id: 'muse-red', text: 'Make these buttons red.', click: { x: 873, y: 328 }, expect: (r, pt) => r.route === 'muse' && r.changes.length > 0 && r.changes.every((c) => pt.changeable.includes(c.token)) && r.changes.some((c) => !c.noop) },
+    { id: 'muse-radius', text: 'Round these buttons like pills.', click: { x: 873, y: 328 }, expect: (r, pt) => r.changes.every((c) => pt.changeable.includes(c.token)) },
+    { id: 'muse-light-text', text: 'Make this label very light gray, almost white.', click: { x: 430, y: 222 }, expect: (r) => r.route === 'none' || (r.predicted && r.predicted.blocked) || r.changes.every((c) => c.noop) },
+  ],
   lightbootstrap: [
     { id: 'contrast-number', phrase: 'a', click: { x: 460, y: 133 }, expect: (r) => r.route === 'contrast' && r.changes.length === 1 && r.predicted.after.fail === 0 && r.predicted.regressions.length === 0 },
     { id: 'focus', phrase: 'b', click: null, focusCheck: true, expect: (r) => r.route === 'focus' },
@@ -62,8 +68,8 @@ for (const name of String(a.scenarios || 'argon').split(',')) {
     for (let i = 1; i <= reps; i++) {
       s.pas.core.cache.clear()
       s.pas.core.pctx.cache.clear()
-      const { wav, audioMs } = wav16(join(phrases, `${sc.phrase}.wav`))
-      const asr = await post('__pas/api/transcribe', wav, true)
+      const { wav, audioMs } = sc.text ? { wav: null, audioMs: 0 } : wav16(join(phrases, `${sc.phrase}.wav`))
+      const asr = sc.text ? { transcript: sc.text, ms: 0 } : await post('__pas/api/transcribe', wav, true)
       let pt = null
       if (sc.click) pt = await post('__pas/api/point', sc.click)
       const intent = await post('__pas/api/intent', { transcript: asr.transcript, point: sc.click })

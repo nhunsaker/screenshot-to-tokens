@@ -113,7 +113,7 @@ export function focusProposal(transcript, stops, values) {
   const name = (c) => c.token || c.value
   let summary
   if (choice.mode === 'single') summary = `Focus ring in ${name(choice.color)} (${choice.color.value}): at least 3:1 against what surrounds all ${choice.total} measured controls.`
-  else if (choice.hue) summary = `Two-tone ring in ${name(choice.color)} (${choice.color.value}) with a ${name(choice.inner)} band: ${choice.hue} alone is under 3:1 next to ${choice.total - choice.singleCovered} of ${choice.total} controls, so the band carries it there (${choice.covered} of ${choice.total} covered).`
+  else if (choice.hue) summary = `Two-tone ring in ${name(choice.color)} (${choice.color.value}) with a ${name(choice.inner)} band: ${name(choice.color)} alone is under 3:1 next to ${choice.total - choice.singleCovered} of ${choice.total} controls, so the band carries it there (${choice.covered} of ${choice.total} covered).`
   else summary = `Two-tone ring (${name(choice.color)} with a ${name(choice.inner)} band): no single token reaches 3:1 next to every control (${choice.covered} of ${choice.total} covered).`
   if (choice.nearest) note = ` No token is ${hue} exactly; ${name(choice.color)} is the nearest hue.` + note
   summary += note
