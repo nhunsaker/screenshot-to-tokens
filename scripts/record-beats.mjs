@@ -105,6 +105,24 @@ await beat(3, async (p) => {
   await p.evaluate(() => [...document.querySelectorAll('h3.tier-head')].find((h) => /semantic/.test(h.textContent))?.scrollIntoView({ block: 'start' })); await wait(p, 3200)
   await p.mouse.wheel(0, 450); await wait(p, 3000)
 })
+// Beat 3's three-tier card (v3, recorded as beat-13.webm; scripts/mix_v3.py places it after the terminal, before the
+// report). The lines are the real ones: out/argon/tokens.css (primitive, semantic, component) and the rewritten
+// main.css (the source keeps the original as its fallback). Lines land 0.9 s apart; the bottom-left stays clear.
+function tierCard() {
+  const css = readFileSync('out/argon/tokens.css', 'utf-8'), src = readFileSync(join('out/argon/site/static/css', readdirSync('out/argon/site/static/css').find((f) => f.endsWith('.css'))), 'utf-8')
+  const need = (re, from, what) => { const m = from.match(re); if (!m) throw new Error(`tier card: ${what} not found`); return m[0].trim() }
+  const rows = [
+    [need(/--color-blue-500:\s*#[0-9a-f]+;/i, css, 'primitive'), 'primitive · the raw value'],
+    [need(/--color-action-primary:\s*var\(--color-blue-500\);/, css, 'semantic'), 'semantic · what it means'],
+    [need(/--button-bg:\s*var\(--color-action-primary\);/, css, 'component'), 'component · where it’s used'],
+    [need(/background-color:\s*var\(--button-bg,\s*#[0-9a-f]+\)/i, src, 'source') + ';', 'the source, original kept as fallback'],
+  ]
+  const html = rows.map(([code, tier], i) => `<div class="r${i === 3 ? ' gap' : ''}" data-at="${(0.3 + i * 0.9).toFixed(1)}"><code>${esc(code)}</code><span class="t">${esc(tier)}</span></div>`).join('')
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:110px 72px;height:100vh;box-sizing:border-box;overflow:hidden}.k{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:#8a9af0;margin-bottom:26px}.r{display:flex;align-items:center;justify-content:space-between;gap:24px;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s;margin:0 0 14px}.r.gap{margin-top:34px}code{font:500 23px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d1d9;white-space:nowrap}.t{flex:none;background:rgba(255,255,255,.1);color:#fff;font:600 17px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;padding:6px 12px;border-radius:10px}.b{opacity:0;transition:opacity .5s;margin-top:34px;font-size:25px;font-weight:700;line-height:1.35;color:#7ee2a8;max-width:1100px}.on{opacity:1!important;transform:none!important}</style>
+<div class="k">Three tiers, one name each · out/argon/tokens.css and the rewritten main.css</div>${html}<div class="b" data-at="4.2">Change color.action.primary once and every button, badge and link follows. A name a person, or a model, can act on.</div>
+<script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},50)</script>`
+}
+await beat(13, async (p) => { await p.goto(page('tiers.html', tierCard())); await wait(p, 8000) })
 await beat(4, async (p) => {
   // Paced to the voiceover: accept (about 2 s in), rename (about 7 s), merge (about 14 s), then the terminal.
   page('review-terminal.html', reviewTerminal())

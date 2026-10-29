@@ -11,7 +11,8 @@
 #   beat-0.webm, beat-8.webm  node scripts/record-beats.mjs --only 0,8 --v3 (title card with the payoff loop; end card)
 #   n1..n5, n6 (first 5 s: proposal link + Show original), n7, n9-v2   the v2 sources, re-paced here
 # Emma's pauses between phrases are cut to PAUSE s (>= 0.35) and she is sped up by TEMPO (atempo, pitch kept, <= 1.04).
-# At those limits the 10-29 script runs 3:08.5; over 3:00 the outputs get an -over suffix (see section 3). Each beat's picture is cut
+# At those limits the second 10-29 script (with the tier card) runs 3:05.4; over 3:00 the outputs get an -over
+# suffix (see section 3). Each beat's picture is cut
 # or held to its speech, and no gap between spoken lines is over 1.4 s (the check is silencedetect at -40 dB, 1.5 s).
 # Outputs: demo-v3-vo.mp4 (narration + requests, -16 LUFS, AAC 256 kbps 48 kHz), screen-track.mp4 (same picture,
 # requests only, same gain),
@@ -92,7 +93,14 @@ beats[0] = plain(0, 'beat-0.webm', 'b0')
 beats[1] = plain(1, 'n1.mp4', 'b1', tail=TAIL_SHORT)
 beats[2] = plain(2, 'n2.mp4', 'b2')
 # Beat 3: the terminal replay (to the "done in" line), then the review report's first screen.
-beats[3] = plain(3, 'n3.mp4', 'b3', [('n3.mp4', 0.6, 9.1, 0), ('n3.mp4', 9.5, 12.45, 0)], tail=TAIL_SHORT)
+# The three-tier card (record-beats.mjs beat 13) lands its first line on "the raw color" (the pause after "three
+# tiers:"), stays through the benefit line, and the beat ends on the terminal's "done in" line for "twenty-three seconds".
+q3 = [q for q in quiet('v3/b3.wav', d=0.12)]
+tiers = next(b for a, b in q3 if b - a > 0.4 and a > 5.0)          # end of the pause after "on three tiers:"
+secs = next(b for a, b in q3 if a > tiers + 6.0)                    # end of the pause before "Twenty-three seconds"
+c0 = 0.25 + tiers - 0.3                                             # card start: its first line shows 0.3 s in
+T3 = 0.25 + SP['b3'][1] + TAIL_SHORT
+beats[3] = plain(3, 'n3.mp4', 'b3', [('n3.mp4', 0.6, 0.6 + c0, 0), ('beat-13.webm', 0, 0.25 + secs - 0.2 - c0, 0), ('n3.mp4', 9.0, 9.4, max(0, T3 - (0.25 + secs - 0.2) - 0.4))], tail=TAIL_SHORT)
 # Beat 4: keep the end (the terminal's 21/21); trim the opening dwell to fit the shorter line.
 T4 = 0.25 + SP['b4'][1] + TAIL_SHORT; V4 = dur('n4.mp4')
 beats[4] = plain(4, 'n4.mp4', 'b4', [('n4.mp4', max(0, V4 - T4), V4, 0)], tail=TAIL_SHORT)
@@ -125,7 +133,7 @@ add(V2, e2['checkEnd'] - 0.1, e2['checkEnd'] + 1.15)                 # focus res
 add(V2, e2['tab1'] - 0.15, e2['tab2'] + 0.05)                        # Tab, Tab: the ring
 add(V2, e2['click3'] - 0.25, e2['click3'] + 0.1); add(V2, e2['pointed3'] - 0.05, e2['pointed3'] + 0.25); add(V2, e2['enter3'] - 0.5, e2['enter3'] + 0.05)
 card = pos
-c2 = min(max(endC1 + 0.3, card - 0.1), endC1 + 1.35)
+c2 = min(max(endC1 + 0.3, card - 0.1), endC1 + 1.2)
 endC2 = say('b6c2', c2)
 T6 = endC2 + 1.1
 hold_used = T6 - card
@@ -136,8 +144,12 @@ pre7 = [(V2, e2['done3'] - 0.05 + hold_used, e2['done3'] - 0.05 + hold_used + 1.
 beats[7] = plain(7, 'n7.mp4', 'b7', pre=pre7, tail=TAIL_SHORT)
 # Beat 9: contrast row held through the why-now line, axe-core card, focus numbers card, dark mode.
 T9 = 0.25 + SP['b9'][1] + TAIL
-fixed = 7.13 + 10.0 + 2.5 + 4.7
-beats[9] = plain(9, 'n9-v2.mp4', 'b9', [('n9-v2.mp4', 0, 7.13, max(0, T9 - fixed)), ('n9-v2.mp4', 7.13, 17.13, 0), ('n9-v2.mp4', 17.13, 19.63, 0), ('n9-v2.mp4', 22.2, 26.9, 0)])
+# The dark-mode picture is no longer narrated: a short hold at the end (the toggle at 24.07 s in n9-v2, then dark),
+# under the line's last words (a silent hold would break the 1.5 s pause rule).
+DARK = float(os.environ.get('V3_DARK', '2.5'))
+fixed = 7.13 + 10.0 + 2.5 + DARK
+segs9 = [('n9-v2.mp4', 0, 7.13, max(0, T9 - fixed)), ('n9-v2.mp4', 7.13, 17.13, 0), ('n9-v2.mp4', 17.13, 19.63, 0)] + ([('n9-v2.mp4', 23.6, 23.6 + DARK, 0)] if DARK > 0 else [])
+beats[9] = plain(9, 'n9-v2.mp4', 'b9', segs9)
 beats[8] = plain(8, 'beat-8.webm', 'b8', tail=1.2)
 
 # 3. Stitch: video by stream copy; audio as one float WAV, loudnorm two-pass (linear, measured values), then one AAC
@@ -151,12 +163,15 @@ ff('-f', 'concat', '-safe', '0', '-i', 'v3/list-v.txt', '-c', 'copy', 'v3/pictur
 for kind in ('full', 'screen'):
     ins = sum((['-i', f'v3/w{n}-{kind}.wav'] for n in ORDER), [])
     ff(*ins, '-filter_complex', ''.join(f'[{i}:a]' for i in range(len(ORDER))) + f'concat=n={len(ORDER)}:v=0:a=1[a]', '-map', '[a]', *WAV, f'v3/bed-{kind}.wav')
-m = json.loads(re.findall(r'\{[^{}]*"input_i"[^{}]*\}', subprocess.run(['ffmpeg', '-i', 'v3/bed-full.wav', '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'], capture_output=True, text=True).stderr)[-1])
+pre = -16.0 - lufs('v3/bed-full.wav')                                  # bring it near -16, then limit sample peaks to -2.5 dBFS (about -2 dBTP)
+ff('-i', 'v3/bed-full.wav', '-af', f'volume={pre:.3f}dB,alimiter=limit=0.7499:attack=1:release=50:level=false', *WAV, 'v3/bed-full-lim.wav')
+ff('-i', 'v3/bed-screen.wav', '-af', f'volume={pre:.3f}dB,alimiter=limit=0.7499:attack=1:release=50:level=false', *WAV, 'v3/bed-screen-lim.wav')
+m = json.loads(re.findall(r'\{[^{}]*"input_i"[^{}]*\}', subprocess.run(['ffmpeg', '-i', 'v3/bed-full-lim.wav', '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'], capture_output=True, text=True).stderr)[-1])
 LN = f"loudnorm=I=-16:TP=-1.5:LRA=11:linear=true:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:print_format=json"
-r2 = subprocess.run(['ffmpeg', '-y', '-i', 'v3/bed-full.wav', '-af', LN + ',aresample=48000', '-ac', '1', '-c:a', 'pcm_f32le', 'v3/master-full.wav'], capture_output=True, text=True).stderr
+r2 = subprocess.run(['ffmpeg', '-y', '-i', 'v3/bed-full-lim.wav', '-af', LN + ',aresample=48000', '-ac', '1', '-c:a', 'pcm_f32le', 'v3/master-full.wav'], capture_output=True, text=True).stderr
 n2 = json.loads(re.findall(r'\{[^{}]*"normalization_type"[^{}]*\}', r2)[-1])
 gain = float(n2['output_i']) - float(m['input_i'])
-ff('-i', 'v3/bed-screen.wav', '-af', f'volume={gain:.3f}dB', '-ac', '1', '-c:a', 'pcm_f32le', 'v3/master-screen.wav')
+ff('-i', 'v3/bed-screen-lim.wav', '-af', f'volume={gain:.3f}dB', '-ac', '1', '-c:a', 'pcm_f32le', 'v3/master-screen.wav')
 OUTS = (('full', f'demo-v3-vo{SUF}.mp4'), ('screen', f'screen-track{SUF}.mp4'))
 for kind, out in OUTS:
     ff('-i', 'v3/picture.mp4', '-i', f'v3/master-{kind}.wav', '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '256k', '-ar', '48000', '-ac', '2', '-movflags', '+faststart', '-shortest', out)
