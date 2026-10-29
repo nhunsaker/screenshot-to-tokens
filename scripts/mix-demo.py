@@ -4,8 +4,11 @@
 # the first. When speech outlasts the picture the last frame holds. Output: out/video/demo-v1-vo.mp4 at -16 LUFS.
 # --v2: beat 6 is Point and say (n6-v2.mp4, scripts/record-pas-beat.mjs + scripts/cut-pas-beat.py) and beat 9 has the
 # focus numbers card (n9-v2.mp4); their lines are vo-v2/b6 and vo-v2/b9. Output: out/video/demo-v2-vo.mp4; v1 untouched.
-#   python3 scripts/mix-demo.py [--v2]
+# --v3: the final cut with spoken requests and the re-paced beats (scripts/mix_v3.py): demo-v3-vo.mp4 + screen-track.mp4.
+#   python3 scripts/mix-demo.py [--v2 | --v3]
 import subprocess, os, sys
+if '--v3' in sys.argv:
+    import runpy; runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mix_v3.py'), run_name='__main__'); sys.exit(0)
 V2='--v2' in sys.argv
 os.chdir('out/video')
 def dur(f): return float(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',f]).strip())
