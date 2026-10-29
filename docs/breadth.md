@@ -1,11 +1,21 @@
-# Breadth run: 28 real sites (L2, 2026-10-26)
+# Breadth run: 28 real sites (L2, 2026-10-26; re-run 2026-10-28 with the rewriter fix)
 
 Every site in the demo pool (`spec/.../demo-site-pool.md`: public `*.github.io` sites with an MIT, Apache-2.0, BSD or
 ISC licence) was mirrored locally (`scripts/mirror-site.mjs`: the page plus its same-origin CSS, JS, fonts and images)
 and run end to end: hybrid segmenter (SAM 3.1 + layout + DOM), Muse Spark Open on Baseten for naming, deterministic
 rewrite, three-check verify. Runner: `node scripts/breadth-run.mjs <pool.md> --concurrency 2`. About 19 s per site.
 
-## Result
+## Result (re-run 2026-10-28, after the rewriter fix)
+
+The point-and-say spike found that the rewriter skipped the **last declaration of every block in minified CSS** (no
+trailing `;`) and read `!important` as part of the value. Fixed in `859f7a1`; every site re-run (`out/breadth5`):
+- **27 sites reachable, 1,632 tokens proposed, 3,687 hardcoded values rewritten** (was 2,313 before the fix).
+- **Rewrite safety: still 0 px on 23 of 23 stable sites with edits.** Same exceptions as before: the two sites that
+  animate on their own (Mavrikant, zeikar) and CWWhitney's near-white color merge flagged for review (rewrite 0 px).
+- **Repeat check: same verdict on every site with edits** (24 of 27 byte-identical). burning-cost has 0 edits; its
+  first shot differed by 43 px of render jitter that the repeat marked as page noise.
+
+## Result (first run, 2026-10-26)
 
 - **27 sites reachable** (ethmarks.github.io now returns 404). **1,631 tokens proposed, 2,313 hardcoded values rewritten.**
 - **Rewrite safety (fallbacks only, must be 0 px): 23 of 23 stable sites with edits.** Two sites with no edits pass
@@ -39,35 +49,35 @@ The verify stage was re-run on all 27 finished sites (same rewrite, fresh screen
   Side effect: with fonts loaded, the review-only "all tokens" view now shows font-size token changes it used to miss
   (devbattery 0.31%).
 
-## Per site
+## Per site (2026-10-28 re-run)
 
 | Site | Framework | Licence | Status | Tokens | Edits | Safety checks |
 |---|---|---|---|---|---|---|
-| wonyong-jang.github.io | jekyll | MIT | ok | 69 | 328 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| devbattery.github.io | jekyll | MIT | ok | 117 | 222 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| ragu-manjegowda.github.io | jekyll | MIT | ok | 53 | 87 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| tw93.github.io | jekyll | MIT | ok | 41 | 1 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| josh-wong.github.io | docusaurus | MIT | ok | 65 | 66 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| diogoribeiro7.github.io | jekyll | MIT | ok | 74 | 201 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| wonyong-jang.github.io | jekyll | MIT | ok | 70 | 460 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| devbattery.github.io | jekyll | MIT | ok | 106 | 358 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| ragu-manjegowda.github.io | jekyll | MIT | ok | 53 | 125 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| tw93.github.io | jekyll | MIT | ok | 42 | 1 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| josh-wong.github.io | docusaurus | MIT | ok | 66 | 85 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| diogoribeiro7.github.io | jekyll | MIT | ok | 75 | 294 | fallback-only 0 px (pass); colors 0.000% (pass) |
 | geuni620.github.io | gatsby | ISC | ok | 43 | 2 | fallback-only 0 px (pass); colors 0.000% (pass) |
 | utzcoz.github.io | jekyll | Apache-2.0 | ok | 32 | 84 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| andra-sun.github.io | jekyll | MIT | ok | 74 | 24 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| proinsias.github.io | jekyll | MIT | ok | 51 | 144 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| awfp1314.github.io | astro | MIT | ok | 37 | 11 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| gaotianchi.github.io | jekyll | MIT | ok | 41 | 157 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| burning-cost.github.io | jekyll | MIT | ok | 149 | 0 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| cgoldberg.github.io | jekyll | MIT | ok | 72 | 21 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| zzy979.github.io | jekyll | MIT | ok | 74 | 24 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| mavrikant.github.io | jekyll | MIT | ok | 108 | 244 | fallback-only 371 px (FAIL); colors 0.015% (pass) |
+| andra-sun.github.io | jekyll | MIT | ok | 74 | 50 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| awfp1314.github.io | astro | MIT | ok | 36 | 17 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| proinsias.github.io | jekyll | MIT | ok | 52 | 243 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| gaotianchi.github.io | jekyll | MIT | ok | 41 | 213 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| burning-cost.github.io | jekyll | MIT | ok | 150 | 0 | fallback-only 43 px (FAIL); colors 0.000% (pass) |
+| cgoldberg.github.io | jekyll | MIT | ok | 72 | 42 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| mavrikant.github.io | jekyll | MIT | ok | 111 | 305 | fallback-only 1100 px (FAIL); colors 0.010% (pass) |
+| zzy979.github.io | jekyll | MIT | ok | 74 | 50 | fallback-only 0 px (pass); colors 0.000% (pass) |
 | ethmarks.github.io | hugo | Apache-2.0 | mirror-failed | - | - | site returns 404 |
-| nithinbekal.github.io | jekyll | MIT | ok | 28 | 42 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| infi-defi.github.io | hugo | MIT | ok | 28 | 16 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| cwwhitney.github.io | hugo | MIT | ok | 37 | 133 | fallback-only 0 px (pass); colors 0.331% (FAIL) |
+| nithinbekal.github.io | jekyll | MIT | ok | 29 | 42 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| infi-defi.github.io | hugo | MIT | ok | 27 | 16 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| cwwhitney.github.io | hugo | MIT | ok | 36 | 514 | fallback-only 0 px (pass); colors 0.331% (FAIL) |
 | c-gyeltshen.github.io | jekyll | MIT | ok | 0 | 0 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| ruzickap.github.io | jekyll | Apache-2.0 | ok | 75 | 21 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| stuocs.github.io | jekyll | MIT | ok | 73 | 25 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| cheonjoosung.github.io | jekyll | MIT | ok | 25 | 12 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| dieghernan.github.io | jekyll | MIT | ok | 74 | 308 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| hacksocnotts.github.io | hugo | MIT | ok | 49 | 65 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| linkarzu.github.io | jekyll | MIT | ok | 73 | 32 | fallback-only 0 px (pass); colors 0.000% (pass) |
-| zeikar.github.io | jekyll | MIT | ok | 69 | 43 | fallback-only 31782 px (FAIL); colors 0.406% (FAIL) |
+| ruzickap.github.io | jekyll | Apache-2.0 | ok | 76 | 43 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| stuocs.github.io | jekyll | MIT | ok | 72 | 51 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| cheonjoosung.github.io | jekyll | MIT | ok | 26 | 23 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| dieghernan.github.io | jekyll | MIT | ok | 76 | 502 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| hacksocnotts.github.io | hugo | MIT | ok | 50 | 65 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| linkarzu.github.io | jekyll | MIT | ok | 74 | 59 | fallback-only 0 px (pass); colors 0.000% (pass) |
+| zeikar.github.io | jekyll | MIT | ok | 69 | 43 | fallback-only 29719 px (FAIL); colors 0.350% (FAIL) |

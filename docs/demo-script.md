@@ -47,10 +47,10 @@ text pairs, Muse proposes fixes, re-checked, **41 → 2** (`node src/cli.js play
 | Claim | Number | Source |
 |---|---|---|
 | div-soup buttons, page structure vs SAM 3.1 | 0 of 8 vs 8 of 8 (IoU 0.95) | `out/scoreboard.html`, `fixtures/div-soup/regions.truth.json` |
-| Argon run time (Baseten namer, uncached) | 23.4 s total, naming 4.9 s, $0.007 (recording run 10-27; 17.1 s on 10-26 before verify gained the noise shot and font wait) | `out/rec-argon/timing.json` |
+| Argon run time (Baseten namer, uncached) | 19.7 s total, naming 4.5 s, $0.007 (recording run 10-28 `out/rec3-argon`, uncached, 844 edits after the rewriter fix) | `out/rec-argon/timing.json` |
 | Review on the fixture | 20/21 → 21/21, verify 0 px | `demo/L5-review-take.md` |
 | Argon verify | fallbacks 0 px · colors 0.000% · all tokens 0.919% | `out/demo-argon-baseten/verify.json` |
-| Breadth | 27 reachable sites, 2,313 values rewritten, 23 of 23 stable sites with edits at 0 px; repeat check same verdict on all 27 | `docs/breadth.md` |
+| Breadth | 27 reachable sites, 3,687 values rewritten, 23 of 23 stable sites with edits at 0 px; repeat check same verdict on all 27 | `docs/breadth.md` |
 | Real-site segmentation (hand-labeled first screens) | hybrid passes on Argon, HackSoc Notts, josh-wong | `docs/real-site-segeval.md` |
 | Hosted vs open-weights naming | hosted Muse Spark 1.3 13.7 to 26.2 s; Muse Spark Open on Baseten 3.0 to 4.4 s (3 to 9×); identical fixture evals | `docs/f17-hosted-vs-open.md` |
 | Contrast audit (local playground, Argon) | 41 failing text pairs → 2 after Muse fixes | `docs/playground-muse.md` |

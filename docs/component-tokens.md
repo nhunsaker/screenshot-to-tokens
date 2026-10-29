@@ -1,4 +1,5 @@
 # F20: component tokens (the third tier, end to end)
+> Note (2026-10-28): the numbers below predate the rewriter fix (`859f7a1`); Argon now has 844 edits (was 412), Light Bootstrap 692 (was 387). The token counts and the 0 px results are unchanged.
 
 Detected components (SAM 3.1 buttons and inputs, layout headers and navs, style-rule cards and badges) are profiled:
 the CSS classes on each component's root elements and the value clusters it uses per property. Muse Spark names

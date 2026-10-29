@@ -10,7 +10,7 @@ import { parseArgs } from '../src/lib/args.js'
 import { serveDir } from '../src/lib/serve.js'
 
 const a = parseArgs(process.argv.slice(2))
-const RUN = a.run || 'out/rec-argon'
+const RUN = a.run || 'out/rec3-argon'
 const APPS = a.apps || process.env.S2T_APPS || '/Volumes/SanDisk/s2t-demo-apps' // demo app builds (docs/demo-apps.md)
 const OUT = resolve('out/video'), PAGES = join(OUT, 'pages')
 mkdirSync(PAGES, { recursive: true })
@@ -126,7 +126,7 @@ function endCard() {
     [3.0, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
     [7.2, 'Open weights, end to end', 'Muse Spark Open on Baseten names the tokens · SAM 3.1 open weights on a Modal GPU segments', '3 to 9× faster than hosted Muse · open SAM matches hosted SAM on every test'],
     [11.5, 'Checked before it merges', 'text contrast on every PR · SAM-measured controls · dark mode as a token file', '28 sites vs axe-core: 99.9% agreement · decides 97% of what it leaves for review'],
-    [14.2, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 2,313 values · 0 px'],
+    [14.2, 'No GPU. One laptop.', 'one run on this dashboard, segmentation and naming included', 'under a cent · 28 real sites · 3,687 values · 0 px'],
     [19.0, 'Propose the change. See it live. Verify before you merge.', '', 'Code: github.com/nhunsaker/screenshot-to-tokens · Live demo: nhunsaker.github.io/argon-dashboard-react'],
   ]
   const rows = items.map(([at, h, sub, big]) => `<div class="it" data-at="${at}"><div class="h">${esc(h)}</div>${sub ? `<div class="s">${esc(sub)}</div>` : ''}<div class="b">${esc(big)}</div></div>`).join('')

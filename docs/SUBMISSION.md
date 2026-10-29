@@ -67,7 +67,7 @@ No GPU on the laptop; one full run on Argon Dashboard costs under a cent. With S
 
 | Claim | Result | Where |
 |---|---|---|
-| Rewrite is safe on real sites | 28 public, permissively licensed sites we didn't build: **2,313 values rewritten, 0 px changed on 23 of 23** stable sites with edits; a second run gave the same verdict on all 27 reachable | `docs/breadth.md` |
+| Rewrite is safe on real sites | 28 public, permissively licensed sites we didn't build: **3,687 values rewritten, 0 px changed on 23 of 23** stable sites with edits; a second run gave the same verdict on all 27 reachable | `docs/breadth.md` |
 | Segmentation on real sites | Hand-labeled first screens of 3 sites: the combined segmenter passes all three | `docs/real-site-segeval.md` |
 | End to end, Argon Dashboard | 16 to 23 s, naming 3.6 to 4.9 s; checks 0 px · 0.000% · 0.919% | `docs/latency.md` |
 | Human review | Accept, rename and merge take the fixture's answer-key score from 20/21 to 21/21, still 0 px | `demo/L5-review-take.md` |
