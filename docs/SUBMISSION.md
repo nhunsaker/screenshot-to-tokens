@@ -14,7 +14,7 @@ change.
 
 ## Links
 
-- **Demo video (under 3:00):** _[link to the unlisted YouTube upload]_
+- **Demo video (2:57):** _[link to the unlisted YouTube upload]_
 - **Code:** https://github.com/nhunsaker/screenshot-to-tokens
 - **Live demo:** https://nhunsaker.github.io/argon-dashboard-react/ (original, tokenized, a previewed change, token playground)
 - **A real pull request on our fork of Argon Dashboard React:** https://github.com/nhunsaker/argon-dashboard-react/pull/2
@@ -78,7 +78,7 @@ No GPU on the laptop; one full run on Argon Dashboard costs under a cent. With S
 |---|---|---|
 | Rewrite is safe on real sites | 28 public, permissively licensed sites we didn't build: **3,687 values rewritten, 0 px changed on 23 of 23** stable sites with edits; a second run gave the same verdict on all 27 reachable | `docs/breadth.md` |
 | Segmentation on real sites | Hand-labeled first screens of 3 sites: the combined segmenter passes all three | `docs/real-site-segeval.md` |
-| End to end, Argon Dashboard | 16 to 23 s, naming 3.6 to 4.9 s; checks 0 px · 0.000% · 0.919% | `docs/latency.md` |
+| End to end, Argon Dashboard | 17 to 23 s, naming 4.2 to 4.9 s; checks 0 px · 0.000% · 0.919% | `docs/latency.md` |
 | Human review | Accept, rename and merge take the fixture's answer-key score from 20/21 to 21/21, still 0 px | `demo/L5-review-take.md` |
 | Text contrast vs the W3C rule | ACT rule afw4f7 (text has minimum contrast): **32 of 32** approved test cases consistent, 31 exact | `docs/a11y.md` |
 | Text contrast vs axe-core 4.14 | 28 sites: agrees on 308 of 309 violations and 2,165 of 2,174 passes, **99.9% agreement** (1 opposite verdict in 2,483, on a page that animates); of the items axe-core can't decide (text on gradients and images), it settles **97%** and flags the rest for review | `docs/a11y.md` |
