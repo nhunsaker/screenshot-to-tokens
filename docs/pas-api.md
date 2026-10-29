@@ -192,7 +192,7 @@ Change item: `{token, cssVar, value|null, alias|null, css, from, why, noop?, isN
 on the page: `affected` = pairs whose ratio moved, `before`/`after` = ranges over those pairs, `page` = whole-page
 counts, `regressions` = pairs that passed and now fail or that fail and got worse (`{id, text, from, to}`).
 `blocked: true` when there is any regression; `reason` names the check and the first element
-("text contrast: \"Since last month\" 4.6 → 3.1"). The page should still re-audit live (`auditLive`) after applying.
+("text contrast: \"Month\" 4.20 → 3.77"). The page should still re-audit live (`auditLive`) after applying.
 
 ## POST /__pas/api/focus-check
 

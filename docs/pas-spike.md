@@ -87,7 +87,8 @@ is the served tokenized app (the copied run's re-rewritten `site/`, with `tokens
   so `color.blue.400`'s other users stay as they are.
 - **Apply + re-audit of the whole page (87 pairs):** failing 41 → 20. The 21 pairs that use the token went from
   2.95:1 to **4.53:1**, all passing. **Regressions: 0.** No pair got worse. The 20 still failing belong to other tokens.
-- This matches the plan's on-screen line ("21 elements, 2.9:1 → 4.6:1"). The real "after" number is **4.53**.
+- The plan's on-screen line rounded the numbers; the measured line is "21 elements, 2.95:1 → **4.53:1**", and that
+  is the one to show and say.
 
 Timings, uncached SAM/ASR (fresh cache directory per run), warm server and browser:
 

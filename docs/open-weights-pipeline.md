@@ -75,10 +75,10 @@ different things.
 | Cold start | none | 164 s (container start, about 8 GB image, 16 s to build the model and load 3.5 GB of weights); the very first call after deploy took 573 s |
 
 The measured GPU seconds are what `recordCall` prices (`gpuS` in `timing.json`). Modal bills container time, which also
-counts startup and the 60 s idle window after the last call, so the bill is higher than the per-image figure: for this
-whole loop (image builds, weight download, two cold starts, three breadth passes, all parity runs) Modal billed
-**$0.18** (L4 $0.159, CPU and memory $0.024, egress $0.001; `modal billing report` at 18:27 CDT) against about
-2 minutes of measured inference. For a single page the startup and the idle window dominate (60 s of idle L4 is
+counts startup and the 60 s idle window after the last call, so the bill is higher than the per-image figure: across
+this loop (image builds, weight download, two cold starts, three breadth passes, all parity runs) most of the billed
+container time was startup and idle, against about 2 minutes of measured inference (`modal billing report`). For a
+single page the startup and the idle window dominate (60 s of idle L4 is
 $0.013), then each extra screenshot while warm costs $0.0001 of GPU time. Batches are where self-hosting is cheapest.
 
 ## All open weights: Argon, end to end

@@ -4,14 +4,17 @@ Meta Global AI Developer Hackathon, Oct 26 – Nov 4, 2026 · **Startup track** 
 
 ## One-line pitch
 
+**A design system from a screenshot in seconds. A more accessible app from the tokens in one change.**
+
 Point it at a live web app with no design tokens. SAM 3.1 reads the interface from pixels, Muse Spark names a tiered
 token set with a reason for each token, a person reviews it, the hardcoded values in the real source are rewritten to
 `var(--token, original)`, and four checks prove the rewrite changes nothing and makes no text harder to read, before a
-pull request opens. From then on, making the app more accessible, or giving it a dark mode, is one token change.
+pull request opens. From then on, making the app more accessible (text contrast, keyboard focus), or giving it a dark mode, is one token
+change.
 
 ## Links
 
-- **Demo video (2:57):** _[link to the unlisted YouTube upload]_
+- **Demo video (under 3:00):** _[link to the unlisted YouTube upload]_
 - **Code:** https://github.com/nhunsaker/screenshot-to-tokens
 - **Live demo:** https://nhunsaker.github.io/argon-dashboard-react/ (original, tokenized, a previewed change, token playground)
 - **A real pull request on our fork of Argon Dashboard React:** https://github.com/nhunsaker/argon-dashboard-react/pull/2
@@ -46,6 +49,11 @@ from April 2027.
    pixels, so a proposal that makes any text harder to read is blocked.
 8. **Pull request** with the verify table and the text pairs below AA, each with the token that controls it.
 9. **Preview** any token change live in the web app itself through Sorb, before anyone merges.
+10. **Point and say:** click a control in the live web app, then say or type the request. Meta's speech model
+    (`muse-voice-transcribe-1.0`) transcribes it, SAM 3.1 outlines what was clicked and finds the tokens that control it,
+    contrast and focus fixes are computed deterministically (no model), and any other request goes to Muse Spark Open,
+    restricted to the tokens that control the clicked element. Every change is re-audited on the whole live page and
+    blocked, and reverted, if any text gets harder to read (`docs/point-and-say.md`).
 
 Also built on the same tokens: `s2t dark` proposes a dark theme as a token file (every text pair contrast-checked, one
 automatic retry), and `s2t nontext` uses SAM 3.1 click prompts to outline each icon and control and measure its contrast
@@ -59,6 +67,7 @@ fixes it with focus-ring tokens.
 | **SAM 3.1** (Meta Model API) | Segments buttons, inputs and icons from pixels; click (point) prompts outline single controls for measurement | On a page built of divs and a canvas, page structure finds **0 of 8** buttons and SAM finds **8 of 8** (IoU 0.95), including one painted inside a canvas. Click-to-outline in about 1.6 s |
 | **Muse Spark Open** on Baseten (open weights) | The default namer, and dark-theme proposals | Names a page's tokens in **3 to 5 s**, 3 to 9× faster than hosted Muse Spark 1.3, with identical fixture scores |
 | **SAM 3.1 open weights** on a Modal GPU (`facebook/sam3.1`) | The same segmentation, self-hosted, so the whole pipeline runs on open weights | Matches hosted SAM 3.1 on every test: div-soup 8/8, the 3 hand-labeled sites identical, 96.6% box agreement on 27 sites (mean IoU 0.89); about $0.0003 of GPU time per screenshot warm. An Argon run on open weights only kept verify at 0 px |
+| **Meta speech model** (`muse-voice-transcribe-1.0`, Meta Model API) | Transcribes the spoken Point and say request (16 kHz mono WAV recorded in the browser, `store: false`) | End of speech to transcript in about **1 to 1.7 s** (1.57 s through the page). In the same flow: click to outline and controlling token 0.85 to 2.1 s; contrast fix computed in about 15 ms; focus check 9 to 12 s (`docs/point-and-say.md`, `docs/pas-api.md`) |
 | **Muse Spark 1.3** (hosted) | Alternative namer; dark-theme proposals in `--provider both` (the better result is kept) | 13.7 to 26.2 s per naming call; won the dark-theme comparison on Light Bootstrap Dashboard |
 
 No GPU on the laptop; one full run on Argon Dashboard costs under a cent. With SAM on Modal and Muse Spark Open on Baseten, the whole pipeline runs on Meta's open weights (`docs/open-weights-pipeline.md`).
@@ -76,16 +85,19 @@ No GPU on the laptop; one full run on Argon Dashboard costs under a cent. With S
 | Icons and controls (SAM) | On the div page, SAM found 9 controls the code doesn't describe; each measured for contrast and size | `docs/a11y-nontext.md` |
 | Visible keyboard focus | 30 real sites, 1,779 Tab stops: 52% show a focus indicator that meets the bar, 17 sites under half. One focus-ring token set takes Argon from **0 of 25 to 25 of 25**, still 0 px when nothing is focused. SAM also finds controls a keyboard can't reach: on the div page, 7 of 7 clickable controls | `docs/keyboard.md` |
 | Dark mode as a token file | Light Bootstrap Dashboard: 83 of 84 text pairs pass in dark (14 of 84 in its original light theme) | `docs/dark-mode.md` |
-| Tests | 232 passing | `pnpm test` |
+| Point and say: contrast | Argon, click "Since last month", *"This label is too light. Make it readable, keep our gray."*: `color.text.muted` moves, **21 elements 2.95:1 → 4.53:1**, whole page **41 → 20** failing text pairs, 0 regressions, 3 of 3 runs. Light Bootstrap: 12 elements 2.81:1 → 4.54:1 | `docs/point-and-say.md` |
+| Point and say: keyboard focus | Argon, *"Give every control a visible focus ring in our blue."*: visible focus on **0 → 25 of 25** controls, 0 worse, 3 of 3 runs | `docs/point-and-say.md` |
+| Point and say: blocked on regression | Argon, *"Make these buttons red."*: **blocked** and reverted, naming "Month" (4.20:1 → 3.77:1) and 2 more | `docs/point-and-say.md` |
+| Tests | 291 passing | `pnpm test` |
 
 ## How it scores against the rubric
 
 | Rubric | Where to look |
 |---|---|
 | **Impact (30%)** | The problem above; contrast fixes, visible keyboard focus and dark mode become token changes; 28-site breadth run; 30-site keyboard baseline |
-| **Use of Meta AI tooling (25%)** | SAM 3.1 on UI screenshots, where the DOM has nothing (0/8 vs 8/8); SAM click prompts to measure single controls; the whole pipeline on Meta's open weights (SAM 3.1 on Modal, Muse Spark Open on Baseten) with parity shown against the hosted models; hosted Muse Spark compared on every dark theme |
-| **Technical depth & execution (20%)** | The model proposes, deterministic code guarantees the shape; four-check verify; benchmarks against the W3C ACT test cases and axe-core; 232 tests |
-| **Demo (25%)** | The video; the live demo site and playground; PR #2 on the fork |
+| **Use of Meta AI tooling (25%)** | Three Meta model families: SAM 3.1 on UI screenshots, where the DOM has nothing (0/8 vs 8/8), and click prompts to outline single controls; Muse Spark naming tokens and interpreting free-form requests; Meta's speech model (`muse-voice-transcribe-1.0`) taking the spoken Point and say request. SAM 3.1 and Muse Spark both also run on open weights (SAM 3.1 on Modal, Muse Spark Open on Baseten) with parity shown against the hosted models; hosted Muse Spark compared on every dark theme |
+| **Technical depth & execution (20%)** | The model proposes, deterministic code guarantees the shape; four-check verify; Point and say routes deterministic first (contrast and focus fixes are computed, not guessed; only other requests reach Muse Spark) and blocks any change that makes text harder to read; benchmarks against the W3C ACT test cases and axe-core; 291 tests |
+| **Demo (25%)** | The video, with Point and say shown live in the playground (spoken request, contrast fix, focus ring, a blocked request); the live demo site and playground; PR #2 on the fork |
 
 ## What existed before the hackathon, and what is new
 
@@ -95,29 +107,33 @@ the rewrite, a three-check verify, the HTML report with review, the CLI, two tes
 depends only on the published `@sorb/seed` package. **Sorb** is Metatoy's existing product (a design-token bridge
 between design and a live web app, published under `@sorb/*`); it is not part of this repo and not shown in the video.
 
-**Built during the hackathon (66 commits after `pre-event-baseline`, `git log pre-event-baseline..main`):** everything
+**Built during the hackathon (90 commits after `pre-event-baseline`, `git log pre-event-baseline..main`):** everything
 that uses Meta's models (SAM 3.1 segmentation and click prompts, Muse Spark naming hosted and open-weights, the hybrid
 segmenter), component and state tokens, on-surface text tokens, the text-contrast check and its benchmarks, SAM-measured
-controls, dark mode, the 28-site breadth run, the live demo site, the playground, and the demo video.
+controls, visible keyboard focus (`s2t focus`), dark mode, the 28-site breadth run, the live demo site, the playground,
+Point and say (speech, SAM click, deterministic contrast and focus fixes, regression block), and the demo video.
 
 ## Limits
 
 - Text contrast is checked on the captured page in its default state: not hover or focus states, placeholders, or
-  non-text contrast beyond the SAM-measured controls. This is a contrast check, not a full accessibility audit (no
-  keyboard or screen-reader checks).
+  non-text contrast beyond the SAM-measured controls. These are named checks (text contrast, SAM-measured controls,
+  visible keyboard focus), not a full accessibility audit: no screen-reader checks.
 - Two of the 28 sites animate on their own (a randomly thrown tag pile, a live waveform); pixel checks can't be exact
   there, so they're reported separately, not counted as passes.
 - SCSS/Less sources aren't rewritten (the compiled CSS is); hashed CSS bundles behind a remote URL need the local build.
 - Dark mode only reaches colors that are tokens: on Argon the sidebar, page background and header gradient stay light.
+- Point and say runs locally only (127.0.0.1, keys from the Keychain); real-voice testing was done through recorded
+  audio played into the browser's mic input. The focus check takes 9 to 12 s. Hover and active states aren't targeted.
 
 ## How to run
 
 ```sh
 pnpm install --ignore-workspace
-pnpm test                                   # 232 tests
+pnpm test                                   # 291 tests
 pnpm demo                                   # fixture app, offline stand-ins → out/acme-shop/report.html
 S2T_SEGMENTER=hybrid S2T_NAMER=baseten node src/cli.js run --serve <app build> --target <css dir> --run out/my-app
 node src/cli.js dark --run out/my-app --provider both
+node src/cli.js playground --run out/my-app --app <app build>   # Point and say (local; open the printed URL)
 ```
 
 ## Data policy

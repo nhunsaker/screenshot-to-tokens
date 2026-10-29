@@ -1,6 +1,7 @@
 # Screenshot to Tokens
+**A design system from a screenshot in seconds. A more accessible app from the tokens in one change.**
 
-Point it at a running web app that has no design tokens. It captures the page, **SAM 3.1** segments the interface from
+Point it at a live web app that has no design tokens. It captures the page, **SAM 3.1** segments the interface from
 pixels (so it works where the markup says nothing), near-duplicate values are clustered, **Muse Spark** names a
 three-tier token set (primitive → semantic → component, with a reason per token), a person accepts, renames or merges,
 the hardcoded literals are rewritten to `var(--token, original)`, and four checks prove the rewrite itself changes nothing and makes no text
@@ -29,10 +30,22 @@ Model API and Muse Spark (hosted, or the open-weights Muse Spark Open served on 
 | Visible keyboard focus (`s2t focus`) | Tab through every stop and compare focused vs unfocused pixels (WCAG 2.4.13 style); 30 real sites: 52% of 1,779 stops pass, 17 sites under half; fix = focus-ring tokens: Argon 0 of 25 → 25 of 25, still 0 px when nothing is focused (`docs/keyboard.md`) |
 | Dark mode as a token file | `s2t dark --provider both`: Light Bootstrap Dashboard 83 of 84 text pairs pass in dark (`docs/dark-mode.md`) |
 | Local playground | Muse Spark contrast audit 41 → 2 failing text pairs; dark theme 84/87 pairs pass (`docs/playground-muse.md`) |
+| Point and say: contrast | click a label in the live web app, say *"make it readable, keep our gray"*: Argon 21 elements 2.95:1 → 4.53:1, whole page 41 → 20 failing text pairs, 0 regressions, 3 of 3 runs; Light Bootstrap 12 elements 2.81:1 → 4.54:1 (`docs/point-and-say.md`) |
+| Point and say: focus and blocks | *"a visible focus ring in our blue"*: Argon visible focus 0 → 25 of 25, 3 of 3; *"make these buttons red"*: blocked and reverted, naming "Month" (4.20:1 → 3.77:1) (`docs/point-and-say.md`) |
+| Tests | 291 passing (`pnpm test`) |
 
 Live demo: [original](https://nhunsaker.github.io/argon-dashboard-react/original/) · [tokenized](https://nhunsaker.github.io/argon-dashboard-react/tokens/) ·
 [a proposed change, previewed](https://nhunsaker.github.io/argon-dashboard-react/tokens/?tokens=color-action-primary:e8711a) ·
 [token playground](https://nhunsaker.github.io/argon-dashboard-react/playground/) · [the PR on our fork](https://github.com/nhunsaker/argon-dashboard-react/pull/2).
+
+## Point and say
+
+Click a control in the live web app, then say or type what to change. Meta's speech model
+(`muse-voice-transcribe-1.0`) transcribes the request, SAM 3.1 outlines what was clicked and finds the tokens that
+control it, contrast and focus fixes are computed (no model), and other requests go to Muse Spark Open, limited to the
+tokens that control the clicked element. Every change is re-checked for text contrast on the whole page and blocked if
+anything gets harder to read. Local only: `node src/cli.js playground --run <run> --app <build>`. Details and timings:
+[`docs/point-and-say.md`](docs/point-and-say.md).
 
 ## Run it
 

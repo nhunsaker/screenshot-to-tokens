@@ -1,7 +1,7 @@
 # Dark mode as a token file (`s2t dark`)
 
 Once an app's colors are tokens, a dark theme is one more CSS file. `s2t dark` asks Muse Spark for dark values, checks
-every captured text pair in the running app with those values, retries once with the failures fed back, and writes
+every captured text pair in the live web app with those values, retries once with the failures fed back, and writes
 `tokens.dark.css`. Nothing is merged: the file goes into the PR as an optional file with its own section.
 
 ## Run it
