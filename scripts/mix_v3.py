@@ -11,7 +11,7 @@
 #   beat-0.webm, beat-8.webm  node scripts/record-beats.mjs --only 0,8 --v3 (title card with the payoff loop; end card)
 #   n1..n5, n6 (first 5 s: proposal link + Show original), n7, n9-v2   the v2 sources, re-paced here
 # Emma's pauses between phrases are cut to PAUSE s (>= 0.35) and she is sped up by TEMPO (atempo, pitch kept, <= 1.04).
-# At those limits the second 10-29 script (with the tier card) runs 3:05.4; over 3:00 the outputs get an -over
+# The 10-29 script with the four redundancy trims runs 2:57.9 at those limits; over 3:00 the outputs get an -over
 # suffix (see section 3). Each beat's picture is cut
 # or held to its speech, and no gap between spoken lines is over 1.4 s (the check is silencedetect at -40 dB, 1.5 s).
 # Outputs: demo-v3-vo.mp4 (narration + requests, -16 LUFS, AAC 256 kbps 48 kHz), screen-track.mp4 (same picture,
@@ -96,8 +96,8 @@ beats[2] = plain(2, 'n2.mp4', 'b2')
 # The three-tier card (record-beats.mjs beat 13) lands its first line on "the raw color" (the pause after "three
 # tiers:"), stays through the benefit line, and the beat ends on the terminal's "done in" line for "twenty-three seconds".
 q3 = [q for q in quiet('v3/b3.wav', d=0.12)]
-tiers = next(b for a, b in q3 if b - a > 0.4 and a > 5.0)          # end of the pause after "on three tiers:"
-secs = next(b for a, b in q3 if a > tiers + 6.0)                    # end of the pause before "Twenty-three seconds"
+tiers = next(b for a, b in q3 if b - a > 0.3 and a > 4.5)          # end of the pause after "on three tiers:"
+secs = max((x for x in q3 if x[0] > tiers + 2.0), key=lambda x: x[1] - x[0])[1]  # sentence pause before "Twenty-three seconds"
 c0 = 0.25 + tiers - 0.3                                             # card start: its first line shows 0.3 s in
 T3 = 0.25 + SP['b3'][1] + TAIL_SHORT
 beats[3] = plain(3, 'n3.mp4', 'b3', [('n3.mp4', 0.6, 0.6 + c0, 0), ('beat-13.webm', 0, 0.25 + secs - 0.2 - c0, 0), ('n3.mp4', 9.0, 9.4, max(0, T3 - (0.25 + secs - 0.2) - 0.4))], tail=TAIL_SHORT)
