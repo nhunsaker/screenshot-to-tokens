@@ -99,14 +99,78 @@ export function captureBoxToOverlay(bbox, iframeSize, captureViewport) {
   return { left: x * sx, top: y * sy, width: w * sx, height: h * sy }
 }
 
-/** Overlay boxes for a point() response: the clicked element/outline (primary) + its twins (secondary), in iframe px. */
-export function overlayBoxesFor(point, iframeSize, captureViewport) {
-  const box = (bbox, kind) => ({ ...captureBoxToOverlay(bbox, iframeSize, captureViewport), kind })
+/**
+ * Overlay boxes for a point() response (contract v2): the outline (primary; `kind` "control" when the server drew the
+ * control's DOM box, `outline.source: "dom-control"`), the element that paints the fill/border (`element.control`)
+ * when it differs from the outline, and the twins (secondary). Boxes are capture-space page px; `scroll` (the
+ * iframe's scroll offset, capture px) is subtracted so the overlay stays on the element while the app scrolls.
+ */
+export function overlayBoxesFor(point, iframeSize, captureViewport, scroll) {
+  const sx = scroll && scroll.x ? scroll.x : 0, sy = scroll && scroll.y ? scroll.y : 0
+  const box = (bbox, kind) => ({ ...captureBoxToOverlay([bbox[0] - sx, bbox[1] - sy, bbox[2], bbox[3]], iframeSize, captureViewport), kind })
+  const same = (a, b) => a && b && a.every((v, i) => Math.abs(v - b[i]) < 2)
   const out = []
-  if (point.outline && point.outline.bbox) out.push(box(point.outline.bbox, 'outline'))
-  else if (point.element && point.element.bbox) out.push(box(point.element.bbox, 'element'))
-  for (const t of point.twins || []) out.push(box(t.bbox, 'twin'))
+  const el = point.element || null
+  // The control box only when the click was on a control (outline from SAM or the control's DOM box). For text, the
+  // element that paints the background is the surrounding card, which is not what the person pointed at.
+  const onControl = !point.outline || point.outline.source !== 'dom'
+  const ctl = onControl && el && el.control && el.control.bbox ? el.control.bbox : null
+  let main = null
+  if (point.outline && point.outline.bbox) { main = point.outline.bbox; out.push(box(main, point.outline.source === 'dom-control' ? 'control' : 'outline')) }
+  else if (ctl) { main = ctl; out.push(box(ctl, 'control')) }
+  else if (el && el.bbox) { main = el.bbox; out.push(box(el.bbox, 'element')) }
+  if (ctl && !same(ctl, main)) out.push(box(ctl, 'control'))
+  for (const t of point.twins || []) if (t && t.bbox) out.push(box(t.bbox, 'twin'))
   return out
+}
+
+/**
+ * The note beside one change item on the proposal card (contract v2 fields): `noop` -> "already that value";
+ * `retargetedFrom` -> "moved to the semantic token" (the model aimed at a primitive in the chain); `aliasPreferred`
+ * -> the model's own target was swapped for the semantic token with the same value. '' when none apply. Pure.
+ */
+export function changeNote(c) {
+  if (!c) return ''
+  if (c.noop) return 'already that value'
+  const notes = []
+  if (c.retargetedFrom) notes.push(`moved to the semantic token (the model named ${c.retargetedFrom})`)
+  if (c.aliasPreferred && c.alias && c.aliasPreferred !== c.alias) notes.push(`pointed at the semantic token ${c.alias} (the model said ${c.aliasPreferred})`)
+  return notes.join('; ')
+}
+
+/** True when every change in a proposal is already in place (nothing to apply). Pure. */
+export function allNoop(changes) {
+  return !!(changes && changes.length) && changes.every((c) => c && c.noop)
+}
+
+const HUE_WORDS = ['red', 'orange', 'yellow', 'green', 'teal', 'cyan', 'blue', 'indigo', 'purple', 'violet', 'pink', 'gray', 'grey', 'black', 'white']
+
+/**
+ * When the focus ring used the nearest hue (`ring.nearest`, e.g. Light Bootstrap has no blue token): "nearest blue in
+ * your tokens is teal (color.teal.300)". '' otherwise. The family is the hue word in the token name, else the name.
+ */
+export function ringNote(ring) {
+  if (!ring || !ring.nearest || !ring.hue) return ''
+  const tok = (ring.color && (ring.color.token || ring.color.value)) || ''
+  const fam = String(tok).split('.').find((p) => HUE_WORDS.includes(p))
+  return fam ? `nearest ${ring.hue} in your tokens is ${fam} (${tok})` : `nearest ${ring.hue} in your tokens is ${tok}`
+}
+
+/**
+ * The blocked line from the server's prediction (`predicted.blocked/reason`), else null. Same wording rule: names the
+ * check and the element ("BLOCKED: text contrast: "Month" 4.2 -> 3.77 (needs 4.5) and 2 more.").
+ */
+export function predictedBlock(predicted) {
+  if (!predicted || !predicted.blocked) return null
+  if (predicted.reason) return `BLOCKED: ${String(predicted.reason).replace(/^blocked:\s*/i, '')}`
+  return blockedMessage('text contrast', (predicted.regressions || []).map((r) => ({ text: r.text, from: r.from, to: r.to })))
+}
+
+/** "whole page: 41 → 20 failing of 87 text pairs checked" from two auditLive() result arrays. Pure. */
+export function pageAuditLine(before, after) {
+  const f = (a) => (a || []).filter((r) => r.status === 'fail').length
+  const n = (a) => (a || []).filter((r) => r.status === 'pass' || r.status === 'fail').length
+  return `whole page: ${f(before)} → ${f(after)} failing of ${n(after)} text pairs checked`
 }
 
 /** Clamp a hold-to-talk duration to the mic's max (10 s default). Pure. */
