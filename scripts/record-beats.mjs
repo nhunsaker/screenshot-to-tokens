@@ -93,7 +93,7 @@ const v=document.getElementById('loop'),cap=document.getElementById('cap');const
 await beat(0, async (p) => {
   // Title card only: the event guide says the demo shows only what was built during the event, so no footage of
   // the pre-existing Sorb product; the card explains it in words.
-  await p.goto(page('title.html', titleCard())); await wait(p, a.v3 ? 21500 : 12500)
+  await p.goto(page('title.html', titleCard())); await wait(p, a.v3 ? 25500 : 12500)
 })
 await beat(1, async (p) => { await p.goto(page('editor.html', editorPage())); await wait(p, 8800) })
 await beat(2, async (p) => { await p.goto(`${srv.url}out/scoreboard.html`, { waitUntil: 'networkidle' }); await wait(p, 600); await p.click('#replay'); await wait(p, 6500); await p.evaluate(() => document.querySelector('.headline')?.scrollIntoView({ block: 'start' })); await wait(p, 3500) })
@@ -126,23 +126,23 @@ await beat(5, async (p) => {
   await p.mouse.wheel(0, 450); await wait(p, 3500)
 })
 await beat(7, async (p) => { await p.goto(page('breadth.html', breadthPage())); await wait(p, 11500) })
-// v3 end card: the items follow the closing line (the three Meta model families, open weights), then the callback
-// line above Sorb's tagline, the repo / PR / live-demo links; the "3 to 9×" line is on the card only, not in the
-// voice. The items sit in a 2 × 2 grid so everything left of x = 300 ends above y = 450, so the bottom-left corner stays clear for the camera
-// bubble (credits are bottom-right).
+// v3 end card: the items follow the closing line (SAM, Muse Spark on open weights, the speech model), then the callback
+// line as the large headline (on the card, not spoken), Sorb's tagline, and bottom-right the open-source line, the
+// PR and live-demo links and the credits. The "3 to 9×" line is on the card only. The items sit in a 2 × 2 grid so
+// everything left of x = 300 ends above y = 450: the bottom-left corner stays clear for the camera bubble.
 function endCard() {
   const items = [
-    [2.6, 'SAM 3.1', 'reads the interface from pixels', '8 of 8 buttons on a page whose code describes none of them'],
-    [5.2, 'Muse Spark', 'names the tokens, with a reason for every one', 'Muse Spark Open on Baseten: 3 to 9× faster than hosted Muse'],
-    [7.2, "Meta's speech model", 'takes the spoken request (muse-voice-transcribe-1.0)', 'Point and say: click, speak, the change is checked live'],
-    [9.4, 'Open weights, end to end', 'SAM 3.1 open weights on a Modal GPU · Muse Spark Open on Baseten', 'open SAM matches hosted SAM on every test'],
+    [2.0, 'SAM 3.1', 'finds controls the code never describes', '0 of 8 buttons from the code · 8 of 8 from pixels'],
+    [7.4, 'Muse Spark', 'names every token with a reason, in seconds, under a cent a run', 'Muse Spark Open on Baseten: 3 to 9× faster than hosted Muse'],
+    [10.6, 'Open weights, end to end', 'SAM 3.1 open weights on a Modal GPU · Muse Spark Open on Baseten', 'open SAM matches hosted SAM on every test'],
+    [13.4, "Meta's speech model", 'takes the spoken request (muse-voice-transcribe-1.0)', 'Point and say: click, speak, a checked token change'],
   ]
   const rows = items.map(([at, h, sub, big]) => `<div class="it" data-at="${at}"><div class="h">${esc(h)}</div><div class="s">${esc(sub)}</div><div class="b">${esc(big)}</div></div>`).join('')
-  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:64px 72px;height:100vh;box-sizing:border-box;overflow:hidden}.g{display:grid;grid-template-columns:1fr 1fr;gap:22px 56px}.it{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;margin:0}.on{opacity:1!important;transform:none!important}.h{font-size:27px;font-weight:700;letter-spacing:-.3px}.s{font-size:16px;color:#9a9a94;margin-top:2px}.b{font-size:19px;color:#8a9af0;margin-top:2px}.cb{opacity:0;transition:opacity .6s;font-size:28px;font-weight:600;line-height:1.3;margin:40px 0 14px;color:#e8e8e4;max-width:1136px}.tg{opacity:0;transition:opacity .6s;font-size:34px;font-weight:700;color:#7ee2a8}.ln{position:absolute;left:300px;right:72px;bottom:64px;text-align:right;font-size:17px;line-height:1.55;color:#e8e8e4;opacity:0;transition:opacity .6s}.cr{position:absolute;left:300px;right:72px;bottom:22px;text-align:right;font-size:12px;color:#6b6a66;opacity:0;transition:opacity .6s}</style><div class="g">${rows}</div>
-<div class="cb" data-at="12.6">The design system took seconds. Making the app more accessible took one change each.</div>
-<div class="tg" data-at="17.6">Propose the change. See it live. Verify before you merge.</div>
-<div class="ln" data-at="17.9">Code: github.com/nhunsaker/screenshot-to-tokens<br>PR: github.com/nhunsaker/argon-dashboard-react/pull/2 · Live demo: nhunsaker.github.io/argon-dashboard-react</div>
-<div class="cr" data-at="19.5">SAM 3.1, Muse Spark and the speech model by Meta · Muse Spark Open served on Baseten · Argon Dashboard React by Creative Tim (MIT; our fork, not affiliated) · breadth-run sites are MIT/Apache/BSD/ISC licensed, used with credit</div>
+  return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:52px 72px;height:100vh;box-sizing:border-box;overflow:hidden}.g{display:grid;grid-template-columns:1fr 1fr;gap:20px 56px}.it{opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;margin:0}.on{opacity:1!important;transform:none!important}.h{font-size:26px;font-weight:700;letter-spacing:-.3px}.s{font-size:16px;color:#9a9a94;margin-top:2px}.b{font-size:19px;color:#8a9af0;margin-top:2px}.cb{opacity:0;transition:opacity .6s;font-size:40px;font-weight:700;letter-spacing:-.5px;line-height:1.2;margin:34px 0 12px;color:#fff;max-width:1136px}.tg{opacity:0;transition:opacity .6s;font-size:26px;font-weight:600;color:#7ee2a8}.ln{position:absolute;left:300px;right:72px;bottom:58px;text-align:right;font-size:17px;line-height:1.55;color:#e8e8e4;opacity:0;transition:opacity .6s}.ln b{color:#7ee2a8;font-weight:600}.cr{position:absolute;left:300px;right:72px;bottom:18px;text-align:right;font-size:12px;color:#6b6a66;opacity:0;transition:opacity .6s}</style><div class="g">${rows}</div>
+<div class="cb" data-at="18.6">The design system took seconds. Making the app more accessible took one change each.</div>
+<div class="tg" data-at="20.8">Propose the change. See it live. Verify before you merge.</div>
+<div class="ln" data-at="23.6"><b>Open source · Apache-2.0 · github.com/nhunsaker/screenshot-to-tokens</b><br>PR: github.com/nhunsaker/argon-dashboard-react/pull/2 · Live demo: nhunsaker.github.io/argon-dashboard-react</div>
+<div class="cr" data-at="24.4">SAM 3.1, Muse Spark and the speech model by Meta · Muse Spark Open served on Baseten · Argon Dashboard React by Creative Tim (MIT; our fork, not affiliated) · breadth-run sites are MIT/Apache/BSD/ISC licensed, used with credit</div>
 <script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},100)</script>`
 }
 // Beat 9 (played before the closer): accessibility. Contrast row on the Argon report, the axe-core comparison card,
@@ -175,5 +175,5 @@ await beat(9, async (p) => {
     await p.click('#sorb-theme-toggle'); await wait(p, 3600)
   } finally { await dark.close() }
 })
-await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, 24000) })
+await beat(8, async (p) => { await p.goto(page('end.html', endCard())); await wait(p, a.v3 ? 30000 : 24000) })
 await browser.close(); await srv.close()

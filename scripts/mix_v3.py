@@ -9,14 +9,16 @@
 #   beat-6-pas-v1.webm, beat-6-pas-v2.webm, beat-6-pas-v3.json   node scripts/record-pas-beat.mjs --voice out/video/req
 #   beat-0.webm, beat-8.webm  node scripts/record-beats.mjs --only 0,8 --v3 (title card with the payoff loop; end card)
 #   n1..n5, n6 (first 5 s: proposal link + Show original), n7, n9-v2   the v2 sources, re-paced here
-# Emma is sped up by TEMPO (atempo, pitch kept) so the 445-word script fits the 3:00 cap. Each beat's picture is cut
+# Emma's pauses between phrases are cut to PAUSE s and she is sped up by TEMPO (atempo, pitch kept) so the
+# script (about 470 words after the founder's 10-29 edits) fits the 3:00 cap. Each beat's picture is cut
 # or held to its speech, and no gap between spoken lines is over 1.4 s (the check is silencedetect at -40 dB, 1.5 s).
 # Outputs: demo-v3-vo.mp4 (narration + requests, -16 LUFS), screen-track.mp4 (same picture, requests only, same gain),
 # v3/beats.json (per-beat start/length, for the teleprompter), v3-contact.png.
 import subprocess, os, json, re
 os.chdir('out/video')
 os.makedirs('v3', exist_ok=True)
-TEMPO = float(os.environ.get('V3_TEMPO', '1.06'))
+TEMPO = float(os.environ.get('V3_TEMPO', '1.09'))
+TAIL = float(os.environ.get('V3_TAIL', '0.4'))  # picture after each line ends
 def ff(*a): subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', *a], check=True)
 def dur(f): return float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).strip())
 def quiet(f, db=-40, d=0.08):
@@ -32,7 +34,10 @@ def speech(f):
 # 1. Audio: Emma at TEMPO, each line to the same loudness; the requests to the same loudness as Emma.
 NORM = 'loudnorm=I=-20:TP=-2:LRA=7'
 KEYS = ['b0', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6a', 'b6b', 'b6c', 'b7', 'b9', 'b8']
-for k in KEYS: ff('-i', f'vo-v3/{k}/vo-1.mp3', '-af', f'atempo={TEMPO},{NORM}', '-ar', '44100', '-ac', '1', f'v3/{k}.wav')
+# PAUSE: pauses between phrases longer than that are cut down to it (the 3:00 cap; the words keep their pace).
+PAUSE = os.environ.get('V3_PAUSE', '0.22')
+SQZ = f'silenceremove=stop_periods=-1:stop_duration={PAUSE}:stop_threshold=-45dB:stop_silence={PAUSE},' if PAUSE else ''
+for k in KEYS: ff('-i', f'vo-v3/{k}/vo-1.mp3', '-af', f'{SQZ}atempo={TEMPO},{NORM}', '-ar', '44100', '-ac', '1', f'v3/{k}.wav')
 inner = [q for q in quiet('v3/b6c.wav', d=0.15) if q[0] > 0.3 and q[1] < dur('v3/b6c.wav') - 0.3]
 cut = (inner[0][0] + inner[0][1]) / 2
 ff('-i', 'v3/b6c.wav', '-t', f'{cut:.3f}', 'v3/b6c1.wav'); ff('-ss', f'{cut:.3f}', '-i', 'v3/b6c.wav', 'v3/b6c2.wav')
@@ -63,9 +68,9 @@ def build(n, segs, audio, T):
         outs[kind] = out
     return outs
 
-def plain(n, src, k, segs=None, tail=0.6, pre=None):
+def plain(n, src, k, segs=None, tail=None, pre=None):
     """A narrated beat: the line starts 0.25 s in; the picture is cut (or its last frame held) to end `tail` after it."""
-    end = 0.25 + SP[k][1]; T = end + tail
+    end = 0.25 + SP[k][1]; T = end + (TAIL if tail is None else tail)
     if segs is None: segs = [(src, 0, dur(src), 0)]
     if pre: segs = pre + segs
     return build(n, segs, [(f'v3/{k}.wav', 0.25, True)], T), T
@@ -78,7 +83,7 @@ beats[2] = plain(2, 'n2.mp4', 'b2')
 # Beat 3: the terminal replay (to the "done in" line), then the review report's first screen.
 beats[3] = plain(3, 'n3.mp4', 'b3', [('n3.mp4', 0.6, 9.1, 0), ('n3.mp4', 9.5, 12.45, 0)])
 # Beat 4: keep the end (the terminal's 21/21); trim the opening dwell to fit the shorter line.
-T4 = 0.25 + SP['b4'][1] + 0.6; V4 = dur('n4.mp4')
+T4 = 0.25 + SP['b4'][1] + TAIL; V4 = dur('n4.mp4')
 beats[4] = plain(4, 'n4.mp4', 'b4', [('n4.mp4', max(0, V4 - T4), V4, 0)])
 beats[5] = plain(5, 'n5.mp4', 'b5')
 
@@ -119,7 +124,7 @@ beats[6] = (build(6, segs, aud, T6), T6)
 pre7 = [(V2, e2['done3'] - 0.05 + hold_used, e2['done3'] - 0.05 + hold_used + 1.3, 0)]
 beats[7] = plain(7, 'n7.mp4', 'b7', pre=pre7)
 # Beat 9: contrast row held through the why-now line, axe-core card, focus numbers card, dark mode.
-T9 = 0.25 + SP['b9'][1] + 0.6
+T9 = 0.25 + SP['b9'][1] + TAIL
 fixed = 7.13 + 10.0 + 2.5 + 4.7
 beats[9] = plain(9, 'n9-v2.mp4', 'b9', [('n9-v2.mp4', 0, 7.13, max(0, T9 - fixed)), ('n9-v2.mp4', 7.13, 17.13, 0), ('n9-v2.mp4', 17.13, 19.63, 0), ('n9-v2.mp4', 22.2, 26.9, 0)])
 beats[8] = plain(8, 'beat-8.webm', 'b8', tail=1.2)
