@@ -91,7 +91,7 @@ export function pickDetection(outlines, regionBbox, point) {
   return { outline: scored[0].o, iou: scored[0].s }
 }
 
-async function callSamPoint({ baseURL, apiKey, model, imageDataUrl, prompt }, stats) {
+export async function callSamPoint({ baseURL, apiKey, model, imageDataUrl, prompt }, stats) {
   const req = { kind: 'point', baseURL, model, prompt, image: createHash('sha256').update(imageDataUrl).digest('hex') }
   const t0 = Date.now()
   const { cached: hit, ...json } = await cached('sam', req, async () => {
@@ -376,7 +376,7 @@ export function cropPng(img, outline, o = {}) {
 // ---------------------------------------------------------------------------------------------------------------
 
 /** The image to send for a region: its 1600 px tile, or a 1600 px window centered on it if it straddles a tile edge. */
-function windowFor(full, bbox, tileH = TILE_H) {
+export function windowFor(full, bbox, tileH = TILE_H) {
   if (full.height <= tileH) return { y: 0, png: full }
   let y = Math.floor(bbox[1] / tileH) * tileH
   if (bbox[1] + bbox[3] > y + tileH) y = Math.max(0, Math.min(full.height - tileH, Math.round(bbox[1] + bbox[3] / 2 - tileH / 2)))
