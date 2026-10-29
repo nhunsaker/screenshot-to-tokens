@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import {
   fmtRatio, contrastLine, focusLine, changeLine, blockedMessage, compareAudits,
   toCaptureXY, captureBoxToOverlay, overlayBoxesFor, clampRecordMs, escapeHtml, prCommandText, whyLine, proposalTitle,
+  changeNote, allNoop, ringNote, predictedBlock, pageAuditLine,
 } from '../src/preview-client/pas-client.js'
 
 // ---- wording -------------------------------------------------------------------------------------------------
@@ -137,6 +138,60 @@ test('overlayBoxesFor falls back to the element box when SAM found no outline', 
   const point = { outline: null, element: { bbox: [5, 5, 10, 10] }, twins: [] }
   const boxes = overlayBoxesFor(point, { width: 10, height: 10 }, { width: 10, height: 10 })
   assert.deepEqual(boxes, [{ left: 5, top: 5, width: 10, height: 10, kind: 'element' }])
+})
+
+// ---- contract v2 --------------------------------------------------------------------------------------------------
+
+test('overlayBoxesFor (v2): a click on a control draws the control box; a click on text does not draw its card', () => {
+  const vp = { width: 100, height: 100 }
+  // "Month" label span inside a.btn: outline is the control's DOM box (dom-control).
+  const month = { outline: { bbox: [40, 10, 30, 12], source: 'dom-control' }, element: { bbox: [45, 12, 20, 8], control: { tag: 'a', bbox: [40, 10, 30, 12] } }, twins: [] }
+  assert.deepEqual(overlayBoxesFor(month, vp, vp).map((b) => b.kind), ['control'])
+  // SAM outline on an icon inside a button whose box differs: both drawn.
+  const icon = { outline: { bbox: [10, 10, 8, 8], source: 'sam' }, element: { bbox: [10, 10, 8, 8], control: { bbox: [5, 5, 30, 18] } }, twins: [] }
+  assert.deepEqual(overlayBoxesFor(icon, vp, vp).map((b) => b.kind), ['outline', 'control'])
+  // Text: the DOM outline only, even though a card paints its background.
+  const text = { outline: { bbox: [20, 20, 30, 5], source: 'dom' }, element: { bbox: [20, 20, 30, 5], control: { bbox: [0, 0, 60, 40] } }, twins: [] }
+  assert.deepEqual(overlayBoxesFor(text, vp, vp).map((b) => b.kind), ['outline'])
+})
+
+test('overlayBoxesFor subtracts the iframe scroll so boxes stay on the element', () => {
+  const point = { outline: { bbox: [10, 300, 20, 10], source: 'dom' }, element: null, twins: [{ bbox: [50, 320, 10, 10] }] }
+  const vp = { width: 100, height: 100 }
+  const boxes = overlayBoxesFor(point, { width: 50, height: 50 }, vp, { x: 0, y: 280 })
+  assert.deepEqual(boxes[0], { left: 5, top: 10, width: 10, height: 5, kind: 'outline' })
+  assert.deepEqual(boxes[1], { left: 25, top: 20, width: 5, height: 5, kind: 'twin' })
+})
+
+test('changeNote: noop, retarget and alias swap from contract v2', () => {
+  assert.equal(changeNote({ token: 'button.bg', alias: 'color.action.primary', noop: true }), 'already that value')
+  assert.match(changeNote({ token: 'color.text.muted', retargetedFrom: 'color.blue.400' }), /^moved to the semantic token \(the model named color\.blue\.400\)$/)
+  assert.match(changeNote({ token: 'button.bg', alias: 'color.action.primary', aliasPreferred: 'color.blue.500' }), /semantic token color\.action\.primary \(the model said color\.blue\.500\)/)
+  assert.equal(changeNote({ token: 'x', alias: 'color.red.500' }), '')
+  assert.equal(allNoop([{ noop: true }, { noop: true }]), true)
+  assert.equal(allNoop([{ noop: true }, {}]), false)
+  assert.equal(allNoop([]), false)
+})
+
+test('ringNote: "nearest blue in your tokens is teal" only when the ring used the nearest hue', () => {
+  assert.equal(ringNote({ nearest: true, hue: 'blue', color: { token: 'color.teal.300', value: '#1dc7ea' } }), 'nearest blue in your tokens is teal (color.teal.300)')
+  assert.equal(ringNote({ nearest: true, hue: 'blue', color: { token: 'brand.accent', value: '#1dc7ea' } }), 'nearest blue in your tokens is brand.accent')
+  assert.equal(ringNote({ nearest: false, hue: 'blue', color: { token: 'color.action.primary' } }), '')
+  assert.equal(ringNote(null), '')
+})
+
+test('predictedBlock: the server reason names the check and the element; null when not blocked', () => {
+  assert.equal(predictedBlock({ blocked: false }), null)
+  assert.equal(predictedBlock({ blocked: true, reason: 'text contrast: "Month" 4.2 → 3.77 (needs 4.5) and 2 more' }), 'BLOCKED: text contrast: "Month" 4.2 → 3.77 (needs 4.5) and 2 more')
+  const m = predictedBlock({ blocked: true, reason: null, regressions: [{ text: 'Dashboard', from: 3.54, to: 2.02 }] })
+  assert.match(m, /^BLOCKED: text contrast would regress on “Dashboard”/)
+  assert.doesNotMatch(m, /\baccessible\b|\bcompliant\b/i)
+})
+
+test('pageAuditLine: whole-page failing before -> after', () => {
+  const before = [{ status: 'fail' }, { status: 'fail' }, { status: 'pass' }, { status: 'skipped' }]
+  const after = [{ status: 'pass' }, { status: 'fail' }, { status: 'pass' }, { status: 'skipped' }]
+  assert.equal(pageAuditLine(before, after), 'whole page: 2 → 1 failing of 3 text pairs checked')
 })
 
 // ---- misc -------------------------------------------------------------------------------------------------------

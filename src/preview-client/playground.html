@@ -74,7 +74,11 @@
   #pasOverlay { position: absolute; pointer-events: none; top: 0; left: 0; width: 0; height: 0; }
   .pasBox { position: absolute; border: 2px solid #ff5fae; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.25); box-sizing: border-box; }
   .pasBox.twin { border-color: #ffb648; border-style: dashed; }
-  .pasBox.outline, .pasBox.element { border-color: #5e72e4; }
+  .pasBox.outline, .pasBox.element { border-color: #e0218a; box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0,0,0,.35); }
+  .pasBox.control { border-color: #e0218a; border-width: 3px; box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0,0,0,.35); }
+  .pasNote { font: 600 11px system-ui, sans-serif; border-radius: 99px; padding: 1px 7px; margin-left: 4px; background: var(--chip); color: var(--muted); }
+  .pasBlocked { background: #fde8ea; color: #8f1d2c; border-radius: 8px; padding: 7px 10px; font-size: 12.5px; font-weight: 700; }
+  @media (prefers-color-scheme: dark) { .pasBlocked { background: #3d1519; color: #f6b2bb; } }
   .pasRow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
   #pasText { flex: 1; min-width: 120px; font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
   #pasMic { position: relative; }
@@ -239,6 +243,7 @@
   document.getElementById('reset').addEventListener('click', function () {
     var r = root(); Object.keys(changes).forEach(function (k) { if (r) r.style.removeProperty('--' + k) })
     changes = {}
+    if (window.__pasReset) window.__pasReset() // point and say: applied map, focus rule, outline, card
     render(); sync(); toast('Back to the merged values')
   })
   document.getElementById('copy').addEventListener('click', function () {
@@ -449,19 +454,25 @@
     if (!pas.on || !pas.health) return
     var vp = pas.health.run.viewport
     var stage = document.getElementById('stage')
-    var s = Math.min(stage.clientWidth / vp.width, stage.clientHeight / vp.height, 1) || 1
+    // Render the app at the capture width (what SAM and the server's probe use), scaled to fit the stage's width, and
+    // tall enough to fill the stage. One uniform scale, so page px = capture px inside the iframe.
+    var s = Math.min(stage.clientWidth / vp.width, 1) || 1
+    pas.scale = s
     frame.style.width = vp.width + 'px'
-    frame.style.height = vp.height + 'px'
+    frame.style.height = Math.ceil(stage.clientHeight / s) + 'px'
     frame.style.transform = 'scale(' + s + ')'
     pasOverlay.style.width = (vp.width * s) + 'px'
-    pasOverlay.style.height = (vp.height * s) + 'px'
+    pasOverlay.style.height = stage.clientHeight + 'px'
     pasRenderOverlay()
   }
   function pasRenderOverlay() {
     pasOverlay.innerHTML = ''
     if (!pas.point) return
     var vp = pas.health.run.viewport
-    var boxes = PAS.overlayBoxesFor(pas.point, { width: pasOverlay.clientWidth, height: pasOverlay.clientHeight }, vp)
+    var win = frame.contentWindow
+    var scroll = win ? { x: win.scrollX || 0, y: win.scrollY || 0 } : null
+    var s = pas.scale || 1
+    var boxes = PAS.overlayBoxesFor(pas.point, { width: vp.width * s, height: vp.height * s }, vp, scroll)
     boxes.forEach(function (b) {
       var d = document.createElement('div')
       d.className = 'pasBox ' + b.kind
@@ -475,20 +486,24 @@
     var win = frame.contentWindow
     var raw = { x: e.clientX + win.scrollX, y: e.clientY + win.scrollY }
     var vp = pas.health.run.viewport
-    var pt = PAS.toCaptureXY(raw, { width: win.innerWidth, height: win.innerHeight }, vp)
+    var w = win.innerWidth || vp.width // iframe CSS px at the capture width: uniform scale from the width alone
+    var pt = PAS.toCaptureXY(raw, { width: w, height: vp.height * w / vp.width }, vp)
     pasPoint(pt)
   }
   function pasPoint(pt) {
     pasResults.innerHTML = ''
     pasBusy(true, 'Looking at what you clicked…')
+    pasState({ phase: 'pointing', clickAt: Date.now() })
     pasFetch('/__pas/api/point', { x: Math.round(pt.x), y: Math.round(pt.y) }).then(function (r) {
       pasBusy(false)
       pas.point = r
+      pasState({ phase: 'pointed', point: { element: r.element && r.element.text, token: r.controls && r.controls.color && r.controls.color.token, pairs: r.pairs && r.pairs.count, twins: (r.twins || []).length, outline: r.outline && r.outline.source, ms: r.ms } })
       pasRenderOverlay()
       var el = r.element
       var tokName = r.controls && r.controls.color && r.controls.color.token
       var html = '<h3>Clicked</h3>'
-      html += '<p>' + (el ? '<code>' + PAS.escapeHtml(el.tag) + '</code> “' + PAS.escapeHtml(el.text || '') + '”' : 'no element there') + '</p>'
+      html += '<p>' + (el ? '<code>' + PAS.escapeHtml(el.tag) + '</code> “' + PAS.escapeHtml(el.text || '') + '”' +
+        (el.control && r.outline && r.outline.source !== 'dom' ? ' <span class="meta">in <code>' + PAS.escapeHtml(el.control.tag + (el.control.classes && el.control.classes.length ? '.' + el.control.classes.slice(0, 2).join('.') : '')) + '</code></span>' : '') : 'no element there') + '</p>'
       html += '<p class="meta">' + (tokName ? 'controlling token: <code>' + PAS.escapeHtml(tokName) + '</code>' : 'no token controls its color') +
         (r.pairs && r.pairs.count ? ' · used by ' + r.pairs.count + ' text pair' + (r.pairs.count === 1 ? '' : 's') : '') +
         (r.twins && r.twins.length ? ' · ' + r.twins.length + ' look-alike' + (r.twins.length === 1 ? '' : 's') : '') + '</p>'
@@ -507,13 +522,19 @@
     }).then(function (out) {
       pas.mic = null
       micBtn.classList.remove('rec'); micBtn.setAttribute('aria-pressed', 'false'); micBtn.textContent = 'Hold to talk'
+      pasState({ phase: 'transcribing', recordedMs: out.ms, speechEndAt: Date.now() })
+      pasResults.innerHTML = ''; pasBusy(true, 'Listening back (Meta speech model)…')
       return pasFetch('/__pas/api/transcribe', out.wav, true)
     }).then(function (r) {
+      pasBusy(false)
+      if (r) pasState({ transcript: r.transcript, asrMs: r.ms })
       if (!r || !r.transcript) return
       document.getElementById('pasText').value = r.transcript
       pasIntent(r.transcript)
     }).catch(function (e) {
       pas.mic = null
+      pasBusy(false)
+      pasState({ phase: 'error', error: e.message })
       micBtn.classList.remove('rec'); micBtn.setAttribute('aria-pressed', 'false'); micBtn.textContent = 'Hold to talk'
       pasResults.innerHTML = '<p class="notice">Could not hear that: ' + PAS.escapeHtml(e.message) + '</p>'; pasResults.classList.add('on')
     })
@@ -543,87 +564,154 @@
     el.textContent = cssText || ''
     pas.rule = cssText || null
   }
+  // Driver/demo hook: the latest point-and-say state (phases + timings), read by scripts/pas-join/e2e.mjs.
+  function pasState(o) {
+    var s = window.__pas || (window.__pas = {})
+    Object.keys(o).forEach(function (k) { s[k] = o[k] })
+    s.updatedAt = Date.now()
+  }
   function pasIntent(transcript) {
     pasResults.innerHTML = ''
     pasBusy(true, 'Mapping “' + transcript + '” to tokens…')
+    pasState({ phase: 'intent', transcript: transcript, intentAt: Date.now(), result: null })
     var body = { transcript: transcript }
     if (pas.point) body.point = { x: pas.point.point[0], y: pas.point.point[1] }
     pasFetch('/__pas/api/intent', body).then(function (r) {
       pasBusy(false)
+      pasState({ intent: { route: r.route, summary: r.summary, ms: r.ms, model: r.model, changes: r.changes } })
       if (!r.changes || !r.changes.length) {
         pasResults.innerHTML = '<h3>' + PAS.escapeHtml(PAS.proposalTitle(r.route)) + '</h3><p class="pasTranscript">“' + PAS.escapeHtml(transcript) + '”</p>' +
           '<p class="notice">Couldn\'t map that to a token.' + (r.summary ? ' ' + PAS.escapeHtml(r.summary) : '') + '</p>'
         pasResults.classList.add('on')
+        pasState({ phase: 'done', result: { kind: 'none', summary: r.summary } })
         return
       }
       if (r.route === 'focus') return pasFinishFocus(r, transcript)
       return pasFinishColor(r, transcript)
-    }).catch(function (e) { pasBusy(false); pasResults.innerHTML = '<p class="notice">Point and say call failed: ' + PAS.escapeHtml(e.message) + '</p>'; pasResults.classList.add('on') })
+    }).catch(function (e) { pasBusy(false); pasState({ phase: 'error', error: e.message }); pasResults.innerHTML = '<p class="notice">Point and say call failed: ' + PAS.escapeHtml(e.message) + '</p>'; pasResults.classList.add('on') })
+  }
+  function pasChangeRow(c, dropped) {
+    var note = PAS.changeNote(c)
+    var sw = /^#/.test(c.css) && c.from ? '<span class="pasSwatches"><span class="sw2" style="background:' + PAS.escapeHtml(c.from) + '"></span>→<span class="sw2" style="background:' + PAS.escapeHtml(c.css) + '"></span></span>' : ''
+    return '<div class="fix' + (dropped ? ' dropped' : '') + '"><span class="name">' + PAS.escapeHtml(c.token) + '</span> ' +
+      (c.from ? '<code>' + PAS.escapeHtml(c.from) + '</code> ' : '') + '→ <code>' + PAS.escapeHtml(c.alias || c.css) + '</code>' + sw +
+      (note ? '<span class="pasNote">' + PAS.escapeHtml(note) + '</span>' : '') +
+      '<div class="why">' + PAS.escapeHtml(PAS.whyLine(c.why)) + '</div></div>'
   }
   function pasFinishColor(r, transcript) {
-    var before = pasAuditNow()
-    pasApplyChanges(r.changes)
-    var after = pasAuditNow()
-    var cmp = PAS.compareAudits(before, after)
-    var checkName = r.route === 'contrast' ? 'text contrast' : 'this change'
     var html = '<h3>' + PAS.escapeHtml(PAS.proposalTitle(r.route)) + '</h3><p class="pasTranscript">“' + PAS.escapeHtml(transcript) + '”</p>'
-    if (!cmp.allPass) {
-      pasRevertChanges(r.changes)
-      html += '<p class="notice">' + PAS.escapeHtml(PAS.blockedMessage(checkName, cmp.regressions)) + '</p>'
-      html += r.changes.map(function (c) { return '<div class="fix dropped"><span class="name">' + PAS.escapeHtml(c.token) + '</span> → <code>' + PAS.escapeHtml(c.css) + '</code><div class="why">' + PAS.escapeHtml(PAS.whyLine(c.why)) + '</div></div>' }).join('')
-      pasResults.innerHTML = html
-      pasResults.classList.add('on')
+    // Everything already in place (contract v2 `noop`): say so, apply nothing.
+    if (PAS.allNoop(r.changes)) {
+      html += '<p class="notice">Already that value: nothing to change.</p>' + r.changes.map(function (c) { return pasChangeRow(c) }).join('')
+      pasResults.innerHTML = html; pasResults.classList.add('on')
+      pasState({ phase: 'done', result: { kind: 'noop', changes: r.changes.length }, doneAt: Date.now() })
       return
     }
+    var live = r.changes.filter(function (c) { return !c.noop })
+    // Apply, then re-measure the whole page live. A regression here or in the server's prediction blocks the change
+    // and it is reverted on the spot (same rule as the pipeline's verify).
+    var before = pasAuditNow()
+    var thaw = C.freezeTransitions(frame.contentDocument)
+    pasApplyChanges(live)
+    var after = pasAuditNow()
+    var cmp = PAS.compareAudits(before, after)
+    var checkName = r.route === 'contrast' ? 'text contrast' : 'text contrast'
+    var serverBlock = PAS.predictedBlock(r.predicted)
+    if (!cmp.allPass || serverBlock) {
+      pasRevertChanges(live) // still frozen: the app snaps back, no fade through the blocked colours
+      getComputedStyle(frame.contentDocument.documentElement).color
+      thaw()
+      var msg = !cmp.allPass ? PAS.blockedMessage(checkName, cmp.regressions) : serverBlock
+      html += '<p class="pasBlocked" role="alert">' + PAS.escapeHtml(msg) + '</p>'
+      if (serverBlock && !cmp.allPass) html += '<p class="meta">Server check agrees: ' + PAS.escapeHtml(serverBlock.replace(/^BLOCKED:\s*/, '')) + '</p>'
+      html += '<p class="meta">Reverted automatically; nothing was kept.</p>'
+      html += r.changes.map(function (c) { return pasChangeRow(c, true) }).join('')
+      pasResults.innerHTML = html
+      pasResults.classList.add('on')
+      pasState({ phase: 'done', result: { kind: 'blocked', message: msg, live: cmp.regressions.length, server: !!serverBlock, reverted: true }, doneAt: Date.now() })
+      return
+    }
+    thaw()
     var n = cmp.affected.length || (r.predicted && r.predicted.affected) || 0
-    var worstBefore = cmp.affected.length ? Math.min.apply(null, cmp.affected.map(function (a) { return a.from } )) : (r.predicted && r.predicted.before && r.predicted.before.min) || 0
-    var worstAfter = cmp.affected.length ? Math.min.apply(null, cmp.affected.map(function (a) { return a.to } )) : (r.predicted && r.predicted.after && r.predicted.after.min) || 0
-    if (r.route === 'contrast' && n) html += '<p><span class="score good">' + PAS.escapeHtml(PAS.contrastLine(n, worstBefore, worstAfter)) + '</span></p>'
-    else if (r.summary) html += '<p>' + PAS.escapeHtml(r.summary) + '</p>'
-    html += r.changes.map(function (c) {
-      var sw = /^#/.test(c.css) ? '<span class="pasSwatches"><span class="sw2" style="background:' + PAS.escapeHtml(c.from || '') + '"></span>→<span class="sw2" style="background:' + PAS.escapeHtml(c.css) + '"></span></span>' : ''
-      return '<div class="fix"><span class="name">' + PAS.escapeHtml(c.token) + '</span> → <code>' + PAS.escapeHtml(c.css) + '</code>' + sw + '<div class="why">' + PAS.escapeHtml(PAS.whyLine(c.why)) + '</div></div>'
-    }).join('')
-    if (cmp.affected.length) html += '<p class="pasAffected">' + cmp.affected.length + ' element' + (cmp.affected.length === 1 ? '' : 's') + ' affected' + (r.rejected && r.rejected.length ? '; ' + r.rejected.length + ' proposed change(s) rejected as unsafe or unrelated' : '') + '</p>'
-    html += pasKeepUndoButtons(r.changes)
+    var worstBefore = cmp.affected.length ? Math.min.apply(null, cmp.affected.map(function (a) { return a.from })) : (r.predicted && r.predicted.before && r.predicted.before.min) || 0
+    var worstAfter = cmp.affected.length ? Math.min.apply(null, cmp.affected.map(function (a) { return a.to })) : (r.predicted && r.predicted.after && r.predicted.after.min) || 0
+    if (n) html += '<p><span class="score good">' + PAS.escapeHtml(PAS.contrastLine(n, worstBefore, worstAfter)) + '</span></p>'
+    if (r.summary && r.route !== 'contrast') html += '<p>' + PAS.escapeHtml(r.summary) + '</p>'
+    html += '<p class="meta">' + PAS.escapeHtml(PAS.pageAuditLine(before, after)) + ', 0 regressions (checked live after applying)</p>'
+    html += r.changes.map(function (c) { return pasChangeRow(c) }).join('')
+    if (r.rejected && r.rejected.length) html += '<p class="pasAffected">' + r.rejected.length + ' proposed change(s) rejected as unsafe or unrelated</p>'
+    html += pasKeepUndoButtons(live)
     pasResults.innerHTML = html
     pasResults.classList.add('on')
-    pasWireButtons(r.changes)
+    pasWireButtons(live)
+    var fails = function (a) { return a.filter(function (x) { return x.status === 'fail' }).length }
+    pasState({ phase: 'done', result: { kind: 'applied', changes: live.map(function (c) { return { token: c.token, from: c.from, css: c.css } }), affected: n, before: worstBefore, after: worstAfter, pageFailBefore: fails(before), pageFailAfter: fails(after), checked: after.filter(function (x) { return x.status === 'pass' || x.status === 'fail' }).length, regressions: 0 }, doneAt: Date.now() })
   }
   function pasFinishFocus(r, transcript) {
     var html = '<h3>Focus ring</h3><p class="pasTranscript">“' + PAS.escapeHtml(transcript) + '”</p>'
     pasApplyChanges(r.changes)
     if (r.rule) pasInjectRule(r.rule)
     html += '<p>' + (r.summary ? PAS.escapeHtml(r.summary) : 'Focus-ring tokens applied.') + '</p>'
-    pasResults.innerHTML = html + '<p class="busy" id="pasFocusBusy">Checking keyboard focus (about 10 seconds)…</p>'
+    var near = PAS.ringNote(r.ring)
+    if (near) html += '<p class="notice">' + PAS.escapeHtml(near.charAt(0).toUpperCase() + near.slice(1)) + '.</p>'
+    html += r.changes.map(function (c) { return pasChangeRow(c) }).join('')
+    pasResults.innerHTML = html + '<p class="busy" id="pasFocusBusy">Checking keyboard focus: Tab through every control (about 10 seconds)…</p>'
     pasResults.classList.add('on')
+    pasState({ phase: 'focus-check', focusAt: Date.now() })
     pasFetch('/__pas/api/focus-check', { changes: r.changes }).then(function (fc) {
       var b = document.getElementById('pasFocusBusy'); if (b) b.remove()
       var line = PAS.focusLine(fc.before.pass, fc.after.pass, fc.after.measured)
-      var more = '<p><span class="score good">' + PAS.escapeHtml(line) + '</span></p>'
-      if (fc.compare && fc.compare.worse && fc.compare.worse.length) more += '<p class="meta">' + fc.compare.worse.length + ' control' + (fc.compare.worse.length === 1 ? '' : 's') + ' worse with this change.</p>'
+      var worse = fc.compare && fc.compare.worse ? fc.compare.worse.length : 0
+      var more = '<p><span class="score ' + (worse ? 'bad' : 'good') + '">' + PAS.escapeHtml(line) + '</span></p>'
+      more += '<p class="meta">before: ' + fc.before.pass + ' pass, ' + fc.before.faint + ' faint, ' + fc.before.none + ' none · after: ' + fc.after.pass + ' pass, ' + fc.after.faint + ' faint, ' + fc.after.none + ' none · ' + (fc.ms / 1000).toFixed(1) + ' s</p>'
+      if (worse) more += '<p class="meta">' + worse + ' control' + (worse === 1 ? '' : 's') + ' worse with this change.</p>'
+      more += '<p class="hint">Press Tab in the app to see the ring.</p>'
       more += pasKeepUndoButtons(r.changes)
       pasResults.insertAdjacentHTML('beforeend', more)
-      pasWireButtons(r.changes)
+      pasWireButtons(r.changes, true)
+      pasState({ phase: 'done', result: { kind: 'focus', before: fc.before, after: fc.after, worse: worse, checkMs: fc.ms, nearest: near || null }, doneAt: Date.now() })
     }).catch(function (e) {
       var b = document.getElementById('pasFocusBusy'); if (b) b.remove()
+      pasState({ phase: 'error', error: e.message })
       pasResults.insertAdjacentHTML('beforeend', '<p class="notice">Focus check failed: ' + PAS.escapeHtml(e.message) + '</p>')
     })
   }
   function pasKeepUndoButtons() {
     return '<div class="actions"><button id="pasKeep" class="primary">Keep (preview)</button><button id="pasUndo">Undo</button><button id="pasShowPr">Show PR command</button></div>'
   }
-  function pasWireButtons(cs) {
+  function pasWireButtons(cs, isFocus) {
     var keep = document.getElementById('pasKeep')
     if (keep) keep.addEventListener('click', function () { keep.disabled = true; var u = document.getElementById('pasUndo'); if (u) u.disabled = true; toast('Kept as a preview. Copy the proposal link to share it.') })
     var undo = document.getElementById('pasUndo')
-    if (undo) undo.addEventListener('click', function () { pasRevertChanges(cs); undo.disabled = true; if (keep) keep.disabled = true; toast('Reverted') })
+    if (undo) undo.addEventListener('click', function () { pasRevertChanges(cs); if (isFocus) pasInjectRule(null); undo.disabled = true; if (keep) keep.disabled = true; toast('Reverted') })
     var pr = document.getElementById('pasShowPr')
     if (pr) pr.addEventListener('click', function () {
       pr.disabled = true
       var cmd = PAS.prCommandText(pas.health && pas.health.run && pas.health.run.dir)
       pasResults.insertAdjacentHTML('beforeend', '<p class="meta">Shown, not run:</p><pre class="pasPre">' + PAS.escapeHtml(cmd) + '</pre>')
     })
+  }
+  // "Reset all": the shared `changes` are cleared by the caller; this clears point and say's own bookkeeping too
+  // (applied map, the injected focus rule, the outline, the card, the driver state).
+  window.__pasReset = function () {
+    pas.applied = {}
+    pasInjectRule(null)
+    var el = frame.contentDocument && frame.contentDocument.getElementById('s2t-pas-focus-rule'); if (el) el.remove()
+    pas.point = null
+    pasOverlay.innerHTML = ''
+    pasResults.innerHTML = ''; pasResults.classList.remove('on')
+    var t = document.getElementById('pasText'); if (t) t.value = ''
+    if (pas.on) document.getElementById('pasHint').textContent = 'On. Click something in the app, then say or type what to change.'
+    window.__pas = { phase: 'reset', updatedAt: Date.now() }
+  }
+  function pasScroll() { if (pas.on && pas.point) pasRenderOverlay() }
+  // Every (re)load of the iframe document: hook the click capture and scroll back up, and put the focus rule back.
+  function pasAttach() {
+    var d = frame.contentDocument; if (!d) return
+    d.removeEventListener('click', pasOnClick, true)
+    if (pas.on) d.addEventListener('click', pasOnClick, true)
+    if (frame.contentWindow) { frame.contentWindow.removeEventListener('scroll', pasScroll); frame.contentWindow.addEventListener('scroll', pasScroll) }
+    if (pas.rule) pasInjectRule(pas.rule)
   }
 
   function pasOn() {
@@ -633,7 +721,7 @@
     document.getElementById('pasToggle').setAttribute('aria-pressed', 'true')
     document.getElementById('pasToggle').textContent = 'Point and say: on'
     document.getElementById('pasHint').textContent = 'On. Click something in the app, then say or type what to change.'
-    if (frame.contentDocument) frame.contentDocument.addEventListener('click', pasOnClick, true)
+    pasAttach()
     pasLayout()
   }
   function pasOff() {
@@ -649,7 +737,10 @@
     pas.point = null
   }
 
+  var pasStarted = false
   function initPas() {
+    if (pasStarted) { if (pas.health) pasAttach(); return } // a reload of the iframe: re-hook, don't re-wire the panel
+    pasStarted = true
     Promise.all([import('./pas-client.js'), C ? Promise.resolve(C) : import('./contrast.js')]).then(function (mods) {
       PAS = mods[0]
       if (!C) C = mods[1]
@@ -670,6 +761,8 @@
         if (e.key === 'Enter' && e.target.value.trim()) pasIntent(e.target.value.trim())
       })
       window.addEventListener('resize', function () { if (pas.on) pasLayout() })
+      pasAttach()
+      pasState({ phase: 'ready', health: { focusBaseline: h.focusBaseline && h.focusBaseline.summary } })
     }).catch(function (e) { void e }) // no /__pas/ routes (static build or lane A not up yet): the toggle stays hidden
   }
 
@@ -700,10 +793,19 @@
     document.getElementById('title').textContent = d.title
     document.title = d.title + ' · Token playground'
     document.getElementById('sub').textContent = d.tokens.length + ' tokens you can change · ' + d.edits + ' hardcoded values replaced · named by ' + d.namer
+    var home = new URL(d.app, location.href).pathname
     frame.addEventListener('load', function () {
+      // A hard reload of a route the app's router pushed (Argon: /admin/index) is the playground's 404 JSON: go back
+      // to the app's home under /app/ instead (the app routes itself from there).
+      try {
+        var doc = frame.contentDocument
+        if (doc && doc.location.pathname.indexOf(home) !== 0 && /"error"\s*:\s*"not found"/.test(doc.body ? doc.body.textContent : '')) { frame.src = home; return }
+      } catch (e) { void e }
       // The app is a single-page app: wait for its styles, then render the panel from live values.
       setTimeout(function () { apply(); render(); sync(); initTools(); initPas() }, 400)
     })
+    // Reload the app frame from its home, never from its current (router-pushed) URL.
+    window.__reloadApp = function () { frame.src = home }
     frame.src = d.app
   }).catch(function (e) {
     document.getElementById('sub').textContent = 'Could not load tokens.json (' + e.message + ')'

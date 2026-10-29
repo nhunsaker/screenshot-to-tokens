@@ -204,6 +204,7 @@ export async function startPlayground(o) {
       }
       if (p === '/' || p === '/index.html') return sendFile(res, join(CLIENT, 'playground.html'))
       if (p === '/contrast.js') return sendFile(res, join(CLIENT, 'contrast.js'))
+      if (p === '/pas-client.js' && pas) return sendFile(res, join(CLIENT, 'pas-client.js'))
       if (p === '/tokens.json') return json(200, data)
       if (p === '/app') { res.writeHead(302, { location: '/app/' }); return res.end() }
       if (p.startsWith('/app/')) {
