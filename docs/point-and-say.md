@@ -1,6 +1,6 @@
 # Point and say
 
-Click something in the running app, then say or type what to change. The playground maps the request to design
+Click something in the live web app, then say or type what to change. The playground maps the request to design
 tokens, applies the change to the live app and checks it before you keep it. Requests that would make text harder to
 read somewhere on the page are **blocked** and reverted, and the card names the check and the element.
 

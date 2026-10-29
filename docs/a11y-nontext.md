@@ -102,7 +102,7 @@ josh-wong's two undersized targets (the 78x18 "Projects" nav link and a 69x18 "G
 
 ### SAM cost and latency
 
-78 uncached point-prompt calls across the five runs (`sam-3.1`, standard tier, about $0.0025 each: about $0.20).
+78 uncached point-prompt calls across the five runs (`sam-3.1`, standard tier, about $0.0025 each).
 Uncached latency per call, median (max): div-soup 1.19 s (2.06), Argon 1.67 s (4.25), breadth 0.9 to 1.6 s (3.6).
 Wall time at four in flight: div-soup 3.8 s for 9 controls, Argon 10.8 s for 22. Re-runs are cached (about 0.1 s per
 control, all pixel work).

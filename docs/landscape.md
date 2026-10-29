@@ -52,7 +52,7 @@ go back into the app's actual `.css`/`.jsx`/`.vue` files and swap the literal fo
 
 - **Tokens Studio** (Figma plugin) — the de facto standard for *authoring* tokens inside Figma:
   23 token types, JSON storage, sync to GitHub/GitLab/Azure DevOps/Bitbucket/Supernova. A human
-  defines the tokens by hand; nothing here extracts them from a running app.
+  defines the tokens by hand; nothing here extracts them from a live web app.
   - A paid **Tokens Studio Platform** (cloud sync) now sits alongside the free plugin.
 - **Supernova** — "agentic design system platform," centralizes tokens/components/docs and
   exposes them to AI agents via MCP. Free tier (5 seats, 1 design system) up to a $35/seat/mo Pro
@@ -115,7 +115,7 @@ rewrites the literals *and* proves the rewrite is visually safe.
 | stylelint-declaration-strict-value | Existing CSS | Lint pass/fail in CI | No (flags only) | No | N/A | Free, OSS |
 | Dembrandt | Live URL | DTCG/Tailwind/shadcn tokens, drift report, screenshots | No | Partial (baseline drift compare, not a rewrite-safety proof) | Yes, with evidence per pick | Free CLI, paid cloud app |
 | extract-design-tokens (humbleteam) | URL, screenshot, or CSS | CSS vars + DTCG JSON | No | No | Yes, role-named | Free, OSS |
-| **Screenshot to Tokens (ours)** | Live running app (screenshot + DOM, no source access needed) | Tiered token set (primitive/semantic/component) with reasons, rewritten `.css`/`.vue`/`.jsx`/SVG, a PR, a live Sorb preview | **Yes** — swaps literals for `var(--token, fallback)` in the real files | **Yes** — 3-check pixel diff (fallback-only must match baseline; drift-merged must stay under threshold) | Yes, tiered with a one-line reason per token, human-reviewable before merge | Hackathon build, offline stand-ins for every model step |
+| **Screenshot to Tokens (ours)** | Live web app (screenshot + DOM, no source access needed) | Tiered token set (primitive/semantic/component) with reasons, rewritten `.css`/`.vue`/`.jsx`/SVG, a PR, a live Sorb preview | **Yes** — swaps literals for `var(--token, fallback)` in the real files | **Yes** — 3-check pixel diff (fallback-only must match baseline; drift-merged must stay under threshold) | Yes, tiered with a one-line reason per token, human-reviewable before merge | Hackathon build, offline stand-ins for every model step |
 
 ## 5. Positioning
 
@@ -125,7 +125,7 @@ Every tool we found does one of two things: it reports on a website's styles, or
 new UI from a design file. None of them look at a page that already has hardcoded colors and
 spacing, work out which values are really the same thing drifted apart, and then rewrite the
 app's own source files to use a token, proving with a pixel diff that the rewrite changes nothing. Screenshot to
-Tokens closes that loop end to end, from a live running app to a human-reviewed pull request, with
+Tokens closes that loop end to end, from a live web app to a human-reviewed pull request, with
 proof before anyone merges.
 
 **Two hardest judge questions:**

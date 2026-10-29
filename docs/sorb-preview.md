@@ -1,7 +1,7 @@
 # Sorb live preview
 
 The demo beat after rewrite/verify: a person nudges one token (e.g.
-`color.action.primary`) and sees it change in the running app immediately — no
+`color.action.primary`) and sees it change in the live web app immediately — no
 rebuild, no redeploy. This is exactly what Sorb (`sorb-juice` bridge +
 `sorb-leaf` React SDK) already does; we don't build a preview mechanism, we
 plug our output into theirs.

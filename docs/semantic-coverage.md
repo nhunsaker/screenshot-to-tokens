@@ -93,4 +93,4 @@ noted above.
 
 Baseten calls are untracked/free in `usage.json` (`$0.000` logged). The 3 hosted `meta` "after" runs cost
 $0.024 + $0.021 + $0.028 = **$0.073** (no "meta before" runs were paid for - reused existing `out/f20-*`
-runs from the same day/code). Total hosted spend for this loop: **~$0.07**.
+runs from the same day/code).

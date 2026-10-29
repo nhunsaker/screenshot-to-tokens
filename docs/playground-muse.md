@@ -2,7 +2,7 @@
 
 The token playground (`src/preview-client/playground.html`) gets two tools:
 
-- **Check contrast**: a WCAG 2.x AA audit of the running app with the current token values. This step is deterministic
+- **Check contrast**: a WCAG 2.x AA audit of the live web app with the current token values. This step is deterministic
   and does not call a model. **Ask Muse to fix these** sends the failures to Muse Spark. Muse proposes token values,
   and the page checks each proposal again before offering it.
 - **Build a dark theme**: Muse re-points the semantic tokens (and may add primitives). The theme is applied as a
