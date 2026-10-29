@@ -106,9 +106,10 @@ almost all of it the Tab-through.
 - **No real human voice has been tested yet.** All speech here is macOS `say` through Chromium's fake mic. The fake
   device loops its file, so a long hold can repeat words; routing keys on intent words, so the intent survives.
   Typing is always available.
-- **The focus check takes 9 to 12 s.** The card shows progress. On Light Bootstrap, the summary predicts "35 of 35
-  covered", but the Tab-through measures 23 pass and 12 faint. The measured number is what the card shows. The
-  prediction is too optimistic on that app (server side, not changed here).
+- **The focus check takes 9 to 12 s.** The card shows progress. The proposal no longer states a predicted coverage
+  count (on Light Bootstrap it predicted "35 of 35 covered" while the Tab-through measured 23 pass and 12 faint).
+  `/api/focus-check` now returns a `summary` built from the measured pass / faint / none, and the card's summary line
+  is replaced with it when the check finishes (`focusResultSummary`, `focus-intent.js`).
 - **Local only.** 127.0.0.1, the founder's keys from the Keychain, and same-origin checks on every `/__pas/` route.
   It is not deployed anywhere.
 - Light Bootstrap's live page checks 84 of 96 pairs (12 not visible in that view). The server's own count uses all

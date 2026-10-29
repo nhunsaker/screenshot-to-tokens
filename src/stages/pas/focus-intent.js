@@ -112,9 +112,9 @@ export function focusProposal(transcript, stops, values) {
   if (!choice) choice = pickRingColor(measured, values)
   const name = (c) => c.token || c.value
   let summary
-  if (choice.mode === 'single') summary = `Focus ring in ${name(choice.color)} (${choice.color.value}): at least 3:1 against what surrounds all ${choice.total} measured controls.`
-  else if (choice.hue) summary = `Two-tone ring in ${name(choice.color)} (${choice.color.value}) with a ${name(choice.inner)} band: ${name(choice.color)} alone is under 3:1 next to ${choice.total - choice.singleCovered} of ${choice.total} controls, so the band carries it there (${choice.covered} of ${choice.total} covered).`
-  else summary = `Two-tone ring (${name(choice.color)} with a ${name(choice.inner)} band): no single token reaches 3:1 next to every control (${choice.covered} of ${choice.total} covered).`
+  if (choice.mode === 'single') summary = `Focus ring in ${name(choice.color)} (${choice.color.value}), 3:1 or more against the surroundings of each control. The Tab-through check measures it next.`
+  else if (choice.hue) summary = `Two-tone ring in ${name(choice.color)} (${choice.color.value}) with a ${name(choice.inner)} band: ${name(choice.color)} alone is under 3:1 next to ${choice.total - choice.singleCovered} of ${choice.total} controls, so the band carries it there. The Tab-through check measures it next.`
+  else summary = `Two-tone ring (${name(choice.color)} with a ${name(choice.inner)} band): no single token reaches 3:1 next to every control. The Tab-through check measures it next.`
   if (choice.nearest) note = ` No token is ${hue} exactly; ${name(choice.color)} is the nearest hue.` + note
   summary += note
   const rule = focusRuleCss(choice)
@@ -124,4 +124,17 @@ export function focusProposal(transcript, stops, values) {
     ring: { mode: choice.mode, color: choice.color, inner: choice.inner || null, covered: choice.covered, total: choice.total, hue: choice.hue || null, nearest: !!choice.nearest },
     predicted: { affected: measured.length, before, ring: { mode: choice.mode, covered: choice.covered, total: choice.total } },
   }
+}
+
+/**
+ * The focus result line, from the measured Tab-through (pass / faint / none), never from the predicted coverage: on
+ * Light Bootstrap the prediction says every stop is covered while the Tab-through measures 23 pass and 12 faint. Pure.
+ * @param {{measured:number, pass:number, faint:number, none:number}} before
+ * @param {{measured:number, pass:number, faint:number, none:number}} after
+ * @param {number} [worse] controls whose indicator got worse
+ */
+export function focusResultSummary(before, after, worse = 0) {
+  const counts = (s) => `${s.pass} pass, ${s.faint} faint, ${s.none} none`
+  return `Measured by Tab-through: visible focus on ${before.pass} → ${after.pass} of ${after.measured} controls (before ${counts(before)}; after ${counts(after)})` +
+    (worse ? `; ${worse} control${worse === 1 ? '' : 's'} worse.` : '.')
 }

@@ -651,7 +651,7 @@
     var html = '<h3>Focus ring</h3><p class="pasTranscript">“' + PAS.escapeHtml(transcript) + '”</p>'
     pasApplyChanges(r.changes)
     if (r.rule) pasInjectRule(r.rule)
-    html += '<p>' + (r.summary ? PAS.escapeHtml(r.summary) : 'Focus-ring tokens applied.') + '</p>'
+    html += '<p id="pasFocusSummary">' + (r.summary ? PAS.escapeHtml(r.summary) : 'Focus-ring tokens applied.') + '</p>'
     var near = PAS.ringNote(r.ring)
     if (near) html += '<p class="notice">' + PAS.escapeHtml(near.charAt(0).toUpperCase() + near.slice(1)) + '.</p>'
     html += r.changes.map(function (c) { return pasChangeRow(c) }).join('')
@@ -660,6 +660,8 @@
     pasState({ phase: 'focus-check', focusAt: Date.now() })
     pasFetch('/__pas/api/focus-check', { changes: r.changes }).then(function (fc) {
       var b = document.getElementById('pasFocusBusy'); if (b) b.remove()
+      // The card's summary reports the measured Tab-through, not the predicted coverage.
+      var fs = document.getElementById('pasFocusSummary'); if (fs && fc.summary && r.summary) fs.textContent = r.summary.replace(/ The Tab-through check measures it next\.$/, '') + ' ' + fc.summary
       var line = PAS.focusLine(fc.before.pass, fc.after.pass, fc.after.measured)
       var worse = fc.compare && fc.compare.worse ? fc.compare.worse.length : 0
       var more = '<p><span class="score ' + (worse ? 'bad' : 'good') + '">' + PAS.escapeHtml(line) + '</span></p>'
