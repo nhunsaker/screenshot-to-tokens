@@ -13,7 +13,7 @@ import { loadPointContext, pointAt } from './point.js'
 import { routeIntent } from './route.js'
 import { contrastFix } from './contrast-fix.js'
 import { museIntent, intentProviders } from './intent.js'
-import { focusProposal, choiceFromChanges } from './focus-intent.js'
+import { focusProposal, choiceFromChanges, focusResultSummary } from './focus-intent.js'
 import { probeAtPoint, pairsUsingToken, auditWith, orderChain, pairStats, comparePairs, PROBE_PROPS, SENTINEL_COLOR, SENTINEL_RADIUS } from './sentinel.js'
 import { localOnly } from './server.js'
 import { focusRuleCss, summarizeStops, compareStops, probeFocus } from '../focus.js'
@@ -228,8 +228,9 @@ export async function focusCheck(core, body) {
   const css = `:root{${changes.map((c) => `--${c.cssVar}: ${c.css};`).join(' ')}}\n${choice ? focusRuleCss(choice) : ''}`
   const before = await core.focus.baseline()
   const r = await core.focus.check(css)
+  const b = summarizeStops(before), a = summarizeStops(r.stops), compare = compareStops(before, r.stops)
   return {
-    before: summarizeStops(before), after: summarizeStops(r.stops), compare: compareStops(before, r.stops),
+    before: b, after: a, compare, summary: focusResultSummary(b, a, compare.worse.length),
     ring: choice ? { mode: choice.mode, color: changes.find((c) => c.cssVar === 'focus-ring-color').css, inner: choice.inner ? changes.find((c) => c.cssVar === 'focus-ring-inner-color').css : null } : null,
     timings: r.timings, ms: Date.now() - t0,
   }

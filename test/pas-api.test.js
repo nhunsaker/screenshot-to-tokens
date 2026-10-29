@@ -10,7 +10,7 @@ import { PNG } from 'pngjs'
 import { probeAtPoint, orderChain, comparePairs, pairStats, PROBE_PROPS, SENTINEL_COLOR, SENTINEL_RADIUS } from '../src/stages/pas/sentinel.js'
 import { decideIntent, resolvePoint, focusCheck, sanitizeFocusChanges, changeableFrom, createPasApi, serial } from '../src/stages/pas/api.js'
 import { refineChanges, preferSemantic, restrictProposal, museIntent, intentProviders } from '../src/stages/pas/intent.js'
-import { focusProposal, ringForHue, namedHue, inHue, choiceFromChanges } from '../src/stages/pas/focus-intent.js'
+import { focusProposal, ringForHue, namedHue, inHue, choiceFromChanges, focusResultSummary } from '../src/stages/pas/focus-intent.js'
 import { startPlayground } from '../src/stages/playground.js'
 
 // Argon-like tokens (playground shape).
@@ -387,4 +387,18 @@ test('playground + pas: routes mounted, Host/Origin guards, tokens.css injected 
     await s.close()
     if (saved === undefined) delete process.env.BASETEN_API_KEY; else process.env.BASETEN_API_KEY = saved
   }
+})
+
+test('focus summary reports the measured Tab-through (pass/faint/none), never the predicted coverage count', async () => {
+  const { core } = fakeCore()
+  const prop = focusProposal('focus ring in our blue', STOPS, core.values)
+  assert.doesNotMatch(prop.summary, /\d+ of \d+ covered/)
+  assert.match(prop.summary, /Tab-through check measures it next/)
+  const r = await focusCheck(core, { changes: prop.changes })
+  assert.equal(r.summary, `Measured by Tab-through: visible focus on 0 → ${r.after.pass} of ${r.after.measured} controls (before 0 pass, 1 faint, 2 none; after ${r.after.pass} pass, ${r.after.faint} faint, ${r.after.none} none).`)
+  // Light Bootstrap's case: predicted 35 of 35, measured 23 pass / 12 faint. The line says what was measured.
+  const lb = focusResultSummary({ measured: 35, pass: 12, faint: 11, none: 12 }, { measured: 35, pass: 23, faint: 12, none: 0 })
+  assert.equal(lb, 'Measured by Tab-through: visible focus on 12 → 23 of 35 controls (before 12 pass, 11 faint, 12 none; after 23 pass, 12 faint, 0 none).')
+  assert.doesNotMatch(lb, /35 of 35/)
+  assert.match(focusResultSummary({ measured: 3, pass: 1, faint: 0, none: 2 }, { measured: 3, pass: 2, faint: 0, none: 1 }, 1), /; 1 control worse\.$/)
 })
