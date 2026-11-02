@@ -30,3 +30,10 @@ end to end, uncached, with `S2T_NAMER=baseten`. Hosted Muse Spark stays one swit
 
 Naming is no longer the longest stage; verify (three screenshot passes) and, on the long Agency page, SAM tiles are.
 Cost: $0.007 to $0.03 per run. One run per app, so these are single measurements, not percentiles.
+
+**"3 to 5 s" naming, the combined range:** across these 3 runs (`out/demo-{argon,lightbootstrap,agency}-baseten/timing.json`:
+4.196 s, 3.609 s, 5.119 s) plus the 5 single-fixture runs in `docs/f17-hosted-vs-open.md`
+(`out/f17b-acme-shop-hybrid-baseten/timing.json` 4.382 s, `out/f17b-div-soup-hybrid-baseten/timing.json` 3.213 s,
+`out/f17b-app-argon-baseten/timing.json` 4.021 s, `out/f17b-app-lightbootstrap-baseten/timing.json` 3.012 s,
+`out/f17b-app-agency-baseten/timing.json` 3.488 s), Muse Spark Open on Baseten's measured naming time across all 8 runs
+is 3.0 to 5.1 s &mdash; "3 to 5 s" rounds that correctly; it is not the f17 fixtures' narrower 3 to 4.4 s alone.

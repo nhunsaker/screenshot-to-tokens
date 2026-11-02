@@ -44,6 +44,10 @@ L1 sites are scored with `segeval --max-y 900` against `fixtures/l1/<site>.truth
 `fixtures/div-soup/regions.truth.json`. Every per-label recall and precision is identical; matched-box IoU differs by
 0.00 to 0.03 (open is slightly tighter on div-soup: input 1.00 vs 0.97).
 
+The "IoU 0.95" quoted for div-soup's 8 of 8 box agreement (README, SUBMISSION.md) is the hosted run's button-label
+`meanIou`: 0.9490 (`out/div-soup-sam/segeval.json`, matched 8/8 against `fixtures/div-soup/regions.truth.json`,
+2026-10-26) &mdash; the hybrid run on the same fixture scores the same 0.9490 (`out/l10/div-soup-hybrid/segeval.json`).
+
 **div-soup's story holds on open weights:** the DOM finds 0 of 8 buttons, open SAM 3.1 finds 8 of 8, like the hosted
 model. It also repeats the hosted model's quirk: 13 "buttons", 5 of them status pills, which the hybrid's inert-pill
 rule turns into badges.
