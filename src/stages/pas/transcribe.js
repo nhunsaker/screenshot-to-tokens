@@ -2,6 +2,7 @@
 // `request` part + an `audio` part). Format checked live 2026-10-26; `store: false` in the request part is accepted
 // (200, checked 2026-10-28). The key stays in the server process. Data: scripted/synthetic or the founder's own speech.
 import { readWavHeader, ASR_RATE } from './wav.js'
+import { externalSignal } from '../../lib/timeout.js'
 
 export const ASR_MODEL = 'muse-voice-transcribe-1.0'
 export const MAX_WAV_BYTES = 44 + ASR_RATE * 2 * 12 // 12 s of 16 kHz mono 16-bit (the page caps at 10 s)
@@ -43,7 +44,7 @@ export async function transcribe(wav, o = {}) {
   f.append('request', new Blob([JSON.stringify(asrRequest(o))], { type: 'application/json' }))
   f.append('audio', new Blob([wav], { type: 'audio/wav' }), 'speech.wav')
   const t0 = Date.now()
-  const res = await (o.fetchFn || fetch)(`${baseURL}/asr/transcribe`, { method: 'POST', headers: { authorization: `Bearer ${apiKey}` }, body: f })
+  const res = await (o.fetchFn || fetch)(`${baseURL}/asr/transcribe`, { method: 'POST', signal: externalSignal(60000), headers: { authorization: `Bearer ${apiKey}` }, body: f })
   const text = await res.text()
   if (!res.ok) throw new Error(`ASR ${res.status}: ${text.slice(0, 200)}`)
   let json

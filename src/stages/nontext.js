@@ -11,6 +11,7 @@ import { createHash } from 'crypto'
 import { PNG } from 'pngjs'
 import { cached } from '../lib/cache.js'
 import { recordCall } from '../lib/metrics.js'
+import { externalSignal } from '../lib/timeout.js'
 import { decodeMaskData } from '../lib/sam-mask.js'
 import { extractOutputText, responsesUrl, mapLimit, TILE_H } from '../providers/segment/meta-sam.js'
 import { contrastRatio, toHex, parseColor, tokensForColor, round2 } from '../preview-client/contrast.js'
@@ -97,6 +98,7 @@ export async function callSamPoint({ baseURL, apiKey, model, imageDataUrl, promp
   const { cached: hit, ...json } = await cached('sam', req, async () => {
     const res = await fetch(responsesUrl(baseURL), {
       method: 'POST',
+      signal: externalSignal(),
       headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({
         model,

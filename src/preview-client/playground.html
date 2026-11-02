@@ -14,6 +14,7 @@
       --accent: #8a9af0; --warn-bg: #3a2a12; --warn-ink: #f0c27a; --chip: #2a2a27; --good: #8fdcaa; }
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html, body { height: 100%; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
   .app { display: grid; grid-template-columns: 380px 1fr; height: 100vh; }
@@ -91,6 +92,15 @@
   .pasSwatches .sw2 { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--line); display: inline-block; }
   .pasAffected { font-size: 12px; color: var(--muted); margin: 4px 0; }
   .pasPre { white-space: pre-wrap; background: var(--chip); border-radius: 8px; padding: 8px 10px; font: 12px ui-monospace, Menlo, monospace; margin: 6px 0; }
+  .pasLive { margin-top: 10px; }
+  .pasAbout { font-size: 12.5px; background: var(--soft); border-radius: 8px; padding: 8px 10px; }
+  .pasAbout p { margin: 0 0 4px; }
+  .pasAbout p:last-child { margin: 0; color: var(--muted); }
+  .pasBudget { margin-top: 8px; font: 700 13px system-ui, sans-serif; }
+  .pasCostNote { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .pasClip { margin-top: 8px; }
+  .pasClip p { margin: 0 0 6px; font-weight: 600; font-size: 12.5px; }
+  .pasClip video { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; background: #000; }
   .toast { position: fixed; right: 16px; bottom: 16px; background: #111; color: #fff; padding: 8px 12px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
   .toast.show { opacity: 1; }
   @media (max-width: 860px) {
@@ -110,6 +120,12 @@
       <h1 id="title">Token playground</h1>
       <div class="sub" id="sub">Loading tokens…</div>
       <div class="notice">Preview only: changes apply in this page. Nothing is merged.</div>
+      <div class="pasLive" id="pasLive" hidden>
+        <div class="pasAbout" id="pasAbout"></div>
+        <div class="pasBudget" id="pasBudget" role="status"></div>
+        <div class="pasCostNote" id="pasMine"></div>
+        <div class="pasCostNote" id="pasCostNote"></div>
+      </div>
       <div class="actions">
         <button id="reset" disabled>Reset all</button>
         <button id="copy" class="primary" disabled>Copy proposal link</button>
@@ -134,6 +150,7 @@
           <input type="text" id="pasText" placeholder="Or point and type what to change…" aria-label="Point and type">
         </div>
         <div class="hint" id="pasHint">Off. Turn it on, then click something in the app and say or type what to change.</div>
+        <div class="pasClip" id="pasClip" hidden></div>
       </div>
       <input class="search" id="search" type="search" placeholder="Filter tokens (e.g. action, blue, radius)" aria-label="Filter tokens">
     </header>
@@ -448,7 +465,38 @@
     var opts = { method: 'POST' }
     if (isWav) { opts.headers = { 'content-type': 'audio/wav' }; opts.body = body }
     else { opts.headers = { 'content-type': 'application/json' }; opts.body = JSON.stringify(body || {}) }
-    return fetch(path, opts).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status)); return j }) })
+    return fetch(path, opts).then(function (r) {
+      return r.json().then(function (j) {
+        if (j && j.budget) pasBudget(j.budget)
+        // Live demo: a spent budget swaps the controls for the recorded clip; never an error on the page.
+        if (r.status === 429) { pasCapped(); var err = new Error(j.error || 'demo budget used up'); err.capped = true; throw err }
+        if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status))
+        return j
+      })
+    })
+  }
+  // A catch handler's first line: true when the budget ran out (pasCapped already showed the clip).
+  function pasWasCapped(e) { if (e && e.capped) { pasBusy(false); return true } return false }
+  function pasBudget(b) {
+    pas.budget = b
+    document.getElementById('pasLive').hidden = false
+    document.getElementById('pasBudget').textContent = PAS.budgetLine(b)
+    document.getElementById('pasMine').textContent = PAS.mineLine(b)
+    pasState({ budget: { left: b.left, total: b.total, mine: b.mine } })
+  }
+  function pasCapped() {
+    if (pas.capped) return
+    pas.capped = true
+    if (pas.on) pasOff()
+    document.getElementById('pasToggle').hidden = true
+    document.getElementById('pasControls').hidden = true
+    document.getElementById('pasHint').hidden = true
+    pasResults.innerHTML = ''; pasResults.classList.remove('on')
+    var clip = document.getElementById('pasClip')
+    clip.innerHTML = '<p>' + PAS.escapeHtml(PAS.capMessage()) + '</p>' +
+      '<video src="/media/pas-demo.mp4" poster="/media/pas-demo-poster.jpg" controls muted playsinline preload="metadata" aria-label="Recording of Point and say on Argon Dashboard"></video>'
+    clip.hidden = false
+    pasState({ phase: 'capped', capped: true })
   }
   function pasLayout() {
     if (!pas.on || !pas.health) return
@@ -497,7 +545,7 @@
     pasFetch('/__pas/api/point', { x: Math.round(pt.x), y: Math.round(pt.y) }).then(function (r) {
       pasBusy(false)
       pas.point = r
-      pasState({ phase: 'pointed', point: { element: r.element && r.element.text, token: r.controls && r.controls.color && r.controls.color.token, pairs: r.pairs && r.pairs.count, twins: (r.twins || []).length, outline: r.outline && r.outline.source, ms: r.ms } })
+      pasState({ phase: 'pointed', point: { cached: !!r.cachedClick, element: r.element && r.element.text, token: r.controls && r.controls.color && r.controls.color.token, pairs: r.pairs && r.pairs.count, twins: (r.twins || []).length, outline: r.outline && r.outline.source, ms: r.ms } })
       pasRenderOverlay()
       var el = r.element
       var tokName = r.controls && r.controls.color && r.controls.color.token
@@ -511,7 +559,7 @@
       pasResults.innerHTML = html
       pasResults.classList.add('on')
       document.getElementById('pasHint').textContent = 'Point set. Hold the mic or type, then say what to change.'
-    }).catch(function (e2) { pasBusy(false); pasResults.innerHTML = '<p class="notice">Could not read that click: ' + PAS.escapeHtml(e2.message) + '</p>'; pasResults.classList.add('on') })
+    }).catch(function (e2) { if (pasWasCapped(e2)) return; pasBusy(false); pasResults.innerHTML = '<p class="notice">Could not read that click: ' + PAS.escapeHtml(e2.message) + '</p>'; pasResults.classList.add('on') })
   }
   function pasStartMic() {
     if (pas.mic || !pas.health || !pas.health.providers.asr.ok) return
@@ -533,6 +581,8 @@
       pasIntent(r.transcript)
     }).catch(function (e) {
       pas.mic = null
+      micBtn.classList.remove('rec'); micBtn.setAttribute('aria-pressed', 'false'); micBtn.textContent = 'Hold to talk'
+      if (pasWasCapped(e)) return
       pasBusy(false)
       pasState({ phase: 'error', error: e.message })
       micBtn.classList.remove('rec'); micBtn.setAttribute('aria-pressed', 'false'); micBtn.textContent = 'Hold to talk'
@@ -588,7 +638,7 @@
       }
       if (r.route === 'focus') return pasFinishFocus(r, transcript)
       return pasFinishColor(r, transcript)
-    }).catch(function (e) { pasBusy(false); pasState({ phase: 'error', error: e.message }); pasResults.innerHTML = '<p class="notice">Point and say call failed: ' + PAS.escapeHtml(e.message) + '</p>'; pasResults.classList.add('on') })
+    }).catch(function (e) { if (pasWasCapped(e)) return; pasBusy(false); pasState({ phase: 'error', error: e.message }); pasResults.innerHTML = '<p class="notice">Point and say call failed: ' + PAS.escapeHtml(e.message) + '</p>'; pasResults.classList.add('on') })
   }
   function pasChangeRow(c, dropped) {
     var note = PAS.changeNote(c)
@@ -674,6 +724,7 @@
       pasState({ phase: 'done', result: { kind: 'focus', before: fc.before, after: fc.after, worse: worse, checkMs: fc.ms, nearest: near || null }, doneAt: Date.now() })
     }).catch(function (e) {
       var b = document.getElementById('pasFocusBusy'); if (b) b.remove()
+      if (pasWasCapped(e)) return
       pasState({ phase: 'error', error: e.message })
       pasResults.insertAdjacentHTML('beforeend', '<p class="notice">Focus check failed: ' + PAS.escapeHtml(e.message) + '</p>')
     })
@@ -704,7 +755,7 @@
     pasResults.innerHTML = ''; pasResults.classList.remove('on')
     var t = document.getElementById('pasText'); if (t) t.value = ''
     if (pas.on) document.getElementById('pasHint').textContent = 'On. Click something in the app, then say or type what to change.'
-    window.__pas = { phase: 'reset', updatedAt: Date.now() }
+    window.__pas = { phase: pas.capped ? 'capped' : 'reset', capped: !!pas.capped, budget: pas.budget ? { left: pas.budget.left, total: pas.budget.total, mine: pas.budget.mine } : null, updatedAt: Date.now() }
   }
   function pasScroll() { if (pas.on && pas.point) pasRenderOverlay() }
   // Every (re)load of the iframe document: hook the click capture and scroll back up, and put the focus rule back.
@@ -739,6 +790,25 @@
     pas.point = null
   }
 
+  // Live demo (the server meters calls, so health carries a budget): explain the page, show the counter and the cost of
+  // each action, turn point and say on, and default to typing on touch screens (hold-to-talk needs a mouse or keys).
+  function pasLiveMode(h) {
+    var about = document.getElementById('pasAbout')
+    about.innerHTML = PAS.WHAT_THIS_IS.map(function (t) { return '<p>' + PAS.escapeHtml(t) + '</p>' }).join('')
+    document.getElementById('pasCostNote').textContent = PAS.COST_NOTE
+    document.getElementById('pasToggle').title = PAS.COST_TITLES.app
+    var mic = document.getElementById('pasMic')
+    if (!mic.disabled) mic.title = PAS.COST_TITLES.mic
+    document.getElementById('pasText').title = PAS.COST_TITLES.text
+    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) { // touch: typing is the default path
+      mic.hidden = true
+      document.getElementById('pasText').placeholder = 'Tap the app, then type what to change…'
+    }
+    pasBudget(h.budget)
+    if (h.budget.mine < 1) return pasCapped()
+    if (!pas.on) pasOn()
+  }
+
   var pasStarted = false
   function initPas() {
     if (pasStarted) { if (pas.health) pasAttach(); return } // a reload of the iframe: re-hook, don't re-wire the panel
@@ -764,6 +834,7 @@
       })
       window.addEventListener('resize', function () { if (pas.on) pasLayout() })
       pasAttach()
+      if (h.budget) pasLiveMode(h)
       pasState({ phase: 'ready', health: { focusBaseline: h.focusBaseline && h.focusBaseline.summary } })
     }).catch(function (e) { void e }) // no /__pas/ routes (static build or lane A not up yet): the toggle stays hidden
   }

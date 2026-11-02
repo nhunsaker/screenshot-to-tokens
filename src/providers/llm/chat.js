@@ -3,6 +3,7 @@
 // Data policy: only public, non-sensitive (class C) content goes to hosted APIs.
 import { cached } from '../../lib/cache.js'
 import { recordCall } from '../../lib/metrics.js'
+import { externalTimeoutMs } from '../../lib/timeout.js'
 
 /** Pull the first JSON object out of a model reply (handles ```json fences and chatter). */
 export function extractJson(text) {
@@ -35,7 +36,7 @@ export async function chat(o) {
 
 async function chatUncached(o) {
   const ctrl = new AbortController()
-  const timer = setTimeout(() => ctrl.abort(), o.timeoutMs || 120000)
+  const timer = setTimeout(() => ctrl.abort(), externalTimeoutMs(o.timeoutMs || 120000))
   try {
     const res = await fetch(`${o.baseURL.replace(/\/$/, '')}/chat/completions`, {
       method: 'POST',

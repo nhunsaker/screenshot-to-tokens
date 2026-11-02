@@ -31,6 +31,28 @@ export function localOnly(req) {
   return !req.headers.origin || req.headers.origin === `http://${host}`
 }
 
+/**
+ * Public mode (S2T_PUBLIC=1, live demo): the request must come from the one public origin. Host must be that
+ * origin's host (Traefik routes by it; anything else is a rebinding or a direct hit), and Origin must equal it when
+ * sent; a state-changing request (not GET/HEAD) must send it, which every browser does for fetch POSTs.
+ * @param {{headers:Record<string, any>, method?:string}} req
+ * @param {string} origin e.g. https://s2t.sorbcloud.com
+ */
+export function sameOriginOnly(req, origin) {
+  let want
+  try { want = new URL(origin) } catch (e) { return false }
+  if (want.origin !== origin.replace(/\/$/, '')) return false
+  if ((req.headers.host || '').toLowerCase() !== want.host) return false
+  const o = req.headers.origin
+  if (o == null) return req.method === 'GET' || req.method === 'HEAD'
+  return o === want.origin
+}
+
+/** The API guard: same-origin on the public host when `publicOrigin` is set, else local only. */
+export function apiAllowed(req, publicOrigin) {
+  return publicOrigin ? sameOriginOnly(req, publicOrigin) : localOnly(req)
+}
+
 /** @param {{point?:any, log?:(s:string)=>void, transcribeFn?:typeof transcribe}} ctx */
 export function pasHandler(ctx) {
   const log = ctx.log || (() => {})

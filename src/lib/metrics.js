@@ -9,7 +9,11 @@ export const PRICES = {
   'sam-3.1-open@modal': { perGpuSecond: 0.8 / 3600 },
 }
 
+// A ring of the last MAX calls: the live demo is a long-running process, so the array must not grow forever.
+// `mark()` is an absolute count (calls ever recorded), so marks stay valid while old calls drop off the front.
+const MAX = 500
 const ledger = []
+let dropped = 0
 
 /**
  * Record one model call. `cached` calls cost nothing and are counted separately.
@@ -24,13 +28,14 @@ export function recordCall({ kind, model, ms, cached = false, usage = null, gpuS
     if (p.perGpuSecond) usd = (gpuS || 0) * p.perGpuSecond
   }
   ledger.push({ kind, model, ms, cached, usd, gpuS: cached ? 0 : gpuS || 0 })
+  if (ledger.length > MAX) { ledger.shift(); dropped++ }
 }
 
-export const mark = () => ledger.length
+export const mark = () => dropped + ledger.length
 
 /** Summarize calls recorded since a mark(). `gpuS` appears only when a self-hosted model ran. */
 export function since(m) {
-  const calls = ledger.slice(m)
+  const calls = ledger.slice(Math.max(0, m - dropped))
   const gpuS = calls.reduce((n, c) => n + (c.gpuS || 0), 0)
   return {
     calls: calls.length,

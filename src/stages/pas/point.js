@@ -103,5 +103,6 @@ export async function pointAt(ctx, x, y, o = {}) {
     twins, near,
   }
   ctx.cache.set(key, result)
+  if (ctx.cache.size > 500) ctx.cache.delete(ctx.cache.keys().next().value) // long-running server: bounded
   return result
 }

@@ -8,6 +8,7 @@ import { PNG } from 'pngjs'
 import { createHash } from 'crypto'
 import { cached } from '../../lib/cache.js'
 import { recordCall } from '../../lib/metrics.js'
+import { externalSignal } from '../../lib/timeout.js'
 import { postprocessRegions } from '../../stages/segeval.js'
 
 /** Concept prompts sent one per call; each maps to a Region.label. */
@@ -128,6 +129,7 @@ async function callSam(o) {
 async function callSamUncached({ baseURL, apiKey, model, imageDataUrl, prompt }) {
   const res = await fetch(responsesUrl(baseURL), {
     method: 'POST',
+    signal: externalSignal(),
     headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({
       model,

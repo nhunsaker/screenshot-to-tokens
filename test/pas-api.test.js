@@ -402,3 +402,94 @@ test('focus summary reports the measured Tab-through (pass/faint/none), never th
   assert.doesNotMatch(lb, /35 of 35/)
   assert.match(focusResultSummary({ measured: 3, pass: 1, faint: 0, none: 2 }, { measured: 3, pass: 2, faint: 0, none: 1 }, 1), /; 1 control worse\.$/)
 })
+
+test('sameOriginOnly: public host and origin only; POST must send Origin', async () => {
+  const { sameOriginOnly, apiAllowed, localOnly } = await import('../src/stages/pas/server.js')
+  const O = 'https://s2t.sorbcloud.com'
+  const req = (host, origin, method = 'POST') => ({ method, headers: { host, ...(origin ? { origin } : {}) } })
+  assert.equal(sameOriginOnly(req('s2t.sorbcloud.com', O), O), true)
+  assert.equal(sameOriginOnly(req('s2t.sorbcloud.com', null, 'GET'), O), true)
+  assert.equal(sameOriginOnly(req('s2t.sorbcloud.com', null, 'POST'), O), false)
+  assert.equal(sameOriginOnly(req('s2t.sorbcloud.com', 'https://evil.example'), O), false)
+  assert.equal(sameOriginOnly(req('s2t.sorbcloud.com', 'http://s2t.sorbcloud.com'), O), false)
+  assert.equal(sameOriginOnly(req('evil.example', O), O), false)
+  assert.equal(sameOriginOnly(req('127.0.0.1:3000', 'http://127.0.0.1:3000'), O), false)
+  assert.equal(sameOriginOnly(req('S2T.sorbcloud.com', O), O), true)
+  assert.equal(sameOriginOnly(req('s2t.sorbcloud.com', O), O + '/'), true)
+  assert.equal(sameOriginOnly(req('localhost:4567', 'http://localhost:4567'), 'http://localhost:4567'), true)
+  assert.equal(sameOriginOnly(req('localhost:4567', 'http://localhost:4568'), 'http://localhost:4567'), false)
+  assert.equal(sameOriginOnly(req('x', 'y'), 'not a url'), false)
+  // Unset public origin: the local guard, unchanged.
+  assert.equal(apiAllowed(req('127.0.0.1:4400', 'http://127.0.0.1:4400'), null), localOnly(req('127.0.0.1:4400', 'http://127.0.0.1:4400')))
+  assert.equal(apiAllowed(req('s2t.sorbcloud.com', O), null), false)
+  assert.equal(apiAllowed(req('s2t.sorbcloud.com', O), O), true)
+})
+
+test('public mode: same-origin guard, session cookie, budget on every response, 429 at the cap, refunds, probe reset', async () => {
+  const { dir, app } = tinyRun()
+  const { createPasApi: make } = await import('../src/stages/pas/api.js')
+  const { createLedger } = await import('../src/stages/pas/ledger.js')
+  const { playgroundData, readRun } = await import('../src/stages/playground.js')
+  const data = playgroundData(readRun(dir), { app: 'app/' })
+  let resets = 0
+  const probe = { at: async () => null, pairsUsing: async () => [], audit: async () => [], reset: async () => { resets++ } }
+  const focus = { baseline: async () => [], check: async () => ({ stops: [], timings: {} }), start: () => Promise.resolve({ stops: [], ms: 1 }), state: () => Promise.resolve({ stops: [], ms: 1 }) }
+  const ledger = createLedger({ caps: { total: 3, day: 300, session: 40, ipDay: 80 } })
+  const s0 = await startPlayground({ runDir: dir, appDir: app, port: 0, pas: { handle: async () => false } }) // find a free port
+  const port = Number(new URL(s0.url).port); await s0.close()
+  const origin = `http://localhost:${port}`
+  const pas = make({ runDir: dir, data, probe, focus, publicOrigin: origin, ledger, transcribeFn: async () => ({ transcript: 'hello', ms: 3 }) })
+  const s = await startPlayground({ runDir: dir, appDir: app, port, pas, public: { origin, ledger } })
+  const H = { host: `localhost:${port}`, origin }
+  try {
+    await s.warming
+    // Local Host is refused in public mode (Host must be the public origin's).
+    assert.equal((await get(`${s.url}__pas/api/transcribe`, { method: 'POST', body: 'RIFF' })).status, 403)
+    // POST without Origin is refused; GET health without Origin is fine and carries the budget.
+    assert.equal((await get(`${s.url}__pas/api/transcribe`, { method: 'POST', headers: { host: H.host }, body: 'RIFF' })).status, 403)
+    const h = await get(`${s.url}__pas/api/health`, { headers: { host: H.host } })
+    assert.deepEqual(JSON.parse(h.body).budget, { left: 3, total: 3, mine: 3 })
+    assert.equal(JSON.parse(h.body).run.dir, dir) // runLabel unset here
+    // The unmetered Muse route is off.
+    assert.equal(JSON.parse((await get(`${s.url}api/muse`, { headers: H })).body).ok, false)
+    assert.equal((await get(`${s.url}api/muse`, { method: 'POST', headers: H, body: '{}' })).status, 403)
+    let r = await getFull(`${s.url}__pas/api/transcribe`, { method: 'POST', headers: H, body: 'RIFF' })
+    assert.equal(r.status, 200)
+    const sid = /s2t_sid=([^;]+); Path=\/; HttpOnly; SameSite=Lax/.exec(r.headers['set-cookie'][0])
+    assert.ok(sid, 'session cookie set, HttpOnly, SameSite=Lax (no Secure on http)')
+    assert.deepEqual(JSON.parse(r.body).budget, { left: 2, total: 3, mine: 2 })
+    const C = { ...H, cookie: `s2t_sid=${sid[1]}` }
+    r = await getFull(`${s.url}__pas/api/transcribe`, { method: 'POST', headers: C, body: 'RIFF' })
+    assert.equal(r.headers['set-cookie'], undefined, 'known session: no new cookie')
+    assert.deepEqual(JSON.parse(r.body).budget, { left: 1, total: 3, mine: 1 })
+    // A bad point request (400) is refunded and still carries the budget; the probe is reset after the job.
+    const before = resets
+    const bad = await get(`${s.url}__pas/api/point`, { method: 'POST', headers: C, body: '{"x":100,"y":5}' })
+    assert.equal(bad.status, 400)
+    assert.deepEqual(JSON.parse(bad.body).budget, { left: 1, total: 3, mine: 1 })
+    assert.equal(resets, before + 1)
+    r = await getFull(`${s.url}__pas/api/transcribe`, { method: 'POST', headers: C, body: 'RIFF' })
+    assert.deepEqual(JSON.parse(r.body).budget, { left: 0, total: 3, mine: 0 })
+    const capped = await get(`${s.url}__pas/api/transcribe`, { method: 'POST', headers: C, body: 'RIFF' })
+    assert.equal(capped.status, 429)
+    const cj = JSON.parse(capped.body)
+    assert.equal(cj.code, 'budget'); assert.equal(cj.reason, 'total'); assert.deepEqual(cj.budget, { left: 0, total: 3, mine: 0 })
+    const sum = await get(`${s.url}__pas/api/budget`, { headers: { host: H.host } })
+    assert.equal(JSON.parse(sum.body).used, 3)
+    assert.doesNotMatch(sum.body, new RegExp(sid[1]))
+  } finally { await s.close() }
+})
+
+function getFull(url, { method = 'GET', headers = {}, body } = {}) {
+  return new Promise((ok, fail) => {
+    const u = new URL(url)
+    const req = request({ host: u.hostname, port: u.port, path: u.pathname, method, headers }, (res) => {
+      let s = ''
+      res.on('data', (c) => { s += c })
+      res.on('end', () => ok({ status: res.statusCode, body: s, headers: res.headers }))
+    })
+    req.on('error', fail)
+    if (body) req.write(body)
+    req.end()
+  })
+}
