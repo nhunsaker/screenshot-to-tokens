@@ -207,3 +207,41 @@ export function proposalTitle(route) {
   if (route === 'focus') return 'Focus ring'
   return 'Token change'
 }
+
+// ---- live demo (public mode): the shared budget ------------------------------------------------------------------
+
+/** Units per action, mirrored from src/stages/pas/ledger.js COSTS (the page only words them; the server charges). */
+export const BUDGET_COSTS = { point: 1, transcribe: 1, deterministic: 0, muse: 2, focusCheck: 3 }
+
+/** "Demo budget: 742 of 1,000 left". */
+export function budgetLine(b) {
+  const n = (v) => Math.max(0, Math.round(Number(v) || 0)).toLocaleString('en-US')
+  return `Demo budget: ${n(b && b.left)} of ${n(b && b.total)} left`
+}
+
+/** "You can use 37 more on this visit." when the per-visit (session/IP/day) share is smaller than the shared counter. */
+export function mineLine(b) {
+  if (!b || b.mine == null || b.mine >= b.left) return ''
+  return `You can use ${Math.max(0, b.mine).toLocaleString('en-US')} more on this visit.`
+}
+
+/** Hover text for the controls: what each action costs. */
+export const COST_TITLES = {
+  app: 'A click on the app costs 1 unit (SAM 3.1 outlines what you clicked).',
+  mic: 'Speech costs 1 unit (Meta speech model), plus the change.',
+  text: 'Typed requests: contrast and focus fixes cost 0 (no model); other changes cost 2 (Muse Spark), the focus check 3.',
+}
+
+/** One line under the counter. */
+export const COST_NOTE = 'A click costs 1, speech 1, a change Muse Spark maps 2, the keyboard focus check 3. Contrast and focus fixes need no model.'
+
+/** The note beside the recorded clip when a cap is hit (any cap: total, today, this visit, this network). */
+export function capMessage() {
+  return 'The demo budget is used up for now; here’s the recording.'
+}
+
+/** The "what this is" box for the live page. */
+export const WHAT_THIS_IS = [
+  'Click a control in the app, then say or type the fix. It’s applied here and checked on the whole page; a change that makes any text harder to read is blocked.',
+  'Requests go to Meta’s hosted models with store: false. Nothing is saved.',
+]

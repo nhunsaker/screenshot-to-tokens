@@ -4,13 +4,16 @@
 // The server must already be running: `S2T_CACHE=0 node src/cli.js playground --run out/argon --app out/argon/site`.
 // Usage: node scripts/pas-join/e2e.mjs --url http://127.0.0.1:4481/ --steps a,c,d --reps 3 [--wav out/phrases/a.wav]
 //        [--shots out/pas-join] [--video out/pas-join/video] [--out out/pas-join/argon.json]
+// Live demo (tier B): --base https://s2t.sorbcloud.com/try/ (same as --url). When the page shows a demo budget, every
+// step checks the counter moved by the cost table (ledger.js; a repeat click on a cached spot costs 0) and a spent
+// budget must show the recorded clip, never an error; exit code 1 on any budget mismatch or error.
 import { chromium } from 'playwright'
 import { mkdirSync, readFileSync, writeFileSync, copyFileSync } from 'fs'
 import { join, resolve } from 'path'
 import { parseArgs } from '../../src/lib/args.js'
 
 const a = parseArgs(process.argv.slice(2))
-const url = a.url || 'http://127.0.0.1:4481/'
+const url = a.base || a.url || 'http://127.0.0.1:4481/'
 const shots = resolve(a.shots || 'out/pas-join')
 const reps = Number(a.reps || 1)
 const pace = !!a.pace
@@ -44,7 +47,7 @@ async function waitPhase(pred, ms = 60000) {
   const t0 = Date.now()
   while (Date.now() - t0 < ms) {
     const s = await pasState()
-    if (s && pred(s)) return s
+    if (s && (pred(s) || s.phase === 'capped')) return s
     await page.waitForTimeout(50)
   }
   throw new Error(`timeout waiting for state; last ${JSON.stringify(await pasState()).slice(0, 300)}`)
@@ -53,13 +56,19 @@ async function waitPhase(pred, ms = 60000) {
 // Open the playground, wait for the focus baseline (the server warms it at startup), turn point and say on.
 await page.goto(url)
 await page.waitForSelector('#pasTools.on', { timeout: 30000 })
+const budgetNow = () => page.evaluate(() => (window.__pas && window.__pas.budget) || null)
+const failures = []
+const COST = { point: 1, muse: 2, focusCheck: 3 } // ledger.js COSTS; contrast and focus intents are free
 for (let i = 0; i < 120; i++) {
   const h = await page.evaluate(() => fetch('/__pas/api/health').then((r) => r.json()))
   if (h.focusBaseline && h.focusBaseline.ready) break
   await page.waitForTimeout(500)
 }
-await page.click('#pasToggle')
+// The live page turns point and say on by itself; locally it starts off.
+if (await page.getAttribute('#pasToggle', 'aria-pressed') !== 'true' && !(await page.isHidden('#pasToggle'))) await page.click('#pasToggle')
 await page.waitForTimeout(600)
+const capturedOnLoad = await pasState()
+if (capturedOnLoad && capturedOnLoad.phase === 'capped') console.log('budget already used up on load: the clip shows')
 
 /** Page coordinates (top window) for a capture-space point in the iframe. */
 async function toPage(pt) {
@@ -86,10 +95,25 @@ async function resetAll() {
 }
 
 const rows = []
+/** A spent budget mid-step: the clip must be on the page and no error card. */
+async function cappedRow(id, st, rep, budget0) {
+  const v = await page.evaluate(() => {
+    const clip = document.getElementById('pasClip'), video = clip && clip.querySelector('video')
+    return { clipShown: !!clip && !clip.hidden, video: video ? video.getAttribute('src') : null, text: clip ? clip.innerText.trim() : '', errorCard: (document.getElementById('pasResults').innerText || '').trim(), controlsHidden: getComputedStyle(document.getElementById('pasControls')).display === 'none' && getComputedStyle(document.getElementById('pasToggle')).display === 'none' }
+  })
+  const b = await budgetNow()
+  const ok = v.clipShown && !!v.video && v.controlsHidden && !v.errorCard
+  if (!ok) failures.push(`${id} #${rep}: capped but ${JSON.stringify(v)}`)
+  await shot(`${st.app}-${id}-capped`)
+  console.log(`${id} #${rep} ${st.app}/${st.name}: CAPPED (budget ${budget0 ? budget0.left : '?'}→${b ? b.left : '?'}) clip=${v.video} note="${v.text}" error card=${JSON.stringify(v.errorCard)} ${ok ? 'OK' : 'NOT OK'}`)
+  return { step: id, name: st.name, rep, capped: true, budget: b, clip: v, ok }
+}
 for (const id of String(a.steps || 'a').split(',')) {
   const st = STEPS[id]
   for (let rep = 1; rep <= reps; rep++) {
+    if ((await pasState() || {}).phase === 'capped') break
     await resetAll()
+    const budget0 = await budgetNow()
     const tag = `${st.app}-${id}-${st.name}${reps > 1 ? `-r${rep}` : ''}`
     let target = st.at ? { ...st.at } : await findTarget(st.find)
     // Move 3 capture px per repeat so the server's click cache does not answer (SAM + sentinel re-run each time).
@@ -99,6 +123,7 @@ for (const id of String(a.steps || 'a').split(',')) {
     await page.mouse.click(p.x, p.y)
     const pointed = await waitPhase((s) => s.phase === 'pointed' || s.phase === 'error', 30000)
     const tPointed = Date.now()
+    if (pointed.phase === 'capped') { rows.push(await cappedRow(id, st, rep, budget0)); break }
     if (rep === 1) await shot(`${tag}-1-overlay`)
     let tSpeechEnd = null
     if (st.voice) {
@@ -119,6 +144,7 @@ for (const id of String(a.steps || 'a').split(',')) {
     }
     const done = await waitPhase((s) => s.phase === 'done' || s.phase === 'error', 60000)
     const tDone = Date.now()
+    if (done.phase === 'capped') { rows.push(await cappedRow(id, st, rep, budget0)); break }
     if (pace) await page.waitForTimeout(2500)
     await page.evaluate(() => { const r = document.getElementById('pasResults'); r.scrollTop = r.scrollHeight })
     await page.waitForTimeout(350) // past any app transition, so the pixels are the end state
@@ -166,8 +192,19 @@ for (const id of String(a.steps || 'a').split(',')) {
       point: pointed.point, clicked, live: { vars: live.vars, focusRule: live.rule, iframePath: live.path }, tab,
       ms: { wall: tDone - t0, point: tPointed - t0, afterSpeech: tSpeechEnd ? tDone - tSpeechEnd : null, asr: done.asrMs || null, intent: done.intent && done.intent.ms, model: done.intent && done.intent.model ? done.intent.model.ms : null, focusCheck: done.result && done.result.checkMs || null },
     }
+    if (budget0) {
+      const b1 = await budgetNow()
+      const kind = done.result && done.result.kind
+      const want = (pointed.point && pointed.point.cached ? 0 : COST.point) + (done.intent && done.intent.route === 'muse' ? COST.muse : 0) + (kind === 'focus' ? COST.focusCheck : 0)
+      // `mine` (this visit's share) moves by exactly our own spend even when another browser shares the counter; the
+      // shared `left` is checked too when nobody else is using the demo (--solo).
+      const spent = budget0.mine - b1.mine, shared = budget0.left - b1.left
+      row.budget = { before: budget0.left, after: b1.left, mineBefore: budget0.mine, mineAfter: b1.mine, spent, shared, expected: want, ok: spent === want && (!a.solo || shared === want) }
+      if (!row.budget.ok) failures.push(`${id} #${rep}: budget moved ${row.budget.spent}, expected ${want}`)
+    }
+    if (done.phase === 'error') failures.push(`${id} #${rep}: error ${done.error}`)
     rows.push(row)
-    console.log(`${id} #${rep} ${st.app}/${st.name}: ${done.phase} ${JSON.stringify(done.result).slice(0, 260)} | wall ${row.ms.wall} ms (point ${row.ms.point}${row.ms.afterSpeech ? `, after speech ${row.ms.afterSpeech}` : ''})${tab ? ` | tab ${JSON.stringify(tab.filter(Boolean).slice(-1))}` : ''}`)
+    console.log(`${id} #${rep} ${st.app}/${st.name}: ${done.phase} ${JSON.stringify(done.result).slice(0, 260)} | wall ${row.ms.wall} ms (point ${row.ms.point}${row.ms.afterSpeech ? `, after speech ${row.ms.afterSpeech}` : ''})${tab ? ` | tab ${JSON.stringify(tab.filter(Boolean).slice(-1))}` : ''}${row.budget ? ` | budget ${row.budget.before}→${row.budget.after} of ${budget0.total}, this visit ${row.budget.mineBefore}→${row.budget.mineAfter} (−${row.budget.spent}, expected −${row.budget.expected}) ${row.budget.ok ? 'OK' : 'MISMATCH'}` : ''}`)
     if (rep === 1 && /a|e/.test(id) && done.result && done.result.kind === 'applied') {
       await page.click('#pasShowPr').catch(() => {})
       await page.waitForTimeout(200)
@@ -184,8 +221,9 @@ const afterReset = pace ? null : await page.evaluate(() => {
 })
 console.log(`after reset: ${JSON.stringify(afterReset)}`)
 if (consoleErrors.length) console.log(`console errors: ${consoleErrors.slice(0, 5).join(' | ')}`)
+if (failures.length) { console.log(`FAILURES: ${failures.join(' ; ')}`); process.exitCode = 1 }
 const out = resolve(a.out || join(shots, `e2e-${Date.now()}.json`))
-writeFileSync(out, JSON.stringify({ url, rows, afterReset, consoleErrors }, null, 2))
+writeFileSync(out, JSON.stringify({ url, rows, afterReset, consoleErrors, failures }, null, 2))
 console.log(`wrote ${out}`)
 const video = page.video()
 await context.close()

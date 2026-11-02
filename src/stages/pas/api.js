@@ -15,7 +15,9 @@ import { contrastFix } from './contrast-fix.js'
 import { museIntent, intentProviders } from './intent.js'
 import { focusProposal, choiceFromChanges, focusResultSummary } from './focus-intent.js'
 import { probeAtPoint, pairsUsingToken, auditWith, orderChain, pairStats, comparePairs, PROBE_PROPS, SENTINEL_COLOR, SENTINEL_RADIUS } from './sentinel.js'
-import { localOnly } from './server.js'
+import { apiAllowed } from './server.js'
+import { COSTS, clientIp } from './ledger.js'
+import { randomUUID } from 'crypto'
 import { focusRuleCss, summarizeStops, compareStops, probeFocus } from '../focus.js'
 import { tokenValues } from '../nontext.js'
 import { parseColor, toHex, isLargeText, cssVarName, UNSAFE, round2 } from '../../preview-client/contrast.js'
@@ -34,6 +36,12 @@ const bad = (m) => new ApiError(400, 'bad_request', m)
 export function serial() {
   let tail = Promise.resolve()
   return (fn) => { const run = tail.then(fn, fn); tail = run.catch(() => {}); return run }
+}
+
+/** Keep a Map under `max` entries (oldest first out): the click caches live as long as the process. */
+export function capMap(map, max = 500) {
+  while (map.size > max) map.delete(map.keys().next().value)
+  return map
 }
 
 const hex = (v) => { const c = parseColor(v); return c ? (c.a < 1 ? v : toHex(c)) : v ?? null }
@@ -102,6 +110,7 @@ export async function resolvePoint(core, x, y) {
     controls, tokens, pairs, twins, warnings, timings, ms: Date.now() - t0,
   }
   core.cache.set(key, result)
+  capMap(core.cache)
   return result
 }
 
@@ -253,6 +262,13 @@ async function openProbe(browser, appUrl, viewport, tokens, pairs) {
     at: (x, y) => q(() => page.evaluate(probeAtPoint, { x, y, tokens: probeTokens, props: PROBE_PROPS, color: SENTINEL_COLOR, radius: SENTINEL_RADIUS })),
     pairsUsing: (cssVar) => q(() => page.evaluate(pairsUsingToken, { cssVar, pairs, color: SENTINEL_COLOR })),
     audit: (changes) => q(() => page.evaluate(auditWith, { changes, pairs })),
+    // After every job: drop any custom-property override left on :root and scroll home, so one visitor's change can
+    // never reach the next visitor's audit (auditWith restores its own; this is the belt to that brace).
+    reset: () => q(() => page.evaluate(() => {
+      const st = document.documentElement.style
+      for (const k of Array.from(st)) if (k.startsWith('--')) st.removeProperty(k)
+      window.scrollTo(0, 0)
+    })),
   }
 }
 
@@ -296,8 +312,12 @@ function focusRunner(browser, appUrl, viewport, log) {
 /**
  * Create the API for a run. `handle(req, res, url)` returns true when it answered; `warm(baseUrl)` launches the probe
  * browser once the server listens; `injectHtml(html)` adds the tokens.css link to the app's HTML.
+ * Public mode (live demo): `publicOrigin` swaps the local-only guard for same-origin-only on that origin, and
+ * `ledger` (ledger.js) meters every /api/* call: `budget: {left, total}` on every response, 429 when a cap is hit.
+ * A session cookie (s2t_sid; HttpOnly, SameSite=Lax, Secure on https) keys the per-session cap.
  * @param {{runDir:string, data:{tokens:object[], pairs:object[]}, log?:(s:string)=>void, provider?:string,
- *   transcribeFn?:Function, museFn?:Function, pointFn?:Function, probe?:object, focus?:object}} o
+ *   transcribeFn?:Function, museFn?:Function, pointFn?:Function, probe?:object, focus?:object,
+ *   publicOrigin?:string|null, ledger?:any, trustProxy?:boolean, runLabel?:string}} o
  */
 export function createPasApi(o) {
   const log = o.log || (() => {})
@@ -354,58 +374,113 @@ export function createPasApi(o) {
     return {
       ok: state.ready && meta && muse.length > 0,
       providers: { asr: { ok: meta, model: process.env.META_ASR_MODEL || 'muse-voice-transcribe-1.0' }, sam: { ok: meta, model: process.env.META_SAM_MODEL || 'sam-3.1' }, muse },
-      run: { dir: o.runDir, tokens: tokens.length, pairs: o.data.pairs.length, viewport },
+      run: { dir: o.runLabel || o.runDir, tokens: tokens.length, pairs: o.data.pairs.length, viewport },
       browser: { ready: state.ready, warmMs: state.warmMs, error: state.error },
       focusBaseline,
     }
+  }
+
+  const pub = o.publicOrigin || null
+  const ledger = o.ledger || null
+  const secure = !!pub && pub.startsWith('https:')
+
+  /** The caller's session id (cookie) and IP; a new session id is set on the response. */
+  function who(req, res) {
+    const m = String(req.headers.cookie || '').match(/(?:^|;\s*)s2t_sid=([A-Za-z0-9-]{8,64})/)
+    let session = m ? m[1] : null
+    if (!session) {
+      session = randomUUID()
+      res.setHeader('set-cookie', `s2t_sid=${session}; Path=/; HttpOnly; SameSite=Lax${secure ? '; Secure' : ''}`)
+    }
+    return { session, ip: clientIp(req, o.trustProxy !== false && !!pub) }
+  }
+
+  /** What one request costs (ledger.js COSTS). A repeat click on the same spot is cached: no SAM call, no charge. */
+  function costOf(name, body) {
+    if (name === 'api/transcribe') return ['transcribe']
+    if (name === 'api/focus-check') return ['focus-check']
+    const clickKey = (pt) => `${Math.round(Number(pt.x))},${Math.round(Number(pt.y))}`
+    const pointCost = (pt) => (pt && !core.cache.has(clickKey(pt)) ? ['point'] : [])
+    if (name === 'api/point') return pointCost(body)
+    if (name === 'api/intent') {
+      const { route } = routeIntent(String((body && body.transcript) || ''))
+      return [...pointCost(body && body.point), route === 'muse' ? 'intent-muse' : 'intent-deterministic']
+    }
+    return []
   }
 
   async function handle(req, res, url) {
     const p = url.pathname
     if (!p.startsWith('/__pas/')) return false
     const t0 = Date.now()
-    const json = (code, v) => { res.writeHead(code, { 'content-type': 'application/json', 'cache-control': 'no-store' }); res.end(JSON.stringify(v)) }
     const name = p.slice('/__pas/'.length)
+    let caller = null, charged = null
+    const budget = () => (ledger && caller ? { budget: (({ left, total, mine }) => ({ left, total, mine }))(ledger.view(caller)) } : {})
+    const json = (code, v) => { res.writeHead(code, { 'content-type': 'application/json', 'cache-control': 'no-store' }); res.end(JSON.stringify({ ...v, ...budget() })) }
     try {
       if (req.method === 'GET' && CLIENT_FILES[name]) { res.writeHead(200, { 'content-type': 'text/javascript', 'cache-control': 'no-store' }); res.end(await readFile(CLIENT_FILES[name])); return true }
       if (req.method === 'GET' && name === 'tokens.css') {
         if (tokensCss == null) tokensCss = await readFile(join(o.runDir, 'tokens.css'), 'utf-8').catch(() => '')
         res.writeHead(200, { 'content-type': 'text/css', 'cache-control': 'no-store' }); res.end(tokensCss); return true
       }
-      if (!localOnly(req)) throw new ApiError(403, 'local_only', 'local only (127.0.0.1, same origin)')
+      if (!apiAllowed(req, pub)) throw pub ? new ApiError(403, 'same_origin', 'same origin only') : new ApiError(403, 'local_only', 'local only (127.0.0.1, same origin)')
+      if (ledger) caller = who(req, res)
       if (name === 'api/health') {
         if (req.method !== 'GET') throw new ApiError(405, 'method', 'GET only')
         json(200, { ...(await health()), ms: Date.now() - t0 }); return true
+      }
+      if (name === 'api/budget' && ledger) {
+        if (req.method !== 'GET') throw new ApiError(405, 'method', 'GET only')
+        json(200, { ...ledger.summary(), costs: COSTS }); return true
       }
       const routes = { 'api/point': 1, 'api/transcribe': 1, 'api/intent': 1, 'api/focus-check': 1 }
       if (!routes[name]) throw new ApiError(404, 'not_found', 'not found')
       if (req.method !== 'POST') throw new ApiError(405, 'method', 'POST only')
       if (name === 'api/transcribe') {
         const wav = new Uint8Array(await readRaw(req, MAX_WAV_BYTES))
+        spend(costOf(name))
         let r
         try { r = await (o.transcribeFn || transcribeWav)(wav) } catch (e) {
           const m = String(e.message || e)
           if (/^(empty audio|audio too long|not a WAV|need 16 kHz)/.test(m)) throw bad(m)
           throw new ApiError(502, 'upstream', m.slice(0, 240))
         }
-        log(`pas transcribe ${r.ms} ms: ${r.transcript}`)
+        log(pub ? `pas transcribe ${r.ms} ms (${String(r.transcript || '').length} chars)` : `pas transcribe ${r.ms} ms: ${r.transcript}`)
         json(200, r); return true
       }
       const body = parseJson(await readRaw(req, 65536))
       needReady()
+      spend(costOf(name, body))
       let out
-      if (name === 'api/point') out = await resolvePoint(core, body.x, body.y)
-      else if (name === 'api/intent') out = await decideIntent(core, body)
-      else out = await focusCheck(core, body)
+      try {
+        if (name === 'api/point') out = await resolvePoint(core, body.x, body.y)
+        else if (name === 'api/intent') out = await decideIntent(core, body)
+        else out = await focusCheck(core, body)
+      } finally {
+        if (pub && core.probe && core.probe.reset) await core.probe.reset().catch((e) => log(`pas: probe reset failed: ${String(e.message || e).slice(0, 120)}`))
+      }
       out = { ...out, ms: Date.now() - t0 }
-      log(`pas ${name} ${out.ms} ms${out.route ? ` route ${out.route}: ${out.summary}` : ''}`)
+      log(`pas ${name} ${out.ms} ms${out.route ? ` route ${out.route}${pub ? '' : `: ${out.summary}`}` : ''}${charged ? ` [${charged.units} units, ${charged.left} left]` : ''}`)
       json(200, out); return true
     } catch (e) {
       const status = e instanceof ApiError ? e.status : 500
       const code = e instanceof ApiError ? e.code : 'internal'
+      // The visitor does not pay for a call that failed (bad input, upstream error, our error).
+      if (charged && charged.units && status !== 429) { ledger.refund(charged.kinds, caller); charged = null }
       log(`pas error ${p}: ${String(e.message || e).slice(0, 200)}`)
-      json(status, { error: String(e.message || e).slice(0, 300), code, ms: Date.now() - t0 })
+      json(status, { error: String(e.message || e).slice(0, 300), code, ms: Date.now() - t0, ...(e.reason ? { reason: e.reason } : {}) })
       return true
+    }
+
+    function spend(kinds) {
+      if (!ledger || !kinds.length) return
+      const r = ledger.charge(kinds, caller)
+      if (!r.ok) {
+        const err = new ApiError(429, 'budget', `The demo budget is used up for now (${r.reason === 'total' ? 'all of it' : r.reason === 'day' ? 'today\'s share' : r.reason === 'session' ? 'this visit\'s share' : 'this network\'s share for today'}).`)
+        err.reason = r.reason
+        throw err
+      }
+      charged = { ...r, kinds }
     }
   }
 

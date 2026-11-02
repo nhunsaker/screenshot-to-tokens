@@ -6,3 +6,4 @@ out/
 .claude/
 __pycache__/
 site/
+build/

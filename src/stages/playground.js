@@ -166,7 +166,11 @@ function readBody(req, limit = 200000) {
  * Start the local playground. Returns {url, close}.
  * With `pas` (point and say, docs/pas-api.md) the /__pas/ routes mount here, the app's HTML gets the run's tokens.css,
  * and a headless probe browser warms once the server listens (`pas: true`, or an injected api for tests).
- * @param {{runDir:string, appDir:string, port?:number, provider?:'baseten'|'meta', title?:string, log?:(s:string)=>void, pas?:boolean|object}} o
+ * `public` (live demo, tier B): {origin, ledger, host?}. The /__pas/ API then takes same-origin requests from that
+ * origin (not local-only) metered by the ledger, and /api/muse (the unmetered dark-theme and audit-fix calls) is off.
+ * The server still binds 127.0.0.1 unless `public.host` says otherwise (the site server proxies to it).
+ * @param {{runDir:string, appDir:string, port?:number, provider?:'baseten'|'meta', title?:string, log?:(s:string)=>void, pas?:boolean|object,
+ *   public?:{origin:string, ledger?:any, host?:string, runLabel?:string}|null}} o
  */
 export async function startPlayground(o) {
   const appDir = resolve(o.appDir)
@@ -177,7 +181,8 @@ export async function startPlayground(o) {
   if (o.pas === true) {
     const { createPasApi } = await import('./pas/api.js')
     // A run without a screenshot/regions (older runs) still gets the plain playground.
-    try { pas = createPasApi({ runDir: resolve(o.runDir), data, log, provider: o.provider }) } catch (e) { log(`point and say off: ${String(e.message || e).slice(0, 160)}`) }
+    const pub = o.public || null
+    try { pas = createPasApi({ runDir: resolve(o.runDir), data, log, provider: o.provider, publicOrigin: pub ? pub.origin : null, ledger: pub ? pub.ledger : null, runLabel: pub ? pub.runLabel : undefined }) } catch (e) { log(`point and say off: ${String(e.message || e).slice(0, 160)}`) }
   } else if (o.pas) pas = o.pas
   const server = createServer(async (req, res) => {
     const url = new URL(req.url || '/', 'http://127.0.0.1')
@@ -186,6 +191,7 @@ export async function startPlayground(o) {
     try {
       if (pas && await pas.handle(req, res, url)) return
       if (p === '/api/muse') {
+        if (o.public) return json(req.method === 'GET' ? 200 : 403, { ok: false, error: 'off in the live demo' })
         // Same-origin only: a page on another origin (or a DNS-rebinding host name) gets nothing.
         const host = req.headers.host || ''
         if (!/^(127\.0\.0\.1|localhost)(:\d+)?$/.test(host)) return json(403, { error: 'local only' })
@@ -232,7 +238,7 @@ export async function startPlayground(o) {
     }
   })
   return new Promise((ok) => {
-    server.listen(o.port || 0, '127.0.0.1', () => {
+    server.listen(o.port || 0, (o.public && o.public.host) || '127.0.0.1', () => {
       const { port } = /** @type {any} */ (server.address())
       const url = `http://127.0.0.1:${port}/`
       const warming = pas && pas.warm ? pas.warm(url) : null

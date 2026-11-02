@@ -213,3 +213,17 @@ test('prCommandText: text only, two commands, uses the run dir when given', () =
   assert.equal(t, 's2t review --run out/argon-run\ns2t pr --run out/argon-run --repo <app git root>')
   assert.match(prCommandText(), /<run dir>/)
 })
+
+test('live demo: budget line, cap message and copy follow the wording rules', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  assert.equal(m.budgetLine({ left: 742, total: 1000 }), 'Demo budget: 742 of 1,000 left')
+  assert.equal(m.budgetLine({ left: -3, total: 5 }), 'Demo budget: 0 of 5 left')
+  assert.equal(m.mineLine({ left: 997, total: 1000, mine: 37 }), 'You can use 37 more on this visit.')
+  assert.equal(m.mineLine({ left: 30, total: 1000, mine: 30 }), '')
+  assert.match(m.capMessage(), /budget is used up for now; here’s the recording/)
+  const all = [m.capMessage(), m.COST_NOTE, ...Object.values(m.COST_TITLES), ...m.WHAT_THIS_IS].join(' ')
+  assert.doesNotMatch(all, /\baccessible\b|\bcompliant\b/i)
+  assert.match(m.WHAT_THIS_IS.join(' '), /store: false\. Nothing is saved\./)
+  const { COSTS } = await import('../src/stages/pas/ledger.js')
+  assert.deepEqual(m.BUDGET_COSTS, { point: COSTS.point, transcribe: COSTS.transcribe, deterministic: COSTS['intent-deterministic'], muse: COSTS['intent-muse'], focusCheck: COSTS['focus-check'] })
+})

@@ -206,6 +206,9 @@ td.flag { color: var(--color-text-note, #f5c46b); }
 .pair img, .shots img { border-radius: var(--radius-chip, 10px); border: 1px solid var(--color-border-default, #2c313c); }
 .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .note { display: inline-block; background: var(--color-surface-code, #1f232c); color: var(--color-text-note, #f5c46b); font-weight: 600; padding: 4px 12px; border-radius: var(--radius-chip, 10px); margin: 0 0 16px; }
+.try-row { margin: 0 0 16px; }
+.try { display: inline-block; background: #8a9af0; color: #0f1115; font-weight: 700; padding: 8px 16px; border-radius: var(--radius-chip, 10px); text-decoration: none; margin-right: 8px; }
+.try:hover { background: #a9b5f5; }
 .good { color: var(--color-text-good, #7ee2a8); font-weight: 600; }
 footer { border-top: 1px solid var(--color-border-default, #2c313c); padding: 28px 0 48px; color: var(--color-text-muted, #a3a39d); font-size: 0.92rem; }
 footer p { margin: 4px 0; }
@@ -299,7 +302,8 @@ ${tiers.map(([code, tier, why]) => `      <li><code>${esc(code)}</code><span cla
 
 <section aria-labelledby="pas-h">
   <h2 id="pas-h">Point and say</h2>
-  <p class="note">Live version coming</p>
+  <!--tier-b--><p class="try-row"><a class="try" href="/try/">Try it live</a> <span class="muted">On Argon Dashboard, with a shared demo budget that counts down on the page.</span></p><!--/tier-b-->
+  <!--no-tier-b--><p class="note">Live version coming</p><!--/no-tier-b-->
   <p class="sub">Click a control in the live web app, then say or type the change. Meta's speech model transcribes it, SAM 3.1
   outlines what was clicked, contrast and focus fixes are computed (no model), and every change is re-checked on the whole
   page and blocked if any text gets harder to read. Screenshots from the recorded runs on Argon:</p>
@@ -331,9 +335,13 @@ ${tiers.map(([code, tier, why]) => `      <li><code>${esc(code)}</code><span cla
 rmSync(out, { recursive: true, force: true })
 mkdirSync(out, { recursive: true })
 writeFileSync(join(out, 'index.html'), html)
-cpSync(join(root, 'demo/argon-run'), join(out, 'argon-run'), { recursive: true })
+// The review report and token files only; the rest of demo/argon-run is the live demo's run input (tier B).
+const PUBLISHED = /^(report\.html|tokens\.css|tokens\.dtcg\.json|img(\/.*)?)$/
+cpSync(join(root, 'demo/argon-run'), join(out, 'argon-run'), { recursive: true, filter: (src) => { const rel = src.slice(join(root, 'demo/argon-run').length + 1); return !rel || PUBLISHED.test(rel) } })
 cpSync(join(root, 'demo/lightbootstrap-run'), join(out, 'lightbootstrap-run'), { recursive: true })
 cpSync(join(root, 'demo/site-media'), join(out, 'media'), { recursive: true })
+// The recorded Point and say take: the live page (tier B) shows it when the demo budget is used up.
+cpSync(join(root, 'demo/media'), join(out, 'media'), { recursive: true })
 
 const total = (d) => readdirSync(d, { withFileTypes: true }).reduce((a, e) => a + (e.isDirectory() ? total(join(d, e.name)) : statSync(join(d, e.name)).size), 0)
 console.log(`site → ${out} (${(total(out) / 1024 / 1024).toFixed(1)} MB; evidence ${evidence.body.length} rows, breadth ${breadth.body.length} sites)`)

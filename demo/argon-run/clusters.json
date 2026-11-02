@@ -1,0 +1,1362 @@
+[
+  {
+    "id": "color-01",
+    "kind": "color",
+    "value": "#0000000d",
+    "members": [
+      {
+        "value": "#0000000d",
+        "count": 34
+      }
+    ],
+    "count": 34,
+    "props": {
+      "border-top-color": 8,
+      "border-right-color": 8,
+      "border-bottom-color": 10,
+      "border-left-color": 8
+    },
+    "regionLabels": {
+      "card": 34
+    },
+    "propRegions": {
+      "border-top-color@card": 8,
+      "border-right-color@card": 8,
+      "border-bottom-color@card": 10,
+      "border-left-color@card": 8
+    }
+  },
+  {
+    "id": "color-02",
+    "kind": "color",
+    "value": "#00000080",
+    "members": [
+      {
+        "value": "#00000080",
+        "count": 9
+      }
+    ],
+    "count": 9,
+    "props": {
+      "color": 9
+    },
+    "regionLabels": {
+      "link": 9
+    },
+    "propRegions": {
+      "color@link": 9
+    }
+  },
+  {
+    "id": "color-03",
+    "kind": "color",
+    "value": "#000000e6",
+    "members": [
+      {
+        "value": "#000000e6",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "color": 2
+    },
+    "regionLabels": {
+      "link": 2
+    },
+    "propRegions": {
+      "color@link": 2
+    }
+  },
+  {
+    "id": "color-04",
+    "kind": "color",
+    "value": "#0000001a",
+    "members": [
+      {
+        "value": "#0000001a",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "border-top-color": 1
+    },
+    "regionLabels": {
+      "nav": 1
+    },
+    "propRegions": {
+      "border-top-color@nav": 1
+    }
+  },
+  {
+    "id": "color-05",
+    "kind": "color",
+    "value": "#32325dff",
+    "members": [
+      {
+        "value": "#32325dff",
+        "count": 7
+      }
+    ],
+    "count": 7,
+    "props": {
+      "color": 7
+    },
+    "regionLabels": {
+      "card": 4,
+      "text": 3
+    },
+    "propRegions": {
+      "color@card": 4,
+      "color@text": 3
+    }
+  },
+  {
+    "id": "color-06",
+    "kind": "color",
+    "value": "#525f7fff",
+    "members": [
+      {
+        "value": "#525f7fff",
+        "count": 35
+      }
+    ],
+    "count": 35,
+    "props": {
+      "color": 35
+    },
+    "regionLabels": {
+      "card": 35
+    },
+    "propRegions": {
+      "color@card": 35
+    }
+  },
+  {
+    "id": "color-07",
+    "kind": "color",
+    "value": "#5e72e4ff",
+    "members": [
+      {
+        "value": "#5e72e4ff",
+        "count": 14
+      }
+    ],
+    "count": 14,
+    "props": {
+      "background-color": 4,
+      "color": 2,
+      "border-top-color": 2,
+      "border-right-color": 2,
+      "border-bottom-color": 2,
+      "border-left-color": 2
+    },
+    "regionLabels": {
+      "button": 12,
+      "link": 1
+    },
+    "propRegions": {
+      "background-color@button": 3,
+      "color@button": 1,
+      "border-top-color@button": 2,
+      "border-right-color@button": 2,
+      "border-bottom-color@button": 2,
+      "border-left-color@button": 2,
+      "color@link": 1
+    }
+  },
+  {
+    "id": "color-08",
+    "kind": "color",
+    "value": "#f5365cff",
+    "members": [
+      {
+        "value": "#f5365cff",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "background-color": 1,
+      "color": 1
+    },
+    "regionLabels": {
+      "icon": 1,
+      "card": 1
+    },
+    "propRegions": {
+      "background-color@icon": 1,
+      "color@card": 1
+    }
+  },
+  {
+    "id": "color-09",
+    "kind": "color",
+    "value": "#fb6340ff",
+    "members": [
+      {
+        "value": "#fb6340ff",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "background-color": 1,
+      "color": 1
+    },
+    "regionLabels": {
+      "icon": 1,
+      "card": 1
+    },
+    "propRegions": {
+      "background-color@icon": 1,
+      "color@card": 1
+    }
+  },
+  {
+    "id": "color-10",
+    "kind": "color",
+    "value": "#8898aaff",
+    "members": [
+      {
+        "value": "#8898aaff",
+        "count": 21
+      }
+    ],
+    "count": 21,
+    "props": {
+      "color": 21
+    },
+    "regionLabels": {
+      "text": 6,
+      "card": 10,
+      "footer": 1,
+      "link": 4
+    },
+    "propRegions": {
+      "color@text": 6,
+      "color@card": 10,
+      "color@footer": 1,
+      "color@link": 4
+    }
+  },
+  {
+    "id": "color-11",
+    "kind": "color",
+    "value": "#adb5bdff",
+    "members": [
+      {
+        "value": "#adb5bdff",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "background-color": 1
+    },
+    "regionLabels": {
+      "badge": 1
+    },
+    "propRegions": {
+      "background-color@badge": 1
+    }
+  },
+  {
+    "id": "color-12",
+    "kind": "color",
+    "value": "#2dce89ff",
+    "members": [
+      {
+        "value": "#2dce89ff",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "color": 2
+    },
+    "regionLabels": {
+      "card": 2
+    },
+    "propRegions": {
+      "color@card": 2
+    }
+  },
+  {
+    "id": "color-13",
+    "kind": "color",
+    "value": "#11cdefff",
+    "members": [
+      {
+        "value": "#11cdefff",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "background-color": 1
+    },
+    "regionLabels": {
+      "icon": 1
+    },
+    "propRegions": {
+      "background-color@icon": 1
+    }
+  },
+  {
+    "id": "color-14",
+    "kind": "color",
+    "value": "#ced4daff",
+    "members": [
+      {
+        "value": "#ced4daff",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "color": 1
+    },
+    "regionLabels": {
+      "text": 1
+    },
+    "propRegions": {
+      "color@text": 1
+    }
+  },
+  {
+    "id": "color-15",
+    "kind": "color",
+    "value": "#ffd600ff",
+    "members": [
+      {
+        "value": "#ffd600ff",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "background-color": 1
+    },
+    "regionLabels": {
+      "icon": 1
+    },
+    "propRegions": {
+      "background-color@icon": 1
+    }
+  },
+  {
+    "id": "color-16",
+    "kind": "color",
+    "value": "#e9ecefff",
+    "members": [
+      {
+        "value": "#e9ecefff",
+        "count": 47
+      }
+    ],
+    "count": 47,
+    "props": {
+      "border-top-color": 35,
+      "border-bottom-color": 7,
+      "background-color": 5
+    },
+    "regionLabels": {
+      "card": 36
+    },
+    "propRegions": {
+      "border-top-color@card": 30,
+      "border-bottom-color@card": 6
+    }
+  },
+  {
+    "id": "color-17",
+    "kind": "color",
+    "value": "#ffffffff",
+    "members": [
+      {
+        "value": "#ffffffff",
+        "count": 16
+      },
+      {
+        "value": "#f6f9fcff",
+        "count": 8
+      },
+      {
+        "value": "#f7fafcff",
+        "count": 1
+      }
+    ],
+    "count": 25,
+    "props": {
+      "background-color": 20,
+      "color": 5
+    },
+    "regionLabels": {
+      "nav": 1,
+      "link": 2,
+      "card": 15,
+      "text": 1,
+      "button": 4,
+      "footer": 1
+    },
+    "propRegions": {
+      "background-color@nav": 1,
+      "color@link": 1,
+      "background-color@card": 15,
+      "color@text": 1,
+      "color@button": 3,
+      "background-color@button": 1,
+      "background-color@link": 1,
+      "background-color@footer": 1
+    }
+  },
+  {
+    "id": "color-18",
+    "kind": "color",
+    "value": "#ffffff99",
+    "members": [
+      {
+        "value": "#ffffff99",
+        "count": 4
+      }
+    ],
+    "count": 4,
+    "props": {
+      "border-top-color": 1,
+      "border-right-color": 1,
+      "border-bottom-color": 1,
+      "border-left-color": 1
+    },
+    "regionLabels": {
+      "input": 4
+    },
+    "propRegions": {
+      "border-top-color@input": 1,
+      "border-right-color@input": 1,
+      "border-bottom-color@input": 1,
+      "border-left-color@input": 1
+    }
+  },
+  {
+    "id": "color-19",
+    "kind": "color",
+    "value": "#fffffff2",
+    "members": [
+      {
+        "value": "#fffffff2",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "color": 1
+    },
+    "regionLabels": {
+      "link": 1
+    },
+    "propRegions": {
+      "color@link": 1
+    }
+  },
+  {
+    "id": "font-family-01",
+    "kind": "font-family",
+    "value": "Open Sans, sans-serif",
+    "members": [
+      {
+        "value": "Open Sans, sans-serif",
+        "count": 87
+      }
+    ],
+    "count": 87,
+    "props": {
+      "font-family": 87
+    },
+    "regionLabels": {
+      "link": 18,
+      "text": 11,
+      "card": 53,
+      "button": 4,
+      "footer": 1
+    },
+    "propRegions": {
+      "font-family@link": 18,
+      "font-family@text": 11,
+      "font-family@card": 53,
+      "font-family@button": 4,
+      "font-family@footer": 1
+    }
+  },
+  {
+    "id": "font-size-01",
+    "kind": "font-size",
+    "value": "10.4px",
+    "members": [
+      {
+        "value": "10.4px",
+        "count": 6
+      },
+      {
+        "value": "10px",
+        "count": 2
+      }
+    ],
+    "count": 8,
+    "props": {
+      "font-size": 8
+    },
+    "regionLabels": {
+      "card": 6,
+      "text": 2
+    },
+    "propRegions": {
+      "font-size@card": 6,
+      "font-size@text": 2
+    }
+  },
+  {
+    "id": "font-size-02",
+    "kind": "font-size",
+    "value": "13px",
+    "members": [
+      {
+        "value": "13px",
+        "count": 39
+      },
+      {
+        "value": "14px",
+        "count": 17
+      },
+      {
+        "value": "12px",
+        "count": 3
+      }
+    ],
+    "count": 59,
+    "props": {
+      "font-size": 59
+    },
+    "regionLabels": {
+      "text": 5,
+      "card": 43,
+      "link": 6,
+      "button": 4,
+      "footer": 1
+    },
+    "propRegions": {
+      "font-size@text": 5,
+      "font-size@card": 43,
+      "font-size@link": 6,
+      "font-size@button": 4,
+      "font-size@footer": 1
+    }
+  },
+  {
+    "id": "font-size-03",
+    "kind": "font-size",
+    "value": "14.4px",
+    "members": [
+      {
+        "value": "14.4px",
+        "count": 11
+      },
+      {
+        "value": "15px",
+        "count": 1
+      }
+    ],
+    "count": 12,
+    "props": {
+      "font-size": 12
+    },
+    "regionLabels": {
+      "link": 12
+    },
+    "propRegions": {
+      "font-size@link": 12
+    }
+  },
+  {
+    "id": "font-size-04",
+    "kind": "font-size",
+    "value": "17px",
+    "members": [
+      {
+        "value": "17px",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "font-size": 2
+    },
+    "regionLabels": {
+      "text": 2
+    },
+    "propRegions": {
+      "font-size@text": 2
+    }
+  },
+  {
+    "id": "font-size-05",
+    "kind": "font-size",
+    "value": "20px",
+    "members": [
+      {
+        "value": "20px",
+        "count": 6
+      }
+    ],
+    "count": 6,
+    "props": {
+      "font-size": 6
+    },
+    "regionLabels": {
+      "card": 4,
+      "text": 2
+    },
+    "propRegions": {
+      "font-size@card": 4,
+      "font-size@text": 2
+    }
+  },
+  {
+    "id": "font-weight-01",
+    "kind": "font-weight",
+    "value": "300",
+    "members": [
+      {
+        "value": "300",
+        "count": 8
+      }
+    ],
+    "count": 8,
+    "props": {
+      "font-weight": 8
+    },
+    "regionLabels": {
+      "card": 8
+    },
+    "propRegions": {
+      "font-weight@card": 8
+    }
+  },
+  {
+    "id": "font-weight-02",
+    "kind": "font-weight",
+    "value": "400",
+    "members": [
+      {
+        "value": "400",
+        "count": 41
+      }
+    ],
+    "count": 41,
+    "props": {
+      "font-weight": 41
+    },
+    "regionLabels": {
+      "link": 15,
+      "card": 25,
+      "footer": 1
+    },
+    "propRegions": {
+      "font-weight@link": 15,
+      "font-weight@card": 25,
+      "font-weight@footer": 1
+    }
+  },
+  {
+    "id": "font-weight-03",
+    "kind": "font-weight",
+    "value": "500",
+    "members": [
+      {
+        "value": "500",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "font-weight": 2
+    },
+    "regionLabels": {
+      "button": 2
+    },
+    "propRegions": {
+      "font-weight@button": 2
+    }
+  },
+  {
+    "id": "font-weight-04",
+    "kind": "font-weight",
+    "value": "600",
+    "members": [
+      {
+        "value": "600",
+        "count": 36
+      }
+    ],
+    "count": 36,
+    "props": {
+      "font-weight": 36
+    },
+    "regionLabels": {
+      "text": 11,
+      "link": 3,
+      "card": 20,
+      "button": 2
+    },
+    "propRegions": {
+      "font-weight@text": 11,
+      "font-weight@link": 3,
+      "font-weight@card": 20,
+      "font-weight@button": 2
+    }
+  },
+  {
+    "id": "line-height-01",
+    "kind": "line-height",
+    "value": "15.6px",
+    "members": [
+      {
+        "value": "15.6px",
+        "count": 6
+      },
+      {
+        "value": "15px",
+        "count": 2
+      }
+    ],
+    "count": 8,
+    "props": {
+      "line-height": 8
+    },
+    "regionLabels": {
+      "card": 6,
+      "text": 2
+    },
+    "propRegions": {
+      "line-height@card": 6,
+      "line-height@text": 2
+    }
+  },
+  {
+    "id": "line-height-02",
+    "kind": "line-height",
+    "value": "18px",
+    "members": [
+      {
+        "value": "18px",
+        "count": 3
+      }
+    ],
+    "count": 3,
+    "props": {
+      "line-height": 3
+    },
+    "regionLabels": {
+      "text": 1,
+      "button": 2
+    },
+    "propRegions": {
+      "line-height@text": 1,
+      "line-height@button": 2
+    }
+  },
+  {
+    "id": "line-height-03",
+    "kind": "line-height",
+    "value": "19.5px",
+    "members": [
+      {
+        "value": "19.5px",
+        "count": 39
+      }
+    ],
+    "count": 39,
+    "props": {
+      "line-height": 39
+    },
+    "regionLabels": {
+      "text": 4,
+      "card": 35
+    },
+    "propRegions": {
+      "line-height@text": 4,
+      "line-height@card": 35
+    }
+  },
+  {
+    "id": "line-height-04",
+    "kind": "line-height",
+    "value": "21.6px",
+    "members": [
+      {
+        "value": "21.6px",
+        "count": 11
+      },
+      {
+        "value": "21px",
+        "count": 9
+      },
+      {
+        "value": "22.5px",
+        "count": 1
+      }
+    ],
+    "count": 21,
+    "props": {
+      "line-height": 21
+    },
+    "regionLabels": {
+      "link": 18,
+      "button": 2,
+      "footer": 1
+    },
+    "propRegions": {
+      "line-height@link": 18,
+      "line-height@button": 2,
+      "line-height@footer": 1
+    }
+  },
+  {
+    "id": "line-height-05",
+    "kind": "line-height",
+    "value": "23.8px",
+    "members": [
+      {
+        "value": "23.8px",
+        "count": 8
+      }
+    ],
+    "count": 8,
+    "props": {
+      "line-height": 8
+    },
+    "regionLabels": {
+      "card": 8
+    },
+    "propRegions": {
+      "line-height@card": 8
+    }
+  },
+  {
+    "id": "line-height-06",
+    "kind": "line-height",
+    "value": "25.5px",
+    "members": [
+      {
+        "value": "25.5px",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "line-height": 2
+    },
+    "regionLabels": {
+      "text": 2
+    },
+    "propRegions": {
+      "line-height@text": 2
+    }
+  },
+  {
+    "id": "line-height-07",
+    "kind": "line-height",
+    "value": "30px",
+    "members": [
+      {
+        "value": "30px",
+        "count": 6
+      }
+    ],
+    "count": 6,
+    "props": {
+      "line-height": 6
+    },
+    "regionLabels": {
+      "card": 4,
+      "text": 2
+    },
+    "propRegions": {
+      "line-height@card": 4,
+      "line-height@text": 2
+    }
+  },
+  {
+    "id": "space-01",
+    "kind": "space",
+    "value": "-96px",
+    "members": [
+      {
+        "value": "-96px",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "margin-top": 1
+    },
+    "regionLabels": {},
+    "propRegions": {}
+  },
+  {
+    "id": "space-02",
+    "kind": "space",
+    "value": "4px",
+    "members": [
+      {
+        "value": "4px",
+        "count": 18
+      }
+    ],
+    "count": 18,
+    "props": {
+      "padding-top": 8,
+      "padding-bottom": 8,
+      "margin-bottom": 2
+    },
+    "regionLabels": {
+      "text": 4,
+      "link": 10,
+      "button": 4
+    },
+    "propRegions": {
+      "padding-top@text": 1,
+      "padding-bottom@text": 1,
+      "padding-top@link": 5,
+      "padding-bottom@link": 5,
+      "margin-bottom@text": 2,
+      "padding-top@button": 2,
+      "padding-bottom@button": 2
+    }
+  },
+  {
+    "id": "space-03",
+    "kind": "space",
+    "value": "8px",
+    "members": [
+      {
+        "value": "8px",
+        "count": 9
+      }
+    ],
+    "count": 9,
+    "props": {
+      "margin-bottom": 1,
+      "padding-top": 2,
+      "padding-bottom": 2,
+      "padding-right": 2,
+      "padding-left": 2
+    },
+    "regionLabels": {
+      "text": 1,
+      "button": 8
+    },
+    "propRegions": {
+      "margin-bottom@text": 1,
+      "padding-top@button": 2,
+      "padding-bottom@button": 2,
+      "padding-right@button": 2,
+      "padding-left@button": 2
+    }
+  },
+  {
+    "id": "space-04",
+    "kind": "space",
+    "value": "10.4px",
+    "members": [
+      {
+        "value": "10.4px",
+        "count": 22
+      },
+      {
+        "value": "10px",
+        "count": 4
+      }
+    ],
+    "count": 26,
+    "props": {
+      "padding-top": 13,
+      "padding-bottom": 13
+    },
+    "regionLabels": {
+      "link": 22,
+      "input": 4
+    },
+    "propRegions": {
+      "padding-top@link": 11,
+      "padding-bottom@link": 11,
+      "padding-top@input": 2,
+      "padding-bottom@input": 2
+    }
+  },
+  {
+    "id": "space-05",
+    "kind": "space",
+    "value": "12px",
+    "members": [
+      {
+        "value": "12px",
+        "count": 39
+      }
+    ],
+    "count": 39,
+    "props": {
+      "padding-right": 9,
+      "padding-top": 11,
+      "padding-bottom": 11,
+      "padding-left": 8
+    },
+    "regionLabels": {
+      "input": 2,
+      "icon": 16,
+      "card": 12,
+      "link": 7
+    },
+    "propRegions": {
+      "padding-right@input": 2,
+      "padding-top@icon": 4,
+      "padding-right@icon": 4,
+      "padding-bottom@icon": 4,
+      "padding-left@icon": 4,
+      "padding-top@card": 6,
+      "padding-bottom@card": 6,
+      "padding-right@link": 3,
+      "padding-left@link": 4
+    }
+  },
+  {
+    "id": "space-06",
+    "kind": "space",
+    "value": "16px",
+    "members": [
+      {
+        "value": "16px",
+        "count": 97
+      },
+      {
+        "value": "15px",
+        "count": 50
+      }
+    ],
+    "count": 147,
+    "props": {
+      "padding-top": 41,
+      "padding-bottom": 42,
+      "margin-top": 5,
+      "margin-bottom": 2,
+      "padding-left": 29,
+      "padding-right": 28
+    },
+    "regionLabels": {
+      "nav": 7,
+      "link": 2,
+      "input": 1,
+      "card": 109,
+      "button": 4,
+      "text": 2,
+      "footer": 4
+    },
+    "propRegions": {
+      "padding-top@nav": 2,
+      "padding-bottom@nav": 2,
+      "padding-bottom@link": 1,
+      "margin-top@nav": 1,
+      "margin-bottom@nav": 2,
+      "padding-left@input": 1,
+      "padding-left@link": 1,
+      "padding-top@card": 34,
+      "padding-bottom@card": 34,
+      "margin-top@card": 4,
+      "padding-right@card": 19,
+      "padding-right@button": 2,
+      "padding-left@button": 2,
+      "padding-left@card": 18,
+      "padding-right@text": 1,
+      "padding-left@text": 1,
+      "padding-right@footer": 2,
+      "padding-left@footer": 2
+    }
+  },
+  {
+    "id": "space-07",
+    "kind": "space",
+    "value": "20px",
+    "members": [
+      {
+        "value": "20px",
+        "count": 8
+      }
+    ],
+    "count": 8,
+    "props": {
+      "padding-top": 4,
+      "padding-bottom": 4
+    },
+    "regionLabels": {
+      "card": 8
+    },
+    "propRegions": {
+      "padding-top@card": 4,
+      "padding-bottom@card": 4
+    }
+  },
+  {
+    "id": "space-08",
+    "kind": "space",
+    "value": "24px",
+    "members": [
+      {
+        "value": "24px",
+        "count": 134
+      }
+    ],
+    "count": 134,
+    "props": {
+      "padding-right": 65,
+      "padding-left": 65,
+      "padding-top": 2,
+      "padding-bottom": 2
+    },
+    "regionLabels": {
+      "nav": 4,
+      "link": 22,
+      "card": 96
+    },
+    "propRegions": {
+      "padding-right@nav": 2,
+      "padding-left@nav": 2,
+      "padding-right@link": 11,
+      "padding-left@link": 11,
+      "padding-right@card": 46,
+      "padding-left@card": 46,
+      "padding-top@card": 2,
+      "padding-bottom@card": 2
+    }
+  },
+  {
+    "id": "space-09",
+    "kind": "space",
+    "value": "39px",
+    "members": [
+      {
+        "value": "39px",
+        "count": 8
+      },
+      {
+        "value": "40px",
+        "count": 2
+      }
+    ],
+    "count": 10,
+    "props": {
+      "padding-right": 4,
+      "padding-left": 4,
+      "padding-top": 1,
+      "padding-bottom": 1
+    },
+    "regionLabels": {
+      "header": 2,
+      "footer": 4
+    },
+    "propRegions": {
+      "padding-right@header": 1,
+      "padding-left@header": 1,
+      "padding-right@footer": 1,
+      "padding-left@footer": 1,
+      "padding-top@footer": 1,
+      "padding-bottom@footer": 1
+    }
+  },
+  {
+    "id": "space-10",
+    "kind": "space",
+    "value": "48px",
+    "members": [
+      {
+        "value": "48px",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "margin-top": 1
+    },
+    "regionLabels": {},
+    "propRegions": {}
+  },
+  {
+    "id": "space-11",
+    "kind": "space",
+    "value": "128px",
+    "members": [
+      {
+        "value": "128px",
+        "count": 2
+      }
+    ],
+    "count": 2,
+    "props": {
+      "padding-top": 1,
+      "padding-bottom": 1
+    },
+    "regionLabels": {},
+    "propRegions": {}
+  },
+  {
+    "id": "radius-01",
+    "kind": "radius",
+    "value": "4px",
+    "members": [
+      {
+        "value": "4px",
+        "count": 5
+      }
+    ],
+    "count": 5,
+    "props": {
+      "border-top-left-radius": 5
+    },
+    "regionLabels": {},
+    "propRegions": {}
+  },
+  {
+    "id": "radius-02",
+    "kind": "radius",
+    "value": "6px",
+    "members": [
+      {
+        "value": "6px",
+        "count": 13
+      },
+      {
+        "value": "5px",
+        "count": 4
+      }
+    ],
+    "count": 17,
+    "props": {
+      "border-top-left-radius": 17
+    },
+    "regionLabels": {
+      "input": 1,
+      "card": 12,
+      "button": 4
+    },
+    "propRegions": {
+      "border-top-left-radius@input": 1,
+      "border-top-left-radius@card": 12,
+      "border-top-left-radius@button": 4
+    }
+  },
+  {
+    "id": "radius-03",
+    "kind": "radius",
+    "value": "32px",
+    "members": [
+      {
+        "value": "32px",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "border-top-left-radius": 1
+    },
+    "regionLabels": {
+      "input": 1
+    },
+    "propRegions": {
+      "border-top-left-radius@input": 1
+    }
+  },
+  {
+    "id": "shadow-01",
+    "kind": "shadow",
+    "value": "rgba(136, 152, 170, 0.15) 0px 0px 32px 0px",
+    "members": [
+      {
+        "value": "rgba(136, 152, 170, 0.15) 0px 0px 32px 0px",
+        "count": 9
+      }
+    ],
+    "count": 9,
+    "props": {
+      "box-shadow": 9
+    },
+    "regionLabels": {
+      "nav": 1,
+      "icon": 4,
+      "card": 4
+    },
+    "propRegions": {
+      "box-shadow@nav": 1,
+      "box-shadow@icon": 4,
+      "box-shadow@card": 4
+    }
+  },
+  {
+    "id": "shadow-02",
+    "kind": "shadow",
+    "value": "rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset",
+    "members": [
+      {
+        "value": "rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset",
+        "count": 5
+      }
+    ],
+    "count": 5,
+    "props": {
+      "box-shadow": 5
+    },
+    "regionLabels": {},
+    "propRegions": {}
+  },
+  {
+    "id": "shadow-03",
+    "kind": "shadow",
+    "value": "rgba(50, 50, 93, 0.11) 0px 4px 6px 0px, rgba(0, 0, 0, 0.08) 0px 1px 3px 0px",
+    "members": [
+      {
+        "value": "rgba(50, 50, 93, 0.11) 0px 4px 6px 0px, rgba(0, 0, 0, 0.08) 0px 1px 3px 0px",
+        "count": 4
+      }
+    ],
+    "count": 4,
+    "props": {
+      "box-shadow": 4
+    },
+    "regionLabels": {
+      "button": 4
+    },
+    "propRegions": {
+      "box-shadow@button": 4
+    }
+  },
+  {
+    "id": "shadow-04",
+    "kind": "shadow",
+    "value": "rgba(50, 50, 93, 0.15) 0px 1px 3px 0px, rgba(0, 0, 0, 0.02) 0px 1px 0px 0px",
+    "members": [
+      {
+        "value": "rgba(50, 50, 93, 0.15) 0px 1px 3px 0px, rgba(0, 0, 0, 0.02) 0px 1px 0px 0px",
+        "count": 1
+      }
+    ],
+    "count": 1,
+    "props": {
+      "box-shadow": 1
+    },
+    "regionLabels": {
+      "input": 1
+    },
+    "propRegions": {
+      "box-shadow@input": 1
+    }
+  }
+]
