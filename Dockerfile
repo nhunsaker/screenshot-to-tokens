@@ -1,6 +1,8 @@
 # Live-demo site. Tier A: a static page built from committed inputs. Tier B (S2T_TIERS=a,b): Point and say on Argon at
 # /try/, metered by the demo budget, with one warm headless Chromium in the same process (scripts/serve-site.mjs).
 # Coolify: memory limit 2 GB, restart on failure, persistent volume at /data (the budget ledger), healthcheck /health.
+# Tier C (S2T_TIERS=a,b,c): "run it on a public page" spawns scripts/mirror-site.mjs and src/cli.js as children with the
+# same Chromium; results live under /data/runs (24 h). Off unless S2T_TIERS includes c. No new keys.
 # Keys come from env only (META_API_KEY, BASETEN_API_KEY); nothing secret is baked into the image.
 FROM mcr.microsoft.com/playwright:v1.61.1-noble
 # curl: Coolify's healthcheck execs it inside the container. git: the Argon build is cloned from the public fork.

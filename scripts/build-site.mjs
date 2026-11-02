@@ -15,6 +15,9 @@ const out = join(root, process.argv[2] || 'site')
 const YOUTUBE_ID = process.env.S2T_YOUTUBE_ID || ''
 
 const REPO = 'https://github.com/nhunsaker/screenshot-to-tokens'
+// Tier C example chips: five stable breadth-pool sites with edits and fallbacks 0 px in docs/breadth.md (MIT; one per
+// framework where we can: Jekyll x2, Hugo, Astro, Docusaurus), all small (under 1.5 MB mirrored).
+const RUN_EXAMPLES = ['https://gaotianchi.github.io/', 'https://proinsias.github.io/', 'https://infi-defi.github.io/', 'https://awfp1314.github.io/', 'https://josh-wong.github.io/']
 const PAGES = 'https://nhunsaker.github.io/argon-dashboard-react'
 const PR = 'https://github.com/nhunsaker/argon-dashboard-react/pull/2'
 
@@ -210,6 +213,24 @@ td.flag { color: var(--color-text-note, #f5c46b); }
 .try { display: inline-block; background: #8a9af0; color: #0f1115; font-weight: 700; padding: 8px 16px; border-radius: var(--radius-chip, 10px); text-decoration: none; margin-right: 8px; }
 .try:hover { background: #a9b5f5; }
 .good { color: var(--color-text-good, #7ee2a8); font-weight: 600; }
+/* tier c: run it on a public page */
+.run-form label { display: block; font-weight: 600; margin: 0 0 6px; }
+.run-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.run-row input { flex: 1 1 260px; min-width: 0; font: inherit; padding: 8px 12px; border-radius: var(--radius-chip, 10px); border: 1px solid #5c6370; background: var(--color-surface-raised, #161920); color: var(--color-text-default, #e8e8e4); }
+.run-row input:focus-visible, .chip:focus-visible, .try:focus-visible { outline: 3px solid #8a9af0; outline-offset: 2px; }
+.run-row .try { border: 0; font: inherit; font-weight: 700; cursor: pointer; margin: 0; }
+.run-row .try:disabled { opacity: .6; cursor: not-allowed; }
+.run-note { color: var(--color-text-muted, #a3a39d); font-size: 0.92rem; margin: 10px 0; }
+.run-examples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+.chip { font: inherit; font-size: 0.88rem; background: var(--color-surface-code, #1f232c); color: var(--color-text-default, #e8e8e4); border: 1px solid var(--color-border-default, #2c313c); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.chip:hover { border-color: #8a9af0; }
+.run-status { margin-top: 8px; }
+.run-msg { margin: 8px 0; }
+.run-done { color: var(--color-text-good, #7ee2a8); font-weight: 600; }
+.run-steps { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 0; margin: 6px 0; font-size: 0.92rem; }
+.run-steps .step-done { color: var(--color-text-good, #7ee2a8); }
+.run-steps .step-now { color: var(--color-text-default, #e8e8e4); font-weight: 700; }
+.run-steps .step-todo { color: var(--color-text-muted, #a3a39d); }
 footer { border-top: 1px solid var(--color-border-default, #2c313c); padding: 28px 0 48px; color: var(--color-text-muted, #a3a39d); font-size: 0.92rem; }
 footer p { margin: 4px 0; }
 .scroll-hint { display: none; color: var(--color-text-muted, #a3a39d); font-size: 0.85rem; margin: 0 0 8px; }
@@ -314,6 +335,26 @@ ${tiers.map(([code, tier, why]) => `      <li><code>${esc(code)}</code><span cla
   </div>
 </section>
 
+<!--tier-c--><section aria-labelledby="run-h">
+  <h2 id="run-h">Run it on a public page</h2>
+  <p class="sub">Paste the address of a public web page. We copy the page and its same-origin files, run the whole pipeline on
+  the copy, and show the review report, the checks and the token file. About 20 to 60 seconds.</p>
+  <form id="run-form" class="run-form" novalidate>
+    <label for="run-url">Page address</label>
+    <div class="run-row">
+      <input id="run-url" name="url" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://example.github.io/" required>
+      <button type="submit" class="try">Run</button>
+    </div>
+    <p class="run-note">The page's screenshot goes to Meta's hosted models with <code>store: false</code>. Public pages only. Results are deleted after 24 hours.</p>
+    <p class="run-examples"><span class="muted">Examples from the 28-site run:</span>
+${RUN_EXAMPLES.map((u) => `      <button type="button" class="chip" data-run-example="${u}">${u.replace(/^https:\/\/|\/$/g, '')}</button>`).join('\n')}
+    </p>
+    <p id="run-budget" class="muted" aria-live="polite"></p>
+  </form>
+  <div id="run-status" class="run-status" aria-live="polite"></div>
+</section>
+<script src="run-client.js" defer></script><!--/tier-c-->
+
 <section aria-labelledby="code-h">
   <h2 id="code-h">Code and pull request</h2>
   <ul class="links">
@@ -342,6 +383,8 @@ cpSync(join(root, 'demo/lightbootstrap-run'), join(out, 'lightbootstrap-run'), {
 cpSync(join(root, 'demo/site-media'), join(out, 'media'), { recursive: true })
 // The recorded Point and say take: the live page (tier B) shows it when the demo budget is used up.
 cpSync(join(root, 'demo/media'), join(out, 'media'), { recursive: true })
+// Tier C's form script (the form itself is only served when the server runs tier c).
+cpSync(join(root, 'scripts/live/run-client.js'), join(out, 'run-client.js'))
 
 const total = (d) => readdirSync(d, { withFileTypes: true }).reduce((a, e) => a + (e.isDirectory() ? total(join(d, e.name)) : statSync(join(d, e.name)).size), 0)
 console.log(`site → ${out} (${(total(out) / 1024 / 1024).toFixed(1)} MB; evidence ${evidence.body.length} rows, breadth ${breadth.body.length} sites)`)

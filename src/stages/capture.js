@@ -48,8 +48,18 @@ const PAGE = { deviceScaleFactor: 1, bypassCSP: true }
 // Randomized layouts (zeikar.github.io throws its tag pile down differently on every load) made two shots of the
 // same page differ. Every page we screenshot gets the same seeded Math.random, so "random" comes out identical.
 const SEEDED_RANDOM = `(() => { let s = 0x2f6b9a1d; Math.random = () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; return (s >>> 0) / 4294967296 } })()`
+// Live demo tier C (S2T_NET_GUARD=1): a visitor chose the page, so every request the browser makes must go to a public
+// host (src/lib/public-url.js guardPage) or to this process's own 127.0.0.1 static servers; service workers are
+// blocked so nothing bypasses the route check. S2T_GOTO_TIMEOUT_MS sets an explicit navigation timeout.
 export async function newPage(browser, viewport) {
-  const page = await browser.newPage({ ...PAGE, viewport })
+  const guarded = process.env.S2T_NET_GUARD === '1'
+  const page = await browser.newPage({ ...PAGE, viewport, ...(guarded ? { serviceWorkers: 'block' } : {}) })
+  if (process.env.S2T_GOTO_TIMEOUT_MS) page.setDefaultNavigationTimeout(Number(process.env.S2T_GOTO_TIMEOUT_MS))
+  if (guarded) {
+    const { guardPage } = await import('../lib/public-url.js')
+    const { SERVED_ORIGINS } = await import('../lib/serve.js')
+    await guardPage(page, { allowOrigins: () => SERVED_ORIGINS, onBlock: (u, why) => console.error(`  guard    blocked ${u.slice(0, 120)} (${why})`) })
+  }
   await page.addInitScript(SEEDED_RANDOM)
   return page
 }

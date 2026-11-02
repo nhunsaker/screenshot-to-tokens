@@ -5,6 +5,9 @@ import { join, extname, normalize } from 'path'
 
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp', '.ico': 'image/x-icon', '.json': 'application/json', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf' }
 
+/** Origins of the static servers this process has open (the network guard lets the browser reach only these locally). */
+export const SERVED_ORIGINS = new Set()
+
 /** Serve `dir` on a free port. Returns { url, close }. */
 export function serveDir(dir, port = 0) {
   const server = createServer(async (req, res) => {
@@ -23,7 +26,9 @@ export function serveDir(dir, port = 0) {
   return new Promise((resolve) => {
     server.listen(port, '127.0.0.1', () => {
       const { port: p } = /** @type {any} */ (server.address())
-      resolve({ url: `http://127.0.0.1:${p}/`, close: () => new Promise((r) => server.close(r)) })
+      const origin = `http://127.0.0.1:${p}`
+      SERVED_ORIGINS.add(origin)
+      resolve({ url: `${origin}/`, close: () => { SERVED_ORIGINS.delete(origin); return new Promise((r) => server.close(r)) } })
     })
   })
 }

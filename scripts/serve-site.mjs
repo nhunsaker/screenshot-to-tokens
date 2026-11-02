@@ -9,7 +9,11 @@
 //     Host, Origin, Cookie and X-Forwarded-For pass through untouched, so the API's same-origin guard and the budget's
 //     per-IP cap see what Traefik saw. The Argon build has relative asset URLs, so nothing root-absolute leaks out of
 //     /try/app/. The API is metered by the budget ledger ($S2T_DATA/ledger.json).
-// The kill switch is S2T_TIERS (env change + restart): without b, /try/ redirects home and the index shows the clips.
+//   tier c (S2T_TIERS includes c, same env as b): "run it on a public page" (src/stages/live-run.js).
+//       POST /api/run {url} -> {id}; GET /api/run/<id> -> status; GET /api/run -> this visitor's runs left + queue;
+//       /run/<id>/ -> the result page (unlisted, noindex, deleted after 24 h). Metered by the same ledger (25 units).
+// The kill switch is S2T_TIERS (env change + restart): without b, /try/ redirects home and the index shows the clips;
+// without c, the run form is not on the index and /api/run answers 404.
 // Usage: node scripts/serve-site.mjs [site dir]
 import { createServer, request as httpRequest } from 'node:http'
 import { createReadStream, statSync, readFileSync } from 'node:fs'
@@ -42,19 +46,29 @@ function send(res, status, body, type, extra = {}) {
 
 // ---- tier b: the playground with point and say, metered -----------------------------------------------------------
 
-let live = null // { port, pas, ledger }
-async function startTierB() {
-  const origin = process.env.S2T_PUBLIC === '1' ? String(process.env.S2T_ORIGIN || '').replace(/\/$/, '') : ''
-  if (!origin) { log('tier b off: needs S2T_PUBLIC=1 and S2T_ORIGIN (e.g. https://s2t.sorbcloud.com)'); return }
+const ORIGIN = process.env.S2T_PUBLIC === '1' ? String(process.env.S2T_ORIGIN || '').replace(/\/$/, '') : ''
+let shared = null // { ledger } once b or c starts
+/** One ledger for tiers b and c (one JSON file; two instances would overwrite each other). */
+async function sharedSetup() {
+  if (shared) return shared
   // Nothing a visitor sends is kept: no response cache on disk. Every outside call gives up after 30 s.
   process.env.S2T_CACHE = '0'
   if (!process.env.S2T_EXTERNAL_TIMEOUT_MS) process.env.S2T_EXTERNAL_TIMEOUT_MS = '30000'
   const { loadDotEnv } = await import('../src/config.js')
   loadDotEnv(repo) // Linux: real env vars; macOS dev: falls back to the Keychain. Never logged.
   const { fileLedger } = await import('../src/stages/pas/ledger.js')
-  const { startPlayground } = await import('../src/stages/playground.js')
   const ledger = fileLedger()
   log(`budget ledger ${ledger.file}: ${JSON.stringify(ledger.summary())}`)
+  shared = { ledger }
+  return shared
+}
+
+let live = null // { port, pas, ledger }
+async function startTierB() {
+  const origin = ORIGIN
+  if (!origin) { log('tier b off: needs S2T_PUBLIC=1 and S2T_ORIGIN (e.g. https://s2t.sorbcloud.com)'); return }
+  const { ledger } = await sharedSetup()
+  const { startPlayground } = await import('../src/stages/playground.js')
   const s = await startPlayground({
     runDir: join(repo, process.env.S2T_ARGON_RUN || 'demo/argon-run'),
     appDir: join(repo, process.env.S2T_ARGON_APP || 'build/argon-app'),
@@ -80,13 +94,41 @@ function proxy(req, res, path) {
   req.pipe(up)
 }
 
+// ---- tier c: run it on a public page ------------------------------------------------------------------------------
+
+let runs = null // createRunService()
+async function startTierC() {
+  if (!ORIGIN) { log('tier c off: needs S2T_PUBLIC=1 and S2T_ORIGIN'); return }
+  const { ledger } = await sharedSetup()
+  const { createRunService } = await import('../src/stages/live-run.js')
+  runs = createRunService({ dataDir: process.env.S2T_DATA || 'out/data', ledger, log })
+  log(`tier c: runs under ${join(process.env.S2T_DATA || 'out/data', 'runs')}; ${JSON.stringify(ledger.runCaps)} runs, ${runs.queueInfo().max} waiting max`)
+}
+
+/** The visitor's session (the same s2t_sid cookie tier b sets) and IP, for the ledger's caps. */
+async function visitor(req, res) {
+  const { clientIp } = await import('../src/stages/pas/ledger.js')
+  const { randomUUID } = await import('node:crypto')
+  const m = String(req.headers.cookie || '').match(/(?:^|;\s*)s2t_sid=([A-Za-z0-9-]{8,64})/)
+  let session = m ? m[1] : null
+  if (!session) {
+    session = randomUUID()
+    res.setHeader('set-cookie', `s2t_sid=${session}; Path=/; HttpOnly; SameSite=Lax${ORIGIN.startsWith('https:') ? '; Secure' : ''}`)
+  }
+  return { session, ip: clientIp(req, true) }
+}
+
 // ---- tier a: the index (tier b's "Try it live" slot resolved at serve time) and static files ----------------------
 
 const tierB = () => TIERS.includes('b') && !!live
-function indexHtml() {
-  const html = readFileSync(join(root, 'index.html'), 'utf-8')
-  const keep = tierB() ? 'tier-b' : 'no-tier-b', drop = tierB() ? 'no-tier-b' : 'tier-b'
+const tierC = () => TIERS.includes('c') && !!runs
+/** Keep the <!--tier-x--> or the <!--no-tier-x--> block of the index, drop the other. */
+function pickBlock(html, tier, on) {
+  const keep = on ? `tier-${tier}` : `no-tier-${tier}`, drop = on ? `no-tier-${tier}` : `tier-${tier}`
   return html.replace(new RegExp(`<!--${drop}-->[\\s\\S]*?<!--/${drop}-->\\n?`, 'g'), '').replace(new RegExp(`<!--/?${keep}-->`, 'g'), '')
+}
+function indexHtml() {
+  return pickBlock(pickBlock(readFileSync(join(root, 'index.html'), 'utf-8'), 'b', tierB()), 'c', tierC())
 }
 
 async function health() {
@@ -96,6 +138,10 @@ async function health() {
     out.browser = { ready: !!(st && st.ready), warmMs: st ? st.warmMs : null, error: st ? st.error : 'tier b not started' }
     if (live) { const b = live.ledger.summary(); out.budget = { left: b.left, total: b.total } }
   }
+  if (TIERS.includes('c')) {
+    out.runs = runs ? runs.queueInfo() : { error: 'tier c not started' }
+    if (shared && !out.budget) { const b = shared.ledger.summary(); out.budget = { left: b.left, total: b.total } }
+  }
   return out
 }
 
@@ -103,6 +149,26 @@ const server = createServer(async (req, res) => {
   let path
   try { path = decodeURIComponent(new URL(req.url, 'http://x').pathname) } catch { return send(res, 400, 'bad request\n', 'text/plain; charset=utf-8') }
   if (path === '/health') return send(res, 200, JSON.stringify(await health()), 'application/json; charset=utf-8', { 'Cache-Control': 'no-store' })
+
+  if (path === '/api/run' || path.startsWith('/api/run/')) {
+    const json = (code, v) => send(res, code, JSON.stringify(v), 'application/json; charset=utf-8', { 'Cache-Control': 'no-store' })
+    if (!tierC()) return json(404, { error: 'Running your own page is off right now.', code: 'off' })
+    const { sameOriginOnly } = await import('../src/stages/pas/server.js')
+    if (!sameOriginOnly(req, ORIGIN)) return json(403, { error: 'same origin only', code: 'same_origin' })
+    try { return await runs.handleApi(req, res, path, await visitor(req, res)) } catch (e) {
+      log(`api/run error: ${String(e.message || e).slice(0, 200)}`)
+      if (!res.headersSent) return json(500, { error: 'Something went wrong on our side.', code: 'server' })
+      return res.destroy()
+    }
+  }
+  if (path.startsWith('/run/')) {
+    if (!tierC()) return send(res, 404, '<!doctype html><meta charset="utf-8"><title>Not found</title><p>Not found. <a href="/">Back to Screenshot to Tokens</a>.</p>', 'text/html; charset=utf-8')
+    if (runs.serveResult(req, res, path, TYPES)) return
+  }
+  if (path === '/api/budget' && !tierB() && shared) {
+    const { COSTS, RUN_COST } = await import('../src/stages/pas/ledger.js')
+    return send(res, 200, JSON.stringify({ ...shared.ledger.summary(), costs: { ...COSTS, run: RUN_COST } }), 'application/json; charset=utf-8', { 'Cache-Control': 'no-store' })
+  }
 
   if (path === '/try' || path.startsWith('/try/') || path.startsWith('/__pas/') || path === '/api/budget') {
     if (!tierB()) { res.writeHead(302, { ...BASE_HEADERS, Location: '/#pas-h' }); return res.end() }
@@ -152,7 +218,8 @@ const server = createServer(async (req, res) => {
 })
 
 if (TIERS.includes('b')) await startTierB().catch((e) => log(`tier b failed to start: ${String(e.message || e).slice(0, 200)}`))
-server.listen(PORT, HOST, () => log(`serving ${root} on http://${HOST}:${PORT} (tiers ${TIERS.join(',')}${TIERS.includes('b') && !live ? ', b NOT running' : ''})`))
+if (TIERS.includes('c')) await startTierC().catch((e) => log(`tier c failed to start: ${String(e.message || e).slice(0, 200)}`))
+server.listen(PORT, HOST, () => log(`serving ${root} on http://${HOST}:${PORT} (tiers ${TIERS.join(',')}${TIERS.includes('b') && !live ? ', b NOT running' : ''}${TIERS.includes('c') && !runs ? ', c NOT running' : ''})`))
 async function shutdown() {
   server.close()
   if (live && live.pas && live.pas.close) await live.pas.close().catch(() => {})
