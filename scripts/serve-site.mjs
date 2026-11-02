@@ -39,6 +39,7 @@ const server = createServer((req, res) => {
   let st
   try { st = statSync(file) } catch { st = null }
   if (st && st.isDirectory()) { res.writeHead(301, { ...BASE_HEADERS, Location: path + '/' }); return res.end() }
+  if (!st && path === "/favicon.ico") { res.writeHead(204, BASE_HEADERS); return res.end() }
   if (!st) return send(res, 404, '<!doctype html><meta charset="utf-8"><title>Not found</title><p>Not found. <a href="/">Back to Screenshot to Tokens</a>.</p>', 'text/html; charset=utf-8')
 
   const ext = extname(file).toLowerCase()

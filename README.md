@@ -35,6 +35,8 @@ Model API and Muse Spark (hosted, or the open-weights Muse Spark Open served on 
 | Tests | 291 passing (`pnpm test`) |
 | Run outputs | `runs/` holds the verify and timing summaries behind every number above |
 
+Live demo site: https://s2t.sorbcloud.com/ (the video, the evidence, both review reports and the breadth table on one page).
+
 Live demo: [original](https://nhunsaker.github.io/argon-dashboard-react/original/) · [tokenized](https://nhunsaker.github.io/argon-dashboard-react/tokens/) ·
 [a proposed change, previewed](https://nhunsaker.github.io/argon-dashboard-react/tokens/?tokens=color-action-primary:e8711a) ·
 [token playground](https://nhunsaker.github.io/argon-dashboard-react/playground/) · [the PR on our fork](https://github.com/nhunsaker/argon-dashboard-react/pull/2).

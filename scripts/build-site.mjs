@@ -94,6 +94,7 @@ const html = `<!doctype html>
 <title>Screenshot to Tokens</title>
 <meta name="description" content="A design system from a screenshot in seconds. A more accessible app from the tokens in one change. SAM 3.1 and Muse Spark, built for the Meta Global AI Developer Hackathon.">
 <meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230f1115%27/%3E%3Crect x=%277%27 y=%277%27 width=%2718%27 height=%2718%27 rx=%274%27 fill=%27%238a9af0%27/%3E%3C/svg%3E">
 <style>
 /* Our own page eats our own cooking: every value is a token, every use is var(--token, fallback). */
 :root {
