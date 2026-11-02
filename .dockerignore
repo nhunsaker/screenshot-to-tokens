@@ -1,0 +1,9 @@
+out/
+node_modules/
+.env
+.env.*
+.git/
+.claude/
+site/
+modal/
+**/.DS_Store

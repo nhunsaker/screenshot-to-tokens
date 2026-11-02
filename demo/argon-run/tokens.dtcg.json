@@ -1,0 +1,1096 @@
+{
+  "color": {
+    "black-a5": {
+      "$value": "#0000000d",
+      "$type": "color",
+      "$description": "Used 34 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "color-01"
+          ]
+        }
+      }
+    },
+    "black-a50": {
+      "$value": "#00000080",
+      "$type": "color",
+      "$description": "Used 9 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "color-02"
+          ]
+        }
+      }
+    },
+    "black-a90": {
+      "$value": "#000000e6",
+      "$type": "color",
+      "$description": "Used 2 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "color-03"
+          ]
+        }
+      }
+    },
+    "black-a10": {
+      "$value": "#0000001a",
+      "$type": "color",
+      "$description": "Used 1 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "color-04"
+          ]
+        }
+      }
+    },
+    "blue": {
+      "400": {
+        "$value": "#8898aa",
+        "$type": "color",
+        "$description": "Used 21 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-10"
+            ]
+          }
+        }
+      },
+      "500": {
+        "$value": "#5e72e4",
+        "$type": "color",
+        "$description": "Used 14 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-07"
+            ]
+          }
+        }
+      },
+      "600": {
+        "$value": "#525f7f",
+        "$type": "color",
+        "$description": "Used 35 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-06"
+            ]
+          }
+        }
+      },
+      "800": {
+        "$value": "#32325d",
+        "$type": "color",
+        "$description": "Used 7 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-05"
+            ]
+          }
+        }
+      }
+    },
+    "red": {
+      "400": {
+        "$value": "#fb6340",
+        "$type": "color",
+        "$description": "Used 2 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-09"
+            ]
+          }
+        }
+      },
+      "500": {
+        "$value": "#f5365c",
+        "$type": "color",
+        "$description": "Used 2 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-08"
+            ]
+          }
+        }
+      }
+    },
+    "gray": {
+      "100": {
+        "$value": "#e9ecef",
+        "$type": "color",
+        "$description": "Used 47 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-16"
+            ]
+          }
+        }
+      },
+      "200": {
+        "$value": "#ced4da",
+        "$type": "color",
+        "$description": "Used 1 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-14"
+            ]
+          }
+        }
+      },
+      "300": {
+        "$value": "#adb5bd",
+        "$type": "color",
+        "$description": "Used 1 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-11"
+            ]
+          }
+        }
+      }
+    },
+    "green": {
+      "300": {
+        "$value": "#2dce89",
+        "$type": "color",
+        "$description": "Used 2 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-12"
+            ]
+          }
+        }
+      }
+    },
+    "teal": {
+      "200": {
+        "$value": "#11cdef",
+        "$type": "color",
+        "$description": "Used 1 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-13"
+            ]
+          }
+        }
+      }
+    },
+    "yellow": {
+      "100": {
+        "$value": "#ffd600",
+        "$type": "color",
+        "$description": "Used 1 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "color-15"
+            ]
+          }
+        }
+      }
+    },
+    "white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Merges 3 near-identical values (#ffffffff, #f6f9fcff, #f7fafcff) used 25 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "color-17"
+          ]
+        }
+      }
+    },
+    "white-a60": {
+      "$value": "#ffffff99",
+      "$type": "color",
+      "$description": "Used 4 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "color-18"
+          ]
+        }
+      }
+    },
+    "white-a95": {
+      "$value": "#fffffff2",
+      "$type": "color",
+      "$description": "Used 1 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "color-19"
+          ]
+        }
+      }
+    },
+    "action": {
+      "primary": {
+        "$value": "{color.blue.500}",
+        "$type": "color",
+        "$description": "Button uses background-color 4 times and border colors from this cluster, indicating primary action color.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "semantic",
+            "clusters": [
+              "color-07"
+            ]
+          }
+        }
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "White background used 20 times across nav, card, button and footer as page background.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "semantic",
+            "clusters": [
+              "color-17"
+            ]
+          }
+        }
+      },
+      "card": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "Card background is white in 15 card uses, distinct from page surface.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "semantic",
+            "clusters": [
+              "color-17"
+            ]
+          }
+        }
+      }
+    },
+    "text": {
+      "default": {
+        "$value": "{color.blue.600}",
+        "$type": "color",
+        "$description": "Most frequent text color with 35 uses in cards, the main body text color.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "semantic",
+            "clusters": [
+              "color-06"
+            ]
+          }
+        }
+      },
+      "muted": {
+        "$value": "{color.blue.400}",
+        "$type": "color",
+        "$description": "Secondary text color with 21 uses across text, card and footer regions.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "semantic",
+            "clusters": [
+              "color-10"
+            ]
+          }
+        }
+      },
+      "on-primary": {
+        "$value": "{color.white}",
+        "$type": "color",
+        "$description": "White text used on button backgrounds that use the primary action color.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "semantic",
+            "clusters": [
+              "color-17"
+            ]
+          }
+        }
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.gray.100}",
+        "$type": "color",
+        "$description": "Border color used 35 times on card borders, the dominant border.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "semantic",
+            "clusters": [
+              "color-16"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "base": {
+        "$value": "Open Sans, sans-serif",
+        "$type": "fontFamily",
+        "$description": "Used 87 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-family-01"
+            ]
+          }
+        }
+      }
+    },
+    "size": {
+      "xs": {
+        "$value": "10.4px",
+        "$type": "dimension",
+        "$description": "Merges 2 near-identical values (10.4px, 10px) used 8 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-size-01"
+            ]
+          }
+        }
+      },
+      "sm": {
+        "$value": "13px",
+        "$type": "dimension",
+        "$description": "Merges 3 near-identical values (13px, 14px, 12px) used 59 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-size-02"
+            ]
+          }
+        }
+      },
+      "md": {
+        "$value": "14.4px",
+        "$type": "dimension",
+        "$description": "Merges 2 near-identical values (14.4px, 15px) used 12 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-size-03"
+            ]
+          }
+        }
+      },
+      "lg": {
+        "$value": "17px",
+        "$type": "dimension",
+        "$description": "Used 2 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-size-04"
+            ]
+          }
+        }
+      },
+      "xl": {
+        "$value": "20px",
+        "$type": "dimension",
+        "$description": "Used 6 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-size-05"
+            ]
+          }
+        }
+      }
+    },
+    "weight": {
+      "light": {
+        "$value": "300",
+        "$type": "fontWeight",
+        "$description": "Used 8 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-weight-01"
+            ]
+          }
+        }
+      },
+      "regular": {
+        "$value": "400",
+        "$type": "fontWeight",
+        "$description": "Used 41 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-weight-02"
+            ]
+          }
+        }
+      },
+      "medium": {
+        "$value": "500",
+        "$type": "fontWeight",
+        "$description": "Used 2 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-weight-03"
+            ]
+          }
+        }
+      },
+      "semibold": {
+        "$value": "600",
+        "$type": "fontWeight",
+        "$description": "Used 36 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "font-weight-04"
+            ]
+          }
+        }
+      }
+    },
+    "line-height": {
+      "1": {
+        "$value": "15.6px",
+        "$type": "dimension",
+        "$description": "Merges 2 near-identical values (15.6px, 15px) used 8 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "line-height-01"
+            ]
+          }
+        }
+      },
+      "2": {
+        "$value": "18px",
+        "$type": "dimension",
+        "$description": "Used 3 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "line-height-02"
+            ]
+          }
+        }
+      },
+      "3": {
+        "$value": "19.5px",
+        "$type": "dimension",
+        "$description": "Used 39 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "line-height-03"
+            ]
+          }
+        }
+      },
+      "4": {
+        "$value": "21.6px",
+        "$type": "dimension",
+        "$description": "Merges 3 near-identical values (21.6px, 21px, 22.5px) used 21 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "line-height-04"
+            ]
+          }
+        }
+      },
+      "5": {
+        "$value": "23.8px",
+        "$type": "dimension",
+        "$description": "Used 8 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "line-height-05"
+            ]
+          }
+        }
+      },
+      "6": {
+        "$value": "25.5px",
+        "$type": "dimension",
+        "$description": "Used 2 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "line-height-06"
+            ]
+          }
+        }
+      },
+      "7": {
+        "$value": "30px",
+        "$type": "dimension",
+        "$description": "Used 6 times.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "primitive",
+            "clusters": [
+              "line-height-07"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "space": {
+    "4": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Used 18 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-02"
+          ]
+        }
+      }
+    },
+    "8": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Used 9 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-03"
+          ]
+        }
+      }
+    },
+    "12": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Used 39 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-05"
+          ]
+        }
+      }
+    },
+    "16": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "Merges 2 near-identical values (16px, 15px) used 147 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-06"
+          ]
+        }
+      }
+    },
+    "20": {
+      "$value": "20px",
+      "$type": "dimension",
+      "$description": "Used 8 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-07"
+          ]
+        }
+      }
+    },
+    "24": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "Used 134 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-08"
+          ]
+        }
+      }
+    },
+    "39": {
+      "$value": "39px",
+      "$type": "dimension",
+      "$description": "Merges 2 near-identical values (39px, 40px) used 10 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-09"
+          ]
+        }
+      }
+    },
+    "48": {
+      "$value": "48px",
+      "$type": "dimension",
+      "$description": "Used 1 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-10"
+          ]
+        }
+      }
+    },
+    "128": {
+      "$value": "128px",
+      "$type": "dimension",
+      "$description": "Used 2 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-11"
+          ]
+        }
+      }
+    },
+    "neg-96": {
+      "$value": "-96px",
+      "$type": "dimension",
+      "$description": "Used 1 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-01"
+          ]
+        }
+      }
+    },
+    "10-4": {
+      "$value": "10.4px",
+      "$type": "dimension",
+      "$description": "Merges 2 near-identical values (10.4px, 10px) used 26 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "space-04"
+          ]
+        }
+      }
+    }
+  },
+  "radius": {
+    "sm": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "Used 5 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "radius-01"
+          ]
+        }
+      }
+    },
+    "md": {
+      "$value": "6px",
+      "$type": "dimension",
+      "$description": "Merges 2 near-identical values (6px, 5px) used 17 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "radius-02"
+          ]
+        }
+      }
+    },
+    "lg": {
+      "$value": "32px",
+      "$type": "dimension",
+      "$description": "Used 1 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "radius-03"
+          ]
+        }
+      }
+    }
+  },
+  "shadow": {
+    "1": {
+      "$value": "rgba(136, 152, 170, 0.15) 0px 0px 32px 0px",
+      "$type": "shadow",
+      "$description": "Used 9 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "shadow-01"
+          ]
+        }
+      }
+    },
+    "2": {
+      "$value": "rgba(0, 0, 0, 0.1) 0px 1px 2px 0px inset",
+      "$type": "shadow",
+      "$description": "Used 5 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "shadow-02"
+          ]
+        }
+      }
+    },
+    "3": {
+      "$value": "rgba(50, 50, 93, 0.11) 0px 4px 6px 0px, rgba(0, 0, 0, 0.08) 0px 1px 3px 0px",
+      "$type": "shadow",
+      "$description": "Used 4 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "shadow-03"
+          ]
+        }
+      }
+    },
+    "4": {
+      "$value": "rgba(50, 50, 93, 0.15) 0px 1px 3px 0px, rgba(0, 0, 0, 0.02) 0px 1px 0px 0px",
+      "$type": "shadow",
+      "$description": "Used 1 times.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "primitive",
+          "clusters": [
+            "shadow-04"
+          ]
+        }
+      }
+    }
+  },
+  "button": {
+    "bg": {
+      "$value": "{color.action.primary}",
+      "$type": "color",
+      "$description": "Button background-color comes from primary action cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-07"
+          ]
+        }
+      }
+    },
+    "text": {
+      "$value": "{color.text.on-primary}",
+      "$type": "color",
+      "$description": "Button text color is white on primary background.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-17"
+          ]
+        }
+      }
+    },
+    "border": {
+      "$value": "{color.action.primary}",
+      "$type": "color",
+      "$description": "Button border colors all from primary action cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-07"
+          ]
+        }
+      }
+    },
+    "radius": {
+      "$value": "{radius.md}",
+      "$type": "dimension",
+      "$description": "Button radius uses 6px cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "radius-02"
+          ]
+        }
+      }
+    },
+    "shadow": {
+      "$value": "{shadow.3}",
+      "$type": "shadow",
+      "$description": "Button box-shadow uses shadow.3 cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "shadow-03"
+          ]
+        }
+      }
+    },
+    "active": {
+      "bg": {
+        "$value": "{color.action.primary}",
+        "$type": "color",
+        "$description": "Active button state keeps primary background.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "component",
+            "clusters": [
+              "color-07"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "input": {
+    "border": {
+      "$value": "{color.white-a60}",
+      "$type": "color",
+      "$description": "Input borders use white-a60 cluster on all sides.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-18"
+          ]
+        }
+      }
+    },
+    "radius": {
+      "$value": "{radius.lg}",
+      "$type": "dimension",
+      "$description": "Input uses 32px radius as primary radius.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "radius-03"
+          ]
+        }
+      }
+    },
+    "shadow": {
+      "$value": "{shadow.4}",
+      "$type": "shadow",
+      "$description": "Input box-shadow uses shadow.4 cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "shadow-04"
+          ]
+        }
+      }
+    }
+  },
+  "card": {
+    "bg": {
+      "$value": "{color.surface.card}",
+      "$type": "color",
+      "$description": "Card background is white surface.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-17"
+          ]
+        }
+      }
+    },
+    "border": {
+      "$value": "{color.border.default}",
+      "$type": "color",
+      "$description": "Card borders use gray.100 cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-16"
+          ]
+        }
+      }
+    },
+    "radius": {
+      "$value": "{radius.md}",
+      "$type": "dimension",
+      "$description": "Card radius uses 6px cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "radius-02"
+          ]
+        }
+      }
+    },
+    "shadow": {
+      "$value": "{shadow.1}",
+      "$type": "shadow",
+      "$description": "Card box-shadow uses shadow.1 cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "shadow-01"
+          ]
+        }
+      }
+    }
+  },
+  "nav": {
+    "bg": {
+      "$value": "{color.surface.default}",
+      "$type": "color",
+      "$description": "Nav background is white surface.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-17"
+          ]
+        }
+      }
+    },
+    "border": {
+      "$value": "{color.black-a10}",
+      "$type": "color",
+      "$description": "Nav border uses black-a10 cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-04"
+          ]
+        }
+      }
+    },
+    "shadow": {
+      "$value": "{shadow.1}",
+      "$type": "shadow",
+      "$description": "Nav box-shadow uses shadow.1 cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "shadow-01"
+          ]
+        }
+      }
+    }
+  },
+  "badge": {
+    "bg": {
+      "$value": "{color.gray.300}",
+      "$type": "color",
+      "$description": "Badge background uses gray.300 cluster.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-11"
+          ]
+        }
+      }
+    }
+  },
+  "link": {
+    "text": {
+      "$value": "{color.black-a50}",
+      "$type": "color",
+      "$description": "Link text primarily uses black-a50 with 9 uses.",
+      "$extensions": {
+        "com.metatoy.s2t": {
+          "tier": "component",
+          "clusters": [
+            "color-02"
+          ]
+        }
+      }
+    },
+    "active": {
+      "bg": {
+        "$value": "{color.surface.default}",
+        "$type": "color",
+        "$description": "Active link background is white surface.",
+        "$extensions": {
+          "com.metatoy.s2t": {
+            "tier": "component",
+            "clusters": [
+              "color-17"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
