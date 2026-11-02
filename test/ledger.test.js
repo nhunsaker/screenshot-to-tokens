@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { mkdtempSync, readFileSync, existsSync, readdirSync } from 'fs'
 import { join } from 'path'
 import { tmpdir } from 'os'
-import { createLedger, fileLedger, capsFromEnv, clientIp, COSTS, DEFAULT_CAPS } from '../src/stages/pas/ledger.js'
+import { createLedger, fileLedger, capsFromEnv, clientIp, COSTS, DEFAULT_CAPS, RUN_COST } from '../src/stages/pas/ledger.js'
 
 const clock = (iso) => { let t = Date.parse(iso); return { now: () => t, add: (ms) => { t += ms } } }
 
@@ -146,4 +146,36 @@ test('session ids and IPs are stored hashed, with a salt that persists', () => {
   assert.doesNotMatch(raw, /session-abc|203\.0\.113\.9/)
   const b = fileLedger({ file })
   assert.equal(b.view({ session: 'session-abc', ip: '203.0.113.9' }).mine, 39)
+})
+
+test('tier C runs: 25 units from the shared total, capped by run counts per session / day / IP', () => {
+  let t = Date.parse('2026-11-01T12:00:00Z')
+  const l = createLedger({ caps: { total: 1000, day: 300, session: 40, ipDay: 80 }, runCaps: { session: 3, day: 4, ipDay: 5 }, now: () => t })
+  const a = { session: 'sess-a', ip: '1.1.1.1' }
+  assert.equal(RUN_COST, 25)
+  for (let i = 0; i < 3; i++) { const r = l.chargeRun(a); assert.equal(r.ok, true); assert.equal(r.left, 1000 - 25 * (i + 1)) }
+  const fourth = l.chargeRun(a)
+  assert.equal(fourth.ok, false); assert.equal(fourth.reason, 'runs-session'); assert.equal(fourth.left, 925)
+  // Runs do not eat the Point and say session allowance.
+  assert.equal(l.charge('point', a).ok, true)
+  assert.equal(l.view(a).mine, 39)
+  // Day cap across sessions.
+  assert.equal(l.chargeRun({ session: 'b', ip: '2.2.2.2' }).ok, true)
+  assert.equal(l.chargeRun({ session: 'c', ip: '3.3.3.3' }).reason, 'runs-day')
+  // Refund gives the run and the units back.
+  l.refundRun(a, '2026-11-01')
+  assert.equal(l.runView(a).runsLeft, 1, 'session 2 of 3, day 3 of 4')
+})
+
+test('tier C runs: refund restores count and units; total cap refuses', () => {
+  const t = Date.parse('2026-11-01T12:00:00Z')
+  const l = createLedger({ caps: { total: 60 }, runCaps: { session: 3, day: 20, ipDay: 5 }, now: () => t })
+  const a = { session: 's', ip: '9.9.9.9' }
+  const r1 = l.chargeRun(a)
+  assert.equal(l.runView(a).runsLeft, 1)
+  l.refundRun(a, r1.day)
+  assert.equal(l.summary().used, 0)
+  assert.equal(l.runView(a).runsLeft, 2)
+  l.chargeRun(a); l.chargeRun(a)
+  assert.equal(l.chargeRun(a).reason, 'total')
 })
