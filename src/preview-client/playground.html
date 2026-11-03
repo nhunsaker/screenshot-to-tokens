@@ -613,7 +613,11 @@
       if (pasWasCapped(e)) return
       pasBusy(false)
       pasState({ phase: 'error', error: e.message })
-      var msg = /Permission|NotAllowed|denied/i.test(e.name + ' ' + e.message) ? 'The microphone is blocked for this page. Allow it in the browser\'s site settings, or type the request instead.' : 'Could not hear that: ' + e.message
+      var why = (e.name || '') + ' ' + (e.message || '')
+      var msg = /Permission|NotAllowed|denied/i.test(why) ? 'The microphone is blocked for this page. Allow it in the browser\'s site settings, or type the request instead.'
+        : /NotReadable|Could not start|audio source|in use/i.test(why) ? 'The microphone could not start. Another app may be using it (Loom, Zoom, a call), or the browser lacks microphone access in your computer\'s privacy settings. Close that app or allow access, then try again; typing still works.'
+        : /NotFound|no device|Requested device not found/i.test(why) ? 'No microphone found. Plug one in, or type the request instead.'
+        : 'Could not hear that: ' + e.message
       pasResults.innerHTML = '<p class="notice">' + PAS.escapeHtml(msg) + '</p>'; pasResults.classList.add('on')
     })
   }
