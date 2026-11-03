@@ -164,3 +164,38 @@ change" dropped).
   out/video/req`; `node scripts/record-beats.mjs --only 0,8 --v3` and `--only 13` (the tier card); Emma lines
   `VO_FORMAT=mp3_44100_192 node scripts/gen-vo.mjs out/video/vo-hq/<beat>/line.json out/video/vo-hq/<beat>`;
   `python3 scripts/mix-demo.py --v3` (both tracks, `v3/beats.json`).
+
+## Final cut (founder VO, 2026-11-03)
+
+- `out/video/final.mp4`, **3:31.2**, 1920x1080 (the 1280x720 sources upscaled with lanczos), −16.0 LUFS integrated
+  (two-pass linear loudnorm), true peak below −2.8 dBTP, longest pause 1.29 s (`silencedetect` −40 dB). Voice-only
+  mix: `out/video/final-vo.wav`. Contact sheet: `out/video/final-contact.png`. **Over 3:00 by 31 s**: the founder's
+  reads total 199 s of speech before any picture padding (the takes ran longer than their targets), so trimming
+  picture holds can't bring it under 3:00; getting there means shorter lines.
+- Every voice is the founder's: no synthetic narrator and no synthetic request voice. Take 12 ("We ran it on
+  twenty-eight public sites...") was not recorded, so beat 7 is left out. To add it, record it and run
+  `FIN_TAKE12="HH-MM-SS" python3 scripts/mix_final.py`.
+- Takes (files `~/Movies/2026-11-03 <time>.mov`, copied to `out/video/founder/src/`; mapping, transcripts and edits in
+  `out/video/founder/takes.json`): 01 `12-44-16` (camera) · 02 `12-30-09` · 03 `12-30-15` · 04 `12-30-27` (misread
+  "in a view report. Review report" cut to "in a review report") · 05 `12-31-45` · 06 `12-32-07` · 07 `12-32-52` ·
+  08 `12-33-07` (request 1) · 09 `12-33-15` · 10 `12-33-33` (request 2) · 11 `12-33-50` · 12 none · 13 `12-34-39` ("uh"
+  cut) + `12-35-03` · 14 `12-35-24` (a stray "using" and "every" before "anyone" cut). Unused: `12-28-09`/`12-28-50`/
+  `12-29-31` (beat 0 voice-only attempts), `12-30-49`, `12-31-13`, `12-31-39`, `12-32-34`, `12-32-45`, `12-33-42`,
+  `12-34-00`, `12-35-18`, `12-42-36`, `12-43-18`, `12-43-29`, `12-44-04`.
+- Audio per take: highpass 70 Hz, afftdn nr 8 at the file's noise floor, pauses inside a line over 0.5 s shortened to
+  0.5 s (the words themselves are never sped up or slowed down: atempo 1.0), trimmed to speech with a 0.15 s head and
+  a 0.25 s tail, −20 LUFS. Mix: 48 kHz float, alimiter at 0.68, two-pass linear loudnorm −16 / TP −1.5, one AAC
+  256k encode.
+- Beat 0: the title is re-rendered (`node scripts/record-beats.mjs --only 0 --v3 --title-ms 34000`) with the
+  disclosure "built Oct 26 to Nov 3, 2026 (git tag pre-event-baseline marks the line)". The founder's camera is cropped
+  from the OBS composite (camera rectangle x 70–331, y 466–613 at 1280x720; a 146 px square around the face) and placed
+  as a round bubble bottom-left: 330 px across at 1920x1080 (220 at 720p), 36 px margins (24), 3 px ring (2). Its sound
+  comes from the same file, so lip sync holds; beat 0 has no pause edits.
+- Beat times: 0 0:00.0–0:31.5 · 1 0:31.5–0:36.9 · 2 0:36.9–0:46.7 · 3 0:46.7–1:05.5 · 4 1:05.5–1:24.1 ·
+  5 1:24.1–1:38.1 · 6 1:38.1–2:21.5 · 9 2:21.5–2:53.5 · 8 2:53.5–3:31.2.
+- Beat 6: the click lands on "So I just point"; request 1 at 1:49.8 (SAM's outline lands 1.0 s earlier, as take 07
+  ends; the mic press is right under the first word), request 2 at 2:09.8 after the Icons click, the BLOCKED card at
+  2:19.2, "it's blocked" at 2:19.5 (take 11 split at its pause).
+- Rebuild: `node scripts/founder-transcribe.mjs` (Meta's speech model, `store: false`, files cut into pieces of up to 11 s
+  at their pauses; writes `out/video/founder/transcripts.json` from the 16 kHz WAVs in `out/video/founder/wav16/`),
+  then `python3 scripts/mix_final.py`.

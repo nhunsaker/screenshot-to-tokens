@@ -2,7 +2,7 @@
 // Draft video beats for the demo (docs/demo-script.md), recorded headless with Playwright at 1280x720. Every number on
 // screen comes from a real run folder; terminal beats replay the real output of that run at its real stage timings.
 // Writes out/video/beat-<n>.webm. A person adds the voiceover and cuts the final video.
-//   node scripts/record-beats.mjs [--run out/rec-argon] [--only 1,3] [--apps /path/to/demo-apps]
+//   node scripts/record-beats.mjs [--run out/rec-argon] [--only 1,3] [--apps /path/to/demo-apps] [--v3] [--title-ms 33000]
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, renameSync } from 'fs'
 import { join, resolve } from 'path'
 import { chromium } from 'playwright'
@@ -85,7 +85,7 @@ const wait = (p, ms) => p.waitForTimeout(ms)
 // bottom-left corner stays empty for the founder's camera bubble.
 function titleCard() {
   return `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0f1115;color:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;height:100vh;overflow:hidden}.c{position:absolute;left:72px;top:170px;width:560px}.k{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#8a9af0;opacity:0;transition:opacity .5s;line-height:1.5}.t{font-size:56px;font-weight:700;letter-spacing:-1px;margin:12px 0 16px;opacity:0;transition:opacity .5s;line-height:1.05}.s{font-size:24px;color:#d6d5cf;line-height:1.4;opacity:0;transition:opacity .5s}.n{font-size:14px;color:#6b6a66;margin-top:22px;opacity:0;transition:opacity .5s;line-height:1.45}.on{opacity:1!important}.v{position:absolute;left:672px;top:200px;width:536px;opacity:0;transition:opacity .6s}.v video{width:536px;height:301px;border-radius:12px;display:block;box-shadow:0 10px 40px rgba(0,0,0,.5)}.cap{margin-top:12px;font-size:16px;color:#b9b8b2;min-height:24px}.cap b{color:#7ee2a8;font-weight:600}.cap i{color:#ffa198;font-style:normal;font-weight:600}</style>
-<div class="c"><div class="k" data-at="0.2">Meta Global AI Developer Hackathon · Startup track · Build for Your World</div><div class="t" data-at="0.5">Screenshot to Tokens</div><div class="s" data-at="1.1">A design system from a screenshot in seconds. A more accessible app from the tokens in one change.</div><div class="n" data-at="2.6">Sorb is Metatoy's existing product and is not shown here. Everything in this video was built Oct 25 to 29, 2026 (git tag pre-event-baseline marks the line).</div></div>
+<div class="c"><div class="k" data-at="0.2">Meta Global AI Developer Hackathon · Startup track · Build for Your World</div><div class="t" data-at="0.5">Screenshot to Tokens</div><div class="s" data-at="1.1">A design system from a screenshot in seconds. A more accessible app from the tokens in one change.</div><div class="n" data-at="2.6">Sorb is Metatoy's existing product and is not shown here. Everything in this video was built Oct 26 to Nov 3, 2026 (git tag pre-event-baseline marks the line).</div></div>
 <div class="v" data-at="0.3"><video id="loop" src="../assets/v3/payoff-loop.webm" muted autoplay loop playsinline></video><div class="cap" id="cap"></div></div>
 <script>const t0=Date.now();setInterval(()=>{for(const e of document.querySelectorAll('[data-at]')){if(Date.now()-t0>=+e.dataset.at*1000)e.classList.add('on')}},100)
 const v=document.getElementById('loop'),cap=document.getElementById('cap');const show=()=>{const t=v.currentTime;cap.innerHTML=t<0.85?'“Since last month”: <i>2.95:1, fails text contrast</i>':t<2?'“Since last month”: <b>4.53:1, passes</b> (one token changed)':'Tab: a <b>visible focus ring</b> in the app’s blue';requestAnimationFrame(show)};show()</script>`
@@ -93,7 +93,7 @@ const v=document.getElementById('loop'),cap=document.getElementById('cap');const
 await beat(0, async (p) => {
   // Title card only: the event guide says the demo shows only what was built during the event, so no footage of
   // the pre-existing Sorb product; the card explains it in words.
-  await p.goto(page('title.html', titleCard())); await wait(p, a.v3 ? 25500 : 12500)
+  await p.goto(page('title.html', titleCard())); await wait(p, a['title-ms'] ? +a['title-ms'] : a.v3 ? 25500 : 12500)
 })
 await beat(1, async (p) => { await p.goto(page('editor.html', editorPage())); await wait(p, 8800) })
 await beat(2, async (p) => { await p.goto(`${srv.url}out/scoreboard.html`, { waitUntil: 'networkidle' }); await wait(p, 600); await p.click('#replay'); await wait(p, 6500); await p.evaluate(() => document.querySelector('.headline')?.scrollIntoView({ block: 'start' })); await wait(p, 3500) })
