@@ -83,9 +83,11 @@ export function readWavHeader(bytes) {
  * Browser only: record from the mic with MediaRecorder until `stop()` is called or `maxMs` passes, then decode the
  * recording (decodeAudioData) and encode it as 16 kHz
  * mono WAV. Resolves {wav: Uint8Array, ms, rate, rms}. Hold-to-talk calls this on press and stop() on release.
+ * `onLevel(rms)` (optional) is called about every 50 ms while recording with the live level from an AnalyserNode on the
+ * same MediaStream (the page's level meter); a meter that can't start never stops the recording.
  * (An AudioContext + ScriptProcessor capture produced no samples in headless Chromium: no render clock there.)
  */
-export async function recordWav({ maxMs = 10000, getUserMedia, deviceId } = {}) {
+export async function recordWav({ maxMs = 10000, getUserMedia, deviceId, onLevel } = {}) {
   const gum = getUserMedia || ((c) => navigator.mediaDevices.getUserMedia(c))
   const constraints = { channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false }
   if (deviceId) constraints.deviceId = { exact: deviceId }
@@ -96,11 +98,13 @@ export async function recordWav({ maxMs = 10000, getUserMedia, deviceId } = {}) 
   const parts = []
   rec.ondataavailable = (e) => { if (e.data && e.data.size) parts.push(e.data) }
   const stopped = new Promise((ok) => { rec.onstop = ok })
+  const meter = onLevel ? startMeter(stream, onLevel) : null
   const t0 = Date.now()
   rec.start(250) // timesliced: without it, a short recording stopped by the timer came back undecodable
   const timer = setTimeout(() => { if (rec.state !== 'inactive') rec.stop() }, maxMs)
   const stop = () => { clearTimeout(timer); if (rec.state !== 'inactive') rec.stop() }
   const result = stopped.then(async () => {
+    if (meter) meter()
     stream.getTracks().forEach((t) => t.stop())
     const ms = Date.now() - t0
     const bytes = await new Blob(parts, { type: rec.mimeType }).arrayBuffer()
@@ -113,4 +117,24 @@ export async function recordWav({ maxMs = 10000, getUserMedia, deviceId } = {}) 
     return { wav: encodeWav(mono, audio.sampleRate), ms, rate: audio.sampleRate, rms: rms(mono), mime: rec.mimeType, label }
   })
   return { stop, result, label }
+}
+
+/** Browser only: poll an AnalyserNode on `stream` and report its RMS level. Returns a stop function (never throws). */
+function startMeter(stream, onLevel) {
+  try {
+    const ctx = new (globalThis.AudioContext || globalThis.webkitAudioContext)()
+    const src = ctx.createMediaStreamSource(stream)
+    const an = ctx.createAnalyser()
+    an.fftSize = 1024
+    src.connect(an)
+    const buf = new Float32Array(an.fftSize)
+    if (ctx.state === 'suspended' && ctx.resume) ctx.resume().catch(() => {})
+    const id = setInterval(() => {
+      try { an.getFloatTimeDomainData(buf); onLevel(rms(buf)) } catch (e) { void e }
+    }, 50)
+    return () => { clearInterval(id); try { src.disconnect(); ctx.close() } catch (e) { void e } try { onLevel(0) } catch (e) { void e } }
+  } catch (e) {
+    void e
+    return null
+  }
 }

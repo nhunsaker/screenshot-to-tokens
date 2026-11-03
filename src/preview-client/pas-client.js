@@ -134,6 +134,7 @@ export function changeNote(c) {
   if (c.noop) return 'already that value'
   const notes = []
   if (c.retargetedFrom) notes.push(`moved to the semantic token (the model named ${c.retargetedFrom})`)
+  if (c.roleRetargetedFrom) notes.push(`moved off ${c.roleRetargetedFrom} (wrong role for this token)`)
   if (c.aliasPreferred && c.alias && c.aliasPreferred !== c.alias) notes.push(`pointed at the semantic token ${c.alias} (the model said ${c.aliasPreferred})`)
   return notes.join('; ')
 }
@@ -213,10 +214,16 @@ export function proposalTitle(route) {
 /** Units per action, mirrored from src/stages/pas/ledger.js COSTS (the page only words them; the server charges). */
 export const BUDGET_COSTS = { point: 1, transcribe: 1, deterministic: 0, muse: 2, focusCheck: 3 }
 
-/** "Demo budget: 742 of 1,000 left". */
+/** "Demo budget 742 of 1,000" (units left of the shared total). */
 export function budgetLine(b) {
   const n = (v) => Math.max(0, Math.round(Number(v) || 0)).toLocaleString('en-US')
-  return `Demo budget: ${n(b && b.left)} of ${n(b && b.total)} left`
+  return `Demo budget ${n(b && b.left)} of ${n(b && b.total)}`
+}
+
+/** Share of the demo budget left, 0..1, for the budget bar. */
+export function budgetFraction(b) {
+  const total = Number(b && b.total) || 0
+  return total > 0 ? Math.max(0, Math.min(1, (Number(b.left) || 0) / total)) : 0
 }
 
 /** "You can use 37 more on this visit." when the per-visit (session/IP/day) share is smaller than the shared counter. */
@@ -282,7 +289,7 @@ export function micProblem({ label, rms, error } = {}) {
 
 /** Steps to get a real microphone working (macOS-first, then the browser). */
 export const MIC_HELP = [
-  'Pick a real microphone in the menu next to the button, if one is listed.',
+  'Pick a real microphone in the menu below the button, if one is listed.',
   'On a Mac laptop with the lid closed, the built-in mic is off: open the lid, or plug in a headset or AirPods.',
   'Mac: System Settings → Sound → Input → choose the real mic (not Teams, Loom or Zoom), and watch the level move.',
   'Mac: System Settings → Privacy & Security → Microphone → allow your browser, then quit and reopen it.',
@@ -290,3 +297,159 @@ export const MIC_HELP = [
   'Another app in a call (Zoom, Teams, Loom) can hold the mic; close it and try again. Typing always works.',
 ]
 
+
+// ---- panel wording (the redesigned side panel) -------------------------------------------------------------------
+
+const PROVIDER_NAMES = { baseten: 'Muse Spark Open', meta: 'Muse Spark', fireworks: 'Muse Spark Open (Fireworks)' }
+
+/**
+ * Human name for a provider id or a namer string ("baseten:meta-models/muse-spark-open-1026" -> "Muse Spark Open").
+ * Never returns the raw model id. Pure.
+ */
+export function providerName(idOrNamer) {
+  const id = String(idOrNamer || '').split(':')[0].trim().toLowerCase()
+  if (PROVIDER_NAMES[id]) return PROVIDER_NAMES[id]
+  if (/muse/i.test(String(idOrNamer || ''))) return 'Muse Spark'
+  return id === 'ollama' ? 'a local model' : 'a model'
+}
+
+/** The one meta line under the panel title: "Argon Dashboard · 44 tokens · named by Muse Spark Open". Pure. */
+export function metaLine({ title, tokens, namer } = {}) {
+  const n = Number(tokens) || 0
+  return [title, `${n} token${n === 1 ? '' : 's'}`, `named by ${providerName(namer)}`].filter(Boolean).join(' · ')
+}
+
+/**
+ * Which of the three steps is current (1 click, 2 say or type, 3 keep or undo; 4 = all done) from the page state.
+ * @param {{phase?:string, hasPoint?:boolean, resultKind?:string|null, kept?:boolean, recording?:boolean}} s
+ */
+export function stepIndex(s = {}) {
+  if (s.kept) return 4
+  if (s.phase === 'done' && (s.resultKind === 'applied' || s.resultKind === 'focus')) return 3
+  if (s.recording) return 2
+  if (['transcribing', 'intent', 'focus-check'].includes(s.phase)) return 2
+  return s.hasPoint ? 2 : 1
+}
+
+/**
+ * The target box after a click: the clicked label, the token that controls it, and how widely that token is used.
+ * {label:"Since last month", token:"color.text.muted", line:"color.text.muted · used by 21 labels"}. Pure.
+ */
+export function targetInfo(point) {
+  const el = (point && point.element) || null
+  const label = el ? String(el.text || '').trim() || `<${el.tag}>` : ''
+  const ctl = (point && point.controls) || {}
+  const color = ctl.color && ctl.color.token
+  const paint = (ctl['background-color'] && ctl['background-color'].token) || (ctl['border-color'] && ctl['border-color'].token)
+  let token = null, line = 'no token controls it'
+  const pairs = point && point.pairs && point.pairs.count
+  if (color) {
+    token = color
+    line = pairs ? `${color} · used by ${pairs} label${pairs === 1 ? '' : 's'}` : color
+  } else if (paint) {
+    token = paint
+    const n = ((point && point.twins) || []).length + 1
+    line = `${paint} · used by ${n} element${n === 1 ? '' : 's'}`
+  }
+  return { label, token, line }
+}
+
+const ROLE_SEG = /^(bg|background|text|fg|border|color|surface|fill|ring|outline)$/
+const cap = (w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w)
+const plural = (w) => (/s$/.test(w) ? w : /(ch|sh|x)$/.test(w) ? w + 'es' : w + 's')
+
+/** "color.text.muted" -> "Muted labels", "button.bg" -> "Buttons", "color.surface.card" -> "Card surfaces". Pure. */
+export function tokenSubject(name) {
+  const seg = String(name || '').split('.')
+  if (seg[0] === 'color' && seg[1] === 'text') {
+    const v = seg[2] || ''
+    if (/^(default|body|primary|base)$/.test(v)) return 'Body text'
+    if (/^(muted|secondary|subtle|light)$/.test(v)) return 'Muted labels'
+    if (/^heading/.test(v)) return 'Headings'
+    if (/^link/.test(v)) return 'Links'
+    return v ? `${cap(v)} text` : 'Text'
+  }
+  if (seg[0] === 'color' && seg[1] === 'surface') return seg[2] ? `${cap(seg[2])} surfaces` : 'Surfaces'
+  if (seg[0] === 'color' && seg[1] === 'action') return seg[2] ? `${cap(seg[2])} actions` : 'Actions'
+  if (seg[0] === 'color' && seg[1] === 'border') return 'Borders'
+  if (seg[0] === 'color' || seg[0] === 'radius') return seg.slice(1).join(' ').replace(/^./, (c) => c.toUpperCase()) || name
+  const parts = seg.filter((x) => !ROLE_SEG.test(x))
+  return parts.length ? cap(parts.map((x, i) => (i === parts.length - 1 ? plural(x) : x)).join(' ').replace(/-/g, ' ')) : cap(name)
+}
+
+const hexRgb = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(String(h || '').trim()); if (!m) return null; const n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255] }
+const lum = ([r, g, b]) => { const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4 }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b) }
+
+/** A plain hue word for a hex colour: gray for low saturation, else red/orange/yellow/green/teal/blue/purple/pink. */
+export function hueWord(hex) {
+  const c = hexRgb(hex); if (!c) return 'colour'
+  const [r, g, b] = c.map((x) => x / 255)
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn
+  const l = (mx + mn) / 2
+  const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1))
+  if (sat < 0.25 || d < 0.08) return l < 0.12 ? 'black' : l > 0.94 ? 'white' : 'gray'
+  let h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4
+  h = (h * 60 + 360) % 360
+  return h < 15 ? 'red' : h < 40 ? 'orange' : h < 65 ? 'yellow' : h < 160 ? 'green' : h < 195 ? 'teal' : h < 255 ? 'blue' : h < 290 ? 'purple' : h < 340 ? 'pink' : 'red'
+}
+
+/**
+ * The bold plain-words headline of a proposal card: "Muted labels: a darker gray", "Buttons: a new background",
+ * "A focus ring on every control". `proposal` = {route, changes:[{token, from, to|value, noop?}]} (`to` = the resolved
+ * new colour). Pure.
+ */
+export function describeChange(proposal) {
+  const p = proposal || {}
+  if (p.route === 'focus') return 'A focus ring on every control'
+  const live = (p.changes || []).filter((c) => c && !c.noop)
+  if (!live.length) return (p.changes || []).length ? 'Already that way: nothing to change' : 'No change'
+  const subject = tokenSubject(live[0].token)
+  const whats = []
+  for (const c of live.filter((x) => tokenSubject(x.token) === subject)) { const w = changeWhat(c); if (!whats.includes(w)) whats.push(w) }
+  const others = new Set(live.map((x) => tokenSubject(x.token)).filter((x) => x !== subject)).size
+  const what = whats.length > 1 && whats.every((w) => /^a new /.test(w)) ? `a new ${whats.map((w) => w.slice(6)).slice(0, 2).join(' and ')}` : whats[0]
+  return `${subject}: ${what}${others ? ` (+${others} more)` : ''}`
+}
+
+/** What one change does, in a few words: "a darker gray", "a new background", "rounder corners". Pure. */
+function changeWhat(c) {
+  const to = c.to || c.value
+  const seg = String(c.token).split('.')
+  if (/^radius/.test(c.token) || /radius/.test(seg[seg.length - 1])) {
+    return parseFloat(to) > parseFloat(c.from) ? 'rounder corners' : parseFloat(to) < parseFloat(c.from) ? 'squarer corners' : 'new corners'
+  }
+  if (seg.some((x) => /^(bg|background|surface|fill)$/.test(x))) return 'a new background'
+  if (seg.some((x) => /^(border|outline|ring)$/.test(x))) return 'a new border'
+  const a = hexRgb(c.from), b = hexRgb(to)
+  if (!b) return 'a new colour'
+  const dir = a ? (lum(b) < lum(a) - 0.005 ? 'a darker ' : lum(b) > lum(a) + 0.005 ? 'a lighter ' : 'a new ') : 'a new '
+  return dir + hueWord(to)
+}
+
+/**
+ * The pass row: "21 labels now pass text contrast: 2.95:1 → 4.53:1" (all fixed), "3 of 21 labels now pass …" (some),
+ * "21 labels changed; text contrast 2.95:1 → 4.53:1" (none newly pass). `ok` says whether it reads as a pass. Pure.
+ */
+export function passLine({ n, fixed = 0, before, after }) {
+  const nums = `${fmtRatio(before)} → ${fmtRatio(after)}`
+  const lab = (k) => `${k} label${k === 1 ? '' : 's'}`
+  if (n && fixed >= n) return { ok: true, text: `${lab(n)} now pass text contrast: ${nums}` }
+  if (n && fixed > 0) return { ok: true, text: `${fixed} of ${lab(n)} now pass text contrast: ${nums}` }
+  return { ok: false, text: `${lab(n || 0)} changed; text contrast ${nums}` }
+}
+
+/** "Checked on the whole page: 41 → 20 text pairs failing, 0 got worse" from two auditLive() arrays. Pure. */
+export function pageCheckLine(before, after, worse = 0) {
+  const f = (a) => (a || []).filter((r) => r.status === 'fail').length
+  return `Checked on the whole page: ${f(before)} → ${f(after)} text pairs failing, ${worse} got worse`
+}
+
+/** Focus pass row: "25 of 25 controls now show a visible focus ring (was 0)". Pure. */
+export function focusPassLine(before, after, total) {
+  return `${after} of ${total} control${total === 1 ? '' : 's'} now show a visible focus ring (was ${before})`
+}
+
+/** Focus page-check row: "Checked by tabbing through the whole page: 25 controls, 0 got worse". Pure. */
+export function focusCheckLine(total, worse = 0) {
+  return `Checked by tabbing through the whole page: ${total} control${total === 1 ? '' : 's'}, ${worse} got worse`
+}

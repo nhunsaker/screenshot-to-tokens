@@ -117,3 +117,16 @@ almost all of it the Tab-through.
 - Muse's wording varies between runs (for example, which twins it names). The token change and the block verdict
   were the same in every run here and in lane A's runs.
 - Only one app state per click: hover and active states are not targeted (out of scope in the plan).
+
+## Token-role guard
+
+The model once mapped `button.bg` to `color.text.default` (same value, wrong role). `guardRoles` in
+`src/stages/pas/intent.js` now runs on every Muse reply: a background or border may alias only a surface, action,
+border or primitive colour token, never `color.text.*`; a text colour may not alias `color.surface.*`. A wrong-role
+alias moves to the allowed token with the nearest value (RGB distance 24 or less); if there is none, the change is
+dropped and the card says why ("skipped: a background can't use a text token").
+
+## Credits
+
+Panel icons: [Phosphor Icons](https://phosphoricons.com) (MIT). Path data is copied verbatim from the regular and
+fill SVGs into one inline sprite in `playground.html`.

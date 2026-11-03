@@ -4,7 +4,7 @@
 // twins, never a value match. The reply is sanitized (contrast.sanitizeProposal), restricted to CHANGEABLE, then
 // refined: alias targets move to the semantic token with the same value (color.blue.500 -> color.action.primary),
 // changes aimed at a primitive in the element's chain move to the nearest non-primitive, and changes already in place
-// are kept as no-ops. Data sent: token names/values, the transcript, the element's text and colours.
+// are kept as no-ops, and the token-role guard keeps a background off text tokens (and text off surfaces). Data sent: token names/values, the transcript, the element's text and colours.
 import { chat, extractJson } from '../../providers/llm/chat.js'
 import { LLM_PRESETS } from '../../config.js'
 import { namerChain } from '../../providers/llm/llm-namer.js'
@@ -138,6 +138,78 @@ export function refineChanges(changes, { tokens, chains = [] }) {
   return out
 }
 
+// ---- token-role guard ------------------------------------------------------------------------------------------------
+// The model once mapped button.bg -> color.text.default (same value, wrong role). A background or border may alias only
+// a surface / action / border / primitive colour token, never color.text.*; a text colour may not alias color.surface.*.
+// A wrong-role alias is moved to the nearest-valued allowed token, or the change is dropped with a reason.
+
+const SEG = (words) => new RegExp(`(^|[.-])(${words})([.-]|$)`, 'i')
+const TEXTY = SEG('text|fg|foreground|label|heading|link|placeholder|ink')
+const PAINTY = SEG('bg|background|surface|fill|border|outline|ring|shadow|divider')
+const BORDERY = SEG('border|outline|ring|divider')
+
+/**
+ * The role of a token being changed: 'background', 'border', 'text', or null when unknown. From its name first, then
+ * the CSS properties it controls on the clicked element (`props`, from changeableFrom). Pure.
+ */
+export function tokenRole(name, props = []) {
+  const n = String(name || '')
+  const p = (props || []).filter((x) => x && x !== 'twin')
+  if (PAINTY.test(n) && !/^color\.text\./.test(n)) return BORDERY.test(n) ? 'border' : 'background'
+  if (TEXTY.test(n)) return 'text'
+  if (p.length && p.every((x) => /border|outline/.test(x))) return 'border'
+  if (p.length && p.every((x) => /background|border|outline|fill/.test(x))) return 'background'
+  if (p.length && p.every((x) => x === 'color')) return 'text'
+  return null
+}
+
+/** True when `target` (a token name) is an allowed alias for a token in `role`. Pure. */
+export function aliasAllowed(role, target, byName) {
+  const t = byName && byName.get(target)
+  const n = String(target || '')
+  if (role === 'background' || role === 'border') {
+    if (/^color\.text\./.test(n)) return false
+    return /^color\.(surface|action|border)\./.test(n) || !!(t && t.tier === 'primitive')
+  }
+  if (role === 'text') return !/^color\.surface\./.test(n)
+  return true
+}
+
+const ROLE_WORD = { background: 'a background', border: 'a border', text: 'a text colour' }
+const BAN_WORD = { background: 'a text token', border: 'a text token', text: 'a surface token' }
+const rgbDist = (a, b) => { const x = parseColor(a), y = parseColor(b); return x && y ? Math.hypot(x.r - y.r, x.g - y.g, x.b - y.b) : Infinity }
+
+/**
+ * Enforce token roles on refined changes. A wrong-role alias moves to the allowed colour token whose value is nearest
+ * (RGB distance <= `maxDist`; ties to the better-ranked name), else the change is skipped with a plain reason
+ * ("skipped: a background can't use a text token"). Pure.
+ * @returns {{changes:Array<object>, skipped:Array<{token:string, alias:string, why:string, role:string}>}}
+ */
+export function guardRoles(changes, { tokens, changeable = [], maxDist = 24 }) {
+  const byName = new Map(tokens.map((t) => [t.name, t]))
+  const props = new Map((changeable || []).map((c) => (typeof c === 'string' ? [c, []] : [c.name, c.props || []])))
+  const out = [], skipped = []
+  for (const c of changes) {
+    const role = tokenRole(c.token, props.get(c.token) || [])
+    if (!c.alias || !role || aliasAllowed(role, c.alias, byName)) { out.push(c); continue }
+    const want = resolveValue(c.alias, byName)
+    const pointsAt = (name) => { const seen = new Set(); for (let t = byName.get(name); t && !seen.has(t.name); t = byName.get(t.alias)) { if (t.name === c.token) return true; seen.add(t.name) } return false }
+    const best = tokens
+      .filter((t) => t.kind !== 'radius' && t.name !== c.token && !pointsAt(t.name) && aliasAllowed(role, t.name, byName) && parseColor(resolveValue(t.name, byName)))
+      .map((t) => ({ t, d: rgbDist(resolveValue(t.name, byName), want) }))
+      .filter((x) => x.d <= maxDist)
+      .sort((a, b) => a.d - b.d || prefRank(a.t) - prefRank(b.t))[0]
+    if (!best) { skipped.push({ token: c.token, alias: c.alias, role, why: `skipped: ${ROLE_WORD[role]} can't use ${BAN_WORD[role]}` }); continue }
+    const alias = best.t.name
+    const cur = byName.get(c.token)
+    const item = { ...c, alias, value: null, css: `var(--${cssVarName(alias)})`, roleRetargetedFrom: c.alias }
+    delete item.noop
+    if (cur && (cur.alias === alias || (c.from && sameColor(c.from, resolveValue(alias, byName))))) item.noop = true
+    out.push(item)
+  }
+  return { changes: out, skipped }
+}
+
 /** Muse providers in the namer's failover order (Baseten -> Fireworks -> hosted), keys present, never "-contributor". */
 export function intentProviders(first = 'baseten', env) {
   return namerChain(first, env).map((id) => LLM_PRESETS[id]()).filter((p) => p.apiKey && p.model && p.id !== 'ollama' && !/-contributor$/i.test(p.model))
@@ -159,8 +231,11 @@ export async function museIntent(req, { provider = 'baseten', chatFn = chat, pro
       const r = await chatFn({ baseURL: p.baseURL, apiKey: p.apiKey, model: p.model, messages, json: true, reasoningEffort: 'low', timeoutMs: 45000 })
       const raw = extractJson(r.text)
       const out = restrictProposal(raw, { known: req.tokens.map((t) => t.name), changeable: req.changeable, radiusTokens })
-      const changes = refineChanges(out.changes, { tokens: req.tokens, chains: req.chains || [] })
-      return { changes, rejected: out.rejected, affects: out.affects, raw, provider: p.id, model: p.model, ms: Date.now() - t0, cached: !!r.cached, errors }
+      const refined = refineChanges(out.changes, { tokens: req.tokens, chains: req.chains || [] })
+      const g = guardRoles(refined, { tokens: req.tokens, changeable: req.changeable })
+      const changes = g.changes
+      const rejected = out.rejected.concat(g.skipped.map((x) => ({ token: x.token, value: x.alias, why: x.why, role: x.role })))
+      return { changes, rejected, affects: out.affects, raw, provider: p.id, model: p.model, ms: Date.now() - t0, cached: !!r.cached, errors }
     } catch (e) { errors.push(`${p.id}: ${String(e.message || e).slice(0, 160)}`) }
   }
   throw new Error(errors.join(' | '))

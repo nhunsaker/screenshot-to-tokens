@@ -9,7 +9,7 @@ import { request } from 'http'
 import { PNG } from 'pngjs'
 import { probeAtPoint, orderChain, comparePairs, pairStats, PROBE_PROPS, SENTINEL_COLOR, SENTINEL_RADIUS } from '../src/stages/pas/sentinel.js'
 import { decideIntent, resolvePoint, focusCheck, sanitizeFocusChanges, changeableFrom, createPasApi, serial } from '../src/stages/pas/api.js'
-import { refineChanges, preferSemantic, restrictProposal, museIntent, intentProviders } from '../src/stages/pas/intent.js'
+import { refineChanges, preferSemantic, restrictProposal, museIntent, intentProviders, tokenRole, aliasAllowed, guardRoles } from '../src/stages/pas/intent.js'
 import { focusProposal, ringForHue, namedHue, inHue, choiceFromChanges, focusResultSummary } from '../src/stages/pas/focus-intent.js'
 import { startPlayground } from '../src/stages/playground.js'
 
@@ -263,6 +263,78 @@ test('museIntent: fails over Baseten -> Fireworks, restricts and refines; intent
   try { assert.deepEqual(intentProviders('baseten', '').map((p) => p.id), ['baseten', 'meta']) } finally {
     for (const k of ['BASETEN_API_KEY', 'FIREWORKS_API_KEY', 'META_API_KEY', 'FIREWORKS_MODEL']) { if (saved[k] === undefined) delete process.env[k]; else process.env[k] = saved[k] }
   }
+})
+
+// ---- token-role guard ----------------------------------------------------------------------------------------------
+
+const ROLE_TOKENS = [
+  T('color.text.default', 'semantic', 'color', '#32325d'),
+  T('color.text.inverse', 'semantic', 'color', '#ffffff'),
+  T('color.surface.page', 'semantic', 'color', '#f7fafc'),
+  T('color.surface.card', 'semantic', 'color', null, 'color.white'),
+  T('color.action.primary', 'semantic', 'color', '#5e72e4'),
+  T('button.bg', 'component', 'color', null, 'color.action.primary'),
+  T('button.border', 'component', 'color', null, 'color.action.primary'),
+  T('button.text', 'component', 'color', null, 'color.text.inverse'),
+  T('color.gray.800', 'primitive', 'color', '#32325e'),
+  T('color.white', 'primitive', 'color', '#ffffff'),
+]
+const chg = (token, alias) => ({ token, cssVar: token.replace(/\./g, '-'), value: null, alias, css: `var(--${alias.replace(/\./g, '-')})`, from: null, why: 'm' })
+
+test('tokenRole: name first, then the CSS properties it controls', () => {
+  assert.equal(tokenRole('button.bg'), 'background')
+  assert.equal(tokenRole('color.surface.card'), 'background')
+  assert.equal(tokenRole('button.border'), 'border')
+  assert.equal(tokenRole('color.text.muted'), 'text')
+  assert.equal(tokenRole('button.text'), 'text')
+  assert.equal(tokenRole('color.black-a5', ['border-color']), 'border')
+  assert.equal(tokenRole('color.blue.400', ['background-color', 'twin']), 'background')
+  assert.equal(tokenRole('color.blue.400', ['color']), 'text')
+  assert.equal(tokenRole('color.blue.400', ['color', 'background-color']), null)
+})
+
+test('aliasAllowed: backgrounds and borders never take color.text.*, text never takes color.surface.*', () => {
+  const byName = new Map(ROLE_TOKENS.map((t) => [t.name, t]))
+  assert.equal(aliasAllowed('background', 'color.text.default', byName), false)
+  assert.equal(aliasAllowed('border', 'color.text.default', byName), false)
+  assert.equal(aliasAllowed('background', 'color.surface.card', byName), true)
+  assert.equal(aliasAllowed('background', 'color.action.primary', byName), true)
+  assert.equal(aliasAllowed('background', 'color.gray.800', byName), true, 'primitives are allowed')
+  assert.equal(aliasAllowed('background', 'button.text', byName), false, 'a component text token is not a paint token')
+  assert.equal(aliasAllowed('text', 'color.surface.card', byName), false)
+  assert.equal(aliasAllowed('text', 'color.text.default', byName), true)
+})
+
+test('guardRoles: button.bg -> color.text.default is retargeted to the nearest-valued allowed token', () => {
+  const g = guardRoles([chg('button.bg', 'color.text.default')], { tokens: ROLE_TOKENS, changeable: [{ name: 'button.bg', props: ['background-color'] }] })
+  assert.equal(g.skipped.length, 0)
+  assert.equal(g.changes[0].alias, 'color.gray.800', '#32325e is 1 step from #32325d')
+  assert.equal(g.changes[0].css, 'var(--color-gray-800)')
+  assert.equal(g.changes[0].roleRetargetedFrom, 'color.text.default')
+})
+
+test('guardRoles: same value prefers the better-ranked name; text off surfaces', () => {
+  const g = guardRoles([chg('button.text', 'color.surface.card')], { tokens: ROLE_TOKENS })
+  assert.equal(g.changes[0].alias, 'color.text.inverse', 'same #ffffff, semantic beats the primitive white')
+  const g2 = guardRoles([chg('button.bg', 'color.text.inverse')], { tokens: ROLE_TOKENS })
+  assert.equal(g2.changes[0].alias, 'color.surface.card')
+})
+
+test('guardRoles: no allowed token near the value -> skipped with a plain reason; allowed aliases untouched', () => {
+  const toks = ROLE_TOKENS.filter((t) => t.name !== 'color.gray.800')
+  const g = guardRoles([chg('button.bg', 'color.text.default'), chg('button.border', 'color.action.primary'), chg('button.text', 'color.text.default')], { tokens: toks })
+  assert.deepEqual(g.changes.map((c) => [c.token, c.alias]), [['button.border', 'color.action.primary'], ['button.text', 'color.text.default']])
+  assert.deepEqual(g.skipped, [{ token: 'button.bg', alias: 'color.text.default', role: 'background', why: "skipped: a background can't use a text token" }])
+  const g2 = guardRoles([chg('color.text.muted', 'color.surface.page')], { tokens: [T('color.text.muted', 'semantic', 'color', '#8898aa'), T('color.surface.page', 'semantic', 'color', '#2dce89'), T('color.text.default', 'semantic', 'color', '#32325d')] })
+  assert.equal(g2.skipped[0].why, "skipped: a text colour can't use a surface token")
+})
+
+test('museIntent: the role guard runs on the model reply and reports skips as rejected', async () => {
+  const chatFn = async () => ({ text: JSON.stringify({ changes: [{ token: 'button.bg', alias: 'color.text.default', why: 'dark' }], affects: 'buttons' }) })
+  const toks = ROLE_TOKENS.filter((t) => t.name !== 'color.gray.800')
+  const r = await museIntent({ transcript: 'make it dark', clicked: {}, changeable: [{ name: 'button.bg', props: ['background-color'] }], tokens: toks }, { chatFn, providers: [{ id: 'baseten', baseURL: 'b', apiKey: 'k', model: 'm' }] })
+  assert.equal(r.changes.length, 0)
+  assert.equal(r.rejected[0].why, "skipped: a background can't use a text token")
 })
 
 // ---- focus ---------------------------------------------------------------------------------------------------------

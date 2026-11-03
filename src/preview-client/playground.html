@@ -6,29 +6,36 @@
 <title>Token Playground</title>
 <style>
   :root {
-    --bg: #f6f6f4; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a66; --line: #e3e2de; --soft: #efefec;
-    --accent: #5e72e4; --warn-bg: #fff5e6; --warn-ink: #8a5300; --chip: #f2f2ef; --good: #1f6e3f;
+    --bg: #f6f6f4; --panel: #ffffff; --ink: #1d1d1b; --muted: #636260; --line: #e3e2de; --soft: #efefec;
+    --accent: #4f62d6; --on-accent: #ffffff; --accent-soft: #eef0fc; --warn-bg: #fff5e6; --warn-ink: #7f4c00; --chip: #f2f2ef;
+    --good: #1d6a3c; --good-soft: #e4f3e9; --bad: #c4283c; --bad-ink: #a11d2e; --bad-soft: #fdecee; --pick: #c2187a;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a09f9a; --line: #34332f; --soft: #2a2a27;
-      --accent: #8a9af0; --warn-bg: #3a2a12; --warn-ink: #f0c27a; --chip: #2a2a27; --good: #8fdcaa; }
+    :root { --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a8a7a2; --line: #3a3934; --soft: #2a2a27;
+      --accent: #8a9af0; --on-accent: #10132a; --accent-soft: #262b4a; --warn-bg: #3a2a12; --warn-ink: #f0c27a; --chip: #2a2a27;
+      --good: #8fdcaa; --good-soft: #173222; --bad: #c4283c; --bad-ink: #f6a9b3; --bad-soft: #3d1519; --pick: #f27ab8; }
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
   html, body { height: 100%; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
   .app { display: grid; grid-template-columns: 380px 1fr; height: 100vh; }
-  aside { background: var(--panel); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; }
-  header { padding: 16px 16px 12px; border-bottom: 1px solid var(--line); }
+  aside { position: relative; background: var(--panel); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
+  header { padding: 16px 16px 10px; }
   h1 { margin: 0; font-size: 17px; letter-spacing: -0.2px; }
-  .sub { color: var(--muted); font-size: 13px; margin: 2px 0 10px; }
+  .sub { color: var(--muted); font-size: 12.5px; margin: 2px 0 0; }
+  .ic { width: 16px; height: 16px; flex: none; fill: currentColor; vertical-align: -3px; }
   .notice { background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; font-weight: 600; }
-  .actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  button { font: 600 12.5px system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
-  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .staticNote { color: var(--muted); font-size: 12px; margin: 6px 0 0; }
+  .actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
+  button { font: 600 12.5px system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 6px 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  button.link { border: 0; background: none; padding: 2px 0; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
   button:disabled { opacity: .45; cursor: default; }
-  .search { margin-top: 10px; width: 100%; font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
-  .list { overflow: auto; flex: 1; padding: 4px 8px 24px; }
+  button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .search { width: 100%; font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+  .filterBar { position: sticky; top: 0; z-index: 2; background: var(--panel); padding: 10px 16px 6px; border-top: 1px solid var(--line); }
+  .list { flex: 1 0 auto; padding: 0 8px 24px; }
   h2 { font-size: 11.5px; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); margin: 16px 8px 6px; }
   .tok { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 8px; border-radius: 10px; }
   .tok:hover { background: var(--soft); }
@@ -42,18 +49,19 @@
   .radius { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
   .radius input { width: 140px; }
   .rprev { width: 34px; height: 34px; border: 2px solid var(--accent); background: var(--soft); }
-  .tools { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .tools { display: none; }
   .tools.on { display: block; }
   .tools .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .tools select { font: 12.5px system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 5px 6px; max-width: 100%; }
-  .tools .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
-  .results { display: none; border-bottom: 1px solid var(--line); padding: 10px 16px 12px; max-height: 46vh; overflow: auto; }
+  select { font: 12.5px system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 5px 6px; max-width: 100%; }
+  .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  .hint:empty { display: none; }
+  .results { display: none; border-top: 1px solid var(--line); padding: 10px 16px 12px; max-height: 46vh; overflow: auto; }
   .results.on { display: block; }
   .results h3 { font-size: 13px; margin: 8px 0 4px; }
   .results p { margin: 4px 0; font-size: 12.5px; }
   .score { display: inline-block; font: 700 12px system-ui, sans-serif; border-radius: 99px; padding: 2px 8px; background: var(--chip); }
   .score.bad { background: var(--warn-bg); color: var(--warn-ink); }
-  .score.good { background: color-mix(in srgb, #2f9e5b 18%, transparent); color: var(--good); }
+  .score.good { background: var(--good-soft); color: var(--good); }
   .pair { display: grid; grid-template-columns: 40px 1fr auto; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--soft); font-size: 12.5px; }
   .pair:first-of-type { border-top: 0; }
   .aa { width: 40px; height: 28px; border-radius: 6px; border: 1px solid var(--line); display: grid; place-items: center; font: 700 13px system-ui, sans-serif; }
@@ -62,9 +70,9 @@
   .fix { padding: 6px 0; border-top: 1px solid var(--soft); font-size: 12.5px; }
   .fix .name { display: inline; }
   .fix .why { color: var(--muted); }
-  .fix.dropped { opacity: .6; }
+  .fix.dropped { opacity: .75; }
   .tag { font: 600 11px system-ui, sans-serif; border-radius: 99px; padding: 1px 7px; margin-left: 4px; background: var(--chip); color: var(--muted); }
-  .tag.ok { background: color-mix(in srgb, #2f9e5b 18%, transparent); color: var(--good); }
+  .tag.ok { background: var(--good-soft); color: var(--good); }
   .tag.no { background: var(--warn-bg); color: var(--warn-ink); }
   .busy { color: var(--muted); font-size: 12.5px; }
   .busy::after { content: ''; display: inline-block; width: 10px; height: 10px; margin-left: 6px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -1px; }
@@ -78,92 +86,191 @@
   .pasBox.outline, .pasBox.element { border-color: #e0218a; box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0,0,0,.35); }
   .pasBox.control { border-color: #e0218a; border-width: 3px; box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(0,0,0,.35); }
   .pasNote { font: 600 11px system-ui, sans-serif; border-radius: 99px; padding: 1px 7px; margin-left: 4px; background: var(--chip); color: var(--muted); }
-  .pasBlocked { background: #fde8ea; color: #8f1d2c; border-radius: 8px; padding: 7px 10px; font-size: 12.5px; font-weight: 700; }
-  @media (prefers-color-scheme: dark) { .pasBlocked { background: #3d1519; color: #f6b2bb; } }
-  .pasRow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-  #pasText { flex: 1; min-width: 120px; font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
-  #pasMic { position: relative; }
-  #pasMic:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  #pasMic.rec { background: #d1374a; border-color: #d1374a; color: #fff; }
-  #pasMic.rec::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #fff; margin-right: 6px; vertical-align: -1px; animation: pasPulse 1s ease-in-out infinite; }
-  @keyframes pasPulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
-  .pasTranscript { font-style: italic; color: var(--muted); margin: 6px 0 0; font-size: 12.5px; }
-  .pasSwatches { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; vertical-align: -3px; }
-  .pasSwatches .sw2 { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--line); display: inline-block; }
-  .pasAffected { font-size: 12px; color: var(--muted); margin: 4px 0; }
-  .pasPre { white-space: pre-wrap; background: var(--chip); border-radius: 8px; padding: 8px 10px; font: 12px ui-monospace, Menlo, monospace; margin: 6px 0; }
+  /* Point and say panel */
   .pasLive { margin-top: 10px; }
-  .pasAbout { font-size: 12.5px; background: var(--soft); border-radius: 8px; padding: 8px 10px; }
-  .pasAbout p { margin: 0 0 4px; }
-  .pasAbout p:last-child { margin: 0; color: var(--muted); }
-  .pasBudget { margin-top: 8px; font: 700 13px system-ui, sans-serif; }
-  .pasCostNote { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .pasBudgetRow { display: flex; align-items: center; gap: 8px; font: 600 12.5px system-ui, sans-serif; }
+  .pasBudgetRow .ic { color: var(--muted); }
+  .pasBar { width: 120px; height: 6px; border-radius: 99px; background: var(--soft); overflow: hidden; flex: none; box-shadow: inset 0 0 0 1px var(--line); }
+  .pasBar span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; }
+  .pasCostNote { color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+  .pasCostNote:empty { display: none; }
+  .pasIntro { margin: 10px 0 0; font-size: 13px; }
+  .pasSec { padding: 2px 16px 14px; }
+  .pasToggleRow { display: flex; justify-content: flex-end; }
+  #pasToggle[aria-pressed="false"] { width: 100%; justify-content: center; padding: 9px 12px; background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-size: 13px; }
+  #pasToggle[aria-pressed="true"] { position: absolute; top: 19px; right: 16px; border: 0; background: none; padding: 0; color: var(--muted); font-weight: 600; font-size: 12px; text-decoration: underline; text-underline-offset: 2px; }
+  .pasSteps { list-style: none; margin: 8px 0 10px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .pasSteps li { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; border: 1px solid var(--line); border-radius: 10px; padding: 8px 4px 7px; font: 600 12px/1.25 system-ui, sans-serif; color: var(--muted); }
+  .pasSteps li .ic { width: 18px; height: 18px; }
+  .pasSteps li .s-done { display: none; }
+  .pasSteps li.cur { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+  .pasSteps li.cur .s-todo { color: var(--accent); }
+  .pasSteps li.done { color: var(--ink); }
+  .pasSteps li.done .s-todo { display: none; }
+  .pasSteps li.done .s-done { display: block; color: var(--good); }
+  .pasTarget { display: flex; gap: 10px; align-items: flex-start; border: 1.5px dashed var(--line); border-radius: 10px; padding: 10px 12px; color: var(--muted); font-size: 12.5px; }
+  .pasTarget .ic { width: 18px; height: 18px; margin-top: 1px; }
+  .pasTarget.set { border-style: solid; color: var(--ink); }
+  .pasTarget.set > .ic { color: var(--pick); }
+  .pasTarget .lab { font-weight: 700; font-size: 13px; word-break: break-word; }
+  .pasTarget .tk { font: 11.5px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); margin-top: 2px; word-break: break-all; }
+  #pasText { display: block; width: 100%; margin-top: 10px; font: inherit; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+  #pasText::placeholder { color: var(--muted); }
+  #pasMic { width: 100%; margin-top: 8px; justify-content: center; padding: 9px 12px; font-size: 13px; min-height: 40px; }
+  #pasMic .mic-on, #pasMic .lvl { display: none; }
+  #pasMic.rec { background: var(--bad); border-color: var(--bad); color: #fff; }
+  #pasMic.rec .mic-off { display: none; }
+  #pasMic.rec .mic-on { display: block; }
+  #pasMic.rec .lvl { display: inline-flex; }
+  .lvl { align-items: center; gap: 2px; height: 16px; }
+  .lvl i { display: block; width: 3px; height: 3px; border-radius: 2px; background: currentColor; transition: height .06s linear; }
+  .pasMicDev { display: flex; align-items: center; gap: 6px; margin-top: 6px; color: var(--muted); font-size: 12px; min-width: 0; }
+  .pasMicDev .ic { width: 14px; height: 14px; }
+  .pasMicDev span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pasMicDev button.link { font-size: 12px; }
+  .pasRow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
+  .pasRow label { color: var(--muted); font-size: 12px; }
+  .pasHelp { display: flex; gap: 8px; margin-top: 8px; background: var(--warn-bg); color: var(--warn-ink); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; }
+  .pasHelp .ic { width: 18px; height: 18px; margin-top: 1px; }
+  .pasHelp p { margin: 0 0 4px; font-weight: 700; }
+  .pasHelp ol { margin: 0; padding-left: 18px; }
+  .pasHelp li { margin: 2px 0; }
+  .pasHelp button.link { color: inherit; font-size: 12px; margin-top: 4px; }
   .pasClip { margin-top: 8px; }
   .pasClip p { margin: 0 0 6px; font-weight: 600; font-size: 12.5px; }
   .pasClip video { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; background: #000; }
+  .pasResults { max-height: none; overflow: visible; border-top: 0; padding-top: 0; }
+  .pasCard { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--panel); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .pasCard.blocked { border-color: color-mix(in srgb, var(--bad) 45%, var(--line)); }
+  .results .pasQuote { margin: 0; font-style: italic; color: var(--muted); font-size: 12.5px; }
+  .results .pasHead { margin: 4px 0 8px; font-size: 15px; line-height: 1.3; text-transform: none; letter-spacing: 0; color: var(--ink); }
+  .pasSwap { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 6px 0; font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .pasSwap .sw3 { width: 18px; height: 18px; border-radius: 5px; border: 1px solid var(--line); display: inline-block; }
+  .pasSwap .ic { color: var(--muted); width: 14px; height: 14px; }
+  .pasLine { display: flex; gap: 8px; align-items: flex-start; border-radius: 8px; padding: 7px 10px; margin: 6px 0; font-size: 12.5px; }
+  .pasLine .ic { width: 16px; height: 16px; margin-top: 1px; }
+  .pasLine.ok { background: var(--good-soft); color: var(--good); font-weight: 600; }
+  .pasLine.page { padding: 2px 0; color: var(--muted); }
+  .pasLine.bad { background: var(--bad-soft); color: var(--bad-ink); font-weight: 700; }
+  .pasLine.skip { background: var(--warn-bg); color: var(--warn-ink); }
+  .pasLine.plain { background: var(--soft); }
+  details.pasDetails { margin-top: 6px; }
+  details.pasDetails > summary, details.more > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  details.pasDetails > summary::-webkit-details-marker, details.more > summary::-webkit-details-marker { display: none; }
+  details.pasDetails > summary { font: 600 12.5px system-ui, sans-serif; color: var(--muted); padding: 2px 0; }
+  details.pasDetails > summary .ic { width: 14px; height: 14px; transition: transform .15s; }
+  details.pasDetails[open] > summary .ic { transform: rotate(90deg); }
+  .pasPre { white-space: pre-wrap; background: var(--chip); border-radius: 8px; padding: 8px 10px; font: 12px ui-monospace, Menlo, monospace; margin: 6px 0; }
+  .pasPreviewNote { color: var(--muted); font-size: 12px; margin: 6px 2px 0 !important; }
+  details.more { border-top: 1px solid var(--line); padding: 10px 16px; }
+  details.more > summary { font: 600 13px system-ui, sans-serif; padding: 2px 0; }
+  details.more > summary .caret { margin-left: auto; color: var(--muted); transition: transform .15s; }
+  details.more[open] > summary .caret { transform: rotate(180deg); }
+  details.more.static > summary { display: none; }
+  details.more.static { padding-top: 4px; }
+  .grp h2 { font: 700 11px system-ui, sans-serif; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); margin: 10px 0 6px; }
   .toast { position: fixed; right: 16px; bottom: 16px; background: #111; color: #fff; padding: 8px 12px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
   .toast.show { opacity: 1; }
   @media (max-width: 860px) {
     .app { grid-template-columns: 1fr; grid-template-rows: 55vh auto; height: auto; }
     .stage { order: -1; height: 55vh; }
-    aside { border-right: 0; border-top: 1px solid var(--line); }
-    .list { overflow: visible; }
+    aside { border-right: 0; border-top: 1px solid var(--line); overflow: visible; }
     .results { max-height: none; overflow: visible; }
   }
-  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } .busy::after { animation: none; } #pasMic.rec::before { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } .busy::after { animation: none; } .lvl i, details .ic { transition: none; } }
 </style>
 </head>
 <body>
+<!-- Icons: Phosphor (MIT, phosphoricons.com), path data copied verbatim from the SVGs. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-cursor-click" viewBox="0 0 256 256"><path d="M88,24V16a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0ZM16,104h8a8,8,0,0,0,0-16H16a8,8,0,0,0,0,16ZM124.42,39.16a8,8,0,0,0,10.74-3.58l8-16a8,8,0,0,0-14.31-7.16l-8,16A8,8,0,0,0,124.42,39.16Zm-96,81.69-16,8a8,8,0,0,0,7.16,14.31l16-8a8,8,0,1,0-7.16-14.31ZM219.31,184a16,16,0,0,1,0,22.63l-12.68,12.68a16,16,0,0,1-22.63,0L132.7,168,115,214.09c0,.1-.08.21-.13.32a15.83,15.83,0,0,1-14.6,9.59l-.79,0a15.83,15.83,0,0,1-14.41-11L32.8,52.92A16,16,0,0,1,52.92,32.8L213,85.07a16,16,0,0,1,1.41,29.8l-.32.13L168,132.69ZM208,195.31,156.69,144h0a16,16,0,0,1,4.93-26l.32-.14,45.95-17.64L48,48l52.2,159.86,17.65-46c0-.11.08-.22.13-.33a16,16,0,0,1,11.69-9.34,16.72,16.72,0,0,1,3-.28,16,16,0,0,1,11.3,4.69L195.31,208Z"/></symbol>
+<symbol id="i-microphone" viewBox="0 0 256 256"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V240a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"/></symbol>
+<symbol id="i-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol>
+<symbol id="i-target" viewBox="0 0 256 256"><path d="M221.87,83.16A104.1,104.1,0,1,1,195.67,49l22.67-22.68a8,8,0,0,1,11.32,11.32l-96,96a8,8,0,0,1-11.32-11.32l27.72-27.72a40,40,0,1,0,17.87,31.09,8,8,0,1,1,16-.9,56,56,0,1,1-22.38-41.65L184.3,60.39a87.88,87.88,0,1,0,23.13,29.67,8,8,0,0,1,14.44-6.9Z"/></symbol>
+<symbol id="i-shield-check" viewBox="0 0 256 256"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 256 256"><path d="M207.06,72.67A111.24,111.24,0,0,0,128,40h-.4C66.07,40.21,16,91,16,153.13V176a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V152A111.25,111.25,0,0,0,207.06,72.67ZM224,176H119.71l54.76-75.3a8,8,0,0,0-12.94-9.42L99.92,176H32V153.13c0-3.08.15-6.12.43-9.13H56a8,8,0,0,0,0-16H35.27c10.32-38.86,44-68.24,84.73-71.66V80a8,8,0,0,0,16,0V56.33A96.14,96.14,0,0,1,221,128H200a8,8,0,0,0,0,16h23.67c.21,2.65.33,5.31.33,8Z"/></symbol>
+<symbol id="i-warning-circle" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"/></symbol>
+<symbol id="i-caret-right" viewBox="0 0 256 256"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></symbol>
+<symbol id="i-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+<symbol id="i-sliders-horizontal" viewBox="0 0 256 256"><path d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"/></symbol>
+<symbol id="i-arrow-counter-clockwise" viewBox="0 0 256 256"><path d="M224,128a96,96,0,0,1-94.71,96H128A95.38,95.38,0,0,1,62.1,197.8a8,8,0,0,1,11-11.63A80,80,0,1,0,71.43,71.39a3.07,3.07,0,0,1-.26.25L44.59,96H72a8,8,0,0,1,0,16H24a8,8,0,0,1-8-8V56a8,8,0,0,1,16,0V85.8L60.25,60A96,96,0,0,1,224,128Z"/></symbol>
+<symbol id="i-git-pull-request" viewBox="0 0 256 256"><path d="M104,64A32,32,0,1,0,64,95v66a32,32,0,1,0,16,0V95A32.06,32.06,0,0,0,104,64ZM56,64A16,16,0,1,1,72,80,16,16,0,0,1,56,64ZM88,192a16,16,0,1,1-16-16A16,16,0,0,1,88,192Zm120-31V110.63a23.85,23.85,0,0,0-7-17L163.31,56H192a8,8,0,0,0,0-16H144a8,8,0,0,0-8,8V96a8,8,0,0,0,16,0V67.31L189.66,105a8,8,0,0,1,2.34,5.66V161a32,32,0,1,0,16,0Zm-8,47a16,16,0,1,1,16-16A16,16,0,0,1,200,208Z"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
+<symbol id="i-microphone-fill" viewBox="0 0 256 256"><path d="M80,128V64a48,48,0,0,1,96,0v64a48,48,0,0,1-96,0Zm128,0a8,8,0,0,0-16,0,64,64,0,0,1-128,0,8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V240a8,8,0,0,0,16,0V207.6A80.11,80.11,0,0,0,208,128Z"/></symbol>
+<symbol id="i-check-circle-fill" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+</defs></svg>
 <div class="app">
   <aside>
     <header>
       <h1 id="title">Token playground</h1>
       <div class="sub" id="sub">Loading tokens…</div>
-      <div class="notice">Preview only: changes apply in this page. Nothing is merged.</div>
       <div class="pasLive" id="pasLive" hidden>
-        <div class="pasAbout" id="pasAbout"></div>
-        <div class="pasBudget" id="pasBudget" role="status"></div>
+        <div class="pasBudgetRow" id="pasBudgetRow"><svg class="ic" aria-hidden="true"><use href="#i-gauge"></use></svg><span class="pasBar" aria-hidden="true"><span id="pasBudgetFill"></span></span><span id="pasBudget" role="status"></span></div>
         <div class="pasCostNote" id="pasMine"></div>
-        <div class="pasCostNote" id="pasCostNote"></div>
+        <div class="pasCostNote" id="pasCostNote" hidden></div>
+        <div id="pasAbout" hidden></div>
       </div>
-      <div class="actions">
-        <button id="reset" disabled>Reset all</button>
-        <button id="copy" class="primary" disabled>Copy proposal link</button>
+      <p class="pasIntro" id="pasIntro" hidden>Click anything in the app, then say or type the change. Every change is checked before you keep it.</p>
+      <p class="staticNote" id="staticNote">Preview only: changes apply in this page. Nothing is merged.</p>
+    </header>
+    <section class="tools pasSec" id="pasTools" aria-label="Point and say">
+      <div class="pasToggleRow"><button id="pasToggle" aria-pressed="false">Turn on Point and say</button></div>
+      <div id="pasControls" hidden>
+        <ol class="pasSteps" id="pasSteps" aria-label="Steps">
+          <li data-step="1"><svg class="ic s-todo" aria-hidden="true"><use href="#i-cursor-click"></use></svg><svg class="ic s-done" aria-hidden="true"><use href="#i-check-circle-fill"></use></svg><span>Click a control</span></li>
+          <li data-step="2"><svg class="ic s-todo" aria-hidden="true"><use href="#i-microphone"></use></svg><svg class="ic s-done" aria-hidden="true"><use href="#i-check-circle-fill"></use></svg><span>Say or type</span></li>
+          <li data-step="3"><svg class="ic s-todo" aria-hidden="true"><use href="#i-check"></use></svg><svg class="ic s-done" aria-hidden="true"><use href="#i-check-circle-fill"></use></svg><span>Keep or undo</span></li>
+        </ol>
+        <div class="pasTarget" id="pasTarget" aria-live="polite"></div>
+        <input type="text" id="pasText" placeholder="Type a change, e.g. “make this label readable”" aria-label="Type a change">
+        <button id="pasMic" aria-pressed="false" title="Hold to talk, or click to start and click again to send" style="touch-action:none;user-select:none;-webkit-user-select:none"><svg class="ic mic-off" aria-hidden="true"><use href="#i-microphone"></use></svg><svg class="ic mic-on" aria-hidden="true"><use href="#i-microphone-fill"></use></svg><span class="lbl">Hold to talk</span><span class="lvl" id="pasLevel" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>
+        <div class="pasMicDev" id="pasMicDev"><svg class="ic" aria-hidden="true"><use href="#i-microphone"></use></svg><span id="pasMicName">Default microphone</span><button class="link" id="pasMicChange" aria-controls="pasMicRow" aria-expanded="false" hidden>change</button></div>
+        <div class="pasRow" id="pasMicRow" hidden>
+          <label for="pasMicPick">Microphone</label>
+          <select id="pasMicPick"></select>
+        </div>
+        <div class="pasHelp" id="pasMicHelp" hidden role="status">
+          <svg class="ic" aria-hidden="true"><use href="#i-warning-circle"></use></svg>
+          <div>
+            <p id="pasMicWhy"></p>
+            <ol id="pasMicSteps"></ol>
+            <ol id="pasMicMore" start="4" hidden></ol>
+            <button class="link" id="pasMicMoreBtn" aria-controls="pasMicMore" aria-expanded="false">More fixes</button>
+          </div>
+        </div>
       </div>
-      <div class="tools" id="tools">
+      <div class="hint" id="pasHint">Off. Turn it on, then click something in the app and say or type what to change.</div>
+      <div class="pasClip" id="pasClip" hidden></div>
+    </section>
+    <section class="results pasResults" id="pasResults" aria-live="polite"></section>
+    <details class="more static" id="more" open>
+      <summary><svg class="ic" aria-hidden="true"><use href="#i-sliders-horizontal"></use></svg>More tools<svg class="ic caret" aria-hidden="true"><use href="#i-caret-down"></use></svg></summary>
+      <div class="grp tools" id="tools">
+        <h2>Check</h2>
         <div class="row">
           <button id="audit">Check contrast</button>
           <button id="dark" hidden>Build a dark theme</button>
-          <select id="provider" hidden aria-label="Model">
-            <option value="baseten">Muse Spark Open (Baseten, fast)</option>
-            <option value="meta">Muse Spark (Meta hosted)</option>
-          </select>
         </div>
         <div class="hint" id="toolsHint">WCAG AA text contrast, checked on the live app with the current token values.</div>
       </div>
-      <div class="tools" id="pasTools">
-        <div class="row">
-          <button id="pasToggle" aria-pressed="false">Point and say</button>
+      <div class="grp">
+        <h2>Share</h2>
+        <div class="row actions" style="margin-top:0">
+          <button id="copy" class="primary" disabled>Copy proposal link</button>
+          <button id="reset" disabled>Reset all</button>
         </div>
-        <div class="pasRow" id="pasControls" hidden>
-          <button id="pasMic" aria-pressed="false" style="touch-action:none;user-select:none;-webkit-user-select:none">Hold to talk (or click)</button>
-          <input type="text" id="pasText" placeholder="Or point and type what to change…" aria-label="Point and type">
-        </div>
-        <div class="pasRow" id="pasMicRow" hidden>
-          <label for="pasMicPick" class="meta">Microphone</label>
-          <select id="pasMicPick" aria-label="Microphone"></select>
-        </div>
-        <div class="notice" id="pasMicHelp" hidden role="status">
-          <p id="pasMicWhy"></p>
-          <ol id="pasMicSteps"></ol>
-        </div>
-        <div class="hint" id="pasHint">Off. Turn it on, then click something in the app and say or type what to change.</div>
-        <div class="pasClip" id="pasClip" hidden></div>
       </div>
-      <input class="search" id="search" type="search" placeholder="Filter tokens (e.g. action, blue, radius)" aria-label="Filter tokens">
-    </header>
+      <div class="grp" id="grpModel" hidden>
+        <h2>Model</h2>
+        <select id="provider" aria-label="Model">
+          <option value="baseten">Muse Spark Open (Baseten, fast)</option>
+          <option value="meta">Muse Spark (Meta hosted)</option>
+        </select>
+        <div class="hint" id="modelHint">Muse proposes; every proposal is re-checked before it is offered.</div>
+      </div>
+    </details>
     <section class="results" id="results" aria-live="polite"></section>
-    <section class="results" id="pasResults" aria-live="polite"></section>
+    <div class="filterBar"><input class="search" id="search" type="search" placeholder="Filter tokens (e.g. action, blue, radius)" aria-label="Filter tokens"></div>
     <div class="list" id="list" aria-live="polite"></div>
   </aside>
   <main class="stage" id="stage">
@@ -183,6 +290,13 @@
   function toast(msg) {
     var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show')
     clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show') }, 1600)
+  }
+  // Same wording as pas-client.js metaLine/providerName (inline: this runs before any module loads).
+  function metaLine(d) {
+    var id = String(d.namer || '').split(':')[0].toLowerCase()
+    var names = { baseten: 'Muse Spark Open', meta: 'Muse Spark', fireworks: 'Muse Spark Open (Fireworks)' }
+    var who = names[id] || (/muse/i.test(d.namer || '') ? 'Muse Spark' : id === 'ollama' ? 'a local model' : 'a model')
+    return [d.title, d.tokens.length + ' token' + (d.tokens.length === 1 ? '' : 's'), 'named by ' + who].filter(Boolean).join(' · ')
   }
   function root() { try { return frame.contentDocument && frame.contentDocument.documentElement } catch (e) { return null } }
   function current(cssVar) {
@@ -463,11 +577,12 @@
   var pas = { on: false, health: null, point: null, mic: null, applied: {}, rule: null }
   var pasOverlay = document.getElementById('pasOverlay')
   var pasResults = document.getElementById('pasResults')
+  function ic(name, cls) { return '<svg class="ic' + (cls ? ' ' + cls : '') + '" aria-hidden="true"><use href="#i-' + name + '"></use></svg>' }
 
   function pasBusy(on, msg) {
     ;['pasToggle', 'pasMic', 'pasText'].forEach(function (id) { var el = document.getElementById(id); if (el) el.disabled = on })
-    if (on) { pasResults.classList.add('on'); pasResults.insertAdjacentHTML('beforeend', '<p class="busy" id="pasBusy">' + PAS.escapeHtml(msg) + '</p>') }
-    else { var b = document.getElementById('pasBusy'); if (b) b.remove() }
+    if (on && msg) { pasResults.classList.add('on'); pasResults.insertAdjacentHTML('beforeend', '<p class="busy" id="pasBusy">' + PAS.escapeHtml(msg) + '</p>') }
+    else if (!on) { var b = document.getElementById('pasBusy'); if (b) b.remove() }
   }
   function pasFetch(path, body, isWav) {
     var opts = { method: 'POST' }
@@ -489,6 +604,7 @@
     pas.budget = b
     document.getElementById('pasLive').hidden = false
     document.getElementById('pasBudget').textContent = PAS.budgetLine(b)
+    document.getElementById('pasBudgetFill').style.width = (PAS.budgetFraction(b) * 100).toFixed(1) + '%'
     document.getElementById('pasMine').textContent = PAS.mineLine(b)
     pasState({ budget: { left: b.left, total: b.total, mine: b.mine } })
   }
@@ -499,6 +615,7 @@
     document.getElementById('pasToggle').hidden = true
     document.getElementById('pasControls').hidden = true
     document.getElementById('pasHint').hidden = true
+    document.getElementById('pasIntro').hidden = true
     pasResults.innerHTML = ''; pasResults.classList.remove('on')
     var clip = document.getElementById('pasClip')
     clip.innerHTML = '<p>' + PAS.escapeHtml(PAS.capMessage()) + '</p>' +
@@ -546,54 +663,84 @@
     var pt = PAS.toCaptureXY(raw, { width: w, height: vp.height * w / vp.width }, vp)
     pasPoint(pt)
   }
+  // The three steps (click, say or type, keep or undo), from the latest phase.
+  function pasSteps() {
+    if (!PAS) return
+    var s = window.__pas || {}
+    var kind = pas.undone ? 'undone' : (s.result && s.result.kind) || null
+    var cur = PAS.stepIndex({ phase: s.phase, hasPoint: !!pas.point, resultKind: kind, kept: !!pas.kept, recording: !!(pas.mic || pas.starting) })
+    Array.prototype.forEach.call(document.querySelectorAll('#pasSteps li'), function (li) {
+      var n = +li.getAttribute('data-step')
+      li.classList.toggle('cur', n === cur); li.classList.toggle('done', n < cur)
+      if (n === cur) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current')
+    })
+  }
+  // The target box: dashed and empty before a click; the clicked label and its token after.
+  function pasTarget(state) {
+    var box = document.getElementById('pasTarget')
+    if (state === 'busy') { box.className = 'pasTarget'; box.innerHTML = ic('cursor-click') + '<div class="busy">Looking at what you clicked…</div>'; return }
+    if (!pas.point) {
+      box.className = 'pasTarget'
+      box.innerHTML = ic('cursor-click') + '<div>Nothing selected yet. Click any text, button or link in the app →</div>'
+      return
+    }
+    var t = PAS.targetInfo(pas.point)
+    box.className = 'pasTarget set'
+    box.innerHTML = ic('target') + '<div><div class="lab">“' + PAS.escapeHtml(t.label) + '”</div><div class="tk">' + PAS.escapeHtml(t.line) + '</div></div>'
+  }
   function pasPoint(pt) {
-    pasResults.innerHTML = ''
-    pasBusy(true, 'Looking at what you clicked…')
+    pasResults.innerHTML = ''; pasResults.classList.remove('on')
+    document.getElementById('pasIntro').hidden = true
+    pas.clicked = true; pas.kept = false; pas.undone = false
+    pasBusy(true)
+    pasTarget('busy')
     pasState({ phase: 'pointing', clickAt: Date.now() })
     pasFetch('/__pas/api/point', { x: Math.round(pt.x), y: Math.round(pt.y) }).then(function (r) {
       pasBusy(false)
       pas.point = r
       pasState({ phase: 'pointed', point: { cached: !!r.cachedClick, element: r.element && r.element.text, token: r.controls && r.controls.color && r.controls.color.token, pairs: r.pairs && r.pairs.count, twins: (r.twins || []).length, outline: r.outline && r.outline.source, ms: r.ms } })
       pasRenderOverlay()
-      var el = r.element
-      var tokName = r.controls && r.controls.color && r.controls.color.token
-      var html = '<h3>Clicked</h3>'
-      html += '<p>' + (el ? '<code>' + PAS.escapeHtml(el.tag) + '</code> “' + PAS.escapeHtml(el.text || '') + '”' +
-        (el.control && r.outline && r.outline.source !== 'dom' ? ' <span class="meta">in <code>' + PAS.escapeHtml(el.control.tag + (el.control.classes && el.control.classes.length ? '.' + el.control.classes.slice(0, 2).join('.') : '')) + '</code></span>' : '') : 'no element there') + '</p>'
-      html += '<p class="meta">' + (tokName ? 'controlling token: <code>' + PAS.escapeHtml(tokName) + '</code>' : 'no token controls its color') +
-        (r.pairs && r.pairs.count ? ' · used by ' + r.pairs.count + ' text pair' + (r.pairs.count === 1 ? '' : 's') : '') +
-        (r.twins && r.twins.length ? ' · ' + r.twins.length + ' look-alike' + (r.twins.length === 1 ? '' : 's') : '') + '</p>'
-      html += '<p class="hint">Now say or type what to change.</p>'
-      pasResults.innerHTML = html
-      pasResults.classList.add('on')
-      document.getElementById('pasHint').textContent = 'Point set. Hold the mic or type, then say what to change.'
-    }).catch(function (e2) { if (pasWasCapped(e2)) return; pasBusy(false); pasResults.innerHTML = '<p class="notice">Could not read that click: ' + PAS.escapeHtml(e2.message) + '</p>'; pasResults.classList.add('on') })
+      pasTarget()
+    }).catch(function (e2) {
+      if (pasWasCapped(e2)) return
+      pasBusy(false); pasTarget()
+      pasResults.innerHTML = '<p class="notice">Could not read that click: ' + PAS.escapeHtml(e2.message) + '</p>'; pasResults.classList.add('on')
+    })
   }
   // Mic: press and hold to talk, or click once to start and click again to send. The browser's permission prompt and
   // the async getUserMedia mean the button can be released before the recorder exists, so release is tracked as state
   // (pas.held) and applied once the recorder is ready; a recording that started while the permission prompt held the
   // pointer is discarded with a hint rather than sent.
-  function pasMicLabel(t) { var b = document.getElementById('pasMic'); b.textContent = t }
+  function pasMicLabel(t) { document.querySelector('#pasMic .lbl').textContent = t }
+  function pasLevel(v) {
+    var l = Math.min(1, Math.sqrt(Math.max(0, v || 0)) * 1.6)
+    var shape = [0.55, 0.8, 1, 0.8, 0.55]
+    Array.prototype.forEach.call(document.querySelectorAll('#pasLevel i'), function (bar, i) {
+      bar.style.height = Math.round(3 + 13 * l * shape[i]) + 'px'
+    })
+  }
   function pasMicIdle() {
     var b = document.getElementById('pasMic')
-    b.classList.remove('rec'); b.setAttribute('aria-pressed', 'false'); pasMicLabel('Hold to talk (or click)')
+    b.classList.remove('rec'); b.setAttribute('aria-pressed', 'false'); pasMicLabel('Hold to talk'); pasLevel(0)
     pas.toggle = false; pas.held = false; pas.discard = false; pas.starting = false
+    pasSteps()
   }
   function pasStartMic() {
     if (pas.mic || pas.starting || !pas.health || !pas.health.providers.asr.ok) return
     var micBtn = document.getElementById('pasMic')
     pas.starting = true; pas.discard = false
     micBtn.classList.add('rec'); micBtn.setAttribute('aria-pressed', 'true'); pasMicLabel('Starting the mic…')
+    pasSteps()
     var t0 = Date.now()
     import('/__pas/wav.js').then(function (m) {
-      return m.recordWav({ maxMs: 10000, deviceId: pas.micId || undefined }).then(function (rec) {
+      return m.recordWav({ maxMs: 10000, deviceId: pas.micId || undefined, onLevel: pasLevel }).then(function (rec) {
         pas.mic = rec; pas.starting = false
         // Released while the mic was starting: a slow start (> 1.5 s) means a permission prompt took the click, so
         // throw this one away; a quick tap means click-to-talk, so keep recording until the next click.
         if (!pas.held && !pas.toggle) {
           if (Date.now() - t0 > 1500) { pas.discard = true; rec.stop() } else { pas.toggle = true }
         }
-        if (!pas.discard) pasMicLabel(pas.toggle ? 'Recording… (click to send)' : 'Recording… (release to send)')
+        if (!pas.discard) pasMicLabel(pas.toggle ? 'Recording · click to send' : 'Recording · release to send')
         return rec.result
       })
     }).then(function (out) {
@@ -635,12 +782,26 @@
   }
   function pasStopMic() { if (pas.mic) pas.mic.stop() }
   // Microphone picker + help: list real mics first; show the steps when the mic fails, is virtual, or is silent.
+  function pasMicPicker(open) {
+    var row = document.getElementById('pasMicRow')
+    if (!document.getElementById('pasMicPick').options.length) open = false
+    row.hidden = !open
+    document.getElementById('pasMicChange').setAttribute('aria-expanded', open ? 'true' : 'false')
+  }
   function pasMicHelp(why) {
     var box = document.getElementById('pasMicHelp')
     if (!why) { box.hidden = true; return }
     document.getElementById('pasMicWhy').textContent = why + ' To fix it:'
-    document.getElementById('pasMicSteps').innerHTML = PAS.MIC_HELP.map(function (t) { return '<li>' + PAS.escapeHtml(t) + '</li>' }).join('')
+    var li = function (t) { return '<li>' + PAS.escapeHtml(t) + '</li>' }
+    document.getElementById('pasMicSteps').innerHTML = PAS.MIC_HELP.slice(0, 3).map(li).join('')
+    document.getElementById('pasMicMore').innerHTML = PAS.MIC_HELP.slice(3).map(li).join('')
+    document.getElementById('pasMicMore').hidden = true
+    var more = document.getElementById('pasMicMoreBtn')
+    more.hidden = PAS.MIC_HELP.length <= 3; more.textContent = 'More fixes'; more.setAttribute('aria-expanded', 'false')
     box.hidden = false
+    pas.micProblem = true
+    document.getElementById('pasMicChange').hidden = !document.getElementById('pasMicPick').options.length
+    pasMicPicker(true)
   }
   function pasMicList() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return
@@ -651,7 +812,11 @@
       var pick = document.getElementById('pasMicPick')
       if (!pas.micId || !mics.some(function (m) { return m.id === pas.micId })) pas.micId = PAS.defaultMicId(mics)
       pick.innerHTML = mics.map(function (m) { return '<option value="' + PAS.escapeHtml(m.id) + '"' + (m.id === pas.micId ? ' selected' : '') + '>' + PAS.escapeHtml(m.label + (m.virtual ? ' (virtual, app audio)' : '')) + '</option>' }).join('')
-      document.getElementById('pasMicRow').hidden = false
+      var cur = mics.filter(function (m) { return m.id === pas.micId })[0]
+      document.getElementById('pasMicName').textContent = cur ? cur.label.replace(/^Default - /, '') + (cur.virtual ? ' (virtual)' : '') : 'Default microphone'
+      var real = mics.filter(function (m) { return !m.virtual }).length
+      // "change" only when there is a choice to make (more than one real mic) or something is wrong.
+      document.getElementById('pasMicChange').hidden = !(real > 1 || pas.micProblem) || mics.length < 2
       if (mics.every(function (m) { return m.virtual })) pasMicHelp('Only virtual devices (from apps like Teams, Loom or Zoom) are available, no real microphone.')
     }).catch(function (e) { void e })
   }
@@ -667,7 +832,7 @@
     pas.held = false
     if (pas.starting) return // the recorder isn't ready yet; pasStartMic decides (tap → click-to-talk, prompt → discard)
     if (pas.mic && !pas.toggle) {
-      if (Date.now() - (pas.pressAt || 0) < 350) { pas.toggle = true; pasMicLabel('Recording… (click to send)') } // a tap
+      if (Date.now() - (pas.pressAt || 0) < 350) { pas.toggle = true; pasMicLabel('Recording · click to send') } // a tap
       else pasStopMic()
     }
   }
@@ -700,9 +865,47 @@
     var s = window.__pas || (window.__pas = {})
     Object.keys(o).forEach(function (k) { s[k] = o[k] })
     s.updatedAt = Date.now()
+    pasSteps()
   }
+  // ---- the proposal card ----
+  // The new colour a change resolves to (a hex value, or the alias token's current value in the app).
+  function pasTo(c) {
+    if (/^#[0-9a-f]{3,8}$/i.test(c.value || '')) return toHex(c.value)
+    var m = String(c.css || '').match(/^var\(--([a-z0-9-]+)\)$/i)
+    var v = m ? current(m[1]) : ''
+    return v && /^(#|rgb)/i.test(v) ? toHex(v) : null
+  }
+  function pasSwatches(cs) {
+    var seen = {}, rows = []
+    cs.forEach(function (c) {
+      if (c.noop || !/^(#|rgb)/i.test(c.from || '')) return
+      var a = toHex(c.from), b = pasTo(c)
+      if (!b || a === b) return
+      var k = a + b
+      if (seen[k]) { seen[k].tokens.push(c.token); return }
+      seen[k] = { a: a, b: b, tokens: [c.token] }; rows.push(seen[k])
+    })
+    return rows.slice(0, 3).map(function (x) {
+      return '<div class="pasSwap" title="' + PAS.escapeHtml(x.tokens.join(', ')) + '"><span class="sw3" style="background:' + x.a + '"></span>' + x.a + ' ' + ic('arrow-right') + ' <span class="sw3" style="background:' + x.b + '"></span>' + x.b + '</div>'
+    }).join('')
+  }
+  function pasLine(kind, icon, text, attrs) { return '<div class="pasLine ' + kind + '"' + (attrs || '') + '>' + ic(icon) + '<span>' + PAS.escapeHtml(text) + '</span></div>' }
+  function pasSkipped(r) {
+    return (r.rejected || []).filter(function (x) { return x.role }).map(function (x) { return pasLine('skip', 'warning-circle', x.token + ': ' + x.why) }).join('')
+  }
+  function pasDetails(inner) { return '<details class="pasDetails"><summary>' + ic('caret-right') + 'Token details</summary>' + inner + '</details>' }
+  function pasHead(transcript, headline) { return '<p class="pasQuote">“' + PAS.escapeHtml(transcript) + '”</p><h2 class="pasHead">' + PAS.escapeHtml(headline) + '</h2>' }
+  function pasShowCard(cardHtml, blocked) {
+    pasResults.innerHTML = '<div class="pasCard' + (blocked ? ' blocked' : '') + '" id="pasCard">' + cardHtml + '</div><p class="pasPreviewNote">Preview only: nothing is merged.</p>'
+    pasResults.classList.add('on')
+    var dis = document.getElementById('pasDismiss')
+    if (dis) dis.addEventListener('click', function () { pasResults.innerHTML = ''; pasResults.classList.remove('on'); document.getElementById('pasText').focus() })
+    if (window.innerWidth > 860) { var card = document.getElementById('pasCard'); if (card && card.scrollIntoView) card.scrollIntoView({ block: 'nearest' }) }
+  }
+  function pasDismissButton() { return '<div class="actions"><button id="pasDismiss">Dismiss</button></div>' }
   function pasIntent(transcript) {
     pasResults.innerHTML = ''
+    pas.kept = false; pas.undone = false
     pasBusy(true, 'Mapping “' + transcript + '” to tokens…')
     pasState({ phase: 'intent', transcript: transcript, intentAt: Date.now(), result: null })
     var body = { transcript: transcript }
@@ -711,9 +914,7 @@
       pasBusy(false)
       pasState({ intent: { route: r.route, summary: r.summary, ms: r.ms, model: r.model, changes: r.changes } })
       if (!r.changes || !r.changes.length) {
-        pasResults.innerHTML = '<h3>' + PAS.escapeHtml(PAS.proposalTitle(r.route)) + '</h3><p class="pasTranscript">“' + PAS.escapeHtml(transcript) + '”</p>' +
-          '<p class="notice">Couldn\'t map that to a token.' + (r.summary ? ' ' + PAS.escapeHtml(r.summary) : '') + '</p>'
-        pasResults.classList.add('on')
+        pasShowCard(pasHead(transcript, 'Couldn’t map that to a token') + (r.summary ? '<p>' + PAS.escapeHtml(r.summary) + '</p>' : '') + pasSkipped(r) + pasDismissButton())
         pasState({ phase: 'done', result: { kind: 'none', summary: r.summary } })
         return
       }
@@ -723,22 +924,22 @@
   }
   function pasChangeRow(c, dropped) {
     var note = PAS.changeNote(c)
-    var sw = /^#/.test(c.css) && c.from ? '<span class="pasSwatches"><span class="sw2" style="background:' + PAS.escapeHtml(c.from) + '"></span>→<span class="sw2" style="background:' + PAS.escapeHtml(c.css) + '"></span></span>' : ''
     return '<div class="fix' + (dropped ? ' dropped' : '') + '"><span class="name">' + PAS.escapeHtml(c.token) + '</span> ' +
-      (c.from ? '<code>' + PAS.escapeHtml(c.from) + '</code> ' : '') + '→ <code>' + PAS.escapeHtml(c.alias || c.css) + '</code>' + sw +
+      (c.from ? '<code>' + PAS.escapeHtml(c.from) + '</code> ' : '') + '→ <code>' + PAS.escapeHtml(c.alias || c.css) + '</code>' +
       (note ? '<span class="pasNote">' + PAS.escapeHtml(note) + '</span>' : '') +
       '<div class="why">' + PAS.escapeHtml(PAS.whyLine(c.why)) + '</div></div>'
   }
+  function pasWithTo(cs) { return cs.map(function (c) { var o = {}; Object.keys(c).forEach(function (k) { o[k] = c[k] }); o.to = pasTo(c); return o }) }
   function pasFinishColor(r, transcript) {
-    var html = '<h3>' + PAS.escapeHtml(PAS.proposalTitle(r.route)) + '</h3><p class="pasTranscript">“' + PAS.escapeHtml(transcript) + '”</p>'
     // Everything already in place (contract v2 `noop`): say so, apply nothing.
     if (PAS.allNoop(r.changes)) {
-      html += '<p class="notice">Already that value: nothing to change.</p>' + r.changes.map(function (c) { return pasChangeRow(c) }).join('')
-      pasResults.innerHTML = html; pasResults.classList.add('on')
+      pasShowCard(pasHead(transcript, PAS.describeChange({ route: r.route, changes: r.changes })) + pasDetails(r.changes.map(function (c) { return pasChangeRow(c) }).join('')) + pasDismissButton())
       pasState({ phase: 'done', result: { kind: 'noop', changes: r.changes.length }, doneAt: Date.now() })
       return
     }
     var live = r.changes.filter(function (c) { return !c.noop })
+    var headline = PAS.describeChange({ route: r.route, changes: pasWithTo(r.changes) })
+    var swatches = pasSwatches(r.changes)
     // Apply, then re-measure the whole page live. A regression here or in the server's prediction blocks the change
     // and it is reverted on the spot (same rule as the pipeline's verify).
     var before = pasAuditNow()
@@ -746,19 +947,20 @@
     pasApplyChanges(live)
     var after = pasAuditNow()
     var cmp = PAS.compareAudits(before, after)
-    var checkName = r.route === 'contrast' ? 'text contrast' : 'text contrast'
     var serverBlock = PAS.predictedBlock(r.predicted)
+    var details = r.changes.map(function (c) { return pasChangeRow(c, !cmp.allPass || serverBlock) }).join('') +
+      (r.summary ? '<p class="meta">' + PAS.escapeHtml(r.summary) + '</p>' : '') +
+      (r.model ? '<p class="meta">Mapped by ' + PAS.escapeHtml(PAS.providerName(r.model.provider)) + '</p>' : '') +
+      ((r.rejected || []).filter(function (x) { return !x.role }).length ? '<p class="meta">' + r.rejected.filter(function (x) { return !x.role }).length + ' proposed change(s) rejected as unsafe or unrelated</p>' : '')
     if (!cmp.allPass || serverBlock) {
       pasRevertChanges(live) // still frozen: the app snaps back, no fade through the blocked colours
       getComputedStyle(frame.contentDocument.documentElement).color
       thaw()
-      var msg = !cmp.allPass ? PAS.blockedMessage(checkName, cmp.regressions) : serverBlock
-      html += '<p class="pasBlocked" role="alert">' + PAS.escapeHtml(msg) + '</p>'
+      var msg = !cmp.allPass ? PAS.blockedMessage('text contrast', cmp.regressions) : serverBlock
+      var html = pasHead(transcript, headline) + swatches + pasLine('bad', 'warning-circle', msg, ' role="alert"')
       if (serverBlock && !cmp.allPass) html += '<p class="meta">Server check agrees: ' + PAS.escapeHtml(serverBlock.replace(/^BLOCKED:\s*/, '')) + '</p>'
-      html += '<p class="meta">Reverted automatically; nothing was kept.</p>'
-      html += r.changes.map(function (c) { return pasChangeRow(c, true) }).join('')
-      pasResults.innerHTML = html
-      pasResults.classList.add('on')
+      html += '<p class="meta">Reverted automatically; nothing was kept.</p>' + pasSkipped(r) + pasDetails(details) + pasDismissButton()
+      pasShowCard(html, true)
       pasState({ phase: 'done', result: { kind: 'blocked', message: msg, live: cmp.regressions.length, server: !!serverBlock, reverted: true }, doneAt: Date.now() })
       return
     }
@@ -766,63 +968,62 @@
     var n = cmp.affected.length || (r.predicted && r.predicted.affected) || 0
     var worstBefore = cmp.affected.length ? Math.min.apply(null, cmp.affected.map(function (a) { return a.from })) : (r.predicted && r.predicted.before && r.predicted.before.min) || 0
     var worstAfter = cmp.affected.length ? Math.min.apply(null, cmp.affected.map(function (a) { return a.to })) : (r.predicted && r.predicted.after && r.predicted.after.min) || 0
-    if (n) html += '<p><span class="score good">' + PAS.escapeHtml(PAS.contrastLine(n, worstBefore, worstAfter)) + '</span></p>'
-    if (r.summary && r.route !== 'contrast') html += '<p>' + PAS.escapeHtml(r.summary) + '</p>'
-    html += '<p class="meta">' + PAS.escapeHtml(PAS.pageAuditLine(before, after)) + ', 0 regressions (checked live after applying)</p>'
-    html += r.changes.map(function (c) { return pasChangeRow(c) }).join('')
-    if (r.rejected && r.rejected.length) html += '<p class="pasAffected">' + r.rejected.length + ' proposed change(s) rejected as unsafe or unrelated</p>'
-    html += pasKeepUndoButtons(live)
-    pasResults.innerHTML = html
-    pasResults.classList.add('on')
+    var html2 = pasHead(transcript, headline) + swatches
+    if (n) { var pl = PAS.passLine({ n: n, fixed: cmp.fixed, before: worstBefore, after: worstAfter }); html2 += pasLine(pl.ok ? 'ok' : 'plain', pl.ok ? 'check-circle-fill' : 'check', pl.text) }
+    html2 += pasLine('page', 'shield-check', PAS.pageCheckLine(before, after, 0))
+    html2 += pasSkipped(r) + pasDetails(details) + pasKeepUndoButtons()
+    pasShowCard(html2)
     pasWireButtons(live)
     var fails = function (a) { return a.filter(function (x) { return x.status === 'fail' }).length }
     pasState({ phase: 'done', result: { kind: 'applied', changes: live.map(function (c) { return { token: c.token, from: c.from, css: c.css } }), affected: n, before: worstBefore, after: worstAfter, pageFailBefore: fails(before), pageFailAfter: fails(after), checked: after.filter(function (x) { return x.status === 'pass' || x.status === 'fail' }).length, regressions: 0 }, doneAt: Date.now() })
   }
   function pasFinishFocus(r, transcript) {
-    var html = '<h3>Focus ring</h3><p class="pasTranscript">“' + PAS.escapeHtml(transcript) + '”</p>'
     pasApplyChanges(r.changes)
     if (r.rule) pasInjectRule(r.rule)
-    html += '<p id="pasFocusSummary">' + (r.summary ? PAS.escapeHtml(r.summary) : 'Focus-ring tokens applied.') + '</p>'
     var near = PAS.ringNote(r.ring)
-    if (near) html += '<p class="notice">' + PAS.escapeHtml(near.charAt(0).toUpperCase() + near.slice(1)) + '.</p>'
-    html += r.changes.map(function (c) { return pasChangeRow(c) }).join('')
-    pasResults.innerHTML = html + '<p class="busy" id="pasFocusBusy">Checking keyboard focus: Tab through every control (about 10 seconds)…</p>'
-    pasResults.classList.add('on')
+    var html = pasHead(transcript, PAS.describeChange({ route: 'focus' })) + pasSwatches(r.changes)
+    if (near) html += pasLine('skip', 'warning-circle', near.charAt(0).toUpperCase() + near.slice(1) + '.')
+    html += '<p class="busy" id="pasFocusBusy">Checking keyboard focus: Tab through every control (about 10 seconds)…</p><div id="pasFocusOut"></div>'
+    html += pasDetails('<p id="pasFocusSummary">' + (r.summary ? PAS.escapeHtml(r.summary) : 'Focus-ring tokens applied.') + '</p>' + r.changes.map(function (c) { return pasChangeRow(c) }).join('') + '<div id="pasFocusMore"></div>')
+    pasShowCard(html)
     pasState({ phase: 'focus-check', focusAt: Date.now() })
     pasFetch('/__pas/api/focus-check', { changes: r.changes }).then(function (fc) {
       var b = document.getElementById('pasFocusBusy'); if (b) b.remove()
       // The card's summary reports the measured Tab-through, not the predicted coverage.
       var fs = document.getElementById('pasFocusSummary'); if (fs && fc.summary && r.summary) fs.textContent = r.summary.replace(/ The Tab-through check measures it next\.$/, '') + ' ' + fc.summary
-      var line = PAS.focusLine(fc.before.pass, fc.after.pass, fc.after.measured)
       var worse = fc.compare && fc.compare.worse ? fc.compare.worse.length : 0
-      var more = '<p><span class="score ' + (worse ? 'bad' : 'good') + '">' + PAS.escapeHtml(line) + '</span></p>'
-      more += '<p class="meta">before: ' + fc.before.pass + ' pass, ' + fc.before.faint + ' faint, ' + fc.before.none + ' none · after: ' + fc.after.pass + ' pass, ' + fc.after.faint + ' faint, ' + fc.after.none + ' none · ' + (fc.ms / 1000).toFixed(1) + ' s</p>'
-      if (worse) more += '<p class="meta">' + worse + ' control' + (worse === 1 ? '' : 's') + ' worse with this change.</p>'
-      more += '<p class="hint">Press Tab in the app to see the ring.</p>'
-      more += pasKeepUndoButtons(r.changes)
-      pasResults.insertAdjacentHTML('beforeend', more)
+      var total = fc.after.measured
+      var good = !worse && fc.after.pass > fc.before.pass
+      var out = pasLine(good ? 'ok' : worse ? 'bad' : 'plain', good ? 'check-circle-fill' : worse ? 'warning-circle' : 'check', PAS.focusPassLine(fc.before.pass, fc.after.pass, total))
+      out += pasLine('page', 'shield-check', PAS.focusCheckLine(total, worse))
+      out += '<p class="meta">Press Tab in the app to see the ring.</p>'
+      document.getElementById('pasFocusOut').innerHTML = out
+      var more = document.getElementById('pasFocusMore')
+      if (more) more.innerHTML = '<p class="meta">before: ' + fc.before.pass + ' pass, ' + fc.before.faint + ' faint, ' + fc.before.none + ' none · after: ' + fc.after.pass + ' pass, ' + fc.after.faint + ' faint, ' + fc.after.none + ' none · ' + (fc.ms / 1000).toFixed(1) + ' s</p>' +
+        (worse ? '<p class="meta">' + worse + ' control' + (worse === 1 ? '' : 's') + ' worse with this change.</p>' : '')
+      document.getElementById('pasCard').insertAdjacentHTML('beforeend', pasKeepUndoButtons())
       pasWireButtons(r.changes, true)
       pasState({ phase: 'done', result: { kind: 'focus', before: fc.before, after: fc.after, worse: worse, checkMs: fc.ms, nearest: near || null }, doneAt: Date.now() })
     }).catch(function (e) {
       var b = document.getElementById('pasFocusBusy'); if (b) b.remove()
       if (pasWasCapped(e)) return
       pasState({ phase: 'error', error: e.message })
-      pasResults.insertAdjacentHTML('beforeend', '<p class="notice">Focus check failed: ' + PAS.escapeHtml(e.message) + '</p>')
+      document.getElementById('pasFocusOut').innerHTML = '<p class="notice">Focus check failed: ' + PAS.escapeHtml(e.message) + '</p>'
     })
   }
   function pasKeepUndoButtons() {
-    return '<div class="actions"><button id="pasKeep" class="primary">Keep (preview)</button><button id="pasUndo">Undo</button><button id="pasShowPr">Show PR command</button></div>'
+    return '<div class="actions"><button id="pasKeep" class="primary">' + ic('check') + 'Keep this change</button><button id="pasUndo">' + ic('arrow-counter-clockwise') + 'Undo</button><button id="pasShowPr" class="link">' + ic('git-pull-request') + 'PR command</button></div>'
   }
   function pasWireButtons(cs, isFocus) {
     var keep = document.getElementById('pasKeep')
-    if (keep) keep.addEventListener('click', function () { keep.disabled = true; var u = document.getElementById('pasUndo'); if (u) u.disabled = true; toast('Kept as a preview. Copy the proposal link to share it.') })
     var undo = document.getElementById('pasUndo')
-    if (undo) undo.addEventListener('click', function () { pasRevertChanges(cs); if (isFocus) pasInjectRule(null); undo.disabled = true; if (keep) keep.disabled = true; toast('Reverted') })
+    if (keep) keep.addEventListener('click', function () { keep.disabled = true; if (undo) undo.disabled = true; pas.kept = true; pasSteps(); toast('Kept as a preview. Copy the proposal link to share it.') })
+    if (undo) undo.addEventListener('click', function () { pasRevertChanges(cs); if (isFocus) pasInjectRule(null); undo.disabled = true; if (keep) keep.disabled = true; pas.undone = true; pasSteps(); toast('Reverted') })
     var pr = document.getElementById('pasShowPr')
     if (pr) pr.addEventListener('click', function () {
       pr.disabled = true
       var cmd = PAS.prCommandText(pas.health && pas.health.run && pas.health.run.dir)
-      pasResults.insertAdjacentHTML('beforeend', '<p class="meta">Shown, not run:</p><pre class="pasPre">' + PAS.escapeHtml(cmd) + '</pre>')
+      document.getElementById('pasCard').insertAdjacentHTML('beforeend', '<p class="meta">Shown, not run:</p><pre class="pasPre">' + PAS.escapeHtml(cmd) + '</pre>')
     })
   }
   // "Reset all": the shared `changes` are cleared by the caller; this clears point and say's own bookkeeping too
@@ -831,12 +1032,12 @@
     pas.applied = {}
     pasInjectRule(null)
     var el = frame.contentDocument && frame.contentDocument.getElementById('s2t-pas-focus-rule'); if (el) el.remove()
-    pas.point = null
+    pas.point = null; pas.kept = false; pas.undone = false
     pasOverlay.innerHTML = ''
     pasResults.innerHTML = ''; pasResults.classList.remove('on')
     var t = document.getElementById('pasText'); if (t) t.value = ''
-    if (pas.on) document.getElementById('pasHint').textContent = 'On. Click something in the app, then say or type what to change.'
     window.__pas = { phase: pas.capped ? 'capped' : 'reset', capped: !!pas.capped, budget: pas.budget ? { left: pas.budget.left, total: pas.budget.total, mine: pas.budget.mine } : null, updatedAt: Date.now() }
+    if (PAS) { pasTarget(); pasSteps() }
   }
   function pasScroll() { if (pas.on && pas.point) pasRenderOverlay() }
   // Every (re)load of the iframe document: hook the click capture and scroll back up, and put the focus rule back.
@@ -853,8 +1054,10 @@
     frame.classList.add('pasFramed')
     document.getElementById('pasControls').hidden = false
     document.getElementById('pasToggle').setAttribute('aria-pressed', 'true')
-    document.getElementById('pasToggle').textContent = 'Point and say: on'
-    document.getElementById('pasHint').textContent = 'On. Click something in the app, then say or type what to change.'
+    document.getElementById('pasToggle').textContent = 'Turn off'
+    document.getElementById('pasHint').textContent = ''
+    document.getElementById('pasIntro').hidden = !!pas.clicked
+    pasTarget(); pasSteps()
     pasAttach()
     pasLayout()
   }
@@ -865,25 +1068,26 @@
     pasOverlay.innerHTML = ''; pasOverlay.style.width = '0'; pasOverlay.style.height = '0'
     document.getElementById('pasControls').hidden = true
     document.getElementById('pasToggle').setAttribute('aria-pressed', 'false')
-    document.getElementById('pasToggle').textContent = 'Point and say'
+    document.getElementById('pasToggle').textContent = 'Turn on Point and say'
     document.getElementById('pasHint').textContent = 'Off. Turn it on, then click something in the app and say or type what to change.'
+    document.getElementById('pasIntro').hidden = true
     if (frame.contentDocument) frame.contentDocument.removeEventListener('click', pasOnClick, true)
     pas.point = null
   }
 
-  // Live demo (the server meters calls, so health carries a budget): explain the page, show the counter and the cost of
-  // each action, turn point and say on, and default to typing on touch screens (hold-to-talk needs a mouse or keys).
+  // Live demo (the server meters calls, so health carries a budget): show the counter (the cost of each action is on
+  // hover), turn point and say on, and default to typing on touch screens (hold-to-talk needs a mouse or keys).
   function pasLiveMode(h) {
-    var about = document.getElementById('pasAbout')
-    about.innerHTML = PAS.WHAT_THIS_IS.map(function (t) { return '<p>' + PAS.escapeHtml(t) + '</p>' }).join('')
-    document.getElementById('pasCostNote').textContent = PAS.COST_NOTE
+    document.getElementById('pasBudgetRow').title = PAS.COST_NOTE
+    document.getElementById('modelHint').textContent = PAS.WHAT_THIS_IS[1]
     document.getElementById('pasToggle').title = PAS.COST_TITLES.app
     var mic = document.getElementById('pasMic')
-    if (!mic.disabled) mic.title = PAS.COST_TITLES.mic
+    if (!mic.disabled) mic.title = 'Hold to talk, or click to start and click again to send. ' + PAS.COST_TITLES.mic
     document.getElementById('pasText').title = PAS.COST_TITLES.text
     if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) { // touch: typing is the default path
       mic.hidden = true
-      document.getElementById('pasText').placeholder = 'Tap the app, then type what to change…'
+      document.getElementById('pasMicDev').hidden = true
+      document.getElementById('pasText').placeholder = 'Tap the app, then type the change…'
     }
     pasBudget(h.budget)
     if (h.budget.mine < 1) return pasCapped()
@@ -901,11 +1105,21 @@
     }).then(function (h) {
       if (!h || !h.ok) return
       pas.health = h
+      // Point and say is here: it leads the panel, and the other tools fold into "More tools".
+      document.getElementById('title').textContent = 'Point and say'
+      document.getElementById('staticNote').hidden = true
+      var more = document.getElementById('more'); more.classList.remove('static'); more.open = false
       document.getElementById('pasTools').classList.add('on')
+      document.getElementById('pasIntro').hidden = false
       document.getElementById('pasToggle').addEventListener('click', function () { if (pas.on) pasOff(); else pasOn() })
       var mic = document.getElementById('pasMic')
       if (!h.providers.asr.ok) { mic.disabled = true; mic.title = 'Speech is not available (no ASR key); typing still works.' }
-      document.getElementById('pasMicPick').addEventListener('change', function (e) { pas.micId = e.target.value; pasMicHelp(null) })
+      document.getElementById('pasMicPick').addEventListener('change', function (e) { pas.micId = e.target.value; pas.micProblem = false; pasMicHelp(null); pasMicList() })
+      document.getElementById('pasMicChange').addEventListener('click', function () { pasMicPicker(document.getElementById('pasMicRow').hidden) })
+      document.getElementById('pasMicMoreBtn').addEventListener('click', function (e) {
+        var m = document.getElementById('pasMicMore'); m.hidden = !m.hidden
+        e.currentTarget.setAttribute('aria-expanded', m.hidden ? 'false' : 'true'); e.currentTarget.textContent = m.hidden ? 'More fixes' : 'Fewer fixes'
+      })
       if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) navigator.mediaDevices.addEventListener('devicechange', pasMicList)
       pasMicList()
       mic.addEventListener('pointerdown', pasMicDown)
@@ -918,6 +1132,7 @@
         if (e.key === 'Enter' && e.target.value.trim()) pasIntent(e.target.value.trim())
       })
       window.addEventListener('resize', function () { if (pas.on) pasLayout() })
+      pasTarget()
       pasAttach()
       if (h.budget) pasLiveMode(h)
       pasState({ phase: 'ready', health: { focusBaseline: h.focusBaseline && h.focusBaseline.summary } })
@@ -939,18 +1154,17 @@
       var ids = j.providers.map(function (p) { return p.id })
       var sel = document.getElementById('provider')
       Array.prototype.slice.call(sel.options).forEach(function (o) { if (ids.indexOf(o.value) < 0) o.remove() })
-      sel.hidden = false
+      document.getElementById('grpModel').hidden = false
       document.getElementById('dark').hidden = false
       document.getElementById('dark').addEventListener('click', buildDark)
-      document.getElementById('toolsHint').textContent = 'Contrast is checked here on the live app. Muse proposes; every proposal is re-checked before it is offered. Sends token names, values and contrast numbers only.'
     }).catch(function (e) { void e }) // no contrast.js (older static build): the audit stays hidden
   }
 
   fetch('tokens.json').then(function (r) { return r.json() }).then(function (d) {
     data = d
-    document.getElementById('title').textContent = d.title
     document.title = d.title + ' · Token playground'
-    document.getElementById('sub').textContent = d.tokens.length + ' tokens you can change · ' + d.edits + ' hardcoded values replaced · named by ' + d.namer
+    document.getElementById('sub').textContent = metaLine(d)
+    document.getElementById('sub').title = d.edits + ' hardcoded values replaced with tokens'
     var home = new URL(d.app, location.href).pathname
     frame.addEventListener('load', function () {
       // A hard reload of a route the app's router pushed (Argon: /admin/index) is the playground's 404 JSON: go back

@@ -216,8 +216,10 @@ test('prCommandText: text only, two commands, uses the run dir when given', () =
 
 test('live demo: budget line, cap message and copy follow the wording rules', async () => {
   const m = await import('../src/preview-client/pas-client.js')
-  assert.equal(m.budgetLine({ left: 742, total: 1000 }), 'Demo budget: 742 of 1,000 left')
-  assert.equal(m.budgetLine({ left: -3, total: 5 }), 'Demo budget: 0 of 5 left')
+  assert.equal(m.budgetLine({ left: 742, total: 1000 }), 'Demo budget 742 of 1,000')
+  assert.equal(m.budgetLine({ left: -3, total: 5 }), 'Demo budget 0 of 5')
+  assert.equal(m.budgetFraction({ left: 250, total: 1000 }), 0.25)
+  assert.equal(m.budgetFraction({ left: 5, total: 0 }), 0)
   assert.equal(m.mineLine({ left: 997, total: 1000, mine: 37 }), 'You can use 37 more on this visit.')
   assert.equal(m.mineLine({ left: 30, total: 1000, mine: 30 }), '')
   assert.match(m.capMessage(), /budget is used up for now; here’s the recording/)
@@ -247,4 +249,75 @@ test('mic detection: virtual devices, ordering, problems', async () => {
   assert.match(m.micProblem({ error: 'NotAllowedError: Permission denied' }), /not allowed/)
   assert.equal(m.micProblem({ label: 'MacBook Pro Microphone', rms: 0.05 }), null)
   assert.ok(m.MIC_HELP.length >= 5)
+})
+
+// ---- redesigned panel wording ---------------------------------------------------------------------------------------
+
+test('providerName / metaLine: human names, never the raw model id', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  assert.equal(m.providerName('baseten'), 'Muse Spark Open')
+  assert.equal(m.providerName('meta'), 'Muse Spark')
+  assert.equal(m.providerName('fireworks'), 'Muse Spark Open (Fireworks)')
+  assert.equal(m.providerName('baseten:meta-models/muse-spark-open-1026'), 'Muse Spark Open')
+  assert.doesNotMatch(m.providerName('weird:meta-models/muse-x-1'), /meta-models|muse-x/)
+  const line = m.metaLine({ title: 'Argon Dashboard', tokens: 44, namer: 'baseten:meta-models/muse-spark-open-1026' })
+  assert.equal(line, 'Argon Dashboard · 44 tokens · named by Muse Spark Open')
+})
+
+test('describeChange: plain-words headlines', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  assert.equal(m.describeChange({ route: 'contrast', changes: [{ token: 'color.text.muted', from: '#8898aa', to: '#687889' }] }), 'Muted labels: a darker gray')
+  assert.equal(m.describeChange({ route: 'muse', changes: [{ token: 'button.bg', from: '#5e72e4', to: '#f5365c' }] }), 'Buttons: a new background')
+  assert.equal(m.describeChange({ route: 'focus', changes: [] }), 'A focus ring on every control')
+  assert.equal(m.describeChange({ route: 'muse', changes: [{ token: 'color.text.default', from: '#32325d', value: '#5e72e4' }] }), 'Body text: a lighter blue')
+  assert.equal(m.describeChange({ route: 'muse', changes: [{ token: 'card.border', from: '#eee', to: '#ddd' }, { token: 'card.bg', from: '#fff', to: '#fafafa' }] }), 'Cards: a new border and background')
+  assert.equal(m.describeChange({ route: 'muse', changes: [{ token: 'button.bg', from: '#5e72e4', to: '#f5365c' }, { token: 'button.border', from: '#5e72e4', to: '#f5365c' }, { token: 'color.text.muted', from: '#8898aa', to: '#687889' }] }), 'Buttons: a new background and border (+1 more)')
+  assert.equal(m.describeChange({ route: 'muse', changes: [{ token: 'radius.md', from: '6px', value: '12px' }] }), 'Md: rounder corners')
+  assert.equal(m.describeChange({ route: 'muse', changes: [{ token: 'button.bg', noop: true }] }), 'Already that way: nothing to change')
+  assert.doesNotMatch(m.describeChange({ route: 'contrast', changes: [{ token: 'color.text.muted', from: '#8898aa', to: '#687889' }] }), /accessible|compliant/i)
+})
+
+test('tokenSubject / hueWord', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  assert.equal(m.tokenSubject('color.text.muted'), 'Muted labels')
+  assert.equal(m.tokenSubject('color.surface.card'), 'Card surfaces')
+  assert.equal(m.tokenSubject('nav.link.text'), 'Nav links')
+  assert.equal(m.tokenSubject('card.bg'), 'Cards')
+  assert.equal(m.hueWord('#8898aa'), 'gray')
+  assert.equal(m.hueWord('#5e72e4'), 'blue')
+  assert.equal(m.hueWord('#f5365c'), 'red')
+  assert.equal(m.hueWord('#2dce89'), 'green')
+})
+
+test('passLine / pageCheckLine / focus lines: numbers beside the named check, never color alone', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  assert.deepEqual(m.passLine({ n: 21, fixed: 21, before: 2.95, after: 4.53 }), { ok: true, text: '21 labels now pass text contrast: 2.95:1 → 4.53:1' })
+  assert.deepEqual(m.passLine({ n: 21, fixed: 3, before: 2.95, after: 4.53 }), { ok: true, text: '3 of 21 labels now pass text contrast: 2.95:1 → 4.53:1' })
+  assert.equal(m.passLine({ n: 1, fixed: 0, before: 5, after: 6 }).ok, false)
+  const before = [{ status: 'fail' }, { status: 'fail' }, { status: 'pass' }], after = [{ status: 'fail' }, { status: 'pass' }, { status: 'pass' }]
+  assert.equal(m.pageCheckLine(before, after), 'Checked on the whole page: 2 → 1 text pairs failing, 0 got worse')
+  assert.equal(m.focusPassLine(0, 25, 25), '25 of 25 controls now show a visible focus ring (was 0)')
+  assert.equal(m.focusCheckLine(25, 0), 'Checked by tabbing through the whole page: 25 controls, 0 got worse')
+})
+
+test('stepIndex: the three steps follow the phases', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  assert.equal(m.stepIndex({ phase: 'ready' }), 1)
+  assert.equal(m.stepIndex({ phase: 'pointing' }), 1)
+  assert.equal(m.stepIndex({ phase: 'pointed', hasPoint: true }), 2)
+  assert.equal(m.stepIndex({ phase: 'ready', recording: true }), 2)
+  assert.equal(m.stepIndex({ phase: 'intent', hasPoint: true }), 2)
+  assert.equal(m.stepIndex({ phase: 'done', resultKind: 'applied', hasPoint: true }), 3)
+  assert.equal(m.stepIndex({ phase: 'done', resultKind: 'focus' }), 3)
+  assert.equal(m.stepIndex({ phase: 'done', resultKind: 'blocked', hasPoint: true }), 2)
+  assert.equal(m.stepIndex({ phase: 'done', resultKind: 'applied', kept: true }), 4)
+})
+
+test('targetInfo: label, controlling token and how widely it is used', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  const p = { element: { tag: 'span', text: 'Since last month' }, controls: { color: { token: 'color.text.muted' } }, pairs: { count: 21 }, twins: [] }
+  assert.deepEqual(m.targetInfo(p), { label: 'Since last month', token: 'color.text.muted', line: 'color.text.muted · used by 21 labels' })
+  const b = { element: { tag: 'a', text: '' }, controls: { color: null, 'background-color': { token: 'button.bg' } }, twins: [{}, {}] }
+  assert.deepEqual(m.targetInfo(b), { label: '<a>', token: 'button.bg', line: 'button.bg · used by 3 elements' })
+  assert.equal(m.targetInfo({ element: { tag: 'div', text: 'x' }, controls: {} }).line, 'no token controls it')
 })
