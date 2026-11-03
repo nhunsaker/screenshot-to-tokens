@@ -14,7 +14,7 @@ change.
 
 ## Links
 
-- **Demo video (2:57):** _[link to the unlisted YouTube upload]_
+- **Demo video (2:55):** https://www.youtube.com/watch?v=RpnO9HfF98E
 - **Code:** https://github.com/nhunsaker/screenshot-to-tokens
 - **Live demo:** https://nhunsaker.github.io/argon-dashboard-react/ (original, tokenized, a previewed change, token playground)
 - **Live demo site:** https://s2t.sorbcloud.com/ (the video, the evidence, both review reports, the breadth table; links to the demo above)
