@@ -53,15 +53,15 @@ TAKES = [
     ('03', 'b2', [('12-30-15', [(0, None)])], 'only read'),
     ('04', 'b3', [('12-30-27', [(0, 14.0), (15.10, None)])], 'misread "in a view report. Review report" cut to "in a review report" (14.0-15.1 s removed); 12-30-49 is a false start'),
     ('05', 'b4', [('12-31-45', [(0, None)])], '12-31-13 and 12-31-39 are near-silent false starts'),
-    ('06', 'b5', [('12-32-07', [(0, None)])], 'only read'),
+    ('06', 'b5', [('12-32-07', [(0, 8.70), (11.45, None)])], 'only read; "merged colors invisible," cut (8.70-11.45 s) so it reads "zero pixels changed, and no text made harder to read"'),
     ('07', 'b6a', [('12-32-52', [(0, None)])], 'last of three; 12-32-34 stumbles ("merges, merges, just"), 12-32-45 stops early'),
     ('08', 'req1', [('12-33-07', [(0, None)])], 'request 1 (replaces the synthetic request voice)'),
     ('09', 'b6b', [('12-33-15', [(0, None)])], 'only read'),
     ('10', 'req2', [('12-33-33', [(0, None)])], 'request 2 (replaces the synthetic request voice); "...in our blue color"'),
     ('11', 'b6c', [('12-33-50', [(0, None)])], 'last of two; split at its pause so "it\'s blocked" lands on the BLOCKED card'),
-    ('12', 'b7', None, 'NOT RECORDED: no file holds "We ran it on twenty-eight public sites we didn\'t build..."; beat 7 is left out until it is'),
-    ('13', 'b9', [('12-34-39', [(0, 10.98), (11.95, None)]), ('12-35-03', [(0, None)])], 'two files: first half from 12-34-39 ("uh" before "local governments" cut, 10.98-11.95 s), second half 12-35-03; 12-34-00 stumbles throughout'),
-    ('14', 'b8', [('12-35-24', [(0.6, 24.12), (24.52, None)])], 'stray "using" before "Meta\'s models" cut (0-0.6 s) and "every" before "anyone" (24.12-24.52 s); 12-35-18 is a false start'),
+    ('12', 'b7', None, 'dropped (founder 11-03: beat 7 does not add much); not recorded'),
+    ('13', 'b9', [('12-34-39', [(0, 6.92)]), ('12-35-03', [(0, None)])], 'two files: "Low-contrast text... failure." from 12-34-39 (the Europe/WCAG sentence after 6.92 s cut, founder 11-03), then 12-35-03; 12-34-00 stumbles throughout'),
+    ('14', 'b8', [('12-35-24', [(0.6, 20.58), (22.65, 24.12), (24.52, None)])], 'stray "using" before "Meta\'s models" cut (0-0.6 s), "under a cent a run" cut (20.58-22.65 s, founder 11-03: "...in seconds, on open weights."), "every" before "anyone" cut (24.12-24.52 s); 12-35-18 is a false start'),
 ]
 GAP_FILES = 0.45   # pause between the two files of take 13
 FILE_TAKE12 = os.environ.get('FIN_TAKE12')   # a re-recorded take 12 (file stem in ~/Movies), when there is one
@@ -284,3 +284,17 @@ sil = quiet('final-vo.wav', -40, 0.3); longest = max((b - a for a, b in sil), de
 json.dump({'maxPause': MAXP, 'loudnorm': {'measured': m, 'second': n2}, 'beats': table, 'beat6': B6, 'total': round(total, 2), 'longestSilence': round(longest, 2)}, open('founder/beats.json', 'w'), indent=1)
 for b in table: print(f"beat {b['beat']}: {b['start']:6.1f}s  len {b['len']:5.1f}s")
 print('total', round(total, 2), 'loudnorm', n2['normalization_type'], 'out I', n2['output_i'], 'TP', n2['output_tp'], 'longest silence', round(longest, 2), 'beat6', B6)
+
+# 4. Contact sheet: 18 frames, the label under each frame (the caption pills sit at the top of the picture).
+from PIL import Image, ImageDraw, ImageFont
+B = {b['beat']: b for b in table}; s6 = B[6]['start']
+pts = [('b0 title + bubble', 2), ('b0 late (disclosure)', B[0]['len'] - 1), ('b1', B[1]['start'] + 3), ('b2', B[2]['start'] + 5), ('b3 card', B[3]['start'] + 11), ('b3 end', B[3]['start'] + B[3]['len'] - 0.5),
+       ('b4', B[4]['start'] + 10), ('b5', B[5]['start'] + 6), ('b6 outline lands', s6 + B6['outlineAt'] + 0.3), ('b6 REQ1 spoken', s6 + B6['req1At'] + 1.5),
+       ('b6 result (take 09)', s6 + B6['speechStarts']['b6b'] + 3), ('b6 Icons click', s6 + B6['req2At'] - 1.0), ('b6 REQ2 spoken', s6 + B6['req2At'] + 1.5),
+       ('b6 focus result', s6 + B6['speechStarts']['b6c1'] + 0.8), ('b6 "it\'s blocked"', s6 + B6['itsBlockedAt'] + 0.3), ('b9 contrast', B[9]['start'] + 5), ('b9 axe card', B[9]['len'] + B[9]['start'] - 4), ('b8 end card', B[8]['start'] + B[8]['len'] - 0.3)]
+fnt = ImageFont.truetype('/System/Library/Fonts/Helvetica.ttc', 18); sheet = Image.new('RGB', (1920, 390 * 6), (0, 0, 0)); dr = ImageDraw.Draw(sheet)
+for i, (lab, t) in enumerate(pts):
+    fr = f'{W}/cs.png'; ff('-ss', f'{t:.2f}', '-i', 'final.mp4', '-frames:v', '1', '-vf', 'scale=640:360', fr)
+    x, y = (i % 3) * 640, (i // 3) * 390; sheet.paste(Image.open(fr).convert('RGB'), (x, y))
+    mm, ss = divmod(t, 60); dr.text((x + 6, y + 365), f'{lab}  {int(mm)}:{ss:04.1f}', fill=(255, 255, 0), font=fnt)
+sheet.save('final-contact.png')

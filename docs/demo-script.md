@@ -167,21 +167,23 @@ change" dropped).
 
 ## Final cut (founder VO, 2026-11-03)
 
-- `out/video/final.mp4`, **3:13.2**, 1920x1080 (the 1280x720 sources upscaled with lanczos), −16.0 LUFS integrated
-  (two-pass linear loudnorm), true peak below −2.8 dBTP, longest pause 1.27 s (`silencedetect` −40 dB). Voice-only
-  mix: `out/video/final-vo.wav`. Contact sheet: `out/video/final-contact.png`. **Over 3:00 by 13 s**: the founder's
-  reads total 181 s of speech before any picture padding (the takes ran longer than their targets), so trimming
-  picture holds can't bring it under 3:00; getting there means shorter lines.
-- Every voice is the founder's: no synthetic narrator and no synthetic request voice. Take 12 ("We ran it on
-  twenty-eight public sites...") was not recorded, so beat 7 is left out. To add it, record it and run
-  `FIN_TAKE12="HH-MM-SS" python3 scripts/mix_final.py`.
-- Takes (files `~/Movies/2026-11-03 <time>.mov`, copied to `out/video/founder/src/`; mapping, transcripts and edits in
-  `out/video/founder/takes.json`): 01 `12-48-24` (camera, short version B: "Build for your world... Screenshot to Tokens fixes that in seconds."; the cleaner of two reads, 12-48-08 says "most of the apps" and "in a second") · 02 `12-30-09` · 03 `12-30-15` · 04 `12-30-27` (misread
-  "in a view report. Review report" cut to "in a review report") · 05 `12-31-45` · 06 `12-32-07` · 07 `12-32-52` ·
-  08 `12-33-07` (request 1) · 09 `12-33-15` · 10 `12-33-33` (request 2) · 11 `12-33-50` · 12 none · 13 `12-34-39` ("uh"
-  cut) + `12-35-03` · 14 `12-35-24` (a stray "using" and "every" before "anyone" cut). Unused: `12-28-09`/`12-28-50`/
-  `12-29-31` (beat 0 voice-only attempts), `12-30-49`, `12-31-13`, `12-31-39`, `12-32-34`, `12-32-45`, `12-33-42`,
-  `12-34-00`, `12-35-18`, `12-42-36`, `12-43-18`, `12-43-29`, `12-44-04`, `12-44-16` (the long beat 0), `12-48-08`.
+- `out/video/final.mp4`, **2:55.4** (2:55.4), 1920x1080 (the 1280x720 sources upscaled with lanczos), −16.0 LUFS
+  integrated (two-pass linear loudnorm), true peak below −2.8 dBTP, longest pause 1.27 s (`silencedetect` −40 dB).
+  Voice-only mix: `out/video/final-vo.wav`. Contact sheet: `out/video/final-contact.png` (labels under each frame).
+- Every voice is the founder's: no synthetic narrator and no synthetic request voice. **Beat 7 is dropped** (founder:
+  it doesn't add much; no take 12). Founder cuts, 11-03: take 13 loses the Europe / WCAG sentence, take 14 loses
+  "under a cent a run" ("...in seconds, on open weights."), take 06 loses "merged colors invisible," ("zero pixels
+  changed, and no text made harder to read"). Each cut keeps a 0.2 s breath at a word boundary; the joins were
+  checked with the speech model. The end card still says "under a cent a run" on screen.
+- Takes (files `~/Movies/2026-11-03 <time>.mov`, copied to `out/video/founder/src/`; mapping, transcripts and edit
+  points in `out/video/founder/takes.json`): 01 `12-48-24` (camera, short version B; the cleaner of two reads,
+  12-48-08 says "most of the apps" and "in a second") · 02 `12-30-09` · 03 `12-30-15` · 04 `12-30-27` (misread "in a
+  view report. Review report" cut to "in a review report") · 05 `12-31-45` · 06 `12-32-07` · 07 `12-32-52` · 08
+  `12-33-07` (request 1) · 09 `12-33-15` · 10 `12-33-33` (request 2) · 11 `12-33-50` · 13 `12-34-39` (to 6.92 s) +
+  `12-35-03` · 14 `12-35-24` (a stray "using", "under a cent a run", and "every" before "anyone" cut). Unused: the long
+  beat 0 takes (`12-28-09`, `12-28-50`, `12-29-31` voice only; `12-42-36`, `12-43-18`, `12-43-29`, `12-44-04`,
+  `12-44-16` camera), `12-48-08`, `12-30-49`, `12-31-13`, `12-31-39`, `12-32-34`, `12-32-45`, `12-33-42`, `12-34-00`,
+  `12-35-18`.
 - Audio per take: highpass 70 Hz, afftdn nr 8 at the file's noise floor, pauses inside a line over 0.5 s shortened to
   0.5 s (the words themselves are never sped up or slowed down: atempo 1.0), trimmed to speech with a 0.15 s head and
   a 0.25 s tail, −20 LUFS. Mix: 48 kHz float, alimiter at 0.68, two-pass linear loudnorm −16 / TP −1.5, one AAC
@@ -192,11 +194,12 @@ change" dropped).
   as a round bubble bottom-left: 330 px across at 1920x1080 (220 at 720p), 36 px margins (24), 3 px ring (2). Its sound
   comes from the same file, so lip sync holds; beat 0 has no pause edits. The take is one variable at the top of
   `scripts/mix_final.py` (`BEAT0`, or `FIN_BEAT0=<time>`); beat 0's length follows it (take + 0.4 s).
-- Beat times: 0 0:00.0–0:13.6 · 1 0:13.6–0:18.9 · 2 0:18.9–0:28.7 · 3 0:28.7–0:47.5 · 4 0:47.5–1:06.1 ·
-  5 1:06.1–1:20.1 · 6 1:20.1–2:03.5 · 9 2:03.5–2:35.6 · 8 2:35.6–3:13.2.
-- Beat 6: the click lands on "So I just point"; request 1 at 1:31.8 (SAM's outline lands 1.0 s earlier, as take 07
-  ends; the mic press is right under the first word), request 2 at 1:51.8 after the Icons click, the BLOCKED card at
-  2:01.2, "it's blocked" at 2:01.5 (take 11 split at its pause).
+- Beat times: 0 0:00.0–0:13.6 · 1 0:13.6–0:18.9 · 2 0:18.9–0:28.7 · 3 0:28.7–0:47.5 · 4 0:47.5–1:06.1 · 5 1:06.1–1:17.3 · 6 1:17.3–2:00.7 · 9 2:00.7–2:19.9 · 8 2:19.9–2:55.4.
+- Beat 6 keeps the take's caption pills (burned in at record time by `scripts/record-pas-beat.mjs`): SAM's outline,
+  the contrast result, "Clicked Icons", the focus check, Tab Tab, Blocked. The click lands on "So I just point";
+  request 1 at 1:29.1 (SAM's outline lands 1.0 s earlier, as take 07 ends; the mic press is right under
+  the first word), request 2 at 1:49.0 after the Icons click, the BLOCKED card at
+  1:58.5, "it's blocked" at 1:58.8 (take 11 split at its pause).
 - Rebuild: `node scripts/founder-transcribe.mjs` (Meta's speech model, `store: false`, files cut into pieces of up to 11 s
   at their pauses; writes `out/video/founder/transcripts.json` from the 16 kHz WAVs in `out/video/founder/wav16/`),
-  then `python3 scripts/mix_final.py`.
+  then `python3 scripts/mix_final.py` (also writes the contact sheet).
