@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 A = os.path.join(ROOT, 'out/ad45'); W = os.path.join(A, 'work'); SH = os.path.join(A, 'shots')
 VO = json.load(open(os.path.join(W, 'vo.json')))
-FPS = 24; XF = 0.3; LEAD = 0.2; GAP = 0.4
+FPS = 24; XF = 0.3; LEAD = 0.15; GAP = 0.3
 
 # ---------------------------------------------------------------- timeline
 SHOT_CLIPS = [['n1'], ['n2'], ['n3'], ['n4'], ['n5', 'req', 'n6'], ['n7'], ['n8']]
@@ -44,7 +44,7 @@ ASPECTS = {
     '1x1': dict(w=1080, h=1080, fs=32, big=46, cap=38, cap_bottom=60, cap_maxw=0.90),
     '9x16': dict(w=1080, h=1920, fs=40, big=58, cap=46, cap_bottom=330, cap_maxw=0.88),
 }
-REAL5 = dict(src=os.path.join(ROOT, 'out/video/final.mp4'), t0=86.3)
+REAL5 = dict(src=os.path.join(ROOT, 'out/video/final.mp4'), t0=86.6)
 # Crop for the real footage (source px, 1920x1080): drops the take's top caption pill; 1x1/9x16 keep the panel.
 REAL5_CROP = {'16x9': (0, 100, 1742, 980), '1x1': (0, 100, 980, 980), '9x16': (10, 100, 551, 980)}
 # Generated shots: horizontal centre (in 1920-wide frame px) of the fill-crop for 1x1 / 9x16.
@@ -83,8 +83,8 @@ def overlays():
             (1, {'16x9': (0.03, 0.64, 'l'), '1x1': (0.5, 0.66, 'c'), '9x16': (0.5, 0.63, 'c')}, [M('color.blue.500'), T(' · the raw value')]),
             (2, {'16x9': (0.03, 0.47, 'l'), '1x1': (0.03, 0.44, 'l'), '9x16': (0.5, 0.45, 'c')}, [M('color.action.primary'), T(' · what it means')]),
             (3, {'16x9': (0.97, 0.06, 'r'), '1x1': (0.5, 0.035, 'c'), '9x16': (0.5, 0.08, 'c')}, [M('button.bg'), T(' · where it’s used')])]:
-        add(2, speech_after('n3', k + 2) - 0.1, None, runs, 'fs', pos)
-    add(2, speech_after('n3', 6), None, [T('named by Muse Spark · '), N('3 to 5 s')], 'fs', {'16x9': (0.03, 0.06, 'l'), '1x1': (0.5, 0.76, 'c'), '9x16': (0.5, 0.72, 'c')})
+        add(2, speech_after('n3', k) - 0.1, None, runs, 'fs', pos)
+    add(2, speech_after('n3', 4), None, [T('named by Muse Spark · '), N('3 to 5 s')], 'fs', {'16x9': (0.03, 0.06, 'l'), '1x1': (0.5, 0.76, 'c'), '9x16': (0.5, 0.72, 'c')})
     # shot 4: the rewrite and the four checks
     add(3, 1.0, None, [M('var(--button-bg, '), ('#5e72e4', INDIGO, True), M(')')], 'fs', {'16x9': (0.5, 0.035, 'c'), '1x1': (0.5, 0.035, 'c'), '9x16': (0.5, 0.10, 'c')})
     c0 = speech_after('n4', 2)
@@ -94,19 +94,19 @@ def overlays():
     # shot 5: point and say (real footage)
     add(4, at('req') - 0.1, speech_end('req') + 0.2, [T('Meta’s speech model')], 'fs', {'16x9': (0.5, 0.78, 'c'), '1x1': (0.5, 0.74, 'c'), '9x16': (0.5, 0.71, 'c')})
     add(4, at('req') - 0.1, speech_end('req') + 0.2, [T('“This label is too light. Make it readable, keep our gray.”')], 'cap', {'16x9': 'cap', '1x1': 'cap', '9x16': 'cap'}, caption=True)
-    add(4, at('n6') + 1.2, None, [N('21'), T(' labels · '), N('2.95:1 → 4.53:1')], 'big', {'16x9': (0.69, 0.30, 'c'), '1x1': (0.5, 0.68, 'c'), '9x16': (0.5, 0.668, 'c')})
-    add(4, speech_after('n6', 2) - 0.1, None, [T('text contrast, checked on the whole page · '), N('0'), T(' worse')], 'fs', {'16x9': (0.69, 0.41, 'c'), '1x1': (0.5, 0.76, 'c'), '9x16': (0.5, 0.716, 'c')})
+    add(4, speech_after('n6', 2) - 0.1, None, [N('21'), T(' labels · '), N('2.95:1 → 4.53:1')], 'big', {'16x9': (0.69, 0.30, 'c'), '1x1': (0.5, 0.68, 'c'), '9x16': (0.5, 0.640, 'c')})
+    add(4, speech_after('n6', 4) - 0.1, None, [T('checked across the whole page · nothing got worse')], 'fs', {'16x9': (0.69, 0.41, 'c'), '1x1': (0.5, 0.76, 'c'), '9x16': (0.5, 0.688, 'c')})
     # shot 6: proof, then the block
-    add(5, 0.4, speech_after('n7', 2) - 0.1, [N('28'), T(' public sites · '), N('0 px'), T(' changed')], 'big', {'16x9': (0.5, 0.08, 'c'), '1x1': (0.5, 0.08, 'c'), '9x16': (0.5, 0.14, 'c')})
-    add(5, speech_after('n7', 2), None, [T('Blocked: contrast on “Month” would regress · reverted')], 'big', {'16x9': (0.5, 0.40, 'c'), '1x1': (0.5, 0.40, 'c'), '9x16': (0.5, 0.40, 'c')})
+    add(5, 0.4, speech_after('n7', 2) - 0.4, [N('28'), T(' public sites · '), N('0 px'), T(' changed')], 'big', {'16x9': (0.5, 0.08, 'c'), '1x1': (0.5, 0.08, 'c'), '9x16': (0.5, 0.14, 'c')})
+    add(5, speech_after('n7', 2) + 1.0, None, [T('Asked for red buttons. Blocked: the text would be harder to read.')], 'big', sub=[T('Nothing changed.')], pos={'16x9': (0.5, 0.38, 'c'), '1x1': (0.5, 0.36, 'c'), '9x16': (0.5, 0.36, 'c')})
     # captions (narrator lines; the request has its own caption above; the end card says vo-8 on screen)
     CAP = [('n1', [(0, 'Every color in your app is a number nobody can explain.')]),
            ('n2', [(0, 'Screenshot to Tokens starts from the pixels.'), (1, 'SAM 3.1 finds the buttons your code never describes.')]),
-           ('n3', [(0, 'Muse Spark names every value:'), (3, 'the raw color, what it means, where it’s used.'), (6, 'In seconds.')]),
+           ('n3', [(0, 'Muse Spark names every value:'), (1, 'the raw color, what it means, where it’s used.'), (4, 'In seconds.')]),
            ('n4', [(0, 'Your source becomes tokens, originals kept as fallbacks,'), (2, 'and four checks prove the rewrite changed nothing.')]),
            ('n5', [(0, 'Then point at a label and say it.')]),
-           ('n6', [(0, 'Twenty-one labels pass text contrast,'), (1, '2.95 to 4.53 to 1,'), (2, 'checked across the whole page.')]),
-           ('n7', [(0, 'Twenty-eight real sites. Zero pixels changed.'), (2, 'Anything that hurts contrast is blocked.')])]
+           ('n6', [(0, 'The app hears you, finds what you pointed at,'), (2, 'and fixes that label everywhere it appears.'), (4, 'Every change is checked across the whole page before it’s kept.')]),
+           ('n7', [(0, 'We tested it on twenty-eight real sites we didn’t build.'), (1, 'Zero pixels changed.'), (2, 'And if a change would make anything harder to read,'), (3, 'it’s blocked.')])]
     for clip, parts in CAP:
         shot = VOICE_AT[clip][0]
         for j, (k, text) in enumerate(parts):
@@ -137,18 +137,22 @@ def render_overlay(o, asp, cfg, path):
     scratch = ImageDraw.Draw(Image.new('RGBA', (8, 8)))
     padx, pady = int(size * 0.55), int(size * 0.32)
     maxw = cfg['w'] * (cfg['cap_maxw'] if o.get('caption') else 0.9) - 2 * padx
-    lines = wrap_runs(o['runs'], f_of, maxw, scratch)
+    lines = wrap_runs(o['runs'], f_of, maxw, scratch); nmain = len(lines)
+    sfonts = {False: font(int(size * 0.72)), True: font(int(size * 0.66), mono=True)}
+    if o.get('sub'): lines += wrap_runs(o['sub'], lambda m: sfonts[m], maxw, scratch)
+    fl = lambda li, m: (fonts if li < nmain else sfonts)[m]
     asc, desc = fonts[False].getmetrics(); lh = int((asc + desc) * 1.12)
-    lw = [sum(scratch.textlength(s.rstrip() if k == len(l) - 1 else s, font=f_of(m)) for k, (s, c, m) in enumerate(l)) for l in lines]
-    bw, bh = int(max(lw)) + 2 * padx, lh * len(lines) + 2 * pady - int(lh * 0.12)
+    sasc, sdesc = sfonts[False].getmetrics(); slh = int((sasc + sdesc) * 1.25)
+    lw = [sum(scratch.textlength(s.rstrip() if k == len(l) - 1 else s, font=fl(li, m)) for k, (s, c, m) in enumerate(l)) for li, l in enumerate(lines)]
+    bw, bh = int(max(lw)) + 2 * padx, lh * nmain + slh * (len(lines) - nmain) + 2 * pady - int(lh * 0.12) + (int(size * 0.2) if len(lines) > nmain else 0)
     im = Image.new('RGBA', (bw, bh), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     alpha = 153 if o.get('caption') else 225
     d.rounded_rectangle([0, 0, bw - 1, bh - 1], radius=int(size * 0.38), fill=(17, 17, 17, alpha))
     for li, l in enumerate(lines):
         x = padx + (max(lw) - lw[li]) / 2 if o.get('caption') or len(lines) > 1 else padx
-        y = pady + li * lh
+        y = pady + min(li, nmain) * lh + max(0, li - nmain) * slh + (int(size * 0.2) if li >= nmain else 0)
         for k, (s, c, m) in enumerate(l):
-            f = f_of(m); yy = y + (asc - f.getmetrics()[0])
+            f = fl(li, m); yy = y + ((asc if li < nmain else sasc) - f.getmetrics()[0])
             d.text((x, yy), s, font=f, fill=c + (255,)); x += d.textlength(s, font=f)
     im.save(path)
     if o['pos'][asp] == 'cap':
@@ -193,9 +197,9 @@ def seg_filter(i, asp, cfg, L):
         slow = 'setpts=1.25*PTS,' if i == 1 else ''
         return f'[0:v]{slow}fps={FPS},trim=0:{L},setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration={L},trim=0:{L},{up}{fill(asp, cfg, cx)}'
     if i == 5:  # shot 6b: 0.8x, with a hold on the checked grid (native 1.3 s) before the red card lands
-        hold = max(0.0, L - (5.04 * 1.25))
+        hold = min(2.4, max(0.0, L - (5.04 * 1.25)))
         return (f'[0:v]setpts=1.25*PTS,fps={FPS},split[a][b];[a]trim=0:1.625,setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration={hold:.3f}[a2];'
-                f'[b]trim=start=1.625,setpts=PTS-STARTPTS[b2];[a2][b2]concat=n=2:v=1,tpad=stop_mode=clone:stop_duration=2,trim=0:{L},setpts=PTS-STARTPTS,{up}{fill(asp, cfg, cx)}')
+                f'[b]trim=start=1.625,setpts=PTS-STARTPTS[b2];[a2][b2]concat=n=2:v=1,tpad=stop_mode=clone:stop_duration=4,trim=0:{L},setpts=PTS-STARTPTS,{up}{fill(asp, cfg, cx)}')
     raise ValueError(i)
 
 def stage_segments():
@@ -235,7 +239,7 @@ def stage_mix():
         ins += ['-i', os.path.join(W, f'{c}.wav')]; parts.append(f'[{k}:a]aresample=48000,pan=stereo|c0=c0|c1=c0,adelay={ms}|{ms}[v{k}]')
     nv = len(order)
     ins += ['-i', os.path.join(W, 'music.mp3'), '-i', click, '-i', tick]
-    click_ms = int((START[0] + 1.0) * 1000); tick_ms = int((START[4] + at('n6') + 1.2) * 1000)
+    click_ms = int((START[0] + 1.0) * 1000); tick_ms = int((START[4] + speech_after('n6', 2)) * 1000)
     fade_st = TOTAL - 2.0
     g = ';'.join(parts) + ';' + ''.join(f'[v{k}]' for k in range(nv)) + f'amix=inputs={nv}:normalize=0,apad=whole_dur={TOTAL}[voice];'
     g += '[voice]asplit[vo][sc];'
@@ -244,7 +248,7 @@ def stage_mix():
     g += '[mu][sc]sidechaincompress=threshold=0.02:ratio=4:attack=20:release=400:makeup=1[mud];'
     g += f'[{nv+1}:a]aresample=48000,pan=stereo|c0=c0|c1=c0,volume=-26dB,adelay={click_ms}|{click_ms}[ck];'
     g += f'[{nv+2}:a]aresample=48000,pan=stereo|c0=c0|c1=c0,volume=-24dB,adelay={tick_ms}|{tick_ms}[tk];'
-    g += f'[vo][mud][ck][tk]amix=inputs=4:normalize=0:duration=first,atrim=0:{TOTAL},alimiter=limit=0.68:level=false[pre]'
+    g += f'[vo][mud][ck][tk]amix=inputs=4:normalize=0:duration=first,atrim=0:{TOTAL},alimiter=limit=0.6:level=false[pre]'
     pre = os.path.join(W, 'mix-pre.wav')
     run(['ffmpeg', '-v', 'error', '-y'] + ins + ['-filter_complex', g, '-map', '[pre]', '-c:a', 'pcm_f32le', '-ar', '48000', pre])
     e = run(['ffmpeg', '-hide_banner', '-nostats', '-i', pre, '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-']).stderr

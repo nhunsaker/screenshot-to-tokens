@@ -5,9 +5,10 @@ speech segments from silencedetect, used to time overlays and captions)."""
 import json, re, subprocess, os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 A = os.path.join(ROOT, 'out/ad45'); W = os.path.join(A, 'work'); os.makedirs(W, exist_ok=True)
-CLIPS = [('n1', 'narrator/vo-1.mp3'), ('n2', 'narrator/vo-2.mp3'), ('n3', 'narrator/vo-3.mp3'), ('n4', 'narrator/vo-4.mp3'),
-         ('n5', 'narrator/vo-5.mp3'), ('req', 'request/vo-1.mp3'), ('n6', 'narrator/vo-6.mp3'), ('n7', 'narrator/vo-7.mp3'),
-         ('n8', 'narrator/vo-8.mp3')]
+NARR = os.environ.get('AD_NARR', 'narrator-v2')
+CLIPS = [('n1', NARR + '/vo-1.mp3'), ('n2', NARR + '/vo-2.mp3'), ('n3', NARR + '/vo-3.mp3'), ('n4', NARR + '/vo-4.mp3'),
+         ('n5', NARR + '/vo-5.mp3'), ('req', 'request/vo-1.mp3'), ('n6', NARR + '/vo-6.mp3'), ('n7', NARR + '/vo-7.mp3'),
+         ('n8', NARR + '/vo-8.mp3')]
 TRIM = 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.15,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.15,areverse'
 def run(*a): return subprocess.run(a, capture_output=True, text=True, check=True)
 def dur(p): return float(run('ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', p).stdout)
