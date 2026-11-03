@@ -72,12 +72,18 @@ async function session(wav, tmpName) {
     const r = l.getBoundingClientRect()
     return { x: Math.round(r.left + Math.min(85, r.width / 2)), y: Math.round(r.top + r.height / 2 + d.defaultView.scrollY), text: l.textContent.trim() }
   })
+  // The redesigned panel's result card is about 300 px tall and starts under the mic, so it would run into the camera
+  // corner: scroll the panel until the card (and its "Preview only" note) ends 218 px above the bottom; top() scrolls
+  // back so the target box and the mic show for the next request.
+  const fit = (smooth = true) => page.evaluate((smooth) => { const a = document.querySelector('aside'), r = document.getElementById('pasResults'); const over = r.getBoundingClientRect().bottom - (innerHeight - 218); if (over > 0) a.scrollTo({ top: a.scrollTop + over, behavior: smooth ? 'smooth' : 'instant' }) }, smooth)
+  const top = () => page.evaluate(() => document.querySelector('aside').scrollTo({ top: 0, behavior: 'smooth' }))
   async function clickAt(pt, k, approach) {
     const p = await toPage(pt)
     if (approach) { await page.mouse.move(p.x - 60, p.y + 40); await wait(250) }
     await page.mouse.move(p.x, p.y, { steps: approach ? 8 : 10 }); await wait(150)
     mark(k); await page.mouse.click(p.x, p.y)
-    return waitPhase((s) => s.phase === 'pointed' || s.phase === 'error', 30000)
+    const r = await waitPhase((s) => s.phase === 'pointed' || s.phase === 'error', 30000)
+    await top(); return r
   }
   async function typed(text, k) {
     await page.fill('#pasText', ''); await page.type('#pasText', text, { delay: 26 }); await wait(300)
@@ -101,9 +107,10 @@ async function session(wav, tmpName) {
     await page.goto(url)
     await page.waitForSelector('#pasTools.on', { timeout: 30000 })
     for (let i = 0; i < 120; i++) { const h = await page.evaluate(() => fetch('/__pas/api/health').then((r) => r.json())); if (h.focusBaseline && h.focusBaseline.ready) break; await wait(500) }
-    // Voice take: keep the bottom-left 210 px clear for the founder's camera bubble (the panel's long hints and the
-    // token filter are hidden so the result card still fits above it). Layout only; nothing the checks read changes.
-    if (wav) await page.addStyleTag({ content: 'aside{padding-bottom:210px} #toolsHint,#search,#provider,#pasHint,aside .list{display:none!important} #pasResults{max-height:none!important;flex:1 1 auto;min-height:0}' })
+    // Voice take: keep the bottom-left 210 px clear for the founder's camera bubble (More tools, the token filter and
+    // the token list are hidden; fit() scrolls the panel so each result card ends above the corner). Layout only;
+    // nothing the checks read changes.
+    if (wav) await page.addStyleTag({ content: 'aside{padding-bottom:210px} #more,.filterBar,#list,#results{display:none!important}' })
     await page.click('#pasToggle'); await wait(500)
   }
   async function finish(file) {
@@ -113,7 +120,7 @@ async function session(wav, tmpName) {
     rmSync(TMP, { recursive: true, force: true })
     await browser.close()
   }
-  return { page, ev, mark, errors, wait, waitPhase, caption, toPage, sidebarLink, clickAt, typed, spoken, start, finish }
+  return { page, ev, mark, errors, wait, waitPhase, caption, toPage, sidebarLink, clickAt, typed, spoken, start, finish, fit, top }
 }
 
 function contrastCaption(r1) {
@@ -135,7 +142,7 @@ async function focusAndTab(s, sl) {
   s.mark('checkEnd')
   if (!d2.result || d2.result.kind !== 'focus') throw new Error(`focus step: ${JSON.stringify(d2).slice(0, 400)}`)
   const r2 = d2.result
-  await s.page.evaluate(() => { const r = document.getElementById('pasResults'), sc = r.querySelector('.score'); if (sc) r.scrollTop = Math.max(0, sc.offsetTop - r.offsetTop - 70); else r.scrollTop = r.scrollHeight })
+  await s.fit()
   await s.caption(`Focus check (${(r2.checkMs / 1000).toFixed(1)} s): visible focus on ${r2.before.pass} → ${r2.after.pass} of ${r2.after.measured} controls · ${r2.worse} worse`)
   await s.wait(2600)
   const page = s.page
@@ -180,32 +187,47 @@ if (!a.voice) {
 } else {
   const dir = resolve(a.voice)
   // Session 1: the contrast request, spoken.
-  const s1 = await session(join(dir, 'req-1.wav'), 'tmp-6pas-v1')
+  // Meta's speech model sometimes doubles a word on the fake-mic audio ("Keep Keep our gray"); that caption would be on
+  // screen, so a session whose transcript doubles a word is discarded and recorded again (up to 4 tries).
+  const stutter = (t) => /\b(\w+)[\s,.]+\1\b/i.test(t)
+  let s1, t1, pt1, tries1 = 0
+  for (;;) {
+  tries1++
+  s1 = await session(join(dir, 'req-1.wav'), 'tmp-6pas-v1')
   await s1.start(); s1.mark('ready')
   await s1.caption('Point and say: click something in the live web app, then say or type the change'); await s1.wait(1600)
-  const pt1 = await s1.clickAt(SINCE, 'click1', true); s1.mark('pointed1')
+  pt1 = await s1.clickAt(SINCE, 'click1', true); s1.mark('pointed1')
   await s1.caption(`SAM 3.1 outlines what was clicked: "${(pt1.point && pt1.point.element) || '?'}"`); await s1.wait(900)
-  const t1 = await s1.spoken(1)
+  t1 = await s1.spoken(1)
+  if (!stutter(t1) || tries1 >= 4) break
+  console.error(`session 1 try ${tries1}: doubled word in "${t1}", recording again`); await s1.finish('beat-6-pas-v1-rejected.webm')
+  }
   const r1 = checkContrast(await s1.waitPhase((x) => x.phase === 'done' || x.phase === 'error', 60000)); s1.mark('done1')
-  await s1.wait(900)
+  await s1.wait(150); await s1.fit(); await s1.wait(750)
   await s1.caption(contrastCaption(r1)); s1.mark('cap1')
   await s1.page.mouse.move(8, 712, { steps: 6 }); await s1.wait(3400)
   s1.mark('end')
   await s1.finish('beat-6-pas-v1.webm')
 
   // Session 2: contrast re-applied off camera, then the focus request spoken, then the blocked case typed.
-  const s2 = await session(join(dir, 'req-2.wav'), 'tmp-6pas-v2')
+  let s2, t2, sl, tries2 = 0
+  for (;;) {
+  tries2++
+  s2 = await session(join(dir, 'req-2.wav'), 'tmp-6pas-v2')
   await s2.start()
   await s2.clickAt(SINCE, 'preClick')
   await s2.page.fill('#pasText', CONTRAST); await s2.page.press('#pasText', 'Enter')
   const r1b = checkContrast(await s2.waitPhase((x) => x.phase === 'done' || x.phase === 'error', 60000))
-  await s2.caption(contrastCaption(r1b))
+  await s2.fit(false); await s2.page.fill('#pasText', ''); await s2.caption(contrastCaption(r1b)) // the typed request off the input
   await s2.page.mouse.move(8, 712); await s2.wait(800)
   s2.mark('ready')
-  const sl = await s2.sidebarLink()
+  sl = await s2.sidebarLink()
   await s2.clickAt(sl, 'click2'); s2.mark('pointed2')
   await s2.caption(`Clicked "${sl.text}" in the sidebar`); await s2.wait(500)
-  const t2 = await s2.spoken(2)
+  t2 = await s2.spoken(2)
+  if (!stutter(t2) || tries2 >= 4) break
+  console.error(`session 2 try ${tries2}: doubled word in "${t2}", recording again`); await s2.finish('beat-6-pas-v2-rejected.webm')
+  }
   const f = await focusAndTab(s2, sl)
   // Blocked: "Month", typed.
   await s2.page.evaluate(() => { document.getElementById('pasOverlay').style.visibility = '' })
@@ -217,13 +239,13 @@ if (!a.voice) {
   if (!d3.result || d3.result.kind !== 'blocked') throw new Error(`blocked step: ${JSON.stringify(d3).slice(0, 400)}`)
   const m = /on [“"]([^”"]+)[”"] \(([\d.]+):1 → ([\d.]+):1\)/.exec(d3.result.message) || []
   await s2.caption(`Blocked: contrast on "${m[1]}" would regress (${m[2]}:1 → ${m[3]}:1). Reverted.`)
-  await s2.page.evaluate(() => { const r = document.getElementById('pasResults'); r.scrollTop = 0 })
+  await s2.wait(150); await s2.fit()
   await s2.page.mouse.move(8, 712, { steps: 6 })
   const reverted = await s2.page.evaluate(() => Array.from(document.getElementById('app').contentDocument.documentElement.style).filter((k) => k.startsWith('--')))
   await s2.wait(2600)
   s2.mark('end')
   await s2.finish('beat-6-pas-v2.webm')
-  const res = { url, s1: { events: s1.ev, transcript: t1, contrast: r1, errors: s1.errors }, s2: { events: s2.ev, transcript: t2, focus: f.r2, tab: f.seen, sidebar: f.sidebar, blocked: { message: d3.result.message, element: m[1], before: m[2], after: m[3], overridesLeft: reverted }, errors: s2.errors } }
+  const res = { url, tries: [tries1, tries2], s1: { events: s1.ev, transcript: t1, contrast: r1, errors: s1.errors }, s2: { events: s2.ev, transcript: t2, focus: f.r2, tab: f.seen, sidebar: f.sidebar, blocked: { message: d3.result.message, element: m[1], before: m[2], after: m[3], overridesLeft: reverted }, errors: s2.errors } }
   writeFileSync(join(OUT, 'beat-6-pas-v3.json'), JSON.stringify(res, null, 2))
   console.log(JSON.stringify({ t1, t2, contrast: { affected: r1.affected, before: r1.before, after: r1.after, page: [r1.pageFailBefore, r1.pageFailAfter], token: r1.changes[0] }, focus: { before: f.r2.before.pass, after: f.r2.after.pass, of: f.r2.after.measured }, blocked: res.s2.blocked, ev1: s1.ev, ev2: s2.ev, errors: [...s1.errors, ...s2.errors] }, null, 1))
 }
