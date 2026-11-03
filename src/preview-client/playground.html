@@ -149,6 +149,14 @@
           <button id="pasMic" aria-pressed="false" style="touch-action:none;user-select:none;-webkit-user-select:none">Hold to talk (or click)</button>
           <input type="text" id="pasText" placeholder="Or point and type what to change…" aria-label="Point and type">
         </div>
+        <div class="pasRow" id="pasMicRow" hidden>
+          <label for="pasMicPick" class="meta">Microphone</label>
+          <select id="pasMicPick" aria-label="Microphone"></select>
+        </div>
+        <div class="notice" id="pasMicHelp" hidden role="status">
+          <p id="pasMicWhy"></p>
+          <ol id="pasMicSteps"></ol>
+        </div>
         <div class="hint" id="pasHint">Off. Turn it on, then click something in the app and say or type what to change.</div>
         <div class="pasClip" id="pasClip" hidden></div>
       </div>
@@ -578,7 +586,7 @@
     micBtn.classList.add('rec'); micBtn.setAttribute('aria-pressed', 'true'); pasMicLabel('Starting the mic…')
     var t0 = Date.now()
     import('/__pas/wav.js').then(function (m) {
-      return m.recordWav({ maxMs: 10000 }).then(function (rec) {
+      return m.recordWav({ maxMs: 10000, deviceId: pas.micId || undefined }).then(function (rec) {
         pas.mic = rec; pas.starting = false
         // Released while the mic was starting: a slow start (> 1.5 s) means a permission prompt took the click, so
         // throw this one away; a quick tap means click-to-talk, so keep recording until the next click.
@@ -597,6 +605,11 @@
         return null
       }
       if (out.ms < 300) return null // an accidental tap
+      pasMicList() // labels are readable now that permission was granted
+      var problem = PAS.micProblem({ label: out.label, rms: out.rms })
+      if (problem && out.rms < PAS.SILENT_RMS) { pasMicHelp(problem); return null } // silence: don't send it
+      if (problem) pasMicHelp(problem + ' It was sent anyway; if the result is wrong, pick a real microphone.')
+      else pasMicHelp(null)
       pasState({ phase: 'transcribing', recordedMs: out.ms, speechEndAt: Date.now() })
       pasResults.innerHTML = ''; pasBusy(true, 'Listening back (Meta speech model)…')
       return pasFetch('/__pas/api/transcribe', out.wav, true)
@@ -614,14 +627,34 @@
       pasBusy(false)
       pasState({ phase: 'error', error: e.message })
       var why = (e.name || '') + ' ' + (e.message || '')
-      var msg = /Permission|NotAllowed|denied/i.test(why) ? 'The microphone is blocked for this page. Allow it in the browser\'s site settings, or type the request instead.'
-        : /NotReadable|Could not start|audio source|in use/i.test(why) ? 'The microphone could not start. Another app may be using it (Loom, Zoom, a call), or the browser lacks microphone access in your computer\'s privacy settings. Close that app or allow access, then try again; typing still works.'
-        : /NotFound|no device|Requested device not found/i.test(why) ? 'No microphone found. Plug one in, or type the request instead.'
-        : 'Could not hear that: ' + e.message
-      pasResults.innerHTML = '<p class="notice">' + PAS.escapeHtml(msg) + '</p>'; pasResults.classList.add('on')
+      pasMicList()
+      pasMicHelp(PAS.micProblem({ error: why }))
+      pasResults.innerHTML = ''; pasResults.classList.remove('on')
+      return
     })
   }
   function pasStopMic() { if (pas.mic) pas.mic.stop() }
+  // Microphone picker + help: list real mics first; show the steps when the mic fails, is virtual, or is silent.
+  function pasMicHelp(why) {
+    var box = document.getElementById('pasMicHelp')
+    if (!why) { box.hidden = true; return }
+    document.getElementById('pasMicWhy').textContent = why + ' To fix it:'
+    document.getElementById('pasMicSteps').innerHTML = PAS.MIC_HELP.map(function (t) { return '<li>' + PAS.escapeHtml(t) + '</li>' }).join('')
+    box.hidden = false
+  }
+  function pasMicList() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return
+    navigator.mediaDevices.enumerateDevices().then(function (ds) {
+      var mics = PAS.orderMics(ds)
+      var named = mics.filter(function (m) { return m.label && m.label !== 'Microphone' })
+      if (!named.length) return // no permission yet: labels are blank
+      var pick = document.getElementById('pasMicPick')
+      if (!pas.micId || !mics.some(function (m) { return m.id === pas.micId })) pas.micId = PAS.defaultMicId(mics)
+      pick.innerHTML = mics.map(function (m) { return '<option value="' + PAS.escapeHtml(m.id) + '"' + (m.id === pas.micId ? ' selected' : '') + '>' + PAS.escapeHtml(m.label + (m.virtual ? ' (virtual, app audio)' : '')) + '</option>' }).join('')
+      document.getElementById('pasMicRow').hidden = false
+      if (mics.every(function (m) { return m.virtual })) pasMicHelp('Only virtual devices (from apps like Teams, Loom or Zoom) are available, no real microphone.')
+    }).catch(function (e) { void e })
+  }
   function pasMicDown(e) {
     e.preventDefault()
     if (pas.mic && pas.toggle) return pasStopMic() // second click in click-to-talk
@@ -872,6 +905,9 @@
       document.getElementById('pasToggle').addEventListener('click', function () { if (pas.on) pasOff(); else pasOn() })
       var mic = document.getElementById('pasMic')
       if (!h.providers.asr.ok) { mic.disabled = true; mic.title = 'Speech is not available (no ASR key); typing still works.' }
+      document.getElementById('pasMicPick').addEventListener('change', function (e) { pas.micId = e.target.value; pasMicHelp(null) })
+      if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) navigator.mediaDevices.addEventListener('devicechange', pasMicList)
+      pasMicList()
       mic.addEventListener('pointerdown', pasMicDown)
       mic.addEventListener('pointerup', pasMicUp)
       mic.addEventListener('pointercancel', pasMicUp)

@@ -245,3 +245,48 @@ export const WHAT_THIS_IS = [
   'Click a control in the app, then say or type the fix. It’s applied here and checked on the whole page; a change that makes any text harder to read is blocked.',
   'Requests go to Meta’s hosted models with store: false. Nothing is saved.',
 ]
+
+// ---- microphone detection (pure) ----------------------------------------------------------------------------------
+const VIRTUAL_MIC = /virtual|teams audio|loom|zoom|blackhole|soundflower|loopback|krisp|obs|aggregate|multi-output/i
+
+/** True when an input device label names a virtual (app-provided) device rather than a real microphone. Pure. */
+export function isVirtualMic(label) { return VIRTUAL_MIC.test(String(label || '')) }
+
+/** Order audio inputs for the picker: real mics first (the OS default among them first), virtual ones last. Pure. */
+export function orderMics(devices) {
+  const ins = (devices || []).filter((d) => d && d.kind === 'audioinput' && d.deviceId && d.deviceId !== 'communications')
+  const rank = (d) => (isVirtualMic(d.label) ? 2 : 0) + (d.deviceId === 'default' ? 0 : 1)
+  return ins.slice().sort((a, b) => rank(a) - rank(b)).map((d) => ({ id: d.deviceId, label: d.label || 'Microphone', virtual: isVirtualMic(d.label) }))
+}
+
+/** The id to record from: the first real mic, else the first input. Pure. */
+export function defaultMicId(mics) {
+  const real = (mics || []).find((m) => !m.virtual)
+  return real ? real.id : ((mics || [])[0] || {}).id || null
+}
+
+/** Below this RMS a recording is silence (a virtual device with no app feeding it, or a muted mic). */
+export const SILENT_RMS = 0.002
+
+/** What went wrong with the mic, as a short headline for the help box; null when the recording looks fine. Pure. */
+export function micProblem({ label, rms, error } = {}) {
+  const why = String(error || '')
+  if (/Permission|NotAllowed|denied/i.test(why)) return 'The browser is not allowed to use the microphone on this page.'
+  if (/NotFound|Requested device not found/i.test(why)) return 'No microphone was found.'
+  if (/NotReadable|Could not start|audio source|in use/i.test(why)) return 'The microphone could not start.'
+  if (why) return 'The microphone failed: ' + why
+  if (isVirtualMic(label)) return `It recorded from “${label}”, an app's virtual device, not a microphone.`
+  if (typeof rms === 'number' && rms < SILENT_RMS) return `It heard only silence from “${label || 'the microphone'}”.`
+  return null
+}
+
+/** Steps to get a real microphone working (macOS-first, then the browser). */
+export const MIC_HELP = [
+  'Pick a real microphone in the menu next to the button, if one is listed.',
+  'On a Mac laptop with the lid closed, the built-in mic is off: open the lid, or plug in a headset or AirPods.',
+  'Mac: System Settings → Sound → Input → choose the real mic (not Teams, Loom or Zoom), and watch the level move.',
+  'Mac: System Settings → Privacy & Security → Microphone → allow your browser, then quit and reopen it.',
+  'Browser: the icon left of the address → Site settings → Microphone → Allow, then reload this page.',
+  'Another app in a call (Zoom, Teams, Loom) can hold the mic; close it and try again. Typing always works.',
+]
+

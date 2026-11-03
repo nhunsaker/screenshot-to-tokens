@@ -85,9 +85,13 @@ export function readWavHeader(bytes) {
  * mono WAV. Resolves {wav: Uint8Array, ms, rate, rms}. Hold-to-talk calls this on press and stop() on release.
  * (An AudioContext + ScriptProcessor capture produced no samples in headless Chromium: no render clock there.)
  */
-export async function recordWav({ maxMs = 10000, getUserMedia } = {}) {
+export async function recordWav({ maxMs = 10000, getUserMedia, deviceId } = {}) {
   const gum = getUserMedia || ((c) => navigator.mediaDevices.getUserMedia(c))
-  const stream = await gum({ audio: { channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false } })
+  const constraints = { channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false }
+  if (deviceId) constraints.deviceId = { exact: deviceId }
+  const stream = await gum({ audio: constraints })
+  const track = stream.getAudioTracks()[0]
+  const label = (track && track.label) || ''
   const rec = new MediaRecorder(stream)
   const parts = []
   rec.ondataavailable = (e) => { if (e.data && e.data.size) parts.push(e.data) }
@@ -106,7 +110,7 @@ export async function recordWav({ maxMs = 10000, getUserMedia } = {}) {
     const ch = []
     for (let i = 0; i < audio.numberOfChannels; i++) ch.push(audio.getChannelData(i))
     const mono = toMono(ch)
-    return { wav: encodeWav(mono, audio.sampleRate), ms, rate: audio.sampleRate, rms: rms(mono), mime: rec.mimeType }
+    return { wav: encodeWav(mono, audio.sampleRate), ms, rate: audio.sampleRate, rms: rms(mono), mime: rec.mimeType, label }
   })
-  return { stop, result }
+  return { stop, result, label }
 }

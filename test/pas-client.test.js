@@ -227,3 +227,24 @@ test('live demo: budget line, cap message and copy follow the wording rules', as
   const { COSTS } = await import('../src/stages/pas/ledger.js')
   assert.deepEqual(m.BUDGET_COSTS, { point: COSTS.point, transcribe: COSTS.transcribe, deterministic: COSTS['intent-deterministic'], muse: COSTS['intent-muse'], focusCheck: COSTS['focus-check'] })
 })
+
+test('mic detection: virtual devices, ordering, problems', async () => {
+  const m = await import('../src/preview-client/pas-client.js')
+  assert.equal(m.isVirtualMic('Microsoft Teams Audio Device (Virtual)'), true)
+  assert.equal(m.isVirtualMic('LoomAudioDevice (Virtual)'), true)
+  assert.equal(m.isVirtualMic('MacBook Pro Microphone'), false)
+  const mics = m.orderMics([
+    { kind: 'audioinput', deviceId: 'v', label: 'LoomAudioDevice (Virtual)' },
+    { kind: 'videoinput', deviceId: 'cam', label: 'FaceTime HD Camera' },
+    { kind: 'audioinput', deviceId: 'r', label: 'MacBook Pro Microphone' },
+  ])
+  assert.deepEqual(mics.map((x) => x.id), ['r', 'v'])
+  assert.equal(m.defaultMicId(mics), 'r')
+  assert.equal(m.defaultMicId([{ id: 'v', virtual: true }]), 'v')
+  assert.match(m.micProblem({ label: 'Microsoft Teams Audio Device (Virtual)', rms: 0.05 }), /virtual device/)
+  assert.match(m.micProblem({ label: 'MacBook Pro Microphone', rms: 0 }), /silence/)
+  assert.match(m.micProblem({ error: 'NotReadableError: Could not start audio source' }), /could not start/)
+  assert.match(m.micProblem({ error: 'NotAllowedError: Permission denied' }), /not allowed/)
+  assert.equal(m.micProblem({ label: 'MacBook Pro Microphone', rms: 0.05 }), null)
+  assert.ok(m.MIC_HELP.length >= 5)
+})
