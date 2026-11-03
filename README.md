@@ -7,7 +7,11 @@ three-tier token set (primitive → semantic → component, with a reason per to
 the hardcoded literals are rewritten to `var(--token, original)`, and four checks prove the rewrite itself changes nothing and makes no text
 harder to read before a pull request opens. **Sorb** then previews any token change live in your web app.
 
-**One minute, no sound:** the page with no markup, one real run, the diff and the three checks, the live preview, the breadth table.
+**▶ The 2:55 demo, narrated:** [watch on YouTube](https://www.youtube.com/watch?v=RpnO9HfF98E) · **Try it live:** [s2t.sorbcloud.com](https://s2t.sorbcloud.com)
+
+[![Screenshot to Tokens: the 2:55 demo on YouTube](docs/media/demo-thumb.jpg)](https://www.youtube.com/watch?v=RpnO9HfF98E)
+
+**One minute, no sound:** the page with no markup, one real run, the diff and the checks, the live preview, the breadth table.
 
 https://github.com/user-attachments/assets/3236827b-b139-4910-b9bc-252291838b0a
 
