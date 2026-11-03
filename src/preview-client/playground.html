@@ -146,7 +146,7 @@
           <button id="pasToggle" aria-pressed="false">Point and say</button>
         </div>
         <div class="pasRow" id="pasControls" hidden>
-          <button id="pasMic" aria-pressed="false">Hold to talk</button>
+          <button id="pasMic" aria-pressed="false" style="touch-action:none;user-select:none;-webkit-user-select:none">Hold to talk (or click)</button>
           <input type="text" id="pasText" placeholder="Or point and type what to change…" aria-label="Point and type">
         </div>
         <div class="hint" id="pasHint">Off. Turn it on, then click something in the app and say or type what to change.</div>
@@ -561,19 +561,47 @@
       document.getElementById('pasHint').textContent = 'Point set. Hold the mic or type, then say what to change.'
     }).catch(function (e2) { if (pasWasCapped(e2)) return; pasBusy(false); pasResults.innerHTML = '<p class="notice">Could not read that click: ' + PAS.escapeHtml(e2.message) + '</p>'; pasResults.classList.add('on') })
   }
+  // Mic: press and hold to talk, or click once to start and click again to send. The browser's permission prompt and
+  // the async getUserMedia mean the button can be released before the recorder exists, so release is tracked as state
+  // (pas.held) and applied once the recorder is ready; a recording that started while the permission prompt held the
+  // pointer is discarded with a hint rather than sent.
+  function pasMicLabel(t) { var b = document.getElementById('pasMic'); b.textContent = t }
+  function pasMicIdle() {
+    var b = document.getElementById('pasMic')
+    b.classList.remove('rec'); b.setAttribute('aria-pressed', 'false'); pasMicLabel('Hold to talk (or click)')
+    pas.toggle = false; pas.held = false; pas.discard = false; pas.starting = false
+  }
   function pasStartMic() {
-    if (pas.mic || !pas.health || !pas.health.providers.asr.ok) return
+    if (pas.mic || pas.starting || !pas.health || !pas.health.providers.asr.ok) return
     var micBtn = document.getElementById('pasMic')
-    micBtn.classList.add('rec'); micBtn.setAttribute('aria-pressed', 'true'); micBtn.textContent = 'Recording… (release to send)'
+    pas.starting = true; pas.discard = false
+    micBtn.classList.add('rec'); micBtn.setAttribute('aria-pressed', 'true'); pasMicLabel('Starting the mic…')
+    var t0 = Date.now()
     import('/__pas/wav.js').then(function (m) {
-      return m.recordWav({ maxMs: 10000 }).then(function (rec) { pas.mic = rec; return rec.result })
+      return m.recordWav({ maxMs: 10000 }).then(function (rec) {
+        pas.mic = rec; pas.starting = false
+        // Released while the mic was starting: a slow start (> 1.5 s) means a permission prompt took the click, so
+        // throw this one away; a quick tap means click-to-talk, so keep recording until the next click.
+        if (!pas.held && !pas.toggle) {
+          if (Date.now() - t0 > 1500) { pas.discard = true; rec.stop() } else { pas.toggle = true }
+        }
+        if (!pas.discard) pasMicLabel(pas.toggle ? 'Recording… (click to send)' : 'Recording… (release to send)')
+        return rec.result
+      })
     }).then(function (out) {
       pas.mic = null
-      micBtn.classList.remove('rec'); micBtn.setAttribute('aria-pressed', 'false'); micBtn.textContent = 'Hold to talk'
+      var discard = pas.discard
+      pasMicIdle()
+      if (discard) {
+        pasResults.innerHTML = '<p class="notice">Microphone ready. Now hold the button while you talk, or click once to start and again to send.</p>'; pasResults.classList.add('on')
+        return null
+      }
+      if (out.ms < 300) return null // an accidental tap
       pasState({ phase: 'transcribing', recordedMs: out.ms, speechEndAt: Date.now() })
       pasResults.innerHTML = ''; pasBusy(true, 'Listening back (Meta speech model)…')
       return pasFetch('/__pas/api/transcribe', out.wav, true)
     }).then(function (r) {
+      if (r === null) return
       pasBusy(false)
       if (r) pasState({ transcript: r.transcript, asrMs: r.ms })
       if (!r || !r.transcript) return
@@ -581,15 +609,31 @@
       pasIntent(r.transcript)
     }).catch(function (e) {
       pas.mic = null
-      micBtn.classList.remove('rec'); micBtn.setAttribute('aria-pressed', 'false'); micBtn.textContent = 'Hold to talk'
+      pasMicIdle()
       if (pasWasCapped(e)) return
       pasBusy(false)
       pasState({ phase: 'error', error: e.message })
-      micBtn.classList.remove('rec'); micBtn.setAttribute('aria-pressed', 'false'); micBtn.textContent = 'Hold to talk'
-      pasResults.innerHTML = '<p class="notice">Could not hear that: ' + PAS.escapeHtml(e.message) + '</p>'; pasResults.classList.add('on')
+      var msg = /Permission|NotAllowed|denied/i.test(e.name + ' ' + e.message) ? 'The microphone is blocked for this page. Allow it in the browser\'s site settings, or type the request instead.' : 'Could not hear that: ' + e.message
+      pasResults.innerHTML = '<p class="notice">' + PAS.escapeHtml(msg) + '</p>'; pasResults.classList.add('on')
     })
   }
   function pasStopMic() { if (pas.mic) pas.mic.stop() }
+  function pasMicDown(e) {
+    e.preventDefault()
+    if (pas.mic && pas.toggle) return pasStopMic() // second click in click-to-talk
+    try { e.currentTarget.setPointerCapture(e.pointerId) } catch (err) { void err } // keep the hold if the pointer drifts
+    pas.held = true; pas.pressAt = Date.now()
+    pasStartMic()
+  }
+  function pasMicUp() {
+    if (!pas.held) return
+    pas.held = false
+    if (pas.starting) return // the recorder isn't ready yet; pasStartMic decides (tap → click-to-talk, prompt → discard)
+    if (pas.mic && !pas.toggle) {
+      if (Date.now() - (pas.pressAt || 0) < 350) { pas.toggle = true; pasMicLabel('Recording… (click to send)') } // a tap
+      else pasStopMic()
+    }
+  }
   function pasAuditNow() {
     var d = frame.contentDocument
     return C.auditLive(d, data.pairs || [])
@@ -824,11 +868,12 @@
       document.getElementById('pasToggle').addEventListener('click', function () { if (pas.on) pasOff(); else pasOn() })
       var mic = document.getElementById('pasMic')
       if (!h.providers.asr.ok) { mic.disabled = true; mic.title = 'Speech is not available (no ASR key); typing still works.' }
-      mic.addEventListener('pointerdown', function (e) { e.preventDefault(); pasStartMic() })
-      mic.addEventListener('pointerup', pasStopMic)
-      mic.addEventListener('pointerleave', pasStopMic)
-      mic.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !pas.mic) { e.preventDefault(); pasStartMic() } })
-      mic.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') pasStopMic() })
+      mic.addEventListener('pointerdown', pasMicDown)
+      mic.addEventListener('pointerup', pasMicUp)
+      mic.addEventListener('pointercancel', pasMicUp)
+      mic.addEventListener('contextmenu', function (e) { e.preventDefault() }) // long-press menus on touch/trackpads
+      mic.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); if (pas.mic && pas.toggle) pasStopMic(); else if (!pas.mic && !pas.starting) { pas.held = true; pas.pressAt = Date.now(); pasStartMic() } } })
+      mic.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') pasMicUp() })
       document.getElementById('pasText').addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && e.target.value.trim()) pasIntent(e.target.value.trim())
       })
