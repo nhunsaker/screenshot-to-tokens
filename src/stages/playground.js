@@ -9,7 +9,7 @@ import { readFile, stat } from 'fs/promises'
 import { join, extname, normalize, dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { cssVarOf } from '../lib/props.js'
-import { cssValue } from './emit.js'
+import { cssValue, toCss } from './emit.js'
 import { LLM_PRESETS } from '../config.js'
 import { chat, extractJson } from '../providers/llm/chat.js'
 import { pairsFromCapture, sanitizeProposal, parseColor, UNSAFE } from '../preview-client/contrast.js'
@@ -38,6 +38,7 @@ export function playgroundData({ set, clusters, rewrite, capture }, { title, app
   return {
     title: title || 'Token playground', app: app || '../tokens/', namer: set.namer, edits: rewrite.edits.length, tokens,
     pairs: capture ? pairsFromCapture(capture) : [],
+    css: toCss(set), // the run's tokens.css, so the page can hand it back with the overrides applied
   }
 }
 
@@ -210,6 +211,7 @@ export async function startPlayground(o) {
       }
       if (p === '/' || p === '/index.html') return sendFile(res, join(CLIENT, 'playground.html'))
       if (p === '/contrast.js') return sendFile(res, join(CLIENT, 'contrast.js'))
+      if (p === '/theme-css.js') return sendFile(res, join(CLIENT, 'theme-css.js'))
       if (p === '/pas-client.js' && pas) return sendFile(res, join(CLIENT, 'pas-client.js'))
       if (p === '/tokens.json') return json(200, data)
       if (p === '/app') { res.writeHead(302, { location: '/app/' }); return res.end() }

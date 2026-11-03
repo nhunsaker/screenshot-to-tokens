@@ -53,21 +53,28 @@ const hex = (v) => { const c = parseColor(v); return c ? (c.a < 1 ? v : toHex(c)
  * using its text-colour token, and each twin's tokens. Cached by rounded position.
  * @param {PasCore} core
  */
-export async function resolvePoint(core, x, y) {
+/** Shown when a click past the captured area finds nothing in the live page either. */
+export const OUTSIDE_MSG = 'That spot is below the area we captured; scroll up a little and click again.'
+
+export async function resolvePoint(core, x, y, opts = {}) {
   x = Number(x); y = Number(y)
   if (!Number.isFinite(x) || !Number.isFinite(y)) throw bad('x, y (page px) required')
   const { width, height } = core.page
-  if (x < 0 || y < 0 || x >= width || y >= height) throw bad(`click outside the captured page (${width}x${height})`)
+  if (x < 0 || y < 0) throw bad(`click outside the captured page (${width}x${height})`)
+  // Past the captured screenshot (the person scrolled further than the capture): SAM has no pixels there, but the probe
+  // page has the same live layout, so the element and its tokens still resolve; the outline is the element's DOM box.
+  const outside = x >= width || y >= height
   const key = `${Math.round(x)},${Math.round(y)}`
   if (core.cache.has(key)) return { ...core.cache.get(key), cachedClick: true }
   const t0 = Date.now()
   const timings = {}
   const time = async (k, fn) => { const s = Date.now(); try { return await fn() } finally { timings[k] = Date.now() - s } }
   const [pt, live] = await Promise.all([
-    time('sam', () => core.pointFn(x, y)),
-    time('sentinel', () => core.probe.at(x, y)),
+    outside ? { sam: { ms: 0, source: 'none', reason: 'outside capture' }, outline: null, region: null, element: null, twins: [] } : time('sam', () => core.pointFn(x, y)),
+    // A taller window makes the app's own page taller than the capture (it fills its viewport): probe at that height.
+    time('sentinel', () => (outside && opts.vh > 0 && core.probe.atHeight ? core.probe.atHeight(x, y, opts.vh) : core.probe.at(x, y))),
   ])
-  if (!live) throw bad('nothing under that point in the app')
+  if (!live) throw bad(outside ? OUTSIDE_MSG : 'nothing under that point in the app')
   const controls = {}
   for (const p of PROBE_PROPS) {
     const o = orderChain(live.controls[p.prop] || [], core.tokens)
@@ -96,9 +103,10 @@ export async function resolvePoint(core, x, y) {
   const samBox = pt && pt.outline
   const outline = isControl && samBox
     ? { bbox: samBox.bbox, source: 'sam', sam: samBox }
-    : isControl && el.control ? { bbox: el.control.bbox, source: 'dom-control', sam: samBox || null } : { bbox: el.bbox, source: 'dom', sam: samBox || null }
+    : (isControl || (outside && el.control)) && el.control ? { bbox: el.control.bbox, source: 'dom-control', sam: samBox || null } : { bbox: el.bbox, source: 'dom', sam: samBox || null }
   const warnings = []
   if (pt && pt.sam && pt.sam.note) warnings.push(pt.sam.note)
+  if (outside) warnings.push(`outside the captured page (${width}x${height}): no SAM outline, element from the live page`)
   if (!controls.color && !controls['background-color'] && !controls['border-color'] && !controls['border-radius']) warnings.push('no token controls this element (literal values)')
   const result = {
     point: [Math.round(x), Math.round(y)],
@@ -260,6 +268,14 @@ async function openProbe(browser, appUrl, viewport, tokens, pairs) {
   return {
     page,
     at: (x, y) => q(() => page.evaluate(probeAtPoint, { x, y, tokens: probeTokens, props: PROBE_PROPS, color: SENTINEL_COLOR, radius: SENTINEL_RADIUS })),
+    // The same probe with the page's viewport as tall as the visitor's (capped), then put back.
+    atHeight: (x, y, h) => q(async () => {
+      const vp = page.viewportSize()
+      const tall = Math.min(4000, Math.round(h))
+      if (tall <= vp.height) return page.evaluate(probeAtPoint, { x, y, tokens: probeTokens, props: PROBE_PROPS, color: SENTINEL_COLOR, radius: SENTINEL_RADIUS })
+      await page.setViewportSize({ width: vp.width, height: tall })
+      try { return await page.evaluate(probeAtPoint, { x, y, tokens: probeTokens, props: PROBE_PROPS, color: SENTINEL_COLOR, radius: SENTINEL_RADIUS }) } finally { await page.setViewportSize(vp) }
+    }),
     pairsUsing: (cssVar) => q(() => page.evaluate(pairsUsingToken, { cssVar, pairs, color: SENTINEL_COLOR })),
     audit: (changes) => q(() => page.evaluate(auditWith, { changes, pairs })),
     // After every job: drop any custom-property override left on :root and scroll home, so one visitor's change can
@@ -453,7 +469,7 @@ export function createPasApi(o) {
       spend(costOf(name, body))
       let out
       try {
-        if (name === 'api/point') out = await resolvePoint(core, body.x, body.y)
+        if (name === 'api/point') out = await resolvePoint(core, body.x, body.y, { vh: Number(body.vh) || 0 })
         else if (name === 'api/intent') out = await decideIntent(core, body)
         else out = await focusCheck(core, body)
       } finally {

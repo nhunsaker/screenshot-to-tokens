@@ -141,6 +141,31 @@ function fakeCore(o = {}) {
 
 const STOPS = [{ tag: 'a', text: 'Dashboard', verdict: 'none', bg: '#ffffff' }, { tag: 'a', text: 'Month', verdict: 'none', bg: '#5e72e4' }, { tag: 'button', text: 'Go', verdict: 'faint', bg: '#f6f9fc' }]
 
+test('resolvePoint: a click past the captured page skips SAM and resolves the element in the live probe', async () => {
+  const { core } = fakeCore()
+  let samCalls = 0
+  const pointFn = core.pointFn
+  core.pointFn = async (...a) => { samCalls++; return pointFn(...a) }
+  const r = await resolvePoint(core, 430, 2400) // capture is 1440x2000
+  assert.equal(samCalls, 0)
+  assert.deepEqual(r.sam, { ms: 0, source: 'none', reason: 'outside capture' })
+  assert.equal(r.outline.source, 'dom')
+  assert.deepEqual(r.outline.bbox, [378, 213, 104, 19])
+  assert.equal(r.controls.color.token, 'color.text.muted')
+  assert.match(r.warnings.join(' '), /outside the captured page/)
+  const b = await resolvePoint(core, 900, 2400)
+  assert.equal(b.outline.source, 'dom-control', 'a control past the capture gets its DOM control box')
+  const seen = []
+  core.probe.atHeight = async (x, y, h) => { seen.push(h); return core.probe.at(x, y) }
+  await resolvePoint(core, 430, 2450, { vh: 2600 })
+  assert.deepEqual(seen, [2600], 'probes at the visitor viewport height')
+  await resolvePoint(core, 430, 222, { vh: 2600 })
+  assert.deepEqual(seen, [2600], 'inside the capture: the normal probe')
+  delete core.probe.atHeight
+  core.probe.at = async () => null
+  await assert.rejects(resolvePoint(core, 430, 2600), /below the area we captured; scroll up a little and click again/)
+})
+
 test('resolvePoint: DOM box for text (SAM glyph kept aside), sentinel controls, pairs using the token; cached', async () => {
   const { core, calls } = fakeCore()
   const r = await resolvePoint(core, 430, 222)

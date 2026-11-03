@@ -126,6 +126,22 @@ border or primitive colour token, never `color.text.*`; a text colour may not al
 alias moves to the allowed token with the nearest value (RGB distance 24 or less); if there is none, the change is
 dropped and the card says why ("skipped: a background can't use a text token").
 
+## A click below the captured page
+
+A taller window makes the app's own page taller than the capture (Argon is 1440x1303 captured; at 1440x1300 the
+iframe page is 1767 px). A click past the capture skips SAM and resolves the element and its tokens in the probe page,
+with the probe's viewport set to the visitor's height for that one call; the outline is the element's DOM box and the
+result carries `sam: {source: 'none', reason: 'outside capture'}`. If the probe finds nothing there either, the target
+box says "That spot is below the area we captured; scroll up a little and click again."
+
+## Taking a theme with you
+
+More tools → Share: "Download tokens.css" (the run's tokens.css with the current overrides applied in place) and
+"Copy changes as CSS" (only the changed properties, one `:root` block). After "Build a dark theme": "Download
+tokens.dark.css" and "Copy CSS", in the CLI's format (`darkCss` in `src/stages/dark.js`), with the app, the date and
+"N of M text pairs pass" in the header. The builders are `src/preview-client/theme-css.js`; `test/theme-css.test.js`
+checks them byte for byte against `darkCss` and `toCss`.
+
 ## Credits
 
 Panel icons: [Phosphor Icons](https://phosphoricons.com) (MIT). Path data is copied verbatim from the regular and

@@ -19,8 +19,9 @@
   [hidden] { display: none !important; }
   html, body { height: 100%; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-  .app { display: grid; grid-template-columns: 380px 1fr; height: 100vh; }
-  aside { position: relative; background: var(--panel); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
+  .app { display: grid; grid-template-columns: 380px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); height: 100vh; height: 100dvh; }
+  aside { position: relative; height: 100%; background: var(--panel); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+  aside > * { flex-shrink: 0; }
   header { padding: 16px 16px 10px; }
   h1 { margin: 0; font-size: 17px; letter-spacing: -0.2px; }
   .sub { color: var(--muted); font-size: 12.5px; margin: 2px 0 0; }
@@ -35,7 +36,7 @@
   button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .search { width: 100%; font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
   .filterBar { position: sticky; top: 0; z-index: 2; background: var(--panel); padding: 10px 16px 6px; border-top: 1px solid var(--line); }
-  .list { flex: 1 0 auto; padding: 0 8px 24px; }
+  .list { flex: 1 0 auto; padding: 0 8px 64px; }
   h2 { font-size: 11.5px; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); margin: 16px 8px 6px; }
   .tok { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 8px; border-radius: 10px; }
   .tok:hover { background: var(--soft); }
@@ -55,7 +56,7 @@
   select { font: 12.5px system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 5px 6px; max-width: 100%; }
   .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
   .hint:empty { display: none; }
-  .results { display: none; border-top: 1px solid var(--line); padding: 10px 16px 12px; max-height: 46vh; overflow: auto; }
+  .results { display: none; border-top: 1px solid var(--line); padding: 10px 16px 12px; }
   .results.on { display: block; }
   .results h3 { font-size: 13px; margin: 8px 0 4px; }
   .results p { margin: 4px 0; font-size: 12.5px; }
@@ -172,9 +173,9 @@
   .toast { position: fixed; right: 16px; bottom: 16px; background: #111; color: #fff; padding: 8px 12px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; pointer-events: none; }
   .toast.show { opacity: 1; }
   @media (max-width: 860px) {
-    .app { grid-template-columns: 1fr; grid-template-rows: 55vh auto; height: auto; }
+    .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: 55vh auto; height: auto; }
     .stage { order: -1; height: 55vh; }
-    aside { border-right: 0; border-top: 1px solid var(--line); overflow: visible; }
+    aside { height: auto; border-right: 0; border-top: 1px solid var(--line); overflow: visible; }
     .results { max-height: none; overflow: visible; }
   }
   @media (prefers-reduced-motion: reduce) { .toast { transition: none; } .busy::after { animation: none; } .lvl i, details .ic { transition: none; } }
@@ -198,6 +199,8 @@
 <symbol id="i-arrow-right" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
 <symbol id="i-microphone-fill" viewBox="0 0 256 256"><path d="M80,128V64a48,48,0,0,1,96,0v64a48,48,0,0,1-96,0Zm128,0a8,8,0,0,0-16,0,64,64,0,0,1-128,0,8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V240a8,8,0,0,0,16,0V207.6A80.11,80.11,0,0,0,208,128Z"/></symbol>
 <symbol id="i-check-circle-fill" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+<symbol id="i-download-simple" viewBox="0 0 256 256"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 256 256"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></symbol>
 </defs></svg>
 <div class="app">
   <aside>
@@ -257,6 +260,8 @@
         <h2>Share</h2>
         <div class="row actions" style="margin-top:0">
           <button id="copy" class="primary" disabled>Copy proposal link</button>
+          <button id="dlTokens" disabled><svg class="ic" aria-hidden="true"><use href="#i-download-simple"></use></svg>Download tokens.css</button>
+          <button id="copyChanges" disabled><svg class="ic" aria-hidden="true"><use href="#i-copy"></use></svg>Copy changes as CSS</button>
           <button id="reset" disabled>Reset all</button>
         </div>
       </div>
@@ -326,6 +331,8 @@
     var n = Object.keys(changes).length
     document.getElementById('reset').disabled = !n
     document.getElementById('copy').disabled = !n
+    document.getElementById('dlTokens').disabled = !n
+    document.getElementById('copyChanges').disabled = !n
     // Refresh swatches for tokens whose value cascades from an alias.
     Array.prototype.forEach.call(list.querySelectorAll('[data-var]'), function (row) {
       var k = row.getAttribute('data-var')
@@ -384,6 +391,25 @@
     changes = {}
     if (window.__pasReset) window.__pasReset() // point and say: applied map, focus rule, outline, card
     render(); sync(); toast('Back to the merged values')
+  })
+  // ---- take the theme with you: files built in the browser, same formats as the CLI (theme-css.js) ----
+  function themeCss() { return import('./theme-css.js') }
+  function download(name, text) {
+    var url = URL.createObjectURL(new Blob([text], { type: 'text/css' }))
+    var a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove()
+    setTimeout(function () { URL.revokeObjectURL(url) }, 1000)
+    toast('Downloaded ' + name)
+  }
+  function copyText(text, what) {
+    var done = function () { toast('Copied ' + what) }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () { prompt('Copy this', text) })
+    else prompt('Copy this', text)
+  }
+  document.getElementById('dlTokens').addEventListener('click', function () {
+    themeCss().then(function (m) { download('tokens.css', m.tokensCssWith(data.css || m.tokensCssFrom(data.tokens), changes)) })
+  })
+  document.getElementById('copyChanges').addEventListener('click', function () {
+    themeCss().then(function (m) { copyText(m.changesCss(changes), 'the changes as CSS') })
   })
   document.getElementById('copy').addEventListener('click', function () {
     var q = Object.keys(changes).map(function (k) { return k + ':' + String(changes[k]).replace(/^#/, '') }).join(',')
@@ -563,9 +589,18 @@
       if (best.r.rejected.length) html += '<p class="meta">Rejected as invalid: ' + best.r.rejected.map(function (x) { return esc(x.token + ' (' + x.why + ')') }).join(', ') + '</p>'
       if (a.fails.length) html += '<p class="meta">Still failing (shown honestly; ' + split.gradient.length + ' sit on a gradient no token controls):</p>' + withTokens(a.groups).map(function (g, i) { return pairRow(a.groups[i], tokenHint(g)) }).join('')
       html += '<details><summary class="meta">The ' + best.r.changes.length + ' token changes</summary>' + best.r.changes.map(function (c) { return '<div class="fix"><span class="name">' + esc(c.token) + '</span> → <code>' + esc(c.css) + '</code>' + (c.isNew ? '<span class="tag">new</span>' : '') + '<div class="why">' + esc(c.reason) + '</div></div>' }).join('') + '</details>'
-      html += '<div class="actions"><button id="reaudit2">Check again</button></div>'
+      html += '<div class="actions"><button id="dlDark" class="primary"><svg class="ic" aria-hidden="true"><use href="#i-download-simple"></use></svg>Download tokens.dark.css</button>' +
+        '<button id="copyDark"><svg class="ic" aria-hidden="true"><use href="#i-copy"></use></svg>Copy CSS</button><button id="reaudit2">Check again</button></div>'
       results.insertAdjacentHTML('beforeend', html)
       document.getElementById('reaudit2').addEventListener('click', runAudit)
+      var darkFile = function () {
+        return themeCss().then(function (m) {
+          var note = m.darkNote({ app: data.title, date: new Date().toISOString().slice(0, 10), pass: a.checked.length - a.fails.length, checked: a.checked.length })
+          return m.darkThemeCss(best.r.changes, { note: note })
+        })
+      }
+      document.getElementById('dlDark').addEventListener('click', function () { darkFile().then(function (css) { download('tokens.dark.css', css) }) })
+      document.getElementById('copyDark').addEventListener('click', function () { darkFile().then(function (css) { copyText(css, 'tokens.dark.css') }) })
       window.__s2t = { lastDark: { rounds: rounds.map(function (x) { return { fixable: x.j.fixable, onGradient: x.j.onGradient, dark: x.j.dark, dominantBg: x.j.dom, checked: x.j.a.checked.length, changes: x.r.changes.length, ms: x.r.ms, provider: x.r.provider, cached: x.r.cached } }), kept: rounds.indexOf(best), pass: a.checked.length - a.fails.length, checked: a.checked.length, dominantBg: dom, totalMs: Date.now() - t0 } }
     }).catch(function (e) { setBusy(false); results.insertAdjacentHTML('beforeend', '<p class="notice">Muse call failed: ' + esc(e.message) + '</p>') })
   }
@@ -695,7 +730,9 @@
     pasBusy(true)
     pasTarget('busy')
     pasState({ phase: 'pointing', clickAt: Date.now() })
-    pasFetch('/__pas/api/point', { x: Math.round(pt.x), y: Math.round(pt.y) }).then(function (r) {
+    var win = frame.contentWindow, vp0 = pas.health.run.viewport
+    var vh = win && win.innerWidth ? Math.round(win.innerHeight * vp0.width / win.innerWidth) : 0 // the app's viewport height, capture px
+    pasFetch('/__pas/api/point', { x: Math.round(pt.x), y: Math.round(pt.y), vh: vh }).then(function (r) {
       pasBusy(false)
       pas.point = r
       pasState({ phase: 'pointed', point: { cached: !!r.cachedClick, element: r.element && r.element.text, token: r.controls && r.controls.color && r.controls.color.token, pairs: r.pairs && r.pairs.count, twins: (r.twins || []).length, outline: r.outline && r.outline.source, ms: r.ms } })
@@ -704,6 +741,13 @@
     }).catch(function (e2) {
       if (pasWasCapped(e2)) return
       pasBusy(false); pasTarget()
+      pasState({ phase: pas.point ? 'pointed' : 'ready', pointError: e2.message })
+      // Past the captured area with nothing under it: a friendly line in the target box, not an error.
+      if (/below the area we captured/.test(e2.message)) {
+        var box = document.getElementById('pasTarget'); box.className = 'pasTarget'
+        box.innerHTML = ic('cursor-click') + '<div>' + PAS.escapeHtml(e2.message) + '</div>'
+        return
+      }
       pasResults.innerHTML = '<p class="notice">Could not read that click: ' + PAS.escapeHtml(e2.message) + '</p>'; pasResults.classList.add('on')
     })
   }

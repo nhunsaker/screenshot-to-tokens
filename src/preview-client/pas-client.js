@@ -337,7 +337,8 @@ export function stepIndex(s = {}) {
  */
 export function targetInfo(point) {
   const el = (point && point.element) || null
-  const label = el ? String(el.text || '').trim() || `<${el.tag}>` : ''
+  const raw = el ? String(el.text || '').replace(/\s+/g, ' ').trim() : ''
+  const label = el ? (raw.length > 60 ? raw.slice(0, 57).trimEnd() + '…' : raw) || `<${el.tag}>` : ''
   const ctl = (point && point.controls) || {}
   const color = ctl.color && ctl.color.token
   const paint = (ctl['background-color'] && ctl['background-color'].token) || (ctl['border-color'] && ctl['border-color'].token)

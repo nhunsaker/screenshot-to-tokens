@@ -320,4 +320,5 @@ test('targetInfo: label, controlling token and how widely it is used', async () 
   const b = { element: { tag: 'a', text: '' }, controls: { color: null, 'background-color': { token: 'button.bg' } }, twins: [{}, {}] }
   assert.deepEqual(m.targetInfo(b), { label: '<a>', token: 'button.bg', line: 'button.bg · used by 3 elements' })
   assert.equal(m.targetInfo({ element: { tag: 'div', text: 'x' }, controls: {} }).line, 'no token controls it')
+  assert.equal(m.targetInfo({ element: { tag: 'div', text: 'Dashboard Icons Maps User Profile Tables Login Register Documentation Getting started' }, controls: {} }).label, 'Dashboard Icons Maps User Profile Tables Login Register D…')
 })
