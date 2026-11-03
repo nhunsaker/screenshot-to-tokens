@@ -226,7 +226,7 @@
         </ol>
         <div class="pasTarget" id="pasTarget" aria-live="polite"></div>
         <input type="text" id="pasText" placeholder="Type a change, e.g. “make this label readable”" aria-label="Type a change">
-        <button id="pasMic" aria-pressed="false" title="Hold to talk, or click to start and click again to send" style="touch-action:none;user-select:none;-webkit-user-select:none"><svg class="ic mic-off" aria-hidden="true"><use href="#i-microphone"></use></svg><svg class="ic mic-on" aria-hidden="true"><use href="#i-microphone-fill"></use></svg><span class="lbl">Hold to talk</span><span class="lvl" id="pasLevel" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>
+        <button id="pasMic" data-umami-event="pas-mic" aria-pressed="false" title="Hold to talk, or click to start and click again to send" style="touch-action:none;user-select:none;-webkit-user-select:none"><svg class="ic mic-off" aria-hidden="true"><use href="#i-microphone"></use></svg><svg class="ic mic-on" aria-hidden="true"><use href="#i-microphone-fill"></use></svg><span class="lbl">Hold to talk</span><span class="lvl" id="pasLevel" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>
         <div class="pasMicDev" id="pasMicDev"><svg class="ic" aria-hidden="true"><use href="#i-microphone"></use></svg><span id="pasMicName">Default microphone</span><button class="link" id="pasMicChange" aria-controls="pasMicRow" aria-expanded="false" hidden>change</button></div>
         <div class="pasRow" id="pasMicRow" hidden>
           <label for="pasMicPick">Microphone</label>
@@ -1056,7 +1056,7 @@
     })
   }
   function pasKeepUndoButtons() {
-    return '<div class="actions"><button id="pasKeep" class="primary">' + ic('check') + 'Keep this change</button><button id="pasUndo">' + ic('arrow-counter-clockwise') + 'Undo</button><button id="pasShowPr" class="link">' + ic('git-pull-request') + 'PR command</button></div>'
+    return '<div class="actions"><button id="pasKeep" class="primary" data-umami-event="pas-keep">' + ic('check') + 'Keep this change</button><button id="pasUndo" data-umami-event="pas-undo">' + ic('arrow-counter-clockwise') + 'Undo</button><button id="pasShowPr" class="link">' + ic('git-pull-request') + 'PR command</button></div>'
   }
   function pasWireButtons(cs, isFocus) {
     var keep = document.getElementById('pasKeep')

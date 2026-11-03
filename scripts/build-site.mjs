@@ -343,7 +343,7 @@ ${tiers.map(([code, tier, why]) => `      <li><code>${esc(code)}</code><span cla
     <label for="run-url">Page address</label>
     <div class="run-row">
       <input id="run-url" name="url" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://example.github.io/" required>
-      <button type="submit" class="try">Run</button>
+      <button type="submit" class="try" data-umami-event="run-submit">Run</button>
     </div>
     <p class="run-note">The page's screenshot goes to Meta's hosted models with <code>store: false</code>. Public pages only. Results are deleted after 24 hours.</p>
     <p class="run-examples"><span class="muted">Examples from the 28-site run:</span>

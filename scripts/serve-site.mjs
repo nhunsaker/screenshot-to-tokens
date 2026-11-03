@@ -39,7 +39,20 @@ const BASE_HEADERS = {
   'X-Frame-Options': 'SAMEORIGIN',
 }
 
+// Analytics: self-hosted Umami (stats.n8plusus.com). The tag is added to every HTML page the site serves when
+// S2T_UMAMI_ID is set (production only); pageviews plus the data-umami-event clicks the pages mark. No cookies.
+const UMAMI_ID = process.env.S2T_UMAMI_ID || ''
+const UMAMI_TAG = UMAMI_ID ? `<script defer src="https://stats.n8plusus.com/script.js" data-website-id="${UMAMI_ID}"></script>` : ''
+function withUmami(html) {
+  if (!UMAMI_TAG) return html
+  const s = String(html)
+  if (s.includes('data-website-id=')) return s
+  const i = s.search(/<\/head>/i)
+  return i >= 0 ? s.slice(0, i) + UMAMI_TAG + s.slice(i) : s + UMAMI_TAG
+}
+
 function send(res, status, body, type, extra = {}) {
+  if (/^text\/html/.test(type)) body = withUmami(body)
   res.writeHead(status, { ...BASE_HEADERS, 'Content-Type': type, 'Content-Length': Buffer.byteLength(body), ...extra })
   res.end(res.req.method === 'HEAD' ? undefined : body)
 }
@@ -82,8 +95,17 @@ async function startTierB() {
 
 function proxy(req, res, path) {
   const up = httpRequest({ host: '127.0.0.1', port: live.port, method: req.method, path, headers: req.headers }, (r) => {
-    res.writeHead(r.statusCode || 502, r.headers)
-    r.pipe(res)
+    const isHtml = UMAMI_TAG && /^text\/html/.test(String(r.headers['content-type'] || ''))
+    if (!isHtml) { res.writeHead(r.statusCode || 502, r.headers); return r.pipe(res) }
+    const chunks = []
+    r.on('data', (c) => chunks.push(c))
+    r.on('end', () => {
+      const body = withUmami(Buffer.concat(chunks).toString('utf8'))
+      const headers = { ...r.headers, 'content-length': Buffer.byteLength(body) }
+      delete headers['transfer-encoding']
+      res.writeHead(r.statusCode || 502, headers)
+      res.end(req.method === 'HEAD' ? undefined : body)
+    })
   })
   up.setTimeout(120000, () => up.destroy(new Error('upstream timeout')))
   up.on('error', (e) => {
