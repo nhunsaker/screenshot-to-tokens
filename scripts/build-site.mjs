@@ -12,7 +12,7 @@ const out = join(root, process.argv[2] || 'site')
 
 // ── YOUTUBE EMBED SLOT ── fill on Nov 3 with the unlisted upload's video id (the part after `v=`), then rebuild.
 // Empty = show the poster frame and a link to the repo README, where the video is embedded.
-const YOUTUBE_ID = process.env.S2T_YOUTUBE_ID || ''
+const YOUTUBE_ID = process.env.S2T_YOUTUBE_ID || 'RpnO9HfF98E'
 
 const REPO = 'https://github.com/nhunsaker/screenshot-to-tokens'
 // Tier C example chips: five stable breadth-pool sites with edits and fallbacks 0 px in docs/breadth.md (MIT; one per
@@ -82,7 +82,7 @@ const steps = [
 const size = (p) => { const b = statSync(join(root, p)).size; return b > 1024 ? `${(b / 1024).toFixed(1)} KB` : `${b} B` }
 
 const video = YOUTUBE_ID
-  ? `<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${esc(YOUTUBE_ID)}" title="Screenshot to Tokens, demo video (2:57)" allow="encrypted-media; picture-in-picture; fullscreen" loading="lazy"></iframe></div>`
+  ? `<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${esc(YOUTUBE_ID)}" title="Screenshot to Tokens, demo video (2:55)" allow="encrypted-media; picture-in-picture; fullscreen" loading="lazy"></iframe></div>`
   : `<!-- YOUTUBE EMBED SLOT: set YOUTUBE_ID in scripts/build-site.mjs (or S2T_YOUTUBE_ID) on Nov 3 and rebuild. -->
 <figure class="video-poster">
   <a href="${REPO}#readme"><img src="media/poster.png" width="640" height="360" alt="Title card of the demo video: Screenshot to Tokens, Meta Global AI Developer Hackathon, Startup track."></a>
