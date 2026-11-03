@@ -17,6 +17,10 @@
 import subprocess, os, json, re, shutil
 import numpy as np
 
+# Beat 0's camera take (OBS composite, ~/Movies/2026-11-03 <stem>.mov). Swap the take here (or FIN_BEAT0=<stem>) and
+# re-run; beat 0's length follows it (title hold = the take's trimmed length + 0.4 s, the payoff loop keeps cycling).
+BEAT0 = os.environ.get('FIN_BEAT0', '12-48-24')
+
 MOV = os.path.expanduser('~/Movies/2026-11-03 {}.mov')
 os.chdir('out/video')
 W = 'founder/work'; os.makedirs(W, exist_ok=True); os.makedirs('founder/src', exist_ok=True)
@@ -44,7 +48,7 @@ def frames_db(x, hop=480):
 # 1. The takes. Each: (take, key, [(file, [(keep from, keep to or None)])], notes). Edits cut a stumble at a point
 # found by transcribing short pieces (out/video/founder/fine.json); None = no clean read recorded.
 TAKES = [
-    ('01', 'b0', [('12-44-16', [(0, None)])], 'camera take (OBS composite); last of four full reads; 12-43-29 has "one check, one check token"'),
+    ('01', 'b0', [(BEAT0, [(0, None)])], 'camera take (OBS composite), short version B; 12-48-24 is the cleaner of two reads (12-48-08: "most of the apps", "in a second"); the 32 s takes 12-43-29 / 12-44-16 are no longer used'),
     ('02', 'b1', [('12-30-09', [(0, None)])], 'only read; "No one can tell you" for "Nobody can tell you"'),
     ('03', 'b2', [('12-30-15', [(0, None)])], 'only read'),
     ('04', 'b3', [('12-30-27', [(0, 14.0), (15.10, None)])], 'misread "in a view report. Review report" cut to "in a review report" (14.0-15.1 s removed); 12-30-49 is a false start'),
@@ -184,7 +188,7 @@ fc = (f'[0:v]trim=0:{T0:.3f},setpts=PTS-STARTPTS,fps=30,{SCALE},tpad=stop_mode=c
       f"geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='255*clip({CAM / 2}-hypot(X-{cx},Y-{cx})+0.5,0,1)',tpad=stop_mode=clone:stop_duration=2[cam];"
       f"color=c=0xE8E8E4:s={D_}x{D_}:r=30,format=yuva444p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='150*clip({D_ / 2}-hypot(X-{rx},Y-{rx})+0.5,0,1)'[ring];"
       f'[bg][ring]overlay={M_}:{OH - M_ - D_}:shortest=1[b1];[b1][cam]overlay={M_ + R_}:{OH - M_ - D_ + R_}:eof_action=repeat,format=yuv420p,trim=0:{T0:.3f}[v]')
-ff('-i', 'beat-0.webm', '-i', 'founder/src/12-44-16.mov', '-filter_complex', fc, '-map', '[v]', '-frames:v', str(round(T0 * 30)), '-c:v', 'libx264', '-crf', '17', '-pix_fmt', 'yuv420p', '-r', '30', '-an', f'{W}/w0-v.mp4')
+ff('-i', 'beat-0.webm', '-i', f'founder/src/{BEAT0}.mov', '-filter_complex', fc, '-map', '[v]', '-frames:v', str(round(T0 * 30)), '-c:v', 'libx264', '-crf', '17', '-pix_fmt', 'yuv420p', '-r', '30', '-an', f'{W}/w0-v.mp4')
 wavs(0, [(B0, 0.25, True)], T0); beats[0] = T0
 
 beats[1] = plain(1, 'n1.mp4', 'b1', tail=0.3)
