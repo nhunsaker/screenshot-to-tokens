@@ -2,7 +2,7 @@
 import { readFileSync } from 'fs'
 import { loadDotEnv } from '../../src/config.js'
 loadDotEnv()
-const wav = readFileSync(process.argv[2] || '/Users/nobrien/workspace/metatoy/screenshot-to-tokens/out/testA/say.wav')
+const wav = readFileSync(process.argv[2] || 'out/testA/say.wav')
 for (const extra of [{ store: false }, {}]) {
   const req = { model: 'muse-voice-transcribe-1.0', audioEncoding: 'WAV', sampleRateHertz: 16000, ...extra }
   const f = new FormData()
