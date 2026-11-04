@@ -15,6 +15,8 @@ const out = join(root, process.argv[2] || 'site')
 const YOUTUBE_ID = process.env.S2T_YOUTUBE_ID || 'RpnO9HfF98E'
 
 const REPO = 'https://github.com/nhunsaker/screenshot-to-tokens'
+// Absolute origin for Open Graph / Twitter card URLs (crawlers need absolute image URLs).
+const SITE = (process.env.S2T_ORIGIN || 'https://s2t.sorbcloud.com').replace(/\/$/, '')
 // Tier C example chips: five stable breadth-pool sites with edits and fallbacks 0 px in docs/breadth.md (MIT; one per
 // framework where we can: Jekyll x2, Hugo, Astro, Docusaurus), all small (under 1.5 MB mirrored).
 const RUN_EXAMPLES = ['https://gaotianchi.github.io/', 'https://proinsias.github.io/', 'https://infi-defi.github.io/', 'https://awfp1314.github.io/', 'https://josh-wong.github.io/']
@@ -97,6 +99,20 @@ const html = `<!doctype html>
 <title>Screenshot to Tokens</title>
 <meta name="description" content="A design system from a screenshot in seconds. A more accessible app from the tokens in one change. SAM 3.1 and Muse Spark, built for the Meta Global AI Developer Hackathon.">
 <meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Screenshot to Tokens">
+<meta property="og:url" content="${SITE}/">
+<meta property="og:title" content="Screenshot to Tokens: a design system from a screenshot">
+<meta property="og:description" content="Turn an old website into a three tier token system, then fix it by voice in the browser. Contrast checked on every change. Open source, built for the Meta Global AI Developer Hackathon.">
+<meta property="og:image" content="${SITE}/og.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="Screenshot to Tokens demo: a stylesheet of bare colors turned into named design tokens">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@precogpunk">
+<meta name="twitter:title" content="Screenshot to Tokens: a design system from a screenshot">
+<meta name="twitter:description" content="Turn an old website into a three tier token system, then fix it by voice in the browser. Open source.">
+<meta name="twitter:image" content="${SITE}/og.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230f1115%27/%3E%3Crect x=%277%27 y=%277%27 width=%2718%27 height=%2718%27 rx=%274%27 fill=%27%238a9af0%27/%3E%3C/svg%3E">
 <style>
 /* Our own page eats our own cooking: every value is a token, every use is var(--token, fallback). */
@@ -385,6 +401,7 @@ cpSync(join(root, 'demo/site-media'), join(out, 'media'), { recursive: true })
 cpSync(join(root, 'demo/media'), join(out, 'media'), { recursive: true })
 // Tier C's form script (the form itself is only served when the server runs tier c).
 cpSync(join(root, 'scripts/live/run-client.js'), join(out, 'run-client.js'))
+cpSync(join(root, 'docs/media/demo-thumb.jpg'), join(out, 'og.jpg'))
 
 const total = (d) => readdirSync(d, { withFileTypes: true }).reduce((a, e) => a + (e.isDirectory() ? total(join(d, e.name)) : statSync(join(d, e.name)).size), 0)
 console.log(`site → ${out} (${(total(out) / 1024 / 1024).toFixed(1)} MB; evidence ${evidence.body.length} rows, breadth ${breadth.body.length} sites)`)
