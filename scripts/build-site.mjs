@@ -179,6 +179,8 @@ header.hero { padding: 64px 0 32px; }
 h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); line-height: 1.05; letter-spacing: -1px; margin: 0 0 18px; }
 .tagline { font-size: clamp(1.2rem, 3vw, 1.6rem); line-height: 1.35; font-weight: 600; margin: 0 0 14px; max-width: 46rem; }
 .lede { color: var(--color-text-muted, #a3a39d); max-width: 46rem; margin: 0; }
+.xrow { margin: 18px 0 0; max-width: 46rem; }
+.xlink { font-weight: 600; }
 section { padding: 36px 0; border-top: 1px solid var(--color-border-default, #2c313c); }
 h2 { font-size: 1.6rem; letter-spacing: -.3px; margin: 0 0 8px; }
 h3 { font-size: 1.15rem; margin: 22px 0 6px; }
@@ -263,6 +265,8 @@ footer p { margin: 4px 0; }
   <p class="lede">Point it at a live web app with no design tokens. SAM 3.1 reads the interface from pixels, Muse Spark names a
   tiered token set, a person reviews it, the hardcoded values in the real source become <code>var(--token, original)</code>,
   and four checks prove nothing moved before a pull request opens.</p>
+  <p class="xrow"><a class="xlink" href="https://x.com/precogpunk/status/2117740495526834365">Watch the 55-second demo on X</a>
+  <span class="muted">A repost there helps this project in the hackathon's Most Viral round through Sunday, Nov 8.</span></p>
 </header>
 
 <main id="main">

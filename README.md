@@ -9,6 +9,8 @@ harder to read before a pull request opens. **Sorb** then previews any token cha
 
 **▶ The 2:55 demo, narrated:** [watch on YouTube](https://www.youtube.com/watch?v=RpnO9HfF98E) · **Try it live:** [s2t.sorbcloud.com](https://s2t.sorbcloud.com)
 
+**▶ The 55-second demo on X:** [x.com/precogpunk](https://x.com/precogpunk/status/2117740495526834365). If this is useful to you, a repost there helps the project in the hackathon's Most Viral round through Sunday, Nov 8.
+
 [![Screenshot to Tokens: the 2:55 demo on YouTube](docs/media/demo-thumb.jpg)](https://www.youtube.com/watch?v=RpnO9HfF98E)
 
 **One minute, no sound:** the page with no markup, one real run, the diff and the checks, the live preview, the breadth table.
