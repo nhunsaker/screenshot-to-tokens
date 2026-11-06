@@ -230,6 +230,14 @@ td.flag { color: var(--color-text-note, #f5c46b); }
 .try-row { margin: 0 0 16px; }
 .try { display: inline-block; background: #8a9af0; color: #0f1115; font-weight: 700; padding: 8px 16px; border-radius: var(--radius-chip, 10px); text-decoration: none; margin-right: 8px; }
 .try:hover { background: #a9b5f5; }
+.try-section h3 { margin: 28px 0 8px; }
+.feature { background: var(--color-surface-raised, #161920); border: 1px solid #3a4152; border-radius: var(--radius-card, 12px); padding: 22px; margin: 0 0 22px; }
+.feature-lead { border: 2px solid #8a9af0; box-shadow: 0 0 0 4px rgba(138, 154, 240, .12); }
+.feature h3 { font-size: 1.35rem; margin: 0 0 8px; }
+.feature-kicker { margin: 0 0 4px; font-size: 0.8rem; letter-spacing: .12em; text-transform: uppercase; color: #8a9af0; font-weight: 700; }
+.feature .shots { margin-top: 12px; }
+.hero-cta { margin: 20px 0 0; }
+.try-lg { font-size: 1.05rem; padding: 11px 22px; }
 .good { color: var(--color-text-good, #7ee2a8); font-weight: 600; }
 /* tier c: run it on a public page */
 .run-form label { display: block; font-weight: 600; margin: 0 0 6px; }
@@ -265,6 +273,7 @@ footer p { margin: 4px 0; }
   <p class="lede">Point it at a live web app with no design tokens. SAM 3.1 reads the interface from pixels, Muse Spark names a
   tiered token set, a person reviews it, the hardcoded values in the real source become <code>var(--token, original)</code>,
   and four checks prove nothing moved before a pull request opens.</p>
+  <p class="hero-cta"><a class="try try-lg" href="#try-h">Try it live</a> <span class="muted">Run it on any public page, or point at a label and say the fix.</span></p>
   <p class="xrow"><a class="xlink" href="https://x.com/precogpunk/status/2117740495526834365">Watch the 55-second demo on X</a>
   <span class="muted">A repost there helps this project in the hackathon's Most Viral round through Sunday, Nov 8.</span></p>
 </header>
@@ -294,8 +303,44 @@ ${tiers.map(([code, tier, why]) => `      <li><code>${esc(code)}</code><span cla
   </figure>
 </section>
 
-<section aria-labelledby="try-h">
+<section aria-labelledby="try-h" class="try-section">
   <h2 id="try-h">Try it</h2>
+  <p class="sub">Two live demos running on Meta's models right now. Each shares a small demo budget that counts down on the page.</p>
+<!--tier-c--><div class="feature feature-lead" role="group" aria-labelledby="run-h">
+  <p class="feature-kicker">Live demo 1</p>
+  <h3 id="run-h">Run it on a public page</h3>
+  <p class="sub">Paste the address of a public web page. We copy the page and its same-origin files, run the whole pipeline on
+  the copy, and show the review report, the checks and the token file. About 20 to 60 seconds.</p>
+  <form id="run-form" class="run-form" novalidate>
+    <label for="run-url">Page address</label>
+    <div class="run-row">
+      <input id="run-url" name="url" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://example.github.io/" required>
+      <button type="submit" class="try" data-umami-event="run-submit">Run</button>
+    </div>
+    <p class="run-note">The page's screenshot goes to Meta's hosted models with <code>store: false</code>. Public pages only. Results are deleted after 24 hours.</p>
+    <p class="run-examples"><span class="muted">Examples from the 28-site run:</span>
+${RUN_EXAMPLES.map((u) => `      <button type="button" class="chip" data-run-example="${u}">${u.replace(/^https:\/\/|\/$/g, '')}</button>`).join('\n')}
+    </p>
+    <p id="run-budget" class="muted" aria-live="polite"></p>
+  </form>
+  <div id="run-status" class="run-status" aria-live="polite"></div>
+</div>
+<script src="run-client.js" defer></script><!--/tier-c-->
+<div class="feature" role="group" aria-labelledby="pas-h">
+  <p class="feature-kicker">Live demo 2</p>
+  <h3 id="pas-h">Point and say</h3>
+  <!--tier-b--><p class="try-row"><a class="try" href="/try/">Try it live</a> <span class="muted">On Argon Dashboard, with a shared demo budget that counts down on the page.</span></p><!--/tier-b-->
+  <!--no-tier-b--><p class="note">Live version coming</p><!--/no-tier-b-->
+  <p class="sub">Click a control in the live web app, then say or type the change. Meta's speech model transcribes it, SAM 3.1
+  outlines what was clicked, contrast and focus fixes are computed (no model), and every change is re-checked on the whole
+  page and blocked if any text gets harder to read. Screenshots from the recorded runs on Argon:</p>
+  <div class="shots">
+    <figure><img src="media/pas-contrast.jpg" width="1440" height="900" loading="lazy" alt="Token playground beside Argon Dashboard. Request: this label is too light, make it readable, keep our gray. Result: text contrast on 21 elements goes from 2.95:1 to 4.53:1."><figcaption>“Make it readable, keep our gray.” Text contrast: 21 elements 2.95:1 → 4.53:1, whole page 41 → 20 failing text pairs.</figcaption></figure>
+    <figure><img src="media/pas-focus.jpg" width="1440" height="900" loading="lazy" alt="Token playground beside Argon Dashboard with focus rings drawn on the sidebar links. Result: visible keyboard focus on 0 of 25 controls before, 25 of 25 after."><figcaption>“A visible focus ring in our blue.” Keyboard focus: 0 → 25 of 25 controls.</figcaption></figure>
+    <figure><img src="media/pas-blocked.jpg" width="1440" height="900" loading="lazy" alt="Token playground beside Argon Dashboard. Request: make these buttons red. Result: blocked, text contrast would regress on the Month button from 4.20:1 to 3.77:1, reverted automatically."><figcaption>“Make these buttons red.” Blocked and reverted: “Month” would drop from 4.20:1 to 3.77:1.</figcaption></figure>
+  </div>
+</div>
+  <h3>More to explore</h3>
   <p class="sub">Argon Dashboard React (Creative Tim, MIT) on our fork's GitHub Pages: the original, the tokenized build, a proposed
   change previewed live, and the token playground.</p>
   <ul class="links">
@@ -340,40 +385,6 @@ ${tiers.map(([code, tier, why]) => `      <li><code>${esc(code)}</code><span cla
   ${renderTable(breadth, { caption: 'Per site, 2026-10-28 re-run. Safety checks: fallbacks only must be 0 px; merged colors must be invisible.', label: 'Breadth table, 28 sites', cellClass: (c, k) => k === 6 ? (/FAIL/.test(c) ? 'flag' : /pass/.test(c) ? 'pass' : '') : '' })}
   </div>
 </section>
-
-<section aria-labelledby="pas-h">
-  <h2 id="pas-h">Point and say</h2>
-  <!--tier-b--><p class="try-row"><a class="try" href="/try/">Try it live</a> <span class="muted">On Argon Dashboard, with a shared demo budget that counts down on the page.</span></p><!--/tier-b-->
-  <!--no-tier-b--><p class="note">Live version coming</p><!--/no-tier-b-->
-  <p class="sub">Click a control in the live web app, then say or type the change. Meta's speech model transcribes it, SAM 3.1
-  outlines what was clicked, contrast and focus fixes are computed (no model), and every change is re-checked on the whole
-  page and blocked if any text gets harder to read. Screenshots from the recorded runs on Argon:</p>
-  <div class="shots">
-    <figure><img src="media/pas-contrast.jpg" width="1440" height="900" loading="lazy" alt="Token playground beside Argon Dashboard. Request: this label is too light, make it readable, keep our gray. Result: text contrast on 21 elements goes from 2.95:1 to 4.53:1."><figcaption>“Make it readable, keep our gray.” Text contrast: 21 elements 2.95:1 → 4.53:1, whole page 41 → 20 failing text pairs.</figcaption></figure>
-    <figure><img src="media/pas-focus.jpg" width="1440" height="900" loading="lazy" alt="Token playground beside Argon Dashboard with focus rings drawn on the sidebar links. Result: visible keyboard focus on 0 of 25 controls before, 25 of 25 after."><figcaption>“A visible focus ring in our blue.” Keyboard focus: 0 → 25 of 25 controls.</figcaption></figure>
-    <figure><img src="media/pas-blocked.jpg" width="1440" height="900" loading="lazy" alt="Token playground beside Argon Dashboard. Request: make these buttons red. Result: blocked, text contrast would regress on the Month button from 4.20:1 to 3.77:1, reverted automatically."><figcaption>“Make these buttons red.” Blocked and reverted: “Month” would drop from 4.20:1 to 3.77:1.</figcaption></figure>
-  </div>
-</section>
-
-<!--tier-c--><section aria-labelledby="run-h">
-  <h2 id="run-h">Run it on a public page</h2>
-  <p class="sub">Paste the address of a public web page. We copy the page and its same-origin files, run the whole pipeline on
-  the copy, and show the review report, the checks and the token file. About 20 to 60 seconds.</p>
-  <form id="run-form" class="run-form" novalidate>
-    <label for="run-url">Page address</label>
-    <div class="run-row">
-      <input id="run-url" name="url" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://example.github.io/" required>
-      <button type="submit" class="try" data-umami-event="run-submit">Run</button>
-    </div>
-    <p class="run-note">The page's screenshot goes to Meta's hosted models with <code>store: false</code>. Public pages only. Results are deleted after 24 hours.</p>
-    <p class="run-examples"><span class="muted">Examples from the 28-site run:</span>
-${RUN_EXAMPLES.map((u) => `      <button type="button" class="chip" data-run-example="${u}">${u.replace(/^https:\/\/|\/$/g, '')}</button>`).join('\n')}
-    </p>
-    <p id="run-budget" class="muted" aria-live="polite"></p>
-  </form>
-  <div id="run-status" class="run-status" aria-live="polite"></div>
-</section>
-<script src="run-client.js" defer></script><!--/tier-c-->
 
 <section aria-labelledby="code-h">
   <h2 id="code-h">Code and pull request</h2>
