@@ -18,8 +18,9 @@ harder to read before a pull request opens. **Sorb** then previews any token cha
 https://github.com/user-attachments/assets/3236827b-b139-4910-b9bc-252291838b0a
 
 Built for the Meta Global AI Developer Hackathon (Oct 26 – Nov 4, 2026) by Metatoy. Every model step sits behind a
-provider with an offline stand-in, so the pipeline runs without any API key; with keys it uses SAM 3.1 on the Meta
-Model API and Muse Spark (hosted, or the open-weights Muse Spark Open served on Baseten).
+provider with an offline stand-in, so the pipeline runs without any API key; with keys it uses SAM 3.1 and Muse Spark
+on the Meta Model API ([dev.meta.ai](https://dev.meta.ai), `https://api.meta.ai/v1`), the open-weights Muse Spark Open
+on our inference partners Baseten (default) and Fireworks (failover), and SAM 3.1 open weights on Modal.
 
 **Measured (details in `docs/`):**
 
