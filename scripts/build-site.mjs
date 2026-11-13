@@ -247,6 +247,7 @@ td.flag { color: var(--color-text-note, #f5c46b); }
 .run-row .try { border: 0; font: inherit; font-weight: 700; cursor: pointer; margin: 0; }
 .run-row .try:disabled { opacity: .6; cursor: not-allowed; }
 .run-note { color: var(--color-text-muted, #a3a39d); font-size: 0.92rem; margin: 10px 0; }
+.run-form .pass-label { margin-top: 14px; }
 .run-examples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
 .chip { font: inherit; font-size: 0.88rem; background: var(--color-surface-code, #1f232c); color: var(--color-text-default, #e8e8e4); border: 1px solid var(--color-border-default, #2c313c); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
 .chip:hover { border-color: #8a9af0; }
@@ -305,7 +306,7 @@ ${tiers.map(([code, tier, why]) => `      <li><code>${esc(code)}</code><span cla
 
 <section aria-labelledby="try-h" class="try-section">
   <h2 id="try-h">Try it</h2>
-  <p class="sub">Two live demos running on Meta's models right now. Each shares a small demo budget that counts down on the page.</p>
+  <p class="sub">Two live demos on Meta's models. They need a demo password for now; the screenshots and recorded runs below show what each one does.</p>
 <!--tier-c--><div class="feature feature-lead" role="group" aria-labelledby="run-h">
   <p class="feature-kicker">Live demo 1</p>
   <h3 id="run-h">Run it on a public page</h3>
@@ -326,11 +327,35 @@ ${RUN_EXAMPLES.map((u) => `      <button type="button" class="chip" data-run-exa
   <div id="run-status" class="run-status" aria-live="polite"></div>
 </div>
 <script src="run-client.js" defer></script><!--/tier-c-->
+<!--no-tier-c--><div class="feature feature-lead" role="group" aria-labelledby="run-h">
+  <p class="feature-kicker">Live demo 1</p>
+  <h3 id="run-h">Run it on a public page</h3>
+  <p class="sub">Paste the address of a public web page. We copy the page and its same-origin files, run the whole pipeline on
+  the copy, and show the review report, the checks and the token file. About 20 to 60 seconds.</p>
+  <div class="run-form">
+    <label for="run-url">Page address</label>
+    <div class="run-row">
+      <input id="run-url" name="url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://example.github.io/">
+    </div>
+    <label for="run-pass" class="pass-label">Demo password</label>
+    <div class="run-row">
+      <input id="run-pass" name="password" type="password" autocomplete="off">
+      <button type="button" class="try" disabled>Run</button>
+    </div>
+    <p class="run-note">The live demo needs a password for now. <a href="#breadth-h">See the 28-site table</a> for results on public pages.</p>
+  </div>
+</div><!--/no-tier-c-->
 <div class="feature" role="group" aria-labelledby="pas-h">
   <p class="feature-kicker">Live demo 2</p>
   <h3 id="pas-h">Point and say</h3>
   <!--tier-b--><p class="try-row"><a class="try" href="/try/">Try it live</a> <span class="muted">On Argon Dashboard, with a shared demo budget that counts down on the page.</span></p><!--/tier-b-->
-  <!--no-tier-b--><p class="note">Live version coming</p><!--/no-tier-b-->
+  <!--no-tier-b--><div class="run-form try-row">
+    <label for="pas-pass">Demo password</label>
+    <div class="run-row">
+      <input id="pas-pass" name="password" type="password" autocomplete="off">
+      <button type="button" class="try" disabled>Try it live</button>
+    </div>
+  </div><!--/no-tier-b-->
   <p class="sub">Click a control in the live web app, then say or type the change. Meta's speech model transcribes it, SAM 3.1
   outlines what was clicked, contrast and focus fixes are computed (no model), and every change is re-checked on the whole
   page and blocked if any text gets harder to read. Screenshots from the recorded runs on Argon:</p>
